@@ -50,6 +50,7 @@ describe('NounStore', () => {
     ///// Begin tests /////
 
     it('can add multiple nouns', function() {
+
         expect(this.nouns()).toEqual([])
 
         this.dispatch({
@@ -71,6 +72,34 @@ describe('NounStore', () => {
             {base: 'test1', plural:false}
         ])
     })
+
+    it('can delete a specific noun', function() {
+
+        this.addNouns([
+            {base: 'test0', plural: true},
+            {base: 'test1', plural: true},
+            {base: 'test2', plural: false},
+        ]);
+
+        this.dispatch({
+            type: NounActionTypes.DELETE_NOUN,
+            id: this.id(2),
+        });
+
+        expect(this.nouns()).toEqual([
+            {base: 'test0', plural: true},
+            {base: 'test1', plural: true},
+        ]);
+
+        this.dispatch({
+            type: NounActionTypes.DELETE_NOUN,
+            id: this.id(0),
+        });
+
+        expect(this.nouns()).toEqual([
+            {base: 'test1', plural: true},
+        ]);
+    });
 
 })
 

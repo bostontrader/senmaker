@@ -16,7 +16,7 @@ The app depends upon node and npm being globally available.
 npm install the first time
 
 npm start will crankup webpack-dev-server.  This will monitor your files for changes, rebuild the bundle.js when needed
-and provide a server that you can view at localhost:8080.  Sometimes this doesn't catch changes so you'll need to stop
+and provide a server that you can view at localhost:8081.  Sometimes this doesn't catch changes so you'll need to stop
 and restart on occasion.
 
 npm test will run the Jest tests.  You can do this from a 2nd terminal window, even while webpack-dev-server is running.

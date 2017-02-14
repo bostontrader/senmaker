@@ -27,6 +27,9 @@ class NounStore extends ReduceStore {
                     base: action.base
                 }))
 
+            case NounActionTypes.DELETE_NOUN:
+                return state.delete(action.id)
+
             default:
                 return state
         }
