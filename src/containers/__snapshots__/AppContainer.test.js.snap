@@ -1,0 +1,26 @@
+exports[`AppContainer renders some nouns 1`] = `
+<div>
+  <section
+    id="main">
+    <ul
+      id="noun-list">
+      <li>
+        <div
+          className="view">
+          <label>
+            
+          </label>
+        </div>
+      </li>
+      <li>
+        <div
+          className="view">
+          <label>
+            
+          </label>
+        </div>
+      </li>
+    </ul>
+  </section>
+</div>
+`;
