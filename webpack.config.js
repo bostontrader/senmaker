@@ -1,10 +1,11 @@
-const path = require('path')
-const webpack = require('webpack')
+var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
     entry: [
         'babel-polyfill',
         './src/root'
+        //'webpack-dev-server/client?http://localhost:8080'
     ],
     output: {
         publicPath: '/',
@@ -24,4 +25,4 @@ module.exports = {
         ]
     },
     debug: true
-}
+};

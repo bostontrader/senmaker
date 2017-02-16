@@ -5,6 +5,8 @@ import renderer from 'react-test-renderer'
 import AppContainer from './AppContainer'
 import Counter from '../data/Counter'
 import Noun from '../data/Noun'
+import NounDraftStore from '../data/NounDraftStore'
+import NounEditStore from '../data/NounEditStore'
 import NounStore from '../data/NounStore'
 
 describe('AppContainer', function() {
@@ -21,16 +23,22 @@ describe('AppContainer', function() {
     // beforeEach() function of your container tests.
     beforeEach(function() {
 
-        let nounStore = Immutable.OrderedMap()
+        let editStore = '';
+        this.setEditID = (id) => editStore = id;
+
+        let draftStore = '';
+        this.setDraftText = (text) => draftStore = text;
+
+        let nounStore = Immutable.OrderedMap();
         this.setNouns = (nouns) => {
             nouns.forEach(noun => {
-                const id = Counter.increment()
+                const id = Counter.increment();
                 nounStore = nounStore.set(
                     id,
                     new Noun({id, text: noun.text, complete: !!noun.complete}),
-                )
-            })
-        }
+                );
+            });
+        };
 
         // Because of how NounStore is set up it's not easy to get access to ids of
         // nouns. This will get the id of a particular noun based on the index it
@@ -40,27 +48,101 @@ describe('AppContainer', function() {
                 throw new Error(
                     'Requested id for an index that is larger than the size of the ' +
                     'current state.'
-                )
+                );
             }
-            return Array.from(nounStore.keys())[index]
-        }
+            return Array.from(nounStore.keys())[index];
+        };
 
         // Override all the get state's to read from our fake data.
-        NounStore.getState = () => nounStore
+        NounDraftStore.getState = () => draftStore;
+        NounEditStore.getState = () => editStore;
+        NounStore.getState = () => nounStore;
 
         // Simple helper so tests read easier.
-        this.render = () => renderer.create(<AppContainer />).toJSON()
-    })
+        this.render = () => renderer.create(<AppContainer />).toJSON();
+    });
 
     ///// Begin tests /////
 
     it('renders some nouns', function() {
         this.setNouns([
-            {base: 'Hello', plural: false},
-            {base: 'World!', plural: false}
-        ])
+            {text: 'Hello', complete: false},
+            {text: 'World!', complete: false},
+            // Uncomment this to see what it looks like when a snapshot doesn't match.
+            // {text: 'Some changes', complete: false},
+        ]);
 
-        expect(this.render()).toMatchSnapshot()
-    })
+        expect(this.render()).toMatchSnapshot();
+    });
 
-})
+    it('renders with no nouns', function() {
+        expect(this.render()).toMatchSnapshot();
+    });
+
+    it('renders nouns that are complete', function() {
+        this.setNouns([
+            // Try changing complete to "true" for test0 to see how snapshot changes.
+            {text: 'test0', complete: false},
+            {text: 'test1', complete: true},
+            {text: 'test2', complete: true},
+            {text: 'test3', complete: false},
+        ]);
+
+        expect(this.render()).toMatchSnapshot();
+    });
+
+    it('can edit task that is not complete', function() {
+        this.setNouns([
+            {text: 'test0', complete: false},
+            {text: 'test1', complete: true},
+            {text: 'test2', complete: true},
+            {text: 'test3', complete: false},
+        ]);
+
+        this.setEditID(this.id(0));
+
+        expect(this.render()).toMatchSnapshot();
+    });
+
+    it('can edit task that is complete', function() {
+        this.setNouns([
+            {text: 'test0', complete: false},
+            {text: 'test1', complete: true},
+            {text: 'test2', complete: true},
+            {text: 'test3', complete: false},
+        ]);
+
+        this.setEditID(this.id(1));
+
+        expect(this.render()).toMatchSnapshot();
+    });
+
+    it('renders draft with nouns', function() {
+        this.setNouns([
+            {text: 'test0', complete: false},
+        ]);
+
+        this.setDraftText('test1');
+
+        expect(this.render()).toMatchSnapshot();
+    });
+
+    it('renders draft with no nouns', function() {
+        this.setDraftText('test0');
+
+        expect(this.render()).toMatchSnapshot();
+    });
+
+    it('renders draft with nouns while editing', function() {
+        this.setNouns([
+            {text: 'test0', complete: false},
+            {text: 'test1', complete: false},
+        ]);
+
+        this.setEditID(this.id(1));
+
+        this.setDraftText('test1 edit');
+
+        expect(this.render()).toMatchSnapshot();
+    });
+});

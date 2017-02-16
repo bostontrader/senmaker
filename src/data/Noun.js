@@ -1,9 +1,9 @@
-import Immutable from 'immutable'
+import Immutable from 'immutable';
 
 const Noun = Immutable.Record({
     id: '',
-    base: '',
-    plural: false
-})
+    complete: false,
+    text: '',
+});
 
-export default Noun
+export default Noun;

@@ -1,11 +1,11 @@
+import AppContainer from './containers/AppContainer'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import AppContainer from './containers/AppContainer'
+ReactDOM.render(<AppContainer />, document.getElementById('nounapp'))
+
 import NounActions from './data/NounActions'
 
-ReactDOM.render(<AppContainer />, document.getElementById('theApp'))
-
-NounActions.addNoun('apple')
 NounActions.addNoun('cat')
 NounActions.addNoun('dog')
+NounActions.addNoun('apple')

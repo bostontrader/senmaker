@@ -5,21 +5,21 @@ import classnames from 'classnames';
 function AppView(props) {
     return (
         <div>
-            {/*<Header {...props} >*/}
-            <Main nouns={props.nouns} />
-            {/*<Footer {...props} />*/}
+            <Header {...props} />
+            <Main {...props} />
+            <Footer {...props} />
         </div>
     );
 }
 
-/*function Header(props) {
+function Header(props) {
     return (
         <header id="header">
             <h1>nouns</h1>
             <NewNoun {...props} />
         </header>
     );
-}*/
+}
 
 function Main(props) {
     if (props.nouns.size === 0) {
@@ -27,12 +27,11 @@ function Main(props) {
     }
 
     // If this were expensive we could move it to the container.
-    //const areAllComplete = props.nouns.every(noun => noun.complete);
-
+    const areAllComplete = props.nouns.every(noun => noun.complete);
 
     return (
         <section id="main">
-            {/*<input
+            <input
                 checked={areAllComplete ? 'checked' : ''}
                 id="toggle-all"
                 type="checkbox"
@@ -40,7 +39,7 @@ function Main(props) {
             />
             <label htmlFor="toggle-all">
                 Mark all as complete
-            </label> */}
+            </label>
             <ul id="noun-list">
                 {[...props.nouns.values()].reverse().map(noun => (
                     <NounItem
@@ -56,10 +55,10 @@ function Main(props) {
                 ))}
             </ul>
         </section>
-    )
+    );
 }
 
-/*function Footer(props) {
+function Footer(props) {
     if (props.nouns.size === 0) {
         return null;
     }
@@ -113,26 +112,25 @@ function NewNoun(props) {
         />
     );
 }
-*/
+
 function NounItem(props) {
     const {editing, noun} = props;
-    //const isEditing = editing === noun.id;
-    const isEditing = false
-    //const onDeleteNoun = () => props.onDeleteNoun(noun.id);
-    //const onStartEditingNoun = () => props.onStartEditingNoun(noun.id);
-    //const onToggleNoun = () => props.onToggleNoun(noun.id);
+    const isEditing = editing === noun.id;
+    const onDeleteNoun = () => props.onDeleteNoun(noun.id);
+    const onStartEditingNoun = () => props.onStartEditingNoun(noun.id);
+    const onToggleNoun = () => props.onToggleNoun(noun.id);
 
     // Construct the input for editing a task if necessary.
-    //let input = null;
-    //if (isEditing) {
-        //const onChange = (event) => props.onEditNoun(noun.id, event.target.value);
-        //const onStopEditingNoun = props.onStopEditingNoun;
-        //const onKeyDown = (event) => {
-            //if (event.keyCode === ENTER_KEY_CODE) {
-                //onStopEditingNoun();
-            //}
-        //};
-        /*input =
+    let input = null;
+    if (isEditing) {
+        const onChange = (event) => props.onEditNoun(noun.id, event.target.value);
+        const onStopEditingNoun = props.onStopEditingNoun;
+        const onKeyDown = (event) => {
+            if (event.keyCode === ENTER_KEY_CODE) {
+                onStopEditingNoun();
+            }
+        };
+        input =
             <input
                 autoFocus={true}
                 className="edit"
@@ -140,19 +138,31 @@ function NounItem(props) {
                 onBlur={onStopEditingNoun}
                 onChange={onChange}
                 onKeyDown={onKeyDown}
-            />;*/
-    //}
+            />;
+    }
 
     return (
-        <li>
+        <li
+            className={classnames({
+                completed: noun.complete,
+                editing: isEditing,
+            })}>
             <div className="view">
-
-                <label >
-                    {noun.base}
+                <input
+                    className="toggle"
+                    type="checkbox"
+                    checked={noun.complete}
+                    onChange={onToggleNoun}
+                />
+                <label onDoubleClick={onStartEditingNoun}>
+                    {noun.text}
                 </label>
+                <button className="destroy" onClick={onDeleteNoun} />
             </div>
+            {input}
         </li>
     );
 }
 
-export default AppView
+
+export default AppView;
