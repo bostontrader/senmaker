@@ -108,10 +108,14 @@ exports[`AppContainer can edit task that is complete 1`] = `
           value={undefined}>
           <option
             value="0">
-            Append -s
+            No selection
           </option>
           <option
             value="1">
+            Append -s
+          </option>
+          <option
+            value="2">
             Append -es
           </option>
         </select>
@@ -237,232 +241,14 @@ exports[`AppContainer can edit task that is not complete 1`] = `
           value={undefined}>
           <option
             value="0">
-            Append -s
+            No selection
           </option>
           <option
             value="1">
-            Append -es
-          </option>
-        </select>
-      </div>
-      <br />
-      <input
-        type="submit"
-        value="Add" />
-      
-      
-    </form>
-  </div>
-</div>
-`;
-
-exports[`AppContainer renders draft with no nouns 1`] = `
-<div>
-  <div
-    className="one-half column" />
-  <div
-    className="one-half column">
-    <form>
-      <label
-        htmlFor="base">
-        Base
-      </label>
-      <input
-        name="base"
-        type="text"
-        value={undefined} />
-      <div>
-        <label
-          htmlFor="pluralization_rule">
-          Pluralization Rule
-        </label>
-        <select
-          name="pluralization_rule"
-          value={undefined}>
-          <option
-            value="0">
             Append -s
           </option>
           <option
-            value="1">
-            Append -es
-          </option>
-        </select>
-      </div>
-      <br />
-      <input
-        type="submit"
-        value="Add" />
-      
-      
-    </form>
-  </div>
-</div>
-`;
-
-exports[`AppContainer renders draft with nouns 1`] = `
-<div>
-  <div
-    className="one-half column">
-    <section
-      id="main">
-      <table
-        id="noun-list">
-        <thead>
-          <tr>
-            <th />
-            <th>
-              Base
-            </th>
-            <th>
-              Plural
-            </th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td />
-            <td>
-              
-            </td>
-            <td>
-              
-            </td>
-            <td>
-              <button
-                onClick={[Function]}
-                type="button">
-                Edit
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </div>
-  <div
-    className="one-half column">
-    <form>
-      <label
-        htmlFor="base">
-        Base
-      </label>
-      <input
-        name="base"
-        type="text"
-        value={undefined} />
-      <div>
-        <label
-          htmlFor="pluralization_rule">
-          Pluralization Rule
-        </label>
-        <select
-          name="pluralization_rule"
-          value={undefined}>
-          <option
-            value="0">
-            Append -s
-          </option>
-          <option
-            value="1">
-            Append -es
-          </option>
-        </select>
-      </div>
-      <br />
-      <input
-        type="submit"
-        value="Add" />
-      
-      
-    </form>
-  </div>
-</div>
-`;
-
-exports[`AppContainer renders draft with nouns while editing 1`] = `
-<div>
-  <div
-    className="one-half column">
-    <section
-      id="main">
-      <table
-        id="noun-list">
-        <thead>
-          <tr>
-            <th />
-            <th>
-              Base
-            </th>
-            <th>
-              Plural
-            </th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td />
-            <td>
-              
-            </td>
-            <td>
-              
-            </td>
-            <td>
-              <button
-                onClick={[Function]}
-                type="button">
-                Edit
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td />
-            <td>
-              
-            </td>
-            <td>
-              
-            </td>
-            <td>
-              <button
-                onClick={[Function]}
-                type="button">
-                Edit
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </div>
-  <div
-    className="one-half column">
-    <form>
-      <label
-        htmlFor="base">
-        Base
-      </label>
-      <input
-        name="base"
-        type="text"
-        value={undefined} />
-      <div>
-        <label
-          htmlFor="pluralization_rule">
-          Pluralization Rule
-        </label>
-        <select
-          name="pluralization_rule"
-          value={undefined}>
-          <option
-            value="0">
-            Append -s
-          </option>
-          <option
-            value="1">
+            value="2">
             Append -es
           </option>
         </select>
@@ -588,10 +374,14 @@ exports[`AppContainer renders nouns that are complete 1`] = `
           value={undefined}>
           <option
             value="0">
-            Append -s
+            No selection
           </option>
           <option
             value="1">
+            Append -s
+          </option>
+          <option
+            value="2">
             Append -es
           </option>
         </select>
@@ -685,10 +475,14 @@ exports[`AppContainer renders some nouns 1`] = `
           value={undefined}>
           <option
             value="0">
-            Append -s
+            No selection
           </option>
           <option
             value="1">
+            Append -s
+          </option>
+          <option
+            value="2">
             Append -es
           </option>
         </select>
@@ -729,10 +523,14 @@ exports[`AppContainer renders with no nouns 1`] = `
           value={undefined}>
           <option
             value="0">
-            Append -s
+            No selection
           </option>
           <option
             value="1">
+            Append -s
+          </option>
+          <option
+            value="2">
             Append -es
           </option>
         </select>

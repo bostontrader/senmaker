@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import classnames from 'classnames';
+import PluralizationSelect from './PluralizationSelect'
 
 function AppView(props) {
     return (
@@ -16,25 +16,12 @@ function AppView(props) {
     )
 }
 
-
-// stateless functional components cannot have ref
 function NounForm(props) {
-    //console.log('AppView.NounForm props=',props)
-
-    const select =
-        <div>
-            <label htmlFor='pluralization_rule'>Pluralization Rule</label>
-            <select  name='pluralization_rule' value={props.editing.pluralization_rule}>
-                <option value='0'>Append -s</option>
-                <option value='1'>Append -es</option>
-            </select>
-        </div>
-
 
     return (
         <form>
             <label htmlFor='base'>Base</label><input name='base' type='text' value={props.editing.base} />
-            {select}
+            <PluralizationSelect pluralization_rule={props.editing.pluralization_rule}/>
             <br />
             <input type='submit' value={props.editing.id?"Save (id = " +props.editing.id+ ")":"Add"}/>
             {props.editing.id?<button >Delete</button>:""}

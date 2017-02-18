@@ -22,22 +22,19 @@ describe('AppContainer', function() {
     // beforeEach() function of your container tests.
     beforeEach(function() {
 
-        let editStore = '';
-        this.setEditID = (id) => editStore = id;
+        let editStore = ''
+        this.setEditID = (id) => editStore = id
 
-        let draftStore = '';
-        this.setDraftText = (text) => draftStore = text;
-
-        let nounStore = Immutable.OrderedMap();
+        let nounStore = Immutable.OrderedMap()
         this.setNouns = (nouns) => {
             nouns.forEach(noun => {
-                const id = Counter.increment();
+                const id = Counter.increment()
                 nounStore = nounStore.set(
                     id,
                     new Noun({id, text: noun.text, complete: !!noun.complete}),
-                );
-            });
-        };
+                )
+            })
+        }
 
         // Because of how NounStore is set up it's not easy to get access to ids of
         // nouns. This will get the id of a particular noun based on the index it
@@ -110,37 +107,9 @@ describe('AppContainer', function() {
             {text: 'test3', complete: false},
         ]);
 
-        this.setEditID(this.id(1));
+        this.setEditID(this.id(1))
 
-        expect(this.render()).toMatchSnapshot();
-    });
+        expect(this.render()).toMatchSnapshot()
+    })
 
-    it('renders draft with nouns', function() {
-        this.setNouns([
-            {text: 'test0', complete: false},
-        ]);
-
-        this.setDraftText('test1');
-
-        expect(this.render()).toMatchSnapshot();
-    });
-
-    it('renders draft with no nouns', function() {
-        this.setDraftText('test0');
-
-        expect(this.render()).toMatchSnapshot();
-    });
-
-    it('renders draft with nouns while editing', function() {
-        this.setNouns([
-            {text: 'test0', complete: false},
-            {text: 'test1', complete: false},
-        ]);
-
-        this.setEditID(this.id(1));
-
-        this.setDraftText('test1 edit');
-
-        expect(this.render()).toMatchSnapshot();
-    });
-});
+})
