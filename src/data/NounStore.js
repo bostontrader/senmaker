@@ -17,35 +17,29 @@ class NounStore extends ReduceStore {
     reduce(state, action) {
         switch (action.type) {
             case NounActionTypes.ADD_NOUN:
-                // Don't add nouns with no text.
-                if (!action.text) {
-                    return state;
-                }
-                const id = Counter.increment();
-                return state.set(id, new Noun({
-                    id,
-                    text: action.text,
-                    complete: false,
-                }));
 
-            case NounActionTypes.DELETE_COMPLETED_NOUNS:
-                return state.filter(noun => !noun.complete)
+                const id = Counter.increment();
+
+                let plural = ''
+                switch(action.noun.pluralization_rule) {
+                    case 0:
+                        plural = action.noun.base + 's'
+                        break
+                    case 1:
+                        plural = action.noun.base + 'es'
+                        break
+                    default:
+                }
+
+                return state.set(id, new Noun({
+                    id: id,
+                    base: action.noun.base,
+                    plural: plural,
+                    pluralization_rule: action.noun.pluralization_rule
+                }))
 
             case NounActionTypes.DELETE_NOUN:
                 return state.delete(action.id)
-
-            case NounActionTypes.EDIT_NOUN:
-                return state.setIn([action.id, 'text'], action.text)
-
-            case NounActionTypes.TOGGLE_ALL_NOUNS:
-                const areAllComplete = state.every(noun => noun.complete)
-                return state.map(noun => noun.set('complete', !areAllComplete))
-
-            case NounActionTypes.TOGGLE_NOUN:
-                return state.update(
-                    action.id,
-                    noun => noun.set('complete', !noun.complete)
-                )
 
             default:
                 return state

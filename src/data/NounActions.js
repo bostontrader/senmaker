@@ -1,67 +1,27 @@
 import NounActionTypes from './NounActionTypes'
 import NounDispatcher from './NounDispatcher'
 
+// Singleton. These functions are called by the UI.  It's an intermediary convenience but it's not required
+// because we could call the dispatcher directly.
 const Actions = {
-    addNoun(text) {
+    addNoun(noun) {
         NounDispatcher.dispatch({
             type: NounActionTypes.ADD_NOUN,
-            text
+            noun
         })
     },
-
-    deleteCompletedNoun() {
-        NounDispatcher.dispatch({
-            type: NounActionTypes.DELETE_COMPLETED_NOUNS
-        })
-    },
-
     deleteNoun(id) {
         NounDispatcher.dispatch({
             type: NounActionTypes.DELETE_NOUN,
             id
         })
     },
-
-    editNoun(id, text) {
+    editNoun(noun) {
         NounDispatcher.dispatch({
             type: NounActionTypes.EDIT_NOUN,
-            id,
-            text
+            noun
         })
     },
-
-    startEditingNoun(id) {
-        NounDispatcher.dispatch({
-            type: NounActionTypes.START_EDITING_NOUN,
-            id
-        })
-    },
-
-    stopEditingNoun() {
-        NounDispatcher.dispatch({
-            type: NounActionTypes.STOP_EDITING_NOUN
-        })
-    },
-
-    toggleAllNouns() {
-        NounDispatcher.dispatch({
-            type: NounActionTypes.TOGGLE_ALL_NOUNS
-        })
-    },
-
-    toggleNoun(id) {
-        NounDispatcher.dispatch({
-            type: NounActionTypes.TOGGLE_NOUN,
-            id
-        })
-    },
-
-    updateDraft(id) {
-        NounDispatcher.dispatch({
-            type: NounActionTypes.UPDATE_DRAFT,
-            id
-        })
-    }
 }
 
 export default Actions

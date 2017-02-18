@@ -4,43 +4,65 @@ import classnames from 'classnames';
 
 function AppView(props) {
     return (
-        <div>
-            <Header {...props} />
+
+    <div>
+        <div className="one-half column">
             <Main {...props} />
-            <Footer {...props} />
         </div>
-    );
+        <div className="one-half column">
+            <NounForm {...props} />
+        </div>
+    </div>
+    )
 }
 
-function Header(props) {
+
+// stateless functional components cannot have ref
+function NounForm(props) {
+    //console.log('AppView.NounForm props=',props)
+
+    const select =
+        <div>
+            <label htmlFor='pluralization_rule'>Pluralization Rule</label>
+            <select  name='pluralization_rule' value={props.editing.pluralization_rule}>
+                <option value='0'>Append -s</option>
+                <option value='1'>Append -es</option>
+            </select>
+        </div>
+
+
     return (
-        <header id="header">
-            <h1>nouns</h1>
-            <NewNoun {...props} />
-        </header>
-    );
+        <form>
+            <label htmlFor='base'>Base</label><input name='base' type='text' value={props.editing.base} />
+            {select}
+            <br />
+            <input type='submit' value={props.editing.id?"Save (id = " +props.editing.id+ ")":"Add"}/>
+            {props.editing.id?<button >Delete</button>:""}
+            {props.editing.id?<button >Cancel</button>:""}
+        </form>
+    )
+
 }
 
 function Main(props) {
     if (props.nouns.size === 0) {
-        return null;
+        return null
     }
-
-    // If this were expensive we could move it to the container.
-    const areAllComplete = props.nouns.every(noun => noun.complete);
 
     return (
         <section id="main">
-            <input
-                checked={areAllComplete ? 'checked' : ''}
-                id="toggle-all"
-                type="checkbox"
-                onChange={props.onToggleAllNouns}
-            />
-            <label htmlFor="toggle-all">
-                Mark all as complete
-            </label>
-            <ul id="noun-list">
+
+            <table id="noun-list">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Base</th>
+                    <th>Plural</th>
+                    <th></th>
+
+                </tr>
+                </thead>
+                <tbody>
                 {[...props.nouns.values()].reverse().map(noun => (
                     <NounItem
                         key={noun.id}
@@ -53,116 +75,33 @@ function Main(props) {
                         onToggleNoun={props.onToggleNoun}
                     />
                 ))}
-            </ul>
+                </tbody>
+            </table>
         </section>
-    );
-}
-
-function Footer(props) {
-    if (props.nouns.size === 0) {
-        return null;
-    }
-
-    const remaining = props.nouns.filter(noun => !noun.complete).size;
-    const completed = props.nouns.size - remaining;
-    const phrase = remaining === 1 ? ' item left' : ' items left';
-
-    let clearCompletedButton = null;
-    if (completed > 0) {
-        clearCompletedButton =
-            <button
-                id="clear-completed"
-                onClick={props.onDeleteCompletedNouns}>
-                Clear completed ({completed})
-            </button>
-    }
-
-    return (
-        <footer id="footer">
-      <span id="noun-count">
-        <strong>
-          {remaining}
-        </strong>
-          {phrase}
-      </span>
-            {clearCompletedButton}
-        </footer>
-    );
-}
-
-const ENTER_KEY_CODE = 13;
-function NewNoun(props) {
-    const addNoun = () => props.onAdd(props.draft);
-    const onBlur = () => addNoun();
-    const onChange = (event) => props.onUpdateDraft(event.target.value);
-    const onKeyDown = (event) => {
-        if (event.keyCode === ENTER_KEY_CODE) {
-            addNoun();
-        }
-    };
-    return (
-        <input
-            autoFocus={true}
-            id="new-noun"
-            placeholder="What needs to be done?"
-            value={props.draft}
-            onBlur={onBlur}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-        />
-    );
+    )
 }
 
 function NounItem(props) {
-    const {editing, noun} = props;
-    const isEditing = editing === noun.id;
-    const onDeleteNoun = () => props.onDeleteNoun(noun.id);
-    const onStartEditingNoun = () => props.onStartEditingNoun(noun.id);
-    const onToggleNoun = () => props.onToggleNoun(noun.id);
-
-    // Construct the input for editing a task if necessary.
-    let input = null;
-    if (isEditing) {
-        const onChange = (event) => props.onEditNoun(noun.id, event.target.value);
-        const onStopEditingNoun = props.onStopEditingNoun;
-        const onKeyDown = (event) => {
-            if (event.keyCode === ENTER_KEY_CODE) {
-                onStopEditingNoun();
-            }
-        };
-        input =
-            <input
-                autoFocus={true}
-                className="edit"
-                value={noun.text}
-                onBlur={onStopEditingNoun}
-                onChange={onChange}
-                onKeyDown={onKeyDown}
-            />;
-    }
+    const {noun} = props;
+    const onEditNoun = () => props.onEditNoun(noun)
 
     return (
-        <li
-            className={classnames({
-                completed: noun.complete,
-                editing: isEditing,
-            })}>
-            <div className="view">
-                <input
-                    className="toggle"
-                    type="checkbox"
-                    checked={noun.complete}
-                    onChange={onToggleNoun}
-                />
-                <label onDoubleClick={onStartEditingNoun}>
-                    {noun.text}
-                </label>
-                <button className="destroy" onClick={onDeleteNoun} />
-            </div>
-            {input}
-        </li>
-    );
+        <tr>
+            <td>
+
+            </td>
+            <td>
+                {noun.base}
+            </td>
+            <td>
+                {noun.plural}
+            </td>
+            <td>
+                <button type="button"  onClick={onEditNoun}>Edit</button>
+            </td>
+
+        </tr>
+    )
 }
 
-
-export default AppView;
+export default AppView

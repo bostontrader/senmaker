@@ -5,7 +5,6 @@ import renderer from 'react-test-renderer'
 import AppContainer from './AppContainer'
 import Counter from '../data/Counter'
 import Noun from '../data/Noun'
-import NounDraftStore from '../data/NounDraftStore'
 import NounEditStore from '../data/NounEditStore'
 import NounStore from '../data/NounStore'
 
@@ -54,7 +53,6 @@ describe('AppContainer', function() {
         };
 
         // Override all the get state's to read from our fake data.
-        NounDraftStore.getState = () => draftStore;
         NounEditStore.getState = () => editStore;
         NounStore.getState = () => nounStore;
 
