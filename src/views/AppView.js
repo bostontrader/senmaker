@@ -1,8 +1,8 @@
 import React from 'react'
 
-import NounAddForm from './NounAddForm'
-import NounEditForm from './NounEditForm'
-import NounTable from './NounTable'
+import NounAddForm from './nouns/NounAddForm'
+import NounEditForm from './nouns/NounEditForm'
+import NounTable from './nouns/NounTable'
 
 function AppView(props) {
 
