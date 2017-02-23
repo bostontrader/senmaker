@@ -13,18 +13,14 @@ function getStores() {
 
 function getState() {
     return {
-        editing: NounEditStore.getState(),
+        editing: NounEditStore.getState(), //
         nouns: NounStore.getState(),
 
         onAdd: NounActions.addNoun,
-        onDeleteCompletedNouns: NounActions.deleteCompletedNouns,
+        onCancel: NounActions.cancel,
+        onInsert: NounActions.insertNoun,
         onDeleteNoun: NounActions.deleteNoun,
         onEditNoun: NounActions.editNoun,
-        onStartEditingNoun: NounActions.startEditingNoun,
-        onStopEditingNoun: NounActions.stopEditingNoun,
-        onToggleAllNouns: NounActions.toggleAllNouns,
-        onToggleNoun: NounActions.toggleNoun,
-        onUpdateDraft: NounActions.updateDraft
     }
 }
 

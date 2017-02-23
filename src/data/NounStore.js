@@ -16,16 +16,19 @@ class NounStore extends ReduceStore {
 
     reduce(state, action) {
         switch (action.type) {
-            case NounActionTypes.ADD_NOUN:
 
+            case NounActionTypes.DELETE_NOUN:
+                return state.delete(action.id)
+
+            case NounActionTypes.INSERT_NOUN:
                 const id = Counter.increment();
 
                 let plural = ''
                 switch(action.noun.pluralization_rule) {
-                    case 0:
+                    case 1:
                         plural = action.noun.base + 's'
                         break
-                    case 1:
+                    case 2:
                         plural = action.noun.base + 'es'
                         break
                     default:
@@ -37,9 +40,6 @@ class NounStore extends ReduceStore {
                     plural: plural,
                     pluralization_rule: action.noun.pluralization_rule
                 }))
-
-            case NounActionTypes.DELETE_NOUN:
-                return state.delete(action.id)
 
             default:
                 return state

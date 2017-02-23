@@ -2,6 +2,10 @@ exports[`AppContainer can edit task that is complete 1`] = `
 <div>
   <div
     className="one-half column">
+    <button
+      onClick={[Function]}>
+      Add new noun
+    </button>
     <section
       id="main">
       <table
@@ -89,44 +93,7 @@ exports[`AppContainer can edit task that is complete 1`] = `
   </div>
   <div
     className="one-half column">
-    <form>
-      <label
-        htmlFor="base">
-        Base
-      </label>
-      <input
-        name="base"
-        type="text"
-        value={undefined} />
-      <div>
-        <label
-          htmlFor="pluralization_rule">
-          Pluralization Rule
-        </label>
-        <select
-          name="pluralization_rule"
-          value={undefined}>
-          <option
-            value="0">
-            No selection
-          </option>
-          <option
-            value="1">
-            Append -s
-          </option>
-          <option
-            value="2">
-            Append -es
-          </option>
-        </select>
-      </div>
-      <br />
-      <input
-        type="submit"
-        value="Add" />
-      
-      
-    </form>
+    <div />
   </div>
 </div>
 `;
@@ -135,6 +102,10 @@ exports[`AppContainer can edit task that is not complete 1`] = `
 <div>
   <div
     className="one-half column">
+    <button
+      onClick={[Function]}>
+      Add new noun
+    </button>
     <section
       id="main">
       <table
@@ -222,44 +193,7 @@ exports[`AppContainer can edit task that is not complete 1`] = `
   </div>
   <div
     className="one-half column">
-    <form>
-      <label
-        htmlFor="base">
-        Base
-      </label>
-      <input
-        name="base"
-        type="text"
-        value={undefined} />
-      <div>
-        <label
-          htmlFor="pluralization_rule">
-          Pluralization Rule
-        </label>
-        <select
-          name="pluralization_rule"
-          value={undefined}>
-          <option
-            value="0">
-            No selection
-          </option>
-          <option
-            value="1">
-            Append -s
-          </option>
-          <option
-            value="2">
-            Append -es
-          </option>
-        </select>
-      </div>
-      <br />
-      <input
-        type="submit"
-        value="Add" />
-      
-      
-    </form>
+    <div />
   </div>
 </div>
 `;
@@ -268,6 +202,10 @@ exports[`AppContainer renders nouns that are complete 1`] = `
 <div>
   <div
     className="one-half column">
+    <button
+      onClick={[Function]}>
+      Add new noun
+    </button>
     <section
       id="main">
       <table
@@ -355,44 +293,7 @@ exports[`AppContainer renders nouns that are complete 1`] = `
   </div>
   <div
     className="one-half column">
-    <form>
-      <label
-        htmlFor="base">
-        Base
-      </label>
-      <input
-        name="base"
-        type="text"
-        value={undefined} />
-      <div>
-        <label
-          htmlFor="pluralization_rule">
-          Pluralization Rule
-        </label>
-        <select
-          name="pluralization_rule"
-          value={undefined}>
-          <option
-            value="0">
-            No selection
-          </option>
-          <option
-            value="1">
-            Append -s
-          </option>
-          <option
-            value="2">
-            Append -es
-          </option>
-        </select>
-      </div>
-      <br />
-      <input
-        type="submit"
-        value="Add" />
-      
-      
-    </form>
+    <div />
   </div>
 </div>
 `;
@@ -401,6 +302,10 @@ exports[`AppContainer renders some nouns 1`] = `
 <div>
   <div
     className="one-half column">
+    <button
+      onClick={[Function]}>
+      Add new noun
+    </button>
     <section
       id="main">
       <table
@@ -456,44 +361,7 @@ exports[`AppContainer renders some nouns 1`] = `
   </div>
   <div
     className="one-half column">
-    <form>
-      <label
-        htmlFor="base">
-        Base
-      </label>
-      <input
-        name="base"
-        type="text"
-        value={undefined} />
-      <div>
-        <label
-          htmlFor="pluralization_rule">
-          Pluralization Rule
-        </label>
-        <select
-          name="pluralization_rule"
-          value={undefined}>
-          <option
-            value="0">
-            No selection
-          </option>
-          <option
-            value="1">
-            Append -s
-          </option>
-          <option
-            value="2">
-            Append -es
-          </option>
-        </select>
-      </div>
-      <br />
-      <input
-        type="submit"
-        value="Add" />
-      
-      
-    </form>
+    <div />
   </div>
 </div>
 `;
@@ -501,47 +369,15 @@ exports[`AppContainer renders some nouns 1`] = `
 exports[`AppContainer renders with no nouns 1`] = `
 <div>
   <div
-    className="one-half column" />
+    className="one-half column">
+    <button
+      onClick={[Function]}>
+      Add new noun
+    </button>
+  </div>
   <div
     className="one-half column">
-    <form>
-      <label
-        htmlFor="base">
-        Base
-      </label>
-      <input
-        name="base"
-        type="text"
-        value={undefined} />
-      <div>
-        <label
-          htmlFor="pluralization_rule">
-          Pluralization Rule
-        </label>
-        <select
-          name="pluralization_rule"
-          value={undefined}>
-          <option
-            value="0">
-            No selection
-          </option>
-          <option
-            value="1">
-            Append -s
-          </option>
-          <option
-            value="2">
-            Append -es
-          </option>
-        </select>
-      </div>
-      <br />
-      <input
-        type="submit"
-        value="Add" />
-      
-      
-    </form>
+    <div />
   </div>
 </div>
 `;

@@ -59,11 +59,11 @@ describe('NounStore', function() {
 
     ///// Begin tests /////
 
-    it('can add multiple nouns', function() {
+    it('can insert multiple nouns', function() {
         expect(this.nouns()).toEqual([])
 
         this.dispatch({
-            type: NounActionTypes.ADD_NOUN,
+            type: NounActionTypes.INSERT_NOUN,
             noun: {
                 base: 'cat',
                 pluralization_rule: 0
@@ -75,7 +75,7 @@ describe('NounStore', function() {
         ])
 
         this.dispatch({
-            type: NounActionTypes.ADD_NOUN,
+            type: NounActionTypes.INSERT_NOUN,
             noun: {
                 base: 'box',
                 pluralization_rule: 1

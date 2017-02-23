@@ -1,16 +1,29 @@
 import React from 'react'
 
-import NounForm from './NounForm'
+import NounAddForm from './NounAddForm'
+import NounEditForm from './NounEditForm'
 
 function AppView(props) {
+
+    // What should be displayed in the add/edit panel?
+    let addeditPanel = <div></div>
+    if(props.editing.id) {
+        addeditPanel = <NounEditForm {...props} />
+    } else if (props.editing.add) {
+        addeditPanel = <NounAddForm {...props} />
+    } else {
+        // Do nothing
+    }
+
     return (
 
     <div>
         <div className="one-half column">
+            <button onClick={props.onAdd}>Add new noun</button>
             <Main {...props} />
         </div>
         <div className="one-half column">
-            <NounForm {...props} />
+            {addeditPanel}
         </div>
     </div>
     )
@@ -42,9 +55,6 @@ function Main(props) {
                         noun={noun}
                         onDeleteNoun={props.onDeleteNoun}
                         onEditNoun={props.onEditNoun}
-                        onStartEditingNoun={props.onStartEditingNoun}
-                        onStopEditingNoun={props.onStopEditingNoun}
-                        onToggleNoun={props.onToggleNoun}
                     />
                 ))}
                 </tbody>
@@ -69,7 +79,7 @@ function NounItem(props) {
                 {noun.plural}
             </td>
             <td>
-                <button type="button"  onClick={onEditNoun}>Edit</button>
+                <button type="button"  onClick={onEditNoun} >Edit</button>
             </td>
 
         </tr>
