@@ -11,8 +11,7 @@ const Noun = Immutable.Record({
     id: '',
     base: '',
     plural: '',
-    pluralization_rule: 0,
-    text: ''
+    pluralization_rule: 0
 })
 
 export default Noun

@@ -3,10 +3,10 @@ import React from 'react'
 import renderer from 'react-test-renderer'
 
 import AppContainer from './AppContainer'
-import Counter from '../data/Counter'
-import Noun from '../data/Noun'
-import NounEditStore from '../data/NounEditStore'
-import NounStore from '../data/NounStore'
+import Counter from '../data/nouns/Counter'
+import Noun from '../data/nouns/Noun'
+import NounEditStore from '../data/nouns/NounEditStore'
+import NounStore from '../data/nouns/NounStore'
 
 describe('AppContainer', function() {
 

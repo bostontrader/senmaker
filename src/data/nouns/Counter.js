@@ -5,7 +5,7 @@ let _counter = 1
  */
 const Counter = {
     increment() {
-        return 'id-' + String(_counter++)
+        return 'n-' + String(_counter++)
     }
 }
 

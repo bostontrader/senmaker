@@ -1,13 +1,13 @@
 import Immutable from 'immutable';
 import {ReduceStore} from 'flux/utils';
-import NounActionTypes from './NounActionTypes';
-import NounDispatcher from './NounDispatcher';
+import VerbActionTypes from './VerbActionTypes';
+import AppDispatcher from '../AppDispatcher';
 import Counter from './Counter'
-import Noun from './Noun'
+import Verb from './Verb'
 
-class NounStore extends ReduceStore {
+class VerbStore extends ReduceStore {
     constructor() {
-        super(NounDispatcher);
+        super(AppDispatcher);
     }
 
     getInitialState() {
@@ -17,28 +17,28 @@ class NounStore extends ReduceStore {
     reduce(state, action) {
         switch (action.type) {
 
-            case NounActionTypes.DELETE_NOUN:
+            case VerbActionTypes.DELETE_VERB:
                 return state.delete(action.id)
 
-            case NounActionTypes.INSERT_NOUN:
+            case VerbActionTypes.INSERT_VERB:
                 const id = Counter.increment();
 
                 let plural = ''
-                switch(action.noun.pluralization_rule) {
+                switch(action.verb.tense_rule) {
                     case 1:
-                        plural = action.noun.base + 's'
+                        plural = action.verb.base + 's'
                         break
                     case 2:
-                        plural = action.noun.base + 'es'
+                        plural = action.verb.base + 'es'
                         break
                     default:
                 }
 
-                return state.set(id, new Noun({
+                return state.set(id, new Verb({
                     id: id,
-                    base: action.noun.base,
+                    base: action.verb.base,
                     plural: plural,
-                    pluralization_rule: action.noun.pluralization_rule
+                    tense_rule: action.verb.tense_rule
                 }))
 
             default:
@@ -47,4 +47,4 @@ class NounStore extends ReduceStore {
     }
 }
 
-export default new NounStore()
+export default new VerbStore()

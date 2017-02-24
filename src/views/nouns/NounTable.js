@@ -17,7 +17,7 @@ function NounTable(props) {
             {[...props.nouns.values()].reverse().map(noun => (
                 <NounItem
                     key={noun.id}
-                    editing={props.editing}
+                    editing={props.editingNoun}
                     noun={noun}
                     onDeleteNoun={props.onDeleteNoun}
                     onEditNoun={props.onEditNoun}
@@ -49,5 +49,3 @@ function NounItem(props) {
 }
 
 export default NounTable
-
-

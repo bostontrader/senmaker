@@ -1,10 +1,10 @@
 import {ReduceStore} from 'flux/utils';
 import NounActionTypes from './NounActionTypes';
-import NounDispatcher from './NounDispatcher';
+import AppDispatcher from '../AppDispatcher';
 
 class NounEditStore extends ReduceStore {
     constructor() {
-        super(NounDispatcher);
+        super(AppDispatcher);
     }
 
     getInitialState() {
