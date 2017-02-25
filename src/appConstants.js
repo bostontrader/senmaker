@@ -1,0 +1,10 @@
+const C = {
+    "L1_NOUNVERB": 10
+    //L2_DEFINITENESS: 20,
+    //L3_SINGULARPLURAL: 30,
+    //L4_VERBTENSE: 40,
+    //L5_NOUNPHRASE: 50,
+    //L6_VERBPHRASE: 60,
+    //L7_ADJECTIVES: 70,
+    //L8_SENTENCES: 80
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import TenseSelect from './TenseSelect'
+import TenseSelect from './PastTenseRuleSelect'
 
 function VerbForm(props) {
 
@@ -9,7 +9,7 @@ function VerbForm(props) {
     return (
         <div>
             <label htmlFor='base'>Base</label><input name='base' type='text' value={props.editingVerb.base}  onChange={onChange}/>
-            <TenseSelect tense_rule={props.editingVerb.tense_rule}/>
+            <TenseSelect pastTense_rule={props.editingVerb.pastTense_rule}/>
             <br />
             <input type='submit' value={"Save (id = " +props.editingVerb.id+ ")"}/>
             <button onClick={onDelete}>Delete</button>

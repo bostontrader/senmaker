@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import TenseSelect from './TenseSelect'
+import TenseSelect from './PastTenseRuleSelect'
 
 it('renders correctly', () => {
     const tree = renderer.create(

@@ -8,7 +8,7 @@ function VerbTable(props) {
             <thead>
             <tr>
                 <th>Base</th>
-                <th>Past</th>
+                <th>Past Tense</th>
                 <th></th>
 
             </tr>
@@ -38,7 +38,7 @@ function VerbItem(props) {
                 {verb.base}
             </td>
             <td>
-                {verb.tense}
+                {verb.pastTense}
             </td>
             <td>
                 <button type="button"  onClick={onEditVerb} >Edit</button>
@@ -49,5 +49,3 @@ function VerbItem(props) {
 }
 
 export default VerbTable
-
-

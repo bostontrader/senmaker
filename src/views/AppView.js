@@ -1,5 +1,9 @@
 import React from 'react'
 
+import Level00 from './Level00'
+import Level01 from './Level01'
+import Level02 from './Level02'
+
 import NounAddForm from './nouns/NounAddForm'
 import NounEditForm from './nouns/NounEditForm'
 import NounTable from './nouns/NounTable'
@@ -10,15 +14,36 @@ import VerbTable from './verbs/VerbTable'
 
 function AppView(props) {
 
+    let levelComponent
+
+    switch(props.level) {
+
+        case 0:
+            levelComponent = <Level00 {...props} />
+            break;
+
+        case 1:
+            levelComponent = <Level01 {...props} />
+            break;
+
+        case 2:
+            levelComponent = <Level02 {...props} />
+            break;
+
+        default:
+            levelComponent = <div>Unknown level</div>
+    }
+
+
     // What should be displayed in the noun add/edit panel?
-    let nounAddEditPanel = <div></div>
+    /*let nounAddEditPanel = <div></div>
     if(props.editingNoun.id) {
         nounAddEditPanel = <NounEditForm {...props} />
     } else if (props.editingNoun.add) {
         nounAddEditPanel = <NounAddForm {...props} />
     } else {
         // Do nothing
-    }
+    }*/
 
     // What should be displayed in the verb add/edit panel?
     let verbAddEditPanel = <div></div>
@@ -33,30 +58,17 @@ function AppView(props) {
     return (
 
         <div className="container">
+
             <div className="row">
-                <div className="one-half column">
-                    <button onClick={props.onAddNoun}>Add new noun</button>
-                    <MainNoun {...props} />
-                </div>
-                <div className="one-half column">
-                    {nounAddEditPanel}
-                </div>
+                {levelComponent}
             </div>
-            <div className="row">
-                <div className="one-half column">
-                    <button onClick={props.onAdd}>Add new verb</button>
-                    <MainVerb {...props} />
-                </div>
-                <div className="one-half column">
-                    {verbAddEditPanel}
-                </div>
-            </div>
+
         </div>
     )
 
 }
 
-function MainNoun(props) {
+/*function MainNoun(props) {
     if (props.nouns.size === 0) {
         return null
     }
@@ -78,6 +90,6 @@ function MainVerb(props) {
             <VerbTable {...props} />
         </section>
     )
-}
+}*/
 
 export default AppView

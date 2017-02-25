@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactTestUtils from 'react-addons-test-utils'
 import renderer from 'react-test-renderer'
-import NounEditForm from './NounAddForm'
+
+import NounEditForm from './NounEditForm'
 import PluralizationSelect from './PluralizationSelect'
 
 it('renders correctly', () => {
     const tree = renderer.create(
-        <NounEditForm editing={{base: ""}} />
+        <NounEditForm editingNoun={{base: ""}} />
     ).toJSON()
     expect(tree).toMatchSnapshot()
 })
@@ -22,11 +23,10 @@ it('renders correctly', () => {
 
 
 it('the html is ok', () => {
-    const renderer = ReactTestUtils.createRenderer();
-    renderer.render(<NounEditForm editing={{base: ""}} />);
-    const result = renderer.getRenderOutput();
+    const renderer = ReactTestUtils.createRenderer()
+    renderer.render(<NounEditForm editingNoun={{base: ""}} />)
+    const result = renderer.getRenderOutput()
 
     expect(result.type).toBe('div')
 
 })
-

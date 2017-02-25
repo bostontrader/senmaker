@@ -1,6 +1,7 @@
 import Counter from './Counter'
 import Verb from './Verb'
 import VerbActionTypes from './VerbActionTypes'
+import VerbConstants from './VerbConstants'
 import VerbStore from './VerbStore'
 
 describe('VerbStore', function() {
@@ -19,9 +20,8 @@ describe('VerbStore', function() {
         // to expect().
         this.verbs = () => Array.from(this.state.values()).map(verb => ({
             base: verb.base,
-            pluralization_rule: verb.pluralization_rule
-            //text: verb.text,
-            //complete: !!verb.complete,
+            pastTense: verb.pastTense,
+            pastTense_rule: verb.pastTense_rule
         }))
 
         // This function is for setting up data, it will add all the verbs to the
@@ -31,8 +31,7 @@ describe('VerbStore', function() {
                 const id = Counter.increment()
                 this.state = this.state.set(
                     id,
-                    //new Verb({id, text: verb.text, complete: !!verb.complete}),
-                    new Verb({id, base: verb.base, pluralization_rule: verb.pluralization_rule})
+                    new Verb({id, base: verb.base, pastTense: verb.pastTense, pastTense_rule: verb.pastTense_rule})
                 )
             })
         }
@@ -65,55 +64,78 @@ describe('VerbStore', function() {
         this.dispatch({
             type: VerbActionTypes.INSERT_VERB,
             verb: {
-                base: 'cat',
-                pluralization_rule: 0
+                base: 'hit',
+                pastTense: 'hit',
+                pastTense_rule: VerbConstants.pastTense_NoChange
             }
         })
 
         expect(this.verbs()).toEqual([
-            {base: 'cat', pluralization_rule: 0}
+            {base: 'hit', pastTense: 'hit', pastTense_rule: VerbConstants.pastTense_NoChange}
         ])
 
         this.dispatch({
             type: VerbActionTypes.INSERT_VERB,
             verb: {
-                base: 'box',
-                pluralization_rule: 1
+                base: 'talk',
+                pastTense: 'talked',
+                pastTense_rule: VerbConstants.pastTense_Append_ed
             }
         })
 
         expect(this.verbs()).toEqual([
-            {base: 'cat', pluralization_rule: 0},
-            {base: 'box', pluralization_rule: 1}
+            {base: 'hit', pastTense: 'hit', pastTense_rule: VerbConstants.pastTense_NoChange},
+            {base: 'talk', pastTense: 'talked', pastTense_rule: VerbConstants.pastTense_Append_ed}
+        ])
+
+        this.dispatch({
+            type: VerbActionTypes.INSERT_VERB,
+            verb: {
+                base: 'eat',
+                pastTense: 'ate',
+                pastTense_rule: VerbConstants.pastTense_Irregular
+            }
+        })
+
+        expect(this.verbs()).toEqual([
+            {base: 'hit', pastTense: 'hit', pastTense_rule: VerbConstants.pastTense_NoChange},
+            {base: 'talk', pastTense: 'talked', pastTense_rule: VerbConstants.pastTense_Append_ed},
+            {base: 'eat', pastTense: 'ate', pastTense_rule: VerbConstants.pastTense_Irregular}
         ])
     })
 
     it('can delete a specific verb', function() {
         this.addVerbs([
-            {base: 'apple', pluralization_rule: 0},
-            {base: 'box', pluralization_rule: 1},
-            {base: 'cat', pluralization_rule: 0},
+            {base: 'hit', pastTense: 'hit', pastTense_rule: VerbConstants.pastTense_NoChange},
+            {base: 'talk', pastTense: 'talked', pastTense_rule: VerbConstants.pastTense_Append_ed},
+            {base: 'eat', pastTense: 'ate', pastTense_rule: VerbConstants.pastTense_Irregular}
         ])
 
         this.dispatch({
             type: VerbActionTypes.DELETE_VERB,
-            id: this.id(2),
+            id: this.id(2)
         })
 
         expect(this.verbs()).toEqual([
-            {base: 'apple', pluralization_rule: 0},
-            {base: 'box', pluralization_rule: 1}
+            {base: 'hit', pastTense: 'hit', pastTense_rule: VerbConstants.pastTense_NoChange},
+            {base: 'talk', pastTense: 'talked', pastTense_rule: VerbConstants.pastTense_Append_ed}
         ])
 
         this.dispatch({
             type: VerbActionTypes.DELETE_VERB,
-            id: this.id(0),
+            id: this.id(0)
         })
 
         expect(this.verbs()).toEqual([
-            {base: 'box', pluralization_rule: 1}
+            {base: 'talk', pastTense: 'talked', pastTense_rule: VerbConstants.pastTense_Append_ed}
         ])
+
+        this.dispatch({
+            type: VerbActionTypes.DELETE_VERB,
+            id: this.id(0)
+        })
+
+        expect(this.verbs()).toEqual([])
     })
 
 })
-

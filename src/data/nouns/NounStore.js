@@ -1,17 +1,18 @@
-import Immutable from 'immutable';
-import {ReduceStore} from 'flux/utils';
-import NounActionTypes from './NounActionTypes';
-import AppDispatcher from '../AppDispatcher';
+import Immutable from 'immutable'
+import {ReduceStore} from 'flux/utils'
+
+import AppDispatcher from '../AppDispatcher'
 import Counter from './Counter'
 import Noun from './Noun'
+import NounActionTypes from './NounActionTypes'
 
 class NounStore extends ReduceStore {
     constructor() {
-        super(AppDispatcher);
+        super(AppDispatcher)
     }
 
     getInitialState() {
-        return Immutable.OrderedMap();
+        return Immutable.OrderedMap()
     }
 
     reduce(state, action) {
@@ -21,7 +22,7 @@ class NounStore extends ReduceStore {
                 return state.delete(action.id)
 
             case NounActionTypes.INSERT_NOUN:
-                const id = Counter.increment();
+                const id = Counter.increment()
 
                 let plural = ''
                 switch(action.noun.pluralization_rule) {

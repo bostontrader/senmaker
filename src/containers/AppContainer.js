@@ -1,5 +1,7 @@
-import AppView from '../views/AppView'
 import {Container} from 'flux/utils'
+
+import AppStore from '../data/AppStore'
+import AppView from '../views/AppView'
 import NounActions from '../data/nouns/NounActions'
 import NounEditStore from '../data/nouns/NounEditStore'
 import NounStore from '../data/nouns/NounStore'
@@ -9,6 +11,7 @@ import VerbStore from '../data/verbs/VerbStore'
 
 function getStores() {
     return [
+        AppStore,
         NounStore,
         NounEditStore,
         VerbStore,
@@ -18,6 +21,7 @@ function getStores() {
 
 function getState() {
     return {
+        level: AppStore.getInitialState(),
         nouns: NounStore.getState(),
         editingNoun: NounEditStore.getState(),
 

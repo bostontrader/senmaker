@@ -8,7 +8,7 @@ class VerbEditStore extends ReduceStore {
     }
 
     getInitialState() {
-        return {base: '', tense_rule: -1}
+        return {base: '', pastTense_rule: -1}
     }
 
     reduce(state, action) {
@@ -33,7 +33,7 @@ class VerbEditStore extends ReduceStore {
                 return {
                     id: action.verb.get('id'),
                     base: action.verb.get('base'),
-                    tense_rule: action.verb.get('tense_rule')
+                    pastTense_rule: action.verb.get('pastTense_rule')
                 }
 
             // Here we only close the UI form.
