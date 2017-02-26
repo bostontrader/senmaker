@@ -1,6 +1,7 @@
 import Counter from './Counter'
 import Noun from './Noun'
 import NounActionTypes from './NounActionTypes'
+import NounConstants from './NounConstants'
 import NounStore from './NounStore'
 
 describe('NounStore', function() {
@@ -19,9 +20,8 @@ describe('NounStore', function() {
         // to expect().
         this.nouns = () => Array.from(this.state.values()).map(noun => ({
             base: noun.base,
+            plural: noun.plural,
             pluralization_rule: noun.pluralization_rule
-            //text: noun.text,
-            //complete: !!noun.complete,
         }))
 
         // This function is for setting up data, it will add all the nouns to the
@@ -31,8 +31,7 @@ describe('NounStore', function() {
                 const id = Counter.increment()
                 this.state = this.state.set(
                     id,
-                    //new Noun({id, text: noun.text, complete: !!noun.complete}),
-                    new Noun({id, base: noun.base, pluralization_rule: noun.pluralization_rule})
+                    new Noun({id, base: noun.base, plural: noun.plural, pluralization_rule: noun.pluralization_rule})
                 )
             })
         }
@@ -64,35 +63,29 @@ describe('NounStore', function() {
 
         this.dispatch({
             type: NounActionTypes.INSERT_NOUN,
-            noun: {
-                base: 'cat',
-                pluralization_rule: 0
-            }
+            noun: {base: 'cat', plural: 'cats', pluralization_rule: NounConstants.pluralization_Append_s}
         })
 
         expect(this.nouns()).toEqual([
-            {base: 'cat', pluralization_rule: 0}
+            {base: 'cat', plural: 'cats', pluralization_rule: NounConstants.pluralization_Append_s}
         ])
 
         this.dispatch({
             type: NounActionTypes.INSERT_NOUN,
-            noun: {
-                base: 'box',
-                pluralization_rule: 1
-            }
+            noun: {base: 'box', plural: 'boxes', pluralization_rule: NounConstants.pluralization_Append_es}
         })
 
         expect(this.nouns()).toEqual([
-            {base: 'cat', pluralization_rule: 0},
-            {base: 'box', pluralization_rule: 1}
+            {base: 'cat', plural: 'cats', pluralization_rule: NounConstants.pluralization_Append_s},
+            {base: 'box', plural: 'boxes', pluralization_rule: NounConstants.pluralization_Append_es}
         ])
     })
 
     it('can delete a specific noun', function() {
         this.addNouns([
-            {base: 'apple', pluralization_rule: 0},
-            {base: 'box', pluralization_rule: 1},
-            {base: 'cat', pluralization_rule: 0},
+            {base: 'apple', plural: 'apples', pluralization_rule: NounConstants.pluralization_Append_s},
+            {base: 'box', plural: 'boxes', pluralization_rule: NounConstants.pluralization_Append_es},
+            {base: 'cat', plural: 'cats', pluralization_rule: NounConstants.pluralization_Append_s},
         ])
 
         this.dispatch({
@@ -101,8 +94,8 @@ describe('NounStore', function() {
         })
 
         expect(this.nouns()).toEqual([
-            {base: 'apple', pluralization_rule: 0},
-            {base: 'box', pluralization_rule: 1}
+            {base: 'apple', plural: 'apples', pluralization_rule: NounConstants.pluralization_Append_s},
+            {base: 'box', plural: 'boxes', pluralization_rule: NounConstants.pluralization_Append_es}
         ])
 
         this.dispatch({
@@ -111,9 +104,16 @@ describe('NounStore', function() {
         })
 
         expect(this.nouns()).toEqual([
-            {base: 'box', pluralization_rule: 1}
+            {base: 'box', plural: 'boxes', pluralization_rule: NounConstants.pluralization_Append_es}
         ])
+
+        this.dispatch({
+            type: NounActionTypes.DELETE_NOUN,
+            id: this.id(0),
+        })
+
+        expect(this.nouns()).toEqual([])
+
     })
 
 })
-

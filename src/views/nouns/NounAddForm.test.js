@@ -6,7 +6,7 @@ import PluralizationSelect from './PluralizationSelect'
 
 it('renders correctly', () => {
     const tree = renderer.create(
-        <NounAddForm editing={{base: ""}} />
+        <NounAddForm editingNoun={{base: ""}} />
     ).toJSON()
     expect(tree).toMatchSnapshot()
 })
@@ -22,9 +22,9 @@ it('renders correctly', () => {
 
 
 it('the html is ok', () => {
-    const renderer = ReactTestUtils.createRenderer();
-    renderer.render(<NounAddForm editing={{base: ""}} />);
-    const result = renderer.getRenderOutput();
+    const renderer = ReactTestUtils.createRenderer()
+    renderer.render(<NounAddForm editingNoun={{base: ""}} />)
+    const result = renderer.getRenderOutput()
 
     expect(result.type).toBe('div')
 

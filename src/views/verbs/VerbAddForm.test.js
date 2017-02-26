@@ -2,7 +2,7 @@ import React from 'react'
 import ReactTestUtils from 'react-addons-test-utils'
 import renderer from 'react-test-renderer'
 import VerbAddForm from './VerbAddForm'
-import PluralizationSelect from './PluralizationSelect'
+import PastTenseRuleSelect from './PastTenseRuleSelect'
 
 it('renders correctly', () => {
     const tree = renderer.create(
@@ -22,11 +22,10 @@ it('renders correctly', () => {
 
 
 it('the html is ok', () => {
-    const renderer = ReactTestUtils.createRenderer();
-    renderer.render(<VerbAddForm editing={{base: ""}} />);
-    const result = renderer.getRenderOutput();
+    const renderer = ReactTestUtils.createRenderer()
+    renderer.render(<VerbAddForm editing={{base: ""}} />)
+    const result = renderer.getRenderOutput()
 
     expect(result.type).toBe('div')
 
 })
-

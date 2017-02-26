@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactTestUtils from 'react-addons-test-utils'
 import renderer from 'react-test-renderer'
+
 import VerbEditForm from './VerbAddForm'
-import PluralizationSelect from './PluralizationSelect'
+import PastTenseRuleSelect from './PastTenseRuleSelect'
 
 it('renders correctly', () => {
     const tree = renderer.create(

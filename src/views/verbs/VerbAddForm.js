@@ -8,7 +8,7 @@ function VerbAddForm(props) {
     return (
         <div>
             <label htmlFor='base'>Base</label><input name='base' type='text'  />
-            <PastTenseRuleSelect pastTense_rule={props.editingVerb.pastTense_rule}/>
+            <PastTenseRuleSelect pastTense_rule={0}/>
             <input type='submit' value="Add" onClick={onInsert}/>
             <button onClick={props.onCancelVerb}>Cancel</button>
         </div>

@@ -1,4 +1,5 @@
 import Immutable from 'immutable'
+import NounConstants from './NounConstants'
 
 /**
  * A Noun has a base form, a plural form, and a pluralization_rule that
@@ -11,7 +12,7 @@ const Noun = Immutable.Record({
     id: '',
     base: '',
     plural: '',
-    pluralization_rule: 0
+    pluralization_rule: NounConstants.pluralization_NoneSelected
 })
 
 export default Noun

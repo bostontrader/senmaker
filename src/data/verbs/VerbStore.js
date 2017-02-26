@@ -25,16 +25,16 @@ class VerbStore extends ReduceStore {
             case VerbActionTypes.INSERT_VERB:
                 const id = Counter.increment();
 
-                let pastTense = ''
-                switch(action.verb.pastTense_rule) {
-                    case VerbConstants.pastTense_NoChange:
-                        pastTense = action.verb.base
-                        break
-                    case VerbConstants.pastTense_Append_ed:
-                        pastTense = action.verb.base + 'ed'
-                        break
-                    default:
-                }
+                //let pastTense = ''
+                //switch(action.verb.pastTense_rule) {
+                    //case VerbConstants.pastTense_NoChange:
+                        //pastTense = action.verb.base
+                        //break
+                    //case VerbConstants.pastTense_Append_ed:
+                        //pastTense = action.verb.base + 'ed'
+                        //break
+                    //default:
+                //}
 
                 return state.set(id, new Verb({
                     id: id,
