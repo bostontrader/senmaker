@@ -1,12 +1,26 @@
 import React from 'react'
 import NounAddForm from './nouns/NounAddForm'
 import NounEditForm from './nouns/NounEditForm'
+import NounPanel from './nouns/NounPanel'
 import NounTable from './nouns/NounTable'
 
 function Level01(props) {
 
+    return(
+        <div className="container">
+            <NounPanel {...props} />
+            <div className="row">
+                <p>Can you add a new noun?</p>
+                <p>Can you delete a noun from this list?</p>
+                <p>Can you change the spelling of a noun?</p>
+            </div>
+        </div>
+    )
+
+
+
     // What should be displayed in the noun add/edit panel?
-    let nounAddEditPanel = <div></div>
+    /*let nounAddEditPanel = <div></div>
     if(props.editingNoun.id) {
         nounAddEditPanel = <NounEditForm {...props} />
     } else if (props.editingNoun.add) {
@@ -36,10 +50,10 @@ function Level01(props) {
             <div className="row">
                 <p>Can you add a new noun?</p>
                 <p>Can you delete a noun from this list?</p>
-                <p>Can you change a noun?</p>
+                <p>Can you change the spelling of a noun?</p>
             </div>
         </div>
-    )
+    )*/
     /*return (
         <div className="container">
 
@@ -78,4 +92,3 @@ function MainNoun(props) {
 }
 
 export default Level01
-

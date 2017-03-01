@@ -8,129 +8,19 @@ exports[`AppContainer can edit task that is complete 1`] = `
       <div
         className="row">
         <h1>
-          Nouns
+          Verbs
         </h1>
-        <p>
-          The things around us are called 
-          <strong>
-            nouns
-          </strong>
-          .
-        </p>
-        <p>
-          When we write nouns must know how many of something we are writing about.  For example are we writing about one cat or more than one cat?
-        </p>
-        <p>
-          If we are writing about only one of something, then we use the base form of the noun.
-        </p>
-        <p>
-          If we are writing about more than one, then we use the plural form of the noun.
-        </p>
-      </div>
-      <div
-        className="row">
         <div
           className="one-half column">
           <button
             onClick={[Function]}>
-            Add new noun
+            Add new verb
           </button>
-          <section
-            id="main">
-            <table
-              id="noun-list">
-              <thead>
-                <tr>
-                  <th>
-                    Base
-                  </th>
-                  <th>
-                    Plural
-                  </th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
         </div>
         <div
           className="one-half column">
           <div />
         </div>
-      </div>
-      <div
-        className="row">
-        <p>
-          Can you add a new noun?
-        </p>
-        <p>
-          Can you delete a noun from this list?
-        </p>
-        <p>
-          Can you change a noun?
-        </p>
       </div>
     </div>
   </div>
@@ -147,129 +37,19 @@ exports[`AppContainer can edit task that is not complete 1`] = `
       <div
         className="row">
         <h1>
-          Nouns
+          Verbs
         </h1>
-        <p>
-          The things around us are called 
-          <strong>
-            nouns
-          </strong>
-          .
-        </p>
-        <p>
-          When we write nouns must know how many of something we are writing about.  For example are we writing about one cat or more than one cat?
-        </p>
-        <p>
-          If we are writing about only one of something, then we use the base form of the noun.
-        </p>
-        <p>
-          If we are writing about more than one, then we use the plural form of the noun.
-        </p>
-      </div>
-      <div
-        className="row">
         <div
           className="one-half column">
           <button
             onClick={[Function]}>
-            Add new noun
+            Add new verb
           </button>
-          <section
-            id="main">
-            <table
-              id="noun-list">
-              <thead>
-                <tr>
-                  <th>
-                    Base
-                  </th>
-                  <th>
-                    Plural
-                  </th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
         </div>
         <div
           className="one-half column">
           <div />
         </div>
-      </div>
-      <div
-        className="row">
-        <p>
-          Can you add a new noun?
-        </p>
-        <p>
-          Can you delete a noun from this list?
-        </p>
-        <p>
-          Can you change a noun?
-        </p>
       </div>
     </div>
   </div>
@@ -286,129 +66,19 @@ exports[`AppContainer renders nouns that are complete 1`] = `
       <div
         className="row">
         <h1>
-          Nouns
+          Verbs
         </h1>
-        <p>
-          The things around us are called 
-          <strong>
-            nouns
-          </strong>
-          .
-        </p>
-        <p>
-          When we write nouns must know how many of something we are writing about.  For example are we writing about one cat or more than one cat?
-        </p>
-        <p>
-          If we are writing about only one of something, then we use the base form of the noun.
-        </p>
-        <p>
-          If we are writing about more than one, then we use the plural form of the noun.
-        </p>
-      </div>
-      <div
-        className="row">
         <div
           className="one-half column">
           <button
             onClick={[Function]}>
-            Add new noun
+            Add new verb
           </button>
-          <section
-            id="main">
-            <table
-              id="noun-list">
-              <thead>
-                <tr>
-                  <th>
-                    Base
-                  </th>
-                  <th>
-                    Plural
-                  </th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
         </div>
         <div
           className="one-half column">
           <div />
         </div>
-      </div>
-      <div
-        className="row">
-        <p>
-          Can you add a new noun?
-        </p>
-        <p>
-          Can you delete a noun from this list?
-        </p>
-        <p>
-          Can you change a noun?
-        </p>
       </div>
     </div>
   </div>
@@ -425,99 +95,19 @@ exports[`AppContainer renders some nouns 1`] = `
       <div
         className="row">
         <h1>
-          Nouns
+          Verbs
         </h1>
-        <p>
-          The things around us are called 
-          <strong>
-            nouns
-          </strong>
-          .
-        </p>
-        <p>
-          When we write nouns must know how many of something we are writing about.  For example are we writing about one cat or more than one cat?
-        </p>
-        <p>
-          If we are writing about only one of something, then we use the base form of the noun.
-        </p>
-        <p>
-          If we are writing about more than one, then we use the plural form of the noun.
-        </p>
-      </div>
-      <div
-        className="row">
         <div
           className="one-half column">
           <button
             onClick={[Function]}>
-            Add new noun
+            Add new verb
           </button>
-          <section
-            id="main">
-            <table
-              id="noun-list">
-              <thead>
-                <tr>
-                  <th>
-                    Base
-                  </th>
-                  <th>
-                    Plural
-                  </th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    
-                  </td>
-                  <td>
-                    <button
-                      onClick={[Function]}
-                      type="button">
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
         </div>
         <div
           className="one-half column">
           <div />
         </div>
-      </div>
-      <div
-        className="row">
-        <p>
-          Can you add a new noun?
-        </p>
-        <p>
-          Can you delete a noun from this list?
-        </p>
-        <p>
-          Can you change a noun?
-        </p>
       </div>
     </div>
   </div>
@@ -534,50 +124,19 @@ exports[`AppContainer renders with no nouns 1`] = `
       <div
         className="row">
         <h1>
-          Nouns
+          Verbs
         </h1>
-        <p>
-          The things around us are called 
-          <strong>
-            nouns
-          </strong>
-          .
-        </p>
-        <p>
-          When we write nouns must know how many of something we are writing about.  For example are we writing about one cat or more than one cat?
-        </p>
-        <p>
-          If we are writing about only one of something, then we use the base form of the noun.
-        </p>
-        <p>
-          If we are writing about more than one, then we use the plural form of the noun.
-        </p>
-      </div>
-      <div
-        className="row">
         <div
           className="one-half column">
           <button
             onClick={[Function]}>
-            Add new noun
+            Add new verb
           </button>
         </div>
         <div
           className="one-half column">
           <div />
         </div>
-      </div>
-      <div
-        className="row">
-        <p>
-          Can you add a new noun?
-        </p>
-        <p>
-          Can you delete a noun from this list?
-        </p>
-        <p>
-          Can you change a noun?
-        </p>
       </div>
     </div>
   </div>

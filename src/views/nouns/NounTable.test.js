@@ -1,104 +1,60 @@
-import Immutable from 'immutable'
-import React from 'react'
-import ReactTestUtils from 'react-addons-test-utils'
-import renderer from 'react-test-renderer'
+import {findAllWithType} from "react-shallow-testutils"
+//import {Immutable} from 'immutable'
+import {OrderedMap} from 'immutable'
+import React from "react"
+import TestUtils from "react-addons-test-utils"
 
 import Noun from '../../data/nouns/Noun'
-import NounConstants from '../../data/nouns/NounConstants'
-import NounStore from '../../data/nouns/NounStore'
 import NounTable from './NounTable'
+import NounItem from './NounItem'
 
-describe('NounTable', function() {
+describe("NounTable", function(){
 
-    beforeEach(function() {
+    let tuRenderer, nounTable, nouns
 
-        //let editStore = '';
-        //this.setEditID = (id) => editStore = id;
+    beforeEach(function(){
+        tuRenderer = TestUtils.createRenderer()
 
-        //let draftStore = '';
-        //this.setDraftText = (text) => draftStore = text;
+        nouns = OrderedMap()
+        const id = 1
+        const action = {base:'cat', plural:'cats', pluralization_rule: 1}
 
-        //this.catfood = () => {
-            //console.log('catfood yum')
-        //}
+        nouns = nouns.set(id, new Noun({
+            id: id,
+            base: action.base,
+            plural: action.plural,
+            pluralization_rule: action.pluralization_rule
+        }))
+        
+    })
 
-        //let nounStore = Immutable.OrderedMap()
-
-        //this.setNouns = (nouns) => {
-            //nouns.forEach(noun => {
-                //const id = Counter.increment();
-                //nounStore = nounStore.set(
-                    //id,
-                    //new Noun({id, base: noun.base, plural: noun.plural, pluralization_rule: noun.pluralization_rule})
-                //)
-            //})
-        //}
-
-        // Because of how NounStore is set up it's not easy to get access to ids of
-        // nouns. This will get the id of a particular noun based on the index it
-        // was added to state in.
-        //this.id = (index) => {
-            //if (nounStore.size <= index) {
-                //throw new Error(
-                    //'Requested id for an index that is larger than the size of the ' +
-                    //'current state.'
-                //)
-            //}
-            //return Array.from(nounStore.keys())[index]
-        //}
-
-        // Override all the get state's to read from our fake data.
-        //NounDraftStore.getState = () => draftStore;
-        //NounEditStore.getState = () => editStore;
-        //NounStore.getState = () => nounStore
-
-        // Simple helper so tests read easier.
-        //this.render = () => renderer.create(<AppContainer />).toJSON();
+    it("renders a level 1 NounTable", () => {
+        tuRenderer = TestUtils.createRenderer()
+        nounTable = tuRenderer.render(<NounTable level={1} nouns={nouns} />)
+        expect(nounTable.type).toBe('table')
+        expect(nounTable.props.children.length).toBe(2)
     })
 
 
-    it('renders correctly', () => {
-
-        let props = {'nouns':Immutable.OrderedMap()}
-
-        //let propsnouns = Immutable.OrderedMap()
-
-        //this.setNouns = (nouns) => {
-        //nouns.forEach(noun => {
-        //const id = Counter.increment();
-        //nounStore = nounStore.set(
-        //id,
-        //new Noun({id, base: noun.base, plural: noun.plural, pluralization_rule: noun.pluralization_rule})
-        //)
-        //})
-        //}
-
-        //this.setNouns([
-            //{base: 'cat', plural: 'cats', pluralization_rule: 0}
-        //])
-
-        //const nouns = [
-        //{base: 'cat', plural: 'cats', pluralization_rule: 0}
-        //]
-
-        const tree = renderer.create(
-            <NounTable {...props} />
-        ).toJSON()
-        expect(tree).toMatchSnapshot()
+    it("renders a level 2 NounTable", () => {
+        tuRenderer = TestUtils.createRenderer()
+        nounTable = tuRenderer.render(<NounTable level={2} nouns={nouns} />)
+        expect(nounTable.type).toBe('table')
+        expect(nounTable.props.children.length).toBe(2)
     })
 
-    it('the html is ok', () => {
-        let props = {'nouns':Immutable.OrderedMap()}
 
-        //const nouns = [
-            //{base: 'cat', plural: 'cats', pluralization_rule: 0}
-        //]
+    it("will render one NounItem", function(){
+        //var todos = shallowTestUtils.findAllWithType(todolist, Toodo);
+        //const nounItems = shallowTestUtils.findAllWithType(nounTable, NounItem)
+        const nounItems = findAllWithType(nounTable, NounItem)
+        //console.log(nounItems)
+        expect(nounItems.length).toBe(1)
 
-        const renderer = ReactTestUtils.createRenderer();
-        renderer.render(<NounTable {...props}  />);
-        const result = renderer.getRenderOutput();
-
-        expect(result.type).toBe('table')
+        //var dinnerTodo = todos[2];
+        //expect(dinnerTodo).to.deep.equal(
+            //<Toodo key="toodo-2" text="go out to dinner" />
+        //);
+        expect(true)
     })
-
 })

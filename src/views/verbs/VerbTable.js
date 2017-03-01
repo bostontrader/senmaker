@@ -1,5 +1,7 @@
 import React from 'react'
 
+import VerbItem from './VerbItem'
+
 function VerbTable(props) {
 
     return (
@@ -18,6 +20,7 @@ function VerbTable(props) {
                 <VerbItem
                     key={verb.id}
                     editing={props.editingVerb}
+                    level={props.level}
                     verb={verb}
                     onDeleteVerb={props.onDeleteVerb}
                     onEditVerb={props.onEditVerb}
@@ -28,7 +31,7 @@ function VerbTable(props) {
     )
 }
 
-function VerbItem(props) {
+/*function VerbItem(props) {
     const {verb} = props;
     const onEditVerb = () => props.onEditVerb(verb)
 
@@ -46,6 +49,6 @@ function VerbItem(props) {
 
         </tr>
     )
-}
+}*/
 
 export default VerbTable

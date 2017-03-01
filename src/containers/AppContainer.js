@@ -20,6 +20,7 @@ function getStores() {
 }
 
 function getState() {
+
     return {
         level: AppStore.getInitialState(),
         nouns: NounStore.getState(),

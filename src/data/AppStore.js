@@ -1,9 +1,5 @@
-//import Immutable from 'immutable';
 import {ReduceStore} from 'flux/utils'
-//import NounActionTypes from './NounActionTypes';
 import AppDispatcher from './AppDispatcher'
-//import Counter from './Counter'
-//import Noun from './Noun'
 
 class AppStore extends ReduceStore {
     constructor() {
@@ -11,7 +7,7 @@ class AppStore extends ReduceStore {
     }
 
     getInitialState() {
-        return 1
+        return 2
     }
 
     reduce(state, action) {

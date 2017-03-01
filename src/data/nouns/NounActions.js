@@ -23,7 +23,8 @@ const Actions = {
     editNoun(noun) {
         AppDispatcher.dispatch({
             type: NounActionTypes.EDIT_NOUN,
-            noun
+            //noun
+            payload: {noun: noun, level: 1}
         })
     },
     insertNoun(noun) {

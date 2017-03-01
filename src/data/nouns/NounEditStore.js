@@ -31,9 +31,9 @@ class NounEditStore extends ReduceStore {
 
             case NounActionTypes.EDIT_NOUN:
                 return {
-                    id: action.noun.get('id'),
-                    base: action.noun.get('base'),
-                    pluralization_rule: action.noun.get('pluralization_rule')
+                    id: action.payload.noun.get('id'),
+                    base: action.payload.noun.get('base'),
+                    pluralization_rule: action.payload.noun.get('pluralization_rule')
                 }
 
             // Here we only close the UI form.

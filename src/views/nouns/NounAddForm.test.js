@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactTestUtils from 'react-addons-test-utils'
-import renderer from 'react-test-renderer'
+import rtRenderer from 'react-test-renderer'
 import NounAddForm from './NounAddForm'
 import PluralizationSelect from './PluralizationSelect'
 
 it('renders correctly', () => {
-    const tree = renderer.create(
+    const tree = rtRenderer.create(
         <NounAddForm editingNoun={{base: ""}} />
     ).toJSON()
     expect(tree).toMatchSnapshot()
@@ -13,7 +13,7 @@ it('renders correctly', () => {
 
 // NounAddForm
 
-// if noun = {} empty...
+// if editingNoun = {} empty...
 // a base input that is empty, and pluralization_rule is not set, plural form is not there
 // the add button is grayed out
 
