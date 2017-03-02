@@ -1,5 +1,7 @@
 import React from 'react'
+
 import PastTenseRuleSelect from './PastTenseRuleSelect'
+import {PastTenseRule} from '../../data/verbs/VerbConstants'
 
 function VerbAddForm(props) {
 

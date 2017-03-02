@@ -5,7 +5,6 @@ import AppDispatcher from '../AppDispatcher'
 import Counter from './Counter'
 import Verb from './Verb'
 import VerbActionTypes from './VerbActionTypes'
-import VerbConstants from './VerbConstants'
 
 class VerbStore extends ReduceStore {
     constructor() {

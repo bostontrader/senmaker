@@ -1,8 +1,23 @@
-const VerbConstants = {
-    'pastTense_NoneSelected':100,
-    'pastTense_NoChange':101,
-    'pastTense_Append_ed':102,
-    'pastTense_Irregular':109
+/**
+ * What is the rule for transforming the base form of the verb into the past tense?
+ */
+const PastTenseRule = {
+    'NoneSelected':100,
+    'NoChange':101,
+    'Append_ed':102,
+    'Irregular':109
 }
 
-export default VerbConstants
+/**
+The UI should generally adapt to a particular level.  Although we have a global app level,
+it's not feasible to have all the UI components track this.  Instead, we maintain levels
+of intermediate granularity.  Here we define the levels available for the VerbPanel component.
+This level drives all of the child components as well.
+ */
+const VerbPanelLevel = {
+    'BASE': 100,
+    'PAST_TENSE': 200
+}
+
+export {PastTenseRule}
+export {VerbPanelLevel}

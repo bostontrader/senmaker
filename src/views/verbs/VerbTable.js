@@ -1,18 +1,18 @@
 import React from 'react'
 
+import {VerbPanelLevel} from '../../data/verbs/VerbConstants'
 import VerbItem from './VerbItem'
 
 function VerbTable(props) {
 
-    return (
-
-        <table id="verb-list">
+    let verbTable = <div></div>
+    if( props.level >= VerbPanelLevel.PAST_TENSE) {
+        verbTable = <table id="verb-list">
             <thead>
             <tr>
                 <th>Base</th>
                 <th>Past Tense</th>
-                <th></th>
-
+                <th> </th>
             </tr>
             </thead>
             <tbody>
@@ -28,27 +28,31 @@ function VerbTable(props) {
             ))}
             </tbody>
         </table>
-    )
+    } else if (props.level >= VerbPanelLevel.BASE) {
+        verbTable = <table id="verb-list">
+            <thead>
+            <tr>
+                <th>Base</th>
+                <th> </th>
+            </tr>
+            </thead>
+            <tbody>
+            {[...props.verbs.values()].reverse().map(verb => (
+                <VerbItem
+                    key={verb.id}
+                    editing={props.editingVerb}
+                    level={props.level}
+                    verb={verb}
+                    onDeleteVerb={props.onDeleteVerb}
+                    onEditVerb={props.onEditVerb}
+                />
+            ))}
+            </tbody>
+        </table>
+    }
+
+    return verbTable
+
 }
-
-/*function VerbItem(props) {
-    const {verb} = props;
-    const onEditVerb = () => props.onEditVerb(verb)
-
-    return (
-        <tr>
-            <td>
-                {verb.base}
-            </td>
-            <td>
-                {verb.pastTense}
-            </td>
-            <td>
-                <button type="button"  onClick={onEditVerb} >Edit</button>
-            </td>
-
-        </tr>
-    )
-}*/
 
 export default VerbTable

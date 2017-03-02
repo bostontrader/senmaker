@@ -5,22 +5,56 @@ exports[`AppContainer can edit task that is complete 1`] = `
     className="row">
     <div
       className="container">
+      <div>
+        <div
+          className="row">
+          <h1>
+            Verbs
+          </h1>
+          <p>
+            The actions we can take are called 
+            <strong>
+              verbs
+            </strong>
+            .
+          </p>
+          <p>
+            We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.
+          </p>
+          <p>
+            For example: If we performed the verb in the past we use the \'past tense\' form of them verb.
+          </p>
+          <p>
+            The base form of the verb is changed into the past-tense form according to certain rules.
+          </p>
+        </div>
+        <div
+          className="row">
+          <div
+            className="one-half column">
+            <button
+              onClick={[Function]}>
+              Add new verb
+            </button>
+            <div />
+          </div>
+          <div
+            className="one-half column">
+            <div />
+          </div>
+        </div>
+      </div>
       <div
         className="row">
-        <h1>
-          Verbs
-        </h1>
-        <div
-          className="one-half column">
-          <button
-            onClick={[Function]}>
-            Add new verb
-          </button>
-        </div>
-        <div
-          className="one-half column">
-          <div />
-        </div>
+        <p>
+          Can you add a new verb?
+        </p>
+        <p>
+          Can you delete a verb from this list?
+        </p>
+        <p>
+          Can you change the spelling of a verb?
+        </p>
       </div>
     </div>
   </div>
@@ -34,22 +68,56 @@ exports[`AppContainer can edit task that is not complete 1`] = `
     className="row">
     <div
       className="container">
+      <div>
+        <div
+          className="row">
+          <h1>
+            Verbs
+          </h1>
+          <p>
+            The actions we can take are called 
+            <strong>
+              verbs
+            </strong>
+            .
+          </p>
+          <p>
+            We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.
+          </p>
+          <p>
+            For example: If we performed the verb in the past we use the \'past tense\' form of them verb.
+          </p>
+          <p>
+            The base form of the verb is changed into the past-tense form according to certain rules.
+          </p>
+        </div>
+        <div
+          className="row">
+          <div
+            className="one-half column">
+            <button
+              onClick={[Function]}>
+              Add new verb
+            </button>
+            <div />
+          </div>
+          <div
+            className="one-half column">
+            <div />
+          </div>
+        </div>
+      </div>
       <div
         className="row">
-        <h1>
-          Verbs
-        </h1>
-        <div
-          className="one-half column">
-          <button
-            onClick={[Function]}>
-            Add new verb
-          </button>
-        </div>
-        <div
-          className="one-half column">
-          <div />
-        </div>
+        <p>
+          Can you add a new verb?
+        </p>
+        <p>
+          Can you delete a verb from this list?
+        </p>
+        <p>
+          Can you change the spelling of a verb?
+        </p>
       </div>
     </div>
   </div>
@@ -63,22 +131,56 @@ exports[`AppContainer renders nouns that are complete 1`] = `
     className="row">
     <div
       className="container">
+      <div>
+        <div
+          className="row">
+          <h1>
+            Verbs
+          </h1>
+          <p>
+            The actions we can take are called 
+            <strong>
+              verbs
+            </strong>
+            .
+          </p>
+          <p>
+            We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.
+          </p>
+          <p>
+            For example: If we performed the verb in the past we use the \'past tense\' form of them verb.
+          </p>
+          <p>
+            The base form of the verb is changed into the past-tense form according to certain rules.
+          </p>
+        </div>
+        <div
+          className="row">
+          <div
+            className="one-half column">
+            <button
+              onClick={[Function]}>
+              Add new verb
+            </button>
+            <div />
+          </div>
+          <div
+            className="one-half column">
+            <div />
+          </div>
+        </div>
+      </div>
       <div
         className="row">
-        <h1>
-          Verbs
-        </h1>
-        <div
-          className="one-half column">
-          <button
-            onClick={[Function]}>
-            Add new verb
-          </button>
-        </div>
-        <div
-          className="one-half column">
-          <div />
-        </div>
+        <p>
+          Can you add a new verb?
+        </p>
+        <p>
+          Can you delete a verb from this list?
+        </p>
+        <p>
+          Can you change the spelling of a verb?
+        </p>
       </div>
     </div>
   </div>
@@ -92,22 +194,56 @@ exports[`AppContainer renders some nouns 1`] = `
     className="row">
     <div
       className="container">
+      <div>
+        <div
+          className="row">
+          <h1>
+            Verbs
+          </h1>
+          <p>
+            The actions we can take are called 
+            <strong>
+              verbs
+            </strong>
+            .
+          </p>
+          <p>
+            We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.
+          </p>
+          <p>
+            For example: If we performed the verb in the past we use the \'past tense\' form of them verb.
+          </p>
+          <p>
+            The base form of the verb is changed into the past-tense form according to certain rules.
+          </p>
+        </div>
+        <div
+          className="row">
+          <div
+            className="one-half column">
+            <button
+              onClick={[Function]}>
+              Add new verb
+            </button>
+            <div />
+          </div>
+          <div
+            className="one-half column">
+            <div />
+          </div>
+        </div>
+      </div>
       <div
         className="row">
-        <h1>
-          Verbs
-        </h1>
-        <div
-          className="one-half column">
-          <button
-            onClick={[Function]}>
-            Add new verb
-          </button>
-        </div>
-        <div
-          className="one-half column">
-          <div />
-        </div>
+        <p>
+          Can you add a new verb?
+        </p>
+        <p>
+          Can you delete a verb from this list?
+        </p>
+        <p>
+          Can you change the spelling of a verb?
+        </p>
       </div>
     </div>
   </div>
@@ -121,22 +257,56 @@ exports[`AppContainer renders with no nouns 1`] = `
     className="row">
     <div
       className="container">
+      <div>
+        <div
+          className="row">
+          <h1>
+            Verbs
+          </h1>
+          <p>
+            The actions we can take are called 
+            <strong>
+              verbs
+            </strong>
+            .
+          </p>
+          <p>
+            We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.
+          </p>
+          <p>
+            For example: If we performed the verb in the past we use the \'past tense\' form of them verb.
+          </p>
+          <p>
+            The base form of the verb is changed into the past-tense form according to certain rules.
+          </p>
+        </div>
+        <div
+          className="row">
+          <div
+            className="one-half column">
+            <button
+              onClick={[Function]}>
+              Add new verb
+            </button>
+            <div />
+          </div>
+          <div
+            className="one-half column">
+            <div />
+          </div>
+        </div>
+      </div>
       <div
         className="row">
-        <h1>
-          Verbs
-        </h1>
-        <div
-          className="one-half column">
-          <button
-            onClick={[Function]}>
-            Add new verb
-          </button>
-        </div>
-        <div
-          className="one-half column">
-          <div />
-        </div>
+        <p>
+          Can you add a new verb?
+        </p>
+        <p>
+          Can you delete a verb from this list?
+        </p>
+        <p>
+          Can you change the spelling of a verb?
+        </p>
       </div>
     </div>
   </div>

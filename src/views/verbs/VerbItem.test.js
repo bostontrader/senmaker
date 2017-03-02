@@ -1,7 +1,9 @@
 import React from "react"
 import TestUtils from "react-addons-test-utils"
+
 import Verb from '../../data/verbs/Verb'
 import VerbItem from './VerbItem'
+import {PastTenseRule, VerbPanelLevel} from '../../data/verbs/VerbConstants'
 
 describe("VerbItem", () => {
 
@@ -9,21 +11,21 @@ describe("VerbItem", () => {
 
     const verb = new Verb({
         id: 1,
-        base: 'cat',
-        plural: 'cats',
-        pluralization_rule: 1
+        base: 'run',
+        pastTense: 'ran',
+        pastTense_rule: PastTenseRule.Irregular
     })
 
-    it("renders a level 1 VerbItem", () => {
+    it("renders a VerbPanelLevel.BASE VerbItem", () => {
         tuRenderer = TestUtils.createRenderer()
-        verbItem = tuRenderer.render(<VerbItem level={1} verb={verb} />)
+        verbItem = tuRenderer.render(<VerbItem level={VerbPanelLevel.BASE} verb={verb} />)
         expect(verbItem.type).toBe('tr')
         expect(verbItem.props.children.length).toBe(2)
     })
 
-    it("renders a level 2 VerbItem", () => {
+    it("renders a VerbPanelLevel.PAST_TENSE", () => {
         tuRenderer = TestUtils.createRenderer()
-        verbItem = tuRenderer.render(<VerbItem level={2} verb={verb} />)
+        verbItem = tuRenderer.render(<VerbItem level={VerbPanelLevel.PAST_TENSE} verb={verb} />)
         expect(verbItem.type).toBe('tr')
         expect(verbItem.props.children.length).toBe(3)
     })

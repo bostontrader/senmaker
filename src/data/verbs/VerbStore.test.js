@@ -1,8 +1,8 @@
 import Counter from './Counter'
 import Verb from './Verb'
 import VerbActionTypes from './VerbActionTypes'
-import VerbConstants from './VerbConstants'
 import VerbStore from './VerbStore'
+import {PastTenseRule} from '../../data/verbs/VerbConstants'
 
 describe('VerbStore', function() {
 
@@ -66,12 +66,12 @@ describe('VerbStore', function() {
             verb: {
                 base: 'hit',
                 pastTense: 'hit',
-                pastTense_rule: VerbConstants.pastTense_NoChange
+                pastTense_rule: PastTenseRule.NoChange
             }
         })
 
         expect(this.verbs()).toEqual([
-            {base: 'hit', pastTense: 'hit', pastTense_rule: VerbConstants.pastTense_NoChange}
+            {base: 'hit', pastTense: 'hit', pastTense_rule: PastTenseRule.NoChange}
         ])
 
         this.dispatch({
@@ -79,13 +79,13 @@ describe('VerbStore', function() {
             verb: {
                 base: 'talk',
                 pastTense: 'talked',
-                pastTense_rule: VerbConstants.pastTense_Append_ed
+                pastTense_rule: PastTenseRule.Append_ed
             }
         })
 
         expect(this.verbs()).toEqual([
-            {base: 'hit', pastTense: 'hit', pastTense_rule: VerbConstants.pastTense_NoChange},
-            {base: 'talk', pastTense: 'talked', pastTense_rule: VerbConstants.pastTense_Append_ed}
+            {base: 'hit', pastTense: 'hit', pastTense_rule: PastTenseRule.NoChange},
+            {base: 'talk', pastTense: 'talked', pastTense_rule: PastTenseRule.Append_ed}
         ])
 
         this.dispatch({
@@ -93,22 +93,22 @@ describe('VerbStore', function() {
             verb: {
                 base: 'eat',
                 pastTense: 'ate',
-                pastTense_rule: VerbConstants.pastTense_Irregular
+                pastTense_rule: PastTenseRule.Irregular
             }
         })
 
         expect(this.verbs()).toEqual([
-            {base: 'hit', pastTense: 'hit', pastTense_rule: VerbConstants.pastTense_NoChange},
-            {base: 'talk', pastTense: 'talked', pastTense_rule: VerbConstants.pastTense_Append_ed},
-            {base: 'eat', pastTense: 'ate', pastTense_rule: VerbConstants.pastTense_Irregular}
+            {base: 'hit', pastTense: 'hit', pastTense_rule: PastTenseRule.NoChange},
+            {base: 'talk', pastTense: 'talked', pastTense_rule: PastTenseRule.Append_ed},
+            {base: 'eat', pastTense: 'ate', pastTense_rule: PastTenseRule.Irregular}
         ])
     })
 
     it('can delete a specific verb', function() {
         this.addVerbs([
-            {base: 'hit', pastTense: 'hit', pastTense_rule: VerbConstants.pastTense_NoChange},
-            {base: 'talk', pastTense: 'talked', pastTense_rule: VerbConstants.pastTense_Append_ed},
-            {base: 'eat', pastTense: 'ate', pastTense_rule: VerbConstants.pastTense_Irregular}
+            {base: 'hit', pastTense: 'hit', pastTense_rule: PastTenseRule.NoChange},
+            {base: 'talk', pastTense: 'talked', pastTense_rule: PastTenseRule.Append_ed},
+            {base: 'eat', pastTense: 'ate', pastTense_rule: PastTenseRule.Irregular}
         ])
 
         this.dispatch({
@@ -117,8 +117,8 @@ describe('VerbStore', function() {
         })
 
         expect(this.verbs()).toEqual([
-            {base: 'hit', pastTense: 'hit', pastTense_rule: VerbConstants.pastTense_NoChange},
-            {base: 'talk', pastTense: 'talked', pastTense_rule: VerbConstants.pastTense_Append_ed}
+            {base: 'hit', pastTense: 'hit', pastTense_rule: PastTenseRule.NoChange},
+            {base: 'talk', pastTense: 'talked', pastTense_rule: PastTenseRule.Append_ed}
         ])
 
         this.dispatch({
@@ -127,7 +127,7 @@ describe('VerbStore', function() {
         })
 
         expect(this.verbs()).toEqual([
-            {base: 'talk', pastTense: 'talked', pastTense_rule: VerbConstants.pastTense_Append_ed}
+            {base: 'talk', pastTense: 'talked', pastTense_rule: PastTenseRule.Append_ed}
         ])
 
         this.dispatch({

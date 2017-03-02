@@ -1,18 +1,17 @@
 import {findAllWithType} from "react-shallow-testutils"
-//import {Immutable} from 'immutable'
 import {OrderedMap} from 'immutable'
 import React from "react"
 import TestUtils from "react-addons-test-utils"
 
 import Noun from '../../data/nouns/Noun'
-import NounTable from './NounTable'
 import NounItem from './NounItem'
+import NounTable from './NounTable'
 
-describe("NounTable", function(){
+describe("NounTable", () => {
 
     let tuRenderer, nounTable, nouns
 
-    beforeEach(function(){
+    beforeEach( () => {
         tuRenderer = TestUtils.createRenderer()
 
         nouns = OrderedMap()
@@ -44,15 +43,15 @@ describe("NounTable", function(){
     })
 
 
-    it("will render one NounItem", function(){
-        //var todos = shallowTestUtils.findAllWithType(todolist, Toodo);
+    it("will render one NounItem", () => {
+        //var nouns = shallowTestUtils.findAllWithType(nounlist, Toodo);
         //const nounItems = shallowTestUtils.findAllWithType(nounTable, NounItem)
         const nounItems = findAllWithType(nounTable, NounItem)
         //console.log(nounItems)
         expect(nounItems.length).toBe(1)
 
-        //var dinnerTodo = todos[2];
-        //expect(dinnerTodo).to.deep.equal(
+        //var dinnerNoun = nouns[2];
+        //expect(dinnerNoun).to.deep.equal(
             //<Toodo key="toodo-2" text="go out to dinner" />
         //);
         expect(true)

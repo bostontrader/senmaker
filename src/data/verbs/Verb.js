@@ -1,5 +1,6 @@
-import Immutable from 'immutable'
-import VerbConstants from './VerbConstants'
+import {Record} from 'immutable'
+
+import {PastTenseRule} from './VerbConstants'
 
 /**
  * A Verb has a base form, a past tense form, and a pastTense_rule that
@@ -8,11 +9,11 @@ import VerbConstants from './VerbConstants'
  * never say never, (except when quoting this rule,) especially with English.
  * So store all three and use this redundancy as a basis for error detection.
  */
-const Verb = Immutable.Record({
+const Verb = Record({
     id: '',
     base: '',
     pastTense: '',
-    pastTense_rule: VerbConstants.pastTense_NoneSelected
+    pastTense_rule: PastTenseRule.NoneSelected
 })
 
 export default Verb
