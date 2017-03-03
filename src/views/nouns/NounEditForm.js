@@ -1,4 +1,6 @@
 import React from 'react'
+
+import {NounPanelLevel} from '../../data/nouns/NounConstants'
 import PluralizationSelect from './PluralizationSelect'
 
 function NounEditForm(props) {
@@ -7,23 +9,23 @@ function NounEditForm(props) {
     const onDelete = () => props.onDeleteNoun(props.editingNoun.id)
 
 
-    let nounEditForm = <div>noun edit form</div>
-    const level = 2
-    if( level >= 2) {
+    let nounEditForm = <div>Noun Edit Form</div>
+
+    if( props.level >= NounPanelLevel.PLURALIZATION) {
         nounEditForm =
             <div>
-                <label htmlFor='base'>Base</label><input name='base' type='text' value={props.editingNoun.base}  onChange={onChange}/>
-                <PluralizationSelect pluralization_rule={props.editingNoun.pluralization_rule}/>
-                <br />
+                <label htmlFor='base'>Base</label>
+                <input name='base' type='text' value={props.editingNoun.base}  onChange={onChange}/>
+                <PluralizationSelect pluralization_rule={0}/>
                 <input type='submit' value={"Save (id = " +props.editingNoun.id+ ")"}/>
                 <button onClick={onDelete}>Delete</button>
                 <button onClick={props.onCancelNoun}>Cancel</button>
             </div>
-    } else if( level >= 1) {
+    } else if(props.level >= NounPanelLevel.BASE) {
         nounEditForm =
             <div>
-                <label htmlFor='base'>Base</label><input name='base' type='text' value={props.editingNoun.base}  onChange={onChange}/>
-                <br />
+                <label htmlFor='base'>Base</label>
+                <input name='base' type='text' value={props.editingNoun.base}  onChange={onChange}/>
                 <input type='submit' value={"Save (id = " +props.editingNoun.id+ ")"}/>
                 <button onClick={onDelete}>Delete</button>
                 <button onClick={props.onCancelNoun}>Cancel</button>
@@ -31,18 +33,6 @@ function NounEditForm(props) {
     }
 
     return (nounEditForm)
-
-
-    /*return (
-        <div>
-            <label htmlFor='base'>Base</label><input name='base' type='text' value={props.editingNoun.base}  onChange={onChange}/>
-            <PluralizationSelect pluralization_rule={props.editingNoun.pluralization_rule}/>
-            <br />
-            <input type='submit' value={"Save (id = " +props.editingNoun.id+ ")"}/>
-            <button onClick={onDelete}>Delete</button>
-            <button onClick={props.onCancelNoun}>Cancel</button>
-        </div>
-    )*/
 
 }
 

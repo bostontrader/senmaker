@@ -1,32 +1,31 @@
 import React from 'react'
-import ReactTestUtils from 'react-addons-test-utils'
-import renderer from 'react-test-renderer'
+
+import TestUtils         from 'react-addons-test-utils'
+import rtRenderer        from 'react-test-renderer'
 
 import NounEditForm from './NounEditForm'
-import PluralizationSelect from './PluralizationSelect'
+import {NounPanelLevel} from '../../data/nouns/NounConstants'
 
-it('renders correctly', () => {
-    const tree = renderer.create(
-        <NounEditForm editingNoun={{base: ""}} />
-    ).toJSON()
-    expect(tree).toMatchSnapshot()
-})
+describe("NounEditForm", () => {
 
-// NounAddForm
+    it("correctly renders a NounPanelLevel.BASE NounEditForm", () => {
+        const renderExpression = <NounEditForm level={NounPanelLevel.BASE} editingNoun={{base: 'cat'}}/>
+        const nounAddForm = TestUtils.createRenderer().render(renderExpression)
+        expect(nounAddForm.type).toBe('div')
+        expect(nounAddForm.props.children.length).toBe(5)
 
-// if noun = {} empty...
-// a base input that is empty, and pluralization_rule is not set, plural form is not there
-// the add button is grayed out
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 
-// if nount != {}
-// base input is something, pluralization rule is set, plural form has something
+    it("renders a NounPanelLevel.PAST_TENSE NounEditForm", () => {
+        const renderExpression = <NounEditForm level={NounPanelLevel.PLURALIZATION} editingNoun={{base: 'cat'}}/>
+        const nounAddForm = TestUtils.createRenderer().render(renderExpression)
+        expect(nounAddForm.type).toBe('div')
+        expect(nounAddForm.props.children.length).toBe(6)
 
-
-it('the html is ok', () => {
-    const renderer = ReactTestUtils.createRenderer()
-    renderer.render(<NounEditForm editingNoun={{base: ""}} />)
-    const result = renderer.getRenderOutput()
-
-    expect(result.type).toBe('div')
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 
 })

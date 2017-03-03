@@ -1,59 +1,93 @@
-import {findAllWithType} from "react-shallow-testutils"
 import {OrderedMap} from 'immutable'
-import React from "react"
-import TestUtils from "react-addons-test-utils"
+import React from 'react'
 
+import TestUtils         from 'react-addons-test-utils'
+import {findAllWithType} from 'react-shallow-testutils'
+import rtRenderer        from 'react-test-renderer'
+
+import {PluralizationRule, NounPanelLevel} from '../../data/nouns/NounConstants'
 import Noun from '../../data/nouns/Noun'
 import NounItem from './NounItem'
 import NounTable from './NounTable'
 
 describe("NounTable", () => {
 
-    let tuRenderer, nounTable, nouns
+    let nouns
 
     beforeEach( () => {
-        tuRenderer = TestUtils.createRenderer()
-
         nouns = OrderedMap()
-        const id = 1
-        const action = {base:'cat', plural:'cats', pluralization_rule: 1}
-
-        nouns = nouns.set(id, new Noun({
-            id: id,
-            base: action.base,
-            plural: action.plural,
-            pluralization_rule: action.pluralization_rule
-        }))
-        
     })
 
-    it("renders a level 1 NounTable", () => {
-        tuRenderer = TestUtils.createRenderer()
-        nounTable = tuRenderer.render(<NounTable level={1} nouns={nouns} />)
+    it("correctly renders a NounPanelLevel.BASE NounTable", () => {
+        const renderExpression = <NounTable level={NounPanelLevel.BASE} nouns={nouns} />
+        const nounTable = TestUtils.createRenderer().render(renderExpression)
         expect(nounTable.type).toBe('table')
-        expect(nounTable.props.children.length).toBe(2)
+
+        // Two columns in the thead
+        expect(nounTable.props.children[0].props.children.props.children.length).toBe(2)
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
     })
 
-
-    it("renders a level 2 NounTable", () => {
-        tuRenderer = TestUtils.createRenderer()
-        nounTable = tuRenderer.render(<NounTable level={2} nouns={nouns} />)
+    it("renders a NounPanelLevel.PLURALIZATION NounTable", () => {
+        const renderExpression = <NounTable level={NounPanelLevel.PLURALIZATION} nouns={nouns} />
+        const nounTable = TestUtils.createRenderer().render(renderExpression)
         expect(nounTable.type).toBe('table')
-        expect(nounTable.props.children.length).toBe(2)
+
+        // Three columns in the thead
+        expect(nounTable.props.children[0].props.children.props.children.length).toBe(3)
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
     })
 
+    it("will render zero NounItem", () => {
+        const renderExpression = <NounTable level={NounPanelLevel.PLURALIZATION} nouns={nouns} />
+        const nounTable = TestUtils.createRenderer().render(renderExpression)
+        const nounItems = findAllWithType(nounTable, NounItem)
+        expect(nounItems.length).toBe(0)
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 
     it("will render one NounItem", () => {
-        //var nouns = shallowTestUtils.findAllWithType(nounlist, Toodo);
-        //const nounItems = shallowTestUtils.findAllWithType(nounTable, NounItem)
+        nouns = nouns.set(1, new Noun({
+            id: 1,
+            base: 'cat',
+            plural: 'cats',
+            pluralization_rule: PluralizationRule.Append_s
+        }))
+        const renderExpression = <NounTable level={NounPanelLevel.PLURALIZATION} nouns={nouns} />
+        const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)
-        //console.log(nounItems)
         expect(nounItems.length).toBe(1)
 
-        //var dinnerNoun = nouns[2];
-        //expect(dinnerNoun).to.deep.equal(
-            //<Toodo key="toodo-2" text="go out to dinner" />
-        //);
-        expect(true)
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
     })
+
+    it("will render two NounItem", () => {
+        nouns = nouns.set(1, new Noun({
+            id: 1,
+            base: 'cat',
+            plural: 'cats',
+            pluralization_rule: PluralizationRule.Append_s
+        }))
+        nouns = nouns.set(2, new Noun({
+            id: 2,
+            base: 'box',
+            plural: 'boxes',
+            pluralization_rule: PluralizationRule.Append_es
+        }))
+        const renderExpression = <NounTable level={NounPanelLevel.PLURALIZATION} nouns={nouns} />
+        const nounTable = TestUtils.createRenderer().render(renderExpression)
+        const nounItems = findAllWithType(nounTable, NounItem)
+        expect(nounItems.length).toBe(2)
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
+
 })

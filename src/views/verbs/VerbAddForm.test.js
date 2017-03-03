@@ -1,31 +1,31 @@
 import React from 'react'
-import ReactTestUtils from 'react-addons-test-utils'
-import renderer from 'react-test-renderer'
+
+import TestUtils         from 'react-addons-test-utils'
+import rtRenderer        from 'react-test-renderer'
+
 import VerbAddForm from './VerbAddForm'
-import PastTenseRuleSelect from './PastTenseRuleSelect'
+import {VerbPanelLevel} from '../../data/verbs/VerbConstants'
 
-it('renders correctly', () => {
-    const tree = renderer.create(
-        <VerbAddForm editing={{base: ""}} />
-    ).toJSON()
-    expect(tree).toMatchSnapshot()
-})
+describe("VerbAddForm", () => {
 
-// VerbAddForm
+    it("correctly renders a VerbPanelLevel.BASE VerbAddForm", () => {
+        const renderExpression = <VerbAddForm level={VerbPanelLevel.BASE} />
+        const verbAddForm = TestUtils.createRenderer().render(renderExpression)
+        expect(verbAddForm.type).toBe('div')
+        expect(verbAddForm.props.children.length).toBe(4)
 
-// if noun = {} empty...
-// a base input that is empty, and pluralization_rule is not set, plural form is not there
-// the add button is grayed out
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 
-// if nount != {}
-// base input is something, pluralization rule is set, plural form has something
+    it("renders a VerbPanelLevel.PAST_TENSE VerbAddForm", () => {
+        const renderExpression = <VerbAddForm level={VerbPanelLevel.PAST_TENSE} />
+        const verbAddForm = TestUtils.createRenderer().render(renderExpression)
+        expect(verbAddForm.type).toBe('div')
+        expect(verbAddForm.props.children.length).toBe(5)
 
-
-it('the html is ok', () => {
-    const renderer = ReactTestUtils.createRenderer()
-    renderer.render(<VerbAddForm editing={{base: ""}} />)
-    const result = renderer.getRenderOutput()
-
-    expect(result.type).toBe('div')
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 
 })

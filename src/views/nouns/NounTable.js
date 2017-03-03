@@ -1,11 +1,12 @@
 import React from 'react'
 
+import {NounPanelLevel} from '../../data/nouns/NounConstants'
 import NounItem from './NounItem'
 
 function NounTable(props) {
 
     let nounTable = <div></div>
-    if( props.level >= 2) {
+    if( props.level >= NounPanelLevel.PLURALIZATION) {
         nounTable =
             <table id="noun-list">
                 <thead>
@@ -27,7 +28,7 @@ function NounTable(props) {
                 ))}
                 </tbody>
             </table>
-    } else if( props.level >= 1) {
+    } else if( props.level >= NounPanelLevel.BASE) {
         nounTable =
             <table id="noun-list">
                 <thead>

@@ -1,33 +1,31 @@
 import React from 'react'
-import ReactTestUtils from 'react-addons-test-utils'
-import renderer from 'react-test-renderer'
 
-import VerbEditForm from './VerbAddForm'
-import PastTenseRuleSelect from './PastTenseRuleSelect'
+import TestUtils         from 'react-addons-test-utils'
+import rtRenderer        from 'react-test-renderer'
 
-it('renders correctly', () => {
-    const tree = renderer.create(
-        <VerbEditForm editing={{base: ""}} />
-    ).toJSON()
-    expect(tree).toMatchSnapshot()
+import VerbEditForm from './VerbEditForm'
+import {VerbPanelLevel} from '../../data/verbs/VerbConstants'
+
+describe("VerbEditForm", () => {
+
+    it("correctly renders a VerbPanelLevel.BASE VerbEditForm", () => {
+        const renderExpression = <VerbEditForm level={VerbPanelLevel.BASE} editingVerb={{base: 'talk'}}/>
+        const verbAddForm = TestUtils.createRenderer().render(renderExpression)
+        expect(verbAddForm.type).toBe('div')
+        expect(verbAddForm.props.children.length).toBe(5)
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
+
+    it("renders a VerbPanelLevel.PAST_TENSE VerbEditForm", () => {
+        const renderExpression = <VerbEditForm level={VerbPanelLevel.PAST_TENSE} editingVerb={{base: 'talk'}}/>
+        const verbAddForm = TestUtils.createRenderer().render(renderExpression)
+        expect(verbAddForm.type).toBe('div')
+        expect(verbAddForm.props.children.length).toBe(6)
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
+
 })
-
-// VerbAddForm
-
-// if noun = {} empty...
-// a base input that is empty, and pluralization_rule is not set, plural form is not there
-// the add button is grayed out
-
-// if nount != {}
-// base input is something, pluralization rule is set, plural form has something
-
-
-it('the html is ok', () => {
-    const renderer = ReactTestUtils.createRenderer();
-    renderer.render(<VerbEditForm editing={{base: ""}} />);
-    const result = renderer.getRenderOutput();
-
-    expect(result.type).toBe('div')
-
-})
-

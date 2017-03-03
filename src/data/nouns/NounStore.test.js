@@ -1,8 +1,8 @@
 import Counter from './Counter'
 import Noun from './Noun'
 import NounActionTypes from './NounActionTypes'
-import NounConstants from './NounConstants'
 import NounStore from './NounStore'
+import {PluralizationRule} from './NounConstants'
 
 describe('NounStore', function() {
 
@@ -63,29 +63,29 @@ describe('NounStore', function() {
 
         this.dispatch({
             type: NounActionTypes.INSERT_NOUN,
-            noun: {base: 'cat', plural: 'cats', pluralization_rule: NounConstants.pluralization_Append_s}
+            noun: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
         })
 
         expect(this.nouns()).toEqual([
-            {base: 'cat', plural: 'cats', pluralization_rule: NounConstants.pluralization_Append_s}
+            {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
         ])
 
         this.dispatch({
             type: NounActionTypes.INSERT_NOUN,
-            noun: {base: 'box', plural: 'boxes', pluralization_rule: NounConstants.pluralization_Append_es}
+            noun: {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
         })
 
         expect(this.nouns()).toEqual([
-            {base: 'cat', plural: 'cats', pluralization_rule: NounConstants.pluralization_Append_s},
-            {base: 'box', plural: 'boxes', pluralization_rule: NounConstants.pluralization_Append_es}
+            {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
+            {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
         ])
     })
 
     it('can delete a specific noun', function() {
         this.addNouns([
-            {base: 'apple', plural: 'apples', pluralization_rule: NounConstants.pluralization_Append_s},
-            {base: 'box', plural: 'boxes', pluralization_rule: NounConstants.pluralization_Append_es},
-            {base: 'cat', plural: 'cats', pluralization_rule: NounConstants.pluralization_Append_s},
+            {base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s},
+            {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
+            {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
         ])
 
         this.dispatch({
@@ -94,8 +94,8 @@ describe('NounStore', function() {
         })
 
         expect(this.nouns()).toEqual([
-            {base: 'apple', plural: 'apples', pluralization_rule: NounConstants.pluralization_Append_s},
-            {base: 'box', plural: 'boxes', pluralization_rule: NounConstants.pluralization_Append_es}
+            {base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s},
+            {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
         ])
 
         this.dispatch({
@@ -104,7 +104,7 @@ describe('NounStore', function() {
         })
 
         expect(this.nouns()).toEqual([
-            {base: 'box', plural: 'boxes', pluralization_rule: NounConstants.pluralization_Append_es}
+            {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
         ])
 
         this.dispatch({

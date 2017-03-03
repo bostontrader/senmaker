@@ -1,32 +1,31 @@
 import React from 'react'
-import ReactTestUtils from 'react-addons-test-utils'
-import rtRenderer from 'react-test-renderer'
+
+import TestUtils         from 'react-addons-test-utils'
+import rtRenderer        from 'react-test-renderer'
+
 import NounAddForm from './NounAddForm'
-import PluralizationSelect from './PluralizationSelect'
+import {NounPanelLevel} from '../../data/nouns/NounConstants'
 
-it('renders correctly', () => {
-    const tree = rtRenderer.create(
-        <NounAddForm editingNoun={{base: ""}} />
-    ).toJSON()
-    expect(tree).toMatchSnapshot()
-})
+describe("NounAddForm", () => {
 
-// NounAddForm
+    it("correctly renders a NounPanelLevel.BASE NounAddForm", () => {
+        const renderExpression = <NounAddForm level={NounPanelLevel.BASE} />
+        const nounAddForm = TestUtils.createRenderer().render(renderExpression)
+        expect(nounAddForm.type).toBe('div')
+        expect(nounAddForm.props.children.length).toBe(4)
 
-// if editingNoun = {} empty...
-// a base input that is empty, and pluralization_rule is not set, plural form is not there
-// the add button is grayed out
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 
-// if nount != {}
-// base input is something, pluralization rule is set, plural form has something
+    it("renders a NounPanelLevel.PAST_TENSE NounAddForm", () => {
+        const renderExpression = <NounAddForm level={NounPanelLevel.PLURALIZATION} />
+        const nounAddForm = TestUtils.createRenderer().render(renderExpression)
+        expect(nounAddForm.type).toBe('div')
+        expect(nounAddForm.props.children.length).toBe(5)
 
-
-it('the html is ok', () => {
-    const renderer = ReactTestUtils.createRenderer()
-    renderer.render(<NounAddForm editingNoun={{base: ""}} />)
-    const result = renderer.getRenderOutput()
-
-    expect(result.type).toBe('div')
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 
 })
-
