@@ -7,7 +7,7 @@ import Level02 from './Level02'
 function AppView(props) {
     let levelComponent
 
-    switch(props.level) {
+    switch(props.level.app) {
 
         case 0:
             levelComponent = <Level00 {...props} />

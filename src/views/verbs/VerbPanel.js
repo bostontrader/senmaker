@@ -3,6 +3,7 @@ import React from 'react'
 import VerbAddForm from './VerbAddForm'
 import VerbEditForm from './VerbEditForm'
 import VerbTable from './VerbTable'
+import {VerbPanelLevel} from '../../data/verbs/VerbConstants'
 
 /*
 The VerbPanel is responsible for displaying everything about our list of verbs.  Such
@@ -16,7 +17,7 @@ as well as any testing for the same.
 function VerbPanel(props) {
 
     // What should be displayed in the verb add/edit panel?
-    let verbAddEditPanel = <div></div>
+    let verbAddEditPanel = <div>verbAddEditPanel</div>
     if(props.editingVerb.id) {
         verbAddEditPanel = <VerbEditForm {...props} />
     } else if (props.editingVerb.add) {
@@ -25,8 +26,8 @@ function VerbPanel(props) {
         // Do nothing
     }
 
-    let verbPanel = <div></div>
-    if( props.level >= 2) {
+    let verbPanel = <div>Verb Panel</div>
+    if(props.level.verbPanel >= VerbPanelLevel.PAST_TENSE) {
         verbPanel =
             <div>
                 <div className="row">
@@ -46,7 +47,7 @@ function VerbPanel(props) {
                     </div>
                 </div>
             </div>
-    } else if( props.level >= 1) {
+    } else if(props.level.verbPanel >= VerbPanelLevel.BASE) {
         verbPanel =
             <div>
                 <div className="row">

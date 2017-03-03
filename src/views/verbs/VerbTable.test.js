@@ -19,7 +19,7 @@ describe("VerbTable", () => {
     })
 
     it("correctly renders a VerbPanelLevel.BASE VerbTable", () => {
-        const renderExpression = <VerbTable level={VerbPanelLevel.BASE} verbs={verbs} />
+        const renderExpression = <VerbTable level={{verbPanel:VerbPanelLevel.BASE}} verbs={verbs} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         expect(verbTable.type).toBe('table')
 
@@ -31,7 +31,7 @@ describe("VerbTable", () => {
     })
 
     it("renders a VerbPanelLevel.PAST_TENSE VerbTable", () => {
-        const renderExpression = <VerbTable level={VerbPanelLevel.PAST_TENSE} verbs={verbs} />
+        const renderExpression = <VerbTable level={{verbPanel:VerbPanelLevel.PAST_TENSE}} verbs={verbs} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         expect(verbTable.type).toBe('table')
 
@@ -43,7 +43,7 @@ describe("VerbTable", () => {
     })
 
     it("will render zero VerbItem", () => {
-        const renderExpression = <VerbTable level={VerbPanelLevel.PAST_TENSE} verbs={verbs} />
+        const renderExpression = <VerbTable level={{verbPanel:VerbPanelLevel.PAST_TENSE}} verbs={verbs} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         const verbItems = findAllWithType(verbTable, VerbItem)
         expect(verbItems.length).toBe(0)
@@ -59,7 +59,7 @@ describe("VerbTable", () => {
             pastTense: 'talked',
             pastTense_rule: PastTenseRule.Append_ed
         }))
-        const renderExpression = <VerbTable level={VerbPanelLevel.PAST_TENSE} verbs={verbs} />
+        const renderExpression = <VerbTable level={{verbPanel:VerbPanelLevel.PAST_TENSE}} verbs={verbs} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         const verbItems = findAllWithType(verbTable, VerbItem)
         expect(verbItems.length).toBe(1)
@@ -81,7 +81,7 @@ describe("VerbTable", () => {
             pastTense: 'ate',
             pastTense_rule: PastTenseRule.Irregular
         }))
-        const renderExpression = <VerbTable level={VerbPanelLevel.PAST_TENSE} verbs={verbs} />
+        const renderExpression = <VerbTable level={{verbPanel:VerbPanelLevel.PAST_TENSE}} verbs={verbs} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         const verbItems = findAllWithType(verbTable, VerbItem)
         expect(verbItems.length).toBe(2)

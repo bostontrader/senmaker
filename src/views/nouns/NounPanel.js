@@ -1,6 +1,8 @@
 import React from 'react'
+
 import NounAddForm from './NounAddForm'
 import NounEditForm from './NounEditForm'
+import {NounPanelLevel} from '../../data/nouns/NounConstants'
 import NounTable from './NounTable'
 
 /*
@@ -15,7 +17,7 @@ as well as any testing for the same.
 function NounPanel(props) {
 
     // What should be displayed in the noun add/edit panel?
-    let nounAddEditPanel = <div></div>
+    let nounAddEditPanel = <div>nounAddEditPanel</div>
     if(props.editingNoun.id) {
         nounAddEditPanel = <NounEditForm {...props} />
     } else if (props.editingNoun.add) {
@@ -24,8 +26,8 @@ function NounPanel(props) {
         // Do nothing
     }
 
-    let nounPanel = <div></div>
-    if( props.level >= 2) {
+    let nounPanel = <div>Noun Panel</div>
+    if(props.level.nounPanel >= NounPanelLevel.PLURALIZATION) {
         nounPanel =
             <div>
                 <div className="row">
@@ -45,7 +47,7 @@ function NounPanel(props) {
                     </div>
                 </div>
             </div>
-    } else if( props.level >= 1) {
+    } else if(props.level.nounPanel >= NounPanelLevel.BASE) {
         nounPanel =
             <div>
                 <div className="row">
