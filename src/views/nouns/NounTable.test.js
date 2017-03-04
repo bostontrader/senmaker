@@ -19,7 +19,8 @@ describe("NounTable", () => {
     })
 
     it("correctly renders a NounPanelLevel.BASE NounTable", () => {
-        const renderExpression = <NounTable level={NounPanelLevel.BASE} nouns={nouns} />
+        const props = {level:{nounPanel:NounPanelLevel.BASE}, nouns:nouns}
+        const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         expect(nounTable.type).toBe('table')
 
@@ -31,7 +32,8 @@ describe("NounTable", () => {
     })
 
     it("renders a NounPanelLevel.PLURALIZATION NounTable", () => {
-        const renderExpression = <NounTable level={NounPanelLevel.PLURALIZATION} nouns={nouns} />
+        const props = {level:{nounPanel:NounPanelLevel.PLURALIZATION}, nouns:nouns}
+        const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         expect(nounTable.type).toBe('table')
 
@@ -43,7 +45,8 @@ describe("NounTable", () => {
     })
 
     it("will render zero NounItem", () => {
-        const renderExpression = <NounTable level={NounPanelLevel.PLURALIZATION} nouns={nouns} />
+        const props = {level:{nounPanel:NounPanelLevel.PLURALIZATION}, nouns:nouns}
+        const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)
         expect(nounItems.length).toBe(0)
@@ -59,7 +62,8 @@ describe("NounTable", () => {
             plural: 'cats',
             pluralization_rule: PluralizationRule.Append_s
         }))
-        const renderExpression = <NounTable level={NounPanelLevel.PLURALIZATION} nouns={nouns} />
+        const props = {level:{nounPanel:NounPanelLevel.PLURALIZATION}, nouns:nouns}
+        const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)
         expect(nounItems.length).toBe(1)
@@ -81,7 +85,8 @@ describe("NounTable", () => {
             plural: 'boxes',
             pluralization_rule: PluralizationRule.Append_es
         }))
-        const renderExpression = <NounTable level={NounPanelLevel.PLURALIZATION} nouns={nouns} />
+        const props = {level:{nounPanel:NounPanelLevel.PLURALIZATION}, nouns:nouns}
+        const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)
         expect(nounItems.length).toBe(2)

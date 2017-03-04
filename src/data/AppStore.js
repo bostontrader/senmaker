@@ -1,27 +1,52 @@
 import {ReduceStore} from 'flux/utils'
+
+import AppActionTypes from './AppActionTypes'
 import AppDispatcher from './AppDispatcher'
 
 import {NounPanelLevel} from '../data/nouns/NounConstants'
 import {VerbPanelLevel} from '../data/verbs/VerbConstants'
 
 class AppStore extends ReduceStore {
+
     constructor() {
         super(AppDispatcher);
     }
 
     getInitialState() {
-        return {app: 0, nounPanel: 0, verbPanel: 0}
-        //return {app: 1, nounPanel: NounPanelLevel.BASE, verbPanel: 0}
-        //return {app: 2, nounPanel: NounPanelLevel.BASE, verbPanel: VerbPanelLevel.BASE}
+        return AppStore.theLevels[AppStore.currentLevel]
     }
 
     reduce(state, action) {
-        //switch (action.type) {
+        switch (action.type) {
 
-            //default:
+            case AppActionTypes.LEVEL_PREVIOUS:
+                if(AppStore.currentLevel > 0)
+                    return AppStore.theLevels[--AppStore.currentLevel]
+                else
+                    return state
+
+            case AppActionTypes.LEVEL_NEXT:
+                if(AppStore.currentLevel < AppStore.theLevels.length-1)
+                    return AppStore.theLevels[++AppStore.currentLevel]
+                else
+                    return state
+
+            case AppActionTypes.LEVEL_RESET:
+                AppStore.currentLevel = 0
+                return AppStore.theLevels[0]
+
+            default:
                 return state
-        //}
+        }
     }
 }
+
+AppStore.currentLevel = 0
+AppStore.theLevels = [
+    {app: 0},
+    {app: 1, nounPanel: NounPanelLevel.BASE},
+    {app: 2, verbPanel: VerbPanelLevel.BASE},
+    {app: 3, nounPanel: NounPanelLevel.PLURALIZATION}
+]
 
 export default new AppStore()

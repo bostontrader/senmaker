@@ -24,17 +24,6 @@ class NounStore extends ReduceStore {
             case NounActionTypes.INSERT_NOUN:
                 const id = Counter.increment()
 
-                //let plural = ''
-                //switch(action.noun.pluralization_rule) {
-                    //case 1:
-                        //plural = action.noun.base + 's'
-                        //break
-                    //case 2:
-                        //plural = action.noun.base + 'es'
-                        //break
-                    //default:
-                //}
-
                 return state.set(id, new Noun({
                     id: id,
                     base: action.noun.base,

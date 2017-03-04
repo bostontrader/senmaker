@@ -1,4 +1,5 @@
 import {ReduceStore} from 'flux/utils';
+
 import NounActionTypes from './NounActionTypes';
 import AppDispatcher from '../AppDispatcher';
 

@@ -8,13 +8,23 @@ exports[`AppContainer can edit task that is complete 1`] = `
         This program will help you build English sentences.
       </p>
       <div>
-        <button>
+        <p>
+          Level 
+          0
+        </p>
+        <button
+          href="#"
+          onClick={[Function]}>
           Previous Level
         </button>
-        <button>
+        <button
+          href="#"
+          onClick={[Function]}>
           Next Level
         </button>
-        <button>
+        <button
+          href="#"
+          onClick={[Function]}>
           Reset
         </button>
       </div>
@@ -33,13 +43,23 @@ exports[`AppContainer can edit task that is not complete 1`] = `
         This program will help you build English sentences.
       </p>
       <div>
-        <button>
+        <p>
+          Level 
+          0
+        </p>
+        <button
+          href="#"
+          onClick={[Function]}>
           Previous Level
         </button>
-        <button>
+        <button
+          href="#"
+          onClick={[Function]}>
           Next Level
         </button>
-        <button>
+        <button
+          href="#"
+          onClick={[Function]}>
           Reset
         </button>
       </div>
@@ -58,13 +78,23 @@ exports[`AppContainer renders nouns that are complete 1`] = `
         This program will help you build English sentences.
       </p>
       <div>
-        <button>
+        <p>
+          Level 
+          0
+        </p>
+        <button
+          href="#"
+          onClick={[Function]}>
           Previous Level
         </button>
-        <button>
+        <button
+          href="#"
+          onClick={[Function]}>
           Next Level
         </button>
-        <button>
+        <button
+          href="#"
+          onClick={[Function]}>
           Reset
         </button>
       </div>
@@ -83,13 +113,23 @@ exports[`AppContainer renders some nouns 1`] = `
         This program will help you build English sentences.
       </p>
       <div>
-        <button>
+        <p>
+          Level 
+          0
+        </p>
+        <button
+          href="#"
+          onClick={[Function]}>
           Previous Level
         </button>
-        <button>
+        <button
+          href="#"
+          onClick={[Function]}>
           Next Level
         </button>
-        <button>
+        <button
+          href="#"
+          onClick={[Function]}>
           Reset
         </button>
       </div>
@@ -108,13 +148,23 @@ exports[`AppContainer renders with no nouns 1`] = `
         This program will help you build English sentences.
       </p>
       <div>
-        <button>
+        <p>
+          Level 
+          0
+        </p>
+        <button
+          href="#"
+          onClick={[Function]}>
           Previous Level
         </button>
-        <button>
+        <button
+          href="#"
+          onClick={[Function]}>
           Next Level
         </button>
-        <button>
+        <button
+          href="#"
+          onClick={[Function]}>
           Reset
         </button>
       </div>

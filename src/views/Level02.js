@@ -1,11 +1,13 @@
 import React from 'react'
 
+import LevelControl from './LevelControl'
 import VerbPanel from './verbs/VerbPanel'
 
 function Level02(props) {
 
     return(
         <div className="container">
+            <LevelControl {...props} />
             <VerbPanel {...props} />
             <div className="row">
                 <p>Can you add a new verb?</p>

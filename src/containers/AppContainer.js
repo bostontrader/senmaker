@@ -1,5 +1,6 @@
 import {Container} from 'flux/utils'
 
+import AppActions from '../data/AppActions'
 import AppStore from '../data/AppStore'
 import AppView from '../views/AppView'
 import NounActions from '../data/nouns/NounActions'
@@ -22,10 +23,14 @@ function getStores() {
 function getState() {
 
     return {
-        level: AppStore.getInitialState(),
+        level: AppStore.getState(),
+
+        onLevelPrevious: AppActions.levelPrevious,
+        onLevelNext: AppActions.levelNext,
+        onLevelReset: AppActions.levelReset,
+
         nouns: NounStore.getState(),
         editingNoun: NounEditStore.getState(),
-
         onAddNoun: NounActions.addNoun,
         onCancelNoun: NounActions.cancel,
         onInsertNoun: NounActions.insertNoun,
@@ -34,7 +39,6 @@ function getState() {
 
         verbs: VerbStore.getState(),
         editingVerb: VerbEditStore.getState(),
-
         onAddVerb: VerbActions.addVerb,
         onCancelVerb: VerbActions.cancel,
         onInsertVerb: VerbActions.insertVerb,

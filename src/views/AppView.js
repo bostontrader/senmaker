@@ -3,6 +3,7 @@ import React from 'react'
 import Level00 from './Level00'
 import Level01 from './Level01'
 import Level02 from './Level02'
+import Level03 from './Level03'
 
 function AppView(props) {
     let levelComponent
@@ -11,15 +12,19 @@ function AppView(props) {
 
         case 0:
             levelComponent = <Level00 {...props} />
-            break;
+            break
 
         case 1:
             levelComponent = <Level01 {...props} />
-            break;
+            break
 
         case 2:
             levelComponent = <Level02 {...props} />
-            break;
+            break
+
+        case 3:
+            levelComponent = <Level03 {...props} />
+            break
 
         default:
             levelComponent = <div>Unknown level</div>

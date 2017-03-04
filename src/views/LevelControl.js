@@ -9,9 +9,10 @@ function LevelControl(props) {
 
     return (
         <div>
-            <button>Previous Level</button>
-            <button>Next Level</button>
-            <button>Reset</button>
+            <p>Level {props.level.app}</p>
+            <button href="#" onClick={props.onLevelPrevious}>Previous Level</button>
+            <button href="#" onClick={props.onLevelNext}>Next Level</button>
+            <button href="#" onClick={props.onLevelReset}>Reset</button>
         </div>
     )
 
