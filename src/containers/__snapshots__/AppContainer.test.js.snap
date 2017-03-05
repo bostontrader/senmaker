@@ -4,26 +4,70 @@ exports[`AppContainer can edit task that is complete 1`] = `
   <div
     className="row">
     <div>
-      <p>
-        This program will help you build English sentences.
-      </p>
-      <div>
+      <div
+        className="help"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
+        <p>
+          This program will help you build an English composition.
+        </p>
+        <p>
+          In order to do that you must first learn how to build smaller pieces of English.
+        </p>
+        <p>
+          You can then assemble the small pieces of English into larger components.
+        </p>
+        <p>
+          You will learn how to do this by following these lessons.
+        </p>
+        <p>
+          You are presently on Level 0. In order to proceed to the next level you will need to pass the quiz.
+        </p>
+      </div>
+      <div
+        className="quiz"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
+        <h3>
+          Quiz
+        </h3>
+        <input
+          checked={true}
+          name="vehicle"
+          type="checkbox"
+          value="Car" />
+        <p>
+          I understand
+        </p>
+      </div>
+      <div
+        className="level-control"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
         <p>
           Level 
           0
         </p>
+        
         <button
-          href="#"
-          onClick={[Function]}>
-          Previous Level
-        </button>
-        <button
-          href="#"
+          id="level-next"
           onClick={[Function]}>
           Next Level
         </button>
         <button
-          href="#"
+          id="level-reset"
           onClick={[Function]}>
           Reset
         </button>
@@ -39,26 +83,70 @@ exports[`AppContainer can edit task that is not complete 1`] = `
   <div
     className="row">
     <div>
-      <p>
-        This program will help you build English sentences.
-      </p>
-      <div>
+      <div
+        className="help"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
+        <p>
+          This program will help you build an English composition.
+        </p>
+        <p>
+          In order to do that you must first learn how to build smaller pieces of English.
+        </p>
+        <p>
+          You can then assemble the small pieces of English into larger components.
+        </p>
+        <p>
+          You will learn how to do this by following these lessons.
+        </p>
+        <p>
+          You are presently on Level 0. In order to proceed to the next level you will need to pass the quiz.
+        </p>
+      </div>
+      <div
+        className="quiz"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
+        <h3>
+          Quiz
+        </h3>
+        <input
+          checked={true}
+          name="vehicle"
+          type="checkbox"
+          value="Car" />
+        <p>
+          I understand
+        </p>
+      </div>
+      <div
+        className="level-control"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
         <p>
           Level 
           0
         </p>
+        
         <button
-          href="#"
-          onClick={[Function]}>
-          Previous Level
-        </button>
-        <button
-          href="#"
+          id="level-next"
           onClick={[Function]}>
           Next Level
         </button>
         <button
-          href="#"
+          id="level-reset"
           onClick={[Function]}>
           Reset
         </button>
@@ -74,26 +162,70 @@ exports[`AppContainer renders nouns that are complete 1`] = `
   <div
     className="row">
     <div>
-      <p>
-        This program will help you build English sentences.
-      </p>
-      <div>
+      <div
+        className="help"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
+        <p>
+          This program will help you build an English composition.
+        </p>
+        <p>
+          In order to do that you must first learn how to build smaller pieces of English.
+        </p>
+        <p>
+          You can then assemble the small pieces of English into larger components.
+        </p>
+        <p>
+          You will learn how to do this by following these lessons.
+        </p>
+        <p>
+          You are presently on Level 0. In order to proceed to the next level you will need to pass the quiz.
+        </p>
+      </div>
+      <div
+        className="quiz"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
+        <h3>
+          Quiz
+        </h3>
+        <input
+          checked={true}
+          name="vehicle"
+          type="checkbox"
+          value="Car" />
+        <p>
+          I understand
+        </p>
+      </div>
+      <div
+        className="level-control"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
         <p>
           Level 
           0
         </p>
+        
         <button
-          href="#"
-          onClick={[Function]}>
-          Previous Level
-        </button>
-        <button
-          href="#"
+          id="level-next"
           onClick={[Function]}>
           Next Level
         </button>
         <button
-          href="#"
+          id="level-reset"
           onClick={[Function]}>
           Reset
         </button>
@@ -109,26 +241,70 @@ exports[`AppContainer renders some nouns 1`] = `
   <div
     className="row">
     <div>
-      <p>
-        This program will help you build English sentences.
-      </p>
-      <div>
+      <div
+        className="help"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
+        <p>
+          This program will help you build an English composition.
+        </p>
+        <p>
+          In order to do that you must first learn how to build smaller pieces of English.
+        </p>
+        <p>
+          You can then assemble the small pieces of English into larger components.
+        </p>
+        <p>
+          You will learn how to do this by following these lessons.
+        </p>
+        <p>
+          You are presently on Level 0. In order to proceed to the next level you will need to pass the quiz.
+        </p>
+      </div>
+      <div
+        className="quiz"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
+        <h3>
+          Quiz
+        </h3>
+        <input
+          checked={true}
+          name="vehicle"
+          type="checkbox"
+          value="Car" />
+        <p>
+          I understand
+        </p>
+      </div>
+      <div
+        className="level-control"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
         <p>
           Level 
           0
         </p>
+        
         <button
-          href="#"
-          onClick={[Function]}>
-          Previous Level
-        </button>
-        <button
-          href="#"
+          id="level-next"
           onClick={[Function]}>
           Next Level
         </button>
         <button
-          href="#"
+          id="level-reset"
           onClick={[Function]}>
           Reset
         </button>
@@ -144,26 +320,70 @@ exports[`AppContainer renders with no nouns 1`] = `
   <div
     className="row">
     <div>
-      <p>
-        This program will help you build English sentences.
-      </p>
-      <div>
+      <div
+        className="help"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
+        <p>
+          This program will help you build an English composition.
+        </p>
+        <p>
+          In order to do that you must first learn how to build smaller pieces of English.
+        </p>
+        <p>
+          You can then assemble the small pieces of English into larger components.
+        </p>
+        <p>
+          You will learn how to do this by following these lessons.
+        </p>
+        <p>
+          You are presently on Level 0. In order to proceed to the next level you will need to pass the quiz.
+        </p>
+      </div>
+      <div
+        className="quiz"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
+        <h3>
+          Quiz
+        </h3>
+        <input
+          checked={true}
+          name="vehicle"
+          type="checkbox"
+          value="Car" />
+        <p>
+          I understand
+        </p>
+      </div>
+      <div
+        className="level-control"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
         <p>
           Level 
           0
         </p>
+        
         <button
-          href="#"
-          onClick={[Function]}>
-          Previous Level
-        </button>
-        <button
-          href="#"
+          id="level-next"
           onClick={[Function]}>
           Next Level
         </button>
         <button
-          href="#"
+          id="level-reset"
           onClick={[Function]}>
           Reset
         </button>

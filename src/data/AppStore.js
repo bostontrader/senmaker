@@ -43,10 +43,10 @@ class AppStore extends ReduceStore {
 
 AppStore.currentLevel = 0
 AppStore.theLevels = [
-    {app: 0},
-    {app: 1, nounPanel: NounPanelLevel.BASE},
-    {app: 2, verbPanel: VerbPanelLevel.BASE},
-    {app: 3, nounPanel: NounPanelLevel.PLURALIZATION}
+    {maxLevel: 3, app: 0},
+    {maxLevel: 3, app: 1, nounPanel: NounPanelLevel.BASE},
+    {maxLevel: 3, app: 2, verbPanel: VerbPanelLevel.BASE},
+    {maxLevel: 3, app: 3, nounPanel: NounPanelLevel.PLURALIZATION}
 ]
 
 export default new AppStore()

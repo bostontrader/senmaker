@@ -7,12 +7,23 @@ The LevelControl is responsible for displaying the control to adjust
  */
 function LevelControl(props) {
 
+    const style = {
+        border: '1px solid black',
+        margin: '5px'
+    }
+
+    const previousButton = (props.level.app === 0) ? '' :
+        <button id="level-previous" onClick={props.onLevelPrevious}>Previous Level</button>
+
+    const nextButton = (props.level.app >= props.level.maxLevel) ? '' :
+        <button id="level-next" onClick={props.onLevelNext}>Next Level</button>
+
     return (
-        <div>
+        <div className="level-control" style={style}>
             <p>Level {props.level.app}</p>
-            <button href="#" onClick={props.onLevelPrevious}>Previous Level</button>
-            <button href="#" onClick={props.onLevelNext}>Next Level</button>
-            <button href="#" onClick={props.onLevelReset}>Reset</button>
+            {previousButton}
+            {nextButton}
+            <button  id="level-reset" onClick={props.onLevelReset}>Reset</button>
         </div>
     )
 
