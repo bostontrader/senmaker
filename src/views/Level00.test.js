@@ -10,7 +10,7 @@ import LevelControl from './LevelControl'
 describe("Level00", () => {
 
     it("correctly renders the Level00", () => {
-        const props = {level:{app:0}}
+        const props = {level:{currentAppLevel:{app: 0}, minLevel:true, maxLevel:false, quiz:false}}
         const renderExpression = <Level00 {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
         expect(levelControl.type).toBe('div')

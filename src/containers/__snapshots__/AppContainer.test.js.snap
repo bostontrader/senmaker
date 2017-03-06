@@ -40,10 +40,9 @@ exports[`AppContainer can edit task that is complete 1`] = `
           Quiz
         </h3>
         <input
-          checked={true}
-          name="vehicle"
-          type="checkbox"
-          value="Car" />
+          checked={false}
+          onChange={[Function]}
+          type="checkbox" />
         <p>
           I understand
         </p>
@@ -61,16 +60,8 @@ exports[`AppContainer can edit task that is complete 1`] = `
           0
         </p>
         
-        <button
-          id="level-next"
-          onClick={[Function]}>
-          Next Level
-        </button>
-        <button
-          id="level-reset"
-          onClick={[Function]}>
-          Reset
-        </button>
+        
+        
       </div>
     </div>
   </div>
@@ -119,10 +110,9 @@ exports[`AppContainer can edit task that is not complete 1`] = `
           Quiz
         </h3>
         <input
-          checked={true}
-          name="vehicle"
-          type="checkbox"
-          value="Car" />
+          checked={false}
+          onChange={[Function]}
+          type="checkbox" />
         <p>
           I understand
         </p>
@@ -140,16 +130,8 @@ exports[`AppContainer can edit task that is not complete 1`] = `
           0
         </p>
         
-        <button
-          id="level-next"
-          onClick={[Function]}>
-          Next Level
-        </button>
-        <button
-          id="level-reset"
-          onClick={[Function]}>
-          Reset
-        </button>
+        
+        
       </div>
     </div>
   </div>
@@ -198,10 +180,9 @@ exports[`AppContainer renders nouns that are complete 1`] = `
           Quiz
         </h3>
         <input
-          checked={true}
-          name="vehicle"
-          type="checkbox"
-          value="Car" />
+          checked={false}
+          onChange={[Function]}
+          type="checkbox" />
         <p>
           I understand
         </p>
@@ -219,16 +200,8 @@ exports[`AppContainer renders nouns that are complete 1`] = `
           0
         </p>
         
-        <button
-          id="level-next"
-          onClick={[Function]}>
-          Next Level
-        </button>
-        <button
-          id="level-reset"
-          onClick={[Function]}>
-          Reset
-        </button>
+        
+        
       </div>
     </div>
   </div>
@@ -277,10 +250,9 @@ exports[`AppContainer renders some nouns 1`] = `
           Quiz
         </h3>
         <input
-          checked={true}
-          name="vehicle"
-          type="checkbox"
-          value="Car" />
+          checked={false}
+          onChange={[Function]}
+          type="checkbox" />
         <p>
           I understand
         </p>
@@ -298,16 +270,8 @@ exports[`AppContainer renders some nouns 1`] = `
           0
         </p>
         
-        <button
-          id="level-next"
-          onClick={[Function]}>
-          Next Level
-        </button>
-        <button
-          id="level-reset"
-          onClick={[Function]}>
-          Reset
-        </button>
+        
+        
       </div>
     </div>
   </div>
@@ -356,10 +320,9 @@ exports[`AppContainer renders with no nouns 1`] = `
           Quiz
         </h3>
         <input
-          checked={true}
-          name="vehicle"
-          type="checkbox"
-          value="Car" />
+          checked={false}
+          onChange={[Function]}
+          type="checkbox" />
         <p>
           I understand
         </p>
@@ -377,16 +340,8 @@ exports[`AppContainer renders with no nouns 1`] = `
           0
         </p>
         
-        <button
-          id="level-next"
-          onClick={[Function]}>
-          Next Level
-        </button>
-        <button
-          id="level-reset"
-          onClick={[Function]}>
-          Reset
-        </button>
+        
+        
       </div>
     </div>
   </div>

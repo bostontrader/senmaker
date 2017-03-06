@@ -16,8 +16,13 @@ as well as any testing for the same.
  */
 function VerbPanel(props) {
 
+    const style = {
+        border: '1px solid black',
+        margin: '5px'
+    }
+
     // What should be displayed in the verb add/edit panel?
-    let verbAddEditPanel = <div>verbAddEditPanel</div>
+    let verbAddEditPanel = <div></div>  // we really want nothing here
     if(props.editingVerb.id) {
         verbAddEditPanel = <VerbEditForm {...props} />
     } else if (props.editingVerb.add) {
@@ -27,39 +32,38 @@ function VerbPanel(props) {
     }
 
     let verbPanel = <div>Verb Panel</div>
-    if(props.level.verbPanel >= VerbPanelLevel.PAST_TENSE) {
+    if(props.level.currentAppLevel.verbPanel >= VerbPanelLevel.PAST_TENSE) {
         verbPanel =
             <div>
-                <div className="row">
+                <div style={style}>
                     <h1>Verbs</h1>
-                    <p>The actions we can take are called <strong>verbs</strong>.</p>
                     <p>We start with a 'base' form of the verb and then we make changes to it according to the rules of grammar.</p>
                     <p>For example: If we performed the verb in the past we use the 'past tense' form of them verb.</p>
                     <p>The base form of the verb is changed into the past-tense form according to certain rules.</p>
                 </div>
-                <div className="row">
-                    <div className="one-half column">
+                <div style={style}>
+                    <div>
                         <button onClick={props.onAddVerb}>Add new verb</button>
                         <VerbTable {...props} />
                     </div>
-                    <div className="one-half column">
+                    <div>
                         {verbAddEditPanel}
                     </div>
                 </div>
             </div>
-    } else if(props.level.verbPanel >= VerbPanelLevel.BASE) {
+    } else if(props.level.currentAppLevel.verbPanel >= VerbPanelLevel.BASE) {
         verbPanel =
             <div>
-                <div className="row">
+                <div style={style}>
                     <h1>Verbs</h1>
                     <p>The actions we can take are called <strong>verbs</strong>.</p>
                 </div>
-                <div className="row">
-                    <div className="one-half column">
+                <div style={style}>
+                    <div>
                         <button onClick={props.onAddVerb}>Add new verb</button>
                         <VerbTable {...props} />
                     </div>
-                    <div className="one-half column">
+                    <div>
                         {verbAddEditPanel}
                     </div>
                 </div>

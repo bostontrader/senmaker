@@ -1,9 +1,9 @@
 import React from 'react'
 
 import LevelControl from './LevelControl'
-import NounPanel from './nouns/NounPanel'
+import VerbPanel from './verbs/VerbPanel'
 
-function Level03(props) {
+function Level04(props) {
 
     const style = {
         border: '1px solid black',
@@ -12,7 +12,7 @@ function Level03(props) {
 
     return(
         <div>
-            <NounPanel {...props} />
+            <VerbPanel {...props} />
             <div className="quiz" style={style}>
                 <p>Can you .... ?</p>
             </div>
@@ -21,4 +21,4 @@ function Level03(props) {
     )
 }
 
-export default Level03
+export default Level04

@@ -1,3 +1,4 @@
+import {OrderedMap} from 'immutable'
 import React from 'react'
 import ReactTestUtils from 'react-addons-test-utils'
 import rtRenderer from 'react-test-renderer'
@@ -5,10 +6,12 @@ import rtRenderer from 'react-test-renderer'
 import Level00 from './Level00'
 import Level01 from './Level01'
 import Level02 from './Level02'
+import {NounPanelLevel} from '../data/nouns/NounConstants'
+import {VerbPanelLevel} from '../data/verbs/VerbConstants'
 
 it('renders level00 correctly', () => {
 
-    const props = {'level':0}
+    const props = {level:{currentAppLevel:{app: 0}, minLevel:true, maxLevel:false, quiz:false}}
 
     const tree = rtRenderer.create(
         <Level00 {...props} />
@@ -25,11 +28,8 @@ it('renders level00 correctly', () => {
 
 it('renders level01 correctly', () => {
 
-    const props = {
-        'level':1,
-        'editingNoun': {},
-        'nouns':[]
-    }
+    const props = {level:{currentAppLevel:{app: 1, nounPanel:NounPanelLevel.BASE}, minLevel:false, maxLevel:false, quiz:false}, editingNoun:{id:'', add:''}, nouns:OrderedMap()}
+
 
     const tree = rtRenderer.create(
         <Level01 {...props} />
@@ -46,11 +46,7 @@ it('renders level01 correctly', () => {
 
 it('renders level02 correctly', () => {
 
-    const props = {
-        'level':2,
-        'editingVerb': {},
-        'verbs':[]
-    }
+    const props = {level:{currentAppLevel:{app: 2, verbPanel:VerbPanelLevel.BASE}, minLevel:false, maxLevel:false, quiz:false}, editingVerb:{id:'', add:''}, verbs:OrderedMap()}
 
     const tree = rtRenderer.create(
         <Level02 {...props} />

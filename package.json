@@ -30,7 +30,7 @@
   "name": "senmaker",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --host 0.0.0.0 --port 8081",
-    "test": "node  ./node_modules/.bin/jest"
+    "test": "node  ./node_modules/.bin/jest --bail"
   },
   "version": "0.0.2"
 }

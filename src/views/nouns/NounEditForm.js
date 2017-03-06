@@ -8,10 +8,9 @@ function NounEditForm(props) {
     const onChange = () => {}
     const onDelete = () => props.onDeleteNoun(props.editingNoun.id)
 
-
     let nounEditForm = <div>Noun Edit Form</div>
 
-    if( props.level >= NounPanelLevel.PLURALIZATION) {
+    if( props.level.currentAppLevel.nounPanel >= NounPanelLevel.PLURALIZATION) {
         nounEditForm =
             <div>
                 <label htmlFor='base'>Base</label>
@@ -21,7 +20,7 @@ function NounEditForm(props) {
                 <button onClick={onDelete}>Delete</button>
                 <button onClick={props.onCancelNoun}>Cancel</button>
             </div>
-    } else if(props.level >= NounPanelLevel.BASE) {
+    } else if(props.level.currentAppLevel.nounPanel >= NounPanelLevel.BASE) {
         nounEditForm =
             <div>
                 <label htmlFor='base'>Base</label>

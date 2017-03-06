@@ -8,16 +8,18 @@ function VerbAddForm(props) {
     const onInsert = () => props.onInsertVerb({base: 'talk', pastTense_rule: 2});
 
     let verbAddForm = <div>Verb Add Form</div>
-    if(props.level >= VerbPanelLevel.PAST_TENSE) {
+    if(props.level.currentAppLevel.editPanel >= VerbPanelLevel.PAST_TENSE) {
         verbAddForm = <div>
-            <label htmlFor='base'>Base</label><input name='base' type='text'  />
+            <label htmlFor='base'>Base</label>
+            <input name='base' type='text'  />
             <PastTenseRuleSelect pastTense_rule={0}/>
             <input type='submit' value="Add" onClick={onInsert}/>
             <button onClick={props.onCancelVerb}>Cancel</button>
         </div>
-    } else if(props.level >= VerbPanelLevel.BASE) {
+    } else if(props.level.currentAppLevel.editPanel >= VerbPanelLevel.BASE) {
         verbAddForm = <div>
-            <label htmlFor='base'>Base</label><input name='base' type='text'  />
+            <label htmlFor='base'>Base</label>
+            <input name='base' type='text'  />
             <input type='submit' value="Add" onClick={onInsert}/>
             <button onClick={props.onCancelVerb}>Cancel</button>
         </div>

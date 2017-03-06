@@ -4,14 +4,14 @@ import React from 'react'
 import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 
-import Level03 from './Level03'
-import {NounPanelLevel} from '../data/nouns/NounConstants'
+import Level04 from './Level04'
+import {VerbPanelLevel} from '../data/verbs/VerbConstants'
 
-describe("Level03", () => {
+describe("Level04", () => {
 
-    it("correctly renders the Level03", () => {
-        const props = {level:{currentAppLevel:{app: 1, nounPanel:NounPanelLevel.BASE}, minLevel:false, maxLevel:false, quiz:false}, editingNoun:{id:'', add:''}, nouns:OrderedMap()}
-        const renderExpression = <Level03 {...props} />
+    it("correctly renders the Level04", () => {
+        const props = {level:{currentAppLevel:{app: 1, verbPanel:VerbPanelLevel.BASE}, minLevel:false, maxLevel:false, quiz:false}, editingVerb:{id:'', add:''}, verbs:OrderedMap()}
+        const renderExpression = <Level04 {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
         expect(levelControl.type).toBe('div')
 

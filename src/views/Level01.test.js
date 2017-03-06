@@ -10,7 +10,7 @@ import Level01 from './Level01'
 describe("Level01", () => {
 
     it("correctly renders the Level01", () => {
-        const props = {level:{app: 1, nounPanel:NounPanelLevel.BASE}, editingNoun:{id:'', add:''}, nouns:OrderedMap()}
+        const props = {level:{currentAppLevel:{app: 1, nounPanel:NounPanelLevel.BASE}, minLevel:false, maxLevel:false, quiz:false}, editingNoun:{id:'', add:''}, nouns:OrderedMap()}
         const renderExpression = <Level01 {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
         expect(levelControl.type).toBe('div')

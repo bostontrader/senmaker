@@ -16,8 +16,13 @@ as well as any testing for the same.
  */
 function NounPanel(props) {
 
+    const style = {
+        border: '1px solid black',
+        margin: '5px'
+    }
+
     // What should be displayed in the noun add/edit panel?
-    let nounAddEditPanel = <div>nounAddEditPanel</div>
+    let nounAddEditPanel = <div></div>  // we really want nothing here
     if(props.editingNoun.id) {
         nounAddEditPanel = <NounEditForm {...props} />
     } else if (props.editingNoun.add) {
@@ -27,39 +32,38 @@ function NounPanel(props) {
     }
 
     let nounPanel = <div>Noun Panel</div>
-    if(props.level.nounPanel >= NounPanelLevel.PLURALIZATION) {
+    if(props.level.currentAppLevel.nounPanel >= NounPanelLevel.PLURALIZATION) {
         nounPanel =
             <div>
-                <div className="row">
+                <div style={style}>
                     <h1>Nouns</h1>
-                    <p>The things around us are called <strong>nouns</strong>.</p>
                     <p>When we write nouns must know how many of something we are writing about.  For example are we writing about one cat or more than one cat?</p>
                     <p>If we are writing about only one of something, then we use the base form of the noun.</p>
                     <p>If we are writing about more than one, then we use the plural form of the noun.</p>
                 </div>
-                <div className="row">
-                    <div className="one-half column">
+                <div style={style}>
+                    <div>
                         <button onClick={props.onAddNoun}>Add new noun</button>
                         <NounTable {...props} />
                     </div>
-                    <div className="one-half column">
+                    <div>
                         {nounAddEditPanel}
                     </div>
                 </div>
             </div>
-    } else if(props.level.nounPanel >= NounPanelLevel.BASE) {
+    } else if(props.level.currentAppLevel.nounPanel >= NounPanelLevel.BASE) {
         nounPanel =
             <div>
-                <div className="row">
+                <div style={style}>
                     <h1>Nouns</h1>
                     <p>The things around us are called <strong>nouns</strong>.</p>
                 </div>
-                <div className="row">
-                    <div className="one-half column">
+                <div style={style}>
+                    <div>
                         <button onClick={props.onAddNoun}>Add new noun</button>
                         <NounTable {...props} />
                     </div>
-                    <div className="one-half column">
+                    <div>
                         {nounAddEditPanel}
                     </div>
                 </div>

@@ -10,7 +10,7 @@ function VerbForm(props) {
 
     let verbEditForm = <div>Verb Edit Form</div>
 
-    if( props.level >= VerbPanelLevel.PAST_TENSE) {
+    if( props.level.currentAppLevel.editPanel >= VerbPanelLevel.PAST_TENSE) {
         verbEditForm =
             <div>
                 <label htmlFor='base'>Base</label>
@@ -20,7 +20,7 @@ function VerbForm(props) {
                 <button onClick={onDelete}>Delete</button>
                 <button onClick={props.onCancelVerb}>Cancel</button>
             </div>
-    } else if( props.level >= VerbPanelLevel.BASE) {
+    } else if( props.level.currentAppLevel.editPanel >= VerbPanelLevel.BASE) {
         verbEditForm =
             <div>
                 <label htmlFor='base'>Base</label>

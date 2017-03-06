@@ -10,7 +10,7 @@ import {VerbPanelLevel} from '../data/verbs/VerbConstants'
 describe("Level02", () => {
 
     it("correctly renders the Level02", () => {
-        const props = {level:{app: 2, verbPanel:VerbPanelLevel.BASE}, editingVerb:{id:'', add:''}, verbs:OrderedMap()}
+        const props = {level:{currentAppLevel:{app: 2, verbPanel:VerbPanelLevel.BASE}, minLevel:false, maxLevel:false, quiz:false}, editingVerb:{id:'', add:''}, verbs:OrderedMap()}
         const renderExpression = <Level02 {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
         expect(levelControl.type).toBe('div')

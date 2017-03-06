@@ -8,7 +8,7 @@ function NounAddForm(props) {
     const onInsert = () => props.onInsertNoun({base: 'frog', pluralization_rule: 2});
 
     let nounAddForm = <div>Noun Add Form</div>
-    if(props.level >= NounPanelLevel.PLURALIZATION) {
+    if(props.level.currentAppLevel.nounPanel >= NounPanelLevel.PLURALIZATION) {
         nounAddForm = <div>
             <label htmlFor='base'>Base</label>
             <input name='base' type='text'  />
@@ -16,7 +16,7 @@ function NounAddForm(props) {
             <input type='submit' value="Add" onClick={onInsert}/>
             <button onClick={props.onCancelNoun}>Cancel</button>
         </div>
-    } else if(props.level >= NounPanelLevel.BASE) {
+    } else if(props.level.currentAppLevel.nounPanel >= NounPanelLevel.BASE) {
         nounAddForm = <div>
             <label htmlFor='base'>Base</label>
             <input name='base' type='text'  />

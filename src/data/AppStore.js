@@ -13,7 +13,7 @@ class AppStore extends ReduceStore {
     }
 
     getInitialState() {
-        return AppStore.theLevels[AppStore.currentLevel]
+        return {currentAppLevel:AppStore.theLevels[0], minLevel:true, maxLevel:false, quiz:false}
     }
 
     reduce(state, action) {
@@ -21,19 +21,34 @@ class AppStore extends ReduceStore {
 
             case AppActionTypes.LEVEL_PREVIOUS:
                 if(AppStore.currentLevel > 0)
-                    return AppStore.theLevels[--AppStore.currentLevel]
+                    //return AppStore.theLevels[--AppStore.currentLevel]
+                    return {
+                        currentAppLevel:AppStore.theLevels[--AppStore.currentLevel],
+                        minLevel:AppStore.currentLevel <= 0, maxLevel:false,
+                        quiz:AppStore.theQuiz
+                    }
                 else
                     return state
 
             case AppActionTypes.LEVEL_NEXT:
                 if(AppStore.currentLevel < AppStore.theLevels.length-1)
-                    return AppStore.theLevels[++AppStore.currentLevel]
+                    return {
+                        currentAppLevel:AppStore.theLevels[++AppStore.currentLevel],
+                        minLevel:false, maxLevel:false,
+                        quiz:AppStore.theQuiz
+                    }
+
                 else
                     return state
 
             case AppActionTypes.LEVEL_RESET:
                 AppStore.currentLevel = 0
-                return AppStore.theLevels[0]
+                AppStore.theQuiz = false
+                return {currentAppLevel:AppStore.theLevels[0], minLevel:true, maxLevel:false, quiz:false}
+
+            case AppActionTypes.QUIZ0_TOGGLE:
+                AppStore.theQuiz ^= true
+                return {currentAppLevel:AppStore.theLevels[0], minLevel:true, maxLevel:false, quiz:AppStore.theQuiz}
 
             default:
                 return state
@@ -43,10 +58,12 @@ class AppStore extends ReduceStore {
 
 AppStore.currentLevel = 0
 AppStore.theLevels = [
-    {maxLevel: 3, app: 0},
-    {maxLevel: 3, app: 1, nounPanel: NounPanelLevel.BASE},
-    {maxLevel: 3, app: 2, verbPanel: VerbPanelLevel.BASE},
-    {maxLevel: 3, app: 3, nounPanel: NounPanelLevel.PLURALIZATION}
+    {app: 0},
+    {app: 1, nounPanel: NounPanelLevel.BASE},
+    {app: 2, verbPanel: VerbPanelLevel.BASE},
+    {app: 3, nounPanel: NounPanelLevel.PLURALIZATION},
+    {app: 4, nounPanel: NounPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE}
 ]
+AppStore.theQuiz = false
 
 export default new AppStore()

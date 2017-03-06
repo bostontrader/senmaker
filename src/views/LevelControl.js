@@ -12,18 +12,21 @@ function LevelControl(props) {
         margin: '5px'
     }
 
-    const previousButton = (props.level.app === 0) ? '' :
+    const previousButton = (props.level.minLevel) ? '' :
         <button id="level-previous" onClick={props.onLevelPrevious}>Previous Level</button>
 
-    const nextButton = (props.level.app >= props.level.maxLevel) ? '' :
+    const nextButton = (!props.level.quiz || props.level.maxLevel) ? '' :
         <button id="level-next" onClick={props.onLevelNext}>Next Level</button>
+
+    const resetButton = (props.level.minLevel && !props.level.quiz) ? '' :
+        <button id="level-reset" onClick={props.onLevelReset}>Reset</button>
 
     return (
         <div className="level-control" style={style}>
-            <p>Level {props.level.app}</p>
+            <p>Level {props.level.currentAppLevel.app}</p>
             {previousButton}
             {nextButton}
-            <button  id="level-reset" onClick={props.onLevelReset}>Reset</button>
+            {resetButton}
         </div>
     )
 

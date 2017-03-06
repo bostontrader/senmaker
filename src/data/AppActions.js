@@ -19,6 +19,12 @@ const AppActions = {
         AppDispatcher.dispatch({
             type: AppActionTypes.LEVEL_RESET
         })
+    },
+    quiz0Toggle() {
+        console.log('AppActions.quiz0Toggle')
+        AppDispatcher.dispatch({
+            type: AppActionTypes.QUIZ0_TOGGLE
+        })
     }
 }
 
