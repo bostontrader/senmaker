@@ -6,6 +6,8 @@ import AppView from '../views/AppView'
 import NounActions from '../data/nouns/NounActions'
 import NounEditStore from '../data/nouns/NounEditStore'
 import NounStore from '../data/nouns/NounStore'
+import StringActions from '../data/StringActions'
+import StringStore from '../data/StringStore'
 import VerbActions from '../data/verbs/VerbActions'
 import VerbEditStore from '../data/verbs/VerbEditStore'
 import VerbStore from '../data/verbs/VerbStore'
@@ -15,6 +17,7 @@ function getStores() {
         AppStore,
         NounStore,
         NounEditStore,
+        StringStore,
         VerbStore,
         VerbEditStore
     ]
@@ -29,6 +32,10 @@ function getState() {
         onLevelNext: AppActions.levelNext,
         onLevelReset: AppActions.levelReset,
         onQuizToggle: AppActions.quizToggle,
+
+        strings: StringStore.getState(),
+        onLangEng: StringActions.langEng,
+        onLangChn: StringActions.langChn,
 
         nouns: NounStore.getState(),
         editingNoun: NounEditStore.getState(),

@@ -4,13 +4,14 @@ import TestUtils  from 'react-addons-test-utils'
 import rtRenderer from 'react-test-renderer'
 import {findWithClass, findWithType} from 'react-shallow-testutils'
 
+import AppStore from '../data/AppStore'
 import Level00 from './Level00'
 import LevelControl from './LevelControl'
 
 describe("Level00", () => {
 
-    it("correctly renders the Level00", () => {
-        const props = {level:{currentAppLevel:{app: 0}, minLevel:true, maxLevel:false, quiz:false}}
+    it("Renders Level00", () => {
+        const props = {level:AppStore.getInitialState()}
         const renderExpression = <Level00 {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
         expect(levelControl.type).toBe('div')

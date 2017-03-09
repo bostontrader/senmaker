@@ -4,7 +4,7 @@ import {ReduceStore} from 'flux/utils'
 
 import AppActionTypes from './AppActionTypes'
 import AppDispatcher from './AppDispatcher'
-
+import {langCode} from './I18NConstants'
 import {NounPanelLevel} from '../data/nouns/NounConstants'
 import {VerbPanelLevel} from '../data/verbs/VerbConstants'
 
@@ -35,19 +35,39 @@ class AppStore extends ReduceStore {
     reduce(state, action) {
         let newState
         switch (action.type) {
-            //case AppActionTypes.LEVEL_PREVIOUS:
-                //if (AppStore.currentLevel > 0) {
-                    //newState = {
-                        //currentAppLevel: AppStore.theLevels[--AppStore.currentLevel],
-                        //minLevel: AppStore.currentLevel <= 0, maxLevel: false,
-                        //quiz: AppStore.theQuiz
-                    //}
-                    //if(AppStore.localStorageAvailable)
-                        //localStorage.setItem(localStorageKey, JSON.stringify(newState))
+            case AppActionTypes.LANG_EN:
+                newState = state.set('lang',langCode.en)
 
-                    //return newState
-                //} else
-                    //return state
+                if(localStorageAvailable)
+                    localStorage.setItem(localStorageKey, JSON.stringify(newState))
+
+                return newState
+
+            case AppActionTypes.LANG_ZH:
+                newState = state.set('lang',langCode.zh)
+
+                if(localStorageAvailable)
+                    localStorage.setItem(localStorageKey, JSON.stringify(newState))
+
+                return newState
+
+
+            case AppActionTypes.LEVEL_PREVIOUS:
+                if (state.get('currentLevel') > 0) {
+                    const newCurrentLevel = state.get('currentLevel') - 1
+                    newState = Immutable.Map({
+                        currentLevel:newCurrentLevel,
+                        minLevel:newCurrentLevel === 0,
+                        maxLevel:false,
+                        quiz: false
+                    }).set('currentAppLevelConfig', AppStore.theLevelConfigs.get(newCurrentLevel))
+
+                    if(localStorageAvailable)
+                        localStorage.setItem(localStorageKey, JSON.stringify(newState))
+
+                    return newState
+                } else
+                    return state
 
             case AppActionTypes.LEVEL_NEXT:
 
@@ -101,7 +121,7 @@ AppStore.theLevelConfigs = Immutable.fromJS([
 ])
 
 AppStore.initialState = Immutable.Map(
-    {currentLevel:0, minLevel:true, maxLevel:false, quiz: false}
+    {currentLevel:0, minLevel:true, maxLevel:false, quiz: false, lang:langCode.zh}
 ).set('currentAppLevelConfig', AppStore.theLevelConfigs.get(0))
 //console.log('n=',JSON.stringify(AppStore.initialState.toJSON()))
 

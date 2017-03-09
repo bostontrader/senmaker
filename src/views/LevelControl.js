@@ -36,10 +36,12 @@ function LevelControl(props) {
 
     return (
         <div className="level-control" style={style}>
-            <p>LevelLevel 级 {props.level.get('currentLevel')}</p>
+            <p>Level 级 {props.level.get('currentLevel')}</p>
             {previousButton}
             {nextButton}
             {resetButton}
+            <img onClick={props.onLangEng} src="/img/us_flag.gif" width="28" height="20" alt=""/>
+            <img onClick={props.onLangChn} src="/img/chinese_flag.gif" width="28" height="20" alt=""/>
         </div>
     )
 

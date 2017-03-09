@@ -12,6 +12,10 @@ function Level01(props) {
 
     return(
         <div>
+            <div className="help" style={style}>
+                <h1>Nouns</h1>
+                <p>The things around us are called <strong>nouns</strong>.</p>
+            </div>
             <NounPanel {...props} />
             <div className="quiz" style={style}>
                 <h3>Quiz测试</h3>

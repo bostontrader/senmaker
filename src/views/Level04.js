@@ -12,6 +12,12 @@ function Level04(props) {
 
     return(
         <div>
+            <div className="help" style={style}>
+                <h1>Verbs</h1>
+                <p>We start with a 'base' form of the verb and then we make changes to it according to the rules of grammar.</p>
+                <p>For example: If we performed the verb in the past we use the 'past tense' form of them verb.</p>
+                <p>The base form of the verb is changed into the past-tense form according to certain rules.</p>
+            </div>
             <VerbPanel {...props} />
             <div className="quiz" style={style}>
                 <h3>Quiz</h3>
