@@ -14,13 +14,14 @@ function Level01(props) {
         <div>
             <NounPanel {...props} />
             <div className="quiz" style={style}>
-                <h3>Quiz</h3>
-                <p>Can you add a new noun?</p>
-                <p>Can you delete a noun from this list?</p>
-                <p>Can you change the spelling of a noun?</p>
+                <h3>Quiz测试</h3>
+                <p>Can you add a new noun?你可以添加一个新的名词吗?</p>
+                <p>Can you delete a noun from this list?你可以从这个列表中删除一个名词吗?</p>
+                <p>Can you change the spelling of a noun?你能改变一个名词的拼写吗?
+                </p>
                 <p>
                     <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
-                    I understand
+                    I understand 我明白
                 </p>
             </div>
             <LevelControl {...props} />

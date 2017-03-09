@@ -36,7 +36,7 @@ function LevelControl(props) {
 
     return (
         <div className="level-control" style={style}>
-            <p>Level {props.level.get('currentLevel')}</p>
+            <p>LevelLevel 级 {props.level.get('currentLevel')}</p>
             {previousButton}
             {nextButton}
             {resetButton}
