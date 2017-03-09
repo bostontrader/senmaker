@@ -9,7 +9,7 @@ import Level04 from './Level04'
 function AppView(props) {
     let levelComponent
 
-    switch(props.level.currentAppLevel.app) {
+    switch(props.level.get('currentLevel')) {
 
         case 0:
             levelComponent = <Level00 {...props} />

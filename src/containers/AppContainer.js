@@ -28,7 +28,7 @@ function getState() {
         onLevelPrevious: AppActions.levelPrevious,
         onLevelNext: AppActions.levelNext,
         onLevelReset: AppActions.levelReset,
-        onQuiz0Toggle: AppActions.quiz0Toggle,
+        onQuizToggle: AppActions.quizToggle,
 
         nouns: NounStore.getState(),
         editingNoun: NounEditStore.getState(),

@@ -18,6 +18,10 @@ function Level02(props) {
                 <p>Can you add a new verb?</p>
                 <p>Can you delete a verb from this list?</p>
                 <p>Can you change the spelling of a verb?</p>
+                <p>
+                    <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
+                    I understand
+                </p>
             </div>
             <LevelControl {...props} />
         </div>

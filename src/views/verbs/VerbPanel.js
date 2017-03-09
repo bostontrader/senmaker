@@ -32,7 +32,7 @@ function VerbPanel(props) {
     }
 
     let verbPanel = <div>Verb Panel</div>
-    if(props.level.currentAppLevel.verbPanel >= VerbPanelLevel.PAST_TENSE) {
+    if(props.level.get('currentAppLevelConfig').get('verbPanel') >= VerbPanelLevel.PAST_TENSE) {
         verbPanel =
             <div>
                 <div style={style}>
@@ -51,7 +51,7 @@ function VerbPanel(props) {
                     </div>
                 </div>
             </div>
-    } else if(props.level.currentAppLevel.verbPanel >= VerbPanelLevel.BASE) {
+    } else if(props.level.get('currentAppLevelConfig').get('verbPanel') >= VerbPanelLevel.BASE) {
         verbPanel =
             <div>
                 <div style={style}>

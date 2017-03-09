@@ -20,8 +20,10 @@ function Level00(props) {
             </div>
             <div className="quiz" style={style}>
                 <h3>Quiz</h3>
-                <input onChange={props.onQuiz0Toggle} type="checkbox" checked={props.level.quiz} />
-                <p>I understand</p>
+                <p>
+                    <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
+                    I understand
+                </p>
             </div>
             <LevelControl {...props} />
         </div>

@@ -5,6 +5,7 @@ import TestUtils         from 'react-addons-test-utils'
 import {findAllWithType} from 'react-shallow-testutils'
 import rtRenderer        from 'react-test-renderer'
 
+import AppStore from '../../data/AppStore'
 import {PluralizationRule, NounPanelLevel} from '../../data/nouns/NounConstants'
 import Noun from '../../data/nouns/Noun'
 import NounItem from './NounItem'
@@ -19,7 +20,9 @@ describe("NounTable", () => {
     })
 
     it("correctly renders a NounPanelLevel.BASE NounTable", () => {
-        const props = {level:{nounPanel:NounPanelLevel.BASE}, nouns:nouns}
+        //const props = {level:{nounPanel:NounPanelLevel.BASE}, nouns:nouns}
+        const props = {level:AppStore.getInitialState()}
+        //console.log('NounTable.test 1=',props)
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         expect(nounTable.type).toBe('table')
@@ -85,6 +88,8 @@ describe("NounTable", () => {
             plural: 'boxes',
             pluralization_rule: PluralizationRule.Append_es
         }))
+        const appState = AppStore.getInitialState()
+
         const props = {level:{nounPanel:NounPanelLevel.PLURALIZATION}, nouns:nouns}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)

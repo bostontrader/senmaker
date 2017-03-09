@@ -39,11 +39,11 @@ exports[`AppContainer can edit task that is complete 1`] = `
         <h3>
           Quiz
         </h3>
-        <input
-          checked={false}
-          onChange={[Function]}
-          type="checkbox" />
         <p>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox" />
           I understand
         </p>
       </div>
@@ -109,11 +109,11 @@ exports[`AppContainer can edit task that is not complete 1`] = `
         <h3>
           Quiz
         </h3>
-        <input
-          checked={false}
-          onChange={[Function]}
-          type="checkbox" />
         <p>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox" />
           I understand
         </p>
       </div>
@@ -179,11 +179,11 @@ exports[`AppContainer renders nouns that are complete 1`] = `
         <h3>
           Quiz
         </h3>
-        <input
-          checked={false}
-          onChange={[Function]}
-          type="checkbox" />
         <p>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox" />
           I understand
         </p>
       </div>
@@ -249,11 +249,11 @@ exports[`AppContainer renders some nouns 1`] = `
         <h3>
           Quiz
         </h3>
-        <input
-          checked={false}
-          onChange={[Function]}
-          type="checkbox" />
         <p>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox" />
           I understand
         </p>
       </div>
@@ -319,11 +319,11 @@ exports[`AppContainer renders with no nouns 1`] = `
         <h3>
           Quiz
         </h3>
-        <input
-          checked={false}
-          onChange={[Function]}
-          type="checkbox" />
         <p>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox" />
           I understand
         </p>
       </div>

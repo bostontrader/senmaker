@@ -3,12 +3,15 @@ import React from 'react'
 import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 
+import AppStore from '../../data/AppStore'
 import NounAddForm from './NounAddForm'
 import {NounPanelLevel} from '../../data/nouns/NounConstants'
 
 describe("NounAddForm", () => {
 
     it("correctly renders a NounPanelLevel.BASE NounAddForm", () => {
+        const appState = AppStore.getInitialState()
+        const props = {level: appState}
         const renderExpression = <NounAddForm level={NounPanelLevel.BASE} />
         const nounAddForm = TestUtils.createRenderer().render(renderExpression)
         expect(nounAddForm.type).toBe('div')

@@ -6,7 +6,9 @@ import NounItem from './NounItem'
 function NounTable(props) {
 
     let nounTable = <div>Noun Table</div>
-    if( props.level.currentAppLevel.nounPanel >= NounPanelLevel.PLURALIZATION) {
+    //console.log('NounTable 1=',props)
+    const level = props.level.get('currentAppLevelConfig').get('nounPanel')
+    if( level >= NounPanelLevel.PLURALIZATION) {
         nounTable =
             <table id="noun-list">
                 <thead>
@@ -21,7 +23,7 @@ function NounTable(props) {
                         <NounItem
                             key={noun.id}
                             editing={props.editingNoun}
-                            level={props.level.currentAppLevel.nounPanel}
+                            level={level}
                             noun={noun}
                             onDeleteNoun={props.onDeleteNoun}
                             onEditNoun={props.onEditNoun}
@@ -29,7 +31,7 @@ function NounTable(props) {
                     ))}
                 </tbody>
             </table>
-    } else if( props.level.currentAppLevel.nounPanel >= NounPanelLevel.BASE) {
+    } else if( level >= NounPanelLevel.BASE) {
         nounTable =
             <table id="noun-list">
                 <thead>
@@ -44,7 +46,7 @@ function NounTable(props) {
                             key={noun.id}
                             editing={props.editingNoun}
                             noun={noun}
-                            level={props.level.currentAppLevel.nounPanel}
+                            level={level}
                             onDeleteNoun={props.onDeleteNoun}
                             onEditNoun={props.onEditNoun}
                         />

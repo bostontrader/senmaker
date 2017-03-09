@@ -6,7 +6,7 @@ import VerbItem from './VerbItem'
 function VerbTable(props) {
 
     let verbTable = <div>Verb Table</div>
-    if( props.level.currentAppLevel.verbPanel >= VerbPanelLevel.PAST_TENSE) {
+    if( props.level.get('currentAppLevelConfig').get('verbPanel') >= VerbPanelLevel.PAST_TENSE) {
         verbTable =
             <table id="verb-list">
                 <thead>
@@ -21,7 +21,7 @@ function VerbTable(props) {
                         <VerbItem
                             key={verb.id}
                             editing={props.editingVerb}
-                            level={props.level.currentAppLevel.verbPanel}
+                            level={props.level.get('currentAppLevelConfig').get('verbPanel')}
                             verb={verb}
                             onDeleteVerb={props.onDeleteVerb}
                             onEditVerb={props.onEditVerb}
@@ -29,7 +29,7 @@ function VerbTable(props) {
                     ))}
                 </tbody>
             </table>
-    } else if (props.level.currentAppLevel.verbPanel >= VerbPanelLevel.BASE) {
+    } else if (props.level.get('currentAppLevelConfig').get('verbPanel') >= VerbPanelLevel.BASE) {
         verbTable =
             <table id="verb-list">
                 <thead>
@@ -43,7 +43,7 @@ function VerbTable(props) {
                         <VerbItem
                             key={verb.id}
                             editing={props.editingVerb}
-                            level={props.level.currentAppLevel.verbPanel}
+                            level={props.level.get('currentAppLevelConfig').get('verbPanel')}
                             verb={verb}
                             onDeleteVerb={props.onDeleteVerb}
                             onEditVerb={props.onEditVerb}

@@ -32,8 +32,11 @@ function NounPanel(props) {
     }
 
     let nounPanel = <div>Noun Panel</div>
-    if(props.level.currentAppLevel.nounPanel >= NounPanelLevel.PLURALIZATION) {
-        nounPanel =
+    console.log('NounPanel 1=', props.level.get('currentAppLevelConfig').get('nounPanel'))
+    //if(props.level.currentAppLevel.nounPanel >= NounPanelLevel.PLURALIZATION) {
+    if(props.level.get('currentAppLevelConfig').get('nounPanel') >= NounPanelLevel.PLURALIZATION) {
+
+            nounPanel =
             <div>
                 <div style={style}>
                     <h1>Nouns</h1>
@@ -51,7 +54,7 @@ function NounPanel(props) {
                     </div>
                 </div>
             </div>
-    } else if(props.level.currentAppLevel.nounPanel >= NounPanelLevel.BASE) {
+    } else if(props.level.get('currentAppLevelConfig').get('nounPanel') >= NounPanelLevel.BASE) {
         nounPanel =
             <div>
                 <div style={style}>
