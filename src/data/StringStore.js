@@ -52,6 +52,12 @@ StringStore.en = {
         quiz2: 'Can you delete a verb from this list?',
         quiz3: 'Can you change the spelling of a verb?'
     },
+    Level03: {
+        help20: 'When we write nouns must know how many of something we are writing about.',
+        help21: 'For example are we writing about one cat or more than one cat?',
+        help22: 'If we are writing about only one of something, then we use the base form of the noun.',
+        help23: 'If we are writing about more than one, then we use the plural form of the noun.'
+    },
     LevelControl: {
         level: 'Level',
         nextLevel: 'Next Level',
@@ -59,6 +65,7 @@ StringStore.en = {
         reset: 'Reset'
     }
 }
+
 StringStore.zh = {
     i_understand: '我明白',
     nouns: 'Nouns',
@@ -72,22 +79,28 @@ StringStore.zh = {
         help5: '你目前是0级，为了继续下一个阶段需要通过测验。'
     },
     Level01: {
-        help10: 'The things around us are called <strong>nouns</strong>.',
+        help10: '我们周围的人、事物、地点或抽象概念的名称叫做名词',
         quiz1: '你可以添加一个新的名词吗?',
         quiz2: '你可以从这个列表中删除一个名词吗?',
         quiz3: '你能改变一个名词的拼写吗?'
     },
     Level02: {
-        help10: 'The actions we can take are called <strong>verbs</strong>',
-        quiz1: 'Can you add a new verb?',
-        quiz2: 'Can you delete a verb from this list?',
-        quiz3: 'Can you change the spelling of a verb?'
+        help10: '陈述人或事物动作、情况、变化的词叫做动词',
+        quiz1: '你可以添加一个新的动词吗?',
+        quiz2: '你可以从这个列表中删除一个动词吗?',
+        quiz3: '你能改变一个动词的拼写吗?'
+    },
+    Level03: {
+        help20: '当我们写名词时必须知道名词的形式。.',
+        help21: '例如我们写关于一只猫或多只猫吗?',
+        help22: '如果我们只写一个东西,我们用名词的基本形式。',
+        help23: '如果我们写不止一个,那么我们使用名词的复数形式。'
     },
     LevelControl: {
         level: '级',
-        nextLevel: 'Next Level',
-        previousLevel: 'Previous Level',
-        reset: 'Reset'
+        nextLevel: '下一級',
+        previousLevel: '上一級',
+        reset: '返回'
     }
 }
 
