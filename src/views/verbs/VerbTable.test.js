@@ -5,21 +5,21 @@ import TestUtils         from 'react-addons-test-utils'
 import {findAllWithType} from 'react-shallow-testutils'
 import rtRenderer        from 'react-test-renderer'
 
-import {PastTenseRule, VerbPanelLevel} from '../../data/verbs/VerbConstants'
+import AppActionTypes from '../../data/AppActionTypes'
+import AppStore from '../../data/AppStore'
+import {PastTenseRule} from '../../data/verbs/VerbConstants'
 import Verb from '../../data/verbs/Verb'
 import VerbItem from './VerbItem'
 import VerbTable from './VerbTable'
 
 describe("VerbTable", () => {
 
-    let verbs
+    it("Renders a VerbPanelLevel.BASE VerbTable", () => {
+        let newState = AppStore.getInitialState()
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
 
-    beforeEach( () => {
-        verbs = OrderedMap()
-    })
-
-    it("correctly renders a VerbPanelLevel.BASE VerbTable", () => {
-        const props = {level:{verbPanel:VerbPanelLevel.BASE}, verbs:verbs}
+        const props = {level:newState, verbs: OrderedMap()}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         expect(verbTable.type).toBe('table')
@@ -31,8 +31,14 @@ describe("VerbTable", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("renders a VerbPanelLevel.PAST_TENSE VerbTable", () => {
-        const props = {level:{verbPanel:VerbPanelLevel.PAST_TENSE}, verbs:verbs}
+    it("Renders a VerbPanelLevel.PAST_TENSE VerbTable", () => {
+        let newState = AppStore.getInitialState()
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+
+        const props = {level:newState, verbs: OrderedMap()}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         expect(verbTable.type).toBe('table')
@@ -44,8 +50,14 @@ describe("VerbTable", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("will render zero VerbItem", () => {
-        const props = {level:{verbPanel:VerbPanelLevel.PAST_TENSE}, verbs:verbs}
+    it("Will render zero VerbItem", () => {
+        let newState = AppStore.getInitialState()
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+
+        const props = {level:newState, verbs: OrderedMap()}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         const verbItems = findAllWithType(verbTable, VerbItem)
@@ -55,14 +67,21 @@ describe("VerbTable", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("will render one VerbItem", () => {
-        verbs = verbs.set(1, new Verb({
+    it("Will render one VerbItem", () => {
+        let newState = AppStore.getInitialState()
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+
+        const verbs = OrderedMap().set(1, new Verb({
             id: 1,
             base: 'talk',
             pastTense: 'talked',
             pastTense_rule: PastTenseRule.Append_ed
         }))
-        const props = {level:{verbPanel:VerbPanelLevel.PAST_TENSE}, verbs:verbs}
+
+        const props = {level:newState, verbs: verbs}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         const verbItems = findAllWithType(verbTable, VerbItem)
@@ -72,20 +91,26 @@ describe("VerbTable", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("will render two VerbItem", () => {
-        verbs = verbs.set(1, new Verb({
+    it("Will render two VerbItem", () => {
+        let newState = AppStore.getInitialState()
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+
+        const verbs = OrderedMap().set(1, new Verb({
             id: 1,
             base: 'talk',
             pastTense: 'talked',
             pastTense_rule: PastTenseRule.Append_ed
-        }))
-        verbs = verbs.set(2, new Verb({
+        })).set(2, new Verb({
             id: 2,
             base: 'eat',
             pastTense: 'ate',
             pastTense_rule: PastTenseRule.Irregular
         }))
-        const props = {level:{verbPanel:VerbPanelLevel.PAST_TENSE}, verbs:verbs}
+
+        const props = {level:newState, verbs: verbs}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         const verbItems = findAllWithType(verbTable, VerbItem)

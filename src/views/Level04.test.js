@@ -9,6 +9,7 @@ import AppActionTypes from '../data/AppActionTypes'
 import AppStore from '../data/AppStore'
 import Level04 from './Level04'
 import LevelControl from './LevelControl'
+import StringStore from '../data/StringStore'
 import VerbPanel from './verbs/VerbPanel'
 
 describe("Level04", () => {
@@ -17,7 +18,7 @@ describe("Level04", () => {
         let newState = AppStore.getInitialState()
         //newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         //newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const props = {editingVerb:{id:'', add:''}, level:newState, verbs: OrderedMap()}
+        const props = {editingVerb:{id:'', add:''}, level:newState, verbs: OrderedMap(), strings:StringStore.getInitialState()}
 
         const renderExpression = <Level04 {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)

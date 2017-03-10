@@ -5,24 +5,19 @@ import TestUtils         from 'react-addons-test-utils'
 import {findAllWithType} from 'react-shallow-testutils'
 import rtRenderer        from 'react-test-renderer'
 
+import AppActionTypes from '../../data/AppActionTypes'
 import AppStore from '../../data/AppStore'
-import {PluralizationRule, NounPanelLevel} from '../../data/nouns/NounConstants'
+import {PluralizationRule} from '../../data/nouns/NounConstants'
 import Noun from '../../data/nouns/Noun'
 import NounItem from './NounItem'
 import NounTable from './NounTable'
 
 describe("NounTable", () => {
 
-    let nouns
-
-    beforeEach( () => {
-        nouns = OrderedMap()
-    })
-
-    it("correctly renders a NounPanelLevel.BASE NounTable", () => {
-        //const props = {level:{nounPanel:NounPanelLevel.BASE}, nouns:nouns}
-        const props = {level:AppStore.getInitialState()}
-        //console.log('NounTable.test 1=',props)
+    it("Renders a NounPanelLevel.BASE NounTable", () => {
+        let newState = AppStore.getInitialState()
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        const props = {level:newState, nouns: OrderedMap()}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         expect(nounTable.type).toBe('table')
@@ -34,8 +29,12 @@ describe("NounTable", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("renders a NounPanelLevel.PLURALIZATION NounTable", () => {
-        const props = {level:{nounPanel:NounPanelLevel.PLURALIZATION}, nouns:nouns}
+    it("Renders a NounPanelLevel.PLURALIZATION NounTable", () => {
+        let newState = AppStore.getInitialState()
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        const props = {level:newState, nouns: OrderedMap()}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         expect(nounTable.type).toBe('table')
@@ -47,8 +46,12 @@ describe("NounTable", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("will render zero NounItem", () => {
-        const props = {level:{nounPanel:NounPanelLevel.PLURALIZATION}, nouns:nouns}
+    it("Will render zero NounItem", () => {
+        let newState = AppStore.getInitialState()
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        const props = {level:newState, nouns: OrderedMap()}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)
@@ -58,14 +61,20 @@ describe("NounTable", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("will render one NounItem", () => {
-        nouns = nouns.set(1, new Noun({
+    it("Will render one NounItem", () => {
+        let newState = AppStore.getInitialState()
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+
+        const nouns = OrderedMap().set(1, new Noun({
             id: 1,
             base: 'cat',
             plural: 'cats',
             pluralization_rule: PluralizationRule.Append_s
         }))
-        const props = {level:{nounPanel:NounPanelLevel.PLURALIZATION}, nouns:nouns}
+
+        const props = {level:newState, nouns: nouns}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)
@@ -75,22 +84,25 @@ describe("NounTable", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("will render two NounItem", () => {
-        nouns = nouns.set(1, new Noun({
+    it("Will render two NounItem", () => {
+        let newState = AppStore.getInitialState()
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
+
+        const nouns = OrderedMap().set(1, new Noun({
             id: 1,
             base: 'cat',
             plural: 'cats',
             pluralization_rule: PluralizationRule.Append_s
-        }))
-        nouns = nouns.set(2, new Noun({
+        })).set(2, new Noun({
             id: 2,
             base: 'box',
             plural: 'boxes',
             pluralization_rule: PluralizationRule.Append_es
         }))
-        const appState = AppStore.getInitialState()
 
-        const props = {level:{nounPanel:NounPanelLevel.PLURALIZATION}, nouns:nouns}
+        const props = {level:newState, nouns: nouns}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)

@@ -3,15 +3,17 @@ import React from 'react'
 import ReactTestUtils from 'react-addons-test-utils'
 import rtRenderer from 'react-test-renderer'
 
+//import AppStore from '../data/AppStore'
 import Level00 from './Level00'
 import Level01 from './Level01'
 import Level02 from './Level02'
 import {NounPanelLevel} from '../data/nouns/NounConstants'
+import StringStore from '../data/StringStore'
 import {VerbPanelLevel} from '../data/verbs/VerbConstants'
 
 it('renders level00 correctly', () => {
 
-    const props = {level:{currentAppLevel:{app: 0}, minLevel:true, maxLevel:false, quiz:false}}
+    const props = {level:{currentAppLevel:{app: 0}, minLevel:true, maxLevel:false, quiz:false}, strings:StringStore.getInitialState()}
 
     const tree = rtRenderer.create(
         <Level00 {...props} />

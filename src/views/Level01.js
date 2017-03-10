@@ -10,22 +10,23 @@ function Level01(props) {
         margin: '5px'
     }
 
+    const s = props.strings.Level01
+
     return(
         <div>
             <div className="help" style={style}>
-                <h1>Nouns</h1>
-                <p>The things around us are called <strong>nouns</strong>.</p>
+                <h1>{props.strings.nouns}</h1>
+                <p>{s.help10}</p>
             </div>
             <NounPanel {...props} />
             <div className="quiz" style={style}>
-                <h3>Quiz测试</h3>
-                <p>Can you add a new noun?你可以添加一个新的名词吗?</p>
-                <p>Can you delete a noun from this list?你可以从这个列表中删除一个名词吗?</p>
-                <p>Can you change the spelling of a noun?你能改变一个名词的拼写吗?
-                </p>
+                <h3>{props.strings.quiz}</h3>
+                <p>{s.quiz1}</p>
+                <p>{s.quiz2}</p>
+                <p>{s.quiz3}</p>
                 <p>
                     <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
-                    I understand 我明白
+                    {props.strings.i_understand}
                 </p>
             </div>
             <LevelControl {...props} />

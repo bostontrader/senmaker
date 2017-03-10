@@ -56,12 +56,25 @@ exports[`AppContainer can edit task that is complete 1`] = `
           }
         }>
         <p>
-          Level 
+          Level
+           
           0
         </p>
         
         
         
+        <img
+          alt=""
+          height="20"
+          onClick={[Function]}
+          src="/img/us_flag.gif"
+          width="28" />
+        <img
+          alt=""
+          height="20"
+          onClick={[Function]}
+          src="/img/chinese_flag.gif"
+          width="28" />
       </div>
     </div>
   </div>
@@ -126,12 +139,25 @@ exports[`AppContainer can edit task that is not complete 1`] = `
           }
         }>
         <p>
-          Level 
+          Level
+           
           0
         </p>
         
         
         
+        <img
+          alt=""
+          height="20"
+          onClick={[Function]}
+          src="/img/us_flag.gif"
+          width="28" />
+        <img
+          alt=""
+          height="20"
+          onClick={[Function]}
+          src="/img/chinese_flag.gif"
+          width="28" />
       </div>
     </div>
   </div>
@@ -196,12 +222,25 @@ exports[`AppContainer renders nouns that are complete 1`] = `
           }
         }>
         <p>
-          Level 
+          Level
+           
           0
         </p>
         
         
         
+        <img
+          alt=""
+          height="20"
+          onClick={[Function]}
+          src="/img/us_flag.gif"
+          width="28" />
+        <img
+          alt=""
+          height="20"
+          onClick={[Function]}
+          src="/img/chinese_flag.gif"
+          width="28" />
       </div>
     </div>
   </div>
@@ -266,12 +305,25 @@ exports[`AppContainer renders some nouns 1`] = `
           }
         }>
         <p>
-          Level 
+          Level
+           
           0
         </p>
         
         
         
+        <img
+          alt=""
+          height="20"
+          onClick={[Function]}
+          src="/img/us_flag.gif"
+          width="28" />
+        <img
+          alt=""
+          height="20"
+          onClick={[Function]}
+          src="/img/chinese_flag.gif"
+          width="28" />
       </div>
     </div>
   </div>
@@ -336,12 +388,25 @@ exports[`AppContainer renders with no nouns 1`] = `
           }
         }>
         <p>
-          Level 
+          Level
+           
           0
         </p>
         
         
         
+        <img
+          alt=""
+          height="20"
+          onClick={[Function]}
+          src="/img/us_flag.gif"
+          width="28" />
+        <img
+          alt=""
+          height="20"
+          onClick={[Function]}
+          src="/img/chinese_flag.gif"
+          width="28" />
       </div>
     </div>
   </div>

@@ -20,11 +20,11 @@ function Level04(props) {
             </div>
             <VerbPanel {...props} />
             <div className="quiz" style={style}>
-                <h3>Quiz</h3>
+                <h3>{props.strings.quiz}</h3>
                 <p>Can you .... ?</p>
                 <p>
                     <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
-                    I understand
+                    {props.strings.i_understand}
                 </p>
             </div>
             <LevelControl {...props} />

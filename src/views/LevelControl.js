@@ -13,30 +13,25 @@ function LevelControl(props) {
         margin: '5px'
     }
 
-    //console.log('LevelControl 1=',props.level)
-    const previousButton = (props.level.get('minLevel')) ? '' :
-        <button id="level-previous" onClick={props.onLevelPrevious}>Previous Level</button>
+    const s = props.strings.LevelControl
 
-    //const nextButton = ( (!props.level.quiz) || props.level.maxLevel) ? '' :
+    const previousButton = (props.level.get('minLevel')) ? '' :
+        <button id="level-previous" onClick={props.onLevelPrevious}>{s.previousLevel}</button>
+
     let n1 = props.level.get('quiz')
     let n2 = props.level.get('maxLevel')
     let n3 = n1 && !n2
-    //const nextButton = ( props.level.quiz && !props.level.maxLevel) ? '' :
-    //const nextButton = ( n3) ? 'nb' :
-        //<button id="level-next" onClick={props.onLevelNext}>Next Level</button>
-    let nextButton
+    let nextButton = ''
     if(n3) {
-        nextButton = <button id="level-next" onClick={props.onLevelNext}>Next Level</button>
-    } else {
-        nextButton = ''
+        nextButton = <button id="level-next" onClick={props.onLevelNext}>{s.nextLevel}</button>
     }
 
     const resetButton = (props.level.get('minLevel') && !props.level.get('quiz')) ? '' :
-        <button id="level-reset" onClick={props.onLevelReset}>Reset</button>
+        <button id="level-reset" onClick={props.onLevelReset}>{s.reset}</button>
 
     return (
         <div className="level-control" style={style}>
-            <p>Level 级 {props.level.get('currentLevel')}</p>
+            <p>{s.level} {props.level.get('currentLevel')}</p>
             {previousButton}
             {nextButton}
             {resetButton}

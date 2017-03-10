@@ -7,11 +7,12 @@ import {findWithClass, findWithType} from 'react-shallow-testutils'
 import AppStore from '../data/AppStore'
 import Level00 from './Level00'
 import LevelControl from './LevelControl'
+import StringStore from '../data/StringStore'
 
 describe("Level00", () => {
 
     it("Renders Level00", () => {
-        const props = {level:AppStore.getInitialState()}
+        const props = {level:AppStore.getInitialState(), strings:StringStore.getInitialState()}
         const renderExpression = <Level00 {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
         expect(levelControl.type).toBe('div')

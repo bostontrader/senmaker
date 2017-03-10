@@ -9,7 +9,7 @@ function Level00(props) {
         margin: '5px'
     }
 
-    const s = props.strings.level00
+    const s = props.strings.Level00
 
     return (
         <div>
@@ -24,7 +24,7 @@ function Level00(props) {
                 <h3>{props.strings.quiz}</h3>
                 <p>
                     <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
-                    I understand 我明白
+                    {props.strings.i_understand}
                 </p>
             </div>
             <LevelControl {...props} />
