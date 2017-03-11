@@ -5,18 +5,17 @@ import PluralizationSelect from './PluralizationSelect'
 
 function NounEditForm(props) {
 
-    const onChange = () => {}
-    const onDelete = () => props.onDeleteNoun(props.editingNoun.id)
+    const onDelete = () => props.onDeleteNoun(props.addEditNoun.getIn(['noun','id']))
+    const onUpdate = () => props.onUpdateNoun(props.addEditNoun.get('noun'))
 
     let nounEditForm = <div>Noun Edit Form</div>
-
-    if( props.level.get('currentAppLevelConfig').get('nounPanel') >= NounPanelLevel.PLURALIZATION) {
+    if(props.level.get('currentAppLevelConfig').get('nounPanel') >= NounPanelLevel.PLURALIZATION) {
         nounEditForm =
             <div>
                 <label htmlFor='base'>Base</label>
-                <input name='base' type='text' value={props.editingNoun.base}  onChange={onChange}/>
+                <input name='base' type='text' value={props.addEditNoun.getIn(['noun','base'])}  onChange={onChange}/>
                 <PluralizationSelect pluralization_rule={0}/>
-                <input type='submit' value={"Save (id = " +props.editingNoun.id+ ")"}/>
+                <input type='submit' value={"Save (id = " +props.addEditNoun.id+ ")"}/>
                 <button onClick={onDelete}>Delete</button>
                 <button onClick={props.onCancelNoun}>Cancel</button>
             </div>
@@ -24,8 +23,8 @@ function NounEditForm(props) {
         nounEditForm =
             <div>
                 <label htmlFor='base'>Base</label>
-                <input name='base' type='text' value={props.editingNoun.base}  onChange={onChange}/>
-                <input type='submit' value={"Save (id = " +props.editingNoun.id+ ")"}/>
+                <input name='base' type='text' value={props.addEditNoun.getIn(['noun','base'])}  onChange={(e)=>props.onChangeBase(e.target.value)}/>
+                <input type='submit' value="Save" onClick={onUpdate}/>
                 <button onClick={onDelete}>Delete</button>
                 <button onClick={props.onCancelNoun}>Cancel</button>
             </div>

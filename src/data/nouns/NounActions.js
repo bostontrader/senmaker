@@ -9,12 +9,20 @@ const Actions = {
             type: NounActionTypes.ADD_NOUN
         })
     },
+    changeBase(base) {
+        //console.log('NounActions.changeBase=',base)
+        AppDispatcher.dispatch({
+            type: NounActionTypes.CHANGE_BASE,
+            base: base
+        })
+    },
     cancel() {
         AppDispatcher.dispatch({
             type: NounActionTypes.CANCEL
         })
     },
     deleteNoun(id) {
+        //console.log('NounActions.deleteNoun')
         AppDispatcher.dispatch({
             type: NounActionTypes.DELETE_NOUN,
             id
@@ -23,13 +31,20 @@ const Actions = {
     editNoun(noun) {
         AppDispatcher.dispatch({
             type: NounActionTypes.EDIT_NOUN,
-            //noun
             payload: {noun: noun, level: 1}
         })
     },
     insertNoun(noun) {
+        //console.log('NounActions.insertNoun')
         AppDispatcher.dispatch({
             type: NounActionTypes.INSERT_NOUN,
+            noun
+        })
+    },
+    updateNoun(noun) {
+        console.log('NounActions.updateNoun =',noun)
+        AppDispatcher.dispatch({
+            type: NounActionTypes.UPDATE_NOUN,
             noun
         })
     }

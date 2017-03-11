@@ -31,6 +31,9 @@ class NounStore extends ReduceStore {
                     pluralization_rule: action.noun.pluralization_rule
                 }))
 
+            case NounActionTypes.UPDATE_NOUN:
+                return state.set(action.noun.get('id'), action.noun)
+
             default:
                 return state
         }

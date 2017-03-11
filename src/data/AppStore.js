@@ -120,9 +120,13 @@ AppStore.theLevelConfigs = Immutable.fromJS([
     {nounPanel: NounPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE}
 ])
 
-AppStore.initialState = Immutable.Map(
-    {currentLevel:0, minLevel:true, maxLevel:false, quiz: false, lang:langCode.zh}
-).set('currentAppLevelConfig', AppStore.theLevelConfigs.get(0))
+AppStore.initialState = Immutable.Map({
+    currentLevel:0,
+    minLevel:true,      // is this is lowest possible level?
+    maxLevel:false,     // is this the highest possible level?
+    quiz: false,        // have the user passed the quiz for this level?
+    lang:langCode.zh    // what language for the UI?
+}).set('currentAppLevelConfig', AppStore.theLevelConfigs.get(0))
 //console.log('n=',JSON.stringify(AppStore.initialState.toJSON()))
 
 export default new AppStore()
