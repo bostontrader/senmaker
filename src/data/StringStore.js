@@ -53,10 +53,10 @@ StringStore.en = {
         quiz3: 'Can you change the spelling of a verb?'
     },
     Level03: {
-        help20: 'When we write nouns must know how many of something we are writing about.',
-        help21: 'For example are we writing about one cat or more than one cat?',
-        help22: 'If we are writing about only one of something, then we use the base form of the noun.',
-        help23: 'If we are writing about more than one, then we use the plural form of the noun.'
+        help10: 'When we write nouns must know how many of something we are writing about.',
+        help11: 'For example are we writing about one cat or more than one cat?',
+        help12: 'If we are writing about only one of something, then we use the base form of the noun.',
+        help13: 'If we are writing about more than one, then we use the plural form of the noun.'
     },
     LevelControl: {
         level: 'Level',
@@ -91,10 +91,10 @@ StringStore.zh = {
         quiz3: '你能改变一个动词的拼写吗?'
     },
     Level03: {
-        help20: '当我们写名词时必须知道名词的形式。.',
-        help21: '例如我们写关于一只猫或多只猫吗?',
-        help22: '如果我们只写一个东西,我们用名词的基本形式。',
-        help23: '如果我们写不止一个,那么我们使用名词的复数形式。'
+        help10: '当我们写名词时必须知道名词的形式。.',
+        help11: '例如我们写关于一只猫或多只猫吗?',
+        help12: '如果我们只写一个东西,我们用名词的基本形式。',
+        help13: '如果我们写不止一个,那么我们使用名词的复数形式。'
     },
     LevelControl: {
         level: '级',

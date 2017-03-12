@@ -5,6 +5,7 @@ import Level01 from './Level01'
 import Level02 from './Level02'
 import Level03 from './Level03'
 import Level04 from './Level04'
+import Level05 from './Level05'
 
 function AppView(props) {
     let levelComponent
@@ -29,6 +30,10 @@ function AppView(props) {
 
         case 4:
             levelComponent = <Level04 {...props} />
+            break
+
+        case 5:
+            levelComponent = <Level05 {...props} />
             break
 
         default:

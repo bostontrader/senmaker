@@ -10,15 +10,18 @@ import AppStore from '../data/AppStore'
 import Level02 from './Level02'
 import LevelControl from './LevelControl'
 import StringStore from '../data/StringStore'
+import VerbAddEditStore from '../data/verbs/VerbAddEditStore'
 import VerbPanel from './verbs/VerbPanel'
 
 describe("Level02", () => {
 
     it("Renders Level02", () => {
-        let newState = AppStore.getInitialState()
-        //newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        //newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const props = {editingVerb:{id:'', add:''}, level:newState, verbs: OrderedMap(), strings:StringStore.getInitialState()}
+        const props = {
+            addEditVerb: VerbAddEditStore.getInitialState(),
+            level:AppStore.getInitialState(),
+            verbs: OrderedMap(),
+            strings:StringStore.getInitialState()
+        }
 
         const renderExpression = <Level02 {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)

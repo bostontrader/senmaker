@@ -18,7 +18,6 @@ function NounPanel(props) {
     }
 
     // What should be displayed in the noun add/edit panel?
-    //console.log('NounPanel props.addEditNoun=',props.addEditNoun)
     let nounAddEditPanel = <div></div>  // we really want nothing here
     if(props.addEditNoun.get('noun').get('id')) {
         nounAddEditPanel = <NounEditForm {...props} />

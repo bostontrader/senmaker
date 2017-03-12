@@ -117,6 +117,7 @@ AppStore.theLevelConfigs = Immutable.fromJS([
     {nounPanel: NounPanelLevel.BASE},
     {verbPanel: VerbPanelLevel.BASE},
     {nounPanel: NounPanelLevel.PLURALIZATION},
+    {nounPanel: NounPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE},
     {nounPanel: NounPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE}
 ])
 

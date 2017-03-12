@@ -7,7 +7,9 @@ import AppStore from '../data/AppStore'
 import Level00 from './Level00'
 import Level01 from './Level01'
 import Level02 from './Level02'
+import NounAddEditStore from '../data/nouns/NounAddEditStore'
 import StringStore from '../data/StringStore'
+import VerbAddEditStore from '../data/verbs/VerbAddEditStore'
 
 it('Renders Level00', () => {
     const props = {level:AppStore.getInitialState(), strings:StringStore.getInitialState()}
@@ -21,7 +23,13 @@ it('Renders Level00', () => {
 })
 
 it('Renders Level01', () => {
-    const props = {editingNoun:{id:'', add:''}, level:AppStore.getInitialState(), strings:StringStore.getInitialState(), nouns:OrderedMap()}
+    const props = {
+        addEditNoun: NounAddEditStore.getInitialState(),
+        level:AppStore.getInitialState(),
+        nouns: OrderedMap(),
+        strings:StringStore.getInitialState()
+    }
+
     const rtuRenderer = ReactTestUtils.createRenderer()
     rtuRenderer.render(<Level01 {...props} />)
     const result = rtuRenderer.getRenderOutput()
@@ -32,7 +40,13 @@ it('Renders Level01', () => {
 })
 
 it('Renders Level02', () => {
-    const props = {editingVerb:{id:'', add:''}, level:AppStore.getInitialState(), strings:StringStore.getInitialState(), verbs:OrderedMap()}
+    const props = {
+        addEditVerb: VerbAddEditStore.getInitialState(),
+        level:AppStore.getInitialState(),
+        verbs: OrderedMap(),
+        strings:StringStore.getInitialState()
+    }
+
     const rtuRenderer = ReactTestUtils.createRenderer()
     rtuRenderer.render(<Level02 {...props} />)
     const result = rtuRenderer.getRenderOutput()

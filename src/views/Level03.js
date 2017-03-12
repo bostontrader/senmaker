@@ -10,13 +10,15 @@ function Level03(props) {
         margin: '5px'
     }
 
+    const s = props.strings.Level03
+
     return(
         <div>
             <div className="help" style={style}>
                 <h1>Nouns</h1>
-                <p>When we write nouns must know how many of something we are writing about.  For example are we writing about one cat or more than one cat?</p>
-                <p>If we are writing about only one of something, then we use the base form of the noun.</p>
-                <p>If we are writing about more than one, then we use the plural form of the noun.</p>
+                <p>{s.help10} {s.help11}</p>
+                <p>{s.help12}</p>
+                <p>{s.help13}</p>
             </div>
             <NounPanel {...props} />
             <div className="quiz" style={style}>
