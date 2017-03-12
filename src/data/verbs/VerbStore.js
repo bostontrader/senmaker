@@ -1,5 +1,5 @@
-import Immutable from 'immutable'
 import {ReduceStore} from 'flux/utils'
+import {OrderedMap} from 'immutable'
 
 import AppDispatcher from '../AppDispatcher'
 import Counter from './Counter'
@@ -8,11 +8,11 @@ import VerbActionTypes from './VerbActionTypes'
 
 class VerbStore extends ReduceStore {
     constructor() {
-        super(AppDispatcher);
+        super(AppDispatcher)
     }
 
     getInitialState() {
-        return Immutable.OrderedMap();
+        return OrderedMap()
     }
 
     reduce(state, action) {
@@ -22,19 +22,7 @@ class VerbStore extends ReduceStore {
                 return state.delete(action.id)
 
             case VerbActionTypes.INSERT_VERB:
-                const id = Counter.increment();
-
-                //let pastTense = ''
-                //switch(action.verb.pastTense_rule) {
-                    //case VerbConstants.pastTense_NoChange:
-                        //pastTense = action.verb.base
-                        //break
-                    //case VerbConstants.pastTense_Append_ed:
-                        //pastTense = action.verb.base + 'ed'
-                        //break
-                    //default:
-                //}
-
+                const id = Counter.increment()
                 return state.set(id, new Verb({
                     id: id,
                     base: action.verb.base,
@@ -42,6 +30,9 @@ class VerbStore extends ReduceStore {
                     pastTense_rule: action.verb.pastTense_rule
                 }))
 
+            case VerbActionTypes.UPDATE_VERB:
+                return state.set(action.verb.get('id'), action.verb)
+            
             default:
                 return state
         }

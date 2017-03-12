@@ -1,5 +1,5 @@
-import Immutable from 'immutable'
 import {ReduceStore} from 'flux/utils'
+import {OrderedMap} from 'immutable'
 
 import AppDispatcher from '../AppDispatcher'
 import Counter from './Counter'
@@ -12,7 +12,7 @@ class NounStore extends ReduceStore {
     }
 
     getInitialState() {
-        return Immutable.OrderedMap()
+        return OrderedMap()
     }
 
     reduce(state, action) {
@@ -23,7 +23,6 @@ class NounStore extends ReduceStore {
 
             case NounActionTypes.INSERT_NOUN:
                 const id = Counter.increment()
-
                 return state.set(id, new Noun({
                     id: id,
                     base: action.noun.base,

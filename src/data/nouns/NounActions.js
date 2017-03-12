@@ -1,8 +1,6 @@
 import NounActionTypes from './NounActionTypes'
 import AppDispatcher from '../AppDispatcher'
 
-// Singleton. These functions are called by the UI.  They are intermediary conveniences and are not
-// strictly required. We could instead call the dispatcher directly.
 const Actions = {
     addNoun(noun) {
         AppDispatcher.dispatch({
@@ -10,7 +8,6 @@ const Actions = {
         })
     },
     changeBase(base) {
-        //console.log('NounActions.changeBase=',base)
         AppDispatcher.dispatch({
             type: NounActionTypes.CHANGE_BASE,
             base: base
@@ -22,7 +19,6 @@ const Actions = {
         })
     },
     deleteNoun(id) {
-        //console.log('NounActions.deleteNoun')
         AppDispatcher.dispatch({
             type: NounActionTypes.DELETE_NOUN,
             id
@@ -35,14 +31,12 @@ const Actions = {
         })
     },
     insertNoun(noun) {
-        //console.log('NounActions.insertNoun')
         AppDispatcher.dispatch({
             type: NounActionTypes.INSERT_NOUN,
             noun
         })
     },
     updateNoun(noun) {
-        console.log('NounActions.updateNoun =',noun)
         AppDispatcher.dispatch({
             type: NounActionTypes.UPDATE_NOUN,
             noun

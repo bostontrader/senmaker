@@ -1,4 +1,4 @@
-const ActionTypes = {
+const NounActionTypes = {
     ADD_NOUN: 'ADD_NOUN',       // Invoke the add-noun UI
     CANCEL: 'CANCEL',           // Quit the Add/Edit form
     CHANGE_BASE: 'CHANGE_BASE', // Change the UI field
@@ -8,4 +8,4 @@ const ActionTypes = {
     UPDATE_NOUN: 'UPDATE_NOUN'  // Update an existing noun
 }
 
-export default ActionTypes
+export default NounActionTypes

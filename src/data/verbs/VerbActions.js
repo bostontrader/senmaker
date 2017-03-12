@@ -1,12 +1,16 @@
 import VerbActionTypes from './VerbActionTypes'
 import AppDispatcher from '../AppDispatcher'
 
-// Singleton. These functions are called by the UI.  They are intermediary conveniences and are not
-// strictly required. We could instead call the dispatcher directly.
 const Actions = {
     addVerb(verb) {
         AppDispatcher.dispatch({
             type: VerbActionTypes.ADD_VERB
+        })
+    },
+    changeBase(base) {
+        AppDispatcher.dispatch({
+            type: VerbActionTypes.CHANGE_BASE,
+            base: base
         })
     },
     cancel() {
@@ -29,6 +33,12 @@ const Actions = {
     insertVerb(verb) {
         AppDispatcher.dispatch({
             type: VerbActionTypes.INSERT_VERB,
+            verb
+        })
+    },
+    updateVerb(verb) {
+        AppDispatcher.dispatch({
+            type: VerbActionTypes.UPDATE_VERB,
             verb
         })
     }

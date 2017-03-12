@@ -42,27 +42,19 @@ class NounAddEditStore extends ReduceStore {
                 return state.set('addNoun', false).set('noun', Noun())
 
             case NounActionTypes.CHANGE_BASE:
-                //console.log('NounAddEditStore CHANGE_BASE 1=',state)
-                //const newState = state.get('noun').set('base', action.base)
-                //console.log('NounAddEditStore CHANGE_BASE 2=',newState)
-
-                //return newState
                 return state.updateIn(['noun','base'],value => action.base)
+
             // Here we only close the UI form.
             // NounStore will also catch this event and it's responsible for the actual deletion.
             case NounActionTypes.DELETE_NOUN:
                 return state.set('addNoun', false).set('noun', Noun())
 
             case NounActionTypes.EDIT_NOUN:
-                console.log('NounAddEditStore.EDIT_NOUN 1=',state)
-                const newState1 = state.set('noun', Noun({
+                return state.set('noun', Noun({
                     id: action.payload.noun.get('id'),
                     base: action.payload.noun.get('base'),
                     pluralization_rule: action.payload.noun.get('pluralization_rule')
                 }))
-                console.log('NounAddEditStore.EDIT_NOUN 2=',newState1)
-
-                return newState1
 
             // Here we only close the UI form.
             // NounStore will also catch this event and it's responsible for the actual insert.

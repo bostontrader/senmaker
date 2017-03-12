@@ -9,7 +9,7 @@ import NounStore from '../data/nouns/NounStore'
 import StringActions from '../data/StringActions'
 import StringStore from '../data/StringStore'
 import VerbActions from '../data/verbs/VerbActions'
-import VerbEditStore from '../data/verbs/VerbEditStore'
+import VerbAddEditStore from '../data/verbs/VerbAddEditStore'
 import VerbStore from '../data/verbs/VerbStore'
 
 function getStores() {
@@ -19,7 +19,7 @@ function getStores() {
         NounAddEditStore,
         StringStore,
         VerbStore,
-        VerbEditStore
+        VerbAddEditStore
     ]
 }
 
@@ -48,12 +48,14 @@ function getState() {
         onUpdateNoun: NounActions.updateNoun,
 
         verbs: VerbStore.getState(),
-        editingVerb: VerbEditStore.getState(),
+        addEditVerb: VerbAddEditStore.getState(),
         onAddVerb: VerbActions.addVerb,
         onCancelVerb: VerbActions.cancel,
-        onInsertVerb: VerbActions.insertVerb,
+        onChangeBase: VerbActions.changeBase,
         onDeleteVerb: VerbActions.deleteVerb,
         onEditVerb: VerbActions.editVerb,
+        onInsertVerb: VerbActions.insertVerb,
+        onUpdateVerb: VerbActions.updateVerb,
         
     }
 }
