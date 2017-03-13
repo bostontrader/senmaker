@@ -8,7 +8,7 @@ function NounAddForm(props) {
     const onInsert = () => props.onInsertNoun({base: props.addEditNoun.getIn(['noun','base'])});
 
     let nounAddForm = <div>Noun Add Form</div>
-    if(props.level.get('currentAppLevelConfig').get('nounPanel') >= NounPanelLevel.PLURALIZATION) {
+    if(props.level.getIn(['currentAppLevelConfig', 'nounPanel']) >= NounPanelLevel.PLURALIZATION) {
         nounAddForm =
             <div>
                 <label htmlFor='base'>Base</label>
@@ -17,7 +17,7 @@ function NounAddForm(props) {
                 <input type='submit' value="Add" onClick={onInsert}/>
                 <button onClick={props.onCancelNoun}>Cancel</button>
             </div>
-    } else if(props.level.get('currentAppLevelConfig').get('nounPanel') >= NounPanelLevel.BASE) {
+    } else if(props.level.getIn(['currentAppLevelConfig', 'nounPanel']) >= NounPanelLevel.BASE) {
         nounAddForm =
             <div>
                 <label htmlFor='base'>Base</label>

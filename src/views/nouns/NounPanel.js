@@ -18,11 +18,11 @@ function NounPanel(props) {
     }
 
     // What should be displayed in the noun add/edit panel?
-    let nounAddEditPanel = <div></div>  // we really want nothing here
-    if(props.addEditNoun.get('noun').get('id')) {
-        nounAddEditPanel = <NounEditForm {...props} />
+    let nounAddEditForm = <div></div>  // we really want nothing here
+    if(props.addEditNoun.getIn(['noun','id'])) {
+        nounAddEditForm = <NounEditForm {...props} />
     } else if (props.addEditNoun.get('addNoun')) {
-        nounAddEditPanel = <NounAddForm {...props} />
+        nounAddEditForm = <NounAddForm {...props} />
     } else {
         // Do nothing
     }
@@ -34,7 +34,7 @@ function NounPanel(props) {
             <NounTable {...props} />
         </div>
         <div>
-            {nounAddEditPanel}
+            {nounAddEditForm}
         </div>
     </div>)
 

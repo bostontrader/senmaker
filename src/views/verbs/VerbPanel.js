@@ -18,11 +18,11 @@ function VerbPanel(props) {
     }
 
     // What should be displayed in the verb add/edit panel?
-    let verbAddEditPanel = <div></div>  // we really want nothing here
-    if(props.addEditVerb.id) {
-        verbAddEditPanel = <VerbEditForm {...props} />
-    } else if (props.addEditVerb.add) {
-        verbAddEditPanel = <VerbAddForm {...props} />
+    let verbAddEditForm = <div></div>  // we really want nothing here
+    if(props.addEditVerb.getIn(['verb','id'])) {
+        verbAddEditForm = <VerbEditForm {...props} />
+    } else if (props.addEditVerb.get('addVerb')) {
+        verbAddEditForm = <VerbAddForm {...props} />
     } else {
         // Do nothing
     }
@@ -34,7 +34,7 @@ function VerbPanel(props) {
             <VerbTable {...props} />
         </div>
         <div>
-            {verbAddEditPanel}
+            {verbAddEditForm}
         </div>
     </div>)
     

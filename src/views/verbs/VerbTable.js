@@ -6,7 +6,7 @@ import VerbItem from './VerbItem'
 function VerbTable(props) {
 
     let verbTable = <div>Verb Table</div>
-    const level = props.level.get('currentAppLevelConfig').get('verbPanel')
+    const level = props.level.getIn(['currentAppLevelConfig','verbPanel'])
     if( level >= VerbPanelLevel.PAST_TENSE) {
         verbTable =
             <table id="verb-list">

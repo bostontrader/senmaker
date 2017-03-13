@@ -6,7 +6,7 @@ import NounItem from './NounItem'
 function NounTable(props) {
 
     let nounTable = <div>Noun Table</div>
-    const level = props.level.get('currentAppLevelConfig').get('nounPanel')
+    const level = props.level.getIn(['currentAppLevelConfig','nounPanel'])
     if( level >= NounPanelLevel.PLURALIZATION) {
         nounTable =
             <table id="noun-list">

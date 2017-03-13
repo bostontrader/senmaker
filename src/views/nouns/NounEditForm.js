@@ -13,9 +13,9 @@ function NounEditForm(props) {
         nounEditForm =
             <div>
                 <label htmlFor='base'>Base</label>
-                <input name='base' type='text' value={props.addEditNoun.getIn(['noun','base'])}  onChange={onChange}/>
+                <input name='base' type='text' value={props.addEditNoun.getIn(['noun','base'])}  onChange={(e)=>props.onChangeBase(e.target.value)}/>
                 <PluralizationSelect pluralization_rule={0}/>
-                <input type='submit' value={"Save (id = " +props.addEditNoun.id+ ")"}/>
+                <input type='submit' value={"Save"}/>
                 <button onClick={onDelete}>Delete</button>
                 <button onClick={props.onCancelNoun}>Cancel</button>
             </div>
