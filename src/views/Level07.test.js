@@ -7,15 +7,15 @@ import {findWithClass, findWithType} from 'react-shallow-testutils'
 
 import AppActionTypes from '../data/AppActionTypes'
 import AppStore from '../data/AppStore'
-import Level04 from './Level04'
+import Level07 from './Level07'
 import LevelControl from './LevelControl'
 import StringStore from '../data/StringStore'
 import VerbAddEditStore from '../data/verbs/VerbAddEditStore'
 import VerbPanel from './verbs/VerbPanel'
 
-describe("Level04", () => {
+describe("Level07", () => {
 
-    it("Renders Level04", () => {
+    it("Renders Level07", () => {
         const props = {
             addEditVerb: VerbAddEditStore.getInitialState(),
             level:AppStore.getInitialState(),
@@ -23,11 +23,12 @@ describe("Level04", () => {
             strings:StringStore.getInitialState()
         }
 
-        const renderExpression = <Level04 {...props} />
+        const renderExpression = <Level07 {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
         expect(levelControl.type).toBe('div')
 
         expect(findWithClass(levelControl,'help'))
+        expect(findWithType(levelControl,VerbPanel))
         expect(findWithClass(levelControl,'quiz'))
         expect(findWithType(levelControl,LevelControl))
 

@@ -10,12 +10,14 @@ function Level05(props) {
         margin: '5px'
     }
 
+    const s = props.strings.Level05
+
     return(
         <div>
             <div className="help" style={style}>
                 <h1>Phrases</h1>
-                <p>A group of words that work together is called a 'phrase'.</p>
-                <p>Building phrases is just the beginning. Later will we assemble phrases together into larger structures.</p>
+                <p>{s.help10}</p>
+                <p>{s.help11}</p>
             </div>
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>

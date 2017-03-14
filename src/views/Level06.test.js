@@ -7,27 +7,28 @@ import {findWithClass, findWithType} from 'react-shallow-testutils'
 
 import AppActionTypes from '../data/AppActionTypes'
 import AppStore from '../data/AppStore'
-import Level04 from './Level04'
+import Level06 from './Level06'
 import LevelControl from './LevelControl'
+import NounAddEditStore from '../data/nouns/NounAddEditStore'
+import NounPanel from './nouns/NounPanel'
 import StringStore from '../data/StringStore'
-import VerbAddEditStore from '../data/verbs/VerbAddEditStore'
-import VerbPanel from './verbs/VerbPanel'
 
-describe("Level04", () => {
+describe("Level06", () => {
 
-    it("Renders Level04", () => {
+    it("Renders Level06", () => {
         const props = {
-            addEditVerb: VerbAddEditStore.getInitialState(),
+            addEditNoun: NounAddEditStore.getInitialState(),
             level:AppStore.getInitialState(),
-            verbs: OrderedMap(),
+            nouns: OrderedMap(),
             strings:StringStore.getInitialState()
         }
 
-        const renderExpression = <Level04 {...props} />
+        const renderExpression = <Level06 {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
         expect(levelControl.type).toBe('div')
 
         expect(findWithClass(levelControl,'help'))
+        expect(findWithType(levelControl,NounPanel))
         expect(findWithClass(levelControl,'quiz'))
         expect(findWithType(levelControl,LevelControl))
 

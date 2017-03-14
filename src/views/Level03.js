@@ -2,6 +2,7 @@ import React from 'react'
 
 import LevelControl from './LevelControl'
 import NounPanel from './nouns/NounPanel'
+import NounSelect from './nouns/NounSelect'
 
 function Level03(props) {
 
@@ -15,15 +16,24 @@ function Level03(props) {
     return(
         <div>
             <div className="help" style={style}>
-                <h1>Nouns</h1>
-                <p>{s.help10} {s.help11}</p>
+                <h1>Definite or Indefinite</h1>
+                <p>{s.help10}</p>
+                <p>{s.help11}</p>
                 <p>{s.help12}</p>
                 <p>{s.help13}</p>
+                <p>{s.help14}</p>
+                <p>{s.help15}</p>
             </div>
-            <NounPanel {...props} />
+
+            <div style={style}>
+                <NounSelect {...props} />
+            </div>
+
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
-                <p>Can you .... ?</p>
+                <p>{s.quiz1}</p>
+                <p>{s.quiz2}</p>
+                <p>{s.quiz3}</p>
                 <p>
                     <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
                     {props.strings.i_understand}

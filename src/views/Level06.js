@@ -1,26 +1,29 @@
 import React from 'react'
 
 import LevelControl from './LevelControl'
-import VerbPanel from './verbs/VerbPanel'
+import NounPanel from './nouns/NounPanel'
 
-function Level04(props) {
+function Level06(props) {
 
     const style = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const s = props.strings.Level04
+    const s = props.strings.Level06
 
     return(
         <div>
             <div className="help" style={style}>
-                <h1>Phrases</h1>
-                <p>{s.help10}</p>
-                <p>{s.help11}</p>
+                <h1>Nouns</h1>
+                <p>{s.help10} {s.help11}</p>
+                <p>{s.help12}</p>
+                <p>{s.help13}</p>
             </div>
+            <NounPanel {...props} />
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
+                <p>Can you .... ?</p>
                 <p>
                     <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
                     {props.strings.i_understand}
@@ -31,4 +34,4 @@ function Level04(props) {
     )
 }
 
-export default Level04
+export default Level06

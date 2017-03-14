@@ -33,6 +33,8 @@ StringStore.en = {
     nouns: 'Nouns',
     quiz: 'Quiz',
     verbs: 'Verbs',
+
+    // Intro
     Level00: {
         help1: 'This program will help you build an English composition.',
         help2: 'In order to do that you must first learn how to build smaller pieces of English.',
@@ -40,24 +42,66 @@ StringStore.en = {
         help4: 'You will learn how to do this by following these lessons.',
         help5: 'You are presently on Level 0. In order to proceed to the next level you will need to pass the quiz.'
     },
+
+    // Nouns
     Level01: {
         help10: 'The things around us are called <strong>nouns</strong>.',
         quiz1: 'Can you add a new noun?',
         quiz2: 'Can you delete a noun from this list?',
         quiz3: 'Can you change the spelling of a noun?'
     },
+
+    // Verbs
     Level02: {
         help10: 'The actions we can take are called <strong>verbs</strong>',
         quiz1: 'Can you add a new verb?',
         quiz2: 'Can you delete a verb from this list?',
         quiz3: 'Can you change the spelling of a verb?'
     },
+
+    // Definite or Indefinite noun
     Level03: {
+        help10: 'Definite or Indefinite.',
+        help11: 'Nouns are usually preceded by the word \'a\', \'an\', or \'the\'.',
+        help12: 'If we have a group of similar items and we are talking about any one of them, then which particular item we are talking about is said to be \'indefinite\' and we use \'a\' or \'an\'.',
+        help13: 'In this case we use \'a\' when the noun starts with a consonant and \'an\' when the noun starts with a vowel. We use this rule in order to make pronunciation better.',
+        help14: 'For example: Buy a car. Which car to buy is indefinite.',
+        help15: 'For example: Buy an apple. Which apple to buy is also indefinite.',
+
+        help16: 'If we only have a single item, then the identity of that items is definite, so we can use \'the.\'.',
+        help17: 'For example: Buy the car. Which particular car is already known and is definite.',
+        quiz1: 'Select a noun',
+        quiz2: 'Select \'definite\' or \'indefinite\'.',
+        quiz3: 'Can you see that the article changes?'
+    },
+
+    // Phrase
+    Level04: {
+        help10: 'A group of words that work together is called a \'phrase\'.',
+        help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
+    },
+
+    // Noun Phrase
+    Level05: {
+        help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
+        help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.'
+    },
+
+    // Plural or Singular
+    Level06: {
         help10: 'When we write nouns must know how many of something we are writing about.',
         help11: 'For example are we writing about one cat or more than one cat?',
         help12: 'If we are writing about only one of something, then we use the base form of the noun.',
         help13: 'If we are writing about more than one, then we use the plural form of the noun.'
     },
+
+    // Past Tense
+    Level07: {
+        help10:'We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.',
+        help11:'For example: If we performed the verb in the past we use the \'past tense\' form of the verb.',
+        help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
+    },
+
     LevelControl: {
         level: 'Level',
         nextLevel: 'Next Level',
