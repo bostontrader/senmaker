@@ -1,5 +1,6 @@
 import React from 'react'
 
+import DefinitenessRadio from './nouns/DefinitenessRadio'
 import LevelControl from './LevelControl'
 import NounPanel from './nouns/NounPanel'
 import NounSelect from './nouns/NounSelect'
@@ -26,7 +27,9 @@ function Level03(props) {
             </div>
 
             <div style={style}>
+                <DefinitenessRadio {...props} />
                 <NounSelect {...props} />
+                <p>Catfood is good</p>
             </div>
 
             <div className="quiz" style={style}>

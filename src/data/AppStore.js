@@ -21,7 +21,7 @@ class AppStore extends ReduceStore {
     getInitialState() {
 
         if (localStorageAvailable) {
-            //localStorage.removeItem(localStorageKey)
+            localStorage.removeItem(localStorageKey)
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState)
@@ -96,9 +96,11 @@ class AppStore extends ReduceStore {
 
                 return newState
 
-            case AppActionTypes.QUIZ_TOGGLE:
-
-                newState = state.set('quiz',!state.get('quiz'))
+            case AppActionTypes.QUIZ_SETSCORE:
+                console.log('AppStore QUIZ_SETSCORE =',action.score)
+                const n = state.get('currentLevel')
+                //newState = state.set('quiz',!state.get('quiz'))
+                newState = state.setIn(['quizResults',n],action.score)
 
                 if(localStorageAvailable)
                     localStorage.setItem(localStorageKey, JSON.stringify(newState))
@@ -128,9 +130,19 @@ AppStore.initialState = Immutable.Map({
     currentLevel:0,
     minLevel:true,      // is this is lowest possible level?
     maxLevel:false,     // is this the highest possible level?
-    quiz: false,        // have the user passed the quiz for this level?
+    quizQuestions: {
+        addNoun: false,
+        changeNoun: false,
+        deleteNoun: false
+    },
+    //quizResults: {false}, // level 0 starts as false
+    // Elements 0, 1, ... should be set to true or false, depending upon
+    // whether or not the quiz for level 0, 1, ... is passed
+    //quizResults:[false,false], // Start with Level 00 false
     lang:langCode.zh    // what language for the UI?
-}).set('currentAppLevelConfig', AppStore.theLevelConfigs.get(0))
+})
+    .set('currentAppLevelConfig', AppStore.theLevelConfigs.get(0))
+    .set('quizResults', new List().push(false))
 //console.log('n=',JSON.stringify(AppStore.initialState.toJSON()))
 
 export default new AppStore()

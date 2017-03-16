@@ -17,9 +17,13 @@ const AppActions = {
             type: AppActionTypes.LEVEL_RESET
         })
     },
-    quizToggle() {
+
+    // score: boolean true = pass, false = not pass. Applies to the present level.
+    setQuizScore(score) {
+        console.log('AppActions setQuizScore =',score)
         AppDispatcher.dispatch({
-            type: AppActionTypes.QUIZ_TOGGLE
+            type: AppActionTypes.QUIZ_SETSCORE,
+            score: score
         })
     }
 }

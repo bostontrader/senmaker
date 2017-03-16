@@ -18,9 +18,12 @@ function LevelControl(props) {
     const previousButton = (props.level.get('minLevel')) ? '' :
         <button id="level-previous" onClick={props.onLevelPrevious}>{s.previousLevel}</button>
 
-    let n1 = props.level.get('quiz')
+    const n = props.level.get('currentLevel')
+    let n1 = props.level.getIn(['quizResults',n])
     let n2 = props.level.get('maxLevel')
     let n3 = n1 && !n2
+    console.log(props.level)
+    console.log(n,n1,n2,n3)
     let nextButton = ''
     if(n3) {
         nextButton = <button id="level-next" onClick={props.onLevelNext}>{s.nextLevel}</button>

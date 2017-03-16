@@ -10,6 +10,9 @@ function Level00(props) {
     }
 
     const s = props.strings.Level00
+    const presentQuizState = props.level.getIn(['quizResults',0])
+        //<input id="iUnderstand" onChange={props.onSetQuizScore(!presentQuizState)} type="checkbox" checked={presentQuizState} />
+    const onChange = () => props.onSetQuizScore(!presentQuizState)
 
     return (
         <div>
@@ -23,7 +26,7 @@ function Level00(props) {
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <p>
-                    <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
+                    <input id="iUnderstand" onChange={onChange} type="checkbox" checked={presentQuizState} />
                     {props.strings.i_understand}
                 </p>
             </div>

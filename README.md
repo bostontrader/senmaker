@@ -22,3 +22,6 @@ and restart on occasion.
 npm test will run the Jest tests.  You can do this from a 2nd terminal window, even while webpack-dev-server is running.
 You may want to use the --coverage flag do display test coverage info or the -u flag to update snapshots.
 
+Junkyard...
+
+//    "test": "node  ./node_modules/.bin/jest --bail Level00"

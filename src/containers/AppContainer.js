@@ -31,7 +31,7 @@ function getState() {
         onLevelPrevious: AppActions.levelPrevious,
         onLevelNext: AppActions.levelNext,
         onLevelReset: AppActions.levelReset,
-        onQuizToggle: AppActions.quizToggle,
+        onSetQuizScore: AppActions.setQuizScore,
 
         strings: StringStore.getState(),
         onLangEng: StringActions.langEng,

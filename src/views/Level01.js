@@ -21,9 +21,16 @@ function Level01(props) {
             <NounPanel {...props} />
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
-                <p>{s.quiz1}</p>
-                <p>{s.quiz2}</p>
-                <p>{s.quiz3}</p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><p>{s.quiz1}</p></td>
+                            <td><img src="/img/Checked.png" alt="checked"/></td>
+                        </tr>
+                        <tr><td><p>{s.quiz2}</p></td><td></td></tr>
+                        <tr><td><p>{s.quiz3}</p></td><td></td></tr>
+                    </tbody>
+                </table>
                 <p>
                     <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
                     {props.strings.i_understand}
