@@ -17,6 +17,8 @@ function VerbPanel(props) {
         margin: '5px'
     }
 
+    const s = props.strings
+
     // What should be displayed in the verb add/edit panel?
     let verbAddEditForm = <div></div>  // we really want nothing here
     if(props.addEditVerb.getIn(['verb','id'])) {
@@ -30,7 +32,7 @@ function VerbPanel(props) {
     // The appearance of a VerbPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button onClick={props.onAddVerb}>Add new verb</button>
+            <button id="add-verb" onClick={props.onAddVerb}>{s.add_new} {s.verb}</button>
             <VerbTable {...props} />
         </div>
         <div>

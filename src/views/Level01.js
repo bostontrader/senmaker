@@ -12,6 +12,15 @@ function Level01(props) {
 
     const s = props.strings.Level01
 
+    const quizInsertNounFlag = props.level.getIn(['quizQuestions','insertNoun']) ?
+        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+
+    const quizUpdateNounFlag = props.level.getIn(['quizQuestions','updateNoun']) ?
+        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+
+    const quizDeleteNounFlag = props.level.getIn(['quizQuestions','deleteNoun']) ?
+        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+
     return(
         <div>
             <div className="help" style={style}>
@@ -25,16 +34,18 @@ function Level01(props) {
                     <tbody>
                         <tr>
                             <td><p>{s.quiz1}</p></td>
-                            <td><img src="/img/Checked.png" alt="checked"/></td>
+                            <td>{quizInsertNounFlag}</td>
                         </tr>
-                        <tr><td><p>{s.quiz2}</p></td><td></td></tr>
-                        <tr><td><p>{s.quiz3}</p></td><td></td></tr>
+                        <tr>
+                            <td><p>{s.quiz2}</p></td>
+                            <td>{quizDeleteNounFlag}</td>
+                        </tr>
+                        <tr>
+                            <td><p>{s.quiz3}</p></td>
+                            <td>{quizUpdateNounFlag}</td>
+                        </tr>
                     </tbody>
                 </table>
-                <p>
-                    <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
-                    {props.strings.i_understand}
-                </p>
             </div>
             <LevelControl {...props} />
         </div>

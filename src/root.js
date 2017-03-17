@@ -9,9 +9,10 @@ import VerbActions from './data/verbs/VerbActions'
 
 ReactDOM.render(<AppContainer />, document.getElementById('nounapp'))
 
-NounActions.insertNoun({base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s})
-NounActions.insertNoun({base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
+// Populate the db, but not via the ordinary UI
+NounActions.insertNoun({ui:false, noun:{base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s}})
+NounActions.insertNoun({ui:false, noun:{base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}})
 
-VerbActions.insertVerb({base: 'eat', pastTense: 'ate', pastTense_rule: PastTenseRule.Irregular})
-VerbActions.insertVerb({base: 'hit', pastTense: 'hit', pastTense_rule: PastTenseRule.NoChange})
-VerbActions.insertVerb({base: 'jump', pastTense: 'jumped', pastTense_rule: PastTenseRule.Append_ed})
+VerbActions.insertVerb({ui:false, verb:{base: 'eat', pastTense: 'ate', pastTense_rule: PastTenseRule.Irregular}})
+VerbActions.insertVerb({ui:false, verb:{base: 'hit', pastTense: 'hit', pastTense_rule: PastTenseRule.NoChange}})
+VerbActions.insertVerb({ui:false, verb:{base: 'jump', pastTense: 'jumped', pastTense_rule: PastTenseRule.Append_ed}})

@@ -12,6 +12,15 @@ function Level02(props) {
 
     const s = props.strings.Level02
 
+    const quizInsertVerbFlag = props.level.getIn(['quizQuestions','insertVerb']) ?
+        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+
+    const quizUpdateVerbFlag = props.level.getIn(['quizQuestions','updateVerb']) ?
+        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+
+    const quizDeleteVerbFlag = props.level.getIn(['quizQuestions','deleteVerb']) ?
+        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+
     return(
         <div>
             <div className="help" style={style}>
@@ -21,13 +30,22 @@ function Level02(props) {
             <VerbPanel {...props} />
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
-                <p>{s.quiz1}</p>
-                <p>{s.quiz2}</p>
-                <p>{s.quiz3}</p>
-                <p>
-                    <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
-                    {props.strings.i_understand}
-                </p>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td><p>{s.quiz1}</p></td>
+                        <td>{quizInsertVerbFlag}</td>
+                    </tr>
+                    <tr>
+                        <td><p>{s.quiz2}</p></td>
+                        <td>{quizDeleteVerbFlag}</td>
+                    </tr>
+                    <tr>
+                        <td><p>{s.quiz3}</p></td>
+                        <td>{quizUpdateVerbFlag}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
             <LevelControl {...props} />
         </div>

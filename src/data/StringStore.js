@@ -29,9 +29,16 @@ class StringStore extends ReduceStore {
 }
 
 StringStore.en = {
+    add_new: 'Add New',
+    cancel: 'Cancel',
+    delete: 'Delete',
+    edit: 'Edit',
     i_understand: 'I understand',
+    noun: 'Noun',
     nouns: 'Nouns',
     quiz: 'Quiz',
+    save: 'Save',
+    verb: 'Verb',
     verbs: 'Verbs',
 
     // Intro
@@ -111,12 +118,20 @@ StringStore.en = {
 }
 
 StringStore.zh = {
+    add_new: '添加新',
+    cancel: '取消',
+    delete: '删除',
+    edit: '编辑',
     i_understand: '我明白',
-    nouns: 'Nouns',
+    noun: 'Noun',
+    nouns: '名词 Nouns',
     quiz: '测试',
-    verbs: 'Verbs',
+    save: '保存',
+    verb: 'Verb',
+    verbs: '动词 Verbs',
+
     Level00: {
-        help1: '这个程序将帮助您建立一个英语作文。',
+        help1: '这个程序将帮助您建立一个英语文章。',
         help2: '为了做到这一点你必须首先学习如何构建英语的小块（句子和段落）。',
         help3: '然后,您可以将英语的小块组装成更大的组件。',
         help4: '通过以下课程您将知道如何学习英语。',
@@ -134,7 +149,23 @@ StringStore.zh = {
         quiz2: '你可以从这个列表中删除一个动词吗?',
         quiz3: '你能改变一个动词的拼写吗?'
     },
+    // Definite or Indefinite noun
     Level03: {
+        help10: 'Definite or Indefinite.',
+        help11: 'Nouns are usually preceded by the word \'a\', \'an\', or \'the\'.',
+        help12: 'If we have a group of similar items and we are talking about any one of them, then which particular item we are talking about is said to be \'indefinite\' and we use \'a\' or \'an\'.',
+        help13: 'In this case we use \'a\' when the noun starts with a consonant and \'an\' when the noun starts with a vowel. We use this rule in order to make pronunciation better.',
+        help14: 'For example: Buy a car. Which car to buy is indefinite.',
+        help15: 'For example: Buy an apple. Which apple to buy is also indefinite.',
+
+        help16: 'If we only have a single item, then the identity of that items is definite, so we can use \'the.\'.',
+        help17: 'For example: Buy the car. Which particular car is already known and is definite.',
+        quiz1: 'Select a noun',
+        quiz2: 'Select \'definite\' or \'indefinite\'.',
+        quiz3: 'Can you see that the article changes?'
+    },
+
+    xLevel03: {
         help10: '当我们写名词时必须知道名词的形式。.',
         help11: '例如我们写关于一只猫或多只猫吗?',
         help12: '如果我们只写一个东西,我们用名词的基本形式。',

@@ -26,6 +26,7 @@ function VerbTable(props) {
                             verb={verb}
                             onDeleteVerb={props.onDeleteVerb}
                             onEditVerb={props.onEditVerb}
+                            strings = {props.strings}
                         />
                     ))}
                 </tbody>
@@ -48,6 +49,7 @@ function VerbTable(props) {
                             verb={verb}
                             onDeleteVerb={props.onDeleteVerb}
                             onEditVerb={props.onEditVerb}
+                            strings = {props.strings}
                         />
                     ))}
                 </tbody>

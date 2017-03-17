@@ -17,6 +17,8 @@ function NounPanel(props) {
         margin: '5px'
     }
 
+    const s = props.strings
+
     // What should be displayed in the noun add/edit panel?
     let nounAddEditForm = <div></div>  // we really want nothing here
     if(props.addEditNoun.getIn(['noun','id'])) {
@@ -30,7 +32,7 @@ function NounPanel(props) {
     // The appearance of a NounPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button onClick={props.onAddNoun}>Add new noun</button>
+            <button id="add-noun" onClick={props.onAddNoun}>{s.add_new} {s.noun}</button>
             <NounTable {...props} />
         </div>
         <div>

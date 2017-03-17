@@ -6,6 +6,7 @@ import rtRenderer        from 'react-test-renderer'
 
 import AppActionTypes from '../../data/AppActionTypes'
 import AppStore from '../../data/AppStore'
+import StringStore from '../../data/StringStore'
 import NounAddEditStore from '../../data/nouns/NounAddEditStore'
 import NounEditForm from './NounEditForm'
 import {NounPanelLevel} from '../../data/nouns/NounConstants'
@@ -17,7 +18,8 @@ describe("NounEditForm", () => {
         //const props = {level: appState, editingNoun:{base: 'cat'}}
         let newState = AppStore.getInitialState()
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const props = {level:newState, nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState()}
+        const strings = StringStore.getInitialState()
+        const props = {level:newState, nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState(), strings:strings}
 
         //const renderExpression = <NounEditForm level={NounPanelLevel.BASE} editingNoun={{base: 'cat'}}/>
         const renderExpression = <NounEditForm {...props}/>
@@ -35,9 +37,8 @@ describe("NounEditForm", () => {
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        console.log('NounEditForm.test',newState)
-        expect(true)
-        const props = {level:newState, nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState()}
+        const strings = StringStore.getInitialState()
+        const props = {level:newState, nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState(), strings:strings}
         
         const renderExpression = <NounEditForm  {...props} />
         const nounEditForm = TestUtils.createRenderer().render(renderExpression)

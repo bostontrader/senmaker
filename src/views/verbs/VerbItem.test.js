@@ -1,6 +1,7 @@
 import React from "react"
 import TestUtils from "react-addons-test-utils"
 
+import StringStore from '../../data/StringStore'
 import Verb from '../../data/verbs/Verb'
 import VerbItem from './VerbItem'
 import {PastTenseRule, VerbPanelLevel} from '../../data/verbs/VerbConstants'
@@ -18,7 +19,8 @@ describe("VerbItem", () => {
 
     it("renders a VerbPanelLevel.BASE VerbItem", () => {
         tuRenderer = TestUtils.createRenderer()
-        const props = {level:VerbPanelLevel.BASE, verb:verb}
+        const strings = StringStore.getInitialState()
+        const props = {level:VerbPanelLevel.BASE, verb:verb, strings: strings}
         verbItem = tuRenderer.render(<VerbItem {...props} />)
         expect(verbItem.type).toBe('tr')
         expect(verbItem.props.children.length).toBe(2)
@@ -26,7 +28,8 @@ describe("VerbItem", () => {
 
     it("renders a VerbPanelLevel.PAST_TENSE", () => {
         tuRenderer = TestUtils.createRenderer()
-        const props = {level:VerbPanelLevel.PAST_TENSE, verb:verb}
+        const strings = StringStore.getInitialState()
+        const props = {level:VerbPanelLevel.PAST_TENSE, verb:verb, strings: strings}
         verbItem = tuRenderer.render(<VerbItem {...props} />)
         expect(verbItem.type).toBe('tr')
         expect(verbItem.props.children.length).toBe(3)

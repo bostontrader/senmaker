@@ -26,6 +26,7 @@ function NounTable(props) {
                             noun={noun}
                             onDeleteNoun={props.onDeleteNoun}
                             onEditNoun={props.onEditNoun}
+                            strings = {props.strings}
                         />
                     ))}
                 </tbody>
@@ -48,6 +49,7 @@ function NounTable(props) {
                             level={level}
                             onDeleteNoun={props.onDeleteNoun}
                             onEditNoun={props.onEditNoun}
+                            strings = {props.strings}
                         />
                     ))}
                 </tbody>

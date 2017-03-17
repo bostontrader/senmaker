@@ -27,13 +27,14 @@ const Actions = {
     editNoun(noun) {
         AppDispatcher.dispatch({
             type: NounActionTypes.EDIT_NOUN,
-            payload: {noun: noun, level: 1}
+            payload: {noun: noun}
         })
     },
-    insertNoun(noun) {
+    insertNoun(payload) {
         AppDispatcher.dispatch({
             type: NounActionTypes.INSERT_NOUN,
-            noun
+            ui:payload.ui,
+            noun: payload.noun
         })
     },
     updateNoun(noun) {

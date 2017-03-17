@@ -51,9 +51,9 @@ class VerbAddEditStore extends ReduceStore {
 
             case VerbActionTypes.EDIT_VERB:
                 return state.set('verb', Verb({
-                    id: action.verb.get('id'),
-                    base: action.verb.get('base'),
-                    pastTense_rule: action.verb.get('pastTense_rule')
+                    id: action.payload.verb.get('id'),
+                    base: action.payload.verb.get('base'),
+                    pastTense_rule: action.payload.verb.get('pastTense_rule')
                 }))
 
             // Here we only close the UI form.

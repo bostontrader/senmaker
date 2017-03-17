@@ -11,7 +11,7 @@ function Level00(props) {
 
     const s = props.strings.Level00
     const presentQuizState = props.level.getIn(['quizResults',0])
-        //<input id="iUnderstand" onChange={props.onSetQuizScore(!presentQuizState)} type="checkbox" checked={presentQuizState} />
+
     const onChange = () => props.onSetQuizScore(!presentQuizState)
 
     return (

@@ -14,12 +14,12 @@ describe("Level00", () => {
     it("Renders Level00", () => {
         const props = {level:AppStore.getInitialState(), strings:StringStore.getInitialState()}
         const renderExpression = <Level00 {...props} />
-        const levelControl = TestUtils.createRenderer().render(renderExpression)
-        expect(levelControl.type).toBe('div')
+        const level00Renderer = TestUtils.createRenderer().render(renderExpression)
+        expect(level00Renderer.type).toBe('div')
 
-        expect(findWithClass(levelControl,'help'))
-        expect(findWithClass(levelControl,'quiz'))
-        expect(findWithType(levelControl,LevelControl))
+        expect(findWithClass(level00Renderer,'help'))
+        expect(findWithClass(level00Renderer,'quiz'))
+        expect(findWithType(level00Renderer,LevelControl))
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()

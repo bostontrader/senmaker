@@ -23,7 +23,7 @@ describe("LevelControl", () => {
         const props = {level:AppStore.getInitialState(), strings:StringStore.getInitialState()}
         const renderExpression = <LevelControl {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
-        expect(levelControl.props.className).toBe("level-control");
+        expect(levelControl.props.className).toBe("level-control")
 
         expect( look4Button(levelControl, 'level-previous')).toBe(0)
         expect( look4Button(levelControl, 'level-next')).toBe(0)
@@ -34,9 +34,9 @@ describe("LevelControl", () => {
     })
 
     it("Renders the LevelControl at level 0 after Quiz 0", () => {
-        let newState = AppStore.getInitialState()
-        newState = AppStore.reduce(newState, {type: AppActionTypes.QUIZ_TOGGLE})
-        const props = {level:newState, strings:StringStore.getInitialState()}
+        let appState = AppStore.getInitialState()
+        appState = AppStore.reduce(appState, {type: AppActionTypes.QUIZ_SETSCORE, score: true})
+        const props = {level:appState, strings:StringStore.getInitialState()}
         const renderExpression = <LevelControl {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
         expect(levelControl.props.className).toBe("level-control");
@@ -50,9 +50,9 @@ describe("LevelControl", () => {
     })
 
     it("Renders the LevelControl at 0 < level < maxLevel before the quiz", () => {
-        let newState = AppStore.getInitialState()
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const props = {level:newState, strings:StringStore.getInitialState()}
+        let appState = AppStore.getInitialState()
+        appState = AppStore.reduce(appState, {type: AppActionTypes.LEVEL_NEXT})
+        const props = {level:appState, strings:StringStore.getInitialState()}
 
         const renderExpression = <LevelControl {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
@@ -67,10 +67,10 @@ describe("LevelControl", () => {
     })
 
     it("Renders the LevelControl at 0 < level < maxLevel after the quiz", () => {
-        let newState = AppStore.getInitialState()
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        newState = AppStore.reduce(newState, {type: AppActionTypes.QUIZ_TOGGLE})
-        const props = {level:newState, strings:StringStore.getInitialState()}
+        let appState = AppStore.getInitialState()
+        appState = AppStore.reduce(appState, {type: AppActionTypes.LEVEL_NEXT})
+        appState = AppStore.reduce(appState, {type: AppActionTypes.QUIZ_SETSCORE, score: true})
+        const props = {level:appState, strings:StringStore.getInitialState()}
         const renderExpression = <LevelControl {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
         expect(levelControl.props.className).toBe("level-control");
@@ -84,10 +84,10 @@ describe("LevelControl", () => {
     })
 
     it("Renders the LevelControl === MaxLevel before the quiz", () => {
-        let newState = AppStore.getInitialState()
-        while(!newState.get('maxLevel'))
-            newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const props = {level:newState, strings:StringStore.getInitialState()}
+        let appState = AppStore.getInitialState()
+        while(!appState.get('maxLevel'))
+            appState = AppStore.reduce(appState, {type: AppActionTypes.LEVEL_NEXT})
+        const props = {level:appState, strings:StringStore.getInitialState()}
 
         const renderExpression = <LevelControl {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
@@ -102,11 +102,11 @@ describe("LevelControl", () => {
     })
 
     it("Renders the LevelControl === MaxLevel after the quiz", () => {
-        let newState = AppStore.getInitialState()
-        while(!newState.get('maxLevel'))
-            newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        newState = AppStore.reduce(newState, {type: AppActionTypes.QUIZ_TOGGLE})
-        const props = {level:newState, strings:StringStore.getInitialState()}
+        let appState = AppStore.getInitialState()
+        while(!appState.get('maxLevel'))
+            appState = AppStore.reduce(appState, {type: AppActionTypes.LEVEL_NEXT})
+        appState = AppStore.reduce(appState, {type: AppActionTypes.QUIZ_SETSCORE, score: true})
+        const props = {level:appState, strings:StringStore.getInitialState()}
 
         const renderExpression = <LevelControl {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)

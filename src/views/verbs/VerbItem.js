@@ -3,6 +3,7 @@ import React from 'react'
 import {VerbPanelLevel} from '../../data/verbs/VerbConstants'
 
 function VerbItem(props) {
+
     const {verb} = props;
     const onEditVerb = () => props.onEditVerb(verb)
 
@@ -12,39 +13,17 @@ function VerbItem(props) {
             <tr>
                 <td>{verb.base}</td>
                 <td>{verb.pastTense}</td>
-                <td><button type="button"  onClick={onEditVerb} >Edit</button></td>
-
+                <td><button id={verb.id} type="button" onClick={onEditVerb} >{props.strings.edit}</button></td>
             </tr>
     } else if( props.level >= VerbPanelLevel.BASE) {
         verbItem =
             <tr>
                 <td>{verb.base}</td>
-                <td><button type="button" onClick={onEditVerb} >Edit</button></td>
+                <td><button id={verb.id} type="button" onClick={onEditVerb} >{props.strings.edit}</button></td>
             </tr>
     }
 
     return (verbItem)
-
-
-    /*
-     const {verb} = props;
-     const onEditVerb = () => props.onEditVerb(verb)
-
-     return (
-     <tr>
-     <td>
-     {verb.base}
-     </td>
-     <td>
-     {verb.pastTense}
-     </td>
-     <td>
-     <button type="button"  onClick={onEditVerb} >Edit</button>
-     </td>
-
-     </tr>
-     )
-     */
 
 }
 

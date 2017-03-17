@@ -6,7 +6,6 @@ The LevelControl is responsible for displaying the control to adjust
  no need to deal with that.
  */
 function LevelControl(props) {
-    //console.log('LevelControl',props)
 
     const style = {
         border: '1px solid black',
@@ -18,18 +17,19 @@ function LevelControl(props) {
     const previousButton = (props.level.get('minLevel')) ? '' :
         <button id="level-previous" onClick={props.onLevelPrevious}>{s.previousLevel}</button>
 
-    const n = props.level.get('currentLevel')
-    let n1 = props.level.getIn(['quizResults',n])
-    let n2 = props.level.get('maxLevel')
-    let n3 = n1 && !n2
-    console.log(props.level)
-    console.log(n,n1,n2,n3)
+    const currentLevel = props.level.get('currentLevel')
+    const currentQuizState = props.level.getIn(['quizResults',currentLevel])
+    const maxLevel = props.level.get('maxLevel')
+    const showNextButton = currentQuizState && !maxLevel
+
     let nextButton = ''
-    if(n3) {
+    if(showNextButton) {
         nextButton = <button id="level-next" onClick={props.onLevelNext}>{s.nextLevel}</button>
     }
 
-    const resetButton = (props.level.get('minLevel') && !props.level.get('quiz')) ? '' :
+    // Always have a reset button unless we're at the minLevel already _and_ that
+    // quiz has not yet been passed.
+    const resetButton = (props.level.get('minLevel') && !currentQuizState) ? '' :
         <button id="level-reset" onClick={props.onLevelReset}>{s.reset}</button>
 
     return (

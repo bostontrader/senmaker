@@ -7,6 +7,7 @@ import rtRenderer        from 'react-test-renderer'
 
 import AppActionTypes from '../../data/AppActionTypes'
 import AppStore from '../../data/AppStore'
+import StringStore from '../../data/StringStore'
 import {PluralizationRule} from '../../data/nouns/NounConstants'
 import Noun from '../../data/nouns/Noun'
 import NounItem from './NounItem'
@@ -74,7 +75,8 @@ describe("NounTable", () => {
             pluralization_rule: PluralizationRule.Append_s
         }))
 
-        const props = {level:newState, nouns: nouns}
+        const strings = StringStore.getInitialState()
+        const props = {level:newState, nouns: nouns, strings:strings}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)
@@ -102,7 +104,8 @@ describe("NounTable", () => {
             pluralization_rule: PluralizationRule.Append_es
         }))
 
-        const props = {level:newState, nouns: nouns}
+        const strings = StringStore.getInitialState()
+        const props = {level:newState, nouns: nouns, strings: strings}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)

@@ -27,13 +27,14 @@ const Actions = {
     editVerb(verb) {
         AppDispatcher.dispatch({
             type: VerbActionTypes.EDIT_VERB,
-            verb
+            payload: {verb: verb}
         })
     },
-    insertVerb(verb) {
+    insertVerb(payload) {
         AppDispatcher.dispatch({
             type: VerbActionTypes.INSERT_VERB,
-            verb
+            ui:payload.ui,
+            verb: payload.verb
         })
     },
     updateVerb(verb) {

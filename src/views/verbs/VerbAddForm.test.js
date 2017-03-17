@@ -6,6 +6,7 @@ import rtRenderer        from 'react-test-renderer'
 
 import AppActionTypes from '../../data/AppActionTypes'
 import AppStore from '../../data/AppStore'
+import StringStore from '../../data/StringStore'
 import VerbAddForm from './VerbAddForm'
 import VerbAddEditStore from '../../data/verbs/VerbAddEditStore'
 import {VerbPanelLevel} from '../../data/verbs/VerbConstants'
@@ -16,7 +17,8 @@ describe("VerbAddForm", () => {
         let newState = AppStore.getInitialState()
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const props = {level:newState, verbs: OrderedMap(), addEditVerb: VerbAddEditStore.getInitialState()}
+        const strings = StringStore.getInitialState()
+        const props = {level:newState, verbs: OrderedMap(), addEditVerb: VerbAddEditStore.getInitialState(), strings:strings}
         
         const renderExpression = <VerbAddForm {...props} />
         const verbAddForm = TestUtils.createRenderer().render(renderExpression)
@@ -33,7 +35,8 @@ describe("VerbAddForm", () => {
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const props = {level:newState, verbs: OrderedMap(), addEditVerb: VerbAddEditStore.getInitialState()}
+        const strings = StringStore.getInitialState()
+        const props = {level:newState, verbs: OrderedMap(), addEditVerb: VerbAddEditStore.getInitialState(), strings:strings}
 
         const renderExpression = <VerbAddForm {...props} />
         const verbAddForm = TestUtils.createRenderer().render(renderExpression)

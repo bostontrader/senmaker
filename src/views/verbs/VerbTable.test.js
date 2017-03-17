@@ -7,6 +7,7 @@ import rtRenderer        from 'react-test-renderer'
 
 import AppActionTypes from '../../data/AppActionTypes'
 import AppStore from '../../data/AppStore'
+import StringStore from '../../data/StringStore'
 import {PastTenseRule} from '../../data/verbs/VerbConstants'
 import Verb from '../../data/verbs/Verb'
 import VerbItem from './VerbItem'
@@ -81,7 +82,8 @@ describe("VerbTable", () => {
             pastTense_rule: PastTenseRule.Append_ed
         }))
 
-        const props = {level:newState, verbs: verbs}
+        const strings = StringStore.getInitialState()
+        const props = {level:newState, verbs: verbs, strings: strings}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         const verbItems = findAllWithType(verbTable, VerbItem)
@@ -110,7 +112,8 @@ describe("VerbTable", () => {
             pastTense_rule: PastTenseRule.Irregular
         }))
 
-        const props = {level:newState, verbs: verbs}
+        const strings = StringStore.getInitialState()
+        const props = {level:newState, verbs: verbs, strings: strings}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         const verbItems = findAllWithType(verbTable, VerbItem)
