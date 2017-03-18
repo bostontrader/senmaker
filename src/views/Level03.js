@@ -1,9 +1,9 @@
 import React from 'react'
 
-import DefinitenessRadio from './nouns/DefinitenessRadio'
 import LevelControl from './LevelControl'
-import NounPanel from './nouns/NounPanel'
-import NounSelect from './nouns/NounSelect'
+import Noun from './noun/Noun'
+import NounSelect from './dictionary/nouns/NounDictionaryItemSelect'
+import {RadioGroup, Radio} from 'react-radio-group'
 
 function Level03(props) {
 
@@ -13,6 +13,9 @@ function Level03(props) {
     }
 
     const s = props.strings.Level03
+
+    //const onChange = () => props.onSetQuizScore(!presentQuizState)
+    //onChange={onChange}
 
     return(
         <div>
@@ -26,11 +29,7 @@ function Level03(props) {
                 <p>{s.help15}</p>
             </div>
 
-            <div style={style}>
-                <DefinitenessRadio {...props} />
-                <NounSelect {...props} />
-                <p>Catfood is good</p>
-            </div>
+            <Noun {...props} />
 
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>

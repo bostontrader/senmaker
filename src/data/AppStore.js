@@ -1,14 +1,13 @@
-import Immutable from 'immutable'
-import {List,Map} from 'immutable'
+import {fromJS, List,Map} from 'immutable'
 import {ReduceStore} from 'flux/utils'
 
 import AppActionTypes from './AppActionTypes'
 import AppDispatcher from './AppDispatcher'
 import {langCode} from './I18NConstants'
-import NounActionTypes from '../data/nouns/NounActionTypes'
-import {NounPanelLevel} from '../data/nouns/NounConstants'
-import {VerbPanelLevel} from '../data/verbs/VerbConstants'
-import VerbActionTypes from '../data/verbs/VerbActionTypes'
+import NounActionTypes from './dictionary/nouns/NounDictionaryItemActionTypes'
+import {NounDictionaryItemPanelLevel} from './dictionary/nouns/NounDictionaryItemConstants'
+import {VerbPanelLevel} from './dictionary/verbs/VerbDictionaryItemConstants'
+import VerbActionTypes from './dictionary/verbs/VerbDictionaryActionTypes'
 
 import {localStorageAvailable} from '../LocalStorage'
 
@@ -27,7 +26,7 @@ class AppStore extends ReduceStore {
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState)
-                return Immutable.fromJS(JSON.parse(localStorageState))
+                return fromJS(JSON.parse(localStorageState))
         }
 
         return AppStore.initialState
@@ -55,6 +54,9 @@ class AppStore extends ReduceStore {
         }
 
         switch (action.type) {
+            case AppActionTypes.CHANGE_DEFINITENESS:
+                return state
+
             case AppActionTypes.LANG_EN:
                 newState = state.set('lang',langCode.en)
 
@@ -75,7 +77,7 @@ class AppStore extends ReduceStore {
             case AppActionTypes.LEVEL_PREVIOUS:
                 if (state.get('currentLevel') > 0) {
                     const newCurrentLevel = state.get('currentLevel') - 1
-                    newState = Immutable.Map({
+                    newState = Map({
                         currentLevel:newCurrentLevel,
                         minLevel:newCurrentLevel === 0,
                         maxLevel:false,
@@ -208,19 +210,19 @@ class AppStore extends ReduceStore {
 }
 
 //AppStore.currentLevel = 0
-AppStore.theLevelConfigs = Immutable.fromJS([
+AppStore.theLevelConfigs = fromJS([
     {}, // level 0
-    {nounPanel: NounPanelLevel.BASE},
+    {nounPanel: NounDictionaryItemPanelLevel.BASE},
     {verbPanel: VerbPanelLevel.BASE},
-    {nounPanel: NounPanelLevel.PLURALIZATION},
-    {nounPanel: NounPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE},
-    {nounPanel: NounPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE}, // 5
-    {nounPanel: NounPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE},
-    {nounPanel: NounPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE}
+    {nounPanel: NounDictionaryItemPanelLevel.PLURALIZATION},
+    {nounPanel: NounDictionaryItemPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE},
+    {nounPanel: NounDictionaryItemPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE}, // 5
+    {nounPanel: NounDictionaryItemPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE},
+    {nounPanel: NounDictionaryItemPanelLevel.PLURALIZATION, verbPanel: VerbPanelLevel.PAST_TENSE}
 
 ])
 
-AppStore.initialState = Immutable.Map({
+AppStore.initialState = Map({
     currentLevel:0,
     minLevel:true,      // is this is lowest possible level?
     maxLevel:false,     // is this the highest possible level?

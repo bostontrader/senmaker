@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import AppContainer from './containers/AppContainer'
-import NounActions from './data/nouns/NounActions'
-import {PastTenseRule} from './data/verbs/VerbConstants'
-import {PluralizationRule} from './data/nouns/NounConstants'
-import VerbActions from './data/verbs/VerbActions'
+import NounActions from './data/dictionary/nouns/NounDictionaryItemActions'
+import {PastTenseRule} from './data/dictionary/verbs/VerbDictionaryItemConstants'
+import {PluralizationRule} from './data/dictionary/nouns/NounDictionaryItemConstants'
+import VerbActions from './data/dictionary/verbs/VerbDictionaryItemActions'
 
 ReactDOM.render(<AppContainer />, document.getElementById('nounapp'))
 

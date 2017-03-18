@@ -1,7 +1,7 @@
 import React from 'react'
 
 import LevelControl from './LevelControl'
-import NounPanel from './nouns/NounPanel'
+import NounPanel from './dictionary/nouns/NounPanel'
 
 function Level06(props) {
 

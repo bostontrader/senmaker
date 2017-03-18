@@ -7,9 +7,9 @@ import AppStore from '../data/AppStore'
 import Level00 from './Level00'
 import Level01 from './Level01'
 import Level02 from './Level02'
-import NounAddEditStore from '../data/nouns/NounAddEditStore'
+import NounAddEditStore from '../data/dictionary/nouns/NounDictionaryItemAddEditStore'
 import StringStore from '../data/StringStore'
-import VerbAddEditStore from '../data/verbs/VerbAddEditStore'
+import VerbAddEditStore from '../data/dictionary/verbs/VerbDictionaryItemAddEditStore'
 
 it('Renders Level00', () => {
     const props = {level:AppStore.getInitialState(), strings:StringStore.getInitialState()}

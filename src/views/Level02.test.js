@@ -10,9 +10,9 @@ import AppStore from '../data/AppStore'
 import Level02 from './Level02'
 import LevelControl from './LevelControl'
 import StringStore from '../data/StringStore'
-import VerbActionTypes from '../data/verbs/VerbActionTypes'
-import VerbAddEditStore from '../data/verbs/VerbAddEditStore'
-import VerbPanel from './verbs/VerbPanel'
+import VerbActionTypes from '../data/dictionary/verbs/VerbDictionaryActionTypes'
+import VerbAddEditStore from '../data/dictionary/verbs/VerbDictionaryItemAddEditStore'
+import VerbPanel from './dictionary/verbs/VerbPanel'
 
 describe("Level02", () => {
 

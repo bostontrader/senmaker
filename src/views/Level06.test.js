@@ -9,8 +9,8 @@ import AppActionTypes from '../data/AppActionTypes'
 import AppStore from '../data/AppStore'
 import Level06 from './Level06'
 import LevelControl from './LevelControl'
-import NounAddEditStore from '../data/nouns/NounAddEditStore'
-import NounPanel from './nouns/NounPanel'
+import NounAddEditStore from '../data/dictionary/nouns/NounDictionaryItemAddEditStore'
+import NounPanel from './dictionary/nouns/NounPanel'
 import StringStore from '../data/StringStore'
 
 describe("Level06", () => {

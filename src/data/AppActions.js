@@ -24,7 +24,16 @@ const AppActions = {
             type: AppActionTypes.QUIZ_SETSCORE,
             score: score
         })
+    },
+
+    // Nouns
+    changeDefiniteness(newDefiniteness) {
+        AppDispatcher.dispatch({
+            type: AppActionTypes.CHANGE_DEFINITENESS,
+            newDefiniteness: newDefiniteness
+        })
     }
+
 }
 
 export default AppActions
