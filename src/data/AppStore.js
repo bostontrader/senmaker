@@ -22,7 +22,7 @@ class AppStore extends ReduceStore {
     getInitialState() {
 
         if (localStorageAvailable) {
-            //localStorage.removeItem(localStorageKey)
+            localStorage.removeItem(localStorageKey)
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState)
@@ -39,17 +39,17 @@ class AppStore extends ReduceStore {
 
         // Has the quiz for Noun CRUD been completed?
         function nounCRUDQuizPassed(state) {
-            const quizInsertNounFlag = state.getIn(['quizQuestions','insertNoun'])
-            const quizUpdateNounFlag = state.getIn(['quizQuestions','updateNoun'])
-            const quizDeleteNounFlag = state.getIn(['quizQuestions','deleteNoun'])
+            const quizInsertNounFlag = state.getIn(['level','quizQuestions','insertNoun'])
+            const quizUpdateNounFlag = state.getIn(['level','quizQuestions','updateNoun'])
+            const quizDeleteNounFlag = state.getIn(['level','quizQuestions','deleteNoun'])
             return quizInsertNounFlag && quizUpdateNounFlag && quizDeleteNounFlag
         }
 
         // Has the quiz for Verb CRUD been completed?
         function verbCRUDQuizPassed(state) {
-            const quizInsertVerbFlag = state.getIn(['quizQuestions', 'insertVerb'])
-            const quizUpdateVerbFlag = state.getIn(['quizQuestions', 'updateVerb'])
-            const quizDeleteVerbFlag = state.getIn(['quizQuestions', 'deleteVerb'])
+            const quizInsertVerbFlag = state.getIn(['level','quizQuestions', 'insertVerb'])
+            const quizUpdateVerbFlag = state.getIn(['level','quizQuestions', 'updateVerb'])
+            const quizDeleteVerbFlag = state.getIn(['level','quizQuestions', 'deleteVerb'])
             return quizInsertVerbFlag && quizUpdateVerbFlag && quizDeleteVerbFlag
         }
 
@@ -93,15 +93,15 @@ class AppStore extends ReduceStore {
 
             case AppActionTypes.LEVEL_NEXT:
 
-                if(state.get('currentLevel') < AppStore.theLevelConfigs.size-1) {
+                if(state.getIn(['level','currentLevel']) < AppStore.theLevelConfigs.size-1) {
 
-                    const newCurrentLevel = state.get('currentLevel') + 1
+                    const newCurrentLevel = state.getIn(['level','currentLevel']) + 1
                     const newMaxLevelFlag = newCurrentLevel === AppStore.theLevelConfigs.size-1
-                    newState = state.set('currentLevel',newCurrentLevel)
-                    newState = newState.setIn(['quizResults',0], false) // new level starts as false
-                    newState = newState.set('minLevel',false)
-                    newState = newState.set('maxLevel',newMaxLevelFlag)
-                    newState = newState.set('currentAppLevelConfig', AppStore.theLevelConfigs.get(newCurrentLevel))
+                    newState = state.setIn(['level','currentLevel'],newCurrentLevel)
+                    newState = newState.setIn(['level','quizResults',0], false) // new level starts as false
+                    newState = newState.setIn(['level','minLevel'],false)
+                    newState = newState.setIn(['level','maxLevel'],newMaxLevelFlag)
+                    newState = newState.setIn(['level','currentAppLevelConfig'], AppStore.theLevelConfigs.get(newCurrentLevel))
 
                     if(localStorageAvailable)
                         localStorage.setItem(localStorageKey, JSON.stringify(newState))
@@ -122,7 +122,7 @@ class AppStore extends ReduceStore {
 
             case AppActionTypes.QUIZ_SETSCORE:
 
-                newState = state.setIn(['quizResults',state.get('currentLevel')],action.score)
+                newState = state.setIn(['level','quizResults',state.getIn(['level','currentLevel'])],action.score)
 
                 if(localStorageAvailable)
                     localStorage.setItem(localStorageKey, JSON.stringify(newState))
@@ -131,11 +131,11 @@ class AppStore extends ReduceStore {
 
             case NounActionTypes.INSERT_NOUN:
                 action.ui ?
-                    newState = state.setIn(['quizQuestions','insertNoun'],true) :
+                    newState = state.setIn(['level','quizQuestions','insertNoun'],true) :
                     newState = state
 
                 if(nounCRUDQuizPassed(newState))
-                    newState = newState.setIn(['quizResults',newState.get('currentLevel')],true)
+                    newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
 
                 if(localStorageAvailable)
                     localStorage.setItem(localStorageKey, JSON.stringify(newState))
@@ -144,10 +144,10 @@ class AppStore extends ReduceStore {
 
             case NounActionTypes.UPDATE_NOUN:
 
-                newState = state.setIn(['quizQuestions','updateNoun'],true)
+                newState = state.setIn(['level','quizQuestions','updateNoun'],true)
 
                 if(nounCRUDQuizPassed(newState))
-                    newState = newState.setIn(['quizResults',newState.get('currentLevel')],true)
+                    newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
 
                 if(localStorageAvailable)
                     localStorage.setItem(localStorageKey, JSON.stringify(newState))
@@ -156,10 +156,10 @@ class AppStore extends ReduceStore {
 
             case NounActionTypes.DELETE_NOUN:
 
-                newState = state.setIn(['quizQuestions','deleteNoun'],true)
+                newState = state.setIn(['level','quizQuestions','deleteNoun'],true)
 
                 if(nounCRUDQuizPassed(newState))
-                    newState = newState.setIn(['quizResults',newState.get('currentLevel')],true)
+                    newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
 
                 if(localStorageAvailable)
                     localStorage.setItem(localStorageKey, JSON.stringify(newState))
@@ -168,11 +168,11 @@ class AppStore extends ReduceStore {
 
             case VerbActionTypes.INSERT_VERB:
                 action.ui ?
-                    newState = state.setIn(['quizQuestions','insertVerb'],true) :
+                    newState = state.setIn(['level','quizQuestions','insertVerb'],true) :
                     newState = state
 
                 if(verbCRUDQuizPassed(newState))
-                    newState = newState.setIn(['quizResults',newState.get('currentLevel')],true)
+                    newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
 
                 if(localStorageAvailable)
                     localStorage.setItem(localStorageKey, JSON.stringify(newState))
@@ -181,10 +181,10 @@ class AppStore extends ReduceStore {
 
             case VerbActionTypes.UPDATE_VERB:
 
-                newState = state.setIn(['quizQuestions','updateVerb'],true)
+                newState = state.setIn(['level','quizQuestions','updateVerb'],true)
 
                 if(verbCRUDQuizPassed(newState))
-                    newState = newState.setIn(['quizResults',newState.get('currentLevel')],true)
+                    newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
 
                 if(localStorageAvailable)
                     localStorage.setItem(localStorageKey, JSON.stringify(newState))
@@ -193,10 +193,10 @@ class AppStore extends ReduceStore {
 
             case VerbActionTypes.DELETE_VERB:
 
-                newState = state.setIn(['quizQuestions','deleteVerb'],true)
+                newState = state.setIn(['level','quizQuestions','deleteVerb'],true)
 
                 if(verbCRUDQuizPassed(newState))
-                    newState = newState.setIn(['quizResults',newState.get('currentLevel')],true)
+                    newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
 
                 if(localStorageAvailable)
                     localStorage.setItem(localStorageKey, JSON.stringify(newState))
@@ -209,7 +209,6 @@ class AppStore extends ReduceStore {
     }
 }
 
-//AppStore.currentLevel = 0
 AppStore.theLevelConfigs = fromJS([
     {}, // level 0
     {nounPanel: NounDictionaryItemPanelLevel.BASE},
@@ -223,6 +222,23 @@ AppStore.theLevelConfigs = fromJS([
 ])
 
 AppStore.initialState = Map({
+    lang:langCode.zh,       // what language for the UI?
+    level: Map({
+        currentLevel:0,
+        currentAppLevelConfig: AppStore.theLevelConfigs.get(0),
+        minLevel:true,      // is this is lowest possible level?
+        maxLevel:false,     // is this the highest possible level?
+        quizQuestions: new Map({
+            insertNoun: false,
+            updateNoun: false,
+            deleteNoun: false
+        }),
+        quizResults: new List().push(false) // Level 00 starts with passed quiz = false
+    }),
+    nouns: Map()
+})
+
+/*AppStore.initialState = Map({
     currentLevel:0,
     minLevel:true,      // is this is lowest possible level?
     maxLevel:false,     // is this the highest possible level?
@@ -236,9 +252,9 @@ AppStore.initialState = Map({
     // whether or not the quiz for level 0, 1, ... is passed
     //quizResults:[false,false], // Start with Level 00 false
     lang:langCode.zh    // what language for the UI?
-})
-    .set('currentAppLevelConfig', AppStore.theLevelConfigs.get(0))
-    .set('quizResults', new List().push(false))
+})*/
+    //.set('currentAppLevelConfig', AppStore.theLevelConfigs.get(0))
+    //.set('quizResults', new List().push(false))
 //console.log('n=',JSON.stringify(AppStore.initialState.toJSON()))
 
 export default new AppStore()

@@ -16,7 +16,7 @@ describe("VerbEditForm", () => {
         let newState = AppStore.getInitialState()
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         const strings = StringStore.getInitialState()
-        const props = {level:newState, verbs: OrderedMap(), addEditVerb: VerbAddEditStore.getInitialState(), strings:strings}
+        const props = {level:newState.get('level'), verbs: OrderedMap(), addEditVerb: VerbAddEditStore.getInitialState(), strings:strings}
         const renderExpression = <VerbEditForm {...props} />
         const verbAddForm = TestUtils.createRenderer().render(renderExpression)
         expect(verbAddForm.type).toBe('div')
@@ -32,7 +32,7 @@ describe("VerbEditForm", () => {
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         const strings = StringStore.getInitialState()
-        const props = {level:newState, verbs: OrderedMap(), addEditVerb: VerbAddEditStore.getInitialState(), strings:strings}
+        const props = {level:newState.get('level'), verbs: OrderedMap(), addEditVerb: VerbAddEditStore.getInitialState(), strings:strings}
         
         const renderExpression = <VerbEditForm {...props} />
         const verbAddForm = TestUtils.createRenderer().render(renderExpression)

@@ -17,7 +17,7 @@ describe("NounAddForm", () => {
         let newState = AppStore.getInitialState()
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         const strings = StringStore.getInitialState()
-        const props = {level:newState, nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState(), strings:strings}
+        const props = {level:newState.get('level'), nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState(), strings:strings}
 
         const renderExpression = <NounAddForm {...props} />
         const nounAddForm = TestUtils.createRenderer().render(renderExpression)
@@ -34,7 +34,7 @@ describe("NounAddForm", () => {
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         const strings = StringStore.getInitialState()
-        const props = {level:newState, nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState(), strings:strings}
+        const props = {level:newState.get('level'), nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState(), strings:strings}
         const renderExpression = <NounAddForm {...props} />
         const nounAddForm = TestUtils.createRenderer().render(renderExpression)
         expect(nounAddForm.type).toBe('div')

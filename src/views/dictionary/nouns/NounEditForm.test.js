@@ -19,7 +19,7 @@ describe("NounEditForm", () => {
         let newState = AppStore.getInitialState()
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         const strings = StringStore.getInitialState()
-        const props = {level:newState, nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState(), strings:strings}
+        const props = {level:newState.get('level'), nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState(), strings:strings}
 
         //const renderExpression = <NounEditForm level={NounDictionaryItemPanelLevel.BASE} editingNoun={{base: 'cat'}}/>
         const renderExpression = <NounEditForm {...props}/>
@@ -38,7 +38,7 @@ describe("NounEditForm", () => {
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         const strings = StringStore.getInitialState()
-        const props = {level:newState, nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState(), strings:strings}
+        const props = {level:newState.get('level'), nouns: OrderedMap(), addEditNoun: NounAddEditStore.getInitialState(), strings:strings}
         
         const renderExpression = <NounEditForm  {...props} />
         const nounEditForm = TestUtils.createRenderer().render(renderExpression)

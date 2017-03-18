@@ -20,7 +20,7 @@ describe("VerbTable", () => {
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
 
-        const props = {level:newState, verbs: OrderedMap()}
+        const props = {level:newState.get('level'), verbs: OrderedMap()}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         expect(verbTable.type).toBe('table')
@@ -39,7 +39,7 @@ describe("VerbTable", () => {
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
 
-        const props = {level:newState, verbs: OrderedMap()}
+        const props = {level:newState.get('level'), verbs: OrderedMap()}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         expect(verbTable.type).toBe('table')
@@ -58,7 +58,7 @@ describe("VerbTable", () => {
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
 
-        const props = {level:newState, verbs: OrderedMap()}
+        const props = {level:newState.get('level'), verbs: OrderedMap()}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         const verbItems = findAllWithType(verbTable, VerbItem)
@@ -83,7 +83,7 @@ describe("VerbTable", () => {
         }))
 
         const strings = StringStore.getInitialState()
-        const props = {level:newState, verbs: verbs, strings: strings}
+        const props = {level:newState.get('level'), verbs: verbs, strings: strings}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         const verbItems = findAllWithType(verbTable, VerbItem)
@@ -113,7 +113,7 @@ describe("VerbTable", () => {
         }))
 
         const strings = StringStore.getInitialState()
-        const props = {level:newState, verbs: verbs, strings: strings}
+        const props = {level:newState.get('level'), verbs: verbs, strings: strings}
         const renderExpression = <VerbTable {...props} />
         const verbTable = TestUtils.createRenderer().render(renderExpression)
         const verbItems = findAllWithType(verbTable, VerbItem)

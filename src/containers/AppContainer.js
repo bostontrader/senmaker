@@ -31,7 +31,10 @@ function getState() {
         onDefinitenessChanged: (n) => {console.log('AppContainer onDefinitenessChanged =',n)},
         onSelectedNounChanged: (n) => {console.log('AppContainer onSelectedNounChanged =',n)},
 
-        level: AppStore.getState(),
+        lang: AppStore.getState().get('lang'),
+        level: AppStore.getState().get('level'),
+        nouns: AppStore.getState().get('nouns'),
+
         onLevelPrevious: AppActions.levelPrevious,
         onLevelNext: AppActions.levelNext,
         onLevelReset: AppActions.levelReset,

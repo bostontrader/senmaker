@@ -19,7 +19,7 @@ describe("Level01", () => {
     it("Renders Level01, no quiz checkmarks.", () => {
         const props = {
             addEditNoun: NounAddEditStore.getInitialState(),
-            level:AppStore.getInitialState(),
+            level:AppStore.getInitialState().get('level'),
             nouns: OrderedMap(),
             strings:StringStore.getInitialState()
         }
@@ -48,7 +48,7 @@ describe("Level01", () => {
 
         const props = {
             addEditNoun: NounAddEditStore.getInitialState(),
-            level:level,
+            level:level.get('level'),
             nouns: OrderedMap(),
             strings:StringStore.getInitialState()
         }
@@ -71,7 +71,7 @@ describe("Level01", () => {
 
         const props = {
             addEditNoun: NounAddEditStore.getInitialState(),
-            level:level,
+            level:level.get('level'),
             nouns: OrderedMap(),
             strings:StringStore.getInitialState()
         }
@@ -95,7 +95,7 @@ describe("Level01", () => {
 
         const props = {
             addEditNoun: NounAddEditStore.getInitialState(),
-            level:level,
+            level:level.get('level'),
             nouns: OrderedMap(),
             strings:StringStore.getInitialState()
         }

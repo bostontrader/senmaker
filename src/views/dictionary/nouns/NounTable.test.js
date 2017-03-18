@@ -18,7 +18,7 @@ describe("NounTable", () => {
     it("Renders a NounDictionaryItemPanelLevel.BASE NounTable", () => {
         let newState = AppStore.getInitialState()
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const props = {level:newState, nouns: OrderedMap()}
+        const props = {level:newState.get('level'), nouns: OrderedMap()}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         expect(nounTable.type).toBe('table')
@@ -35,7 +35,7 @@ describe("NounTable", () => {
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const props = {level:newState, nouns: OrderedMap()}
+        const props = {level:newState.get('level'), nouns: OrderedMap()}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         expect(nounTable.type).toBe('table')
@@ -52,7 +52,7 @@ describe("NounTable", () => {
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
         newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const props = {level:newState, nouns: OrderedMap()}
+        const props = {level:newState.get('level'), nouns: OrderedMap()}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)
@@ -76,7 +76,7 @@ describe("NounTable", () => {
         }))
 
         const strings = StringStore.getInitialState()
-        const props = {level:newState, nouns: nouns, strings:strings}
+        const props = {level:newState.get('level'), nouns: nouns, strings:strings}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)
@@ -105,7 +105,7 @@ describe("NounTable", () => {
         }))
 
         const strings = StringStore.getInitialState()
-        const props = {level:newState, nouns: nouns, strings: strings}
+        const props = {level:newState.get('level'), nouns: nouns, strings: strings}
         const renderExpression = <NounTable {...props} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         const nounItems = findAllWithType(nounTable, NounItem)
