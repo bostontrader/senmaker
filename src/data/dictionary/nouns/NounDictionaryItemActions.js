@@ -13,12 +13,6 @@ const NounDictionaryItemActions = {
             base: base
         })
     },
-    changeDefiniteness(newDefiniteness) {
-        AppDispatcher.dispatch({
-            type: NounDictionaryItemActionTypes.CHANGE_DEFINITENESS,
-            newDefiniteness: newDefiniteness
-        })
-    },
     cancel() {
         AppDispatcher.dispatch({
             type: NounDictionaryItemActionTypes.CANCEL

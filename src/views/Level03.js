@@ -1,9 +1,8 @@
 import React from 'react'
 
+import AppActions from '../data/AppActions'
 import LevelControl from './LevelControl'
-import Noun from './noun/Noun'
-import NounSelect from './dictionary/nouns/NounDictionaryItemSelect'
-import {RadioGroup, Radio} from 'react-radio-group'
+import NouniAddForm from './nouni/NouniAddForm'
 
 function Level03(props) {
 
@@ -14,8 +13,15 @@ function Level03(props) {
 
     const s = props.strings.Level03
 
-    //const onChange = () => props.onSetQuizScore(!presentQuizState)
-    //onChange={onChange}
+    // if existing nouni, read it, else
+    // make new nouni
+    //AppActions.insertNouni({
+        //ui:false,
+        //noun:{base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s}
+        //noun: {},
+        //definiteness:''
+    //})
+    //props.onAddNoun}>{s.add_new} {s.noun}</button> opens the UI
 
     return(
         <div>
@@ -29,7 +35,7 @@ function Level03(props) {
                 <p>{s.help15}</p>
             </div>
 
-            <Noun {...props} />
+            <NouniAddForm {...props} />
 
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>

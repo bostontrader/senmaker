@@ -11,7 +11,6 @@ import Level07 from './Level07'
 
 function AppView(props) {
 
-    console.log('AppView =',props)
     let levelComponent
 
     switch(props.level.get('currentLevel')) {

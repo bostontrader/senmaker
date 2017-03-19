@@ -22,7 +22,7 @@ class AppStore extends ReduceStore {
     getInitialState() {
 
         if (localStorageAvailable) {
-            localStorage.removeItem(localStorageKey)
+            //localStorage.removeItem(localStorageKey)
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState)
@@ -55,7 +55,20 @@ class AppStore extends ReduceStore {
 
         switch (action.type) {
             case AppActionTypes.CHANGE_DEFINITENESS:
+                console.log('AppStore CHANGE_DEFINITENESS =',action.newDefiniteness)
                 return state
+
+            case AppActionTypes.INSERT_NOUNI:
+                //const id = Counter.increment()
+                console.log('AppStore INSERT_NOUNI =',action.nouni)
+
+                //const id = 'example_nouni'
+                //return state.set(id, new Nouni({
+                    //id: id,
+                    //noun: action.nouni.noun,
+                    //definiteness: action.nouni.definiteness
+                //}))
+
 
             case AppActionTypes.LANG_EN:
                 newState = state.set('lang',langCode.en)
@@ -235,26 +248,8 @@ AppStore.initialState = Map({
         }),
         quizResults: new List().push(false) // Level 00 starts with passed quiz = false
     }),
-    nouns: Map()
+    nouni: Map()    // nouns, instantiated
 })
-
-/*AppStore.initialState = Map({
-    currentLevel:0,
-    minLevel:true,      // is this is lowest possible level?
-    maxLevel:false,     // is this the highest possible level?
-    quizQuestions: new Map({
-        insertNoun: false,
-        changeNoun: false,
-        deleteNoun: false
-    }),
-    //quizResults: {false}, // level 0 starts as false
-    // Elements 0, 1, ... should be set to true or false, depending upon
-    // whether or not the quiz for level 0, 1, ... is passed
-    //quizResults:[false,false], // Start with Level 00 false
-    lang:langCode.zh    // what language for the UI?
-})*/
-    //.set('currentAppLevelConfig', AppStore.theLevelConfigs.get(0))
-    //.set('quizResults', new List().push(false))
 //console.log('n=',JSON.stringify(AppStore.initialState.toJSON()))
 
 export default new AppStore()

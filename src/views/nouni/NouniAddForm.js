@@ -6,7 +6,7 @@ import React from 'react'
 import NounDictionaryItemSelect from '../dictionary/nouns/NounDictionaryItemSelect'
 import {RadioGroup, Radio} from 'react-radio-group'
 
-function Noun(props) {
+function Nouni(props) {
 
     const style = {
         border: '1px solid black',
@@ -20,12 +20,14 @@ function Noun(props) {
     //onChange={onChange}
     //const onDefinitenessChanged = () => {console.log('Noun onDefinitenessChanged')}
         //onSelectedNounChanged: () => {},
-    console.log('Noun =',props)
+
+    //value={props.addEditNoun.getIn(['noun','base'])}
+    console.log('Nouni =',props)
     return(
         <div>
 
             <div style={style}>
-                <RadioGroup name="definiteness" selectedValue="indefinite" onChange={props.onDefinitenessChanged}>
+                <RadioGroup name="definiteness" selectedValue={props.addEditNouni.getIn(['nouni','definiteness'])} onChange={(e)=>{props.onChangeDefiniteness(e)}}>
                     <Radio value="definite" />Definite
                     <Radio value="indefinite" />Indefinite
                 </RadioGroup>
@@ -37,4 +39,4 @@ function Noun(props) {
     )
 }
 
-export default Noun
+export default Nouni
