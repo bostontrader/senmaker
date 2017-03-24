@@ -1,7 +1,7 @@
 import React from 'react'
 
 import LevelControl from './LevelControl'
-import VerbPanel from './dictionary/verbs/VerbPanel'
+import VerbdPanel from './dictionary/verbd/VerbdPanel'
 
 function Level07(props) {
 
@@ -18,7 +18,7 @@ function Level07(props) {
                 <p>For example: If we performed the verb in the past we use the 'past tense' form of the verb.</p>
                 <p>The base form of the verb is changed into the past-tense form according to certain rules.</p>
             </div>
-            <VerbPanel {...props} />
+            <VerbdPanel {...props} />
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <p>Can you .... ?</p>

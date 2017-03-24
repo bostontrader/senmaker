@@ -17,30 +17,30 @@ describe('Starting at Level00', () => {
             .click('#iUnderstand') .wait(250)
             .click('#level-next') .wait(250)       // goto level 01
 
-            .click('#add-noun') .wait(250)
+            .click('#add-nound') .wait(250)
             .type('#base', 'carrot'). wait(250)
-            .click('#save') .wait(250)
+            .click('#save-nound') .wait(250)
 
             // edit a noun
             .click('#n-1') .wait(250)
             .type('#base', 'beaver'). wait(250)
-            .click('#save') .wait(250)
+            .click('#save-nound') .wait(250)
 
             .click('#n-1') .wait(250)
-            .click('#delete') .wait(250)
+            .click('#delete-nound') .wait(250)
 
             .click('#level-next') .wait(250)       // goto level 02
-            .click('#add-verb') .wait(250)
+            .click('#add-verbd') .wait(250)
             .type('#base', 'eat'). wait(250)
-            .click('#save') .wait(250)
+            .click('#save-verbd') .wait(250)
 
             // edit a verb
             .click('#v-1') .wait(1000)
             .type('#base', 'run'). wait(2000)
-            .click('#save') .wait(1000)
+            .click('#save-verbd') .wait(1000)
 
             .click('#v-1') .wait(1000)
-            .click('#delete') .wait(1000)
+            .click('#delete-verbd') .wait(1000)
             .click('#level-next') .wait(1000)       // goto level 03
 
             .end()

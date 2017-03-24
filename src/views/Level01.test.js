@@ -1,4 +1,4 @@
-import {OrderedMap} from 'immutable'
+import {Map, OrderedMap} from 'immutable'
 import React from 'react'
 
 import TestUtils         from 'react-addons-test-utils'
@@ -9,18 +9,21 @@ import AppActionTypes from '../data/AppActionTypes'
 import AppStore from '../data/AppStore'
 import Level01 from './Level01'
 import LevelControl from './LevelControl'
-import NounActionTypes from '../data/dictionary/nouns/NounDictionaryItemActionTypes'
-import NounAddEditStore from '../data/dictionary/nouns/NounDictionaryItemAddEditStore'
-import NounPanel from './dictionary/nouns/NounPanel'
+//import NoundActionTypes from '../data/dictionary/nound/NoundActionTypes'
+import NoundAEStore from '../data/dictionary/nound/addedit/NoundAEStore'
+import NoundAEActionTypes from '../data/dictionary/nound/addedit/NoundAEActionTypes'
+import NoundPanel from './dictionary/nound/NoundPanel'
 import StringStore from '../data/StringStore'
 
 describe("Level01", () => {
 
     it("Renders Level01, no quiz checkmarks.", () => {
         const props = {
-            addEditNoun: NounAddEditStore.getInitialState(),
             level:AppStore.getInitialState().get('level'),
-            nouns: OrderedMap(),
+            nound: Map({
+                addEditNound: NoundAEStore.getInitialState(),
+                nouns: OrderedMap()
+            }),
             strings:StringStore.getInitialState()
         }
 
@@ -29,7 +32,7 @@ describe("Level01", () => {
         expect(level01Renderer.type).toBe('div')
 
         expect(findWithClass(level01Renderer,'help'))
-        expect(findWithType(level01Renderer,NounPanel))
+        expect(findWithType(level01Renderer,NoundPanel))
         expect(findWithClass(level01Renderer,'quiz'))
         expect(findWithType(level01Renderer,LevelControl))
 
@@ -44,12 +47,14 @@ describe("Level01", () => {
 
         let level = AppStore.getInitialState()
         level = AppStore.reduce(level, {type: AppActionTypes.LEVEL_NEXT})
-        level = AppStore.reduce(level, {ui: true, type: NounActionTypes.INSERT_NOUN})
+        level = AppStore.reduce(level, {type: NoundAEActionTypes.CLICK_SAVE_NOUND, nound:{}})
 
         const props = {
-            addEditNoun: NounAddEditStore.getInitialState(),
             level:level.get('level'),
-            nouns: OrderedMap(),
+            nound: Map({
+                addEditNound: NoundAEStore.getInitialState(),
+                nouns: OrderedMap()
+            }),
             strings:StringStore.getInitialState()
         }
 
@@ -66,13 +71,15 @@ describe("Level01", () => {
 
         let level = AppStore.getInitialState()
         level = AppStore.reduce(level, {type: AppActionTypes.LEVEL_NEXT})
-        level = AppStore.reduce(level, {ui: true, type: NounActionTypes.INSERT_NOUN})
-        level = AppStore.reduce(level, {type: NounActionTypes.UPDATE_NOUN})
+        level = AppStore.reduce(level, {type: NoundAEActionTypes.CLICK_SAVE_NOUND, nound:{}})
+        level = AppStore.reduce(level, {type: NoundAEActionTypes.CLICK_SAVE_NOUND, nound:{id:'1'}})
 
         const props = {
-            addEditNoun: NounAddEditStore.getInitialState(),
+            nound: Map({
+                addEditNound: NoundAEStore.getInitialState(),
+                nouns: OrderedMap()
+            }),
             level:level.get('level'),
-            nouns: OrderedMap(),
             strings:StringStore.getInitialState()
         }
 
@@ -89,14 +96,16 @@ describe("Level01", () => {
 
         let level = AppStore.getInitialState()
         level = AppStore.reduce(level, {type: AppActionTypes.LEVEL_NEXT})
-        level = AppStore.reduce(level, {ui: true, type: NounActionTypes.INSERT_NOUN})
-        level = AppStore.reduce(level, {type: NounActionTypes.UPDATE_NOUN})
-        level = AppStore.reduce(level, {type: NounActionTypes.DELETE_NOUN})
+        level = AppStore.reduce(level, {type: NoundAEActionTypes.CLICK_SAVE_NOUND, nound:{}})
+        level = AppStore.reduce(level, {type: NoundAEActionTypes.CLICK_SAVE_NOUND, nound:{id:'1'}})
+        level = AppStore.reduce(level, {type: NoundAEActionTypes.CLICK_DELETE_NOUND})
 
         const props = {
-            addEditNoun: NounAddEditStore.getInitialState(),
             level:level.get('level'),
-            nouns: OrderedMap(),
+            nound: Map({
+                addEditNound: NoundAEStore.getInitialState(),
+                nouns: OrderedMap()
+            }),
             strings:StringStore.getInitialState()
         }
 

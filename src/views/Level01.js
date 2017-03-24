@@ -1,7 +1,7 @@
 import React from 'react'
 
 import LevelControl from './LevelControl'
-import NounPanel from './dictionary/nouns/NounPanel'
+import NoundPanel from './dictionary/nound/NoundPanel'
 
 function Level01(props) {
 
@@ -12,13 +12,13 @@ function Level01(props) {
 
     const s = props.strings.Level01
 
-    const quizInsertNounFlag = props.level.getIn(['quizQuestions','insertNoun']) ?
+    const quizInsertNounFlag = props.level.getIn(['quizQuestions','insertNound']) ?
         <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizUpdateNounFlag = props.level.getIn(['quizQuestions','updateNoun']) ?
+    const quizUpdateNounFlag = props.level.getIn(['quizQuestions','updateNound']) ?
         <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizDeleteNounFlag = props.level.getIn(['quizQuestions','deleteNoun']) ?
+    const quizDeleteNounFlag = props.level.getIn(['quizQuestions','deleteNound']) ?
         <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     return(
@@ -27,7 +27,7 @@ function Level01(props) {
                 <h1>{props.strings.nouns}</h1>
                 <p>{s.help10}</p>
             </div>
-            <NounPanel {...props} />
+            <NoundPanel {...props} />
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>
@@ -37,12 +37,12 @@ function Level01(props) {
                             <td>{quizInsertNounFlag}</td>
                         </tr>
                         <tr>
-                            <td><p>{s.quiz2}</p></td>
-                            <td>{quizDeleteNounFlag}</td>
-                        </tr>
-                        <tr>
                             <td><p>{s.quiz3}</p></td>
                             <td>{quizUpdateNounFlag}</td>
+                        </tr>
+                        <tr>
+                            <td><p>{s.quiz2}</p></td>
+                            <td>{quizDeleteNounFlag}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -3,8 +3,8 @@ import {Map} from 'immutable'
 
 import AppDispatcher from '../AppDispatcher'
 //import Counter from './Counter'
-//import NounDictionaryItem from './NounDictionaryItem'
-//import NounDictionaryItemActionTypes from './NounDictionaryItemActionTypes'
+//import Nound from './Nound'
+//import NoundActionTypes from './NoundActionTypes'
 
 class NouniStore extends ReduceStore {
     constructor() {
@@ -18,19 +18,19 @@ class NouniStore extends ReduceStore {
     reduce(state, action) {
         switch (action.type) {
 
-            //case NounDictionaryItemActionTypes.DELETE_NOUN:
+            //case NoundActionTypes.DELETE_NOUN:
                 //return state.delete(action.id)
 
-            //case NounDictionaryItemActionTypes.INSERT_NOUN:
+            //case NoundActionTypes.INSERT_NOUN:
                 //const id = Counter.increment()
-                //return state.set(id, new NounDictionaryItem({
+                //return state.set(id, new Nound({
                     //id: id,
                     //base: action.noun.base,
                     //plural: action.noun.plural,
                     //pluralization_rule: action.noun.pluralization_rule
                 //}))
 
-            //case NounDictionaryItemActionTypes.UPDATE_NOUN:
+            //case NoundActionTypes.UPDATE_NOUN:
                 //return state.set(action.noun.get('id'), action.noun)
 
             default:

@@ -5,8 +5,9 @@ import {Record} from 'immutable'
  */
 const Nouni = Record({
     id: '',
-    noun: {},
-    definiteness: ''
+    nound_id: '',
+    definiteness: '',
+    resultText: ''
 })
 
 export default Nouni

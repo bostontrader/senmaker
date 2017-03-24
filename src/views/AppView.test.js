@@ -1,4 +1,4 @@
-import {OrderedMap} from 'immutable'
+import {Map, OrderedMap} from 'immutable'
 import React from 'react'
 import ReactTestUtils from 'react-addons-test-utils'
 import rtRenderer from 'react-test-renderer'
@@ -7,9 +7,9 @@ import AppStore from '../data/AppStore'
 import Level00 from './Level00'
 import Level01 from './Level01'
 import Level02 from './Level02'
-import NounAddEditStore from '../data/dictionary/nouns/NounDictionaryItemAddEditStore'
+import NoundAEStore from '../data/dictionary/nound/addedit/NoundAEStore'
 import StringStore from '../data/StringStore'
-import VerbAddEditStore from '../data/dictionary/verbs/VerbDictionaryItemAddEditStore'
+import VerbdAEStore from '../data/dictionary/verbd/addedit/VerbdAEStore'
 
 it('Renders Level00', () => {
     const props = {level:AppStore.getInitialState(), strings:StringStore.getInitialState()}
@@ -24,9 +24,11 @@ it('Renders Level00', () => {
 
 it('Renders Level01', () => {
     const props = {
-        addEditNoun: NounAddEditStore.getInitialState(),
         level:AppStore.getInitialState(),
-        nouns: OrderedMap(),
+        nound: Map({
+            addEditNound: NoundAEStore.getInitialState(),
+            nouns: OrderedMap()
+        }),
         strings:StringStore.getInitialState()
     }
 
@@ -41,7 +43,7 @@ it('Renders Level01', () => {
 
 it('Renders Level02', () => {
     const props = {
-        addEditVerb: VerbAddEditStore.getInitialState(),
+        addEditVerb: VerbdAEStore.getInitialState(),
         level:AppStore.getInitialState(),
         verbs: OrderedMap(),
         strings:StringStore.getInitialState()

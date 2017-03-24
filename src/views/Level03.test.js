@@ -9,15 +9,15 @@ import AppActionTypes from '../data/AppActionTypes'
 import AppStore from '../data/AppStore'
 import Level03 from './Level03'
 import LevelControl from './LevelControl'
-import NounAddEditStore from '../data/dictionary/nouns/NounDictionaryItemAddEditStore'
-import NounPanel from './dictionary/nouns/NounPanel'
+import NounAddEditStore from '../data/dictionary/nound/addedit/NoundAEStore'
+import NounPanel from './dictionary/nound/NoundPanel'
 import StringStore from '../data/StringStore'
 
 describe("Level03", () => {
 
     it("Renders Level03", () => {
         const props = {
-            addEditNoun: NounAddEditStore.getInitialState(),
+            addEditNound: NounAddEditStore.getInitialState(),
             level:AppStore.getInitialState(),
             nouns: OrderedMap(),
             strings:StringStore.getInitialState()

@@ -2,17 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import AppContainer from './containers/AppContainer'
-import NounActions from './data/dictionary/nouns/NounDictionaryItemActions'
-import {PastTenseRule} from './data/dictionary/verbs/VerbDictionaryItemConstants'
-import {PluralizationRule} from './data/dictionary/nouns/NounDictionaryItemConstants'
-import VerbActions from './data/dictionary/verbs/VerbDictionaryItemActions'
+import NoundActions from './data/dictionary/nound/NoundActions'
+import {PastTenseRule} from './data/dictionary/verbd/VerbdConstants'
+import {PluralizationRule} from './data/dictionary/nound/NoundConstants'
+import VerbdActions from './data/dictionary/verbd/VerbdActions'
 
 ReactDOM.render(<AppContainer />, document.getElementById('nounapp'))
 
 // Populate the db, but not via the ordinary UI
-NounActions.insertNoun({ui:false, noun:{base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s}})
-NounActions.insertNoun({ui:false, noun:{base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}})
+NoundActions.insertNound({base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s})
+NoundActions.insertNound({base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
 
-VerbActions.insertVerb({ui:false, verb:{base: 'eat', pastTense: 'ate', pastTense_rule: PastTenseRule.Irregular}})
-VerbActions.insertVerb({ui:false, verb:{base: 'hit', pastTense: 'hit', pastTense_rule: PastTenseRule.NoChange}})
-VerbActions.insertVerb({ui:false, verb:{base: 'jump', pastTense: 'jumped', pastTense_rule: PastTenseRule.Append_ed}})
+VerbdActions.insertVerbd({base: 'eat', pastTense: 'ate', pastTense_rule: PastTenseRule.Irregular})
+VerbdActions.insertVerbd({base: 'hit', pastTense: 'hit', pastTense_rule: PastTenseRule.NoChange})
+VerbdActions.insertVerbd({base: 'jump', pastTense: 'jumped', pastTense_rule: PastTenseRule.Append_ed})

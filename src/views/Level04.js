@@ -1,7 +1,7 @@
 import React from 'react'
 
 import LevelControl from './LevelControl'
-import VerbPanel from './dictionary/verbs/VerbPanel'
+import VerbdPanel from './dictionary/verbd/VerbdPanel'
 
 function Level04(props) {
 

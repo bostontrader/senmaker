@@ -1,42 +1,45 @@
 import {Container} from 'flux/utils'
+import {Map}       from 'immutable'
 
-import AppActions from '../data/AppActions'
-import AppStore   from '../data/AppStore'
+import AppActions     from '../data/AppActions'
+import AppStore       from '../data/AppStore'
+
+import NoundAEStore   from '../data/dictionary/nound/addedit/NoundAEStore'
+import NoundAEActions from '../data/dictionary/nound/addedit/NoundAEActions'
+import NoundStore     from '../data/dictionary/nound/NoundStore'
+
+import VerbdAEStore   from '../data/dictionary/verbd/addedit/VerbdAEStore'
+import VerbdAEActions from '../data/dictionary/verbd/addedit/VerbdAEActions'
+import VerbdStore     from '../data/dictionary/verbd/VerbdStore'
+
+import NouniActions   from '../data/nouni/NouniActions'
+import NouniAEStore   from '../data/nouni/NouniAEStore'
+import NouniStore     from '../data/nouni/NouniStore'
+
+import StringActions  from '../data/StringActions'
+import StringStore    from '../data/StringStore'
 
 import AppView from '../views/AppView'
-
-import StringActions from '../data/StringActions'
-import StringStore   from '../data/StringStore'
-
-import NounDictionaryItemActions      from '../data/dictionary/nouns/NounDictionaryItemActions'
-import NounDictionaryItemAddEditStore from '../data/dictionary/nouns/NounDictionaryItemAddEditStore'
-import NounDictionaryStore            from '../data/dictionary/nouns/NounDictionaryStore'
-
-import VerbActions      from '../data/dictionary/verbs/VerbDictionaryItemActions'
-import VerbAddEditStore from '../data/dictionary/verbs/VerbDictionaryItemAddEditStore'
-import VerbStore        from '../data/dictionary/verbs/VerbDictionaryStore'
-
-import NouniActions      from '../data/nouni/NouniActions'
-import NouniAddEditStore from '../data/nouni/NouniAddEditStore'
-import NouniStore        from '../data/nouni/NouniStore'
 
 function getStores() {
     return [
         AppStore,
-        NounDictionaryStore,
-        NounDictionaryItemAddEditStore,
+        NoundStore,
+        NoundAEStore,
         NouniStore,
-        NouniAddEditStore,
+        NouniAEStore,
         StringStore,
-        VerbStore,
-        VerbAddEditStore
+        VerbdStore,
+        VerbdAEStore
     ]
 }
 
 function getState() {
 
+    // It's tempting to try to make this a single atom of immutable state. However, the immutable object
+    // you try to create here will be converted by deus ex machina into an ordinary Object, devoid of the
+    // immutable methods.
     return {
-
         lang: AppStore.getState().get('lang'),
 
         level: AppStore.getState().get('level'),
@@ -45,17 +48,18 @@ function getState() {
         onLevelReset: AppActions.levelReset,
         onSetQuizScore: AppActions.setQuizScore,
 
-        // instantiated nouns
+        // instantiated nound
         nouni: AppStore.getState().get('nouni'),
         onChangeDefiniteness: NouniActions.changeDefiniteness,
         //onChangeSelectedNoun: (n) => {console.log('AppContainer onSelectedNounChanged =',n)},
+        //onChangeSelectedNoun: NouniActions.changeSelectedNoun, // move this to nound?
         //onInsertNouni: AppActions.insertNouni,
-        addEditNouni: NouniAddEditStore.getState(),
+        addEditNouni: NouniAEStore.getState(),
         //onAddNouni: NouniDictionaryItemActions.addNouni,
         //onCancelNouni: NouniDictionaryItemActions.cancel,
         //onChangeNouniBase: NouniDictionaryItemActions.changeBase,
         //onDeleteNouni: NouniDictionaryItemActions.deleteNouni,
-        //onEditNouni: NouniDictionaryItemActions.editNouni,
+        //onClickEditNouni: NouniDictionaryItemActions.editNouni,
         //onInsertNouni: NouniDictionaryItemActions.insertNouni,
         //onUpdateNouni: NouniDictionaryItemActions.updateNouni,
 
@@ -64,27 +68,38 @@ function getState() {
         onLangChn: StringActions.langChn,
 
         // noun dictionary
-        nouns: NounDictionaryStore.getState(),
-        addEditNoun: NounDictionaryItemAddEditStore.getState(),
-        onAddNoun: NounDictionaryItemActions.addNoun,
-        onCancelNoun: NounDictionaryItemActions.cancel,
-        onChangeNounBase: NounDictionaryItemActions.changeBase,
-        onDeleteNoun: NounDictionaryItemActions.deleteNoun,
-        onEditNoun: NounDictionaryItemActions.editNoun,
-        onInsertNoun: NounDictionaryItemActions.insertNoun,
-        onUpdateNoun: NounDictionaryItemActions.updateNoun,
+        nound: Map({
+            addEditNound: NoundAEStore.getState(),
+            nouns: NoundStore.getState(),
+            //selectedNounId: NoundStore.getState().get('selectedNounId'),
 
-        // verb dictionary
-        verbs: VerbStore.getState(),
-        addEditVerb: VerbAddEditStore.getState(),
-        onAddVerb: VerbActions.addVerb,
-        onCancelVerb: VerbActions.cancel,
-        onChangeVerbBase: VerbActions.changeBase,
-        onDeleteVerb: VerbActions.deleteVerb,
-        onEditVerb: VerbActions.editVerb,
-        onInsertVerb: VerbActions.insertVerb,
-        onUpdateVerb: VerbActions.updateVerb,
+            onClickAddNound: NoundAEActions.clickAddNound,
+            onClickDeleteNound: NoundAEActions.clickDeleteNoun,
+            onClickEditNound: NoundAEActions.clickEditNound,
+            onClickSaveNound: NoundAEActions.clickSaveNound,
+            //onCancelNoun: NoundActions.cancel,
+            onChangeNoundBase: NoundAEActions.onChangeBase,
+            //onChangeSelectedNoun: NoundActions.changeSelectedNoun,
+            //onInsertNound: NoundActions.insertNound,
+            //onUpdateNoun: NoundActions.updateNoun
+        }),
         
+        // verb dictionary
+        verbd: Map({
+            addEditVerbd: VerbdAEStore.getState(),
+            verbs: VerbdStore.getState(),
+            //selectedVerbId: VerbdStore.getState().get('selectedVerbId'),
+
+            onClickAddVerbd: VerbdAEActions.clickAddVerbd,
+            onClickDeleteVerbd: VerbdAEActions.clickDeleteVerbd,
+            onClickEditVerbd: VerbdAEActions.clickEditVerbd,
+            onClickSaveVerbd: VerbdAEActions.clickSaveVerbd,
+            //onCancelVerb: VerbdActions.cancel,
+            onChangeVerbdBase: VerbdAEActions.onChangeBase,
+            //onChangeSelectedVerb: VerbdActions.changeSelectedVerb,
+            //onInsertVerbd: VerbdActions.insertVerbd,
+            //onUpdateVerb: VerbdActions.updateVerb
+        })
     }
 }
 

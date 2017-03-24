@@ -52,7 +52,7 @@ StringStore.en = {
 
     // Nouns
     Level01: {
-        help10: 'The things around us are called <strong>nouns</strong>.',
+        help10: 'The things around us are called <strong>nound</strong>.',
         quiz1: 'Can you add a new noun?',
         quiz2: 'Can you delete a noun from this list?',
         quiz3: 'Can you change the spelling of a noun?'
@@ -60,7 +60,7 @@ StringStore.en = {
 
     // Verbs
     Level02: {
-        help10: 'The actions we can take are called <strong>verbs</strong>',
+        help10: 'The actions we can take are called <strong>verbd</strong>',
         quiz1: 'Can you add a new verb?',
         quiz2: 'Can you delete a verb from this list?',
         quiz3: 'Can you change the spelling of a verb?'
@@ -91,16 +91,19 @@ StringStore.en = {
     // Noun Phrase
     Level05: {
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
-        help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.'
+        help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
+        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting a definiteness and a noun, you produced a two-word noun phrase.'
+        // although a noun phrase is usually more than one word, it could be just a single noun.
     },
 
     // Plural or Singular
     Level06: {
-        help10: 'When we write nouns must know how many of something we are writing about.',
+        help10: 'When we write nound must know how many of something we are writing about.',
         help11: 'For example are we writing about one cat or more than one cat?',
         help12: 'If we are writing about only one of something, then we use the base form of the noun.',
         help13: 'If we are writing about more than one, then we use the plural form of the noun.'
     },
+
 
     // Past Tense
     Level07: {
@@ -108,6 +111,24 @@ StringStore.en = {
         help11:'For example: If we performed the verb in the past we use the \'past tense\' form of the verb.',
         help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
     },
+
+    // Adjectives
+
+    // Adjectives as part of noun phrases
+
+    // Adverbs
+
+    // Adverbs as part of verb phrases
+
+    // Clause.  A clause has a noun phrase and a verb phrase.
+    // go ahead an make a noun phrase and a verb phrase.
+
+    // Sentence. A sentence can have many clauses, or it may just have a single clause.
+    // If you can put all these pieces together and the indicator turns green, then you have built a complete, grammatically correct sentence.
+    // Until now, all of your writing has used the lower-case letters and no punctuation.  The first rule of capitalization is that the first letter of a sentence should be capitalized.
+    // The first rule of punctuation is that a sentence should be terminated with a period.
+    // You now have a dictionary of nound, verbd, adjectives, and adverbs.
+    // You can create noun phrases and verb phrases.
 
     LevelControl: {
         level: 'Level',

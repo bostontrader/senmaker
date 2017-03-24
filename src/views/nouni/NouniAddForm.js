@@ -1,9 +1,9 @@
 import React from 'react'
 
-//import DefinitenessRadio from './dictionary/nouns/DefinitenessRadio'
+//import DefinitenessRadio from './dictionary/nound/DefinitenessRadio'
 //import LevelControl from './LevelControl'
-//import NounPanel from './dictionary/nouns/NounPanel'
-import NounDictionaryItemSelect from '../dictionary/nouns/NounDictionaryItemSelect'
+//import NounPanel from './dictionary/nound/NounPanel'
+import NoundSelect from '../dictionary/nound/NoundSelect'
 import {RadioGroup, Radio} from 'react-radio-group'
 
 function Nouni(props) {
@@ -13,16 +13,7 @@ function Nouni(props) {
         margin: '5px'
     }
 
-    //const s = props.strings.Noun
-
-    //const onChange = () => props.onSetQuizScore(!presentQuizState)
-    //const onChange = () => {}
-    //onChange={onChange}
-    //const onDefinitenessChanged = () => {console.log('Noun onDefinitenessChanged')}
-        //onSelectedNounChanged: () => {},
-
-    //value={props.addEditNoun.getIn(['noun','base'])}
-    console.log('Nouni =',props)
+    console.log('NouniAddForm',JSON.stringify(props.addEditNouni.toJSON()))
     return(
         <div>
 
@@ -31,8 +22,8 @@ function Nouni(props) {
                     <Radio value="definite" />Definite
                     <Radio value="indefinite" />Indefinite
                 </RadioGroup>
-                <NounDictionaryItemSelect {...props} />
-                <p>Catfood is good</p>
+                <NoundSelect {...props} />
+                <p>{props.addEditNouni.getIn(['nouni','resultText'])}</p>
             </div>
 
         </div>
