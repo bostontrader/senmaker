@@ -72,16 +72,14 @@ function getState() {
             addEditNound: NoundAEStore.getState(),
             nouns: NoundStore.getState(),
             //selectedNounId: NoundStore.getState().get('selectedNounId'),
+            //onChangeSelectedNoun: NoundActions.changeSelectedNoun,
 
             onClickAddNound: NoundAEActions.clickAddNound,
+            onClickCancel: NoundAEActions.clickCancel, // target only the NoundAEStore
             onClickDeleteNound: NoundAEActions.clickDeleteNoun,
             onClickEditNound: NoundAEActions.clickEditNound,
             onClickSaveNound: NoundAEActions.clickSaveNound,
-            //onCancelNoun: NoundActions.cancel,
             onChangeNoundBase: NoundAEActions.onChangeBase,
-            //onChangeSelectedNoun: NoundActions.changeSelectedNoun,
-            //onInsertNound: NoundActions.insertNound,
-            //onUpdateNoun: NoundActions.updateNoun
         }),
         
         // verb dictionary
@@ -89,16 +87,14 @@ function getState() {
             addEditVerbd: VerbdAEStore.getState(),
             verbs: VerbdStore.getState(),
             //selectedVerbId: VerbdStore.getState().get('selectedVerbId'),
+            //onChangeSelectedVerb: VerbdActions.changeSelectedVerb,
 
             onClickAddVerbd: VerbdAEActions.clickAddVerbd,
+            onClickCancel: VerbdAEActions.clickCancel, // target only the VerbdAEStore
             onClickDeleteVerbd: VerbdAEActions.clickDeleteVerbd,
             onClickEditVerbd: VerbdAEActions.clickEditVerbd,
             onClickSaveVerbd: VerbdAEActions.clickSaveVerbd,
-            //onCancelVerb: VerbdActions.cancel,
             onChangeVerbdBase: VerbdAEActions.onChangeBase,
-            //onChangeSelectedVerb: VerbdActions.changeSelectedVerb,
-            //onInsertVerbd: VerbdActions.insertVerbd,
-            //onUpdateVerb: VerbdActions.updateVerb
         })
     }
 }

@@ -7,6 +7,11 @@ const NoundAEActions = {
             type: NoundAEActionTypes.CLICK_ADD_NOUND
         })
     },
+    clickCancel() {
+        AppDispatcher.dispatch({
+            type: NoundAEActionTypes.CLICK_CANCEL
+        })
+    },
     clickDeleteNoun(id) {
         AppDispatcher.dispatch({
             type: NoundAEActionTypes.CLICK_DELETE_NOUND,
@@ -33,13 +38,7 @@ const NoundAEActions = {
             type: NoundAEActionTypes.CLICK_SAVE_NOUND,
             nound: nound
         })
-    },
-
-    //cancel() {
-        //AppDispatcher.dispatch({
-            //type: NoundAEActionTypes.CANCEL
-        //})
-    //},
+    }
 }
 
 export default NoundAEActions

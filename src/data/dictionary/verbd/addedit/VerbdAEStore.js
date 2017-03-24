@@ -6,13 +6,13 @@ import VerbdAEActionTypes from './VerbdAEActionTypes'
 import AppDispatcher from '../../../AppDispatcher'
 
 /*
-This store manages all state required to support the add/edit operations on a noun.
-This obviously includes the present state of whatever noun is being added or created.
-If said noun has an id, then this is an edit, otherwise we're creating a new noun.
+This store manages all state required to support the add/edit operations on a verbd.
+This obviously includes the present state of whatever verbd is being added or created.
+If said verbd has an id, then this is an edit, otherwise we're creating a new verbd.
 
 We can use this information to manage the display of a suitable add/edit component.
-If the noun has an id then we are editing a noun and we thus want to display the NounEditForm component.
-If the clickAddVerbd flag = true, then we are adding a new noun and we want to display the NounAddForm component.
+If the verbd has an id then we are editing a verbd and we thus want to display the VerbdEditForm component.
+If the clickAddVerbd flag = true, then we are adding a new verbd and we want to display the VerbdAddForm component.
 Else display nothing.
 
 We use the clickAddVerbd flag for purposes of code clarity.
@@ -33,15 +33,21 @@ class VerbdAEStore extends ReduceStore {
     reduce(state, action) {
         switch (action.type) {
 
-            // Only open the add-noun UI
+            // Signal the UI to open the VerbdAddForm
             case VerbdAEActionTypes.CLICK_ADD_VERBD:
-                const newState = state.set('addVerbd', true)
+                return state.set('addVerbd', true)
 
-                console.log('VerbdAEStore CLICK_ADD_VERBD',JSON.stringify(newState.toJSON()))
-                return newState
-                //return state.set('addVerbd', true)
-                //return state.setIn(['addEditVerbd','addVerbd'],true)
+            // Signal the UI to close VerbdAddForm or VerbdEditForm
+            case VerbdAEActionTypes.CLICK_CANCEL:
+                return this.getInitialState()
 
+            // Signal the UI to close VerbdAddForm or VerbdEditForm (but the delete button
+            // is only present on VerbEditForm.)
+            // VerbdStore will also catch this event and it's responsible for the actual deletion.
+            case VerbdAEActionTypes.CLICK_DELETE_VERBD:
+                return this.getInitialState()
+
+            // Signal the UI to open VerbdEditForm and populate with the given data.
             case VerbdAEActionTypes.CLICK_EDIT_VERBD:
                 return state.set('verbd', Verbd({
                     id: action.verbd.id,
@@ -50,34 +56,13 @@ class VerbdAEStore extends ReduceStore {
                     pastTense_rule: action.verbd.pastTense_rule
                 }))
 
-            // Here we only close the UI form.
-            // VerbdStore will also catch this event and it's responsible for the actual deletion.
-            case VerbdAEActionTypes.CLICK_DELETE_VERBD:
-                console.log('VerbdAEStore', action)
-                return this.getInitialState()
-
-            // Here we only close the UI form.
-            // VerbdStore will also catch this event and it's responsible for the actual insert or update.
+            // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't need to specificy which,
+            // the same state should close either one.
             case VerbdAEActionTypes.CLICK_SAVE_VERBD:
                 return this.getInitialState()
 
-            //case VerbdActionTypes.CANCEL:
-                //return state.set('clickAddVerbd', false).set('noun', Verbd())
-
             case VerbdAEActionTypes.ON_CHANGE_BASE:
                 return state.updateIn(['verbd','base'],value => action.base)
-
-
-
-            // Here we only close the UI form.
-            // NounStore will also catch this event and it's responsible for the actual insert.
-            //case VerbdActionTypes.INSERT_NOUN:
-                //return state.set('clickAddVerbd', false).set('noun', Verbd())
-
-            // Here we only close the UI form.
-            // NounStore will also catch this event and it's responsible for the actual update.
-            //case VerbdActionTypes.UPDATE_NOUN:
-                //return state.set('clickAddVerbd', false).set('noun', Verbd())
 
             default:
                 return state

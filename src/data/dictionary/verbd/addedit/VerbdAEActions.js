@@ -7,6 +7,11 @@ const VerbdAEActions = {
             type: VerbdAEActionTypes.CLICK_ADD_VERBD
         })
     },
+    clickCancel() {
+        AppDispatcher.dispatch({
+            type: VerbdAEActionTypes.CLICK_CANCEL
+        })
+    },
     clickDeleteVerbd(id) {
         AppDispatcher.dispatch({
             type: VerbdAEActionTypes.CLICK_DELETE_VERBD,
@@ -34,12 +39,6 @@ const VerbdAEActions = {
             verbd: verbd
         })
     },
-
-    //cancel() {
-        //AppDispatcher.dispatch({
-            //type: VerbdAEActionTypes.CANCEL
-        //})
-    //},
 }
 
 export default VerbdAEActions

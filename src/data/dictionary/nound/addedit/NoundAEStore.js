@@ -6,16 +6,16 @@ import NoundAEActionTypes from './NoundAEActionTypes'
 import AppDispatcher from '../../../AppDispatcher'
 
 /*
-This store manages all state required to support the add/edit operations on a noun.
-This obviously includes the present state of whatever noun is being added or created.
-If said noun has an id, then this is an edit, otherwise we're creating a new noun.
+ This store manages all state required to support the add/edit operations on a nound.
+ This obviously includes the present state of whatever nound is being added or created.
+ If said nound has an id, then this is an edit, otherwise we're creating a new nound.
 
-We can use this information to manage the display of a suitable add/edit component.
-If the noun has an id then we are editing a noun and we thus want to display the NounEditForm component.
-If the clickAddNound flag = true, then we are adding a new noun and we want to display the NounAddForm component.
-Else display nothing.
+ We can use this information to manage the display of a suitable add/edit component.
+ If the nound has an id then we are editing a nound and we thus want to display the NoundEditForm component.
+ If the clickAddNound flag = true, then we are adding a new nound and we want to display the NoundAddForm component.
+ Else display nothing.
 
-We use the clickAddNound flag for purposes of code clarity.
+ We use the clickAddNound flag for purposes of code clarity.
 
  */
 class NoundAEStore extends ReduceStore {
@@ -33,15 +33,21 @@ class NoundAEStore extends ReduceStore {
     reduce(state, action) {
         switch (action.type) {
 
-            // Only open the add-noun UI
+            // Signal the UI to open the NoundAddForm
             case NoundAEActionTypes.CLICK_ADD_NOUND:
-                const newState = state.set('addNound', true)
+                return state.set('addNound', true)
 
-                console.log('NoundAEStore CLICK_ADD_NOUND',JSON.stringify(newState.toJSON()))
-                return newState
-                //return state.set('addNound', true)
-                //return state.setIn(['addEditNound','addNound'],true)
+            // Signal the UI to close NoundAddForm or NoundEditForm
+            case NoundAEActionTypes.CLICK_CANCEL:
+                return this.getInitialState()
 
+            // Signal the UI to close NoundAddForm or NoundEditForm (but the delete button
+            // is only present on NounEditForm.)
+            // NoundStore will also catch this event and it's responsible for the actual deletion.
+            case NoundAEActionTypes.CLICK_DELETE_NOUND:
+                return this.getInitialState()
+
+            // Signal the UI to open NoundEditForm and populate with the given data.
             case NoundAEActionTypes.CLICK_EDIT_NOUND:
                 return state.set('nound', Nound({
                     id: action.nound.id,
@@ -50,34 +56,13 @@ class NoundAEStore extends ReduceStore {
                     pluralization_rule: action.nound.pluralization_rule
                 }))
 
-            // Here we only close the UI form.
-            // NoundStore will also catch this event and it's responsible for the actual deletion.
-            case NoundAEActionTypes.CLICK_DELETE_NOUND:
-                console.log('NoundAEStore', action)
-                return this.getInitialState()
-
-            // Here we only close the UI form.
-            // NoundStore will also catch this event and it's responsible for the actual insert or update.
+            // Signal the UI to close NoundAddForm or NoundEditForm. We don't need to specificy which,
+            // the same state should close either one.
             case NoundAEActionTypes.CLICK_SAVE_NOUND:
                 return this.getInitialState()
 
-            //case NoundActionTypes.CANCEL:
-                //return state.set('clickAddNound', false).set('noun', Nound())
-
             case NoundAEActionTypes.ON_CHANGE_BASE:
                 return state.updateIn(['nound','base'],value => action.base)
-
-
-
-            // Here we only close the UI form.
-            // NounStore will also catch this event and it's responsible for the actual insert.
-            //case NoundActionTypes.INSERT_NOUN:
-                //return state.set('clickAddNound', false).set('noun', Nound())
-
-            // Here we only close the UI form.
-            // NounStore will also catch this event and it's responsible for the actual update.
-            //case NoundActionTypes.UPDATE_NOUN:
-                //return state.set('clickAddNound', false).set('noun', Nound())
 
             default:
                 return state

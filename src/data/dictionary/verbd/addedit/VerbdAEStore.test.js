@@ -2,6 +2,9 @@ import VerbdAEActionTypes from './VerbdAEActionTypes'
 import VerbdAEStore from './VerbdAEStore'
 import {PastTenseRule} from '../VerbdConstants'
 
+// The VerbdAEStore is responsible for setting a small bit of state to signal
+// that VerbdAddForm or VerbdEditForm should be opened or closed, as well as a bit of state
+// to record changes to the add/edit fields.
 describe('VerbdAEStore', function() {
 
     beforeEach(function() {
@@ -15,6 +18,7 @@ describe('VerbdAEStore', function() {
         }
     })
 
+    // Signal the UI to open the VerbdAddForm
     it('CLICK_ADD_VERBD', function() {
         this.dispatch({
             type: VerbdAEActionTypes.CLICK_ADD_VERBD
@@ -22,15 +26,17 @@ describe('VerbdAEStore', function() {
         expect(this.state.get('addVerbd')).toBe(true)
     })
 
-    // Just close the add/edit UI
-    it('CLICK_DELETE_VERBD', function() {
-
-        // First open the UI
+    // Signal the UI to close VerbdAddForm or VerbdEditForm
+    it('CLICK_CANCEL', function() {
         this.dispatch({
-            type: VerbdAEActionTypes.CLICK_EDIT_VERBD,
-            verbd: {id: '1', base: 'run', pastTense: 'ran', pastTense_rule: PastTenseRule.Irregular}
+            type: VerbdAEActionTypes.CLICK_CANCEL
         })
-        expect(this.state.get('verbd').toJSON()).toEqual({id: '1', base: 'run', pastTense: 'ran', pastTense_rule: PastTenseRule.Irregular})
+        this.state = VerbdAEStore.getInitialState()
+    })
+
+    // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't test these two separately,
+    // the same state should close either one. But the delete button is only available on VerbdEditForm.
+    it('CLICK_DELETE_VERBD', function() {
 
         // Now close it
         this.dispatch({
@@ -40,6 +46,7 @@ describe('VerbdAEStore', function() {
         expect(this.state).toEqual(VerbdAEStore.getInitialState())
     })
 
+    // Signal the UI to open VerbdEditForm and populate with the given data.
     it('CLICK_EDIT_VERBD', function() {
         this.dispatch({
             type: VerbdAEActionTypes.CLICK_EDIT_VERBD,
@@ -48,22 +55,26 @@ describe('VerbdAEStore', function() {
         expect(this.state.get('verbd').toJSON()).toEqual({id: '1', base: 'run', pastTense: 'ran', pastTense_rule: PastTenseRule.Irregular})
     })
 
-    // This test only closes the UI. The value of verbd is unimportant
+    // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't test these two separately,
+    // the same state should close either one.
+    //
+    // This action should have a verbd that will be used for insert or update in VerbdStore.  But
+    // here we only close the UI and the value of verbd is unimportant.
     it('CLICK_SAVE_VERBD, new verbd', function() {
         // We know this is a new record because verbd has no id.
         this.dispatch({
             type: VerbdAEActionTypes.CLICK_SAVE_VERBD,
             verbd: {}
         })
-        expect(this.state.get('addVerbd')).toBe(false)
+        expect(this.state).toEqual(VerbdAEStore.getInitialState())
     })
 
     it('ON_CHANGE_BASE', function() {
         this.dispatch({
             type: VerbdAEActionTypes.ON_CHANGE_BASE,
-            base: 'jump'
+            base: 'catfood'
         })
-        expect(this.state.getIn(['verbd','base'])).toBe('jump')
+        expect(this.state.getIn(['verbd','base'])).toBe('catfood')
     })
 
 })

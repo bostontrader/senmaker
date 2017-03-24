@@ -2,6 +2,9 @@ import NoundAEActionTypes from './NoundAEActionTypes'
 import NoundAEStore from './NoundAEStore'
 import {PluralizationRule} from '../NoundConstants'
 
+// The NoundAEStore is responsible for setting a small bit of state to signal
+// that NoundAddForm or NoundEditForm should be opened or closed, as well as a bit of state
+// to record changes to the add/edit fields.
 describe('NoundAEStore', function() {
 
     beforeEach(function() {
@@ -15,6 +18,7 @@ describe('NoundAEStore', function() {
         }
     })
 
+    // Signal the UI to open the NoundAddForm
     it('CLICK_ADD_NOUND', function() {
         this.dispatch({
             type: NoundAEActionTypes.CLICK_ADD_NOUND
@@ -22,15 +26,17 @@ describe('NoundAEStore', function() {
         expect(this.state.get('addNound')).toBe(true)
     })
 
-    // Just close the add/edit UI
-    it('CLICK_DELETE_NOUND', function() {
-
-        // First open the UI
+    // Signal the UI to close NoundAddForm or NoundEditForm
+    it('CLICK_CANCEL', function() {
         this.dispatch({
-            type: NoundAEActionTypes.CLICK_EDIT_NOUND,
-            nound: {id: '1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
+            type: NoundAEActionTypes.CLICK_CANCEL
         })
-        expect(this.state.get('nound').toJSON()).toEqual({id: '1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s})
+        this.state = NoundAEStore.getInitialState()
+    })
+
+    // Signal the UI to close NoundAddForm or NoundEditForm. We don't test these two separately,
+    // the same state should close either one. But the delete button is only available on NoundEditForm.
+    it('CLICK_DELETE_NOUND', function() {
 
         // Now close it
         this.dispatch({
@@ -40,6 +46,7 @@ describe('NoundAEStore', function() {
         expect(this.state).toEqual(NoundAEStore.getInitialState())
     })
 
+    // Signal the UI to open NoundEditForm and populate with the given data.
     it('CLICK_EDIT_NOUND', function() {
         this.dispatch({
             type: NoundAEActionTypes.CLICK_EDIT_NOUND,
@@ -48,14 +55,18 @@ describe('NoundAEStore', function() {
         expect(this.state.get('nound').toJSON()).toEqual({id: '1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s})
     })
 
-    // This test only closes the UI. The value of nound is unimportant
+    // Signal the UI to close NoundAddForm or NoundEditForm. We don't test these two separately,
+    // the same state should close either one.
+    //
+    // This action should have a nound that will be used for insert or update in NoundStore.  But
+    // here we only close the UI and the value of nound is unimportant.
     it('CLICK_SAVE_NOUND, new nound', function() {
         // We know this is a new record because nound has no id.
         this.dispatch({
             type: NoundAEActionTypes.CLICK_SAVE_NOUND,
             nound: {}
         })
-        expect(this.state.get('addNound')).toBe(false)
+        expect(this.state).toEqual(NoundAEStore.getInitialState())
     })
 
     it('ON_CHANGE_BASE', function() {

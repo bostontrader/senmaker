@@ -24,8 +24,8 @@ function VerbdAddForm(props) {
             <div>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text' value={props.verbd.getIn(['addEditVerbd','verbd','base'])} onChange={(e)=>props.verbd.getIn(['onChangeVerbdBase'])(e.target.value)} />
-                <input id='save-verbd' type='submit' value={s.save} onClick={onClickSave}/>
-                <button onClick={props.onCancelVerb}>{s.cancel}</button>
+                <button id='save-verbd' onClick={onClickSave}>{s.save}</button>
+                <button id='cancel'     onClick={props.verbd.getIn(['onClickCancel'])}>{s.cancel}</button>
             </div>
     }
 

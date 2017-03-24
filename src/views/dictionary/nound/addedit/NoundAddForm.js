@@ -24,8 +24,8 @@ function NoundAddForm(props) {
             <div>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text' value={props.nound.getIn(['addEditNound','nound','base'])} onChange={(e)=>props.nound.getIn(['onChangeNoundBase'])(e.target.value)} />
-                <input id='save-nound' type='submit' value={s.save} onClick={onClickSave}/>
-                <button onClick={props.onCancelNoun}>{s.cancel}</button>
+                <button id='save-nound' onClick={onClickSave}>{s.save}</button>
+                <button id='cancel'     onClick={props.nound.getIn(['onClickCancel'])}>{s.cancel}</button>
             </div>
     }
 
