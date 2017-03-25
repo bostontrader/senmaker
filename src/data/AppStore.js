@@ -2,14 +2,12 @@ import {fromJS, List,Map} from 'immutable'
 import {ReduceStore} from 'flux/utils'
 
 import AppActionTypes from './AppActionTypes'
-import NouniActionTypes from './nouni/NouniActionTypes'
-
-import AppDispatcher from './AppDispatcher'
-import {langCode} from './I18NConstants'
+import AppDispatcher  from './AppDispatcher'
+import {langCode}     from './I18NConstants'
 import NoundAEActionTypes from './dictionary/nound/addedit/NoundAEActionTypes'
-import {NoundPanelLevel} from './dictionary/nound/NoundConstants'
-import {VerbdPanelLevel} from './dictionary/verbd/VerbdConstants'
+import {NoundPanelLevel}  from './dictionary/nound/NoundConstants'
 import VerbdAEActionTypes from './dictionary/verbd/addedit/VerbdAEActionTypes'
+import {VerbdPanelLevel}  from './dictionary/verbd/VerbdConstants'
 
 import {localStorageAvailable} from '../LocalStorage'
 
@@ -56,50 +54,17 @@ class AppStore extends ReduceStore {
         }
 
         switch (action.type) {
-            case AppActionTypes.CHANGE_DEFINITENESS:
-                console.log('AppStore CHANGE_DEFINITENESS =',action.newDefiniteness)
-                return state
-
-                //console.log('NouniAddEditStore CHANGE_SELECTED_NOUN =',action.newNoun)
-
-            case NouniActionTypes.CHANGE_SELECTED_NOUN:
-                console.log('AppStore CHANGE_SELECTED_NOUN =',action.newNoun)
-                console.log('AppStore CHANGE_SELECTED_NOUN =',state)
-
-                //return state.nound.set('selectedNounId','n-1')
-                //return state.updateIn(['nouni','noun'],value => action.newNoun)
-                return state
-
-            //case AppActionTypes.INSERT_NOUNI:
-                //const id = Counter.increment()
-                //console.log('AppStore INSERT_NOUNI =',action.nouni)
-
-                //const id = 'example_nouni'
-                //return state.set(id, new Nouni({
-                    //id: id,
-                    //noun: action.nouni.noun,
-                    //definiteness: action.nouni.definiteness
-                //}))
-
 
             case AppActionTypes.LANG_EN:
                 newState = state.set('lang',langCode.en)
-
-                if(localStorageAvailable)
-                    localStorage.setItem(localStorageKey, JSON.stringify(newState))
-
-                return newState
+                break
 
             case AppActionTypes.LANG_ZH:
                 newState = state.set('lang',langCode.zh)
-
-                if(localStorageAvailable)
-                    localStorage.setItem(localStorageKey, JSON.stringify(newState))
-
-                return newState
-
+                break
 
             case AppActionTypes.LEVEL_PREVIOUS:
+                newState = state
                 if (state.get('currentLevel') > 0) {
                     const newCurrentLevel = state.get('currentLevel') - 1
                     newState = Map({
@@ -108,16 +73,11 @@ class AppStore extends ReduceStore {
                         maxLevel:false,
                         quiz: false
                     }).set('currentAppLevelConfig', AppStore.theLevelConfigs.get(newCurrentLevel))
-
-                    if(localStorageAvailable)
-                        localStorage.setItem(localStorageKey, JSON.stringify(newState))
-
-                    return newState
-                } else
-                    return state
+                }
+                break
 
             case AppActionTypes.LEVEL_NEXT:
-
+                newState = state
                 if(state.getIn(['level','currentLevel']) < AppStore.theLevelConfigs.size-1) {
 
                     const newCurrentLevel = state.getIn(['level','currentLevel']) + 1
@@ -127,81 +87,62 @@ class AppStore extends ReduceStore {
                     newState = newState.setIn(['level','minLevel'],false)
                     newState = newState.setIn(['level','maxLevel'],newMaxLevelFlag)
                     newState = newState.setIn(['level','currentAppLevelConfig'], AppStore.theLevelConfigs.get(newCurrentLevel))
-
-                    if(localStorageAvailable)
-                        localStorage.setItem(localStorageKey, JSON.stringify(newState))
-
-                    return newState
                 }
-                else
-                    return state
+                break
 
             case AppActionTypes.LEVEL_RESET:
-
                 newState = AppStore.initialState
-
-                if(localStorageAvailable)
-                    localStorage.setItem(localStorageKey, JSON.stringify(newState))
-
-                return newState
+                break
 
             case AppActionTypes.QUIZ_SETSCORE:
-
                 newState = state.setIn(['level','quizResults',state.getIn(['level','currentLevel'])],action.score)
+                break
 
-                if(localStorageAvailable)
-                    localStorage.setItem(localStorageKey, JSON.stringify(newState))
 
-                return newState
-
+            // NoundAEActionTypes...
             case NoundAEActionTypes.CLICK_SAVE_NOUND:
-
-                newState = state
-
                 newState = (action.nound.id === undefined) ?
                     state.setIn(['level','quizQuestions','insertNound'],true) :
                     state.setIn(['level','quizQuestions','updateNound'],true)
 
-                return newState
+                if(nounCRUDQuizPassed(newState))
+                    newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
+                break
 
             case NoundAEActionTypes.CLICK_DELETE_NOUND:
+
                 newState = state.setIn(['level','quizQuestions','deleteNound'],true)
 
                 if(nounCRUDQuizPassed(newState))
                     newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
+                break
 
-                if(localStorageAvailable)
-                    localStorage.setItem(localStorageKey, JSON.stringify(newState))
 
-                return newState
-
+            // VerbdAEActionTypes...
             case VerbdAEActionTypes.CLICK_SAVE_VERBD:
-
-                newState = state
-
                 newState = (action.verbd.id === undefined) ?
                     state.setIn(['level','quizQuestions','insertVerbd'],true) :
                     state.setIn(['level','quizQuestions','updateVerbd'],true)
 
-                return newState
+                if(verbCRUDQuizPassed(newState))
+                    newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
+                break
 
             case VerbdAEActionTypes.CLICK_DELETE_VERBD:
                 newState = state.setIn(['level','quizQuestions','deleteVerbd'],true)
 
                 if(verbCRUDQuizPassed(newState))
                     newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
+                break
 
-                if(localStorageAvailable)
-                    localStorage.setItem(localStorageKey, JSON.stringify(newState))
-
-                return newState
-
-
-
-            
             default:
-                return state
+                newState = state
         }
+
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+
+        return newState
     }
 }
 
@@ -236,6 +177,5 @@ AppStore.initialState = Map({
     }),
     nouni: Map()    // nound, instantiated
 })
-//console.log('n=',JSON.stringify(AppStore.initialState.toJSON()))
 
 export default new AppStore()
