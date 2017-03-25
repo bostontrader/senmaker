@@ -43,6 +43,7 @@ class VerbdStore extends ReduceStore {
             case VerbdAEActionTypes.CLICK_DELETE_VERBD:
                 return state.delete(action.id)
 
+            // Insert a new record programmatically, w/o a UI.
             case VerbdActionTypes.INSERT_VERBD:
                 return insertNewRecord(action.verbd)
 

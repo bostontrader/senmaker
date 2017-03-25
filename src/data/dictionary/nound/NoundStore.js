@@ -30,7 +30,7 @@ class NoundStore extends ReduceStore {
 
         switch (action.type) {
 
-            // Save new record or update existing one.
+            // Insert a new record or update an existing one, originating from a UI.
             case NoundAEActionTypes.CLICK_SAVE_NOUND:
                 if(action.nound.id) {
                     // An id exists so update the existing record.
@@ -43,6 +43,7 @@ class NoundStore extends ReduceStore {
             case NoundAEActionTypes.CLICK_DELETE_NOUND:
                 return state.delete(action.id)
 
+            // Insert a new record programmatically, w/o a UI.
             case NoundActionTypes.INSERT_NOUND:
                 return insertNewRecord(action.nound)
 
