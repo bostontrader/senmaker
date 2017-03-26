@@ -18,7 +18,6 @@ function VerbdPanel(props) {
     }
 
     const s = props.strings
-console.log('VerbdPanel',JSON.stringify(props.verbd.toJSON()))
     // What should be displayed in the verbd add/edit panel?
     let verbAddEditForm = <div></div>  // we really want nothing here
     if(props.verbd.getIn(['addEditVerbd','verbd','id'])) {

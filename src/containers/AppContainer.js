@@ -4,16 +4,17 @@ import {Map}       from 'immutable'
 import AppActions     from '../data/AppActions'
 import AppStore       from '../data/AppStore'
 
-import NoundAEStore   from '../data/dictionary/nound/addedit/NoundAEStore'
+import NoundActions   from '../data/dictionary/nound/NoundActions'
 import NoundAEActions from '../data/dictionary/nound/addedit/NoundAEActions'
+import NoundAEStore   from '../data/dictionary/nound/addedit/NoundAEStore'
 import NoundStore     from '../data/dictionary/nound/NoundStore'
 
-import VerbdAEStore   from '../data/dictionary/verbd/addedit/VerbdAEStore'
 import VerbdAEActions from '../data/dictionary/verbd/addedit/VerbdAEActions'
+import VerbdAEStore   from '../data/dictionary/verbd/addedit/VerbdAEStore'
 import VerbdStore     from '../data/dictionary/verbd/VerbdStore'
 
-import NouniActions   from '../data/nouni/NouniActions'
-import NouniAEStore   from '../data/nouni/NouniAEStore'
+import NouniAEActions from '../data/nouni/addedit/NouniAEActions'
+import NouniAEStore   from '../data/nouni/addedit/NouniAEStore'
 import NouniStore     from '../data/nouni/NouniStore'
 
 import StringActions  from '../data/StringActions'
@@ -43,26 +44,11 @@ function getState() {
         lang: AppStore.getState().get('lang'),
 
         level: AppStore.getState().get('level'),
+        mostRecentlySelectedNound: AppStore.getState().get('mostRecentlySelectedNound'),
         onLevelPrevious: AppActions.levelPrevious,
         onLevelNext: AppActions.levelNext,
         onLevelReset: AppActions.levelReset,
         onSetQuizScore: AppActions.setQuizScore,
-
-        // instantiated nound
-        nouni: AppStore.getState().get('nouni'),
-        onChangeDefiniteness: NouniActions.changeDefiniteness,
-        //onChangeSelectedNoun: (n) => {console.log('AppContainer onSelectedNounChanged =',n)},
-        //onChangeSelectedNoun: NouniActions.changeSelectedNoun, // move this to nound?
-        //onInsertNouni: AppActions.insertNouni,
-        addEditNouni: NouniAEStore.getState(),
-        //onAddNouni: NouniDictionaryItemActions.addNouni,
-        //onCancelNouni: NouniDictionaryItemActions.cancel,
-        //onChangeNouniBase: NouniDictionaryItemActions.changeBase,
-        //onDeleteNouni: NouniDictionaryItemActions.deleteNouni,
-        //onClickEditNouni: NouniDictionaryItemActions.editNouni,
-        //onInsertNouni: NouniDictionaryItemActions.insertNouni,
-        //onUpdateNouni: NouniDictionaryItemActions.updateNouni,
-
         strings: StringStore.getState(),
         onLangEng: StringActions.langEng,
         onLangChn: StringActions.langChn,
@@ -71,23 +57,27 @@ function getState() {
         nound: Map({
             addEditNound: NoundAEStore.getState(),
             nouns: NoundStore.getState(),
-            //selectedNounId: NoundStore.getState().get('selectedNounId'),
-            //onChangeSelectedNoun: NoundActions.changeSelectedNoun,
+            onChangeSelectedNound: NoundActions.onChangeSelectedNound,
+            onChangeNoundBase: NoundAEActions.onChangeBase,
 
             onClickAddNound: NoundAEActions.clickAddNound,
             onClickCancel: NoundAEActions.clickCancel, // target only the NoundAEStore
             onClickDeleteNound: NoundAEActions.clickDeleteNoun,
             onClickEditNound: NoundAEActions.clickEditNound,
             onClickSaveNound: NoundAEActions.clickSaveNound,
-            onChangeNoundBase: NoundAEActions.onChangeBase,
         }),
-        
+
+        // noun dictionary
+        nouni: Map({
+            addEditNouni: NouniAEStore.getState(),
+            onChangeDefiniteness: NouniAEActions.onChangeDefiniteness,
+        }),
+
         // verb dictionary
         verbd: Map({
             addEditVerbd: VerbdAEStore.getState(),
             verbs: VerbdStore.getState(),
-            //selectedVerbId: VerbdStore.getState().get('selectedVerbId'),
-            //onChangeSelectedVerb: VerbdActions.changeSelectedVerb,
+            //onChangeSelectedVerbd: VerbdActions.onChangeSelectedVerbd,
 
             onClickAddVerbd: VerbdAEActions.clickAddVerbd,
             onClickCancel: VerbdAEActions.clickCancel, // target only the VerbdAEStore

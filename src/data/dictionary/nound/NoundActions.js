@@ -8,6 +8,13 @@ const NoundActions = {
             type: NoundActionTypes.INSERT_NOUND,
             nound: nound
         })
+    },
+    onChangeSelectedNound(nound) {
+        //console.log('C. NoundActions onChangeSelectedNoun',nound)
+        AppDispatcher.dispatch({
+            type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
+            nound: nound
+        })
     }
 }
 

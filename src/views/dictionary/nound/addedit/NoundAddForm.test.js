@@ -27,9 +27,9 @@ describe("NoundAddForm", () => {
         }
 
         const renderExpression = <NoundAddForm {...props} />
-        const nounAddForm = TestUtils.createRenderer().render(renderExpression)
-        expect(nounAddForm.type).toBe('div')
-        //expect(nounAddForm.props.children.length).toBe(4)
+        const noundAddForm = TestUtils.createRenderer().render(renderExpression)
+        expect(noundAddForm.type).toBe('div')
+        //expect(noundAddForm.props.children.length).toBe(4)
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
@@ -50,9 +50,9 @@ describe("NoundAddForm", () => {
             strings:strings
         }
         const renderExpression = <NoundAddForm {...props} />
-        const nounAddForm = TestUtils.createRenderer().render(renderExpression)
-        expect(nounAddForm.type).toBe('div')
-        //expect(nounAddForm.props.children.length).toBe(5)
+        const noundAddForm = TestUtils.createRenderer().render(renderExpression)
+        expect(noundAddForm.type).toBe('div')
+        //expect(noundAddForm.props.children.length).toBe(5)
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()

@@ -140,4 +140,24 @@ describe('NoundStore', function() {
             {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
         ])
     })
+
+    //it('ON_CHANGE_SELECTED_NOUND', function() {
+        //expect(this.nouns()).toEqual([])
+        //this.addNouns([
+            //{base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s},
+            //{base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
+            //{base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
+        //])
+        // In this test, the value of id is unused.
+        //this.dispatch({
+            //type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
+            //nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+        //})
+        //console.log('AppStore.test',this.state)
+        //expect(this.state.get('mostRecentSelectedNound')).toEqual([
+        //{id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+        //])
+        //expect(true)
+    //})
+
 })

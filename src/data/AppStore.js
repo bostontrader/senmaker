@@ -4,6 +4,8 @@ import {ReduceStore} from 'flux/utils'
 import AppActionTypes from './AppActionTypes'
 import AppDispatcher  from './AppDispatcher'
 import {langCode}     from './I18NConstants'
+import Nound              from './dictionary/nound/Nound'
+import NoundActionTypes   from './dictionary/nound/NoundActionTypes'
 import NoundAEActionTypes from './dictionary/nound/addedit/NoundAEActionTypes'
 import {NoundPanelLevel}  from './dictionary/nound/NoundConstants'
 import VerbdAEActionTypes from './dictionary/verbd/addedit/VerbdAEActionTypes'
@@ -55,6 +57,7 @@ class AppStore extends ReduceStore {
 
         switch (action.type) {
 
+            // AppActionTypes
             case AppActionTypes.LANG_EN:
                 newState = state.set('lang',langCode.en)
                 break
@@ -98,6 +101,14 @@ class AppStore extends ReduceStore {
                 newState = state.setIn(['level','quizResults',state.getIn(['level','currentLevel'])],action.score)
                 break
 
+
+            // NoundActiontypes
+            case NoundActionTypes.ON_CHANGE_SELECTED_NOUND:
+                //console.log('C1. AppStore reduce ON_CHANGE_SELECTED_NOUND:',action.nound)
+                newState = state.set('mostRecentlySelectedNound',action.nound)
+                //console.log('C1. AppStore reduce ON_CHANGE_SELECTED_NOUND:',JSON.stringify(newState.get('mostRecentlySelectedNound').toJSON()))
+
+                break
 
             // NoundAEActionTypes...
             case NoundAEActionTypes.CLICK_SAVE_NOUND:
@@ -175,7 +186,8 @@ AppStore.initialState = Map({
         }),
         quizResults: new List().push(false) // Level 00 starts with passed quiz = false
     }),
-    nouni: Map()    // nound, instantiated
+    mostRecentlySelectedNound:Nound()
+    //nouni: Map()    // nound, instantiated
 })
 
 export default new AppStore()

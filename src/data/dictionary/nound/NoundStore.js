@@ -47,6 +47,10 @@ class NoundStore extends ReduceStore {
             case NoundActionTypes.INSERT_NOUND:
                 return insertNewRecord(action.nound)
 
+            //case NoundActionTypes.ON_CHANGE_SELECTED_NOUND:
+                //console.log('NoundStore ON_CHANGE_SELECTED_NOUND',action)
+                //return state
+
             default:
                 return state
         }

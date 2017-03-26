@@ -1,4 +1,4 @@
-import React from 'react'
+import React  from 'react'
 import Select from 'react-select'
 
 function NoundSelect(props) {
@@ -7,9 +7,11 @@ function NoundSelect(props) {
         return {value:noun.get('id'), label:noun.get('base')}
     })
 
-    const selectedValue = props.nound.getIn(['selectedNounId'])
-
-    return <Select options={options} value={selectedValue} placeholder="Select a noun..." onChange={(e)=>{ props.nound.getIn(['onChangeSelectedNoun'])(e)}}/>
+    const selectedValue = props.mostRecentlySelectedNound.getIn(['id'])
+    return <Select options={options} value={selectedValue} placeholder="Select a noun..." onChange={(e)=>{
+        const nound = props.nound.getIn(['nouns']).get(e.value)
+        props.nound.getIn(['onChangeSelectedNound'])(nound)
+    }}/>
 
 }
 
