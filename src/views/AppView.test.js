@@ -45,7 +45,10 @@ it('Renders Level02', () => {
     const props = {
         addEditVerb: VerbdAEStore.getInitialState(),
         level:AppStore.getInitialState(),
-        verbs: OrderedMap(),
+        verbd: Map({
+            addEditVerbd: VerbdAEStore.getInitialState(),
+            verbs: OrderedMap()
+        }),
         strings:StringStore.getInitialState()
     }
 

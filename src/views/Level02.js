@@ -13,13 +13,13 @@ function Level02(props) {
     const s = props.strings.Level02
 
     const quizInsertVerbFlag = props.level.getIn(['quizQuestions','insertVerbd']) ?
-        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="insertVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     const quizUpdateVerbFlag = props.level.getIn(['quizQuestions','updateVerbd']) ?
-        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="updateVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     const quizDeleteVerbFlag = props.level.getIn(['quizQuestions','deleteVerbd']) ?
-        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="deleteVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     return(
         <div>

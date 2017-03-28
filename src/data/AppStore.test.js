@@ -19,18 +19,18 @@ describe('AppStore', function() {
         }
     })
 
-    describe('Misc', function() {
-        it('ON_CHANGE_SELECTED_NOUND', function() {
+    //describe('Misc', function() {
+        //it('ON_CHANGE_SELECTED_NOUND', function() {
             // In this test, the value of id is unused.
-            this.dispatch({
-                type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
-                nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
-            })
-            expect(this.state.get('mostRecentlySelectedNound').toJSON()).toEqual(
-                {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
-            )
-        })
-    })
+            //this.dispatch({
+                //type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
+                //nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            //})
+            //expect(this.state.get('mostRecentlySelectedNound').toJSON()).toEqual(
+                //{id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            //)
+        //})
+    //})
 
     describe('Nound', function() {
 

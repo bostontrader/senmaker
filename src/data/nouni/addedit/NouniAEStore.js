@@ -7,6 +7,7 @@ import NouniAEActionTypes from './NouniAEActionTypes'
 import AppDispatcher      from '../../AppDispatcher'
 
 import {localStorageAvailable} from '../../../LocalStorage'
+import {DefinitenessSelect} from '../NouniConstants'
 
 const localStorageKey = 'NouniAEStore'
 
@@ -91,14 +92,31 @@ class NouniAEStore extends ReduceStore {
 
             let article = ''
 
-            if(definiteness === 'definite') {article = 'the'}
-            if(definiteness === 'indefinite') {
+            if(definiteness === DefinitenessSelect.Definite) {article = 'the'}
+            if(definiteness === DefinitenessSelect.Indefinite) {
                 article = testStartWithVowel === true ? 'an' : 'a'
             }
 
             let generatedText = ''
-            if(article !== '' && nound.base !=='')
-                generatedText = article + ' ' + nound.base
+            if(article === '') {
+                if(nound.base === '') {
+                    // no article, no base, no result
+                } else {
+                    // no article, but there is a base, so use that as the result
+                    generatedText = nound.base
+                }
+            } else {
+                if(nound.base === '') {
+                    // an article, but no base, no result
+                } else {
+                    // an article and a base, we can use that
+                    generatedText = article + ' ' + nound.base
+                }
+            }
+
+
+            //if(article !== '' && nound.base !=='')
+                //generatedText = article + ' ' + nound.base
 
             return generatedText
             // if indefinite, then disable plural and singular

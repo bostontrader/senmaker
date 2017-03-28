@@ -38,7 +38,7 @@ function getStores() {
 function getState() {
 
     // It's tempting to try to make this a single atom of immutable state. However, the immutable object
-    // you try to create here will be converted by deus ex machina into an ordinary Object, devoid of the
+    // you try to create here will be converted by deus ex machina into an ordinary JS Object, devoid of the
     // immutable methods.
     return {
         lang: AppStore.getState().get('lang'),
@@ -53,7 +53,8 @@ function getState() {
         onLangEng: StringActions.langEng,
         onLangChn: StringActions.langChn,
 
-        // noun dictionary
+        // A dictionary of available nouns.  We will instantiate as many copies of these
+        // definitions as we need, as nouni.
         nound: Map({
             addEditNound: NoundAEStore.getState(),
             nouns: NoundStore.getState(),
@@ -67,13 +68,14 @@ function getState() {
             onClickSaveNound: NoundAEActions.clickSaveNound,
         }),
 
-        // noun dictionary
+        // A collection of instantiated nound.
         nouni: Map({
             addEditNouni: NouniAEStore.getState(),
             onChangeDefiniteness: NouniAEActions.onChangeDefiniteness,
         }),
 
-        // verb dictionary
+        // A dictionary of available verbs.  We will instantiate as many copies of these
+        // definitions as we need, as verbi.
         verbd: Map({
             addEditVerbd: VerbdAEStore.getState(),
             verbs: VerbdStore.getState(),

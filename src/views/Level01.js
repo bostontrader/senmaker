@@ -13,13 +13,13 @@ function Level01(props) {
     const s = props.strings.Level01
 
     const quizInsertNounFlag = props.level.getIn(['quizQuestions','insertNound']) ?
-        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="insertNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     const quizUpdateNounFlag = props.level.getIn(['quizQuestions','updateNound']) ?
-        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="updateNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     const quizDeleteNounFlag = props.level.getIn(['quizQuestions','deleteNound']) ?
-        <img className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="deleteNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     return(
         <div>

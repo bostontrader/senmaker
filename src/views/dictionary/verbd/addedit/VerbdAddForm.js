@@ -19,9 +19,10 @@ function VerbdAddForm(props) {
                 <input type='submit' value={s.save} onClick={onInsert}/>
                 <button onClick={props.onCancelVerb}>{s.cancel}</button>
             </div>
+
     } else if(props.level.getIn(['currentAppLevelConfig', 'verbdPanel']) >= VerbdPanelLevel.BASE) {
         verbdAddForm =
-            <div>
+            <div id="verbd-add-form">
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text' value={props.verbd.getIn(['addEditVerbd','verbd','base'])} onChange={(e)=>props.verbd.getIn(['onChangeVerbdBase'])(e.target.value)} />
                 <button id='save-verbd' onClick={onClickSave}>{s.save}</button>

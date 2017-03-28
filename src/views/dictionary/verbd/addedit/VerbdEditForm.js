@@ -15,7 +15,7 @@ function VerbdEditForm(props) {
     let verbdEditForm = null
     if(props.level.getIn(['currentAppLevelConfig','verbdPanel']) >= VerbdPanelLevel.PAST_TENSE) {
         verbdEditForm =
-            <div>
+            <div id="verbd-edit-form">
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text' value={props.addEditVerb.getIn(['verb','base'])} onChange={(e)=>props.onChangeVerbBase(e.target.value)}/>
                 <PastTenseRuleSelect pastTense_rule={props.editingVerb.pastTense_rule}/>

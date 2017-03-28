@@ -19,9 +19,10 @@ function NoundAddForm(props) {
                 <input type='submit' value={s.save} onClick={onInsert}/>
                 <button onClick={props.onCancelNoun}>{s.cancel}</button>
             </div>
+
     } else if(props.level.getIn(['currentAppLevelConfig', 'noundPanel']) >= NoundPanelLevel.BASE) {
         noundAddForm =
-            <div>
+            <div id="nound-add-form">
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text' value={props.nound.getIn(['addEditNound','nound','base'])} onChange={(e)=>props.nound.getIn(['onChangeNoundBase'])(e.target.value)} />
                 <button id='save-nound' onClick={onClickSave}>{s.save}</button>
