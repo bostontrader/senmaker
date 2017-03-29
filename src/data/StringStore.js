@@ -68,19 +68,20 @@ StringStore.en = {
 
     // Definite or Indefinite noun
     Level03: {
-        help10: 'Definite or Indefinite.',
-        help11: 'Nouns are usually preceded by the word \'a\', \'an\', or \'the\'.',
-        help12: 'If we have a group of similar items and we are talking about any one of them, then which particular item we are talking about is said to be \'indefinite\' and we use \'a\' or \'an\'.',
-        help13: 'In this case we use \'a\' when the noun starts with a consonant and \'an\' when the noun starts with a vowel. We use this rule in order to make pronunciation better.',
-        help14: 'For example: Buy a car. Which car to buy is indefinite.',
-        help15: 'For example: Buy an apple. Which apple to buy is also indefinite.',
+        help10: '确定（Definite）或不确定（Indefinite）',
+        help11: '名词通常这个词之前\'a\', \'an\',或\'the\'.',
+        help12: '如果我们有一组类似的项目和我们谈论任何其中之一, 哪些特定的项目我们正在讨论 \'indefinite\' 我们使用 \'a\' 或 \'an\'.',
+        help13: '在本例中，如果名词以元音开头则使用\'an\'，如果名词以辅音开头则使用\'a\'. 我们使用这个规则是为了使发音更好.',
+        help14: '例如:买一辆车（a car). 去买哪一辆车？（indefinite）',
+        help15: '例如: 买一个苹果（an apple). 买哪个苹果？（indefinite）.',
 
-        help16: 'If we only have a single item, then the identity of that items is definite, so we can use \'the.\'.',
-        help17: 'For example: Buy the car. Which particular car is already known and is definite.',
-        quiz1: 'Select a noun',
-        quiz2: 'Select \'definite\' or \'indefinite\'.',
-        quiz3: 'Can you see that the article changes?'
+        help16: '如果我们有一个项目, 物品的身份不明确, 所以我们可以使用\'the.\'.',
+        help17: '例如: 买那辆车`. 已经明确知道哪辆车.',
+        quiz1: '选择一个名词的',
+        quiz2: '选择 确定（\'definite\'） 或 不确定（\'indefinite\'）.',
+        quiz3: '你能看到名词的变化吗?'
     },
+
 
     // Phrase
     Level04: {
