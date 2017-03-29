@@ -50,7 +50,7 @@ class NouniAEStore extends ReduceStore {
         let newState
 
         const calcResultText = (definiteness, nound) => {
-
+            console.log(definiteness, JSON.stringify(nound.toJSON()))
             // Graft in this ugly code from another project...
             // http://www.ef.com/english-resources/english-grammar/singular-and-plural-nouns
             //const noun = this.state.selectedNoun
@@ -64,7 +64,8 @@ class NouniAEStore extends ReduceStore {
             //const n1 = noun.slice(-1)
             //const n2 = noun.slice(-2)
             //const n3 = noun.slice(-2,2)
-            const n4 = nound.base.slice(0,1)
+            const base = nound.get('base')
+            const n4 = base.slice(0,1)
 
             //const test1 = !(n[noun] === undefined)
             //const test2 = !(es[n1] === undefined && es[n2] === undefined)
@@ -92,25 +93,30 @@ class NouniAEStore extends ReduceStore {
 
             let article = ''
 
+            // Ugly hack
+            if(definiteness === "definite") definiteness = DefinitenessSelect.Definite
+            if(definiteness === "indefinite") definiteness = DefinitenessSelect.Indefinite
+
             if(definiteness === DefinitenessSelect.Definite) {article = 'the'}
             if(definiteness === DefinitenessSelect.Indefinite) {
                 article = testStartWithVowel === true ? 'an' : 'a'
             }
 
+            console.log("a=",article,"b=",base)
             let generatedText = ''
             if(article === '') {
-                if(nound.base === '') {
+                if(base === '') {
                     // no article, no base, no result
                 } else {
                     // no article, but there is a base, so use that as the result
-                    generatedText = nound.base
+                    generatedText = base
                 }
             } else {
-                if(nound.base === '') {
+                if(base === '') {
                     // an article, but no base, no result
                 } else {
                     // an article and a base, we can use that
-                    generatedText = article + ' ' + nound.base
+                    generatedText = article + ' ' + base
                 }
             }
 

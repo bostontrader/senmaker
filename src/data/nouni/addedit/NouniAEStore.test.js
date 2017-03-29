@@ -1,6 +1,7 @@
 import NoundActionTypes    from '../../dictionary/nound/NoundActionTypes'
 import {PluralizationRule} from '../../dictionary/nound/NoundConstants'
 
+import Nound                from '../../dictionary/nound/Nound'
 import NouniAEActionTypes   from './NouniAEActionTypes'
 import NouniAEStore         from './NouniAEStore'
 import {DefinitenessSelect} from '../NouniConstants'
@@ -19,14 +20,13 @@ describe('NouniAEStore', function() {
     })
 
     it('Test calcResult', function() {
-        console.log(this.state.getIn(['nouni','generatedText']))
         expect(this.state.getIn(['nouni','generatedText'])).toEqual('')
 
         // 1. Nound, but no definiteness. Only base form of noun.
         // In this test, the value of id is unused.
         this.dispatch({
             type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
-            nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            nound: Nound({id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
         })
         expect(this.state.getIn(['nouni','generatedText'])).toEqual('box')
 
@@ -37,14 +37,14 @@ describe('NouniAEStore', function() {
         })
         this.dispatch({ // Fake reset to no selected nound
             type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
-            nound: {id:'', base: '', plural: '', pluralization_rule: PluralizationRule.NoneSelected}
+            nound: Nound({id:'', base: '', plural: '', pluralization_rule: PluralizationRule.NoneSelected})
         })
         expect(this.state.getIn(['nouni','generatedText'])).toEqual('')
 
         // 3. Now give it a noun and expect the definite form.
         this.dispatch({
             type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
-            nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            nound: Nound({id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
         })
         expect(this.state.getIn(['nouni','generatedText'])).toEqual('the box')
 
@@ -58,7 +58,7 @@ describe('NouniAEStore', function() {
         // 5. Indefinite, nound.base does start with vowel.
         this.dispatch({
             type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
-            nound: {id:'n-666', base: 'elephant', plural: 'elephants', pluralization_rule: PluralizationRule.Append_s}
+            nound: Nound({id:'n-666', base: 'elephant', plural: 'elephants', pluralization_rule: PluralizationRule.Append_s})
         })
         expect(this.state.getIn(['nouni','generatedText'])).toEqual('an elephant')
 
@@ -69,10 +69,9 @@ describe('NouniAEStore', function() {
         // In this test, the value of id is unused.
         this.dispatch({
             type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
-            nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            nound: Nound({id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
         })
-        expect(true)
-        expect(this.state.getIn(['nouni','nound'])).toEqual({id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
+        expect(this.state.getIn(['nouni','nound']).toJSON()).toEqual({id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
     })
 
 

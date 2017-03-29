@@ -10,7 +10,7 @@ import NoundAEActionTypes from './dictionary/nound/addedit/NoundAEActionTypes'
 import {NoundPanelLevel}  from './dictionary/nound/NoundConstants'
 import VerbdAEActionTypes from './dictionary/verbd/addedit/VerbdAEActionTypes'
 import {VerbdPanelLevel}  from './dictionary/verbd/VerbdConstants'
-
+import NouniAEActionTypes from './nouni/addedit/NouniAEActionTypes'
 import {localStorageAvailable} from '../LocalStorage'
 
 const localStorageKey = 'AppStore'
@@ -39,7 +39,7 @@ class AppStore extends ReduceStore {
 
         let newState
 
-        // Has the quiz for Noun CRUD been completed?
+        // Has the quiz for Level01 Noun CRUD been completed?
         function nounCRUDQuizPassed(state) {
             const quizInsertNounFlag = state.getIn(['level','quizQuestions','insertNound'])
             const quizUpdateNounFlag = state.getIn(['level','quizQuestions','updateNound'])
@@ -47,12 +47,21 @@ class AppStore extends ReduceStore {
             return quizInsertNounFlag && quizUpdateNounFlag && quizDeleteNounFlag
         }
 
-        // Has the quiz for Verb CRUD been completed?
+        // Has the quiz for Level02 Verb CRUD been completed?
         function verbCRUDQuizPassed(state) {
             const quizInsertVerbFlag = state.getIn(['level','quizQuestions', 'insertVerbd'])
             const quizUpdateVerbFlag = state.getIn(['level','quizQuestions', 'updateVerbd'])
             const quizDeleteVerbFlag = state.getIn(['level','quizQuestions', 'deleteVerbd'])
             return quizInsertVerbFlag && quizUpdateVerbFlag && quizDeleteVerbFlag
+        }
+
+        // Has the quiz for Level03 Nouni been completed?
+        function nouniQuizPassed(state) {
+            return (
+                state.getIn(['level','quizQuestions', 'definitenessChanged']) &&
+                state.getIn(['level','quizQuestions', 'noundChanged']) &&
+                state.getIn(['level','quizQuestions', 'iseeArticleChanged'])
+            )
         }
 
         switch (action.type) {
@@ -104,10 +113,10 @@ class AppStore extends ReduceStore {
 
             // NoundActiontypes
             case NoundActionTypes.ON_CHANGE_SELECTED_NOUND:
-                //console.log('C1. AppStore reduce ON_CHANGE_SELECTED_NOUND:',action.nound)
                 newState = state.set('mostRecentlySelectedNound',action.nound)
-                //console.log('C1. AppStore reduce ON_CHANGE_SELECTED_NOUND:',JSON.stringify(newState.get('mostRecentlySelectedNound').toJSON()))
-
+                newState = newState.setIn(['level','quizQuestions','noundChanged'],true)
+                if(nouniQuizPassed(newState))
+                    newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
                 break
 
             // NoundAEActionTypes...
@@ -128,6 +137,12 @@ class AppStore extends ReduceStore {
                     newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
                 break
 
+            // NouniAEActionTypes
+            case NouniAEActionTypes.ON_CHANGE_DEFINITENESS:
+                newState = state.setIn(['level','quizQuestions','definitenessChanged'],true)
+                if(nouniQuizPassed(newState))
+                    newState = newState.setIn(['level','quizResults',newState.getIn(['level','currentLevel'])],true)
+                break
 
             // VerbdAEActionTypes...
             case VerbdAEActionTypes.CLICK_SAVE_VERBD:
@@ -177,12 +192,17 @@ AppStore.initialState = Map({
         minLevel:true,      // is this is lowest possible level?
         maxLevel:false,     // is this the highest possible level?
         quizQuestions: new Map({
-            insertNound: false,
+            insertNound: false, // Level01
             updateNound: false,
             deleteNound: false,
-            insertVerbd: false,
+
+            insertVerbd: false, // Level02
             updateVerbd: false,
-            deleteVerbd: false
+            deleteVerbd: false,
+
+            definitenessChanged: false, // Level03
+            noundChanged       : false,
+            iseeArticleChanged : false
         }),
         quizResults: new List().push(false) // Level 00 starts with passed quiz = false
     }),

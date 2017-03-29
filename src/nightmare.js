@@ -35,7 +35,7 @@ describe('Starting at Level00', () => {
                     return nightmare
                         .click('#add-nound')
                         .type('#base', 'carrot')
-                        .click('#save-nound') .wait(1000)
+                        .click('#save-nound')
 
                         // The NoundAddForm should now go away.
                         .evaluate(function() {
@@ -56,7 +56,7 @@ describe('Starting at Level00', () => {
                     throw('insertNoundCheck did not appear after save')
                 return nightmare
                     .click('#n-1')
-                    .click('#cancel').wait(1000)
+                    .click('#cancel')
                     .evaluate(function() {
                         return document.querySelector('#nound-edit-form') === null
                     })
@@ -65,8 +65,8 @@ describe('Starting at Level00', () => {
                 if (!nound_edit_form_gone)
                     throw('nound-edit-form has not gone away after cancel')
                 return nightmare
-                    .click('#n-1') .wait(250)
-                    .type('#base', 'beaver'). wait(250)
+                    .click('#n-1')
+                    .type('#base', 'beaver')
                     .click('#save-nound') .wait(250)
                     .evaluate(function() {
                         return document.querySelector('#nound-edit-form') === null
@@ -143,8 +143,8 @@ describe('Starting at Level00', () => {
                 if (!insertVerbdCheckFound)
                     throw('insertVerbdCheck did not appear after save')
                 return nightmare
-                    .click('#v-1') .wait(1000)
-                    .click('#cancel').wait(1000)
+                    .click('#v-1')
+                    .click('#cancel')
                     .evaluate(function() {
                         return document.querySelector('#verbd-edit-form') === null
                     })
@@ -172,7 +172,7 @@ describe('Starting at Level00', () => {
                 if (!updateVerbdCheckFound)
                     throw('updateVerbdCheck did not appear after save')
                 return nightmare
-                    .click('#v-1') .wait(250)
+                    .click('#v-1')
                     .click('#delete-verbd') .wait(250)
                     .evaluate(function() {
                         return document.querySelector('#verbd-edit-form') === null
@@ -189,11 +189,21 @@ describe('Starting at Level00', () => {
             .then(deleteVerbdCheckFound => {
                 if (!deleteVerbdCheckFound)
                     throw('deleteVerbdCheck did not appear after delete')
+                return nightmare
+                    .click('#level-next').wait(1000)      // goto level 03
+                    .click('input[type="radio"]').wait(1000)
+                    .evaluate(function() {
+                        return document.querySelector('#changeDefinitenessCheck') !== null
+                    })
+            })
+            .then(changeDefinitenessCheckFound => {
+                if (!changeDefinitenessCheckFound)
+                    throw('changeDefinitenessCheck did not appear')
             })
             .then(resolve => {
                 done()
             })
             .catch(err => {console.log(err),done()})
-    }).timeout(15000)
+    }).timeout(14000)
 
 })

@@ -13,15 +13,14 @@ function Level03(props) {
 
     const s = props.strings.Level03
 
-    // if existing nouni, read it, else
-    // make new nouni
-    //AppActions.insertNouni({
-        //ui:false,
-        //noun:{base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s}
-        //noun: {},
-        //definiteness:''
-    //})
-    //props.onAddNoun}>{s.add_new} {s.noun}</button> opens the UI
+    const quizOnNoundChangedFlag = props.level.getIn(['quizQuestions','noundChanged']) ?
+        <img id="xxxupdateVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+
+    const quizOnDefinitenessChangedFlag = props.level.getIn(['quizQuestions','definitenessChanged']) ?
+        <img id="changeDefinitenessCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+
+    const quizIseeArticleChangedFlag = props.level.getIn(['quizQuestions','iseeArticleChanged']) ?
+        <img id="xxx" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     return(
         <div>
@@ -39,9 +38,22 @@ function Level03(props) {
 
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
-                <p>{s.quiz1}</p>
-                <p>{s.quiz2}</p>
-                <p>{s.quiz3}</p>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td><p>{s.quiz1}</p></td>
+                        <td>{quizOnNoundChangedFlag}</td>
+                    </tr>
+                    <tr>
+                        <td><p>{s.quiz2}</p></td>
+                        <td>{quizOnDefinitenessChangedFlag}</td>
+                    </tr>
+                    <tr>
+                        <td><p>{s.quiz3}</p></td>
+                        <td>{quizIseeArticleChangedFlag}</td>
+                    </tr>
+                    </tbody>
+                </table>
                 <p>
                     <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
                     {props.strings.i_understand}

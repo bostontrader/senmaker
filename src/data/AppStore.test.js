@@ -1,10 +1,12 @@
 import AppActionTypes from './AppActionTypes'
 import AppStore from './AppStore'
 
-import NoundActionTypes    from './dictionary/nound/NoundActionTypes'
-import {PluralizationRule} from './dictionary/nound/NoundConstants'
-import NoundAEActionTypes  from './dictionary/nound/addedit/NoundAEActionTypes'
-import VerbdAEActionTypes  from './dictionary/verbd/addedit/VerbdAEActionTypes'
+import NoundActionTypes     from './dictionary/nound/NoundActionTypes'
+import {PluralizationRule}  from './dictionary/nound/NoundConstants'
+import NoundAEActionTypes   from './dictionary/nound/addedit/NoundAEActionTypes'
+import VerbdAEActionTypes   from './dictionary/verbd/addedit/VerbdAEActionTypes'
+import {DefinitenessSelect} from './nouni/NouniConstants'
+import NouniAEActionTypes   from './nouni/addedit/NouniAEActionTypes'
 
 describe('AppStore', function() {
 
@@ -19,18 +21,30 @@ describe('AppStore', function() {
         }
     })
 
-    //describe('Misc', function() {
-        //it('ON_CHANGE_SELECTED_NOUND', function() {
-            // In this test, the value of id is unused.
-            //this.dispatch({
-                //type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
-                //nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
-            //})
-            //expect(this.state.get('mostRecentlySelectedNound').toJSON()).toEqual(
-                //{id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
-            //)
-        //})
-    //})
+    describe('Nouni', function() {
+        it('ON_CHANGE_SELECTED_NOUND', function() {
+            expect(this.state.getIn(['level','quizQuestions','noundChanged'])).toBe(false)
+
+            this.dispatch({
+                type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
+                nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            })
+            expect(this.state.get('mostRecentlySelectedNound')).toEqual(
+                {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            )
+            expect(this.state.getIn(['level','quizQuestions','noundChanged'])).toBe(true)
+
+        })
+
+        it('ON_CHANGE_DEFINITENESS', function() {
+            expect(this.state.getIn(['level','quizQuestions','definitenessChanged'])).toBe(false)
+            this.dispatch({
+                type: NouniAEActionTypes.ON_CHANGE_DEFINITENESS,
+                newDefiniteness: DefinitenessSelect.Definite
+            })
+            expect(this.state.getIn(['level','quizQuestions','definitenessChanged'])).toBe(true)
+        })
+    })
 
     describe('Nound', function() {
 
