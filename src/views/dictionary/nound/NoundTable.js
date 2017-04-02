@@ -6,8 +6,8 @@ import NoundRow from './NoundRow'
 function NoundTable(props) {
 
     let noundTable = null
-    const level = props.level.getIn(['currentAppLevelConfig','noundPanel'])
-    if( level >= NoundPanelLevel.PLURALIZATION) {
+    //const level = props.level.getIn(['currentAppLevelConfig','noundPanel'])
+    /*if( level >= NoundPanelLevel.PLURALIZATION) {
         noundTable =
             <table id="nound-list">
                 <thead>
@@ -31,7 +31,7 @@ function NoundTable(props) {
                     ))}
                 </tbody>
             </table>
-    } else if( level >= NoundPanelLevel.BASE) {
+    } else if( level >= NoundPanelLevel.BASE) {*/
         noundTable =
             <table id="nound-list">
                 <thead>
@@ -42,19 +42,11 @@ function NoundTable(props) {
                 </thead>
                 <tbody>
                     {[...props.nound.getIn(['nouns']).values()].map(noun => (
-                        <NoundRow
-                            key={noun.id}
-                            editing={props.nound.getIn(['editingNoun'])}
-                            noun={noun}
-                            level={level}
-                            onDeleteNoun={props.nound.getIn(['onDeleteNoun'])}
-                            onClickEditNound={props.nound.getIn(['onClickEditNound'])}
-                            strings = {props.strings}
-                        />
+                        <NoundRow key={noun.id} noun={noun} {...props} />
                     ))}
                 </tbody>
             </table>
-    }
+    //}
 
     return(noundTable)
 }

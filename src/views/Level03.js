@@ -13,20 +13,19 @@ function Level03(props) {
 
     const s = props.strings.Level03
 
-    const quizOnNoundChangedFlag = props.level.getIn(['quizQuestions','noundChanged']) ?
-        <img id="xxxupdateVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+    const quizOnNoundChangedFlag = q.getIn(['nound','iunderstand']) ?
+        <img id="changeNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizOnDefinitenessChangedFlag = props.level.getIn(['quizQuestions','definitenessChanged']) ?
+    const quizOnDefinitenessChangedFlag = q.getIn(['nound','iunderstand']) ?
         <img id="changeDefinitenessCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizIseeArticleChangedFlag = props.level.getIn(['quizQuestions','iseeArticleChanged']) ?
-        <img id="xxx" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+    const quizIseeArticleChangedFlag = q.getIn(['nound','iunderstand']) ?
+        <img id="iseeArticleChangedCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     return(
         <div>
             <div className="help" style={style}>
-                <h1>Definite or Indefinite</h1>
-                <p>{s.help10}</p>
+                <h1>{s.help10}</h1>
                 <p>{s.help11}</p>
                 <p>{s.help12}</p>
                 <p>{s.help13}</p>
@@ -49,15 +48,18 @@ function Level03(props) {
                         <td>{quizOnDefinitenessChangedFlag}</td>
                     </tr>
                     <tr>
-                        <td><p>{s.quiz3}</p></td>
+                        <td>
+                            <p>{s.quiz3}</p>
+                            <p>
+                                <input  id="iseeArticleChanged" onChange={props.quiz.get('onIseeArticleChanged')} type="checkbox" checked={props.level.get('quiz')} />
+                                {'I can see it change'}
+                            </p>
+                        </td>
                         <td>{quizIseeArticleChangedFlag}</td>
                     </tr>
                     </tbody>
                 </table>
-                <p>
-                    <input onChange={props.onQuizToggle} type="checkbox" checked={props.level.get('quiz')} />
-                    {props.strings.i_understand}
-                </p>
+
             </div>
             <LevelControl {...props} />
         </div>

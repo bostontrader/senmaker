@@ -7,6 +7,7 @@ import NoundAEActionTypes   from './dictionary/nound/addedit/NoundAEActionTypes'
 import VerbdAEActionTypes   from './dictionary/verbd/addedit/VerbdAEActionTypes'
 import {DefinitenessSelect} from './nouni/NouniConstants'
 import NouniAEActionTypes   from './nouni/addedit/NouniAEActionTypes'
+import Syllabus             from './syllabus/Syllabus'
 
 describe('AppStore', function() {
 
@@ -21,32 +22,50 @@ describe('AppStore', function() {
         }
     })
 
-    describe('Nouni', function() {
-        it('ON_CHANGE_SELECTED_NOUND', function() {
-            expect(this.state.getIn(['level','quizQuestions','noundChanged'])).toBe(false)
 
+    describe('Misc', function() {
+
+        it('ON_LESSON_NEXT', function() {
+
+            let currentLevel = 0
+            let lessonName
+            const lessonCount  = Object.keys(Syllabus).length
+
+            for(lessonName in Syllabus) {
+                console.log("n=",lessonName)
+
+                expect(this.state.getIn(['level','currentLevel'])).toBe(currentLevel++)
+                expect(this.state.getIn(['level','currentLesson'])).toBe(lessonName)
+
+                if(lessonName === "intro")
+                    expect(this.state.getIn(['level','firstLesson'])).toBe(true)
+                else
+                    expect(this.state.getIn(['level','firstLesson'])).toBe(false)
+
+                if(currentLevel < lessonCount)
+                    expect(this.state.getIn(['level','lastLesson'])).toBe(false)
+                else
+                    expect(this.state.getIn(['level','lastLesson'])).toBe(true)
+
+                this.dispatch({
+                    type: AppActionTypes.ON_LESSON_NEXT
+                })
+
+            }
+
+            // One more time at the end, nothing should change.
             this.dispatch({
-                type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
-                nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+                type: AppActionTypes.ON_LESSON_NEXT
             })
-            expect(this.state.get('mostRecentlySelectedNound')).toEqual(
-                {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
-            )
-            expect(this.state.getIn(['level','quizQuestions','noundChanged'])).toBe(true)
-
+            expect(this.state.getIn(['level','currentLevel'])).toBe(currentLevel-1)
+            expect(this.state.getIn(['level','currentLesson'])).toBe(lessonName)
+            expect(this.state.getIn(['level','firstLesson'])).toBe(false)
+            expect(this.state.getIn(['level','lastLesson'])).toBe(true)
         })
 
-        it('ON_CHANGE_DEFINITENESS', function() {
-            expect(this.state.getIn(['level','quizQuestions','definitenessChanged'])).toBe(false)
-            this.dispatch({
-                type: NouniAEActionTypes.ON_CHANGE_DEFINITENESS,
-                newDefiniteness: DefinitenessSelect.Definite
-            })
-            expect(this.state.getIn(['level','quizQuestions','definitenessChanged'])).toBe(true)
-        })
     })
 
-    describe('Nound', function() {
+/*    describe('Nound', function() {
 
         beforeEach(function() {
             // We know that this is a new record because nound has no id.
@@ -138,6 +157,31 @@ describe('AppStore', function() {
             this.clickSaveNoundEdit()
             currentQuizState = this.state.getIn(['level','quizResults',currentLevel])
             expect(currentQuizState).toBe(true)
+        })
+    })
+
+    describe('Nouni', function() {
+        it('ON_CHANGE_SELECTED_NOUND', function() {
+            expect(this.state.getIn(['level','quizQuestions','noundChanged'])).toBe(false)
+
+            this.dispatch({
+                type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
+                nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            })
+            expect(this.state.get('mostRecentlySelectedNound')).toEqual(
+                {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            )
+            expect(this.state.getIn(['level','quizQuestions','noundChanged'])).toBe(true)
+
+        })
+
+        it('ON_CHANGE_DEFINITENESS', function() {
+            expect(this.state.getIn(['level','quizQuestions','definitenessChanged'])).toBe(false)
+            this.dispatch({
+                type: NouniAEActionTypes.ON_CHANGE_DEFINITENESS,
+                newDefiniteness: DefinitenessSelect.Definite
+            })
+            expect(this.state.getIn(['level','quizQuestions','definitenessChanged'])).toBe(true)
         })
     })
 
@@ -234,6 +278,6 @@ describe('AppStore', function() {
             currentQuizState = this.state.getIn(['level','quizResults',currentLevel])
             expect(currentQuizState).toBe(true)
         })
-    })
+    })*/
 
 })

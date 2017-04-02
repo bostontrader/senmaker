@@ -13,7 +13,7 @@ function VerbdEditForm(props) {
     const s = props.strings
 
     let verbdEditForm = null
-    if(props.level.getIn(['currentAppLevelConfig','verbdPanel']) >= VerbdPanelLevel.PAST_TENSE) {
+    /*if(props.level.getIn(['currentAppLevelConfig','verbdPanel']) >= VerbdPanelLevel.PAST_TENSE) {
         verbdEditForm =
             <div id="verbd-edit-form">
                 <label htmlFor='base'>Base</label>
@@ -22,8 +22,8 @@ function VerbdEditForm(props) {
                 <input id='save' type='submit' value={s.save}/>
                 <button id='delete' onClick={onDelete}>{s.delete}</button>
                 <button onClick={props.onCancelVerb}>{s.cancel}</button>
-            </div>
-    } else if(props.level.getIn(['currentAppLevelConfig','verbdPanel']) >= VerbdPanelLevel.BASE) {
+            </div>*/
+    //} else if(props.level.getIn(['currentAppLevelConfig','verbdPanel']) >= VerbdPanelLevel.BASE) {
         verbdEditForm =
             <div>
                 <label htmlFor='base'>Base</label>
@@ -32,7 +32,7 @@ function VerbdEditForm(props) {
                 <button id='delete-verbd' onClick={onDelete}>{s.delete}</button>
                 <button id='cancel'       onClick={props.verbd.getIn(['onClickCancel'])}>{s.cancel}</button>
             </div>
-    }
+    //}
 
     return verbdEditForm
 

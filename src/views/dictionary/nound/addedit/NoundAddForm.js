@@ -10,17 +10,17 @@ function NoundAddForm(props) {
 
     let noundAddForm = null
 
-    if(props.level.getIn(['currentAppLevelConfig', 'noundPanel']) >= NoundPanelLevel.PLURALIZATION) {
-        noundAddForm =
+    //if(props.level.getIn(['currentAppLevelConfig', 'noundPanel']) >= NoundPanelLevel.PLURALIZATION) {
+        /*noundAddForm =
             <div>
                 <label htmlFor='base'>Base</label>
                 <input name='base' type='text'  />
                 <PluralizationSelect pluralization_rule={0}/>
                 <input type='submit' value={s.save} onClick={onInsert}/>
                 <button onClick={props.onCancelNoun}>{s.cancel}</button>
-            </div>
+            </div>*/
 
-    } else if(props.level.getIn(['currentAppLevelConfig', 'noundPanel']) >= NoundPanelLevel.BASE) {
+    //} else if(props.level.getIn(['currentAppLevelConfig', 'noundPanel']) >= NoundPanelLevel.BASE) {
         noundAddForm =
             <div id="nound-add-form">
                 <label htmlFor='base'>Base</label>
@@ -28,7 +28,7 @@ function NoundAddForm(props) {
                 <button id='save-nound' onClick={onClickSave}>{s.save}</button>
                 <button id='cancel'     onClick={props.nound.getIn(['onClickCancel'])}>{s.cancel}</button>
             </div>
-    }
+    //}
 
     return noundAddForm
 }

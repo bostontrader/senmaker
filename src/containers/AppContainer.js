@@ -17,6 +17,9 @@ import NouniAEActions from '../data/nouni/addedit/NouniAEActions'
 import NouniAEStore   from '../data/nouni/addedit/NouniAEStore'
 import NouniStore     from '../data/nouni/NouniStore'
 
+import QuizActions    from '../data/quiz/QuizActions'
+import QuizStore      from '../data/quiz/QuizStore'
+
 import StringActions  from '../data/StringActions'
 import StringStore    from '../data/StringStore'
 
@@ -29,6 +32,7 @@ function getStores() {
         NoundAEStore,
         NouniStore,
         NouniAEStore,
+        QuizStore,
         StringStore,
         VerbdStore,
         VerbdAEStore
@@ -41,17 +45,17 @@ function getState() {
     // you try to create here will be converted by deus ex machina into an ordinary JS Object, devoid of the
     // immutable methods.
     return {
-        lang: AppStore.getState().get('lang'),
 
-        level: AppStore.getState().get('level'),
-        mostRecentlySelectedNound: AppStore.getState().get('mostRecentlySelectedNound'),
-        onLevelPrevious: AppActions.levelPrevious,
-        onLevelNext: AppActions.levelNext,
-        onLevelReset: AppActions.levelReset,
-        onSetQuizScore: AppActions.setQuizScore,
-        strings: StringStore.getState(),
-        onLangEng: StringActions.langEng,
-        onLangChn: StringActions.langChn,
+        app: AppStore.getState(),
+        //lang: AppStore.getState().get('lang'),
+
+        //mostRecentlySelectedNound: AppStore.getState().get('mostRecentlySelectedNound'),
+        //onLessonPrevious: AppActions.lessonPrevious,
+        //onLessonNext: AppActions.lessonNext,
+        //onLevelReset: AppActions.levelReset,
+        //onSetQuizScore: AppActions.setQuizScore,
+        //onLangEng: StringActions.langEng,
+        //onLangChn: StringActions.langChn,
 
         // A dictionary of available nouns.  We will instantiate as many copies of these
         // definitions as we need, as nouni.
@@ -73,6 +77,11 @@ function getState() {
             addEditNouni: NouniAEStore.getState(),
             onChangeDefiniteness: NouniAEActions.onChangeDefiniteness,
         }),
+
+        // The quizzes
+        quiz: QuizStore.getState(),
+
+        strings: StringStore.getState(),
 
         // A dictionary of available verbs.  We will instantiate as many copies of these
         // definitions as we need, as verbi.

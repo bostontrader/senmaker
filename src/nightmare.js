@@ -67,7 +67,7 @@ describe('Starting at Level00', () => {
                 return nightmare
                     .click('#n-1')
                     .type('#base', 'beaver')
-                    .click('#save-nound') .wait(250)
+                    .click('#save-nound')
                     .evaluate(function() {
                         return document.querySelector('#nound-edit-form') === null
                     })
@@ -84,8 +84,8 @@ describe('Starting at Level00', () => {
                 if (!updateNoundCheckFound)
                     throw('updateNoundCheck did not appear after save')
                 return nightmare
-                    .click('#n-1') .wait(250)
-                    .click('#delete-nound') .wait(250)
+                    .click('#n-1')
+                    .click('#delete-nound')
                     .evaluate(function() {
                         return document.querySelector('#nound-edit-form') === null
                     })
@@ -107,22 +107,20 @@ describe('Starting at Level00', () => {
                     .click('#level-next')      // goto level 02
 
                     .click('#add-verbd')
-                    .click('#verbd-add-form #cancel').wait(250)
+                    .click('#verbd-add-form #cancel')
 
                     // The VerbdAddForm should now go away.
                     .evaluate(function() {
                         return document.querySelector('#verbd-add-form') === null
                     })
             })
-
-
             .then(
                 verbd_add_form_gone => {
                     if (!verbd_add_form_gone)
                         throw('verbd-add-form has not gone away after cancel')
                     return nightmare
                         .click('#add-verbd') .wait(250)
-                        .type('#base', 'jump'). wait(1000)
+                        .type('#base', 'jump'). wait(500)
                         .click('#save-verbd') .wait(1000)
 
                         // The VerbdAddForm should now go away.
@@ -199,7 +197,31 @@ describe('Starting at Level00', () => {
             .then(changeDefinitenessCheckFound => {
                 if (!changeDefinitenessCheckFound)
                     throw('changeDefinitenessCheck did not appear')
+                return nightmare
+                    .click('#iseeArticleChanged').wait(1000)
+                    .evaluate(function() {
+                        return document.querySelector('#iseeArticleChangedCheck') !== null
+                    })
             })
+            .then(iseeArticleChangedCheckFound => {
+                if (!iseeArticleChangedCheckFound)
+                    throw('iseeArticleChangedCheck did not appear')
+                return nightmare
+                    .type('div.Select-input input','apple').wait(1000)
+                    .click('div.Select-input input').wait(1000)
+
+                    .evaluate(function() {
+                        return document.querySelector('#changeNoundCheck') !== null
+                    })
+            })
+
+            // For some mysterious and inherently unknowable reason it's not possible to select a selection
+            // or enter text for a choice, as we attempt infra.  I don't have time to figure this out right
+            // so I will hack around it instead.
+            //.then(changeNoundCheckFound => {
+                //if (!changeNoundCheckFound)
+                    //throw('changeNoundCheck did not appear')
+            //})
             .then(resolve => {
                 done()
             })

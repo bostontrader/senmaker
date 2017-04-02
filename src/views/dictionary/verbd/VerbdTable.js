@@ -6,7 +6,7 @@ import VerbdRow from './VerbdRow'
 function VerbdTable(props) {
 
     let verbdTable = null
-    const level = props.level.getIn(['currentAppLevelConfig','verbdPanel'])
+    /*const level = props.level.getIn(['currentAppLevelConfig','verbdPanel'])
     if( level >= VerbdPanelLevel.PAST_TENSE) {
         verbdTable =
             <table id="verbd-list">
@@ -31,7 +31,7 @@ function VerbdTable(props) {
                     ))}
                 </tbody>
             </table>
-    } else if (level >= VerbdPanelLevel.BASE) {
+    } else if (level >= VerbdPanelLevel.BASE) {*/
         verbdTable =
             <table id="verbd-list">
                 <thead>
@@ -42,19 +42,11 @@ function VerbdTable(props) {
                 </thead>
                 <tbody>
                 {[...props.verbd.getIn(['verbs']).values()].map(verb => (
-                        <VerbdRow
-                            key={verb.id}
-                            editing={props.verbd.getIn(['editingVerb'])}
-                            level={level}
-                            verb={verb}
-                            onDeleteVerb={props.verbd.getIn(['onDeleteVerb'])}
-                            onClickEditVerbd={props.verbd.getIn(['onClickEditVerbd'])}
-                            strings = {props.strings}
-                        />
-                    ))}
+                    <VerbdRow key={verb.id} verb={verb} {...props} />
+                ))}
                 </tbody>
             </table>
-    }
+    //}
 
     return verbdTable
 

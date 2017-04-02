@@ -1,24 +1,25 @@
 import React from 'react'
 
-import LevelControl from './LevelControl'
-import VerbdPanel from './dictionary/verbd/VerbdPanel'
+import LessonNavigator from './LessonNavigator'
+import VerbdPanel from '../dictionary/verbd/VerbdPanel'
 
-function Level02(props) {
+function Verbd(props) {
 
     const style = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const s = props.strings.Level02
+    const q = props.quiz
+    const s = props.strings.verbd
 
-    const quizInsertVerbFlag = q.getIn(['nound','iunderstand']) ?
+    const quizInsertVerbFlag = q.getIn(['verbd','insertVerbd']) ?
         <img id="insertVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizUpdateVerbFlag = q.getIn(['nound','iunderstand']) ?
+    const quizUpdateVerbFlag = q.getIn(['verbd','updateVerbd']) ?
         <img id="updateVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizDeleteVerbFlag = q.getIn(['nound','iunderstand']) ?
+    const quizDeleteVerbFlag = q.getIn(['verbd','deleteVerbd']) ?
         <img id="deleteVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     return(
@@ -37,19 +38,19 @@ function Level02(props) {
                             <td>{quizInsertVerbFlag}</td>
                         </tr>
                         <tr>
-                            <td><p>{s.quiz2}</p></td>
-                            <td>{quizDeleteVerbFlag}</td>
-                        </tr>
-                        <tr>
                             <td><p>{s.quiz3}</p></td>
                             <td>{quizUpdateVerbFlag}</td>
+                        </tr>
+                        <tr>
+                            <td><p>{s.quiz2}</p></td>
+                            <td>{quizDeleteVerbFlag}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <LevelControl {...props} />
+            <LessonNavigator {...props} />
         </div>
     )
 }
 
-export default Level02
+export default Verbd

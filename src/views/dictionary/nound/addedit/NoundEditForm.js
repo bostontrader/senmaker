@@ -14,8 +14,8 @@ function NoundEditForm(props) {
 
     let noundEditForm = null
 
-    if(props.level.getIn(['currentAppLevelConfig','noundPanel']) >= NoundPanelLevel.PLURALIZATION) {
-        noundEditForm =
+    //if(props.level.getIn(['currentAppLevelConfig','noundPanel']) >= NoundPanelLevel.PLURALIZATION) {
+        /*noundEditForm =
             <div>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text' value={props.nound.getIn(['addEditNound','noun','base'])} onChange={(e)=>props.nound.getIn(['onChangeNounBase'])(e.target.value)}/>
@@ -23,8 +23,8 @@ function NoundEditForm(props) {
                 <input id='save-nound' type='submit' value={s.save}/>
                 <button id='delete-nound' onClick={onDelete}>{s.delete}</button>
                 <button onClick={props.onCancelNoun}>{s.cancel}</button>
-            </div>
-    } else if(props.level.getIn(['currentAppLevelConfig','noundPanel']) >= NoundPanelLevel.BASE) {
+            </div>*/
+    //} else if(props.level.getIn(['currentAppLevelConfig','noundPanel']) >= NoundPanelLevel.BASE) {
         noundEditForm =
             <div id="nound-edit-form">
                 <label htmlFor='base'>Base</label>
@@ -33,7 +33,7 @@ function NoundEditForm(props) {
                 <button id='delete-nound' onClick={onDelete}>{s.delete}</button>
                 <button id='cancel'       onClick={props.nound.getIn(['onClickCancel'])}>{s.cancel}</button>
             </div>
-    }
+    //}
 
     return noundEditForm
 

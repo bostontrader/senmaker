@@ -1,24 +1,25 @@
 import React from 'react'
 
-import LevelControl from './LevelControl'
-import NoundPanel from './dictionary/nound/NoundPanel'
+import LessonNavigator from './LessonNavigator'
+import NoundPanel from '../dictionary/nound/NoundPanel'
 
-function Level01(props) {
+function Nound(props) {
 
     const style = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const s = props.strings.Level01
+    const q = props.quiz
+    const s = props.strings.nound
 
-    const quizInsertNounFlag = props.level.getIn(['quizQuestions','insertNound']) ?
+    const quizInsertNounFlag = q.getIn(['nound','insertNound']) ?
         <img id="insertNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizUpdateNounFlag = props.level.getIn(['quizQuestions','updateNound']) ?
+    const quizUpdateNounFlag = q.getIn(['nound','updateNound']) ?
         <img id="updateNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizDeleteNounFlag = props.level.getIn(['quizQuestions','deleteNound']) ?
+    const quizDeleteNounFlag = q.getIn(['nound','deleteNound']) ?
         <img id="deleteNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     return(
@@ -47,9 +48,9 @@ function Level01(props) {
                     </tbody>
                 </table>
             </div>
-            <LevelControl {...props} />
+            <LessonNavigator {...props} />
         </div>
     )
 }
 
-export default Level01
+export default Nound

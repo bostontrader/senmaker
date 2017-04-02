@@ -26,13 +26,13 @@ describe("NoundRow", () => {
         expect(noundRow.props.children.length).toBe(2)
     })
 
-    it("renders a NoundPanelLevel.PLURALIZATION NoundRow", () => {
-        tuRenderer = TestUtils.createRenderer()
-        const strings = StringStore.getInitialState()
-        const props = {level:NoundPanelLevel.PLURALIZATION, noun:noun, strings: strings}
-        noundRow = tuRenderer.render(<NoundRow {...props} />)
-        expect(noundRow.type).toBe('tr')
-        expect(noundRow.props.children.length).toBe(3)
-    })
+    //it("renders a NoundPanelLevel.PLURALIZATION NoundRow", () => {
+        //tuRenderer = TestUtils.createRenderer()
+        //const strings = StringStore.getInitialState()
+        //const props = {level:NoundPanelLevel.PLURALIZATION, noun:noun, strings: strings}
+        //noundRow = tuRenderer.render(<NoundRow {...props} />)
+        //expect(noundRow.type).toBe('tr')
+        //expect(noundRow.props.children.length).toBe(3)
+    //})
 
 })

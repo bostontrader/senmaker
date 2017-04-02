@@ -22,19 +22,19 @@ const AppActions = {
         })
     },
 
-    levelPrevious() {
+    lessonPrevious() {
         AppDispatcher.dispatch({
-            type: AppActionTypes.LEVEL_PREVIOUS
+            type: AppActionTypes.ON_LESSON_PREVIOUS
         })
     },
-    levelNext() {
+    lessonNext() {
         AppDispatcher.dispatch({
-            type: AppActionTypes.LEVEL_NEXT
+            type: AppActionTypes.ON_LESSON_NEXT
         })
     },
     levelReset() {
         AppDispatcher.dispatch({
-            type: AppActionTypes.LEVEL_RESET
+            type: AppActionTypes.ON_LEVEL_RESET
         })
     },
 

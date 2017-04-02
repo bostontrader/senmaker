@@ -9,6 +9,7 @@ function NoundSelect(props) {
 
     const selectedValue = props.mostRecentlySelectedNound.getIn(['id'])
     return <Select options={options} value={selectedValue} placeholder="Select a noun..." onChange={(e)=>{
+        console.log('changed')
         const nound = props.nound.getIn(['nouns']).get(e.value)
         props.nound.getIn(['onChangeSelectedNound'])(nound)
     }}/>
