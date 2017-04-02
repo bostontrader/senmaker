@@ -1,6 +1,7 @@
 import QuizActionTypes   from './QuizActionTypes'
 import QuizStore         from './QuizStore'
-
+import NoundAEActionTypes from '../dictionary/nound/addedit/NoundAEActionTypes'
+import VerbdAEActionTypes from '../dictionary/verbd/addedit/VerbdAEActionTypes'
 describe('QuizStore', function() {
 
     beforeEach(function() {
@@ -38,7 +39,7 @@ describe('QuizStore', function() {
             expect(this.state.getIn(['nound','passed'])).toBe(false)
 
             this.dispatch({
-                type: QuizActionTypes.nound.ON_CLICK_SAVE_NOUND,
+                type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND,
                 nound: {} // no id means insert new nound
             })
 
@@ -51,7 +52,7 @@ describe('QuizStore', function() {
             expect(this.state.getIn(['nound','passed'])).toBe(false)
 
             this.dispatch({
-                type: QuizActionTypes.nound.ON_CLICK_SAVE_NOUND,
+                type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND,
                 nound: {id:'1'} // id means update
             })
 
@@ -64,7 +65,7 @@ describe('QuizStore', function() {
             expect(this.state.getIn(['nound','passed'])).toBe(false)
 
             this.dispatch({
-                type: QuizActionTypes.nound.ON_CLICK_DELETE_NOUND
+                type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND
             })
 
             expect(this.state.getIn(['nound','deleteNound'])).toBe(true)
@@ -75,17 +76,17 @@ describe('QuizStore', function() {
             expect(this.state.getIn(['nound','passed'])).toBe(false)
 
             this.dispatch({
-                type: QuizActionTypes.nound.ON_CLICK_SAVE_NOUND,
+                type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND,
                 nound: {} // no id means insert new nound
             })
 
             this.dispatch({
-                type: QuizActionTypes.nound.ON_CLICK_SAVE_NOUND,
+                type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND,
                 nound: {id:'1'} // id means update
             })
 
             this.dispatch({
-                type: QuizActionTypes.nound.ON_CLICK_DELETE_NOUND
+                type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND
             })
 
             expect(this.state.getIn(['nound','passed'])).toBe(true)
@@ -106,7 +107,7 @@ describe('QuizStore', function() {
             expect(this.state.getIn(['verbd','passed'])).toBe(false)
 
             this.dispatch({
-                type: QuizActionTypes.verbd.ON_CLICK_SAVE_VERBD,
+                type: VerbdAEActionTypes.ON_CLICK_SAVE_VERBD,
                 verbd: {} // no id means insert new verbd
             })
 
@@ -119,7 +120,7 @@ describe('QuizStore', function() {
             expect(this.state.getIn(['verbd','passed'])).toBe(false)
 
             this.dispatch({
-                type: QuizActionTypes.verbd.ON_CLICK_SAVE_VERBD,
+                type: VerbdAEActionTypes.ON_CLICK_SAVE_VERBD,
                 verbd: {id:'1'} // id means update
             })
 
@@ -132,7 +133,7 @@ describe('QuizStore', function() {
             expect(this.state.getIn(['verbd','passed'])).toBe(false)
 
             this.dispatch({
-                type: QuizActionTypes.verbd.ON_CLICK_DELETE_VERBD
+                type: VerbdAEActionTypes.ON_CLICK_DELETE_VERBD
             })
 
             expect(this.state.getIn(['verbd','deleteVerbd'])).toBe(true)
@@ -143,17 +144,17 @@ describe('QuizStore', function() {
             expect(this.state.getIn(['verbd','passed'])).toBe(false)
 
             this.dispatch({
-                type: QuizActionTypes.verbd.ON_CLICK_SAVE_VERBD,
+                type: VerbdAEActionTypes.ON_CLICK_SAVE_VERBD,
                 verbd: {} // no id means insert new verbd
             })
 
             this.dispatch({
-                type: QuizActionTypes.verbd.ON_CLICK_SAVE_VERBD,
+                type: VerbdAEActionTypes.ON_CLICK_SAVE_VERBD,
                 verbd: {id:'1'} // id means update
             })
 
             this.dispatch({
-                type: QuizActionTypes.verbd.ON_CLICK_DELETE_VERBD
+                type: VerbdAEActionTypes.ON_CLICK_DELETE_VERBD
             })
 
             expect(this.state.getIn(['verbd','passed'])).toBe(true)

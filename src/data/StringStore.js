@@ -41,7 +41,6 @@ StringStore.en = {
     verb: 'Verb',
     verbs: 'Verbs',
 
-    // Intro
     intro: {
         help1: 'This program will help you build an English composition.',
         help2: 'In order to do that you must first learn how to build smaller pieces of English.',
@@ -50,7 +49,6 @@ StringStore.en = {
         help5: 'You are presently on Level 0. In order to proceed to the next level you will need to pass the quiz.'
     },
 
-    // Nouns
     nound: {
         help10: 'The things around us are called <strong>nouns</strong>.',
         quiz1: 'Can you add a new noun?',
@@ -58,8 +56,7 @@ StringStore.en = {
         quiz3: 'Can you change the spelling of a noun?'
     },
 
-    // Verbs
-    Level02: {
+    verbd: {
         help10: 'The actions we can take are called <strong>verbs</strong>',
         quiz1: 'Can you add a new verb?',
         quiz2: 'Can you delete a verb from this list?',
@@ -172,7 +169,7 @@ StringStore.zh = {
         quiz2: '你可以从这个列表中删除一个名词吗?',
         quiz3: '你能改变一个名词的拼写吗?'
     },
-    Level02: {
+    verbd: {
         help10: '陈述人或事物动作、情况、变化的词叫做动词',
         quiz1: '你可以添加一个新的动词吗?',
         quiz2: '你可以从这个列表中删除一个动词吗?',

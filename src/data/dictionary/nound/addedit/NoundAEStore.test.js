@@ -19,37 +19,37 @@ describe('NoundAEStore', function() {
     })
 
     // Signal the UI to open the NoundAddForm
-    it('CLICK_ADD_NOUND', function() {
+    it('ON_CLICK_ADD_NOUND', function() {
         this.dispatch({
-            type: NoundAEActionTypes.CLICK_ADD_NOUND
+            type: NoundAEActionTypes.ON_CLICK_ADD_NOUND
         })
         expect(this.state.get('addNound')).toBe(true)
     })
 
     // Signal the UI to close NoundAddForm or NoundEditForm
-    it('CLICK_CANCEL', function() {
+    it('ON_CLICK_CANCEL', function() {
         this.dispatch({
-            type: NoundAEActionTypes.CLICK_CANCEL
+            type: NoundAEActionTypes.ON_CLICK_CANCEL
         })
         this.state = NoundAEStore.getInitialState()
     })
 
     // Signal the UI to close NoundAddForm or NoundEditForm. We don't test these two separately,
     // the same state should close either one. But the delete button is only available on NoundEditForm.
-    it('CLICK_DELETE_NOUND', function() {
+    it('ON_CLICK_DELETE_NOUND', function() {
 
         // Now close it
         this.dispatch({
-            type: NoundAEActionTypes.CLICK_DELETE_NOUND,
+            type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
             nound: {} // This action doesn't care about the nound
         })
         expect(this.state).toEqual(NoundAEStore.getInitialState())
     })
 
     // Signal the UI to open NoundEditForm and populate with the given data.
-    it('CLICK_EDIT_NOUND', function() {
+    it('ON_CLICK_EDIT_NOUND', function() {
         this.dispatch({
-            type: NoundAEActionTypes.CLICK_EDIT_NOUND,
+            type: NoundAEActionTypes.ON_CLICK_EDIT_NOUND,
             nound: {id: '1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
         })
         expect(this.state.get('nound').toJSON()).toEqual({id: '1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s})
@@ -60,10 +60,10 @@ describe('NoundAEStore', function() {
     //
     // This action should have a nound that will be used for insert or update in NoundStore.  But
     // here we only close the UI and the value of nound is unimportant.
-    it('CLICK_SAVE_NOUND, new nound', function() {
+    it('ON_CLICK_SAVE_NOUND, new nound', function() {
         // We know this is a new record because nound has no id.
         this.dispatch({
-            type: NoundAEActionTypes.CLICK_SAVE_NOUND,
+            type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND,
             nound: {}
         })
         expect(this.state).toEqual(NoundAEStore.getInitialState())

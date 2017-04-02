@@ -52,7 +52,7 @@ describe('NoundStore', function() {
         }
     })
 
-    it('CLICK_DELETE_NOUND', function() {
+    it('ON_CLICK_DELETE_NOUND', function() {
         expect(this.nouns()).toEqual([])
         this.addNouns([
             {base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s},
@@ -61,7 +61,7 @@ describe('NoundStore', function() {
         ])
 
         this.dispatch({
-            type: NoundAEActionTypes.CLICK_DELETE_NOUND,
+            type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
             id: this.id(2),
         })
 
@@ -71,7 +71,7 @@ describe('NoundStore', function() {
         ])
 
         this.dispatch({
-            type: NoundAEActionTypes.CLICK_DELETE_NOUND,
+            type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
             id: this.id(0),
         })
 
@@ -80,7 +80,7 @@ describe('NoundStore', function() {
         ])
 
         this.dispatch({
-            type: NoundAEActionTypes.CLICK_DELETE_NOUND,
+            type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
             id: this.id(0),
         })
 
@@ -88,11 +88,11 @@ describe('NoundStore', function() {
 
     })
 
-    it('CLICK_SAVE_NOUND, new nound', function() {
+    it('ON_CLICK_SAVE_NOUND, new nound', function() {
         // We know that this is a new record because nound has no id.
         expect(this.nouns()).toEqual([])
         this.dispatch({
-            type: NoundAEActionTypes.CLICK_SAVE_NOUND,
+            type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND,
             nound: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
         })
         expect(this.nouns()).toEqual([
@@ -100,7 +100,7 @@ describe('NoundStore', function() {
         ])
     })
 
-    it('CLICK_SAVE_NOUND, edit nound', function() {
+    it('ON_CLICK_SAVE_NOUND, edit nound', function() {
         // We know that this is an update to an existing record because nound has an id.
         expect(this.nouns()).toEqual([])
         this.dispatch({
@@ -109,7 +109,7 @@ describe('NoundStore', function() {
         })
 
         this.dispatch({
-            type: NoundAEActionTypes.CLICK_SAVE_NOUND,
+            type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND,
             nound: Nound({id: this.id(0), base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
         })
 

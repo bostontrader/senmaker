@@ -2,25 +2,25 @@ import NoundAEActionTypes from './NoundAEActionTypes'
 import AppDispatcher from '../../../AppDispatcher'
 
 const NoundAEActions = {
-    clickAddNound() {
+    onClickAddNound() {
         AppDispatcher.dispatch({
-            type: NoundAEActionTypes.CLICK_ADD_NOUND
+            type: NoundAEActionTypes.ON_CLICK_ADD_NOUND
         })
     },
-    clickCancel() {
+    onClickCancel() {
         AppDispatcher.dispatch({
-            type: NoundAEActionTypes.CLICK_CANCEL
+            type: NoundAEActionTypes.ON_CLICK_CANCEL
         })
     },
-    clickDeleteNoun(id) {
+    onClickDeleteNoun(id) {
         AppDispatcher.dispatch({
-            type: NoundAEActionTypes.CLICK_DELETE_NOUND,
+            type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
             id
         })
     },
-    clickEditNound(nound) {
+    onClickEditNound(nound) {
         AppDispatcher.dispatch({
-            type: NoundAEActionTypes.CLICK_EDIT_NOUND,
+            type: NoundAEActionTypes.ON_CLICK_EDIT_NOUND,
             nound: nound
         })
     },
@@ -33,9 +33,9 @@ const NoundAEActions = {
 
     // The Save button for an add or edit is clicked.
     // For programmatic insert see NoundActionTypes INSERT_NOUND
-    clickSaveNound(nound) {
+    onClickSaveNound(nound) {
         AppDispatcher.dispatch({
-            type: NoundAEActionTypes.CLICK_SAVE_NOUND,
+            type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND,
             nound: nound
         })
     }

@@ -31,7 +31,7 @@ class VerbdStore extends ReduceStore {
         switch (action.type) {
 
             // Save new record or update existing one.
-            case VerbdAEActionTypes.CLICK_SAVE_VERBD:
+            case VerbdAEActionTypes.ON_CLICK_SAVE_VERBD:
                 if(action.verbd.id) {
                     // An id exists so update the existing record.
                     return state.set(action.verbd.id, action.verbd)
@@ -40,7 +40,7 @@ class VerbdStore extends ReduceStore {
                     return insertNewRecord(action.verbd)
                 }
 
-            case VerbdAEActionTypes.CLICK_DELETE_VERBD:
+            case VerbdAEActionTypes.ON_CLICK_DELETE_VERBD:
                 return state.delete(action.id)
 
             // Insert a new record programmatically, w/o a UI.

@@ -2,18 +2,17 @@ import {Map} from 'immutable'
 import React from 'react'
 
 import TestUtils         from 'react-addons-test-utils'
-import {findAll, findAllWithClass, findWithClass, findWithType} from 'react-shallow-testutils'
-
+import {findAllWithClass, findWithClass, findWithType} from 'react-shallow-testutils'
 
 import LessonNavigator from './LessonNavigator'
 import Verbd           from './Verbd'
 
-import AppActionTypes  from '../../data/AppActionTypes'
-import AppStore        from '../../data/AppStore'
-import VerbdStore      from '../../data/dictionary/verbd/VerbdStore'
-import QuizActionTypes from '../../data/quiz/QuizActionTypes'
-import QuizStore       from '../../data/quiz/QuizStore'
-import StringStore     from '../../data/StringStore'
+import AppActionTypes     from '../../data/AppActionTypes'
+import AppStore           from '../../data/AppStore'
+import VerbdAEActionTypes from '../../data/dictionary/verbd/addedit/VerbdAEActionTypes'
+import VerbdStore         from '../../data/dictionary/verbd/VerbdStore'
+import QuizStore          from '../../data/quiz/QuizStore'
+import StringStore        from '../../data/StringStore'
 
 import VerbdPanel from '../dictionary/verbd/VerbdPanel'
 
@@ -24,8 +23,8 @@ describe("Verbd", function() {
             app:     AppStore.getInitialState(),
             quiz:    QuizStore.getInitialState(),
             strings: StringStore.getInitialState(),
-            verbd:Map({
-                verbs:VerbdStore.getInitialState()
+            nound:Map({
+                nouns:VerbdStore.getInitialState()
             })
         }
     }
@@ -72,22 +71,22 @@ describe("Verbd", function() {
             }
         }
 
-        const verifyBasicLayout = (verbdRenderer) => {
-            expect(verbdRenderer.type).toBe('div')
-            expect(findWithClass(verbdRenderer,'help'))
-            expect(findWithType(verbdRenderer,VerbdPanel))
-            expect(findWithClass(verbdRenderer,'quiz'))
-            expect(findWithType(verbdRenderer,LessonNavigator))
+        const verifyBasicLayout = (noundRenderer) => {
+            expect(noundRenderer.type).toBe('div')
+            expect(findWithClass(noundRenderer,'help'))
+            expect(findWithType(noundRenderer,VerbdPanel))
+            expect(findWithClass(noundRenderer,'quiz'))
+            expect(findWithType(noundRenderer,LessonNavigator))
         }
 
         const testSinglePermutation = (quizSequence) => {
             this.state = getInitialState()
             this.dispatch({
-                type: AppActionTypes.ON_LESSON_NEXT    // advance to lesson verbd
+                type: AppActionTypes.ON_LESSON_NEXT    // advance to lesson nound
             })
 
             const renderExpression = <Verbd {...this.state} />
-            const verbdRenderer = TestUtils.createRenderer().render(renderExpression)
+            const noundRenderer = TestUtils.createRenderer().render(renderExpression)
 
             // no need to check basic layout or the fact that none of the checks are displayed
             // because we've already checked it for the beginning state.
@@ -96,18 +95,18 @@ describe("Verbd", function() {
             for(let quizItem of quizSequence) {
                 this.dispatch({
                     type: quizItem.type,
-                    verbd: quizItem.verbd
+                    nound: quizItem.nound
                 })
                 checks.push(quizItem.i)
                 let renderExpression = <Verbd {...this.state} />
-                let verbdRenderer = TestUtils.createRenderer().render(renderExpression)
+                let noundRenderer = TestUtils.createRenderer().render(renderExpression)
 
-                verifyBasicLayout(verbdRenderer)
+                verifyBasicLayout(noundRenderer)
 
                 // verify that only the currently answered questions are checked
-                expect(findAllWithClass(verbdRenderer,'checkmark').length).toBe(checks.length)
+                //expect(findAllWithClass(noundRenderer,'checkmark').length).toBe(checks.length)
                 //for(let check of checks) {
-                    //const n = findAll(verbdRenderer, (element) => {element === check})
+                    //const n = findAll(noundRenderer, (element) => {element === check})
                     //expect(n.length).toBe(1)
                 //}
             }
@@ -115,22 +114,22 @@ describe("Verbd", function() {
 
         // Starting from the beginning,
         this.dispatch({
-            type: AppActionTypes.ON_LESSON_NEXT    // advance to lesson verbd
+            type: AppActionTypes.ON_LESSON_NEXT    // advance to lesson nound
         })
 
         const renderExpression = <Verbd {...this.state} />
-        const verbdRenderer = TestUtils.createRenderer().render(renderExpression)
+        const noundRenderer = TestUtils.createRenderer().render(renderExpression)
 
-        verifyBasicLayout(verbdRenderer)
+        verifyBasicLayout(noundRenderer)
 
         // None of the quiz items should be checked.
-        expect(findAllWithClass(verbdRenderer,'checkmark').length).toBe(0)
+        expect(findAllWithClass(noundRenderer,'checkmark').length).toBe(0)
 
         // Now verify correct operation of each permutation.
         heapsPermute([
-            {type:QuizActionTypes.verbd.ON_CLICK_SAVE_VERBD,   i:'insertVerbdCheck', verbd:{}},
-            {type:QuizActionTypes.verbd.ON_CLICK_SAVE_VERBD,   i:'updateVerbdCheck', verbd:{id:'1'}},
-            {type:QuizActionTypes.verbd.ON_CLICK_DELETE_VERBD, i:'deleteVerbdCheck'}
+            {type:VerbdAEActionTypes.ON_CLICK_SAVE_NOUND,   i:'insertVerbdCheck', nound:{}},
+            {type:VerbdAEActionTypes.ON_CLICK_SAVE_NOUND,   i:'updateVerbdCheck', nound:{id:'1'}},
+            {type:VerbdAEActionTypes.ON_CLICK_DELETE_NOUND, i:'deleteVerbdCheck'}
             ], testSinglePermutation)
     })
 })

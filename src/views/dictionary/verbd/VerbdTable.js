@@ -41,14 +41,14 @@ function VerbdTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                {[...props.verbd.getIn(['verbs']).values()].map(verb => (
-                    <VerbdRow key={verb.id} verb={verb} {...props} />
-                ))}
+                    {[...props.verbd.getIn(['verbs']).values()].map(verb => (
+                        <VerbdRow key={verb.id} verb={verb} {...props} />
+                    ))}
                 </tbody>
             </table>
     //}
 
-    return verbdTable
+    return(verbdTable)
 
 }
 

@@ -2,18 +2,17 @@ import {Map} from 'immutable'
 import React from 'react'
 
 import TestUtils         from 'react-addons-test-utils'
-import {findAll, findAllWithClass, findWithClass, findWithType} from 'react-shallow-testutils'
-
+import {findAllWithClass, findWithClass, findWithType} from 'react-shallow-testutils'
 
 import LessonNavigator from './LessonNavigator'
 import Nound           from './Nound'
 
-import AppActionTypes  from '../../data/AppActionTypes'
-import AppStore        from '../../data/AppStore'
-import NoundStore      from '../../data/dictionary/nound/NoundStore'
-import QuizActionTypes from '../../data/quiz/QuizActionTypes'
-import QuizStore       from '../../data/quiz/QuizStore'
-import StringStore     from '../../data/StringStore'
+import AppActionTypes     from '../../data/AppActionTypes'
+import AppStore           from '../../data/AppStore'
+import NoundAEActionTypes from '../../data/dictionary/nound/addedit/NoundAEActionTypes'
+import NoundStore         from '../../data/dictionary/nound/NoundStore'
+import QuizStore          from '../../data/quiz/QuizStore'
+import StringStore        from '../../data/StringStore'
 
 import NoundPanel from '../dictionary/nound/NoundPanel'
 
@@ -128,9 +127,9 @@ describe("Nound", function() {
 
         // Now verify correct operation of each permutation.
         heapsPermute([
-            {type:QuizActionTypes.nound.ON_CLICK_SAVE_NOUND,   i:'insertNoundCheck', nound:{}},
-            {type:QuizActionTypes.nound.ON_CLICK_SAVE_NOUND,   i:'updateNoundCheck', nound:{id:'1'}},
-            {type:QuizActionTypes.nound.ON_CLICK_DELETE_NOUND, i:'deleteNoundCheck'}
+            {type:NoundAEActionTypes.ON_CLICK_SAVE_NOUND,   i:'insertNoundCheck', nound:{}},
+            {type:NoundAEActionTypes.ON_CLICK_SAVE_NOUND,   i:'updateNoundCheck', nound:{id:'1'}},
+            {type:NoundAEActionTypes.ON_CLICK_DELETE_NOUND, i:'deleteNoundCheck'}
             ], testSinglePermutation)
     })
 })

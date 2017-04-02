@@ -26,13 +26,13 @@ describe("VerbdRow", () => {
         expect(verbdRow.props.children.length).toBe(2)
     })
 
-    it("renders a VerbdPanelLevel.PAST_TENSE", () => {
-        tuRenderer = TestUtils.createRenderer()
-        const strings = StringStore.getInitialState()
-        const props = {level:VerbdPanelLevel.PAST_TENSE, verb:verb, strings: strings}
-        verbdRow = tuRenderer.render(<VerbdRow {...props} />)
-        expect(verbdRow.type).toBe('tr')
-        expect(verbdRow.props.children.length).toBe(3)
-    })
+    //it("renders a VerbdPanelLevel.PAST_TENSE", () => {
+        //tuRenderer = TestUtils.createRenderer()
+        //const strings = StringStore.getInitialState()
+        //const props = {level:VerbdPanelLevel.PAST_TENSE, verb:verb, strings: strings}
+        //verbdRow = tuRenderer.render(<VerbdRow {...props} />)
+        //expect(verbdRow.type).toBe('tr')
+        //expect(verbdRow.props.children.length).toBe(3)
+    //})
 
 })

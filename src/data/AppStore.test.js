@@ -92,7 +92,7 @@ describe('AppStore', function() {
             // nound id is unimportant
             this.clickDeleteNound = () => {
                 this.dispatch({
-                    type: NoundAEActionTypes.CLICK_DELETE_NOUND,
+                    type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
                     id: 0
                 })
             }

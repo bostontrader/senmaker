@@ -39,17 +39,28 @@ exports[`AppContainer 's Alive! 1`] = `
         <h3>
           Quiz
         </h3>
-        <p>
-          <input
-            checked={false}
-            id="iUnderstand"
-            onChange={[Function]}
-            type="checkbox" />
-          I understand
-        </p>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <p>
+                  <input
+                    checked={false}
+                    id="iunderstandCheck"
+                    onChange={[Function]}
+                    type="checkbox" />
+                  I understand
+                </p>
+              </td>
+              <td>
+                
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div
-        className="level-control"
+        className="lesson-navigator"
         style={
           Object {
             "border": "1px solid black",
@@ -63,17 +74,21 @@ exports[`AppContainer 's Alive! 1`] = `
         </p>
         
         
-        
+        <button
+          id="level-reset"
+          onClick={undefined}>
+          Reset
+        </button>
         <img
           alt=""
           height="20"
-          onClick={[Function]}
+          onClick={undefined}
           src="/img/us_flag.gif"
           width="28" />
         <img
           alt=""
           height="20"
-          onClick={[Function]}
+          onClick={undefined}
           src="/img/chinese_flag.gif"
           width="28" />
       </div>

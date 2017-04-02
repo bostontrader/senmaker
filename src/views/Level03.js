@@ -1,7 +1,7 @@
 import React from 'react'
 
 import AppActions from '../data/AppActions'
-import LevelControl from './LevelControl'
+//import LevelControl from './LevelControl'
 import NouniAddForm from './nouni/addedit/NouniAddForm'
 
 function Level03(props) {

@@ -12,10 +12,10 @@ If said verbd has an id, then this is an edit, otherwise we're creating a new ve
 
 We can use this information to manage the display of a suitable add/edit component.
 If the verbd has an id then we are editing a verbd and we thus want to display the VerbdEditForm component.
-If the clickAddVerbd flag = true, then we are adding a new verbd and we want to display the VerbdAddForm component.
+If the onClickAddVerbd flag = true, then we are adding a new verbd and we want to display the VerbdAddForm component.
 Else display nothing.
 
-We use the clickAddVerbd flag for purposes of code clarity.
+We use the onClickAddVerbd flag for purposes of code clarity.
 
  */
 class VerbdAEStore extends ReduceStore {
@@ -34,21 +34,21 @@ class VerbdAEStore extends ReduceStore {
         switch (action.type) {
 
             // Signal the UI to open the VerbdAddForm
-            case VerbdAEActionTypes.CLICK_ADD_VERBD:
+            case VerbdAEActionTypes.ON_CLICK_ADD_VERBD:
                 return state.set('addVerbd', true)
 
             // Signal the UI to close VerbdAddForm or VerbdEditForm
-            case VerbdAEActionTypes.CLICK_CANCEL:
+            case VerbdAEActionTypes.ON_CLICK_CANCEL:
                 return this.getInitialState()
 
             // Signal the UI to close VerbdAddForm or VerbdEditForm (but the delete button
             // is only present on VerbEditForm.)
             // VerbdStore will also catch this event and it's responsible for the actual deletion.
-            case VerbdAEActionTypes.CLICK_DELETE_VERBD:
+            case VerbdAEActionTypes.ON_CLICK_DELETE_VERBD:
                 return this.getInitialState()
 
             // Signal the UI to open VerbdEditForm and populate with the given data.
-            case VerbdAEActionTypes.CLICK_EDIT_VERBD:
+            case VerbdAEActionTypes.ON_CLICK_EDIT_VERBD:
                 return state.set('verbd', Verbd({
                     id: action.verbd.id,
                     base: action.verbd.base,

@@ -19,24 +19,24 @@ describe('VerbdAEStore', function() {
     })
 
     // Signal the UI to open the VerbdAddForm
-    it('CLICK_ADD_VERBD', function() {
+    it('ON_CLICK_ADD_VERBD', function() {
         this.dispatch({
-            type: VerbdAEActionTypes.CLICK_ADD_VERBD
+            type: VerbdAEActionTypes.ON_CLICK_ADD_VERBD
         })
         expect(this.state.get('addVerbd')).toBe(true)
     })
 
     // Signal the UI to close VerbdAddForm or VerbdEditForm
-    it('CLICK_CANCEL', function() {
+    it('ON_CLICK_CANCEL', function() {
         this.dispatch({
-            type: VerbdAEActionTypes.CLICK_CANCEL
+            type: VerbdAEActionTypes.ON_CLICK_CANCEL
         })
         this.state = VerbdAEStore.getInitialState()
     })
 
     // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't test these two separately,
     // the same state should close either one. But the delete button is only available on VerbdEditForm.
-    it('CLICK_DELETE_VERBD', function() {
+    it('ON_CLICK_DELETE_VERBD', function() {
 
         // Now close it
         this.dispatch({
@@ -47,9 +47,9 @@ describe('VerbdAEStore', function() {
     })
 
     // Signal the UI to open VerbdEditForm and populate with the given data.
-    it('CLICK_EDIT_VERBD', function() {
+    it('ON_CLICK_EDIT_VERBD', function() {
         this.dispatch({
-            type: VerbdAEActionTypes.CLICK_EDIT_VERBD,
+            type: VerbdAEActionTypes.ON_CLICK_EDIT_VERBD,
             verbd: {id: '1', base: 'run', pastTense: 'ran', pastTense_rule: PastTenseRule.Irregular}
         })
         expect(this.state.get('verbd').toJSON()).toEqual({id: '1', base: 'run', pastTense: 'ran', pastTense_rule: PastTenseRule.Irregular})
@@ -60,10 +60,10 @@ describe('VerbdAEStore', function() {
     //
     // This action should have a verbd that will be used for insert or update in VerbdStore.  But
     // here we only close the UI and the value of verbd is unimportant.
-    it('CLICK_SAVE_VERBD, new verbd', function() {
+    it('ON_CLICK_SAVE_VERBD, new verbd', function() {
         // We know this is a new record because verbd has no id.
         this.dispatch({
-            type: VerbdAEActionTypes.CLICK_SAVE_VERBD,
+            type: VerbdAEActionTypes.ON_CLICK_SAVE_VERBD,
             verbd: {}
         })
         expect(this.state).toEqual(VerbdAEStore.getInitialState())

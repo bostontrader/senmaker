@@ -12,10 +12,10 @@ import AppDispatcher from '../../../AppDispatcher'
 
  We can use this information to manage the display of a suitable add/edit component.
  If the nound has an id then we are editing a nound and we thus want to display the NoundEditForm component.
- If the clickAddNound flag = true, then we are adding a new nound and we want to display the NoundAddForm component.
+ If the onClickAddNound flag = true, then we are adding a new nound and we want to display the NoundAddForm component.
  Else display nothing.
 
- We use the clickAddNound flag for purposes of code clarity.
+ We use the onClickAddNound flag for purposes of code clarity.
 
  */
 class NoundAEStore extends ReduceStore {
@@ -34,21 +34,21 @@ class NoundAEStore extends ReduceStore {
         switch (action.type) {
 
             // Signal the UI to open the NoundAddForm
-            case NoundAEActionTypes.CLICK_ADD_NOUND:
+            case NoundAEActionTypes.ON_CLICK_ADD_NOUND:
                 return state.set('addNound', true)
 
             // Signal the UI to close NoundAddForm or NoundEditForm
-            case NoundAEActionTypes.CLICK_CANCEL:
+            case NoundAEActionTypes.ON_CLICK_CANCEL:
                 return this.getInitialState()
 
             // Signal the UI to close NoundAddForm or NoundEditForm (but the delete button
             // is only present on NounEditForm.)
             // NoundStore will also catch this event and it's responsible for the actual deletion.
-            case NoundAEActionTypes.CLICK_DELETE_NOUND:
+            case NoundAEActionTypes.ON_CLICK_DELETE_NOUND:
                 return this.getInitialState()
 
             // Signal the UI to open NoundEditForm and populate with the given data.
-            case NoundAEActionTypes.CLICK_EDIT_NOUND:
+            case NoundAEActionTypes.ON_CLICK_EDIT_NOUND:
                 return state.set('nound', Nound({
                     id: action.nound.id,
                     base: action.nound.base,
@@ -58,7 +58,7 @@ class NoundAEStore extends ReduceStore {
 
             // Signal the UI to close NoundAddForm or NoundEditForm. We don't need to specificy which,
             // the same state should close either one.
-            case NoundAEActionTypes.CLICK_SAVE_NOUND:
+            case NoundAEActionTypes.ON_CLICK_SAVE_NOUND:
                 return this.getInitialState()
 
             case NoundAEActionTypes.ON_CHANGE_BASE:

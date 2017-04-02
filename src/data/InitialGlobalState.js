@@ -38,11 +38,11 @@ const initialGlobalState = {
         onChangeSelectedNound: NoundActions.onChangeSelectedNound,
         onChangeNoundBase: NoundAEActions.onChangeBase,
 
-        onClickAddNound: NoundAEActions.clickAddNound,
-        onClickCancel: NoundAEActions.clickCancel, // target only the NoundAEStore
-        onClickDeleteNound: NoundAEActions.clickDeleteNoun,
-        onClickEditNound: NoundAEActions.clickEditNound,
-        onClickSaveNound: NoundAEActions.clickSaveNound,
+        onClickAddNound:    NoundAEActions.onClickAddNound,
+        onClickCancel:      NoundAEActions.onClickCancel, // target only the NoundAEStore
+        onClickDeleteNound: NoundAEActions.onClickDeleteNoun,
+        onClickEditNound:   NoundAEActions.onClickEditNound,
+        onClickSaveNound:   NoundAEActions.onClickSaveNound,
     }),
 
     // noun dictionary
@@ -57,12 +57,12 @@ const initialGlobalState = {
         verbs: VerbdStore.getState(),
         //onChangeSelectedVerbd: VerbdActions.onChangeSelectedVerbd,
 
-        onClickAddVerbd: VerbdAEActions.clickAddVerbd,
-        onClickCancel: VerbdAEActions.clickCancel, // target only the VerbdAEStore
-        onClickDeleteVerbd: VerbdAEActions.clickDeleteVerbd,
-        onClickEditVerbd: VerbdAEActions.clickEditVerbd,
-        onClickSaveVerbd: VerbdAEActions.clickSaveVerbd,
-        onChangeVerbdBase: VerbdAEActions.onChangeBase,
+        onClickAddVerbd:    VerbdAEActions.onClickAddVerbd,
+        onClickCancel:      VerbdAEActions.onClickCancel, // target only the VerbdAEStore
+        onClickDeleteVerbd: VerbdAEActions.onClickDeleteVerbd,
+        onClickEditVerbd:   VerbdAEActions.onClickEditVerbd,
+        onClickSaveVerbd:   VerbdAEActions.onClickSaveVerbd,
+        onChangeVerbdBase:  VerbdAEActions.onChangeBase,
     })
 }
 

@@ -2,25 +2,25 @@ import VerbdAEActionTypes from './VerbdAEActionTypes'
 import AppDispatcher from '../../../AppDispatcher'
 
 const VerbdAEActions = {
-    clickAddVerbd() {
+    onClickAddVerbd() {
         AppDispatcher.dispatch({
-            type: VerbdAEActionTypes.CLICK_ADD_VERBD
+            type: VerbdAEActionTypes.ON_CLICK_ADD_VERBD
         })
     },
-    clickCancel() {
+    onClickCancel() {
         AppDispatcher.dispatch({
-            type: VerbdAEActionTypes.CLICK_CANCEL
+            type: VerbdAEActionTypes.ON_CLICK_CANCEL
         })
     },
-    clickDeleteVerbd(id) {
+    onClickDeleteVerbd(id) {
         AppDispatcher.dispatch({
-            type: VerbdAEActionTypes.CLICK_DELETE_VERBD,
+            type: VerbdAEActionTypes.ON_CLICK_DELETE_VERBD,
             id
         })
     },
-    clickEditVerbd(verbd) {
+    onClickEditVerbd(verbd) {
         AppDispatcher.dispatch({
-            type: VerbdAEActionTypes.CLICK_EDIT_VERBD,
+            type: VerbdAEActionTypes.ON_CLICK_EDIT_VERBD,
             verbd: verbd
         })
     },
@@ -33,9 +33,9 @@ const VerbdAEActions = {
 
     // The Save button for an add or edit is clicked.
     // For programmatic insert see VerbdActionTypes INSERT_VERBD
-    clickSaveVerbd(verbd) {
+    onClickSaveVerbd(verbd) {
         AppDispatcher.dispatch({
-            type: VerbdAEActionTypes.CLICK_SAVE_VERBD,
+            type: VerbdAEActionTypes.ON_CLICK_SAVE_VERBD,
             verbd: verbd
         })
     },

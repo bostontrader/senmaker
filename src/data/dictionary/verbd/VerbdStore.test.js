@@ -52,7 +52,7 @@ describe('VerbdStore', function() {
         }
     })
 
-    it('CLICK_DELETE_VERBD', function() {
+    it('ON_CLICK_DELETE_VERBD', function() {
         expect(this.verbs()).toEqual([])
         this.addVerbs([
             {base: 'eat', pastTense: 'ate', pastTense_rule: PastTenseRule.Irregular},
@@ -61,7 +61,7 @@ describe('VerbdStore', function() {
         ])
 
         this.dispatch({
-            type: VerbdAEActionTypes.CLICK_DELETE_VERBD,
+            type: VerbdAEActionTypes.ON_CLICK_DELETE_VERBD,
             id: this.id(2),
         })
 
@@ -71,7 +71,7 @@ describe('VerbdStore', function() {
         ])
 
         this.dispatch({
-            type: VerbdAEActionTypes.CLICK_DELETE_VERBD,
+            type: VerbdAEActionTypes.ON_CLICK_DELETE_VERBD,
             id: this.id(0),
         })
 
@@ -80,7 +80,7 @@ describe('VerbdStore', function() {
         ])
 
         this.dispatch({
-            type: VerbdAEActionTypes.CLICK_DELETE_VERBD,
+            type: VerbdAEActionTypes.ON_CLICK_DELETE_VERBD,
             id: this.id(0),
         })
 
@@ -88,11 +88,11 @@ describe('VerbdStore', function() {
 
     })
 
-    it('CLICK_SAVE_VERBD, new verbd', function() {
+    it('ON_CLICK_SAVE_VERBD, new verbd', function() {
         // We know that this is a new record because verbd has no id.
         expect(this.verbs()).toEqual([])
         this.dispatch({
-            type: VerbdAEActionTypes.CLICK_SAVE_VERBD,
+            type: VerbdAEActionTypes.ON_CLICK_SAVE_VERBD,
             verbd: {base: 'eat', pastTense: 'ate', pastTense_rule: PastTenseRule.Irregular}
         })
         expect(this.verbs()).toEqual([
@@ -100,7 +100,7 @@ describe('VerbdStore', function() {
         ])
     })
 
-    it('CLICK_SAVE_VERBD, edit verbd', function() {
+    it('ON_CLICK_SAVE_VERBD, edit verbd', function() {
         // We know that this is an update to an existing record because verbd has an id.
         expect(this.verbs()).toEqual([])
         this.dispatch({
@@ -109,7 +109,7 @@ describe('VerbdStore', function() {
         })
 
         this.dispatch({
-            type: VerbdAEActionTypes.CLICK_SAVE_VERBD,
+            type: VerbdAEActionTypes.ON_CLICK_SAVE_VERBD,
             verbd: Verbd({id: this.id(0), base: 'talk', pastTense: 'talked', pastTense_rule: PastTenseRule.Append_ed})
         })
 
