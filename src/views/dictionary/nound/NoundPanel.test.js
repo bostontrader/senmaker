@@ -5,14 +5,14 @@ import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 import {findWithType} from 'react-shallow-testutils'
 
-import AppStore from '../../../data/AppStore'
+import AppStore from '../../../data/app/AppStore'
 import NoundAEStore from '../../../data/dictionary/nound/addedit/NoundAEStore'
 import NoundPanel from './NoundPanel'
 import NoundTable from './NoundTable'
 import NoundAddForm  from './addedit/NoundAddForm'
 import NoundEditForm from './addedit/NoundEditForm'
 
-import StringStore from '../../../data/StringStore'
+import StringStore from '../../../data/strings/StringStore'
 
 describe("NoundPanel", () => {
 

@@ -1,8 +1,9 @@
 import React from 'react'
 
-import Intro from '../../views/syllabus/Intro'
-import Nound from '../../views/syllabus/Nound'
-import Verbd from '../../views/syllabus/Verbd'
+import Intro        from '../../views/syllabus/Intro'
+import Nound        from '../../views/syllabus/Nound'
+import Verbd        from '../../views/syllabus/Verbd'
+import Definiteness from '../../views/syllabus/Definiteness'
 
 /**
  * We have a series of lessons that we want to progress through in a specific order.
@@ -21,7 +22,7 @@ const syllabus = {
     intro:Intro,
     nound:Nound,
     verbd:Verbd,
-    //definiteness:<Level03 {...props} />
+    definiteness:Definiteness
     // phrase
     // noun phrase
     // pluralization

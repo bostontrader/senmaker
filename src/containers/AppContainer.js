@@ -1,8 +1,8 @@
 import {Container} from 'flux/utils'
 import {Map}       from 'immutable'
 
-import AppActions     from '../data/AppActions'
-import AppStore       from '../data/AppStore'
+import AppActions     from '../data/app/AppActions'
+import AppStore       from '../data/app/AppStore'
 
 import NoundActions   from '../data/dictionary/nound/NoundActions'
 import NoundAEActions from '../data/dictionary/nound/addedit/NoundAEActions'
@@ -20,8 +20,8 @@ import NouniStore     from '../data/nouni/NouniStore'
 import QuizActions    from '../data/quiz/QuizActions'
 import QuizStore      from '../data/quiz/QuizStore'
 
-import StringActions  from '../data/StringActions'
-import StringStore    from '../data/StringStore'
+import StringActions  from '../data/strings/StringActions'
+import StringStore    from '../data/strings/StringStore'
 
 import AppView from '../views/AppView'
 
@@ -47,34 +47,23 @@ function getState() {
     return {
 
         app: AppStore.getState(),
-        //lang: AppStore.getState().get('lang'),
 
         //mostRecentlySelectedNound: AppStore.getState().get('mostRecentlySelectedNound'),
-        //onLessonPrevious: AppActions.lessonPrevious,
-        //onLevelReset: AppActions.levelReset,
-        //onSetQuizScore: AppActions.setQuizScore,
-        //onLangEng: StringActions.langEng,
-        //onLangChn: StringActions.langChn,
+        //onLessonPrevious: AppActions.onLessonPrevious,
+        //onLevelReset: AppActions.onAppReset,
 
         // A dictionary of available nouns.  We will instantiate as many copies of these
         // definitions as we need, as nouni.
         nound: Map({
             addEditNound: NoundAEStore.getState(),
             nouns: NoundStore.getState(),
-            onChangeSelectedNound: NoundActions.onChangeSelectedNound,
-            onChangeNoundBase: NoundAEActions.onChangeBase,
-
-            onClickAddNound:    NoundAEActions.onClickAddNound,
-            onClickCancel:      NoundAEActions.onClickCancel, // target only the NoundAEStore
-            onClickDeleteNound: NoundAEActions.onClickDeleteNoun,
-            onClickEditNound:   NoundAEActions.onClickEditNound,
-            onClickSaveNound:   NoundAEActions.onClickSaveNound,
+            //onChangeSelectedNound: NoundActions.onChangeSelectedNound,
+            //onChangeNoundBase:     NoundAEActions.onChangeBase,
         }),
 
         // A collection of instantiated nound.
         nouni: Map({
             addEditNouni: NouniAEStore.getState(),
-            onChangeDefiniteness: NouniAEActions.onChangeDefiniteness,
         }),
 
         // The quizzes
@@ -88,13 +77,7 @@ function getState() {
             addEditVerbd: VerbdAEStore.getState(),
             verbs: VerbdStore.getState(),
             //onChangeSelectedVerbd: VerbdActions.onChangeSelectedVerbd,
-
-            onClickAddVerbd:    VerbdAEActions.onClickAddVerbd,
-            onClickCancel:      VerbdAEActions.onClickCancel, // target only the VerbdAEStore
-            onClickDeleteVerbd: VerbdAEActions.onClickDeleteVerbd,
-            onClickEditVerbd:   VerbdAEActions.onClickEditVerbd,
-            onClickSaveVerbd:   VerbdAEActions.onClickSaveVerbd,
-            onChangeVerbdBase:  VerbdAEActions.onChangeBase,
+            //onChangeVerbdBase:  VerbdAEActions.onChangeBase,
         })
     }
 }

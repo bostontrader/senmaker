@@ -1,8 +1,9 @@
 var Nightmare = require('nightmare')
-//const should = require('chai').should()
+var nightmareNound = require('./nightmareNound')
+var nightmareVerbd = require('./nightmareVerbd')
+var nightmareDefiniteness = require('./nightmareDefiniteness')
 
-describe('Starting at Level00', () => {
-
+describe('In the beginning...', () => {
 
     const url = 'http://localhost:8081'
 
@@ -15,217 +16,77 @@ describe('Starting at Level00', () => {
      */
     it('Should work correctly', (done) => {
         const nightmare = new Nightmare({show:true, width:600, height:800})
+        const delay = 250 // delay between steps
 
-        nightmare.goto(url)
+        // test reset at the end
+        nightmare.goto(url).wait(delay)
 
-            .click('#iUnderstand')
-            .click('#level-next')      // goto level 01
+        // 00. Verify that we can switch between languages and that the correct language switch is
+        //    displayed.
+            
+        // 00.1 By default the language starts at zh.  Verify that we _can_ see the enFlag, but _not_ the zhFlag.
+        .evaluate(function() {
+            return document.querySelector('#enFlag') !== null
+        }).then( enFlagFound => {
+            if (!enFlagFound)
+                throw('enFlagFound was not found')
+        })
 
-            .click('#add-nound')
-            .click('#nound-add-form #cancel')
+        // Now look for the zh flag
+        .then( res => {
+            return nightmare
+                .evaluate(function () {
+                    return document.querySelector('#zhFlag') === null
+                })
+        })
+        .then( zhFlagNotFound => {
+            if (!zhFlagNotFound)
+                throw('zhFlagFound was found, but it shouldn\'t be there.')
+        })
 
-            // The NoundAddForm should now go away.
-            .evaluate(function() {
-                return document.querySelector('#nound-add-form') === null
-            })
-            .then(
-                nound_add_form_gone => {
-                    if (!nound_add_form_gone)
-                        throw('nound-add-form has not gone away after cancel')
-                    return nightmare
-                        .click('#add-nound')
-                        .type('#base', 'carrot')
-                        .click('#save-nound')
+        // 00.2 Now switch to english. Verify that we _can_ see the zhFlag, but _not_ the enFlag.
+        .then( res => {
+            return nightmare
+                .click('#enFlag').wait(delay)
 
-                        // The NoundAddForm should now go away.
-                        .evaluate(function() {
-                            return document.querySelector('#nound-add-form') === null
-                        })
-                }
-            )
-            .then(nound_add_form_gone => {
-                if (!nound_add_form_gone)
-                    throw('nound-add-form has not gone away after save')
-                return nightmare
-                    .evaluate(function() {
-                        return document.querySelector('#insertNoundCheck') !== null
-                    })
-            })
-            .then(insertNoundCheckFound => {
-                if (!insertNoundCheckFound)
-                    throw('insertNoundCheck did not appear after save')
-                return nightmare
-                    .click('#n-1')
-                    .click('#cancel')
-                    .evaluate(function() {
-                        return document.querySelector('#nound-edit-form') === null
-                    })
-            })
-            .then(nound_edit_form_gone => {
-                if (!nound_edit_form_gone)
-                    throw('nound-edit-form has not gone away after cancel')
-                return nightmare
-                    .click('#n-1')
-                    .type('#base', 'beaver')
-                    .click('#save-nound')
-                    .evaluate(function() {
-                        return document.querySelector('#nound-edit-form') === null
-                    })
-            })
-            .then(nound_edit_form_gone => {
-                if (!nound_edit_form_gone)
-                    throw('nound-edit-form has not gone away after save')
-                return nightmare
-                    .evaluate(function() {
-                        return document.querySelector('#updateNoundCheck') !== null
-                    })
-            })
-            .then(updateNoundCheckFound => {
-                if (!updateNoundCheckFound)
-                    throw('updateNoundCheck did not appear after save')
-                return nightmare
-                    .click('#n-1')
-                    .click('#delete-nound')
-                    .evaluate(function() {
-                        return document.querySelector('#nound-edit-form') === null
-                    })
-            })
-            .then(nound_edit_form_gone => {
-                if (!nound_edit_form_gone)
-                    throw('nound-edit-form has not gone away after delete')
-                return nightmare
-                    .evaluate(function() {
-                        return document.querySelector('#deleteNoundCheck') !== null
-                    })
-            })
-            .then(deleteNoundCheckFound => {
-                if (!deleteNoundCheckFound)
-                    throw('deleteNoundCheck did not appear after delete')
-            })
-            .then(res=>{
-                return nightmare
-                    .click('#level-next')      // goto level 02
+                // Verify that we can see the zhFlag
+                .evaluate(function () {
+                    return document.querySelector('#zhFlag') !== null
+                })
+        }).then( zhFlagFound => {
+            if (!zhFlagFound)
+                throw('zhFlagFound was not found')
+        })
+        .then( res => {
+            return nightmare
+                .evaluate(function () {
+                    return document.querySelector('#enFlag') === null
+                })
+        })
+        .then( enFlagNotFound => {
+            if (!enFlagNotFound)
+                throw('enFlagFound was found, but it shouldn\'t be there.')
+        })
 
-                    .click('#add-verbd')
-                    .click('#verbd-add-form #cancel')
+        // 0. Now answer the intro lesson question. Can I see the checkmark?
+        .then( res => {
+            return nightmare
+                .click('#iunderstandCheck').wait(delay)
+                .evaluate(function () {
+                    return document.querySelector('#iunderstandCheck') !== null
+                })
+        })
+        .then( iunderstandCheck => {
+            if (!iunderstandCheck)
+                throw('iunderstandCheck was not found')
+        })
 
-                    // The VerbdAddForm should now go away.
-                    .evaluate(function() {
-                        return document.querySelector('#verbd-add-form') === null
-                    })
-            })
-            .then(
-                verbd_add_form_gone => {
-                    if (!verbd_add_form_gone)
-                        throw('verbd-add-form has not gone away after cancel')
-                    return nightmare
-                        .click('#add-verbd') .wait(250)
-                        .type('#base', 'jump'). wait(500)
-                        .click('#save-verbd') .wait(1000)
+        .then( res => {return nightmareNound(nightmare, delay)})
+        .then( res => {return nightmareVerbd(nightmare, delay)})
+        .then( res => {return nightmareDefiniteness(nightmare, delay)})
+        .then(resolve => {done()})
+        .catch(err => {console.log(err),done()})
 
-                        // The VerbdAddForm should now go away.
-                        .evaluate(function() {
-                            return document.querySelector('#verbd-add-form') === null
-                        })
-                }
-            )
-            .then(verbd_add_form_gone => {
-                if (!verbd_add_form_gone)
-                    throw('verbd-add-form has not gone away after save')
-                return nightmare
-                    .evaluate(function() {
-                        return document.querySelector('#insertVerbdCheck') !== null
-                    })
-            })
-            .then(insertVerbdCheckFound => {
-                if (!insertVerbdCheckFound)
-                    throw('insertVerbdCheck did not appear after save')
-                return nightmare
-                    .click('#v-1')
-                    .click('#cancel')
-                    .evaluate(function() {
-                        return document.querySelector('#verbd-edit-form') === null
-                    })
-            })
-            .then(verbd_edit_form_gone => {
-                if (!verbd_edit_form_gone)
-                    throw('verbd-edit-form has not gone away after cancel')
-                return nightmare
-                    .click('#v-1') .wait(250)
-                    .type('#base', 'beaver'). wait(250)
-                    .click('#save-verbd') .wait(250)
-                    .evaluate(function() {
-                        return document.querySelector('#verbd-edit-form') === null
-                    })
-            })
-            .then(verbd_edit_form_gone => {
-                if (!verbd_edit_form_gone)
-                    throw('verbd-edit-form has not gone away after save')
-                return nightmare
-                    .evaluate(function() {
-                        return document.querySelector('#updateVerbdCheck') !== null
-                    })
-            })
-            .then(updateVerbdCheckFound => {
-                if (!updateVerbdCheckFound)
-                    throw('updateVerbdCheck did not appear after save')
-                return nightmare
-                    .click('#v-1')
-                    .click('#delete-verbd') .wait(250)
-                    .evaluate(function() {
-                        return document.querySelector('#verbd-edit-form') === null
-                    })
-            })
-            .then(verbd_edit_form_gone => {
-                if (!verbd_edit_form_gone)
-                    throw('verbd-edit-form has not gone away after delete')
-                return nightmare
-                    .evaluate(function() {
-                        return document.querySelector('#deleteVerbdCheck') !== null
-                    })
-            })
-            .then(deleteVerbdCheckFound => {
-                if (!deleteVerbdCheckFound)
-                    throw('deleteVerbdCheck did not appear after delete')
-                return nightmare
-                    .click('#level-next').wait(1000)      // goto level 03
-                    .click('input[type="radio"]').wait(1000)
-                    .evaluate(function() {
-                        return document.querySelector('#changeDefinitenessCheck') !== null
-                    })
-            })
-            .then(changeDefinitenessCheckFound => {
-                if (!changeDefinitenessCheckFound)
-                    throw('changeDefinitenessCheck did not appear')
-                return nightmare
-                    .click('#iseeArticleChanged').wait(1000)
-                    .evaluate(function() {
-                        return document.querySelector('#iseeArticleChangedCheck') !== null
-                    })
-            })
-            .then(iseeArticleChangedCheckFound => {
-                if (!iseeArticleChangedCheckFound)
-                    throw('iseeArticleChangedCheck did not appear')
-                return nightmare
-                    .type('div.Select-input input','apple').wait(1000)
-                    .click('div.Select-input input').wait(1000)
-
-                    .evaluate(function() {
-                        return document.querySelector('#changeNoundCheck') !== null
-                    })
-            })
-
-            // For some mysterious and inherently unknowable reason it's not possible to select a selection
-            // or enter text for a choice, as we attempt infra.  I don't have time to figure this out right
-            // so I will hack around it instead.
-            //.then(changeNoundCheckFound => {
-                //if (!changeNoundCheckFound)
-                    //throw('changeNoundCheck did not appear')
-            //})
-            .then(resolve => {
-                done()
-            })
-            .catch(err => {console.log(err),done()})
-    }).timeout(14000)
+    }).timeout(20000)
 
 })

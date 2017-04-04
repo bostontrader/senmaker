@@ -4,11 +4,11 @@ import React from 'react'
 import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 
-import AppActionTypes from '../../../data/AppActionTypes'
-import AppStore       from '../../../data/AppStore'
+import AppActionTypes from '../../../data/app/AppActionTypes'
+import AppStore       from '../../../data/app/AppStore'
 import Nound          from '../../../data/dictionary/nound/Nound'
 import NouniAEStore   from '../../../data/nouni/addedit/NouniAEStore'
-import StringStore    from '../../../data/StringStore'
+import StringStore    from '../../../data/strings/StringStore'
 
 import NouniAddForm from './NouniAddForm'
 

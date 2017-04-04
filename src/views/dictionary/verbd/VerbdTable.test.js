@@ -5,9 +5,9 @@ import TestUtils         from 'react-addons-test-utils'
 import {findAllWithType} from 'react-shallow-testutils'
 import rtRenderer        from 'react-test-renderer'
 
-import AppActionTypes from '../../../data/AppActionTypes'
-import AppStore       from '../../../data/AppStore'
-import StringStore    from '../../../data/StringStore'
+import AppActionTypes from '../../../data/app/AppActionTypes'
+import AppStore       from '../../../data/app/AppStore'
+import StringStore    from '../../../data/strings/StringStore'
 
 import {PastTenseRule}  from '../../../data/dictionary/verbd/VerbdConstants'
 import Verbd            from '../../../data/dictionary/verbd/Verbd'

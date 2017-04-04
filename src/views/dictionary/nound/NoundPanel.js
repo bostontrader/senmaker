@@ -1,6 +1,8 @@
 import React from 'react'
 
-import NoundAddForm from './addedit/NoundAddForm'
+import NoundAEActions from '../../../data/dictionary/nound/addedit/NoundAEActions'
+
+import NoundAddForm  from './addedit/NoundAddForm'
 import NoundEditForm from './addedit/NoundEditForm'
 import NoundTable from './NoundTable'
 
@@ -32,7 +34,7 @@ function NoundPanel(props) {
     // The appearance of a NoundPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-nound" onClick={props.nound.getIn(['onClickAddNound'])}>{s.add_new} {s.noun}</button>
+            <button id="add-nound" onClick={NoundAEActions.onClickAddNound}>{s.add_new} {s.noun}</button>
             <NoundTable {...props} />
         </div>
         <div>

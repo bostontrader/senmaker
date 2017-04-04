@@ -1,12 +1,13 @@
 import React from 'react'
 
+import VerbdAEActions    from '../../../data/dictionary/verbd/addedit/VerbdAEActions'
 import {VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'
 
 function VerbdRow(props) {
 
     const {verb} = props;
     //const onClickEditVerbd = () => props.onClickEditVerbd(verb)
-    const onClickEditVerbd = () => props.verbd.getIn(['onClickEditVerbd'])(verb)
+    const onClickEditVerbd = () => VerbdAEActions.onClickEditVerbd(verb)
     //const onClickSave = () => props.verbd.getIn(['onClickSaveVerbd'])({base: props.verbd.getIn(['addEditVerbd','verbd','base'])})
 
     let verbdRow = <div>verb item</div>

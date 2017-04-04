@@ -1,25 +1,30 @@
 import React from 'react'
 
-import AppActions from '../data/AppActions'
-//import LevelControl from './LevelControl'
-import NouniAddForm from './nouni/addedit/NouniAddForm'
+import AppActions  from '../../data/app/AppActions'
+import QuizActions from '../../data/quiz/QuizActions'
 
-function Level03(props) {
+import LessonNavigator from './LessonNavigator'
+import NouniAddForm from '../nouni/addedit/NouniAddForm'
+
+function Definiteness(props) {
 
     const style = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const s = props.strings.Level03
+    const q = props.quiz
+    const s = props.strings.definiteness
 
-    const quizOnNoundChangedFlag = q.getIn(['nound','iunderstand']) ?
+    const onChange = QuizActions.definiteness.onIseeArticleChanged
+
+    const quizOnNoundChangedFlag = q.getIn(['definiteness','noundChanged']) ?
         <img id="changeNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizOnDefinitenessChangedFlag = q.getIn(['nound','iunderstand']) ?
+    const quizOnDefinitenessChangedFlag = q.getIn(['definiteness','definitenessChanged']) ?
         <img id="changeDefinitenessCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizIseeArticleChangedFlag = q.getIn(['nound','iunderstand']) ?
+    const quizIseeArticleChangedFlag = q.getIn(['definiteness','iseeArticleChanged']) ?
         <img id="iseeArticleChangedCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     return(
@@ -51,7 +56,7 @@ function Level03(props) {
                         <td>
                             <p>{s.quiz3}</p>
                             <p>
-                                <input  id="iseeArticleChanged" onChange={props.quiz.get('onIseeArticleChanged')} type="checkbox" checked={props.level.get('quiz')} />
+                                <input  id="iseeArticleChanged" onChange={onChange} type="checkbox" checked={q.getIn(['definiteness','iseeArticleChanged'])} />
                                 {'I can see it change'}
                             </p>
                         </td>
@@ -61,9 +66,9 @@ function Level03(props) {
                 </table>
 
             </div>
-            <LevelControl {...props} />
+            <LessonNavigator {...props} />
         </div>
     )
 }
 
-export default Level03
+export default Definiteness

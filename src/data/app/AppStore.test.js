@@ -1,22 +1,20 @@
 import AppActionTypes from './AppActionTypes'
-import AppStore from './AppStore'
+import AppStore       from './AppStore'
+import {langCode}     from '../I18NConstants'
 
-import NoundActionTypes     from './dictionary/nound/NoundActionTypes'
-import {PluralizationRule}  from './dictionary/nound/NoundConstants'
-import NoundAEActionTypes   from './dictionary/nound/addedit/NoundAEActionTypes'
-import VerbdAEActionTypes   from './dictionary/verbd/addedit/VerbdAEActionTypes'
-import {DefinitenessSelect} from './nouni/NouniConstants'
-import NouniAEActionTypes   from './nouni/addedit/NouniAEActionTypes'
-import Syllabus             from './syllabus/Syllabus'
+import NoundActionTypes     from '../dictionary/nound/NoundActionTypes'
+import {PluralizationRule}  from '../dictionary/nound/NoundConstants'
+import NoundAEActionTypes   from '../dictionary/nound/addedit/NoundAEActionTypes'
+import VerbdAEActionTypes   from '../dictionary/verbd/addedit/VerbdAEActionTypes'
+import {DefinitenessSelect} from '../nouni/NouniConstants'
+import NouniAEActionTypes   from '../nouni/addedit/NouniAEActionTypes'
+import Syllabus             from '../syllabus/Syllabus'
 
 describe('AppStore', function() {
 
     beforeEach(function() {
-        // Always start with the initial state.
         this.state = AppStore.getInitialState()
 
-        // This "dispatches" an action to our store. We can bypass the dispatcher
-        // and just call the store's reduce function directly.
         this.dispatch = action => {
             this.state = AppStore.reduce(this.state, action)
         }
@@ -25,6 +23,22 @@ describe('AppStore', function() {
 
     describe('Misc', function() {
 
+        it('ON_APP_RESET', function() {
+            const oldState = this.state
+            this.dispatch({
+                type: AppActionTypes.ON_LESSON_NEXT
+            })
+            expect(oldState).not.toBe(this.state)
+
+            this.dispatch({
+                type: AppActionTypes.ON_APP_RESET
+            })
+            expect(oldState).toBe(this.state)
+        })
+
+        /**
+         * Starting from the beginning verify that we can step through all the lessons until the end.
+         */
         it('ON_LESSON_NEXT', function() {
 
             let currentLevel = 0
@@ -32,8 +46,6 @@ describe('AppStore', function() {
             const lessonCount  = Object.keys(Syllabus).length
 
             for(lessonName in Syllabus) {
-                console.log("n=",lessonName)
-
                 expect(this.state.getIn(['level','currentLevel'])).toBe(currentLevel++)
                 expect(this.state.getIn(['level','currentLesson'])).toBe(lessonName)
 
@@ -50,7 +62,6 @@ describe('AppStore', function() {
                 this.dispatch({
                     type: AppActionTypes.ON_LESSON_NEXT
                 })
-
             }
 
             // One more time at the end, nothing should change.
@@ -65,41 +76,52 @@ describe('AppStore', function() {
 
     })
 
-/*    describe('Nound', function() {
+    describe('Nound', function() {
 
-        beforeEach(function() {
+        //beforeEach(function() {
             // We know that this is a new record because nound has no id.
             // This store will only set the insertNound flag and thus the actual
             // nound value is otherwise unimportant.
-            this.clickSaveNoundNew = () => {
-                this.dispatch({
-                    type: NoundAEActionTypes.CLICK_SAVE_NOUND,
-                    nound: {}
-                })
-            }
+            //this.clickSaveNoundNew = () => {
+                //this.dispatch({
+                    //type: NoundAEActionTypes.CLICK_SAVE_NOUND,
+                    //nound: {}
+                //})
+            //}
 
             // We know that this is an update to an existing record because nound has an id.
             // This store will only set the updateNound flag and thus the actual
             // nound value is otherwise unimportant.
-            this.clickSaveNoundEdit = () => {
-                this.dispatch({
-                    type: NoundAEActionTypes.CLICK_SAVE_NOUND,
-                    nound: {id:0}
-                })
-            }
+            //this.clickSaveNoundEdit = () => {
+                //this.dispatch({
+                    //type: NoundAEActionTypes.CLICK_SAVE_NOUND,
+                    //nound: {id:0}
+                //})
+            //}
 
             // This store will only set the deleteNound flag and thus the actual
             // nound id is unimportant
-            this.clickDeleteNound = () => {
-                this.dispatch({
-                    type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
-                    id: 0
-                })
-            }
+            //this.clickDeleteNound = () => {
+                //this.dispatch({
+                    //type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
+                    //id: 0
+                //})
+            //}
 
+        //})
+
+        it('ON_CHANGE_SELECTED_NOUND', function() {
+            this.dispatch({
+                type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
+                nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            })
+            //console.log('AppStore.test',this.state)
+            expect(this.state.get('mostRecentlySelectedNound')).toEqual(
+                {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            )
         })
 
-        it('CLICK_SAVE_NOUND, new nound', function() {
+         /*it('CLICK_SAVE_NOUND, new nound', function() {
             expect(this.state.getIn(['level','quizQuestions','insertNound'])).toBe(false)
             this.clickSaveNoundNew()
             expect(this.state.getIn(['level','quizQuestions','insertNound'])).toBe(true)
@@ -157,10 +179,10 @@ describe('AppStore', function() {
             this.clickSaveNoundEdit()
             currentQuizState = this.state.getIn(['level','quizResults',currentLevel])
             expect(currentQuizState).toBe(true)
-        })
+        })*/
     })
 
-    describe('Nouni', function() {
+    /*describe('Nouni', function() {
         it('ON_CHANGE_SELECTED_NOUND', function() {
             expect(this.state.getIn(['level','quizQuestions','noundChanged'])).toBe(false)
 

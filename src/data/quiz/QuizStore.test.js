@@ -1,7 +1,17 @@
-import QuizActionTypes   from './QuizActionTypes'
-import QuizStore         from './QuizStore'
+import QuizActionTypes    from './QuizActionTypes'
+import QuizStore          from './QuizStore'
+import NoundActionTypes   from '../dictionary/nound/NoundActionTypes'
 import NoundAEActionTypes from '../dictionary/nound/addedit/NoundAEActionTypes'
+import NouniAEActionTypes from '../nouni/addedit/NouniAEActionTypes'
 import VerbdAEActionTypes from '../dictionary/verbd/addedit/VerbdAEActionTypes'
+
+/**
+ * For each lesson tested, it's sufficient to test each individual
+ * question and verify that the quiz has not passed.  Then in a final test,
+ * answer all questions and verify that the quiz has indeed passed.  The order
+ * of answering these questions is hereby deemed unimportant, hence no need to
+ * check all the permutations of question answering order.
+ */
 describe('QuizStore', function() {
 
     beforeEach(function() {
@@ -12,7 +22,7 @@ describe('QuizStore', function() {
         }
     })
 
-    // 1. intro
+    // 0. intro
     it('ON_I_UNDERSTAND', function() {
         expect(this.state.getIn(['intro','iunderstand'])).toBe(false)
         expect(this.state.getIn(['intro','passed'])).toBe(false)
@@ -25,15 +35,9 @@ describe('QuizStore', function() {
         expect(this.state.getIn(['intro','passed'])).toBe(true)
     })
 
-    // 2.
+    // 1.
     describe('nound', function() {
-        /**
-         * This section has three questions.  It's sufficient to test each individual
-         * question and verify that the quiz has not passed.  Then in a final test,
-         * answer all questions and verify that the quiz has indeed passed.  The order
-         * of answering these questions is hereby deemed unimportant, hence no need to
-         * check all the permutations.
-         */
+
         it('ON_CLICK_SAVE_NOUND, insert', function() {
             expect(this.state.getIn(['nound','insertNound'])).toBe(false)
             expect(this.state.getIn(['nound','passed'])).toBe(false)
@@ -93,15 +97,9 @@ describe('QuizStore', function() {
         })
     })
 
-    // 3.
+    // 2.
     describe('verbd', function() {
-        /**
-         * This section has three questions.  It's sufficient to test each individual
-         * question and verify that the quiz has not passed.  Then in a final test,
-         * answer all questions and verify that the quiz has indeed passed.  The order
-         * of answering these questions is hereby deemed unimportant, hence no need to
-         * check all the permutations.
-         */
+
         it('ON_CLICK_SAVE_VERBD, insert', function() {
             expect(this.state.getIn(['verbd','insertVerbd'])).toBe(false)
             expect(this.state.getIn(['verbd','passed'])).toBe(false)
@@ -161,6 +159,61 @@ describe('QuizStore', function() {
         })
     })
 
+    // 3.
+    describe('definiteness', function() {
 
+        it('ON_CHANGE_SELECTED_NOUND', function() {
+            expect(this.state.getIn(['definiteness','noundChanged'])).toBe(false)
+            expect(this.state.getIn(['definiteness','passed'])).toBe(false)
+            this.dispatch({
+                type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
+            })
+
+            expect(this.state.getIn(['definiteness','noundChanged'])).toBe(true)
+            expect(this.state.getIn(['definiteness','passed'])).toBe(false)
+        })
+
+        it('ON_CHANGE_DEFINITENESS', function() {
+            expect(this.state.getIn(['definiteness','definitenessChanged'])).toBe(false)
+            expect(this.state.getIn(['definiteness','passed'])).toBe(false)
+
+            this.dispatch({
+                type: NouniAEActionTypes.ON_CHANGE_DEFINITENESS
+            })
+
+            expect(this.state.getIn(['definiteness','definitenessChanged'])).toBe(true)
+            expect(this.state.getIn(['definiteness','passed'])).toBe(false)
+        })
+
+        it('ON_ISEE_CHANGE_ARTICLE', function() {
+            expect(this.state.getIn(['definiteness','iseeArticleChanged'])).toBe(false)
+            expect(this.state.getIn(['definiteness','passed'])).toBe(false)
+
+            this.dispatch({
+                type: QuizActionTypes.definiteness.ON_ISEE_CHANGE_ARTICLE
+            })
+
+            expect(this.state.getIn(['definiteness','iseeArticleChanged'])).toBe(true)
+            expect(this.state.getIn(['definiteness','passed'])).toBe(false)
+        })
+
+        it('Pass the quiz.', function() {
+            expect(this.state.getIn(['definiteness','passed'])).toBe(false)
+
+            this.dispatch({
+                type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
+            })
+
+            this.dispatch({
+                type: NouniAEActionTypes.ON_CHANGE_DEFINITENESS
+            })
+
+            this.dispatch({
+                type: QuizActionTypes.definiteness.ON_ISEE_CHANGE_ARTICLE
+            })
+
+            expect(this.state.getIn(['definiteness','passed'])).toBe(true)
+        })
+    })
 
 })

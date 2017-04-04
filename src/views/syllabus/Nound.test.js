@@ -7,12 +7,12 @@ import {findAllWithClass, findWithClass, findWithType} from 'react-shallow-testu
 import LessonNavigator from './LessonNavigator'
 import Nound           from './Nound'
 
-import AppActionTypes     from '../../data/AppActionTypes'
-import AppStore           from '../../data/AppStore'
+import AppActionTypes     from '../../data/app/AppActionTypes'
+import AppStore           from '../../data/app/AppStore'
 import NoundAEActionTypes from '../../data/dictionary/nound/addedit/NoundAEActionTypes'
 import NoundStore         from '../../data/dictionary/nound/NoundStore'
 import QuizStore          from '../../data/quiz/QuizStore'
-import StringStore        from '../../data/StringStore'
+import StringStore        from '../../data/strings/StringStore'
 
 import NoundPanel from '../dictionary/nound/NoundPanel'
 

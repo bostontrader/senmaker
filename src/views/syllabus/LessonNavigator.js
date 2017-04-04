@@ -1,5 +1,7 @@
 import React from 'react'
-import AppActions from '../../data/AppActions'
+import AppActions from '../../data/app/AppActions'
+import StringActions from '../../data/strings/StringActions'
+import {langCode} from '../../data/I18NConstants'
 
 /**
 The LessonNavigator is responsible for displaying the control to navigate
@@ -17,13 +19,18 @@ function LessonNavigator(props) {
     const previousButton = (props.app.getIn(['level','firstLesson'])) ? '' :
         <button id="lesson-previous" onClick={props.onLevelPrevious}>{s.previousLevel}</button>
 
+    const enFlag = (props.strings.lang ===langCode.en) ? '' :
+        <img id="enFlag" onClick={StringActions.onLangEN} src="/img/us_flag.gif" width="28" height="20" alt=""/>
 
+    const zhFlag = (props.strings.lang ===langCode.zh) ? '' :
+        <img id="zhFlag" onClick={StringActions.onLangZH} src="/img/chinese_flag.gif" width="28" height="20" alt=""/>
+    
     const currentLesson  = props.app.getIn(['level','currentLesson'])
     const currentQuizPassed = props.quiz.getIn([currentLesson,'passed'])
 
     // If we have passed the quiz for this lesson and are not yet on the last lesson,
     // then there is another lesson to proceed to.
-    const onClickNext = AppActions.lessonNext
+    const onClickNext = AppActions.onLessonNext
     let nextButton = ''
     if( currentQuizPassed && !props.app.getIn(['level','lastLesson'])) {
         //nextButton = <button id="lesson-next" onClick={props.onLevelNext}>{s.nextLevel}</button>
@@ -41,11 +48,10 @@ function LessonNavigator(props) {
             {previousButton}
             {nextButton}
             {resetButton}
-            <img onClick={props.onLangEng} src="/img/us_flag.gif" width="28" height="20" alt=""/>
-            <img onClick={props.onLangChn} src="/img/chinese_flag.gif" width="28" height="20" alt=""/>
+            {enFlag}
+            {zhFlag}
         </div>
     )
-
 }
 
 export default LessonNavigator

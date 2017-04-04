@@ -1,5 +1,7 @@
 import React from 'react'
 
+import VerbdAEActions from '../../../data/dictionary/verbd/addedit/VerbdAEActions'
+
 import VerbdAddForm from './addedit/VerbdAddForm'
 import VerbdEditForm from './addedit/VerbdEditForm'
 import VerbdTable from './VerbdTable'
@@ -31,7 +33,7 @@ function VerbdPanel(props) {
     // The appearance of a VerbdPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-verbd" onClick={props.verbd.getIn(['onClickAddVerbd'])}>{s.add_new} {s.verb}</button>
+            <button id="add-verbd" onClick={VerbdAEActions.onClickAddVerbd}>{s.add_new} {s.verb}</button>
             <VerbdTable {...props} />
         </div>
         <div>

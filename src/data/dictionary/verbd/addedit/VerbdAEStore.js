@@ -56,9 +56,9 @@ class VerbdAEStore extends ReduceStore {
                     pastTense_rule: action.verbd.pastTense_rule
                 }))
 
-            // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't need to specificy which,
+            // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't need to specify which,
             // the same state should close either one.
-            case VerbdAEActionTypes.CLICK_SAVE_VERBD:
+            case VerbdAEActionTypes.ON_CLICK_SAVE_VERBD:
                 return this.getInitialState()
 
             case VerbdAEActionTypes.ON_CHANGE_BASE:

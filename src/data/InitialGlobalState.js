@@ -1,7 +1,7 @@
 import {Map}       from 'immutable'
 
-import AppActions     from './AppActions'
-import AppStore       from './AppStore'
+import AppActions     from './app/AppActions'
+import AppStore       from './app/AppStore'
 
 import NoundActions   from './dictionary/nound/NoundActions'
 import NoundAEActions from './dictionary/nound/addedit/NoundAEActions'
@@ -15,8 +15,8 @@ import VerbdStore     from './dictionary/verbd/VerbdStore'
 import NouniAEActions from './nouni/addedit/NouniAEActions'
 import NouniAEStore   from './nouni/addedit/NouniAEStore'
 
-import StringActions  from './StringActions'
-import StringStore    from './StringStore'
+import StringActions  from './strings/StringActions'
+import StringStore    from './strings/StringStore'
 
 const initialGlobalState = {
     lang: AppStore.getState().get('lang'),
@@ -25,7 +25,7 @@ const initialGlobalState = {
     mostRecentlySelectedNound: AppStore.getState().get('mostRecentlySelectedNound'),
     onLevelPrevious: AppActions.levelPrevious,
     onLevelNext: AppActions.levelNext,
-    onLevelReset: AppActions.levelReset,
+    onLevelReset: AppActions.onAppReset,
     onSetQuizScore: AppActions.setQuizScore,
     strings: StringStore.getState(),
     onLangEng: StringActions.langEng,

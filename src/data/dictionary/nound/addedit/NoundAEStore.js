@@ -56,7 +56,7 @@ class NoundAEStore extends ReduceStore {
                     pluralization_rule: action.nound.pluralization_rule
                 }))
 
-            // Signal the UI to close NoundAddForm or NoundEditForm. We don't need to specificy which,
+            // Signal the UI to close NoundAddForm or NoundEditForm. We don't need to specify which,
             // the same state should close either one.
             case NoundAEActionTypes.ON_CLICK_SAVE_NOUND:
                 return this.getInitialState()

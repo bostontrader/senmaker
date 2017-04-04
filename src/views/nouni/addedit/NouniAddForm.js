@@ -2,6 +2,7 @@ import React from 'react'
 
 import NoundSelect from '../../dictionary/nound/NoundSelect'
 import {RadioGroup, Radio} from 'react-radio-group'
+import NouniAEActions from '../../../data/nouni/addedit/NouniAEActions'
 
 function NouniAddForm(props) {
 
@@ -13,11 +14,11 @@ function NouniAddForm(props) {
     return(
         <div>
             <div style={style}>
-                <RadioGroup name="definiteness" selectedValue={props.nouni.getIn(['addEditNouni','definiteness'])} onChange={(e)=>{props.nouni.getIn(['onChangeDefiniteness'])(e)}}>
+                <NoundSelect {...props} />
+                <RadioGroup name="definiteness" selectedValue={props.nouni.getIn(['addEditNouni','definiteness'])} onChange={(e)=>{NouniAEActions.onChangeDefiniteness(e)}}>
                     <Radio value="definite" />Definite
                     <Radio value="indefinite" />Indefinite
                 </RadioGroup>
-                <NoundSelect {...props} />
                 <p>{props.nouni.getIn(['addEditNouni','nouni','generatedText'])}</p>
             </div>
 

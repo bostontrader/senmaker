@@ -1,12 +1,13 @@
 import React from 'react'
 
+import NoundAEActions    from '../../../data/dictionary/nound/addedit/NoundAEActions'
 import {NoundPanelLevel} from '../../../data/dictionary/nound/NoundConstants'
 
 function NoundRow(props) {
 
     const {noun} = props;
     //const onClickEditNound = () => props.onClickEditNound(noun)
-    const onClickEditNound = () => props.nound.getIn(['onClickEditNound'])(noun)
+    const onClickEditNound = () => NoundAEActions.onClickEditNound(noun)
     //const onClickSave = () => props.nound.getIn(['onClickSaveNound'])({base: props.nound.getIn(['addEditNound','nound','base'])})
 
     let noundRow = <div>noun item</div>

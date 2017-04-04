@@ -3,12 +3,12 @@ import React from 'react'
 import ReactTestUtils from 'react-addons-test-utils'
 import rtRenderer from 'react-test-renderer'
 
-import AppStore from '../data/AppStore'
+import AppStore from '../data/app/AppStore'
 import Level00 from './Level00'
 import Level01 from './Level01'
 import Level02 from './Level02'
 import NoundAEStore from '../data/dictionary/nound/addedit/NoundAEStore'
-import StringStore from '../data/StringStore'
+import StringStore from '../data/strings/StringStore'
 import VerbdAEStore from '../data/dictionary/verbd/addedit/VerbdAEStore'
 
 it('Renders Level00', () => {

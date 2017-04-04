@@ -1,7 +1,13 @@
+import {fromJS} from 'immutable'
 import {ReduceStore} from 'flux/utils'
 
-import AppDispatcher from './AppDispatcher'
+import AppActionTypes from '../app/AppActionTypes'
+import AppDispatcher from '../AppDispatcher'
 import StringActionTypes from './StringActionTypes'
+import {localStorageAvailable} from '../../LocalStorage'
+import {langCode}     from '../I18NConstants'
+
+const localStorageKey = 'StringStore'
 
 class StringStore extends ReduceStore {
 
@@ -10,25 +16,47 @@ class StringStore extends ReduceStore {
     }
 
     getInitialState() {
-        return StringStore.en
+        if (localStorageAvailable) {
+            //localStorage.removeItem(localStorageKey)
+            const localStorageState = localStorage.getItem(localStorageKey)
+
+            if(localStorageState)
+                return JSON.parse(localStorageState) // not immutable
+        }
+        return StringStore.initialState
     }
 
     reduce(state, action) {
+
+        let newState = state
+
         switch (action.type) {
 
-            case StringActionTypes.LANG_EN:
-                return StringStore.en
+            case AppActionTypes.ON_APP_RESET:
+                newState = StringStore.initialState
+                break
+            
+            case StringActionTypes.ON_LANG_EN:
+                newState = StringStore.en
+                break
 
-            case StringActionTypes.LANG_ZH:
-                return StringStore.zh
+            case StringActionTypes.ON_LANG_ZH:
+                newState = StringStore.zh
+                break
 
             default:
-                return state
+                // do nothing, newState is already set to the existing state
         }
+
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+
+        return newState
     }
 }
 
 StringStore.en = {
+    lang: langCode.en,
     add_new: 'Add New',
     cancel: 'Cancel',
     delete: 'Delete',
@@ -64,7 +92,7 @@ StringStore.en = {
     },
 
     // Definite or Indefinite noun
-    Level03: {
+    definiteness: {
         help10: 'Definite or Indefinite.',
         help11: 'Nouns are usually preceded by the word \'a\', \'an\', or \'the\'.',
         help12: 'If we have a group of similar items and we are talking about any one of them, then which particular item we are talking about is said to be \'indefinite\' and we use \'a\' or \'an\'.',
@@ -78,14 +106,11 @@ StringStore.en = {
         quiz2: 'Select \'definite\' or \'indefinite\'.',
         quiz3: 'Can you see that the article changes?'
     },
-    // Phrase
-    Level04: {
+    phrase: {
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
     },
-
-    // Noun Phrase
-    Level05: {
+    nounPhrase: {
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
         help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
         help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting a definiten or indefinite, and a noun, you produced a two-word noun phrase.'
@@ -144,6 +169,7 @@ StringStore.en = {
 }
 
 StringStore.zh = {
+    lang: langCode.zh,
     add_new: '添加新',
     cancel: '取消',
     delete: '删除',
@@ -176,7 +202,7 @@ StringStore.zh = {
         quiz3: '你能改变一个动词的拼写吗?'
     },
     // Definite or Indefinite noun
-    Level03: {
+    definiteness: {
         help10: '确定（Definite）或不确定（Indefinite）',
         help11: '名词通常这个词之前\'a\', \'an\',或\'the\'.',
         help12: '如果我们有一组类似的项目和我们谈论任何其中之一, 哪些特定的项目我们正在讨论 \'indefinite\' 我们使用 \'a\' 或 \'an\'.',
@@ -189,6 +215,16 @@ StringStore.zh = {
         quiz1: '选择一个名词的',
         quiz2: '选择 确定（\'definite\'） 或 不确定（\'indefinite\'）.',
         quiz3: '你能看到名词的变化吗?'
+    },
+    phrase: {
+        help10: 'A group of words that work together is called a \'phrase\'.',
+        help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
+    },
+    nounPhrase: {
+        help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
+        help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
+        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting a definiten or indefinite, and a noun, you produced a two-word noun phrase.'
+        // although a noun phrase is usually more than one word, it could be just a single noun.
     },
     xLevel03: {
         help10: '当我们写名词时必须知道名词的形式。.',
@@ -203,5 +239,7 @@ StringStore.zh = {
         reset: '返回'
     }
 }
+
+StringStore.initialState = StringStore.zh
 
 export default new StringStore()

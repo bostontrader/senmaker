@@ -154,9 +154,9 @@ describe('NoundStore', function() {
             //nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
         //})
         //console.log('AppStore.test',this.state)
-        //expect(this.state.get('mostRecentSelectedNound')).toEqual([
-        //{id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
-        //])
+        //expect(this.state.get('mostRecentSelectedNound')).toEqual(
+            //{id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+        //)
         //expect(true)
     //})
 

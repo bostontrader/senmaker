@@ -12,7 +12,7 @@ function Intro(props) {
 
     const q = props.quiz
     const s = props.strings.intro
-
+console.log('Intro',props.strings.intro)
     //const onChange = () => q.getIn(['intro','onIUnderstand'])
     const onChange = QuizActions.intro.onIUnderstand
 

@@ -1,5 +1,6 @@
 import React  from 'react'
 import Select from 'react-select'
+import NoundActions from '../../../data/dictionary/nound/NoundActions'
 
 function NoundSelect(props) {
 
@@ -7,11 +8,11 @@ function NoundSelect(props) {
         return {value:noun.get('id'), label:noun.get('base')}
     })
 
-    const selectedValue = props.mostRecentlySelectedNound.getIn(['id'])
+    const selectedValue = props.app.getIn(['mostRecentlySelectedNound','id'])
     return <Select options={options} value={selectedValue} placeholder="Select a noun..." onChange={(e)=>{
         console.log('changed')
         const nound = props.nound.getIn(['nouns']).get(e.value)
-        props.nound.getIn(['onChangeSelectedNound'])(nound)
+        NoundActions.onChangeSelectedNound(nound)
     }}/>
 
 }

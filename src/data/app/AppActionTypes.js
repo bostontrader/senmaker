@@ -1,9 +1,9 @@
 const AppActionTypes = {
     ON_LESSON_NEXT:     'ON_LESSON_NEXT',
     ON_LESSON_PREVIOUS: 'ON_LESSON_PREVIOUS',
-    ON_LEVEL_RESET:     'ON_LEVEL_RESET',
-    //QUIZ_SETSCORE: 'QUIZ_SETSCORE',
-
+    ON_APP_RESET:       'ON_APP_RESET',
+    //ON_LANG_ENG:        'ON_LANG_ENG',
+    //ON_LANG_CHN:        'ON_LANG_CHN'
     // Nouni
     //ADD_NOUNI: 'ADD_NOUNI',       // Invoke the add-noun UI
     //CANCEL: 'CANCEL',           // Quit the Add/Edit form

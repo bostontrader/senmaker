@@ -4,9 +4,9 @@ import React from 'react'
 import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 
-import AppActionTypes from '../../../../data/AppActionTypes'
-import AppStore from '../../../../data/AppStore'
-import StringStore from '../../../../data/StringStore'
+import AppActionTypes from '../../../../data/app/AppActionTypes'
+import AppStore from '../../../../data/app/AppStore'
+import StringStore from '../../../../data/strings/StringStore'
 import VerbdAddForm from './VerbdAddForm'
 import VerbdAEStore from '../../../../data/dictionary/verbd/addedit/VerbdAEStore'
 

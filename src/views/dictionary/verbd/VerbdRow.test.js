@@ -1,7 +1,7 @@
 import React from "react"
 import TestUtils from "react-addons-test-utils"
 
-import StringStore from '../../../data/StringStore'
+import StringStore from '../../../data/strings/StringStore'
 import Verbd from '../../../data/dictionary/verbd/Verbd'
 import VerbdRow from './VerbdRow'
 import {PastTenseRule, VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'

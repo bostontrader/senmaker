@@ -4,9 +4,9 @@ import TestUtils  from 'react-addons-test-utils'
 import rtRenderer from 'react-test-renderer'
 import {findWithClass, findWithType} from 'react-shallow-testutils'
 
-import AppStore    from '../../data/AppStore'
+import AppStore    from '../../data/app/AppStore'
 import QuizStore   from '../../data/quiz/QuizStore'
-import StringStore from '../../data/StringStore'
+import StringStore from '../../data/strings/StringStore'
 
 import Intro from './Intro'
 import LessonNavigator from './LessonNavigator'

@@ -4,7 +4,7 @@ import TestUtils from "react-addons-test-utils"
 import Nound from '../../../data/dictionary/nound/Nound'
 import NoundRow from './NoundRow'
 import {NoundPanelLevel} from '../../../data/dictionary/nound/NoundConstants'
-import StringStore from '../../../data/StringStore'
+import StringStore from '../../../data/strings/StringStore'
 
 describe("NoundRow", () => {
 
