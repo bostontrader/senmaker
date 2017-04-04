@@ -6,7 +6,7 @@ import Verbd        from '../../views/syllabus/Verbd'
 import Definiteness from '../../views/syllabus/Definiteness'
 
 /**
- * We have a series of lessons that we want to progress through in a specific order.
+ * We have a series of lessons that we want to progress through, in both directions, in a specific order.
  *
  * We also want to determine a "level".  That is, level 0 for the first lesson, level 1 for
  * the next lesson, and so on.
@@ -16,13 +16,20 @@ import Definiteness from '../../views/syllabus/Definiteness'
  * We want to be able to determine if we are presently at the first or last level. This
  * affects the lesson navigation UI.
  *
+ * The basic choice is to figure out how to iterate, bi-directionally over some simple data structure
+ * or to use a more slightly more complicated structure to implement a doubly-linked list.  I first attempted choice
+ * the prior but got bogged down in code that was way too complicated for this simple and limited
+ * application.  Hence my present doubly-linked list approach.
+ * 
  */
 
+// comp = component, prev = previous, next = next
 const syllabus = {
-    intro:Intro,
-    nound:Nound,
-    verbd:Verbd,
-    definiteness:Definiteness
+    intro:        {comp:Intro,        prev:null,     next:'nound'},
+    nound:        {comp:Nound,        prev:'intro',  next:'verbd'},
+    verbd:        {comp:Verbd,        prev:'nound',  next:'definiteness'},
+    definiteness: {comp:Definiteness, prev:'verbd',  next:null},
+
     // phrase
     // noun phrase
     // pluralization

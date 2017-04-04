@@ -1,26 +1,14 @@
 import {Container} from 'flux/utils'
 import {Map}       from 'immutable'
 
-import AppActions     from '../data/app/AppActions'
 import AppStore       from '../data/app/AppStore'
-
-import NoundActions   from '../data/dictionary/nound/NoundActions'
-import NoundAEActions from '../data/dictionary/nound/addedit/NoundAEActions'
 import NoundAEStore   from '../data/dictionary/nound/addedit/NoundAEStore'
 import NoundStore     from '../data/dictionary/nound/NoundStore'
-
-import VerbdAEActions from '../data/dictionary/verbd/addedit/VerbdAEActions'
 import VerbdAEStore   from '../data/dictionary/verbd/addedit/VerbdAEStore'
 import VerbdStore     from '../data/dictionary/verbd/VerbdStore'
-
-import NouniAEActions from '../data/nouni/addedit/NouniAEActions'
 import NouniAEStore   from '../data/nouni/addedit/NouniAEStore'
 import NouniStore     from '../data/nouni/NouniStore'
-
-import QuizActions    from '../data/quiz/QuizActions'
 import QuizStore      from '../data/quiz/QuizStore'
-
-import StringActions  from '../data/strings/StringActions'
 import StringStore    from '../data/strings/StringStore'
 
 import AppView from '../views/AppView'
@@ -47,8 +35,6 @@ function getState() {
     return {
 
         app: AppStore.getState(),
-
-        //mostRecentlySelectedNound: AppStore.getState().get('mostRecentlySelectedNound'),
         //onLessonPrevious: AppActions.onLessonPrevious,
         //onLevelReset: AppActions.onAppReset,
 
