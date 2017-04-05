@@ -35,16 +35,12 @@ function getState() {
     return {
 
         app: AppStore.getState(),
-        //onLessonPrevious: AppActions.onLessonPrevious,
-        //onLevelReset: AppActions.onAppReset,
 
         // A dictionary of available nouns.  We will instantiate as many copies of these
         // definitions as we need, as nouni.
         nound: Map({
             addEditNound: NoundAEStore.getState(),
             nouns: NoundStore.getState(),
-            //onChangeSelectedNound: NoundActions.onChangeSelectedNound,
-            //onChangeNoundBase:     NoundAEActions.onChangeBase,
         }),
 
         // A collection of instantiated nound.
@@ -62,8 +58,6 @@ function getState() {
         verbd: Map({
             addEditVerbd: VerbdAEStore.getState(),
             verbs: VerbdStore.getState(),
-            //onChangeSelectedVerbd: VerbdActions.onChangeSelectedVerbd,
-            //onChangeVerbdBase:  VerbdAEActions.onChangeBase,
         })
     }
 }

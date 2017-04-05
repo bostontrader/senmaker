@@ -1,5 +1,5 @@
-import NoundAEActionTypes from './NoundAEActionTypes'
-import NoundAEStore from './NoundAEStore'
+import NoundAEActionTypes  from './NoundAEActionTypes'
+import NoundAEStore        from './NoundAEStore'
 import {PluralizationRule} from '../NoundConstants'
 
 // The NoundAEStore is responsible for setting a small bit of state to signal

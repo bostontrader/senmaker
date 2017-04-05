@@ -17,7 +17,6 @@ class StringStore extends ReduceStore {
 
     getInitialState() {
         if (localStorageAvailable) {
-            //localStorage.removeItem(localStorageKey)
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState)
@@ -106,11 +105,11 @@ StringStore.en = {
         quiz2: 'Select \'definite\' or \'indefinite\'.',
         quiz3: 'Can you see that the article changes?'
     },
-    phrase: {
+    phrases: {
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
     },
-    nounPhrase: {
+    nounPhrases: {
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
         help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
         help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting a definiten or indefinite, and a noun, you produced a two-word noun phrase.'
@@ -216,11 +215,11 @@ StringStore.zh = {
         quiz2: '选择 确定（\'definite\'） 或 不确定（\'indefinite\'）.',
         quiz3: '你能看到名词的变化吗?'
     },
-    phrase: {
+    phrases: {
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
     },
-    nounPhrase: {
+    nounPhrases: {
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
         help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
         help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting a definiten or indefinite, and a noun, you produced a two-word noun phrase.'

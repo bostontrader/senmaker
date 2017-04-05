@@ -1,9 +1,13 @@
 import {ReduceStore} from 'flux/utils'
-import {Map} from 'immutable'
+import {fromJS, Map} from 'immutable'
 
+import AppActionTypes from '../../../app/AppActionTypes'
 import Nound from '../Nound'
 import NoundAEActionTypes from './NoundAEActionTypes'
 import AppDispatcher from '../../../AppDispatcher'
+import {localStorageAvailable} from '../../../../LocalStorage'
+
+const localStorageKey = 'NoundAEStore'
 
 /*
  This store manages all state required to support the add/edit operations on a nound.
@@ -24,50 +28,80 @@ class NoundAEStore extends ReduceStore {
     }
 
     getInitialState() {
-        return Map({
-            addNound: false,
-            nound: new Nound()
-        })
+
+        if (localStorageAvailable) {
+            const localStorageState = localStorage.getItem(localStorageKey)
+
+            if(localStorageState)
+                return fromJS(JSON.parse(localStorageState))
+        }
+
+        return NoundAEStore.initialState
+
     }
 
     reduce(state, action) {
+
+        let newState = state
+
         switch (action.type) {
+
+            // AppActionTypes
+            case AppActionTypes.ON_APP_RESET:
+                newState = NoundAEStore.initialState
+                break
 
             // Signal the UI to open the NoundAddForm
             case NoundAEActionTypes.ON_CLICK_ADD_NOUND:
-                return state.set('addNound', true)
+                newState = state.set('addNound', true)
+                break
 
             // Signal the UI to close NoundAddForm or NoundEditForm
             case NoundAEActionTypes.ON_CLICK_CANCEL:
-                return this.getInitialState()
+                newState = NoundAEStore.initialState
+                break
 
             // Signal the UI to close NoundAddForm or NoundEditForm (but the delete button
             // is only present on NounEditForm.)
             // NoundStore will also catch this event and it's responsible for the actual deletion.
             case NoundAEActionTypes.ON_CLICK_DELETE_NOUND:
-                return this.getInitialState()
+                newState = NoundAEStore.initialState
+                break
 
             // Signal the UI to open NoundEditForm and populate with the given data.
             case NoundAEActionTypes.ON_CLICK_EDIT_NOUND:
-                return state.set('nound', Nound({
+                newState = state.set('nound', Nound({
                     id: action.nound.id,
                     base: action.nound.base,
                     plural: action.nound.plural,
                     pluralization_rule: action.nound.pluralization_rule
                 }))
+                break
 
             // Signal the UI to close NoundAddForm or NoundEditForm. We don't need to specify which,
             // the same state should close either one.
             case NoundAEActionTypes.ON_CLICK_SAVE_NOUND:
-                return this.getInitialState()
+                newState = NoundAEStore.initialState
+                break
 
             case NoundAEActionTypes.ON_CHANGE_BASE:
-                return state.updateIn(['nound','base'],value => action.base)
+                newState = state.updateIn(['nound','base'],value => action.base)
+                break
 
             default:
-                return state
+            // do nothing, newState is already set to the existing state
         }
+
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+
+        return newState
     }
 }
+
+NoundAEStore.initialState = Map({
+    addNound: false,
+    nound: new Nound()
+})
 
 export default new NoundAEStore()

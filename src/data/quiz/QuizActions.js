@@ -10,13 +10,19 @@ const QuizActions = {
             })
         },
     },
-
     definiteness: {
         onIseeArticleChanged() {
             AppDispatcher.dispatch({
                 type: QuizActionTypes.definiteness.ON_ISEE_CHANGE_ARTICLE
             })
         }
+    },
+    phrases: {
+        onIUnderstand() {
+            AppDispatcher.dispatch({
+                type: QuizActionTypes.phrases.ON_I_UNDERSTAND
+            })
+        },
     }
 }
 

@@ -1,9 +1,10 @@
 import {ReduceStore} from 'flux/utils'
-import {Map} from 'immutable'
+import {fromJS, Map} from 'immutable'
 
 import QuizActionTypes from './QuizActionTypes'
 import AppDispatcher   from '../AppDispatcher'
 
+import AppActionTypes     from '../app/AppActionTypes'
 import NoundActionTypes   from '../dictionary/nound/NoundActionTypes'
 import NoundAEActionTypes from '../dictionary/nound/addedit/NoundAEActionTypes'
 import NouniAEActionTypes from '../nouni/addedit/NouniAEActionTypes'
@@ -24,37 +25,13 @@ class QuizStore extends ReduceStore {
     getInitialState() {
 
         if (localStorageAvailable) {
-            localStorage.removeItem(localStorageKey)
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState)
                 return fromJS(JSON.parse(localStorageState))
         }
 
-        return Map({
-            intro: Map({
-                iunderstand: false,
-                passed: false
-            }),
-            nound: Map({
-                insertNound: false,
-                updateNound: false,
-                deleteNound: false,
-                passed: false
-            }),
-            verbd: Map({
-                insertVerbd: false,
-                updateVerbd: false,
-                deleteVerbd: false,
-                passed: false
-            }),
-            definiteness: Map({
-                definitenessChanged: false,
-                noundChanged       : false,
-                iseeArticleChanged : false,
-                passed: false
-            })
-        })
+        return QuizStore.initialState
     }
 
     reduce(state, action) {
@@ -80,6 +57,10 @@ class QuizStore extends ReduceStore {
         let newState = state
 
         switch (action.type) {
+
+            case AppActionTypes.ON_APP_RESET:
+                newState = QuizStore.initialState
+                break
 
             // 0. intro
             case QuizActionTypes.intro.ON_I_UNDERSTAND:
@@ -136,6 +117,12 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['definiteness','passed'],definitenessQuizPassed(newState))
                 break
 
+            // 4. phrases
+            case QuizActionTypes.phrases.ON_I_UNDERSTAND:
+                newState = newState.setIn(['phrases','iunderstand'],true)
+                newState = newState.setIn(['phrases','passed'],true)
+                break
+
             default:
                 newState = state
         }
@@ -146,5 +133,34 @@ class QuizStore extends ReduceStore {
         return newState
     }
 }
+
+QuizStore.initialState = Map({
+    intro: Map({
+        iunderstand: false,
+        passed: false
+    }),
+    nound: Map({
+        insertNound: false,
+        updateNound: false,
+        deleteNound: false,
+        passed: false
+    }),
+    verbd: Map({
+        insertVerbd: false,
+        updateVerbd: false,
+        deleteVerbd: false,
+        passed: false
+    }),
+    definiteness: Map({
+        definitenessChanged: false,
+        noundChanged       : false,
+        iseeArticleChanged : false,
+        passed: false
+    }),
+    phrases: Map({
+        iunderstand: false,
+        passed: false
+    })
+})
 
 export default new QuizStore()

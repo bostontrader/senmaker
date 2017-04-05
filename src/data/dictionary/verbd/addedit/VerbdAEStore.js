@@ -1,9 +1,13 @@
 import {ReduceStore} from 'flux/utils'
-import {Map} from 'immutable'
+import {fromJS, Map} from 'immutable'
 
+import AppActionTypes from '../../../app/AppActionTypes'
 import Verbd from '../Verbd'
 import VerbdAEActionTypes from './VerbdAEActionTypes'
 import AppDispatcher from '../../../AppDispatcher'
+import {localStorageAvailable} from '../../../../LocalStorage'
+
+const localStorageKey = 'VerbdAEStore'
 
 /*
 This store manages all state required to support the add/edit operations on a verbd.
@@ -24,50 +28,80 @@ class VerbdAEStore extends ReduceStore {
     }
 
     getInitialState() {
-        return Map({
-            addVerbd: false,
-            verbd: new Verbd()
-        })
+
+        if (localStorageAvailable) {
+            const localStorageState = localStorage.getItem(localStorageKey)
+
+            if(localStorageState)
+                return fromJS(JSON.parse(localStorageState))
+        }
+
+        return VerbdAEStore.initialState
+
     }
 
     reduce(state, action) {
+
+        let newState = state
+
         switch (action.type) {
+
+            // AppActionTypes
+            case AppActionTypes.ON_APP_RESET:
+                newState = VerbdAEStore.initialState
+                break
 
             // Signal the UI to open the VerbdAddForm
             case VerbdAEActionTypes.ON_CLICK_ADD_VERBD:
-                return state.set('addVerbd', true)
+                newState = state.set('addVerbd', true)
+                break
 
             // Signal the UI to close VerbdAddForm or VerbdEditForm
             case VerbdAEActionTypes.ON_CLICK_CANCEL:
-                return this.getInitialState()
+                newState = VerbdAEStore.initialState
+                break
 
             // Signal the UI to close VerbdAddForm or VerbdEditForm (but the delete button
             // is only present on VerbEditForm.)
             // VerbdStore will also catch this event and it's responsible for the actual deletion.
             case VerbdAEActionTypes.ON_CLICK_DELETE_VERBD:
-                return this.getInitialState()
+                newState = VerbdAEStore.initialState
+                break
 
             // Signal the UI to open VerbdEditForm and populate with the given data.
             case VerbdAEActionTypes.ON_CLICK_EDIT_VERBD:
-                return state.set('verbd', Verbd({
+                newState = state.set('verbd', Verbd({
                     id: action.verbd.id,
                     base: action.verbd.base,
                     pastTense: action.verbd.pastTense,
                     pastTense_rule: action.verbd.pastTense_rule
                 }))
+                break
 
             // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't need to specify which,
             // the same state should close either one.
             case VerbdAEActionTypes.ON_CLICK_SAVE_VERBD:
-                return this.getInitialState()
+                newState = VerbdAEStore.initialState
+                break
 
             case VerbdAEActionTypes.ON_CHANGE_BASE:
-                return state.updateIn(['verbd','base'],value => action.base)
+                newState = state.updateIn(['verbd','base'],value => action.base)
+                break
 
             default:
-                return state
+            // do nothing, newState is already set to the existing state
         }
+
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+
+        return newState
     }
 }
+
+VerbdAEStore.initialState = Map({
+    addVerbd: false,
+    verbd: new Verbd()
+})
 
 export default new VerbdAEStore()

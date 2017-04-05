@@ -4,6 +4,7 @@ import Intro        from '../../views/syllabus/Intro'
 import Nound        from '../../views/syllabus/Nound'
 import Verbd        from '../../views/syllabus/Verbd'
 import Definiteness from '../../views/syllabus/Definiteness'
+import Phrases       from '../../views/syllabus/Phrases'
 
 /**
  * We have a series of lessons that we want to progress through, in both directions, in a specific order.
@@ -25,12 +26,12 @@ import Definiteness from '../../views/syllabus/Definiteness'
 
 // comp = component, prev = previous, next = next
 const syllabus = {
-    intro:        {comp:Intro,        prev:null,     next:'nound'},
-    nound:        {comp:Nound,        prev:'intro',  next:'verbd'},
-    verbd:        {comp:Verbd,        prev:'nound',  next:'definiteness'},
-    definiteness: {comp:Definiteness, prev:'verbd',  next:null},
+    intro:        {comp:Intro,        prev:null,           next:'nound'},
+    nound:        {comp:Nound,        prev:'intro',        next:'verbd'},
+    verbd:        {comp:Verbd,        prev:'nound',        next:'definiteness'},
+    definiteness: {comp:Definiteness, prev:'verbd',        next:'phrases'},
+    phrases:       {comp:Phrases,     prev:'definiteness', next:null},
 
-    // phrase
     // noun phrase
     // pluralization
     // past tense

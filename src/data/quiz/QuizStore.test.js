@@ -23,7 +23,7 @@ describe('QuizStore', function() {
     })
 
     // 0. intro
-    it('ON_I_UNDERSTAND', function() {
+    it('intro ON_I_UNDERSTAND', function() {
         expect(this.state.getIn(['intro','iunderstand'])).toBe(false)
         expect(this.state.getIn(['intro','passed'])).toBe(false)
 
@@ -216,4 +216,16 @@ describe('QuizStore', function() {
         })
     })
 
+    // 4. intro
+    it('phrases ON_I_UNDERSTAND', function() {
+        expect(this.state.getIn(['phrases','iunderstand'])).toBe(false)
+        expect(this.state.getIn(['phrases','passed'])).toBe(false)
+
+        this.dispatch({
+            type: QuizActionTypes.phrases.ON_I_UNDERSTAND
+        })
+
+        expect(this.state.getIn(['phrases','iunderstand'])).toBe(true)
+        expect(this.state.getIn(['phrases','passed'])).toBe(true)
+    })
 })

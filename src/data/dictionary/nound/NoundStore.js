@@ -1,5 +1,5 @@
 import {ReduceStore} from 'flux/utils'
-import {OrderedMap} from 'immutable'
+import {fromJS, Map} from 'immutable'
 
 import AppDispatcher from '../../AppDispatcher'
 import Counter from './Counter'
@@ -7,13 +7,25 @@ import Nound from './Nound'
 import NoundActionTypes from './NoundActionTypes'
 import NoundAEActionTypes from './addedit/NoundAEActionTypes'
 
+import {localStorageAvailable} from '../../../LocalStorage'
+const localStorageKey = 'NoundStore'
+
 class NoundStore extends ReduceStore {
     constructor() {
         super(AppDispatcher)
     }
 
     getInitialState() {
-        return OrderedMap()
+
+        if (localStorageAvailable) {
+            const localStorageState = localStorage.getItem(localStorageKey)
+
+            if(localStorageState)
+                return fromJS(JSON.parse(localStorageState))
+        }
+
+        return NoundStore.initialState
+
     }
 
     reduce(state, action) {
@@ -28,33 +40,41 @@ class NoundStore extends ReduceStore {
             }))
         }
 
+        let newState = state
+
         switch (action.type) {
 
             // Insert a new record or update an existing one, originating from a UI.
             case NoundAEActionTypes.ON_CLICK_SAVE_NOUND:
                 if(action.nound.id) {
                     // An id exists so update the existing record.
-                    return state.set(action.nound.id, action.nound)
+                    newState = state.set(action.nound.id, action.nound)
                 } else {
                     // No id exists so insert a new record.
-                    return insertNewRecord(action.nound)
+                    newState = insertNewRecord(action.nound)
                 }
+                break
 
             case NoundAEActionTypes.ON_CLICK_DELETE_NOUND:
                 return state.delete(action.id)
+                break
 
             // Insert a new record programmatically, w/o a UI.
             case NoundActionTypes.INSERT_NOUND:
-                return insertNewRecord(action.nound)
-
-            //case NoundActionTypes.ON_CHANGE_SELECTED_NOUND:
-                //console.log('NoundStore ON_CHANGE_SELECTED_NOUND',action)
-                //return state
+                newState = insertNewRecord(action.nound)
+                break
 
             default:
-                return state
+                // do nothing, newState is already set to the existing state
         }
+
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+
+        return newState
     }
 }
+
+NoundStore.initialState = Map()
 
 export default new NoundStore()

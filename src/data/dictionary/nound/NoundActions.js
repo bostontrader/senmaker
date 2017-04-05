@@ -1,5 +1,5 @@
 import NoundActionTypes from './NoundActionTypes'
-import AppDispatcher from '../../AppDispatcher'
+import AppDispatcher    from '../../AppDispatcher'
 
 const NoundActions = {
     // Programmatic insert, no UI

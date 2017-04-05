@@ -20,7 +20,6 @@ class AppStore extends ReduceStore {
     getInitialState() {
 
         if (localStorageAvailable) {
-            //localStorage.removeItem(localStorageKey)
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState)
@@ -80,7 +79,7 @@ class AppStore extends ReduceStore {
                 break
 
             default:
-            // do nothing, newState is already set to the existing state
+                // do nothing, newState is already set to the existing state
         }
 
         if(localStorageAvailable)

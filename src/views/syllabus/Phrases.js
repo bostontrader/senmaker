@@ -1,9 +1,9 @@
 import React from 'react'
 
-import LessonNavigator from '../syllabus/LessonNavigator'
-import QuizActions     from '../../data/quiz/QuizActions'
-
-function Intro(props) {
+import LessonNavigator from './LessonNavigator'
+import VerbdPanel from '../dictionary/verbd/VerbdPanel'
+import QuizActions from '../../data/quiz/QuizActions'
+function Phrases(props) {
 
     const style = {
         border: '1px solid black',
@@ -11,26 +11,24 @@ function Intro(props) {
     }
 
     const q = props.quiz
-    const s = props.strings.intro
+    const s = props.strings.phrases
 
-    const iunderstandCheck = q.getIn(['intro','iunderstand']) ?
+    const iunderstandCheck = q.getIn(['phrases','iunderstand']) ?
         <img id="iunderstandCheck" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    return (
+    return(
         <div>
             <div className="help" style={style}>
-                <p>{s.help1}</p>
-                <p>{s.help2}</p>
-                <p>{s.help3}</p>
-                <p>{s.help4}</p>
-                <p>{s.help5}</p>
+                <h1>Phrases</h1>
+                <p>{s.help10}</p>
+                <p>{s.help11}</p>
             </div>
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>
                     <tbody>
                     <tr>
-                        <td><p><input id="iunderstandCheck" onChange={QuizActions.intro.onIUnderstand} type="checkbox" checked={q.getIn(['intro','iunderstand'])} />
+                        <td><p><input id="iunderstandCheck" onChange={QuizActions.phrases.onIUnderstand} type="checkbox" checked={q.getIn(['phrases','iunderstand'])} />
                             {props.strings.i_understand}</p></td>
                         <td>{iunderstandCheck}</td>
                     </tr>
@@ -42,4 +40,4 @@ function Intro(props) {
     )
 }
 
-export default Intro
+export default Phrases

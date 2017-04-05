@@ -34,7 +34,7 @@ function NoundEditForm(props) {
         noundEditForm =
             <div id="nound-edit-form" style={style}>
                 <label htmlFor='base'>Base</label>
-                <input id='base' name='base' type='text' value={props.nound.getIn(['addEditNound','nound','base'])} onChange={(e)=>props.nound.getIn(['onChangeNoundBase'])(e.target.value)}/>
+                <input id='base' name='base' type='text' value={props.nound.getIn(['addEditNound','nound','base'])} onChange={(e)=>NoundAEActions.onChangeBase(e.target.value)}/>
                 <button id='save-nound'   onClick={onClickSave}>{s.save}</button>
                 <button id='delete-nound' onClick={onDelete}>{s.delete}</button>
                 <button id='cancel'       onClick={NoundAEActions.onClickCancel}>{s.cancel}</button>

@@ -1,14 +1,9 @@
 import AppActionTypes from './AppActionTypes'
 import AppStore       from './AppStore'
-import {langCode}     from '../I18NConstants'
 
-import NoundActionTypes     from '../dictionary/nound/NoundActionTypes'
-import {PluralizationRule}  from '../dictionary/nound/NoundConstants'
-import NoundAEActionTypes   from '../dictionary/nound/addedit/NoundAEActionTypes'
-import VerbdAEActionTypes   from '../dictionary/verbd/addedit/VerbdAEActionTypes'
-import {DefinitenessSelect} from '../nouni/NouniConstants'
-import NouniAEActionTypes   from '../nouni/addedit/NouniAEActionTypes'
-import syllabus             from '../syllabus/Syllabus'
+import NoundActionTypes    from '../dictionary/nound/NoundActionTypes'
+import {PluralizationRule} from '../dictionary/nound/NoundConstants'
+import syllabus            from '../syllabus/Syllabus'
 
 describe('AppStore', function() {
 
