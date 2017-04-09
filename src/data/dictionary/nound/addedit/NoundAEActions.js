@@ -1,5 +1,5 @@
 import NoundAEActionTypes from './NoundAEActionTypes'
-import AppDispatcher from '../../../AppDispatcher'
+import AppDispatcher      from '../../../AppDispatcher'
 
 const NoundAEActions = {
     onClickAddNound() {
@@ -12,7 +12,7 @@ const NoundAEActions = {
             type: NoundAEActionTypes.ON_CLICK_CANCEL
         })
     },
-    onClickDeleteNoun(id) {
+    onClickDeleteNound(id) {
         AppDispatcher.dispatch({
             type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
             id

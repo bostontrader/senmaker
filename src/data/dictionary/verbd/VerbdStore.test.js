@@ -1,15 +1,14 @@
-import Counter from './Counter'
-import Verbd from './Verbd'
-import VerbdActionTypes from './VerbdActionTypes'
-import VerbdStore from './VerbdStore'
-import {PastTenseRule} from './VerbdConstants'
-
 import VerbdAEActionTypes from './addedit/VerbdAEActionTypes'
+import Counter            from './Counter'
+import Verbd              from './Verbd'
+import VerbdActionTypes   from './VerbdActionTypes'
+import VerbdStore         from './VerbdStore'
+import {PastTenseRule}    from './VerbdConstants'
+import AppActionTypes     from '../../app/AppActionTypes'
 
 describe('VerbdStore', function() {
 
     beforeEach(function() {
-        // Always start with the initial state.
         this.state = VerbdStore.getInitialState()
 
         // This function gets a more readable form of the verbd that we can pass
@@ -44,14 +43,29 @@ describe('VerbdStore', function() {
             }
             return Array.from(this.state.keys())[index]
         }
-
-        // This "dispatches" an action to our store. We can bypass the dispatcher
-        // and just call the store's reduce function directly.
+        
         this.dispatch = action => {
             this.state = VerbdStore.reduce(this.state, action)
         }
     })
 
+    it('ON_APP_RESET', function() {
+        const initialState = this.state
+
+        // Now do anything, doesn't matter what, to change the initial state
+        this.dispatch({
+            type: VerbdActionTypes.INSERT_VERBD,
+            verbd: {base: 'eat', pastTense: 'ate', pastTense_rule: PastTenseRule.Irregular}
+        })
+        expect(initialState).not.toBe(this.state)
+
+        // Now reset the state
+        this.dispatch({
+            type: AppActionTypes.ON_APP_RESET
+        })
+        expect(initialState).toBe(this.state)
+    })
+    
     it('ON_CLICK_DELETE_VERBD', function() {
         expect(this.verbs()).toEqual([])
         this.addVerbs([

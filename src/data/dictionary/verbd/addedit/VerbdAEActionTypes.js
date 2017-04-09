@@ -12,7 +12,7 @@ const VerbdAEActionTypes = {
     ON_CLICK_DELETE_VERBD: 'ON_CLICK_DELETE_VERBD',
     ON_CLICK_EDIT_VERBD:   'ON_CLICK_EDIT_VERBD',
     ON_CLICK_SAVE_VERBD:   'ON_CLICK_SAVE_VERBD',
-    ON_CHANGE_BASE:        'ON_CHANGE_BASE'
+    ON_CHANGE_BASE:        'ON_CHANGE_VERBD_BASE'
 }
 
 export default VerbdAEActionTypes

@@ -1,8 +1,8 @@
 import React from 'react'
 
 import LessonNavigator from './LessonNavigator'
-import VerbdPanel from '../dictionary/verbd/VerbdPanel'
 import QuizActions from '../../data/quiz/QuizActions'
+
 function Phrases(props) {
 
     const style = {

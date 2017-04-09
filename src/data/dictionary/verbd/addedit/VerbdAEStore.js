@@ -53,7 +53,7 @@ class VerbdAEStore extends ReduceStore {
 
             // Signal the UI to open the VerbdAddForm
             case VerbdAEActionTypes.ON_CLICK_ADD_VERBD:
-                newState = state.set('addVerbd', true)
+                newState = newState.set('addVerbd', true)
                 break
 
             // Signal the UI to close VerbdAddForm or VerbdEditForm
@@ -70,7 +70,7 @@ class VerbdAEStore extends ReduceStore {
 
             // Signal the UI to open VerbdEditForm and populate with the given data.
             case VerbdAEActionTypes.ON_CLICK_EDIT_VERBD:
-                newState = state.set('verbd', Verbd({
+                newState = newState.set('verbd', Verbd({
                     id: action.verbd.id,
                     base: action.verbd.base,
                     pastTense: action.verbd.pastTense,
@@ -85,11 +85,11 @@ class VerbdAEStore extends ReduceStore {
                 break
 
             case VerbdAEActionTypes.ON_CHANGE_BASE:
-                newState = state.updateIn(['verbd','base'],value => action.base)
+                newState = newState.updateIn(['verbd','base'],value => action.base)
                 break
 
             default:
-            // do nothing, newState is already set to the existing state
+                // do nothing, newState is already set to the existing state
         }
 
         if(localStorageAvailable)

@@ -23,6 +23,13 @@ const QuizActions = {
                 type: QuizActionTypes.phrases.ON_I_UNDERSTAND
             })
         },
+    },
+    nounPhrases: {
+        onIUnderstand() {
+            AppDispatcher.dispatch({
+                type: QuizActionTypes.nounPhrases.ON_I_UNDERSTAND
+            })
+        },
     }
 }
 

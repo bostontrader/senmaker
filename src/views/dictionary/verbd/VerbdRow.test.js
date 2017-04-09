@@ -1,10 +1,11 @@
 import React from "react"
 import TestUtils from "react-addons-test-utils"
 
+import VerbdRow    from './VerbdRow'
+import Verbd       from '../../../data/dictionary/verbd/Verbd'
 import StringStore from '../../../data/strings/StringStore'
-import Verbd from '../../../data/dictionary/verbd/Verbd'
-import VerbdRow from './VerbdRow'
-import {PastTenseRule, VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'
+import {PastTenseRule} from '../../../data/dictionary/verbd/VerbdConstants'
+//import {PastTenseRule, VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'
 
 describe("VerbdRow", () => {
 
@@ -20,10 +21,10 @@ describe("VerbdRow", () => {
     it("renders a VerbdPanelLevel.BASE VerbdRow", () => {
         tuRenderer = TestUtils.createRenderer()
         const strings = StringStore.getInitialState()
-        const props = {level:VerbdPanelLevel.BASE, verb:verb, strings: strings}
+        const props = {verb:verb, strings: strings}
         verbdRow = tuRenderer.render(<VerbdRow {...props} />)
         expect(verbdRow.type).toBe('tr')
-        expect(verbdRow.props.children.length).toBe(2)
+        expect(verbdRow.props.children.length).toBe(2) // verb, edit
     })
 
     //it("renders a VerbdPanelLevel.PAST_TENSE", () => {

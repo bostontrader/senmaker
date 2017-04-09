@@ -1,5 +1,5 @@
 import VerbdAEActionTypes from './VerbdAEActionTypes'
-import AppDispatcher from '../../../AppDispatcher'
+import AppDispatcher      from '../../../AppDispatcher'
 
 const VerbdAEActions = {
     onClickAddVerbd() {

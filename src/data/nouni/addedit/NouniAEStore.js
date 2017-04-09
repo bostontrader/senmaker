@@ -31,13 +31,13 @@ class NouniAEStore extends ReduceStore {
 
     getInitialState() {
 
-        if (localStorageAvailable) {
-            localStorage.removeItem(localStorageKey)
-            const localStorageState = localStorage.getItem(localStorageKey)
+        //if (localStorageAvailable) {
+            //localStorage.removeItem(localStorageKey)
+            //const localStorageState = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return fromJS(JSON.parse(localStorageState))
-        }
+            //if(localStorageState)
+                //return fromJS(JSON.parse(localStorageState))
+        //}
 
         return Map({
             addNouni: false,
@@ -50,7 +50,6 @@ class NouniAEStore extends ReduceStore {
         let newState
 
         const calcResultText = (definiteness, nound) => {
-            console.log(definiteness, JSON.stringify(nound.toJSON()))
             // Graft in this ugly code from another project...
             // http://www.ef.com/english-resources/english-grammar/singular-and-plural-nouns
             //const noun = this.state.selectedNoun
@@ -102,7 +101,6 @@ class NouniAEStore extends ReduceStore {
                 article = testStartWithVowel === true ? 'an' : 'a'
             }
 
-            console.log("a=",article,"b=",base)
             let generatedText = ''
             if(article === '') {
                 if(base === '') {
@@ -171,7 +169,7 @@ class NouniAEStore extends ReduceStore {
                 presentDefiniteness = action.newDefiniteness
                 presentNound = state.getIn(['nouni','nound'])
                 generatedText = calcResultText(presentDefiniteness, presentNound)
-                newState = state.updateIn(['nouni','definiteness'],value => action.newDefiniteness)
+                newState = newState.updateIn(['nouni','definiteness'],value => action.newDefiniteness)
                 newState = newState.updateIn(['nouni','generatedText'], value => generatedText)
                 break
 
@@ -179,7 +177,7 @@ class NouniAEStore extends ReduceStore {
                 presentDefiniteness = state.getIn(['nouni','definiteness'])
                 presentNound = action.nound
                 generatedText = calcResultText(presentDefiniteness, presentNound)
-                newState = state.updateIn(['nouni','nound'],value => presentNound)
+                newState = newState.updateIn(['nouni','nound'],value => presentNound)
                 newState = newState.updateIn(['nouni','generatedText'], value => generatedText)
                 break
 
@@ -187,8 +185,8 @@ class NouniAEStore extends ReduceStore {
                 newState = state
         }
 
-        if(localStorageAvailable)
-            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+        //if(localStorageAvailable)
+            //localStorage.setItem(localStorageKey, JSON.stringify(newState))
 
         return newState
     }

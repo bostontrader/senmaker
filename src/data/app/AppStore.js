@@ -19,12 +19,12 @@ class AppStore extends ReduceStore {
 
     getInitialState() {
 
-        if (localStorageAvailable) {
-            const localStorageState = localStorage.getItem(localStorageKey)
+        //if (localStorageAvailable) {
+            //const localStorageState = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return fromJS(JSON.parse(localStorageState))
-        }
+            //if(localStorageState)
+                //return fromJS(JSON.parse(localStorageState))
+        //}
 
         return AppStore.initialState
 
@@ -75,15 +75,15 @@ class AppStore extends ReduceStore {
 
             // NoundActiontypes
             case NoundActionTypes.ON_CHANGE_SELECTED_NOUND:
-                newState = state.set('mostRecentlySelectedNound',action.nound)
+                newState = newState.set('mostRecentlySelectedNound',action.nound)
                 break
 
             default:
                 // do nothing, newState is already set to the existing state
         }
 
-        if(localStorageAvailable)
-            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+        //if(localStorageAvailable)
+            //localStorage.setItem(localStorageKey, JSON.stringify(newState))
 
         return newState
     }

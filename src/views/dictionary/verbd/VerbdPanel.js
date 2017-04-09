@@ -2,9 +2,9 @@ import React from 'react'
 
 import VerbdAEActions from '../../../data/dictionary/verbd/addedit/VerbdAEActions'
 
-import VerbdAddForm from './addedit/VerbdAddForm'
+import VerbdAddForm  from './addedit/VerbdAddForm'
 import VerbdEditForm from './addedit/VerbdEditForm'
-import VerbdTable from './VerbdTable'
+import VerbdTable    from './VerbdTable'
 
 /*
 The VerbdPanel is responsible for displaying everything about our list of verbd.  Such
@@ -20,6 +20,7 @@ function VerbdPanel(props) {
     }
 
     const s = props.strings
+
     // What should be displayed in the verbd add/edit panel?
     let verbAddEditForm = <div></div>  // we really want nothing here
     if(props.verbd.getIn(['addEditVerbd','verbd','id'])) {

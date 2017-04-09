@@ -5,10 +5,11 @@ import QuizActionTypes from './QuizActionTypes'
 import AppDispatcher   from '../AppDispatcher'
 
 import AppActionTypes     from '../app/AppActionTypes'
-import NoundActionTypes   from '../dictionary/nound/NoundActionTypes'
-import NoundAEActionTypes from '../dictionary/nound/addedit/NoundAEActionTypes'
-import NouniAEActionTypes from '../nouni/addedit/NouniAEActionTypes'
-import VerbdAEActionTypes from '../dictionary/verbd/addedit/VerbdAEActionTypes'
+import AdjectivdAEActionTypes from '../dictionary/adjectivd/addedit/AdjectivdAEActionTypes'
+import NoundActionTypes       from '../dictionary/nound/NoundActionTypes'
+import NoundAEActionTypes     from '../dictionary/nound/addedit/NoundAEActionTypes'
+import NouniAEActionTypes     from '../nouni/addedit/NouniAEActionTypes'
+import VerbdAEActionTypes     from '../dictionary/verbd/addedit/VerbdAEActionTypes'
 
 import {localStorageAvailable} from '../../LocalStorage'
 
@@ -24,12 +25,12 @@ class QuizStore extends ReduceStore {
 
     getInitialState() {
 
-        if (localStorageAvailable) {
-            const localStorageState = localStorage.getItem(localStorageKey)
+        //if (localStorageAvailable) {
+            //const localStorageState = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return fromJS(JSON.parse(localStorageState))
-        }
+            //if(localStorageState)
+                //return fromJS(JSON.parse(localStorageState))
+        //}
 
         return QuizStore.initialState
     }
@@ -46,6 +47,12 @@ class QuizStore extends ReduceStore {
             return state.getIn(['verbd','updateVerbd']) &&
                 state.getIn(['verbd','insertVerbd']) &&
                 state.getIn(['verbd','deleteVerbd'])
+        }
+        
+        const adjectivdQuizPassed = (state) => {
+            return state.getIn(['adjectivd','updateAdjectivd']) &&
+                state.getIn(['adjectivd','insertAdjectivd']) &&
+                state.getIn(['adjectivd','deleteAdjectivd'])
         }
 
         const definitenessQuizPassed = (state) => {
@@ -100,7 +107,23 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['verbd','passed'],verbdQuizPassed(newState))
                 break
 
-            // 3. definiteness
+            // 3. adjectivd
+            case AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD:
+                if(action.adjectivd.id) { // if an id is present then this is an update
+                    newState = newState.setIn(['adjectivd','updateAdjectivd'],true)
+                    newState = newState.setIn(['adjectivd','passed'],adjectivdQuizPassed(newState))
+                } else { // otherwise it's an insert
+                    newState = newState.setIn(['adjectivd','insertAdjectivd'],true)
+                    newState = newState.setIn(['adjectivd','passed'],adjectivdQuizPassed(newState))
+                }
+                break
+
+            case AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD:
+                newState = newState.setIn(['adjectivd','deleteAdjectivd'],true)
+                newState = newState.setIn(['adjectivd','passed'],adjectivdQuizPassed(newState))
+                break
+
+            // 4. definiteness
             case NoundActionTypes.ON_CHANGE_SELECTED_NOUND:
                 newState = newState.setIn(['definiteness','noundChanged'],true)
                 newState = newState.setIn(['definiteness','passed'],definitenessQuizPassed(newState))
@@ -117,18 +140,24 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['definiteness','passed'],definitenessQuizPassed(newState))
                 break
 
-            // 4. phrases
+            // 5. phrases
             case QuizActionTypes.phrases.ON_I_UNDERSTAND:
                 newState = newState.setIn(['phrases','iunderstand'],true)
                 newState = newState.setIn(['phrases','passed'],true)
                 break
 
+            // 6. nounPhrases
+            case QuizActionTypes.nounPhrases.ON_I_UNDERSTAND:
+                newState = newState.setIn(['nounPhrases','iunderstand'],true)
+                newState = newState.setIn(['nounPhrases','passed'],true)
+                break
+
             default:
-                newState = state
+                // do nothing, newState is already set to the existing state
         }
 
-        if(localStorageAvailable)
-            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+        //if(localStorageAvailable)
+            //localStorage.setItem(localStorageKey, JSON.stringify(newState))
 
         return newState
     }
@@ -151,6 +180,12 @@ QuizStore.initialState = Map({
         deleteVerbd: false,
         passed: false
     }),
+    adjectivd: Map({
+        insertAdjectivd: false,
+        updateAdjectivd: false,
+        deleteAdjectivd: false,
+        passed: false
+    }),
     definiteness: Map({
         definitenessChanged: false,
         noundChanged       : false,
@@ -158,6 +193,10 @@ QuizStore.initialState = Map({
         passed: false
     }),
     phrases: Map({
+        iunderstand: false,
+        passed: false
+    }),
+    nounPhrases: Map({
         iunderstand: false,
         passed: false
     })

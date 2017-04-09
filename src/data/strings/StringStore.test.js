@@ -14,16 +14,19 @@ describe('StringStore', function() {
     })
 
     it('ON_APP_RESET', function() {
-        const oldState = this.state
+        const initialState = this.state
+
+        // Now do anything, doesn't matter what, to change the initial state
         this.dispatch({
             type: StringActionTypes.ON_LANG_EN
         })
-        expect(oldState).not.toBe(this.state)
+        expect(initialState).not.toBe(this.state)
 
+        // Now reset the state
         this.dispatch({
             type: AppActionTypes.ON_APP_RESET
         })
-        expect(oldState).toBe(this.state)
+        expect(initialState).toBe(this.state)
     })
 
     it('Can change languages', function() {

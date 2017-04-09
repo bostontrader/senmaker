@@ -1,15 +1,14 @@
-import Counter from './Counter'
-import Nound from './Nound'
-import NoundActionTypes from './NoundActionTypes'
-import NoundStore from './NoundStore'
+import NoundAEActionTypes  from './addedit/NoundAEActionTypes'
+import Counter             from './Counter'
+import Nound               from './Nound'
+import NoundActionTypes    from './NoundActionTypes'
+import NoundStore          from './NoundStore'
 import {PluralizationRule} from './NoundConstants'
-
-import NoundAEActionTypes from './addedit/NoundAEActionTypes'
+import AppActionTypes      from '../../app/AppActionTypes'
 
 describe('NoundStore', function() {
 
     beforeEach(function() {
-        // Always start with the initial state.
         this.state = NoundStore.getInitialState()
 
         // This function gets a more readable form of the nound that we can pass
@@ -45,11 +44,26 @@ describe('NoundStore', function() {
             return Array.from(this.state.keys())[index]
         }
 
-        // This "dispatches" an action to our store. We can bypass the dispatcher
-        // and just call the store's reduce function directly.
         this.dispatch = action => {
             this.state = NoundStore.reduce(this.state, action)
         }
+    })
+
+    it('ON_APP_RESET', function() {
+        const initialState = this.state
+
+        // Now do anything, doesn't matter what, to change the initial state
+        this.dispatch({
+            type: NoundActionTypes.INSERT_NOUND,
+            nound: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
+        })
+        expect(initialState).not.toBe(this.state)
+
+        // Now reset the state
+        this.dispatch({
+            type: AppActionTypes.ON_APP_RESET
+        })
+        expect(initialState).toBe(this.state)
     })
 
     it('ON_CLICK_DELETE_NOUND', function() {

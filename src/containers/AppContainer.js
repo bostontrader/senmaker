@@ -1,21 +1,25 @@
 import {Container} from 'flux/utils'
 import {Map}       from 'immutable'
 
-import AppStore       from '../data/app/AppStore'
-import NoundAEStore   from '../data/dictionary/nound/addedit/NoundAEStore'
-import NoundStore     from '../data/dictionary/nound/NoundStore'
-import VerbdAEStore   from '../data/dictionary/verbd/addedit/VerbdAEStore'
-import VerbdStore     from '../data/dictionary/verbd/VerbdStore'
-import NouniAEStore   from '../data/nouni/addedit/NouniAEStore'
-import NouniStore     from '../data/nouni/NouniStore'
-import QuizStore      from '../data/quiz/QuizStore'
-import StringStore    from '../data/strings/StringStore'
+import AppStore         from '../data/app/AppStore'
+import AdjectivdAEStore from '../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
+import AdjectivdStore   from '../data/dictionary/adjectivd/AdjectivdStore'
+import NoundAEStore     from '../data/dictionary/nound/addedit/NoundAEStore'
+import NoundStore       from '../data/dictionary/nound/NoundStore'
+import VerbdAEStore     from '../data/dictionary/verbd/addedit/VerbdAEStore'
+import VerbdStore       from '../data/dictionary/verbd/VerbdStore'
+import NouniAEStore     from '../data/nouni/addedit/NouniAEStore'
+import NouniStore       from '../data/nouni/NouniStore'
+import QuizStore        from '../data/quiz/QuizStore'
+import StringStore      from '../data/strings/StringStore'
 
 import AppView from '../views/AppView'
 
 function getStores() {
     return [
         AppStore,
+        AdjectivdStore,
+        AdjectivdAEStore,
         NoundStore,
         NoundAEStore,
         NouniStore,
@@ -36,6 +40,13 @@ function getState() {
 
         app: AppStore.getState(),
 
+        // A dictionary of available adjectivs.  We will instantiate as many copies of these
+        // definitions as we need, as adjectivi.
+        adjectivd: Map({
+            addEditAdjectivd: AdjectivdAEStore.getState(),
+            adjectivs: AdjectivdStore.getState(),
+        }),
+        
         // A dictionary of available nouns.  We will instantiate as many copies of these
         // definitions as we need, as nouni.
         nound: Map({

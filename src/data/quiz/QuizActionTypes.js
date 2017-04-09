@@ -9,7 +9,10 @@ const QuizActionTypes = {
         ON_ISEE_CHANGE_ARTICLE: 'ON_ISEE_CHANGE_ARTICLE'
     },
     phrases: {
-        ON_I_UNDERSTAND: 'ON_I_UNDERSTANDx',
+        ON_I_UNDERSTAND: 'ON_I_UNDERSTAND1',
+    },
+    nounPhrases: {
+        ON_I_UNDERSTAND: 'ON_I_UNDERSTAND2',
     },
 }
 

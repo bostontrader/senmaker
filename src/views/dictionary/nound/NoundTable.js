@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {NoundPanelLevel} from '../../../data/dictionary/nound/NoundConstants'
+//import {NoundPanelLevel} from '../../../data/dictionary/nound/NoundConstants'
 import NoundRow from './NoundRow'
 
 function NoundTable(props) {
@@ -32,7 +32,8 @@ function NoundTable(props) {
                 </tbody>
             </table>
     } else if( level >= NoundPanelLevel.BASE) {*/
-        noundTable =
+
+    noundTable =
             <table id="nound-list">
                 <thead>
                     <tr>
@@ -42,7 +43,7 @@ function NoundTable(props) {
                 </thead>
                 <tbody>
                     {[...props.nound.getIn(['nouns']).values()].map(noun => (
-                        <NoundRow key={noun.id} noun={noun} {...props} />
+                        <NoundRow key={noun.get('id')} noun={noun} strings={props.strings} />
                     ))}
                 </tbody>
             </table>

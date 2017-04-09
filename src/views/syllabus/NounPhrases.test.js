@@ -5,17 +5,17 @@ import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 import {findWithClass, findWithType} from 'react-shallow-testutils'
 
-import AppActionTypes from '../data/app/AppActionTypes'
-import AppStore from '../data/app/AppStore'
-import Level07 from './Level07'
+//import AppActionTypes from '../data/app/AppActionTypes'
+//import AppStore from '../data/app/AppStore'
+import NounPhrases from './NounPhrases'
 //import LevelControl from './LevelControl'
-import StringStore from '../data/strings/StringStore'
+//import StringStore from '../data/strings/StringStore'
 //import VerbAddEditStore from '../data/dictionary/verbd/VerbdAddEditStore'
 //import VerbPanel from './dictionary/verbd/VerbPanel'
 
-describe("Level07", () => {
+describe("NounPhrases", () => {
 
-    it("Renders Level07", () => {
+    it("Renders NounPhrases", () => {
         //const props = {
             //addEditVerb: VerbAddEditStore.getInitialState(),
             //level:AppStore.getInitialState(),
@@ -23,12 +23,12 @@ describe("Level07", () => {
             //strings:StringStore.getInitialState()
         //}
 
-        //const renderExpression = <Level07 {...props} />
+        //const renderExpression = <NounPhrases {...props} />
         //const levelControl = TestUtils.createRenderer().render(renderExpression)
-        //expect(levelControl.type).toBe('div')
         expect(true)
+        //expect(levelControl.type).toBe('div')
+
         //expect(findWithClass(levelControl,'help'))
-        //expect(findWithType(levelControl,VerbPanel))
         //expect(findWithClass(levelControl,'quiz'))
         //expect(findWithType(levelControl,LevelControl))
 

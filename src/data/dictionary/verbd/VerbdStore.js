@@ -1,11 +1,13 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import AppDispatcher from '../../AppDispatcher'
-import Counter from './Counter'
-import Verbd from './Verbd'
-import VerbdActionTypes from './VerbdActionTypes'
 import VerbdAEActionTypes from './addedit/VerbdAEActionTypes'
+import Counter            from './Counter'
+import Verbd              from './Verbd'
+import VerbdActionTypes   from './VerbdActionTypes'
+
+import AppActionTypes from '../../app/AppActionTypes'
+import AppDispatcher  from '../../AppDispatcher'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'VerbdStore'
@@ -44,11 +46,16 @@ class VerbdStore extends ReduceStore {
 
         switch (action.type) {
 
-            // Save new record or update existing one.
+            // AppActionTypes
+            case AppActionTypes.ON_APP_RESET:
+                newState = VerbdStore.initialState
+                break
+
+            // Insert a new record or update an existing one, originating from a UI.
             case VerbdAEActionTypes.ON_CLICK_SAVE_VERBD:
                 if(action.verbd.id) {
                     // An id exists so update the existing record.
-                    newState = state.set(action.verbd.id, action.verbd)
+                    newState = newState.set(action.verbd.id, Verbd(action.verbd))
                 } else {
                     // No id exists so insert a new record.
                     newState = insertNewRecord(action.verbd)
@@ -56,7 +63,7 @@ class VerbdStore extends ReduceStore {
                 break
 
             case VerbdAEActionTypes.ON_CLICK_DELETE_VERBD:
-                newState = state.delete(action.id)
+                newState = newState.delete(action.id)
                 break
 
             // Insert a new record programmatically, w/o a UI.

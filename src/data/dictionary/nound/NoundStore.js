@@ -1,11 +1,13 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import AppDispatcher from '../../AppDispatcher'
-import Counter from './Counter'
-import Nound from './Nound'
-import NoundActionTypes from './NoundActionTypes'
 import NoundAEActionTypes from './addedit/NoundAEActionTypes'
+import Counter            from './Counter'
+import Nound              from './Nound'
+import NoundActionTypes   from './NoundActionTypes'
+
+import AppActionTypes from '../../app/AppActionTypes'
+import AppDispatcher  from '../../AppDispatcher'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'NoundStore'
@@ -44,11 +46,16 @@ class NoundStore extends ReduceStore {
 
         switch (action.type) {
 
+            // AppActionTypes
+            case AppActionTypes.ON_APP_RESET:
+                newState = NoundStore.initialState
+                break
+
             // Insert a new record or update an existing one, originating from a UI.
             case NoundAEActionTypes.ON_CLICK_SAVE_NOUND:
                 if(action.nound.id) {
                     // An id exists so update the existing record.
-                    newState = state.set(action.nound.id, action.nound)
+                    newState = newState.set(action.nound.id, Nound(action.nound))
                 } else {
                     // No id exists so insert a new record.
                     newState = insertNewRecord(action.nound)
@@ -56,7 +63,7 @@ class NoundStore extends ReduceStore {
                 break
 
             case NoundAEActionTypes.ON_CLICK_DELETE_NOUND:
-                return state.delete(action.id)
+                newState = newState.delete(action.id)
                 break
 
             // Insert a new record programmatically, w/o a UI.
@@ -69,7 +76,7 @@ class NoundStore extends ReduceStore {
         }
 
         if(localStorageAvailable)
-            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+            localStorage.setItem(localStorageKey, JSON.stringify(newState.toJSON()))
 
         return newState
     }

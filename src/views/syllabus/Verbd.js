@@ -27,6 +27,9 @@ function Verbd(props) {
             <div className="help" style={style}>
                 <h1>{props.strings.verbs}</h1>
                 <p>{s.help10}</p>
+                <p>{s.help11}</p>
+                <p>{s.help12}</p>
+                <p>{s.help13}</p>
             </div>
             <VerbdPanel {...props} />
             <div className="quiz" style={style}>

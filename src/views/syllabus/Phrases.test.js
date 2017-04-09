@@ -5,17 +5,17 @@ import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 import {findWithClass, findWithType} from 'react-shallow-testutils'
 
-import AppActionTypes from '../data/app/AppActionTypes'
-import AppStore from '../data/app/AppStore'
-import Level04 from './Level04'
+//import AppActionTypes from '../data/app/AppActionTypes'
+//import AppStore from '../data/app/AppStore'
+import Phrases from './Phrases'
 //import LevelControl from './LevelControl'
-import StringStore from '../data/strings/StringStore'
+//import StringStore from '../data/strings/StringStore'
 //import VerbAddEditStore from '../data/dictionary/verbd/VerbdAddEditStore'
 //import VerbPanel from './dictionary/verbd/VerbPanel'
 
-describe("Level04", () => {
+describe("Phrases", () => {
 
-    it("Renders Level04", () => {
+    it("Renders Phrases", () => {
         //const props = {
             //addEditVerb: VerbAddEditStore.getInitialState(),
             //level:AppStore.getInitialState(),
@@ -23,7 +23,7 @@ describe("Level04", () => {
             //strings:StringStore.getInitialState()
         //}
 
-        //const renderExpression = <Level04 {...props} />
+        //const renderExpression = <Phrases {...props} />
         //const levelControl = TestUtils.createRenderer().render(renderExpression)
         expect(true)
         //expect(levelControl.type).toBe('div')

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'
+//import {VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'
 import VerbdRow from './VerbdRow'
 
 function VerbdTable(props) {
@@ -36,13 +36,13 @@ function VerbdTable(props) {
             <table id="verbd-list">
                 <thead>
                     <tr>
-                        <th>Base</th>
+                        <th>Verb</th>
                         <th> </th>
                     </tr>
                 </thead>
                 <tbody>
                     {[...props.verbd.getIn(['verbs']).values()].map(verb => (
-                        <VerbdRow key={verb.id} verb={verb} {...props} />
+                        <VerbdRow key={verb.id} verb={verb} strings={props.strings} />
                     ))}
                 </tbody>
             </table>

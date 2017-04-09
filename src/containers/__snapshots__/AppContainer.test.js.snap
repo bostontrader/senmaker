@@ -13,19 +13,19 @@ exports[`AppContainer 's Alive! 1`] = `
           }
         }>
         <p>
-          This program will help you build an English composition.
+          这个程序将帮助您建立一个英语文章。
         </p>
         <p>
-          In order to do that you must first learn how to build smaller pieces of English.
+          为了做到这一点你必须首先学习如何构建英语的小块（句子和段落）。
         </p>
         <p>
-          You can then assemble the small pieces of English into larger components.
+          然后,您可以将英语的小块组装成更大的组件。
         </p>
         <p>
-          You will learn how to do this by following these lessons.
+          通过以下课程您将知道如何学习英语。
         </p>
         <p>
-          You are presently on Level 0. In order to proceed to the next level you will need to pass the quiz.
+          你目前是0级，为了继续下一个阶段需要通过测验。
         </p>
       </div>
       <div
@@ -37,7 +37,7 @@ exports[`AppContainer 's Alive! 1`] = `
           }
         }>
         <h3>
-          Quiz
+          测试
         </h3>
         <table>
           <tbody>
@@ -49,7 +49,7 @@ exports[`AppContainer 's Alive! 1`] = `
                     id="iunderstandCheck"
                     onChange={[Function]}
                     type="checkbox" />
-                  I understand
+                  我明白
                 </p>
               </td>
               <td>
@@ -68,7 +68,7 @@ exports[`AppContainer 's Alive! 1`] = `
           }
         }>
         <p>
-          Level
+          级
            
           0
         </p>
@@ -76,21 +76,17 @@ exports[`AppContainer 's Alive! 1`] = `
         
         <button
           id="level-reset"
-          onClick={undefined}>
-          Reset
+          onClick={[Function]}>
+          返回
         </button>
         <img
           alt=""
           height="20"
-          onClick={undefined}
+          id="enFlag"
+          onClick={[Function]}
           src="/img/us_flag.gif"
           width="28" />
-        <img
-          alt=""
-          height="20"
-          onClick={undefined}
-          src="/img/chinese_flag.gif"
-          width="28" />
+        
       </div>
     </div>
   </div>

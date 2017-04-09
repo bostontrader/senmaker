@@ -1,6 +1,7 @@
 import NoundAEActionTypes  from './NoundAEActionTypes'
 import NoundAEStore        from './NoundAEStore'
 import {PluralizationRule} from '../NoundConstants'
+import AppActionTypes      from '../../../app/AppActionTypes'
 
 // The NoundAEStore is responsible for setting a small bit of state to signal
 // that NoundAddForm or NoundEditForm should be opened or closed, as well as a bit of state
@@ -8,14 +9,27 @@ import {PluralizationRule} from '../NoundConstants'
 describe('NoundAEStore', function() {
 
     beforeEach(function() {
-        // Always start with the initial state.
         this.state = NoundAEStore.getInitialState()
 
-        // This "dispatches" an action to our store. We can bypass the dispatcher
-        // and just call the store's reduce function directly.
         this.dispatch = action => {
             this.state = NoundAEStore.reduce(this.state, action)
         }
+    })
+
+    it('ON_APP_RESET', function() {
+        const initialState = this.state
+
+        // Now do anything, doesn't matter what, to change the initial state
+        this.dispatch({
+            type: NoundAEActionTypes.ON_CLICK_ADD_NOUND
+        })
+        expect(initialState).not.toBe(this.state)
+
+        // Now reset the state
+        this.dispatch({
+            type: AppActionTypes.ON_APP_RESET
+        })
+        expect(initialState).toBe(this.state)
     })
 
     // Signal the UI to open the NoundAddForm

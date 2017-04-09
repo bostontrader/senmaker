@@ -1,6 +1,7 @@
 import VerbdAEActionTypes from './VerbdAEActionTypes'
-import VerbdAEStore from './VerbdAEStore'
-import {PastTenseRule} from '../VerbdConstants'
+import VerbdAEStore       from './VerbdAEStore'
+import {PastTenseRule}    from '../VerbdConstants'
+import AppActionTypes     from '../../../app/AppActionTypes'
 
 // The VerbdAEStore is responsible for setting a small bit of state to signal
 // that VerbdAddForm or VerbdEditForm should be opened or closed, as well as a bit of state
@@ -8,14 +9,27 @@ import {PastTenseRule} from '../VerbdConstants'
 describe('VerbdAEStore', function() {
 
     beforeEach(function() {
-        // Always start with the initial state.
         this.state = VerbdAEStore.getInitialState()
-
-        // This "dispatches" an action to our store. We can bypass the dispatcher
-        // and just call the store's reduce function directly.
+        
         this.dispatch = action => {
             this.state = VerbdAEStore.reduce(this.state, action)
         }
+    })
+
+    it('ON_APP_RESET', function() {
+        const initialState = this.state
+
+        // Now do anything, doesn't matter what, to change the initial state
+        this.dispatch({
+            type: VerbdAEActionTypes.ON_CLICK_ADD_VERBD
+        })
+        expect(initialState).not.toBe(this.state)
+
+        // Now reset the state
+        this.dispatch({
+            type: AppActionTypes.ON_APP_RESET
+        })
+        expect(initialState).toBe(this.state)
     })
 
     // Signal the UI to open the VerbdAddForm
@@ -40,7 +54,7 @@ describe('VerbdAEStore', function() {
 
         // Now close it
         this.dispatch({
-            type: VerbdAEActionTypes.CLICK_DELETE_VERBD,
+            type: VerbdAEActionTypes.ON_CLICK_DELETE_VERBD,
             verbd: {} // This action doesn't care about the verbd
         })
         expect(this.state).toEqual(VerbdAEStore.getInitialState())

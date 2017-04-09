@@ -12,7 +12,7 @@ const NoundAEActionTypes = {
     ON_CLICK_DELETE_NOUND: 'ON_CLICK_DELETE_NOUND',
     ON_CLICK_EDIT_NOUND:   'ON_CLICK_EDIT_NOUND',
     ON_CLICK_SAVE_NOUND:   'ON_CLICK_SAVE_NOUND',
-    ON_CHANGE_BASE:        'ON_CHANGE_BASE'
+    ON_CHANGE_BASE:        'ON_CHANGE_NOUND_BASE'
 }
 
 export default NoundAEActionTypes

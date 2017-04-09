@@ -5,25 +5,27 @@ import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 import {findWithClass, findWithType} from 'react-shallow-testutils'
 
-import AppActionTypes from '../data/AppActionTypes'
-import AppStore from '../data/AppStore'
-import Level03 from './Definiteness'
+//import AppActionTypes from '../data/AppActionTypes'
+import AppStore from '../../data/app/AppStore'
+import Definiteness from './Definiteness'
 //import LevelControl from './LevelControl'
-import NounAddEditStore from '../data/dictionary/nound/addedit/NoundAEStore'
-import NounPanel from './dictionary/nound/NoundPanel'
-import StringStore from '../data/StringStore'
+import NounAddEditStore from '../../data/dictionary/nound/addedit/NoundAEStore'
+//import NounPanel from './dictionary/nound/NoundPanel'
+import QuizStore from '../../data/quiz/QuizStore'
+import StringStore from '../../data/strings/StringStore'
 
-describe("Level03", () => {
+describe("Definiteness", () => {
 
-    it("Renders Level03", () => {
+    it("Renders Definiteness", () => {
         const props = {
             addEditNound: NounAddEditStore.getInitialState(),
             level:AppStore.getInitialState(),
             nouns: OrderedMap(),
-            strings:StringStore.getInitialState()
+            strings:StringStore.getInitialState(),
+            quiz:QuizStore.getInitialState()
         }
 
-        const renderExpression = <Level03 {...props} />
+        const renderExpression = <Definiteness {...props} />
         const levelControl = TestUtils.createRenderer().render(renderExpression)
         //expect(levelControl.type).toBe('div')
 

@@ -65,7 +65,8 @@ const nightmareVerbd = (nightmare, delay) => {
         .then(verbd_edit_form_gone => {
             if (!verbd_edit_form_gone)
                 throw('verbd-edit-form has not gone away after save')
-        }).then( res => {
+        })
+        .then( res => {
             return nightmare
                 .evaluate(function() {
                     return document.querySelector('#updateVerbdCheck') !== null
@@ -74,7 +75,8 @@ const nightmareVerbd = (nightmare, delay) => {
         .then(updateVerbdCheckFound => {
             if (!updateVerbdCheckFound)
                 throw('updateVerbdCheck did not appear after save')
-        }).then( res => {
+        })
+        .then( res => {
             return nightmare
                 .click('#v-1').wait(delay)
                 .click('#delete-verbd').wait(delay)
@@ -96,6 +98,7 @@ const nightmareVerbd = (nightmare, delay) => {
             if (!deleteVerbdCheckFound)
                 throw('deleteVerbdCheck did not appear after delete')
         })
+
 }
 
 module.exports = nightmareVerbd

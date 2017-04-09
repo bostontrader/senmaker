@@ -1,8 +1,8 @@
 import React from 'react'
 
 import VerbdAEActions from '../../../../data/dictionary/verbd/addedit/VerbdAEActions'
-import PastTenseRuleSelect from '../PastTenseRuleSelect'
-import {VerbdPanelLevel} from '../../../../data/dictionary/verbd/VerbdConstants'
+//import PastTenseRuleSelect from '../PastTenseRuleSelect'
+//import {VerbdPanelLevel} from '../../../../data/dictionary/verbd/VerbdConstants'
 
 function VerbdAddForm(props) {
 
@@ -11,7 +11,9 @@ function VerbdAddForm(props) {
         margin: '5px'
     }
 
-    const onClickSave = () => VerbdAEActions.onClickSaveVerbd({base: props.verbd.getIn(['addEditVerbd','verbd','base'])})
+    const onClickSave = () => VerbdAEActions.onClickSaveVerbd({
+        base: props.verbd.getIn(['addEditVerbd','verbd','base'])
+    })
     const s = props.strings
 
     let verbdAddForm = null
@@ -30,14 +32,16 @@ function VerbdAddForm(props) {
         verbdAddForm =
             <div id="verbd-add-form" style={style}>
                 <label htmlFor='base'>Base</label>
-                <input id='base' name='base' type='text' value={props.verbd.getIn(['addEditVerbd','verbd','base'])} onChange={(e)=>VerbdAEActions.onChangeBase(e.target.value)} />
+                <input id='base' name='base' type='text'
+                    value={props.verbd.getIn(['addEditVerbd','verbd','base'])}
+                    onChange={(e)=>VerbdAEActions.onChangeBase(e.target.value)}
+                />
                 <button id='save-verbd' onClick={onClickSave}>{s.save}</button>
                 <button id='cancel'     onClick={VerbdAEActions.onClickCancel}>{s.cancel}</button>
             </div>
     //}
 
     return verbdAddForm
-
 }
 
 export default VerbdAddForm

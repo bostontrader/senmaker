@@ -53,7 +53,7 @@ class NoundAEStore extends ReduceStore {
 
             // Signal the UI to open the NoundAddForm
             case NoundAEActionTypes.ON_CLICK_ADD_NOUND:
-                newState = state.set('addNound', true)
+                newState = newState.set('addNound', true)
                 break
 
             // Signal the UI to close NoundAddForm or NoundEditForm
@@ -70,7 +70,7 @@ class NoundAEStore extends ReduceStore {
 
             // Signal the UI to open NoundEditForm and populate with the given data.
             case NoundAEActionTypes.ON_CLICK_EDIT_NOUND:
-                newState = state.set('nound', Nound({
+                newState = newState.set('nound', Nound({
                     id: action.nound.id,
                     base: action.nound.base,
                     plural: action.nound.plural,
@@ -85,11 +85,11 @@ class NoundAEStore extends ReduceStore {
                 break
 
             case NoundAEActionTypes.ON_CHANGE_BASE:
-                newState = state.updateIn(['nound','base'],value => action.base)
+                newState = newState.updateIn(['nound','base'],value => action.base)
                 break
 
             default:
-            // do nothing, newState is already set to the existing state
+                // do nothing, newState is already set to the existing state
         }
 
         if(localStorageAvailable)

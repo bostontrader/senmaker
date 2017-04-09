@@ -5,52 +5,37 @@ import TestUtils         from 'react-addons-test-utils'
 import {findAllWithType} from 'react-shallow-testutils'
 import rtRenderer        from 'react-test-renderer'
 
-import AppActionTypes from '../../../data/app/AppActionTypes'
+import NoundRow   from './NoundRow'
+import NoundTable from './NoundTable'
+
+//import AppActionTypes from '../../../data/app/AppActionTypes'
 import AppStore       from '../../../data/app/AppStore'
 import StringStore    from '../../../data/strings/StringStore'
 
-import Nound               from '../../../data/dictionary/nound/Nound'
+//import Nound               from '../../../data/dictionary/nound/Nound'
 import NoundActionTypes    from '../../../data/dictionary/nound/NoundActionTypes'
-import NoundStore          from '../../../data/dictionary/nound/NoundStore'
 import {PluralizationRule} from '../../../data/dictionary/nound/NoundConstants'
-
-import NoundRow   from './NoundRow'
-import NoundTable from './NoundTable'
+import NoundStore          from '../../../data/dictionary/nound/NoundStore'
 
 describe("NoundTable", function() {
 
     beforeEach(function() {
-        // Always start with the initial state.
         this.state = {}
         this.state.app     = AppStore.getInitialState()
-        //this.state.quiz    = QuizStore.getInitialState()
         this.state.strings = StringStore.getInitialState()
         this.state.nound = Map({
             nouns:NoundStore.getInitialState()
         })
 
-        // This "dispatches" an action to our stores. We can bypass the dispatcher
-        // and just call the store's reduce function directly.
         this.dispatch = action => {
             this.state.app   = AppStore .reduce(this.state.app, action)
-            //this.state.quiz  = QuizStore.reduce(this.state.quiz, action)
             const n = NoundStore.reduce(this.state.nound.get('nouns'), action)
             this.state.nound = this.state.nound.set('nouns',n)
         }
     })
 
     it("Renders a NoundPanelLevel.BASE NoundTable", function() {
-        //let newState = {app: AppStore.getInitialState()}
-        //newState = AppStore.reduce(newState, {type: AppActionTypes.ON_LESSON_NEXT})
-        //const props = {
-            //level:newState.get('level'),
-            //nound: Map({
-                //nouns: OrderedMap()
-            //})
-        //}
-        //const renderExpression = <NoundTable {...props} />
         const renderExpression = <NoundTable {...this.state} />
-
         const nounTable = TestUtils.createRenderer().render(renderExpression)
         expect(nounTable.type).toBe('table')
 
@@ -93,11 +78,11 @@ describe("NoundTable", function() {
         expect(tree).toMatchSnapshot()
     })*/
 
-    it("Will render one NoundRow", function() {
-        this.dispatch({
-            type: AppActionTypes.ON_LESSON_NEXT
-        })
 
+
+
+
+    it("Will render one NoundRow", function() {
         this.dispatch({
             type: NoundActionTypes.INSERT_NOUND,
             nound: {
@@ -117,36 +102,6 @@ describe("NoundTable", function() {
     })
 
     it("Will render two NoundRow", function() {
-        /*let newState = AppStore.getInitialState()
-        newState = AppStore.reduce(newState, {type: AppActionTypes.ON_LESSON_NEXT})
-        newState = AppStore.reduce(newState, {type: AppActionTypes.ON_LESSON_NEXT})
-        newState = AppStore.reduce(newState, {type: AppActionTypes.ON_LESSON_NEXT})
-
-        const nouns = OrderedMap().set(1, new Nound({
-            id: 1,
-            base: 'cat',
-            plural: 'cats',
-            pluralization_rule: PluralizationRule.Append_s
-        })).set(2, new Nound({
-            id: 2,
-            base: 'box',
-            plural: 'boxes',
-            pluralization_rule: PluralizationRule.Append_es
-        }))*/
-
-
-
-
-
-
-        //const strings = StringStore.getInitialState()
-        //const props = {level:newState.get('level'), nouns: nouns, strings: strings}
-
-
-        this.dispatch({
-            type: AppActionTypes.ON_LESSON_NEXT
-        })
-
         this.dispatch({
             type: NoundActionTypes.INSERT_NOUND,
             nound: {
@@ -164,7 +119,6 @@ describe("NoundTable", function() {
                 pluralization_rule: PluralizationRule.Append_es
             }
         })
-
 
         const renderExpression = <NoundTable {...this.state} />
         const nounTable = TestUtils.createRenderer().render(renderExpression)

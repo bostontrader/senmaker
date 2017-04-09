@@ -3,8 +3,10 @@ import React from 'react'
 import Intro        from '../../views/syllabus/Intro'
 import Nound        from '../../views/syllabus/Nound'
 import Verbd        from '../../views/syllabus/Verbd'
+import Adjectivd    from '../../views/syllabus/Adjectivd'
 import Definiteness from '../../views/syllabus/Definiteness'
-import Phrases       from '../../views/syllabus/Phrases'
+import Phrases      from '../../views/syllabus/Phrases'
+import NounPhrases  from '../../views/syllabus/NounPhrases'
 
 /**
  * We have a series of lessons that we want to progress through, in both directions, in a specific order.
@@ -28,14 +30,14 @@ import Phrases       from '../../views/syllabus/Phrases'
 const syllabus = {
     intro:        {comp:Intro,        prev:null,           next:'nound'},
     nound:        {comp:Nound,        prev:'intro',        next:'verbd'},
-    verbd:        {comp:Verbd,        prev:'nound',        next:'definiteness'},
-    definiteness: {comp:Definiteness, prev:'verbd',        next:'phrases'},
-    phrases:       {comp:Phrases,     prev:'definiteness', next:null},
+    verbd:        {comp:Verbd,        prev:'nound',        next:'adjectivd'},
+    adjectivd:    {comp:Adjectivd,    prev:'verbd',        next:'definiteness'},
+    definiteness: {comp:Definiteness, prev:'adjectivd',    next:'phrases'},
+    phrases:      {comp:Phrases,      prev:'definiteness', next:'nounPhrases'},
+    nounPhrases:  {comp:NounPhrases,  prev:'phrases',      next:null},
 
-    // noun phrase
     // pluralization
     // past tense
-    // adjectives
     // adjectives in noun phrases
 
     // Adverbs

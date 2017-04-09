@@ -27,6 +27,9 @@ function Nound(props) {
             <div className="help" style={style}>
                 <h1>{props.strings.nouns}</h1>
                 <p>{s.help10}</p>
+                <p>{s.help11}</p>
+                <p>{s.help12}</p>
+                <p>{s.help13}</p>
             </div>
             <NoundPanel {...props} />
             <div className="quiz" style={style}>

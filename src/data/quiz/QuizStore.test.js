@@ -1,5 +1,6 @@
 import QuizActionTypes    from './QuizActionTypes'
 import QuizStore          from './QuizStore'
+import AdjectivdAEActionTypes from '../dictionary/adjectivd/addedit/AdjectivdAEActionTypes'
 import NoundActionTypes   from '../dictionary/nound/NoundActionTypes'
 import NoundAEActionTypes from '../dictionary/nound/addedit/NoundAEActionTypes'
 import NouniAEActionTypes from '../nouni/addedit/NouniAEActionTypes'
@@ -35,7 +36,7 @@ describe('QuizStore', function() {
         expect(this.state.getIn(['intro','passed'])).toBe(true)
     })
 
-    // 1.
+    // 1. nound
     describe('nound', function() {
 
         it('ON_CLICK_SAVE_NOUND, insert', function() {
@@ -97,7 +98,7 @@ describe('QuizStore', function() {
         })
     })
 
-    // 2.
+    // 2. verbd
     describe('verbd', function() {
 
         it('ON_CLICK_SAVE_VERBD, insert', function() {
@@ -159,7 +160,69 @@ describe('QuizStore', function() {
         })
     })
 
-    // 3.
+    // 3. adjectivd
+    describe('adjectivd', function() {
+
+        it('ON_CLICK_SAVE_ADJECTIVD, insert', function() {
+            expect(this.state.getIn(['adjectivd','insertAdjectivd'])).toBe(false)
+            expect(this.state.getIn(['adjectivd','passed'])).toBe(false)
+
+            this.dispatch({
+                type: AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD,
+                adjectivd: {} // no id means insert new adjectivd
+            })
+
+            expect(this.state.getIn(['adjectivd','insertAdjectivd'])).toBe(true)
+            expect(this.state.getIn(['adjectivd','passed'])).toBe(false)
+        })
+
+        it('ON_CLICK_SAVE_ADJECTIVD, update', function() {
+            expect(this.state.getIn(['adjectivd','updateAdjectivd'])).toBe(false)
+            expect(this.state.getIn(['adjectivd','passed'])).toBe(false)
+
+            this.dispatch({
+                type: AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD,
+                adjectivd: {id:'1'} // id means update
+            })
+
+            expect(this.state.getIn(['adjectivd','updateAdjectivd'])).toBe(true)
+            expect(this.state.getIn(['adjectivd','passed'])).toBe(false)
+        })
+
+        it('ON_CLICK_DELETE_ADJECTIVD, update', function() {
+            expect(this.state.getIn(['adjectivd','deleteAdjectivd'])).toBe(false)
+            expect(this.state.getIn(['adjectivd','passed'])).toBe(false)
+
+            this.dispatch({
+                type: AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD
+            })
+
+            expect(this.state.getIn(['adjectivd','deleteAdjectivd'])).toBe(true)
+            expect(this.state.getIn(['adjectivd','passed'])).toBe(false)
+        })
+
+        it('Pass the quiz.', function() {
+            expect(this.state.getIn(['adjectivd','passed'])).toBe(false)
+
+            this.dispatch({
+                type: AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD,
+                adjectivd: {} // no id means insert new adjectivd
+            })
+
+            this.dispatch({
+                type: AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD,
+                adjectivd: {id:'1'} // id means update
+            })
+
+            this.dispatch({
+                type: AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD
+            })
+
+            expect(this.state.getIn(['adjectivd','passed'])).toBe(true)
+        })
+    })
+
+    // 4. definiteness
     describe('definiteness', function() {
 
         it('ON_CHANGE_SELECTED_NOUND', function() {
@@ -216,7 +279,7 @@ describe('QuizStore', function() {
         })
     })
 
-    // 4. intro
+    // 5. phrases
     it('phrases ON_I_UNDERSTAND', function() {
         expect(this.state.getIn(['phrases','iunderstand'])).toBe(false)
         expect(this.state.getIn(['phrases','passed'])).toBe(false)
@@ -228,4 +291,18 @@ describe('QuizStore', function() {
         expect(this.state.getIn(['phrases','iunderstand'])).toBe(true)
         expect(this.state.getIn(['phrases','passed'])).toBe(true)
     })
+
+    // 6. nounPhrases
+    it('nounPhrases ON_I_UNDERSTAND', function() {
+        expect(this.state.getIn(['nounPhrases','iunderstand'])).toBe(false)
+        expect(this.state.getIn(['nounPhrases','passed'])).toBe(false)
+
+        this.dispatch({
+            type: QuizActionTypes.nounPhrases.ON_I_UNDERSTAND
+        })
+
+        expect(this.state.getIn(['nounPhrases','iunderstand'])).toBe(true)
+        expect(this.state.getIn(['nounPhrases','passed'])).toBe(true)
+    })
+
 })

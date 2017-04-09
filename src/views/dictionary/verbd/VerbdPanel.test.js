@@ -1,37 +1,35 @@
-import {Map, OrderedMap} from 'immutable'
+import {Map} from 'immutable'
 import React from 'react'
 
 import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 import {findWithType} from 'react-shallow-testutils'
 
-import AppStore from '../../../data/app/AppStore'
-import VerbdAEStore from '../../../data/dictionary/verbd/addedit/VerbdAEStore'
-import VerbdPanel from './VerbdPanel'
-import VerbdTable from './VerbdTable'
+//import AppStore from '../../../data/app/AppStore'
 import VerbdAddForm  from './addedit/VerbdAddForm'
 import VerbdEditForm from './addedit/VerbdEditForm'
-
-import StringStore from '../../../data/strings/StringStore'
+import VerbdPanel    from './VerbdPanel'
+import VerbdTable    from './VerbdTable'
+import VerbdAEStore  from '../../../data/dictionary/verbd/addedit/VerbdAEStore'
+import StringStore   from '../../../data/strings/StringStore'
 
 describe("VerbdPanel", () => {
 
     it("Renders a VerbdPanel", () => {
         const props = {
-            level:AppStore.getInitialState(),
             verbd: Map({
                 addEditVerbd: VerbdAEStore.getInitialState(),
-                verbs: OrderedMap()
+                verbs: Map()
             }),
             strings:StringStore.getInitialState()
         }
 
         const renderExpression = <VerbdPanel {...props} />
-        const verbPanel = TestUtils.createRenderer().render(renderExpression)
-        expect(verbPanel.type).toBe('div')
+        const verbdPanel = TestUtils.createRenderer().render(renderExpression)
+        expect(verbdPanel.type).toBe('div')
 
-        expect(findWithType(verbPanel,'button'))
-        expect(findWithType(verbPanel,VerbdTable))
+        expect(findWithType(verbdPanel,'button'))
+        expect(findWithType(verbdPanel,VerbdTable))
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
@@ -39,46 +37,43 @@ describe("VerbdPanel", () => {
 
     it("Renders a VerbdPanel with a VerbdAddForm", () => {
         let props = {
-            level:AppStore.getInitialState(),
             verbd: Map({
                 addEditVerbd: VerbdAEStore.getInitialState(),
-                verbs: OrderedMap()
+                verbs: Map()
             }),
             strings:StringStore.getInitialState()
         }
         props.verbd = props.verbd.setIn(['addEditVerbd','addVerbd'],true)
 
         const renderExpression = <VerbdPanel {...props} />
-        const verbPanel = TestUtils.createRenderer().render(renderExpression)
-        expect(verbPanel.type).toBe('div')
+        const verbdPanel = TestUtils.createRenderer().render(renderExpression)
+        expect(verbdPanel.type).toBe('div')
 
-        expect(findWithType(verbPanel,'button'))
-        expect(findWithType(verbPanel,VerbdAddForm))
-        expect(findWithType(verbPanel,VerbdTable))
+        expect(findWithType(verbdPanel,'button'))
+        expect(findWithType(verbdPanel,VerbdAddForm))
+        expect(findWithType(verbdPanel,VerbdTable))
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
     })
 
-
     it("Renders a VerbdPanel with a VerbdEditForm", () => {
         const props = {
-            level:AppStore.getInitialState(),
             verbd: Map({
                 addEditVerbd: VerbdAEStore.getInitialState(),
-                verbs: OrderedMap()
+                verbs: Map()
             }),
             strings:StringStore.getInitialState()
         }
         props.verbd = props.verbd.setIn(['addEditVerbd','verbd','id'],"0") // don't let this string become falsey
 
         const renderExpression = <VerbdPanel {...props} />
-        const verbPanel = TestUtils.createRenderer().render(renderExpression)
-        expect(verbPanel.type).toBe('div')
+        const verbdPanel = TestUtils.createRenderer().render(renderExpression)
+        expect(verbdPanel.type).toBe('div')
 
-        expect(findWithType(verbPanel,'button'))
-        expect(findWithType(verbPanel,VerbdEditForm))
-        expect(findWithType(verbPanel,VerbdTable))
+        expect(findWithType(verbdPanel,'button'))
+        expect(findWithType(verbdPanel,VerbdEditForm))
+        expect(findWithType(verbdPanel,VerbdTable))
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()

@@ -1,6 +1,7 @@
 var Nightmare = require('nightmare')
 var nightmareNound = require('./nightmareNound')
 var nightmareVerbd = require('./nightmareVerbd')
+var nightmareAdjectivd = require('./nightmareVerbd')
 var nightmareDefiniteness = require('./nightmareDefiniteness')
 
 describe('In the beginning...', () => {
@@ -16,7 +17,8 @@ describe('In the beginning...', () => {
      */
     it('Should work correctly', (done) => {
         const nightmare = new Nightmare({show:true, width:600, height:800})
-        const delay = 250 // delay between steps
+        const delay = 1000 // delay between steps
+        const delay1 = 2000
 
         // test reset at the end
         nightmare.goto(url).wait(delay)
@@ -83,10 +85,118 @@ describe('In the beginning...', () => {
 
         .then( res => {return nightmareNound(nightmare, delay)})
         .then( res => {return nightmareVerbd(nightmare, delay)})
-        .then( res => {return nightmareDefiniteness(nightmare, delay)})
+
+        // I want to factor out this code into nightmareAdjectivd.  But when I do so
+        // I get mysterious errors re: cannot find add-verbd.  But if I keep it here, then all is well.
+        //.then( res => {return nightmareAdjectivd(nightmare, 5000)})
+        /*.then( res => {
+            return nightmare
+                .click('#lesson-next').wait(delay1)
+                .click('#add-adjectivd').wait(delay1)
+                .click('#adjectivd-add-form #cancel').wait(delay1)
+
+            // The adjectivdAddForm should now go away.
+            .evaluate(function () {
+                return document.querySelector('#adjectivd-add-form') === null
+            })
+        })
+        .then( adjectivd_add_form_gone => {
+            if (!adjectivd_add_form_gone)
+                throw('adjectivd-add-form has not gone away after cancel')
+        })
+        .then( res => {
+            return nightmare
+                .click('#add-adjectivd').wait(delay1)
+                .type('#base', 'fat').wait(delay1)
+                .click('#save-adjectivd').wait(delay1)
+
+                // The AdjectivdAddForm should now go away.
+                .evaluate(function() {
+                    return document.querySelector('#adjectivd-add-form') === null
+                })
+        })
+        .then(adjectivd_add_form_gone => {
+            if (!adjectivd_add_form_gone)
+                throw('adjectivd-add-form has not gone away after save')
+        })
+        .then( res => {
+            return nightmare
+                .evaluate(function() {
+                    return document.querySelector('#insertAdjectivdCheck') !== null
+                })
+        })
+        .then(insertAdjectivdCheckFound => {
+            if (!insertAdjectivdCheckFound)
+                throw('insertAdjectivdCheck did not appear after save')
+        })
+        .then( res => {
+            return nightmare
+                .click('#adj-1').wait(delay1)
+                .click('#cancel').wait(delay1)
+                .evaluate(function() {
+                    return document.querySelector('#adjectivd-edit-form') === null
+                })
+        })
+        .then(adjectivd_edit_form_gone => {
+            if (!adjectivd_edit_form_gone)
+                throw('adjectivd-edit-form has not gone away after cancel')
+        })
+
+            .then( res => {
+                return nightmare
+                    .click('#adj-1').wait(delay)
+                    .type('#base', 'beaver').wait(delay)
+                    .click('#save-adjectivd').wait(delay)
+                    .evaluate(function() {
+                        return document.querySelector('#adjectivd-edit-form') === null
+                    })
+            })
+            .then(adjectivd_edit_form_gone => {
+                if (!adjectivd_edit_form_gone)
+                    throw('adjectivd-edit-form has not gone away after save')
+            }).then( res => {
+            return nightmare
+                .evaluate(function() {
+                    return document.querySelector('#updateAdjectivdCheck') !== null
+                })
+        })
+            .then(updateAdjectivdCheckFound => {
+                if (!updateAdjectivdCheckFound)
+                    throw('updateAdjectivdCheck did not appear after save')
+            }).then( res => {
+            return nightmare
+                .click('#adj-1').wait(delay)
+                .click('#delete-adjectivd').wait(delay)
+                .evaluate(function() {
+                    return document.querySelector('#adjectivd-edit-form') === null
+                })
+        })
+            .then(adjectivd_edit_form_gone => {
+                if (!adjectivd_edit_form_gone)
+                    throw('adjectivd-edit-form has not gone away after delete')
+            })
+            .then( res => {
+                return nightmare
+                    .evaluate(function() {
+                        return document.querySelector('#deleteAdjectivdCheck') !== null
+                    })
+            })
+
+
+        //.then( res => {return nightmareAdjectivd(nightmare, 5000)})
+
+            .then(deleteAdjectivdCheckFound => {
+                if (!deleteAdjectivdCheckFound)
+                    throw('deleteAdjectivdCheck did not appear after delete')
+            })
+*/
+
+
+
+        //.then( res => {return nightmareDefiniteness(nightmare, delay1)})
         .then(resolve => {done()})
         .catch(err => {console.log(err),done()})
 
-    }).timeout(20000)
+    }).timeout(50000)
 
 })

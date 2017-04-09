@@ -57,6 +57,7 @@ class StringStore extends ReduceStore {
 StringStore.en = {
     lang: langCode.en,
     add_new: 'Add New',
+    adjectivs: 'Adjectives',
     cancel: 'Cancel',
     delete: 'Delete',
     edit: 'Edit',
@@ -78,6 +79,9 @@ StringStore.en = {
 
     nound: {
         help10: 'The things around us are called <strong>nouns</strong>.',
+        help11: 'In order to write English you will use many nouns.',
+        help12: 'This is the dictionary of nouns that you can use.',
+        help13: 'At this time there are very few nouns but you can add more nouns whenever you like.',
         quiz1: 'Can you add a new noun?',
         quiz2: 'Can you delete a noun from this list?',
         quiz3: 'Can you change the spelling of a noun?'
@@ -85,11 +89,24 @@ StringStore.en = {
 
     verbd: {
         help10: 'The actions we can take are called <strong>verbs</strong>',
+        help11: 'In order to write English you will use many verbs.',
+        help12: 'This is the dictionary of verbs that you can use.',
+        help13: 'At this time there are very few verbs but you can add more verbs whenever you like.',
         quiz1: 'Can you add a new verb?',
         quiz2: 'Can you delete a verb from this list?',
         quiz3: 'Can you change the spelling of a verb?'
     },
 
+    adjectivd: {
+        help10: 'We modify the meaning of nouns by using adjectives.',
+        help11: 'In order to write English you will use many adjectives.',
+        help12: 'This is the dictionary of adjectives that you can use.',
+        help13: 'At this time there are very few adjectives but you can add more adjectives whenever you like.',
+        quiz1: 'Can you add a new adjective?',
+        quiz2: 'Can you delete a adjective from this list?',
+        quiz3: 'Can you change the spelling of a adjective?'
+    },
+    
     // Definite or Indefinite noun
     definiteness: {
         help10: 'Definite or Indefinite.',
@@ -112,18 +129,25 @@ StringStore.en = {
     nounPhrases: {
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
         help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
-        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting a definiten or indefinite, and a noun, you produced a two-word noun phrase.'
+        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.'
         // although a noun phrase is usually more than one word, it could be just a single noun.
     },
+    npWithAdjectives: {
+        help10: '',
+        help11: ''
+    },
+    /**
+     * workbench
+     */
 
     // Plural or Singular
-    Level06: {
-        help10: 'When we write a noun we must specifiy how many of something we are writing about.',
-        help11: 'For example are we writing about one cat or more than one cat?',
-        help12: 'If we are writing about only one of something, then we use the base form of the noun.',
-        help13: 'If we are writing about more than one, then we use the plural form of the noun.'
+    //Level06: {
+        //help10: 'When we write a noun we must specifiy how many of something we are writing about.',
+        //help11: 'For example are we writing about one cat or more than one cat?',
+        //help12: 'If we are writing about only one of something, then we use the base form of the noun.',
+        //help13: 'If we are writing about more than one, then we use the plural form of the noun.'
         //quiz:
-    },
+    //},
 
     // Pluralization rules.
     // How do we convert the base form of a noun into its plural form?  There are a few rules for doing this.
@@ -135,11 +159,11 @@ StringStore.en = {
     // quiz: enter into the noun dictionary:
 
     // Past Tense
-    Level07: {
-        help10:'We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.',
-        help11:'For example: If we performed the verb in the past we use the \'past tense\' form of the verb.',
-        help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
-    },
+    //Level07: {
+        //help10:'We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.',
+        //help11:'For example: If we performed the verb in the past we use the \'past tense\' form of the verb.',
+        //help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
+    //},
 
     // Adjectives
 
@@ -170,6 +194,7 @@ StringStore.en = {
 StringStore.zh = {
     lang: langCode.zh,
     add_new: '添加新',
+    adjectivs: 'Adjectives',
     cancel: '取消',
     delete: '删除',
     edit: '编辑',
@@ -225,12 +250,13 @@ StringStore.zh = {
         help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting a definiten or indefinite, and a noun, you produced a two-word noun phrase.'
         // although a noun phrase is usually more than one word, it could be just a single noun.
     },
-    xLevel03: {
-        help10: '当我们写名词时必须知道名词的形式。.',
-        help11: '例如我们写关于一只猫或多只猫吗?',
-        help12: '如果我们只写一个东西,我们用名词的基本形式。',
-        help13: '如果我们写不止一个,那么我们使用名词的复数形式。'
-    },
+    // plural
+    //xLevel03: {
+        //help10: '当我们写名词时必须知道名词的形式。.',
+        //help11: '例如我们写关于一只猫或多只猫吗?',
+        //help12: '如果我们只写一个东西,我们用名词的基本形式。',
+        //help13: '如果我们写不止一个,那么我们使用名词的复数形式。'
+    //},
     lessonNavigator: {
         level: '级',
         nextLevel: '下一級',
