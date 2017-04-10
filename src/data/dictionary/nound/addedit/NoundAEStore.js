@@ -1,10 +1,10 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import AppActionTypes from '../../../app/AppActionTypes'
-import Nound from '../Nound'
 import NoundAEActionTypes from './NoundAEActionTypes'
-import AppDispatcher from '../../../AppDispatcher'
+import Nound              from '../Nound'
+import AppActionTypes     from '../../../app/AppActionTypes'
+import AppDispatcher      from '../../../AppDispatcher'
 import {localStorageAvailable} from '../../../../LocalStorage'
 
 const localStorageKey = 'NoundAEStore'
@@ -93,7 +93,7 @@ class NoundAEStore extends ReduceStore {
         }
 
         if(localStorageAvailable)
-            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+            localStorage.setItem(localStorageKey, JSON.stringify(newState.toJSON()))
 
         return newState
     }

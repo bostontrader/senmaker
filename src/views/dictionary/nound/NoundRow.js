@@ -1,10 +1,18 @@
 import React from 'react'
+import {Map} from 'immutable'
 
-import NoundAEActions    from '../../../data/dictionary/nound/addedit/NoundAEActions'
+import Nound          from '../../../data/dictionary/nound/Nound'
+import NoundAEActions from '../../../data/dictionary/nound/addedit/NoundAEActions'
 //import {NoundPanelLevel} from '../../../data/dictionary/nound/NoundConstants'
 
 function NoundRow(props) {
-    const {noun} = props
+    let {noun} = props
+
+    // The original state is a Nound Record, but when round-tripped to/from localStorage
+    // it gets turned into a Map.  This should be corrected, but until then, apply this hack.
+    if(noun instanceof(Map))
+        noun = Nound(noun)
+
     const onClickEditNound = () => NoundAEActions.onClickEditNound(noun)
 
     let noundRow = <div>noun item</div>

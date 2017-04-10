@@ -1,7 +1,7 @@
 import React from 'react'
-
-import NoundSelect from '../../dictionary/nound/NoundSelect'
 import {RadioGroup, Radio} from 'react-radio-group'
+
+import NoundSelect    from '../../dictionary/nound/NoundSelect'
 import NouniAEActions from '../../../data/nouni/addedit/NouniAEActions'
 
 function NouniAddForm(props) {

@@ -1,5 +1,7 @@
 import AdjectivdAEActionTypes  from './AdjectivdAEActionTypes'
 import AdjectivdAEStore        from './AdjectivdAEStore'
+import AppActionTypes      from '../../../app/AppActionTypes'
+
 
 // The AdjectivdAEStore is responsible for setting a small bit of state to signal
 // that AdjectivdAddForm or AdjectivdEditForm should be opened or closed, as well as a bit of state
@@ -7,16 +9,29 @@ import AdjectivdAEStore        from './AdjectivdAEStore'
 describe('AdjectivdAEStore', function() {
 
     beforeEach(function() {
-        // Always start with the initial state.
         this.state = AdjectivdAEStore.getInitialState()
-
-        // This "dispatches" an action to our store. We can bypass the dispatcher
-        // and just call the store's reduce function directly.
+        
         this.dispatch = action => {
             this.state = AdjectivdAEStore.reduce(this.state, action)
         }
     })
 
+    it('ON_APP_RESET', function() {
+        const initialState = this.state
+
+        // Now do anything, doesn't matter what, to change the initial state
+        this.dispatch({
+            type: AdjectivdAEActionTypes.ON_CLICK_ADD_ADJECTIVD
+        })
+        expect(initialState).not.toBe(this.state)
+
+        // Now reset the state
+        this.dispatch({
+            type: AppActionTypes.ON_APP_RESET
+        })
+        expect(initialState).toBe(this.state)
+    })
+    
     // Signal the UI to open the AdjectivdAddForm
     it('ON_CLICK_ADD_ADJECTIVD', function() {
         this.dispatch({

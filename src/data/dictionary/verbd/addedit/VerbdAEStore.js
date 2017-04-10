@@ -93,7 +93,7 @@ class VerbdAEStore extends ReduceStore {
         }
 
         if(localStorageAvailable)
-            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+            localStorage.setItem(localStorageKey, JSON.stringify(newState.toJSON()))
 
         return newState
     }

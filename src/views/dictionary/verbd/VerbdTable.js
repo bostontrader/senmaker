@@ -42,7 +42,7 @@ function VerbdTable(props) {
                 </thead>
                 <tbody>
                     {[...props.verbd.getIn(['verbs']).values()].map(verb => (
-                        <VerbdRow key={verb.id} verb={verb} strings={props.strings} />
+                        <VerbdRow key={verb.get('id')} verb={verb} strings={props.strings} />
                     ))}
                 </tbody>
             </table>

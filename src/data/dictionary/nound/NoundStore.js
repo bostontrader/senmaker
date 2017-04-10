@@ -5,9 +5,8 @@ import NoundAEActionTypes from './addedit/NoundAEActionTypes'
 import Counter            from './Counter'
 import Nound              from './Nound'
 import NoundActionTypes   from './NoundActionTypes'
-
-import AppActionTypes from '../../app/AppActionTypes'
-import AppDispatcher  from '../../AppDispatcher'
+import AppActionTypes     from '../../app/AppActionTypes'
+import AppDispatcher      from '../../AppDispatcher'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'NoundStore'

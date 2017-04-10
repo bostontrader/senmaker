@@ -17,7 +17,7 @@ describe('In the beginning...', () => {
      */
     it('Should work correctly', (done) => {
         const nightmare = new Nightmare({show:true, width:600, height:800})
-        const delay = 1000 // delay between steps
+        const delay = 250 // delay between steps
         const delay1 = 2000
 
         // test reset at the end
@@ -89,7 +89,7 @@ describe('In the beginning...', () => {
         // I want to factor out this code into nightmareAdjectivd.  But when I do so
         // I get mysterious errors re: cannot find add-verbd.  But if I keep it here, then all is well.
         //.then( res => {return nightmareAdjectivd(nightmare, 5000)})
-        /*.then( res => {
+        .then( res => {
             return nightmare
                 .click('#lesson-next').wait(delay1)
                 .click('#add-adjectivd').wait(delay1)
@@ -189,7 +189,7 @@ describe('In the beginning...', () => {
                 if (!deleteAdjectivdCheckFound)
                     throw('deleteAdjectivdCheck did not appear after delete')
             })
-*/
+
 
 
 

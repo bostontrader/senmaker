@@ -1,20 +1,22 @@
-import Counter from './Counter'
-import Adjectivd from './Adjectivd'
-import AdjectivdActionTypes from './AdjectivdActionTypes'
-import AdjectivdStore from './AdjectivdStore'
-
+import Adjectivd              from './Adjectivd'
+import AdjectivdActionTypes   from './AdjectivdActionTypes'
+import AdjectivdStore         from './AdjectivdStore'
+import Counter                from './Counter'
 import AdjectivdAEActionTypes from './addedit/AdjectivdAEActionTypes'
+import AppActionTypes      from '../../app/AppActionTypes'
+
 
 describe('AdjectivdStore', function() {
 
     beforeEach(function() {
-        // Always start with the initial state.
         this.state = AdjectivdStore.getInitialState()
 
         // This function gets a more readable form of the adjectivd that we can pass
         // to expect(). It strips away the id.
         this.adjectivs = () => Array.from(this.state.values()).map(adjectiv => ({
             base: adjectiv.base
+            
+            
         }))
 
         // This function is for setting up data, it will add all the adjectivd to the
@@ -41,14 +43,29 @@ describe('AdjectivdStore', function() {
             }
             return Array.from(this.state.keys())[index]
         }
-
-        // This "dispatches" an action to our store. We can bypass the dispatcher
-        // and just call the store's reduce function directly.
+        
         this.dispatch = action => {
             this.state = AdjectivdStore.reduce(this.state, action)
         }
     })
 
+    it('ON_APP_RESET', function() {
+        const initialState = this.state
+
+        // Now do anything, doesn't matter what, to change the initial state
+        this.dispatch({
+            type: AdjectivdActionTypes.INSERT_ADJECTIVD,
+            adjectivd: {base: 'cat'}
+        })
+        expect(initialState).not.toBe(this.state)
+
+        // Now reset the state
+        this.dispatch({
+            type: AppActionTypes.ON_APP_RESET
+        })
+        expect(initialState).toBe(this.state)
+    })
+    
     it('ON_CLICK_DELETE_ADJECTIVD', function() {
         expect(this.adjectivs()).toEqual([])
         this.addAdjectivs([

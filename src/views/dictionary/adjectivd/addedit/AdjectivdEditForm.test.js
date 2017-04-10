@@ -1,38 +1,31 @@
-import {Map, OrderedMap} from 'immutable'
+import {Map} from 'immutable'
 import React from 'react'
 
 import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 
-import AppActionTypes from '../../../../data/app/AppActionTypes'
-import AppStore from '../../../../data/app/AppStore'
-import StringStore from '../../../../data/strings/StringStore'
-import AdjectivAEStore from '../../../../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
 import AdjectivEditForm from './AdjectivdEditForm'
+import AppActionTypes   from '../../../../data/app/AppActionTypes'
+import AppStore         from '../../../../data/app/AppStore'
+import AdjectivAEStore  from '../../../../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
+import StringStore      from '../../../../data/strings/StringStore'
+
+
 
 describe("AdjectivEditForm", () => {
 
     it("Renders a AdjectivdPanelLevel.BASE AdjectivdEditForm", () => {
-        //const appState = AppStore.getInitialState()
-        //const props = {level: appState, editingAdjectiv:{base: 'cat'}}
-        let newState = AppStore.getInitialState()
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const strings = StringStore.getInitialState()
         const props = {
-            level:newState.get('level'),
             adjectivd: Map({
                 addEditAdjectivd: AdjectivAEStore.getInitialState(),
-                adjectivs: OrderedMap()
+                adjectivs: Map()
             }),
-            strings:strings
+            strings:StringStore.getInitialState()
         }
-
-        //const renderExpression = <AdjectivEditForm level={AdjectivdPanelLevel.BASE} editingAdjectiv={{base: 'cat'}}/>
         const renderExpression = <AdjectivEditForm {...props}/>
-
         const adjectivEditForm = TestUtils.createRenderer().render(renderExpression)
         expect(adjectivEditForm.type).toBe('div')
-        //expect(adjectivEditForm.props.children.length).toBe(14)
+        expect(adjectivEditForm.props.children.length).toBe(5) // noun, input, save, delete, cancel
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
@@ -48,7 +41,7 @@ describe("AdjectivEditForm", () => {
             level:newState.get('level'),
             adjectivd: Map({
                 addEditAdjectivd: AdjectivAEStore.getInitialState(),
-                adjectivs: OrderedMap()
+                adjectivs: Map()
             }),
             strings:strings
         }

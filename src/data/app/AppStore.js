@@ -2,12 +2,13 @@ import {fromJS, Map} from 'immutable'
 import {ReduceStore} from 'flux/utils'
 
 import AppActionTypes from './AppActionTypes'
-import AppDispatcher  from '../AppDispatcher'
 
-import Nound              from '../dictionary/nound/Nound'
-import NoundActionTypes   from '../dictionary/nound/NoundActionTypes'
+import AppDispatcher    from '../AppDispatcher'
+import Nound            from '../dictionary/nound/Nound'
+import NoundActionTypes from '../dictionary/nound/NoundActionTypes'
+import syllabus         from '../syllabus/Syllabus'
+
 import {localStorageAvailable} from '../../LocalStorage'
-import syllabus from '../syllabus/Syllabus'
 
 const localStorageKey = 'AppStore'
 
@@ -19,15 +20,14 @@ class AppStore extends ReduceStore {
 
     getInitialState() {
 
-        //if (localStorageAvailable) {
-            //const localStorageState = localStorage.getItem(localStorageKey)
+        if (localStorageAvailable) {
+            const localStorageState = localStorage.getItem(localStorageKey)
 
-            //if(localStorageState)
-                //return fromJS(JSON.parse(localStorageState))
-        //}
+            if(localStorageState)
+                return fromJS(JSON.parse(localStorageState))
+        }
 
         return AppStore.initialState
-
     }
     
     reduce(state, action) {
@@ -82,8 +82,8 @@ class AppStore extends ReduceStore {
                 // do nothing, newState is already set to the existing state
         }
 
-        //if(localStorageAvailable)
-            //localStorage.setItem(localStorageKey, JSON.stringify(newState))
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState.toJSON()))
 
         return newState
     }

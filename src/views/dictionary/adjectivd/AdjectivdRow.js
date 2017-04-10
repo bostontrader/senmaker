@@ -1,12 +1,19 @@
 import React from 'react'
+import {Map} from 'immutable'
 
-import AdjectivdAEActions    from '../../../data/dictionary/adjectivd/addedit/AdjectivdAEActions'
+import Adjectivd          from '../../../data/dictionary/adjectivd/Adjectivd'
+import AdjectivdAEActions from '../../../data/dictionary/adjectivd/addedit/AdjectivdAEActions'
+
 
 function AdjectivdRow(props) {
-    const {adjectiv} = props
-    //const onClickEditAdjectivd = () => props.onClickEditAdjectivd(adjectiv)
+    let {adjectiv} = props
+
+    // The original state is a Adjectivd Record, but when round-tripped to/from localStorage
+    // it gets turned into a Map.  This should be corrected, but until then, apply this hack.
+    if(adjectiv instanceof(Map))
+        adjectiv = Adjectivd(adjectiv)
+    
     const onClickEditAdjectivd = () => AdjectivdAEActions.onClickEditAdjectivd(adjectiv)
-    //const onClickSave = () => props.adjectivd.getIn(['onClickSaveAdjectivd'])({base: props.adjectivd.getIn(['addEditAdjectivd','adjectivd','base'])})
 
     let adjectivdRow = <div>adjectiv item</div>
     //if( props.level >= AdjectivdPanelLevel.PLURALIZATION) {

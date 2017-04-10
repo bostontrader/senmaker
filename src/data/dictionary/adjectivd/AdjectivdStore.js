@@ -1,12 +1,12 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import AppActionTypes from '../../app/AppActionTypes'
-import AppDispatcher from '../../AppDispatcher'
-import Counter from './Counter'
-import Adjectivd from './Adjectivd'
-import AdjectivdActionTypes from './AdjectivdActionTypes'
+import Adjectivd              from './Adjectivd'
+import AdjectivdActionTypes   from './AdjectivdActionTypes'
+import Counter                from './Counter'
 import AdjectivdAEActionTypes from './addedit/AdjectivdAEActionTypes'
+import AppDispatcher          from '../../AppDispatcher'
+import AppActionTypes         from '../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'AdjectivdStore'
@@ -18,12 +18,12 @@ class AdjectivdStore extends ReduceStore {
 
     getInitialState() {
 
-        //if (localStorageAvailable) {
-            //const localStorageState = localStorage.getItem(localStorageKey)
+        if (localStorageAvailable) {
+            const localStorageState = localStorage.getItem(localStorageKey)
 
-            //if(localStorageState)
-                //return fromJS(JSON.parse(localStorageState))
-        //}
+            if(localStorageState)
+                return fromJS(JSON.parse(localStorageState))
+        }
 
         return AdjectivdStore.initialState
 
@@ -36,6 +36,8 @@ class AdjectivdStore extends ReduceStore {
             return state.set(id, Adjectivd({
                 id: id,
                 base: adjectivd.base
+
+
             }))
         }
 
@@ -52,7 +54,7 @@ class AdjectivdStore extends ReduceStore {
             case AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD:
                 if(action.adjectivd.id) {
                     // An id exists so update the existing record.
-                    newState = newState.set(action.adjectivd.id, action.adjectivd)
+                    newState = newState.set(action.adjectivd.id, Adjectivd(action.adjectivd))
                 } else {
                     // No id exists so insert a new record.
                     newState = insertNewRecord(action.adjectivd)
@@ -60,7 +62,7 @@ class AdjectivdStore extends ReduceStore {
                 break
 
             case AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD:
-                return newState.delete(action.id)
+                newState =  newState.delete(action.id)
                 break
 
             // Insert a new record programmatically, w/o a UI.
@@ -72,8 +74,8 @@ class AdjectivdStore extends ReduceStore {
                 // do nothing, newState is already set to the existing state
         }
 
-        //if(localStorageAvailable)
-            //localStorage.setItem(localStorageKey, JSON.stringify(newState))
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState.toJSON()))
 
         return newState
     }

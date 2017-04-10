@@ -1,9 +1,9 @@
-import NoundAEActionTypes  from './addedit/NoundAEActionTypes'
 import Counter             from './Counter'
 import Nound               from './Nound'
 import NoundActionTypes    from './NoundActionTypes'
 import NoundStore          from './NoundStore'
 import {PluralizationRule} from './NoundConstants'
+import NoundAEActionTypes  from './addedit/NoundAEActionTypes'
 import AppActionTypes      from '../../app/AppActionTypes'
 
 describe('NoundStore', function() {

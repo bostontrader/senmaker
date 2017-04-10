@@ -1,10 +1,10 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import AppActionTypes from '../../../app/AppActionTypes'
-import Adjectivd from '../Adjectivd'
-import AdjectivdAEActionTypes from './AdjectivdAEActionTypes'
-import AppDispatcher from '../../../AppDispatcher'
+import AdjectivdAEActionTypes  from './AdjectivdAEActionTypes'
+import Adjectivd               from '../Adjectivd'
+import AppActionTypes          from '../../../app/AppActionTypes'
+import AppDispatcher           from '../../../AppDispatcher'
 import {localStorageAvailable} from '../../../../LocalStorage'
 
 const localStorageKey = 'AdjectivdAEStore'
@@ -29,12 +29,12 @@ class AdjectivdAEStore extends ReduceStore {
 
     getInitialState() {
 
-        //if (localStorageAvailable) {
-            //const localStorageState = localStorage.getItem(localStorageKey)
+        if (localStorageAvailable) {
+            const localStorageState = localStorage.getItem(localStorageKey)
 
-            //if(localStorageState)
-                //return fromJS(JSON.parse(localStorageState))
-        //}
+            if(localStorageState)
+                return fromJS(JSON.parse(localStorageState))
+        }
 
         return AdjectivdAEStore.initialState
 
@@ -72,9 +72,9 @@ class AdjectivdAEStore extends ReduceStore {
             case AdjectivdAEActionTypes.ON_CLICK_EDIT_ADJECTIVD:
                 newState = newState.set('adjectivd', Adjectivd({
                     id: action.adjectivd.id,
-                    base: action.adjectivd.base,
-                    plural: action.adjectivd.plural,
-                    pluralization_rule: action.adjectivd.pluralization_rule
+                    base: action.adjectivd.base
+
+
                 }))
                 break
 
@@ -89,11 +89,11 @@ class AdjectivdAEStore extends ReduceStore {
                 break
 
             default:
-            // do nothing, newState is already set to the existing state
+                // do nothing, newState is already set to the existing state
         }
 
-        //if(localStorageAvailable)
-            //localStorage.setItem(localStorageKey, JSON.stringify(newState))
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState.toJSON()))
 
         return newState
     }

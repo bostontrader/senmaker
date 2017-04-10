@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 import AdjectivdRow from './AdjectivdRow'
 
 function AdjectivdTable(props) {
@@ -31,6 +32,7 @@ function AdjectivdTable(props) {
                 </tbody>
             </table>
     } else if( level >= AdjectivdPanelLevel.BASE) {*/
+
         adjectivdTable =
             <table id="adjectivd-list">
                 <thead>
@@ -41,7 +43,7 @@ function AdjectivdTable(props) {
                 </thead>
                 <tbody>
                     {[...props.adjectivd.getIn(['adjectivs']).values()].map(adjectiv => (
-                        <AdjectivdRow key={adjectiv.id} adjectiv={adjectiv} strings={props.strings} />
+                        <AdjectivdRow key={adjectiv.get('id')} adjectiv={adjectiv} strings={props.strings} />
                     ))}
                 </tbody>
             </table>

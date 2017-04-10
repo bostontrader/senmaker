@@ -4,7 +4,7 @@ import AdjectivdAEActions from '../../../data/dictionary/adjectivd/addedit/Adjec
 
 import AdjectivdAddForm  from './addedit/AdjectivdAddForm'
 import AdjectivdEditForm from './addedit/AdjectivdEditForm'
-import AdjectivdTable from './AdjectivdTable'
+import AdjectivdTable    from './AdjectivdTable'
 
 /*
 The AdjectivdPanel is responsible for displaying everything about our list of adjectivd.  Such

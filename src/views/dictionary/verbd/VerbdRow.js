@@ -1,10 +1,18 @@
 import React from 'react'
+import {Map} from 'immutable'
 
-import VerbdAEActions    from '../../../data/dictionary/verbd/addedit/VerbdAEActions'
+import Verbd          from '../../../data/dictionary/verbd/Verbd'
+import VerbdAEActions from '../../../data/dictionary/verbd/addedit/VerbdAEActions'
 //import {VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'
 
 function VerbdRow(props) {
-    const {verb} = props
+    let {verb} = props
+
+    // The original state is a Verbd Record, but when round-tripped to/from localStorage
+    // it gets turned into a Map.  This should be corrected, but until then, apply this hack.
+    if(verb instanceof(Map))
+        verb = Verbd(verb)
+    
     const onClickEditVerbd = () => VerbdAEActions.onClickEditVerbd(verb)
 
     let verbdRow = <div>verb item</div>

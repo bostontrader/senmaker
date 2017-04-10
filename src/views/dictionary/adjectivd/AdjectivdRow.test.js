@@ -1,9 +1,10 @@
 import React from "react"
 import TestUtils from "react-addons-test-utils"
 
-import Adjectivd from '../../../data/dictionary/adjectivd/Adjectivd'
 import AdjectivdRow from './AdjectivdRow'
-import StringStore from '../../../data/strings/StringStore'
+import Adjectivd    from '../../../data/dictionary/adjectivd/Adjectivd'
+import StringStore  from '../../../data/strings/StringStore'
+
 
 describe("AdjectivdRow", () => {
 
@@ -14,13 +15,15 @@ describe("AdjectivdRow", () => {
         base: 'fat'
     })
 
+
+
     it("renders a AdjectivdPanelLevel.BASE AdjectivdRow", () => {
         tuRenderer = TestUtils.createRenderer()
         const strings = StringStore.getInitialState()
         const props = {adjectiv:adjectiv, strings: strings}
         adjectivdRow = tuRenderer.render(<AdjectivdRow {...props} />)
         expect(adjectivdRow.type).toBe('tr')
-        expect(adjectivdRow.props.children.length).toBe(2)
+        expect(adjectivdRow.props.children.length).toBe(2) // adjective, edit
     })
 
     //it("renders a AdjectivdPanelLevel.PLURALIZATION AdjectivdRow", () => {

@@ -1,16 +1,14 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import QuizActionTypes from './QuizActionTypes'
-import AppDispatcher   from '../AppDispatcher'
-
-import AppActionTypes     from '../app/AppActionTypes'
+import QuizActionTypes        from './QuizActionTypes'
+import AppDispatcher          from '../AppDispatcher'
+import AppActionTypes         from '../app/AppActionTypes'
 import AdjectivdAEActionTypes from '../dictionary/adjectivd/addedit/AdjectivdAEActionTypes'
 import NoundActionTypes       from '../dictionary/nound/NoundActionTypes'
 import NoundAEActionTypes     from '../dictionary/nound/addedit/NoundAEActionTypes'
-import NouniAEActionTypes     from '../nouni/addedit/NouniAEActionTypes'
 import VerbdAEActionTypes     from '../dictionary/verbd/addedit/VerbdAEActionTypes'
-
+import NouniAEActionTypes     from '../nouni/addedit/NouniAEActionTypes'
 import {localStorageAvailable} from '../../LocalStorage'
 
 const localStorageKey = 'QuizStore'
@@ -25,12 +23,12 @@ class QuizStore extends ReduceStore {
 
     getInitialState() {
 
-        //if (localStorageAvailable) {
-            //const localStorageState = localStorage.getItem(localStorageKey)
+        if (localStorageAvailable) {
+            const localStorageState = localStorage.getItem(localStorageKey)
 
-            //if(localStorageState)
-                //return fromJS(JSON.parse(localStorageState))
-        //}
+            if(localStorageState)
+                return fromJS(JSON.parse(localStorageState))
+        }
 
         return QuizStore.initialState
     }
@@ -156,8 +154,8 @@ class QuizStore extends ReduceStore {
                 // do nothing, newState is already set to the existing state
         }
 
-        //if(localStorageAvailable)
-            //localStorage.setItem(localStorageKey, JSON.stringify(newState))
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState.toJSON()))
 
         return newState
     }

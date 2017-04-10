@@ -1,27 +1,25 @@
-import {Map, OrderedMap} from 'immutable'
+import {Map} from 'immutable'
 import React from 'react'
 
 import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 import {findWithType} from 'react-shallow-testutils'
 
-import AppStore from '../../../data/app/AppStore'
-import AdjectivdAEStore from '../../../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
-import AdjectivdPanel from './AdjectivdPanel'
-import AdjectivdTable from './AdjectivdTable'
+//import AppStore from '../../../data/app/AppStore'
+import AdjectivdPanel    from './AdjectivdPanel'
+import AdjectivdTable    from './AdjectivdTable'
 import AdjectivdAddForm  from './addedit/AdjectivdAddForm'
 import AdjectivdEditForm from './addedit/AdjectivdEditForm'
-
-import StringStore from '../../../data/strings/StringStore'
+import AdjectivdAEStore  from '../../../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
+import StringStore       from '../../../data/strings/StringStore'
 
 describe("AdjectivdPanel", () => {
 
     it("Renders a AdjectivdPanel w/o add/edit", () => {
         const props = {
-            level:AppStore.getInitialState(),
             adjectivd: Map({
                 addEditAdjectivd: AdjectivdAEStore.getInitialState(),
-                adjectivs: OrderedMap()
+                adjectivs: Map()
             }),
             strings:StringStore.getInitialState()
         }
@@ -37,13 +35,11 @@ describe("AdjectivdPanel", () => {
         expect(tree).toMatchSnapshot()
     })
 
-
     it("Renders a AdjectivdPanel with a AdjectivdAddForm", () => {
         let props = {
-            level:AppStore.getInitialState(),
             adjectivd: Map({
                 addEditAdjectivd: AdjectivdAEStore.getInitialState(),
-                adjectivs: OrderedMap()
+                adjectivs: Map()
             }),
             strings:StringStore.getInitialState()
         }
@@ -64,10 +60,9 @@ describe("AdjectivdPanel", () => {
 
     it("Renders a AdjectivdPanel with a AdjectivdEditForm", () => {
         const props = {
-            level:AppStore.getInitialState(),
             adjectivd: Map({
                 addEditAdjectivd: AdjectivdAEStore.getInitialState(),
-                adjectivs: OrderedMap()
+                adjectivs: Map()
             }),
             strings:StringStore.getInitialState()
         }

@@ -1,5 +1,5 @@
 import AdjectivdAEActionTypes from './AdjectivdAEActionTypes'
-import AppDispatcher from '../../../AppDispatcher'
+import AppDispatcher          from '../../../AppDispatcher'
 
 const AdjectivdAEActions = {
     onClickAddAdjectivd() {

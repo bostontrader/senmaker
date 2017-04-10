@@ -2,6 +2,8 @@ import React from 'react'
 
 import AdjectivdAEActions from '../../../../data/dictionary/adjectivd/addedit/AdjectivdAEActions'
 
+
+
 function AdjectivdEditForm(props) {
 
     const style = {
@@ -32,10 +34,13 @@ function AdjectivdEditForm(props) {
         adjectivdEditForm =
             <div id="adjectivd-edit-form" style={style}>
                 <label htmlFor='base'>Base</label>
-                <input id='base' name='base' type='text' value={props.adjectivd.getIn(['addEditAdjectivd','adjectivd','base'])} onChange={(e)=>AdjectivdAEActions.onChangeBase(e.target.value)}/>
+                <input id='base' name='base' type='text'
+                    value={props.adjectivd.getIn(['addEditAdjectivd','adjectivd','base'])}
+                    onChange={(e)=>AdjectivdAEActions.onChangeBase(e.target.value)}
+                />
                 <button id='save-adjectivd'   onClick={onClickSave}>{s.save}</button>
                 <button id='delete-adjectivd' onClick={onDelete}>{s.delete}</button>
-                <button id='cancel'       onClick={AdjectivdAEActions.onClickCancel}>{s.cancel}</button>
+                <button id='cancel'           onClick={AdjectivdAEActions.onClickCancel}>{s.cancel}</button>
             </div>
     //}
 

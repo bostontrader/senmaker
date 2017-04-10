@@ -1,5 +1,5 @@
 import AdjectivdActionTypes from './AdjectivdActionTypes'
-import AppDispatcher    from '../../AppDispatcher'
+import AppDispatcher        from '../../AppDispatcher'
 
 const AdjectivdActions = {
     // Programmatic insert, no UI
