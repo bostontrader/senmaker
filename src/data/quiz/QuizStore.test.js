@@ -279,7 +279,20 @@ describe('QuizStore', function() {
         })
     })
 
-    // 5. phrases
+    // 5. nouni
+    it('nouni ON_I_UNDERSTAND', function() {
+        expect(this.state.getIn(['nouni','iunderstand'])).toBe(false)
+        expect(this.state.getIn(['nouni','passed'])).toBe(false)
+
+        this.dispatch({
+            type: QuizActionTypes.nouni.ON_I_UNDERSTAND
+        })
+
+        expect(this.state.getIn(['nouni','iunderstand'])).toBe(true)
+        expect(this.state.getIn(['nouni','passed'])).toBe(true)
+    })
+    
+    // 6. phrases
     it('phrases ON_I_UNDERSTAND', function() {
         expect(this.state.getIn(['phrases','iunderstand'])).toBe(false)
         expect(this.state.getIn(['phrases','passed'])).toBe(false)
@@ -292,7 +305,7 @@ describe('QuizStore', function() {
         expect(this.state.getIn(['phrases','passed'])).toBe(true)
     })
 
-    // 6. nounPhrases
+    // 7. nounPhrases
     it('nounPhrases ON_I_UNDERSTAND', function() {
         expect(this.state.getIn(['nounPhrases','iunderstand'])).toBe(false)
         expect(this.state.getIn(['nounPhrases','passed'])).toBe(false)

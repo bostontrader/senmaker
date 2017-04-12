@@ -1,12 +1,12 @@
 import {fromJS} from 'immutable'
 import {ReduceStore} from 'flux/utils'
 
-import AppActionTypes from '../app/AppActionTypes'
-import AppDispatcher from '../AppDispatcher'
 import StringActionTypes from './StringActionTypes'
-import {localStorageAvailable} from '../../LocalStorage'
-import {langCode}     from '../I18NConstants'
+import AppActionTypes    from '../app/AppActionTypes'
+import AppDispatcher     from '../AppDispatcher'
+import {langCode}        from '../I18NConstants'
 
+import {localStorageAvailable} from '../../LocalStorage'
 const localStorageKey = 'StringStore'
 
 class StringStore extends ReduceStore {
@@ -47,6 +47,9 @@ class StringStore extends ReduceStore {
                 // do nothing, newState is already set to the existing state
         }
 
+        // We don't really need to save all these strings to localStorage.  But presently
+        // we need to do this in order to save the language selection. Find a more elegant way
+        // to do this.
         if(localStorageAvailable)
             localStorage.setItem(localStorageKey, JSON.stringify(newState))
 
@@ -64,6 +67,7 @@ StringStore.en = {
     i_understand: 'I understand',
     noun: 'Noun',
     nouns: 'Nouns',
+    noun_phrase: 'Noun Phrase',
     quiz: 'Quiz',
     save: 'Save',
     verb: 'Verb',
@@ -126,10 +130,11 @@ StringStore.en = {
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
     },
-    nounPhrases: {
+    np: {
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
         help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
-        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.'
+        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.',
+        help13: 'Here we repackage that into an explicit noun phrase format.'
         // although a noun phrase is usually more than one word, it could be just a single noun.
     },
     npWithAdjectives: {
@@ -201,6 +206,7 @@ StringStore.zh = {
     i_understand: '我明白',
     noun: 'Noun',
     nouns: '名词 Nouns',
+    noun_phrase: 'Noun Phrase',
     quiz: '测试',
     save: '保存',
     verb: 'Verb',
@@ -244,10 +250,11 @@ StringStore.zh = {
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
     },
-    nounPhrases: {
+    np: {
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
         help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
-        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting a definiten or indefinite, and a noun, you produced a two-word noun phrase.'
+        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting a definiten or indefinite, and a noun, you produced a two-word noun phrase.',
+        help13: 'Here we repackage that into an explicit noun phrase format.'
         // although a noun phrase is usually more than one word, it could be just a single noun.
     },
     // plural

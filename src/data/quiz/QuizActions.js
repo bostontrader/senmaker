@@ -17,6 +17,13 @@ const QuizActions = {
             })
         }
     },
+    nouni: {
+        onIUnderstand() {
+            AppDispatcher.dispatch({
+                type: QuizActionTypes.nouni.ON_I_UNDERSTAND
+            })
+        },
+    },
     phrases: {
         onIUnderstand() {
             AppDispatcher.dispatch({

@@ -8,11 +8,14 @@ const QuizActionTypes = {
     definiteness: {
         ON_ISEE_CHANGE_ARTICLE: 'ON_ISEE_CHANGE_ARTICLE'
     },
-    phrases: {
+    nouni: {
         ON_I_UNDERSTAND: 'ON_I_UNDERSTAND1',
     },
-    nounPhrases: {
+    phrases: {
         ON_I_UNDERSTAND: 'ON_I_UNDERSTAND2',
+    },
+    nounPhrases: {
+        ON_I_UNDERSTAND: 'ON_I_UNDERSTAND3',
     },
 }
 

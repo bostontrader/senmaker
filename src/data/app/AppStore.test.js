@@ -3,7 +3,7 @@ import AppStore       from './AppStore'
 
 import NoundActionTypes    from '../dictionary/nound/NoundActionTypes'
 import {PluralizationRule} from '../dictionary/nound/NoundConstants'
-import syllabus            from '../syllabus/Syllabus'
+import syllabus            from '../Syllabus'
 
 describe('AppStore', function() {
 

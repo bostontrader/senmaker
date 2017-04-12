@@ -6,6 +6,8 @@ import AdjectivdAEStore from '../data/dictionary/adjectivd/addedit/AdjectivdAESt
 import AdjectivdStore   from '../data/dictionary/adjectivd/AdjectivdStore'
 import NoundAEStore     from '../data/dictionary/nound/addedit/NoundAEStore'
 import NoundStore       from '../data/dictionary/nound/NoundStore'
+import NPAEStore        from '../data/np/addedit/NPAEStore'
+import NPStore          from '../data/np/NPStore'
 import VerbdAEStore     from '../data/dictionary/verbd/addedit/VerbdAEStore'
 import VerbdStore       from '../data/dictionary/verbd/VerbdStore'
 import NouniAEStore     from '../data/nouni/addedit/NouniAEStore'
@@ -24,6 +26,8 @@ function getStores() {
         NoundAEStore,
         NouniStore,
         NouniAEStore,
+        NPAEStore,
+        NPStore,
         QuizStore,
         StringStore,
         VerbdStore,
@@ -57,8 +61,15 @@ function getState() {
         // A collection of instantiated nound.
         nouni: Map({
             addEditNouni: NouniAEStore.getState(),
+            nouns: NouniStore.getState(),
         }),
 
+        // A collection of available np.
+        np: Map({
+            addEditNP: NPAEStore.getState(),
+            nps: NPStore.getState(),
+        }),
+        
         // The quizzes
         quiz: QuizStore.getState(),
 

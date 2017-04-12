@@ -1,6 +1,6 @@
 import React from 'react'
 
-import syllabus from '../data/syllabus/Syllabus'
+import syllabus from '../data/Syllabus'
 
 function AppView(props) {
 

@@ -3,6 +3,7 @@ import React from 'react'
 import LessonNavigator from './LessonNavigator'
 import QuizActions from '../../data/quiz/QuizActions'
 
+
 function Phrases(props) {
 
     const style = {

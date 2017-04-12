@@ -5,7 +5,7 @@ const NouniActionTypes = {
     //ON_CHANGE_BASE: 'ON_CHANGE_BASE', // Change the UI field
     //DELETE_NOUNI: 'DELETE_NOUNI',
     //EDIT_NOUNI: 'EDIT_NOUNI',     // Invoke the edit-noun UI
-    //INSERT_NOUNI: 'INSERT_NOUNI', // Pump a new noun into the db
+    INSERT_NOUNI: 'INSERT_NOUNI', // Pump a new nound directly into the db w/o dealing with any UI.
     //UPDATE_NOUNI: 'UPDATE_NOUNI'  // Update an existing noun
 }
 

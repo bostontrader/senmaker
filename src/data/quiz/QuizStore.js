@@ -138,13 +138,19 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['definiteness','passed'],definitenessQuizPassed(newState))
                 break
 
-            // 5. phrases
+            // 5. nouni
+            case QuizActionTypes.nouni.ON_I_UNDERSTAND:
+                newState = newState.setIn(['nouni','iunderstand'],true)
+                newState = newState.setIn(['nouni','passed'],true)
+                break
+            
+            // 6. phrases
             case QuizActionTypes.phrases.ON_I_UNDERSTAND:
                 newState = newState.setIn(['phrases','iunderstand'],true)
                 newState = newState.setIn(['phrases','passed'],true)
                 break
 
-            // 6. nounPhrases
+            // 7. nounPhrases
             case QuizActionTypes.nounPhrases.ON_I_UNDERSTAND:
                 newState = newState.setIn(['nounPhrases','iunderstand'],true)
                 newState = newState.setIn(['nounPhrases','passed'],true)
@@ -188,6 +194,10 @@ QuizStore.initialState = Map({
         definitenessChanged: false,
         noundChanged       : false,
         iseeArticleChanged : false,
+        passed: false
+    }),
+    nouni: Map({
+        iunderstand: false,
         passed: false
     }),
     phrases: Map({

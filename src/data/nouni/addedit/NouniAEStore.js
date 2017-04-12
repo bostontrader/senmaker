@@ -47,7 +47,9 @@ class NouniAEStore extends ReduceStore {
 
     reduce(state, action) {
 
-        let newState
+        let newState = state
+
+        //console.log('NouniAEStore',state)
 
         const calcResultText = (definiteness, nound) => {
             // Graft in this ugly code from another project...

@@ -6,7 +6,7 @@ import AppActionTypes from './AppActionTypes'
 import AppDispatcher    from '../AppDispatcher'
 import Nound            from '../dictionary/nound/Nound'
 import NoundActionTypes from '../dictionary/nound/NoundActionTypes'
-import syllabus         from '../syllabus/Syllabus'
+import syllabus         from '../Syllabus'
 
 import {localStorageAvailable} from '../../LocalStorage'
 
