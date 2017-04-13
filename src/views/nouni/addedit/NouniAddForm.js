@@ -10,7 +10,12 @@ function NouniAddForm(props) {
         border: '1px solid black',
         margin: '5px'
     }
+    const s = props.strings
 
+    const onClickSave = () => NouniAEActions.onClickSaveNouni(
+        props.nouni.getIn(['addEditNouni','nouni'])
+    )
+    
     return(
         <div>
             <div style={style}>
@@ -20,10 +25,13 @@ function NouniAddForm(props) {
                     <Radio value="indefinite" />Indefinite
                 </RadioGroup>
                 <p>{props.nouni.getIn(['addEditNouni','nouni','generatedText'])}</p>
+                <button id='save-nouni' onClick={onClickSave}>{s.save}</button>
+                <button id='cancel'     onClick={NouniAEActions.onClickCancel}>{s.cancel}</button>
             </div>
-
         </div>
     )
+
+
 }
 
 export default NouniAddForm

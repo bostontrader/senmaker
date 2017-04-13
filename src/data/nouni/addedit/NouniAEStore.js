@@ -1,14 +1,14 @@
 import {ReduceStore} from 'flux/utils'
-import {Map} from 'immutable'
+import {fromJS, Map} from 'immutable'
 
-import NoundActionTypes   from '../../dictionary/nound/NoundActionTypes'
-import Nouni from '../Nouni'
-import NouniAEActionTypes from './NouniAEActionTypes'
-import AppDispatcher      from '../../AppDispatcher'
+import NouniAEActionTypes   from './NouniAEActionTypes'
+import {DefinitenessSelect} from '../NouniConstants'
+import Nouni                from '../Nouni'
+import AppDispatcher        from '../../AppDispatcher'
+import AppActionTypes       from '../../app/AppActionTypes'
+import NoundActionTypes     from '../../dictionary/nound/NoundActionTypes'
 
 import {localStorageAvailable} from '../../../LocalStorage'
-import {DefinitenessSelect} from '../NouniConstants'
-
 const localStorageKey = 'NouniAEStore'
 
 /*
@@ -31,25 +31,20 @@ class NouniAEStore extends ReduceStore {
 
     getInitialState() {
 
-        //if (localStorageAvailable) {
-            //localStorage.removeItem(localStorageKey)
-            //const localStorageState = localStorage.getItem(localStorageKey)
+        if (localStorageAvailable) {
+            const localStorageState = localStorage.getItem(localStorageKey)
 
-            //if(localStorageState)
-                //return fromJS(JSON.parse(localStorageState))
-        //}
+            if(localStorageState)
+                return fromJS(JSON.parse(localStorageState))
+        }
 
-        return Map({
-            addNouni: false,
-            nouni: new Nouni()
-        })
+        return NouniAEStore.initialState
+
     }
 
     reduce(state, action) {
 
         let newState = state
-
-        //console.log('NouniAEStore',state)
 
         const calcResultText = (definiteness, nound) => {
             // Graft in this ugly code from another project...
@@ -166,6 +161,45 @@ class NouniAEStore extends ReduceStore {
 
         switch (action.type) {
 
+            // AppActionTypes
+            case AppActionTypes.ON_APP_RESET:
+                newState = NouniAEStore.initialState
+                break
+
+            // Signal the UI to open the NouniAddForm
+            case NouniAEActionTypes.ON_CLICK_ADD_NOUNI:
+                newState = newState.set('addNouni', true)
+                break
+
+            // Signal the UI to close NouniAddForm or NouniEditForm
+            case NouniAEActionTypes.ON_CLICK_CANCEL:
+                newState = NouniAEStore.initialState
+                break
+
+            // Signal the UI to close NouniAddForm or NouniEditForm (but the delete button
+            // is only present on NounEditForm.)
+            // NouniStore will also catch this event and it's responsible for the actual deletion.
+            //case NouniAEActionTypes.ON_CLICK_DELETE_NOUNI:
+                //newState = NouniAEStore.initialState
+                //break
+
+            // Signal the UI to open NouniEditForm and populate with the given data.
+            case NouniAEActionTypes.ON_CLICK_EDIT_NOUNI:
+                console.log(action)
+                newState = newState.set('nouni', Nouni({
+                    id: action.nouni.id,
+                    nound: action.nouni.nound,
+                    definiteness: action.nouni.definiteness,
+                    generatedText: action.nouni.generatedText
+                }))
+                break
+
+            // Signal the UI to close NouniAddForm or NouniEditForm. We don't need to specify which,
+            // the same state should close either one.
+            case NouniAEActionTypes.ON_CLICK_SAVE_NOUNI:
+                newState = NouniAEStore.initialState
+                break
+
             case NouniAEActionTypes.ON_CHANGE_DEFINITENESS:
 
                 presentDefiniteness = action.newDefiniteness
@@ -184,14 +218,19 @@ class NouniAEStore extends ReduceStore {
                 break
 
             default:
-                newState = state
+                // do nothing, newState is already set to the existing state
         }
 
-        //if(localStorageAvailable)
-            //localStorage.setItem(localStorageKey, JSON.stringify(newState))
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState.toJSON()))
 
         return newState
     }
 }
+
+NouniAEStore.initialState =  Map({
+    addNouni: false,
+    nouni: new Nouni()
+})
 
 export default new NouniAEStore()

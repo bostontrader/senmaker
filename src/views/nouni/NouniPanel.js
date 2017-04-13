@@ -3,7 +3,7 @@ import React from 'react'
 import NouniAEActions from '../../data/nouni/addedit/NouniAEActions'
 
 import NouniAddForm  from './addedit/NouniAddForm'
-//import NouniEditForm from './addedit/NouniEditForm'
+import NouniEditForm from './addedit/NouniEditForm'
 import NouniTable    from './NouniTable'
 
 /*

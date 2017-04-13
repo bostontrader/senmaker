@@ -26,7 +26,7 @@ function NouniRow(props) {
     //} else if( props.level >= NouniPanelLevel.BASE) {
         nouniRow =
             <tr>
-                <td>{noun.base}</td>
+                <td>{noun.generatedText}</td>
                 <td><button id={noun.id} type="button" onClick={onClickEditNouni} >{props.strings.edit}</button></td>
             </tr>
     //}

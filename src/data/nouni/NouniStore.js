@@ -1,10 +1,15 @@
 import {ReduceStore} from 'flux/utils'
-import {Map} from 'immutable'
+import {fromJS, Map} from 'immutable'
 
-import AppDispatcher from '../AppDispatcher'
-//import Counter from './Counter'
-//import Nound from './Nound'
-//import NoundActionTypes from './NoundActionTypes'
+import Counter            from './Counter'
+import Nouni              from './Nouni'
+import NouniActionTypes   from './NouniActionTypes'
+import NouniAEActionTypes from './addedit/NouniAEActionTypes'
+import AppDispatcher      from '../AppDispatcher'
+import Nound              from '../dictionary/nound/Nound'
+
+import {localStorageAvailable} from '../../LocalStorage'
+const localStorageKey = 'NouniStore'
 
 class NouniStore extends ReduceStore {
     constructor() {
@@ -12,12 +17,48 @@ class NouniStore extends ReduceStore {
     }
 
     getInitialState() {
-        return Map()
+
+        if (localStorageAvailable) {
+            const localStorageState = localStorage.getItem(localStorageKey)
+
+            if(localStorageState)
+                return fromJS(JSON.parse(localStorageState))
+        }
+
+        return NouniStore.initialState
+
     }
 
     reduce(state, action) {
+
+        function insertNewRecord(nouni) {
+            //console.log(nouni.toJSON())
+            //console.log(nouni.nound.toJSON())
+
+            const id = Counter.increment()
+            return state.set(id, Nouni({
+                id: id,
+                nound: Nound(nouni.get('nound')),
+                definiteness: nouni.get('definiteness'),
+                generatedText: nouni.get('generatedText')
+            }))
+        }
+
+        let newState = state
+        
         switch (action.type) {
 
+            // Insert a new record or update an existing one, originating from a UI.
+            case NouniAEActionTypes.ON_CLICK_SAVE_NOUNI:
+                if(action.nouni.id) {
+                    // An id exists so update the existing record.
+                    newState = newState.set(action.nouni.id, Nouni(action.nouni))
+                } else {
+                    // No id exists so insert a new record.
+                    newState = insertNewRecord(action.nouni)
+                }
+                break
+            
             //case NoundActionTypes.DELETE_NOUN:
                 //return state.delete(action.id)
 
@@ -33,10 +74,23 @@ class NouniStore extends ReduceStore {
             //case NoundActionTypes.UPDATE_NOUN:
                 //return state.set(action.noun.get('id'), action.noun)
 
+            // Insert a new record programmatically, w/o a UI.
+            case NouniActionTypes.INSERT_NOUNI:
+                newState = insertNewRecord(action.nouni)
+                break
+
             default:
-                return state
+                // do nothing, newState is already set to the existing state
+                
         }
+        
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState.toJSON()))
+
+        return newState
     }
 }
+
+NouniStore.initialState = Map()
 
 export default new NouniStore()

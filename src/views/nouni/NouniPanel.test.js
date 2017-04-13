@@ -5,11 +5,12 @@ import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 import {findWithType} from 'react-shallow-testutils'
 
-//import AppStore from '../../../data/app/AppStore'
+import AppStore from '../../data/app/AppStore'
 import NouniAddForm  from './addedit/NouniAddForm'
 //import NouniEditForm from './addedit/NouniEditForm'
 import NouniPanel    from './NouniPanel'
 import NouniTable    from './NouniTable'
+import NoundAEStore  from '../../data/dictionary/nound/addedit/NoundAEStore'
 import NouniAEStore  from '../../data/nouni/addedit/NouniAEStore'
 import StringStore   from '../../data/strings/StringStore'
 
@@ -35,8 +36,13 @@ describe("NouniPanel", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    /*it("Renders a NouniPanel with a NouniAddForm", () => {
+    it("Renders a NouniPanel with a NouniAddForm", () => {
         let props = {
+            app: AppStore.getState(),
+            nound: Map({
+                addEditNound: NoundAEStore.getInitialState(),
+                nouns: Map()
+            }),
             nouni: Map({
                 addEditNouni: NouniAEStore.getInitialState(),
                 nouns: Map()
@@ -53,9 +59,10 @@ describe("NouniPanel", () => {
         expect(findWithType(nouniPanel,NouniAddForm))
         expect(findWithType(nouniPanel,NouniTable))
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
-    })*/
+        // TypeError: Cannot read property 'style' of null wtf?
+        //const tree = rtRenderer.create(renderExpression).toJSON()
+        //expect(tree).toMatchSnapshot()
+    })
 
     /*it("Renders a NouniPanel with a NouniEditForm", () => {
         const props = {
