@@ -18,7 +18,7 @@ function NouniEditForm(props) {
     const onDelete = () => NouniAEActions.onClickDeleteNouni(props.nouni.getIn(['addEditNouni','nouni','id']))
     const s = props.strings
 
-    return nouniEditForm =
+    return(
         <div style={style}>
             <NoundSelect {...props} />
             <RadioGroup name="definiteness" selectedValue={props.nouni.getIn(['addEditNouni','definiteness'])} onChange={(e)=>{NouniAEActions.onChangeDefiniteness(e)}}>
@@ -30,6 +30,7 @@ function NouniEditForm(props) {
             <button id='delete-nound' onClick={onDelete}>{s.delete}</button>
             <button id='cancel'       onClick={NouniAEActions.onClickCancel}>{s.cancel}</button>
         </div>
+    )
 }
 
 export default NouniEditForm

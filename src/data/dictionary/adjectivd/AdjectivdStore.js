@@ -3,7 +3,6 @@ import {fromJS, Map} from 'immutable'
 
 import Adjectivd              from './Adjectivd'
 import AdjectivdActionTypes   from './AdjectivdActionTypes'
-import Counter                from './Counter'
 import AdjectivdAEActionTypes from './addedit/AdjectivdAEActionTypes'
 import AppDispatcher          from '../../AppDispatcher'
 import AppActionTypes         from '../../app/AppActionTypes'
@@ -32,7 +31,7 @@ class AdjectivdStore extends ReduceStore {
     reduce(state, action) {
 
         function insertNewRecord(adjectivd) {
-            const id = Counter.increment()
+            const id = state.size + 1
             return state.set(id, Adjectivd({
                 id: id,
                 base: adjectivd.base

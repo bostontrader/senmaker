@@ -1,7 +1,6 @@
 import Adjectivd              from './Adjectivd'
 import AdjectivdActionTypes   from './AdjectivdActionTypes'
 import AdjectivdStore         from './AdjectivdStore'
-import Counter                from './Counter'
 import AdjectivdAEActionTypes from './addedit/AdjectivdAEActionTypes'
 import AppActionTypes      from '../../app/AppActionTypes'
 
@@ -22,10 +21,10 @@ describe('AdjectivdStore', function() {
         // This function is for setting up data, it will add all the adjectivd to the
         // state in a direct way.
         this.addAdjectivs = (adjectivs) => {
+            let id = 1
             adjectivs.forEach(adjectiv => {
-                const id = Counter.increment()
                 this.state = this.state.set(
-                    id,
+                    id++,
                     new Adjectivd({id, base: adjectiv.base})
                 )
             })

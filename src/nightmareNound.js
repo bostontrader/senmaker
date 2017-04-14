@@ -42,7 +42,7 @@ const nightmareNound = (nightmare, delay) => {
 
         .then( res => {
             return nightmare
-                .click('#n-1').wait(delay)
+                .click('#id1').wait(delay)
                 .click('#cancel').wait(delay)
                 .evaluate(function() {
                     return document.querySelector('#nound-edit-form') === null
@@ -55,7 +55,7 @@ const nightmareNound = (nightmare, delay) => {
 
         .then( res => {
             return nightmare
-                .click('#n-1').wait(delay)
+                .click('#id1').wait(delay)
                 .type('#base', 'beaver').wait(delay)
                 .click('#save-nound').wait(delay)
                 .evaluate(function() {
@@ -76,7 +76,7 @@ const nightmareNound = (nightmare, delay) => {
                 throw('updateNoundCheck did not appear after save')
         }).then( res => {
             return nightmare
-                .click('#n-1').wait(delay)
+                .click('#id1').wait(delay)
                 .click('#delete-nound').wait(delay)
                 .evaluate(function() {
                     return document.querySelector('#nound-edit-form') === null

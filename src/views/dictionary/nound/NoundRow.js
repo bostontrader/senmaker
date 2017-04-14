@@ -27,7 +27,7 @@ function NoundRow(props) {
         noundRow =
             <tr>
                 <td>{noun.base}</td>
-                <td><button id={noun.id} type="button" onClick={onClickEditNound} >{props.strings.edit}</button></td>
+                <td><button id={'id'+noun.id} type="button" onClick={onClickEditNound} >{props.strings.edit}</button></td>
             </tr>
     //}
 

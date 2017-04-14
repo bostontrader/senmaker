@@ -2,12 +2,12 @@ const nightmareAdjectivd = (nightmare, delay) => {
     return nightmare
         .click('#lesson-next').wait(delay)
         .click('#add-adjectivd').wait(delay)
-        //.click('#adjectivd-add-form #cancel').wait(delay)
+        .click('#adjectivd-add-form #cancel').wait(delay)
 
         // The adjectivdAddForm should now go away.
-        //.evaluate(function () {
-            //return document.querySelector('#adjectivd-add-form') === null
-        //})
+        .evaluate(function () {
+            return document.querySelector('#adjectivd-add-form') === null
+        })
 
         //.then(
             //adjectivd_add_form_gone => {
@@ -92,10 +92,10 @@ const nightmareAdjectivd = (nightmare, delay) => {
                     return document.querySelector('#deleteAdjectivdCheck') !== null
                 })
         })*/
-        .then(deleteAdjectivdCheckFound => {
-            if (!deleteAdjectivdCheckFound)
-                throw('deleteAdjectivdCheck did not appear after delete')
-        })
+        //.then(deleteAdjectivdCheckFound => {
+            //if (!deleteAdjectivdCheckFound)
+                //throw('deleteAdjectivdCheck did not appear after delete')
+        //})
 }
 
 module.exports = nightmareAdjectivd

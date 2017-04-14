@@ -2,7 +2,6 @@ import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
 import NoundAEActionTypes from './addedit/NoundAEActionTypes'
-import Counter            from './Counter'
 import Nound              from './Nound'
 import NoundActionTypes   from './NoundActionTypes'
 import AppActionTypes     from '../../app/AppActionTypes'
@@ -32,7 +31,7 @@ class NoundStore extends ReduceStore {
     reduce(state, action) {
 
         function insertNewRecord(nound) {
-            const id = Counter.increment()
+            const id = state.size + 1
             return state.set(id, Nound({
                 id: id,
                 base: nound.base,

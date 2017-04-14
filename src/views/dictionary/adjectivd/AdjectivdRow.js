@@ -27,7 +27,7 @@ function AdjectivdRow(props) {
         adjectivdRow =
             <tr>
                 <td>{adjectiv.base}</td>
-                <td><button id={adjectiv.id} type="button" onClick={onClickEditAdjectivd} >{props.strings.edit}</button></td>
+                <td><button id={'id'+adjectiv.id} type="button" onClick={onClickEditAdjectivd} >{props.strings.edit}</button></td>
             </tr>
     //}
 

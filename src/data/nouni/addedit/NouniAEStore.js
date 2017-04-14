@@ -185,7 +185,6 @@ class NouniAEStore extends ReduceStore {
 
             // Signal the UI to open NouniEditForm and populate with the given data.
             case NouniAEActionTypes.ON_CLICK_EDIT_NOUNI:
-                console.log(action)
                 newState = newState.set('nouni', Nouni({
                     id: action.nouni.id,
                     nound: action.nouni.nound,

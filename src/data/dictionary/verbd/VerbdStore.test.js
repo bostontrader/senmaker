@@ -1,5 +1,4 @@
 import VerbdAEActionTypes from './addedit/VerbdAEActionTypes'
-import Counter            from './Counter'
 import Verbd              from './Verbd'
 import VerbdActionTypes   from './VerbdActionTypes'
 import VerbdStore         from './VerbdStore'
@@ -22,10 +21,10 @@ describe('VerbdStore', function() {
         // This function is for setting up data, it will add all the verbd to the
         // state in a direct way.
         this.addVerbs = (verbs) => {
+            let id = 1
             verbs.forEach(verb => {
-                const id = Counter.increment()
                 this.state = this.state.set(
-                    id,
+                    id++,
                     new Verbd({id, base: verb.base, pastTense: verb.pastTense, pastTense_rule: verb.pastTense_rule})
                 )
             })

@@ -1,4 +1,3 @@
-import Counter             from './Counter'
 import Nound               from './Nound'
 import NoundActionTypes    from './NoundActionTypes'
 import NoundStore          from './NoundStore'
@@ -22,10 +21,10 @@ describe('NoundStore', function() {
         // This function is for setting up data, it will add all the nound to the
         // state in a direct way.
         this.addNouns = (nouns) => {
+            let id = 1
             nouns.forEach(noun => {
-                const id = Counter.increment()
                 this.state = this.state.set(
-                    id,
+                    id++,
                     new Nound({id, base: noun.base, plural: noun.plural, pluralization_rule: noun.pluralization_rule})
                 )
             })

@@ -2,10 +2,8 @@ import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
 import VerbdAEActionTypes from './addedit/VerbdAEActionTypes'
-import Counter            from './Counter'
 import Verbd              from './Verbd'
 import VerbdActionTypes   from './VerbdActionTypes'
-
 import AppActionTypes from '../../app/AppActionTypes'
 import AppDispatcher  from '../../AppDispatcher'
 
@@ -33,7 +31,7 @@ class VerbdStore extends ReduceStore {
     reduce(state, action) {
 
         function insertNewRecord(verbd) {
-            const id = Counter.increment()
+            const id = state.size + 1
             return state.set(id, Verbd({
                 id: id,
                 base: verbd.base,

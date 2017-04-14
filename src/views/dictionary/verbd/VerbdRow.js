@@ -27,7 +27,7 @@ function VerbdRow(props) {
         verbdRow =
             <tr>
                 <td>{verb.base}</td>
-                <td><button id={verb.id} type="button" onClick={onClickEditVerbd} >{props.strings.edit}</button></td>
+                <td><button id={'id'+verb.id} type="button" onClick={onClickEditVerbd} >{props.strings.edit}</button></td>
             </tr>
     //}
 

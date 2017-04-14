@@ -1,3 +1,5 @@
+import {Map} from 'immutable'
+
 //import Counter             from './Counter'
 //import Nouni               from './Nouni'
 import NouniActionTypes     from './NouniActionTypes'
@@ -15,7 +17,7 @@ describe('NouniStore', function() {
         // This function gets a more readable form of the nouni that we can pass
         // to expect(). It strips away the id.
         this.nouns = () => Array.from(this.state.values()).map(nouni => ({
-            nound: nouni.nound,
+            nound: nouni.nound.toJSON(),
             definiteness: nouni.definiteness,
             generatedText: nouni.generatedText
         }))
@@ -103,32 +105,21 @@ describe('NouniStore', function() {
     it('ON_CLICK_SAVE_NOUNI, new nouni', function() {
         // We know that this is a new record because nouni has no id.
         expect(this.nouns()).toEqual([])
-        //this.dispatch({
-            //type: NouniAEActionTypes.ON_CLICK_SAVE_NOUNI,
-            //nouni: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
-        //})
-        //expect(this.nouns()).toEqual([
-            //{base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
-        //])
-        //expect(this.nouns()).toEqual([])
 
         this.dispatch({
             type: NouniAEActionTypes.ON_CLICK_SAVE_NOUNI,
             nouni: {
-                nound: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
+                nound: {id:'1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
                 definiteness: DefinitenessSelect.Definite,
                 generatedText: 'the cat'
             }
         })
 
         expect(this.nouns()).toEqual([{
-            nound: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
+            nound: {id:'1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
             definiteness: DefinitenessSelect.Definite,
             generatedText: 'the cat'
         }])
-
-
-
 
     })
 
@@ -156,14 +147,14 @@ describe('NouniStore', function() {
         this.dispatch({
             type: NouniActionTypes.INSERT_NOUNI,
             nouni: {
-                nound: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
+                nound: {id:'1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
                 definiteness: DefinitenessSelect.Definite,
                 generatedText: 'the cat'
             }
         })
 
         expect(this.nouns()).toEqual([{
-            nound: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
+            nound: {id:'1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
             definiteness: DefinitenessSelect.Definite,
             generatedText: 'the cat'
         }])
@@ -171,7 +162,7 @@ describe('NouniStore', function() {
         this.dispatch({
             type: NouniActionTypes.INSERT_NOUNI,
             nouni: {
-                nound: {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
+                nound: {id:'2', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
                 definiteness: DefinitenessSelect.Indefinite,
                 generatedText: 'a box'
             }
@@ -179,12 +170,12 @@ describe('NouniStore', function() {
 
         expect(this.nouns()).toEqual([
             {
-                nound: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
+                nound: {id:'1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
                 definiteness: DefinitenessSelect.Definite,
                 generatedText: 'the cat'
             },
             {
-                nound: {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
+                nound: {id:'2', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
                 definiteness: DefinitenessSelect.Indefinite,
                 generatedText: 'a box'
             }

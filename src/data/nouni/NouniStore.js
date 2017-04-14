@@ -38,9 +38,9 @@ class NouniStore extends ReduceStore {
             const id = Counter.increment()
             return state.set(id, Nouni({
                 id: id,
-                nound: Nound(nouni.get('nound')),
-                definiteness: nouni.get('definiteness'),
-                generatedText: nouni.get('generatedText')
+                nound: Nound(nouni.nound),
+                definiteness: nouni.definiteness,
+                generatedText: nouni.generatedText
             }))
         }
 
@@ -52,6 +52,10 @@ class NouniStore extends ReduceStore {
             case NouniAEActionTypes.ON_CLICK_SAVE_NOUNI:
                 if(action.nouni.id) {
                     // An id exists so update the existing record.
+                    //const nound = Nound(action.nouni.noud)
+                    //const nouni = Nouni
+                    const nouni = Nouni(action.nouni)
+                    console.log(nouni)
                     newState = newState.set(action.nouni.id, Nouni(action.nouni))
                 } else {
                     // No id exists so insert a new record.

@@ -42,7 +42,7 @@ const nightmareVerbd = (nightmare, delay) => {
 
         .then( res => {
             return nightmare
-                .click('#v-1').wait(delay)
+                .click('#id1').wait(delay)
                 .click('#cancel').wait(delay)
                 .evaluate(function() {
                     return document.querySelector('#verbd-edit-form') === null
@@ -55,7 +55,7 @@ const nightmareVerbd = (nightmare, delay) => {
 
         .then( res => {
             return nightmare
-                .click('#v-1').wait(delay)
+                .click('#id1').wait(delay)
                 .type('#base', 'beaver').wait(delay)
                 .click('#save-verbd').wait(delay)
                 .evaluate(function() {
@@ -78,7 +78,7 @@ const nightmareVerbd = (nightmare, delay) => {
         })
         .then( res => {
             return nightmare
-                .click('#v-1').wait(delay)
+                .click('#id1').wait(delay)
                 .click('#delete-verbd').wait(delay)
                 .evaluate(function() {
                     return document.querySelector('#verbd-edit-form') === null
