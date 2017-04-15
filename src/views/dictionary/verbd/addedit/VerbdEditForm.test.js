@@ -17,7 +17,7 @@ describe("VerbdEditForm", () => {
     it("Renders a VerbdPanelLevel.BASE VerbdEditForm", () => {
         const props = {
             verbd: Map({
-                addEditVerbd: VerbdAEStore.getInitialState(),
+                addedit: VerbdAEStore.getInitialState(),
                 verbs: Map()
             }),
             strings:StringStore.getInitialState()

@@ -3,10 +3,10 @@ import {fromJS, Map} from 'immutable'
 
 import AdjectivdAEActionTypes  from './AdjectivdAEActionTypes'
 import Adjectivd               from '../Adjectivd'
-import AppActionTypes          from '../../../app/AppActionTypes'
 import AppDispatcher           from '../../../AppDispatcher'
-import {localStorageAvailable} from '../../../../LocalStorage'
+import AppActionTypes          from '../../../app/AppActionTypes'
 
+import {localStorageAvailable} from '../../../../LocalStorage'
 const localStorageKey = 'AdjectivdAEStore'
 
 /*

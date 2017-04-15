@@ -12,7 +12,7 @@ function NPAddForm(props) {
     }
 
     const onClickSave = () => NPAEActions.onClickSaveNP({
-        base: props.np.getIn(['addEditNP','np','base'])
+        base: props.np.getIn(['addedit','np','base'])
     })
     const s = props.strings
 
@@ -33,7 +33,7 @@ function NPAddForm(props) {
             <div id="np-add-form" style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
-                    value={props.np.getIn(['addEditNP','np','base'])}
+                    value={props.np.getIn(['addedit','np','base'])}
                     onChange={(e)=>NPAEActions.onChangeBase(e.target.value)}
                 />
                 <button id='save-np' onClick={onClickSave}>{s.save}</button>

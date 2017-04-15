@@ -17,7 +17,7 @@ describe("NPEditForm", () => {
     it("Renders a NPPanelLevel.BASE NPEditForm", () => {
         const props = {
             np: Map({
-                addEditNP: NPAEStore.getInitialState(),
+                addedit: NPAEStore.getInitialState(),
                 nouns: Map()
             }),
             strings:StringStore.getInitialState()
@@ -39,7 +39,7 @@ describe("NPEditForm", () => {
         const strings = StringStore.getInitialState()
         const props = {
             np: Map({
-                addEditNP: NounAEStore.getInitialState(),
+                addedit: NounAEStore.getInitialState(),
                 nouns: OrderedMap()
             }),
             strings:strings

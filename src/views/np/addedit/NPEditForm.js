@@ -12,10 +12,10 @@ function NPEditForm(props) {
     }
 
     const onClickSave = () => NPAEActions.onClickSaveNP({
-        id: props.np.getIn(['addEditNP','np','id']),
-        base: props.np.getIn(['addEditNP','np','base'])
+        id: props.np.getIn(['addedit','np','id']),
+        base: props.np.getIn(['addedit','np','base'])
     })
-    const onDelete = () => NPAEActions.onClickDeleteNP(props.np.getIn(['addEditNP','np','id']))
+    const onDelete = () => NPAEActions.onClickDeleteNP(props.np.getIn(['addedit','np','id']))
     const s = props.strings
 
     let npEditForm = null
@@ -24,7 +24,7 @@ function NPEditForm(props) {
         /*npEditForm =
             <div>
                 <label htmlFor='base'>Base</label>
-                <input id='base' name='base' type='text' value={props.np.getIn(['addEditNP','noun','base'])} onChange={(e)=>props.np.getIn(['onChangeNounBase'])(e.target.value)}/>
+                <input id='base' name='base' type='text' value={props.np.getIn(['addedit','noun','base'])} onChange={(e)=>props.np.getIn(['onChangeNounBase'])(e.target.value)}/>
                 <PluralizationRuleSelect pluralization_rule={0}/>
                 <input id='save-np' type='submit' value={s.save}/>
                 <button id='delete-np' onClick={onDelete}>{s.delete}</button>
@@ -35,7 +35,7 @@ function NPEditForm(props) {
             <div id="np-edit-form" style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
-                    value={props.np.getIn(['addEditNP','np','base'])}
+                    value={props.np.getIn(['addedit','np','base'])}
                     onChange={(e)=>NPAEActions.onChangeBase(e.target.value)}
                 />
                 <button id='save-np'   onClick={onClickSave}>{s.save}</button>

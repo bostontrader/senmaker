@@ -32,6 +32,7 @@ function VerbdTable(props) {
                 </tbody>
             </table>
     } else if (level >= VerbdPanelLevel.BASE) {*/
+
         verbdTable =
             <table id="verbd-list">
                 <thead>
@@ -41,7 +42,7 @@ function VerbdTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {[...props.verbd.getIn(['verbs']).values()].map(verb => (
+                    {[...props.verbd.getIn(['dict','coll']).values()].map(verb => (
                         <VerbdRow key={verb.get('id')} verb={verb} strings={props.strings} />
                     ))}
                 </tbody>

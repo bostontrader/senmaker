@@ -13,18 +13,19 @@ function NouniAddForm(props) {
     const s = props.strings
 
     const onClickSave = () => NouniAEActions.onClickSaveNouni(
-        props.nouni.getIn(['addEditNouni','nouni'])
+        props.nouni.getIn(['addedit','nouni'])
     )
-    
+
+    //console.log('NouniAddForm definiteness=',props.nouni.getIn(['addedit','nouni','definiteness']))
     return(
         <div>
             <div style={style}>
                 <NoundSelect {...props} />
-                <RadioGroup name="definiteness" selectedValue={props.nouni.getIn(['addEditNouni','definiteness'])} onChange={(e)=>{NouniAEActions.onChangeDefiniteness(e)}}>
+                <RadioGroup name="definiteness" selectedValue={props.nouni.getIn(['addedit','nouni','definiteness'])} onChange={(e)=>{NouniAEActions.onChangeDefiniteness(e)}}>
                     <Radio value="definite" />Definite
                     <Radio value="indefinite" />Indefinite
                 </RadioGroup>
-                <p>{props.nouni.getIn(['addEditNouni','nouni','generatedText'])}</p>
+                <p>{props.nouni.getIn(['addedit','nouni','generatedText'])}</p>
                 <button id='save-nouni' onClick={onClickSave}>{s.save}</button>
                 <button id='cancel'     onClick={NouniAEActions.onClickCancel}>{s.cancel}</button>
             </div>

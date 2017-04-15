@@ -12,7 +12,7 @@ function NoundAddForm(props) {
     }
 
     const onClickSave = () => NoundAEActions.onClickSaveNound({
-        base: props.nound.getIn(['addEditNound','nound','base'])
+        base: props.nound.getIn(['addedit','nound','base'])
     })
     const s = props.strings
 
@@ -33,7 +33,7 @@ function NoundAddForm(props) {
             <div id="nound-add-form" style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
-                    value={props.nound.getIn(['addEditNound','nound','base'])}
+                    value={props.nound.getIn(['addedit','nound','base'])}
                     onChange={(e)=>NoundAEActions.onChangeBase(e.target.value)}
                 />
                 <button id='save-nound' onClick={onClickSave}>{s.save}</button>

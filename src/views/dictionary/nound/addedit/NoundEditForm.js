@@ -12,10 +12,10 @@ function NoundEditForm(props) {
     }
 
     const onClickSave = () => NoundAEActions.onClickSaveNound({
-        id: props.nound.getIn(['addEditNound','nound','id']),
-        base: props.nound.getIn(['addEditNound','nound','base'])
+        id: props.nound.getIn(['addedit','nound','id']),
+        base: props.nound.getIn(['addedit','nound','base'])
     })
-    const onDelete = () => NoundAEActions.onClickDeleteNound(props.nound.getIn(['addEditNound','nound','id']))
+    const onDelete = () => NoundAEActions.onClickDeleteNound(props.nound.getIn(['addedit','nound','id']))
     const s = props.strings
 
     let noundEditForm = null
@@ -24,7 +24,7 @@ function NoundEditForm(props) {
         /*noundEditForm =
             <div>
                 <label htmlFor='base'>Base</label>
-                <input id='base' name='base' type='text' value={props.nound.getIn(['addEditNound','noun','base'])} onChange={(e)=>props.nound.getIn(['onChangeNounBase'])(e.target.value)}/>
+                <input id='base' name='base' type='text' value={props.nound.getIn(['addedit','noun','base'])} onChange={(e)=>props.nound.getIn(['onChangeNounBase'])(e.target.value)}/>
                 <PluralizationRuleSelect pluralization_rule={0}/>
                 <input id='save-nound' type='submit' value={s.save}/>
                 <button id='delete-nound' onClick={onDelete}>{s.delete}</button>
@@ -35,7 +35,7 @@ function NoundEditForm(props) {
             <div id="nound-edit-form" style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
-                    value={props.nound.getIn(['addEditNound','nound','base'])}
+                    value={props.nound.getIn(['addedit','nound','base'])}
                     onChange={(e)=>NoundAEActions.onChangeBase(e.target.value)}
                 />
                 <button id='save-nound'   onClick={onClickSave}>{s.save}</button>

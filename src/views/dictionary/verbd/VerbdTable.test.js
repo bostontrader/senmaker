@@ -8,14 +8,11 @@ import rtRenderer        from 'react-test-renderer'
 import VerbdRow   from './VerbdRow'
 import VerbdTable from './VerbdTable'
 
-//import AppActionTypes from '../../../data/app/AppActionTypes'
-import AppStore       from '../../../data/app/AppStore'
-import StringStore    from '../../../data/strings/StringStore'
-
-//import Verbd            from '../../../data/dictionary/verbd/Verbd'
+import AppStore         from '../../../data/app/AppStore'
 import {PastTenseRule}  from '../../../data/dictionary/verbd/VerbdConstants'
 import VerbdActionTypes from '../../../data/dictionary/verbd/VerbdActionTypes'
 import VerbdStore       from '../../../data/dictionary/verbd/VerbdStore'
+import StringStore      from '../../../data/strings/StringStore'
 
 describe("VerbdTable", function() {
 
@@ -24,13 +21,13 @@ describe("VerbdTable", function() {
         this.state.app     = AppStore.getInitialState()
         this.state.strings = StringStore.getInitialState()
         this.state.verbd = Map({
-            verbs:VerbdStore.getInitialState()
+            dict:VerbdStore.getInitialState()
         })
 
         this.dispatch = action => {
             this.state.app   = AppStore .reduce(this.state.app, action)
-            const n = VerbdStore.reduce(this.state.verbd.get('verbs'), action)
-            this.state.verbd = this.state.verbd.set('verbs',n)
+            const n = VerbdStore.reduce(this.state.verbd.get('dict'), action)
+            this.state.verbd = this.state.verbd.set('dict',n)
         }
     })
 
@@ -64,23 +61,7 @@ describe("VerbdTable", function() {
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
     })
-
-    it("Will render zero VerbdRow", () => {
-        let newState = AppStore.getInitialState()
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-
-        const props = {level:newState.get('level'), verbs: OrderedMap()}
-        const renderExpression = <VerbdTable {...props} />
-        const verbTable = TestUtils.createRenderer().render(renderExpression)
-        const verbItems = findAllWithType(verbTable, VerbdRow)
-        expect(verbItems.length).toBe(0)
-
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
-    })*/
+*/
 
     it("Will render one VerbdRow", function() {
         this.dispatch({

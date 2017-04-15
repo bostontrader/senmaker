@@ -16,7 +16,7 @@ describe("AdjectivdAddForm", () => {
     it("Renders a AdjectivdPanelLevel.BASE AdjectivdAddForm", () => {
         const props = {
             adjectivd: Map({
-                addEditAdjectivd: AdjectivdAEStore.getInitialState(),
+                addedit: AdjectivdAEStore.getInitialState(),
                 adjectivs: Map()
             }),
             strings:StringStore.getInitialState()
@@ -40,7 +40,7 @@ describe("AdjectivdAddForm", () => {
         const props = {
             level:newState.get('level'),
             adjectivd: Map({
-                addEditAdjectivd: AdjectivdAEStore.getInitialState(),
+                addedit: AdjectivdAEStore.getInitialState(),
                 adjectivs: OrderedMap()
             }),
             strings:strings

@@ -23,9 +23,9 @@ function NouniPanel(props) {
 
     // What should be displayed in the nouni add/edit panel?
     let nounAddEditForm = <div></div>  // we really want nothing here
-    if(props.nouni.getIn(['addEditNouni','nouni','id'])) {
+    if(props.nouni.getIn(['addedit','nouni','id'])) {
         nounAddEditForm = <NouniEditForm {...props} />
-    } else if (props.nouni.getIn(['addEditNouni','addNouni'])) {
+    } else if (props.nouni.getIn(['addedit','addNouni'])) {
         nounAddEditForm = <NouniAddForm {...props} />
     } else {
         // Do nothing

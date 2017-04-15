@@ -23,9 +23,9 @@ function NoundPanel(props) {
 
     // What should be displayed in the nound add/edit panel?
     let nounAddEditForm = <div></div>  // we really want nothing here
-    if(props.nound.getIn(['addEditNound','nound','id'])) {
+    if(props.nound.getIn(['addedit','nound','id'])) {
         nounAddEditForm = <NoundEditForm {...props} />
-    } else if (props.nound.getIn(['addEditNound','addNound'])) {
+    } else if (props.nound.getIn(['addedit','addNound'])) {
         nounAddEditForm = <NoundAddForm {...props} />
     } else {
         // Do nothing

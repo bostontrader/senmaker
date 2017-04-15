@@ -25,7 +25,7 @@ describe("NouniAddForm", () => {
                 nouns: OrderedMap()
             }),
             nouni: Map({
-                addEditNouni: NouniAEStore.getState(),
+                addedit: NouniAEStore.getState(),
             }),
             strings:strings
         }

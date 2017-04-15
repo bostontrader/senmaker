@@ -23,9 +23,9 @@ function AdjectivdPanel(props) {
 
     // What should be displayed in the adjectivd add/edit panel?
     let adjectivAddEditForm = <div></div>  // we really want nothing here
-    if(props.adjectivd.getIn(['addEditAdjectivd','adjectivd','id'])) {
+    if(props.adjectivd.getIn(['addedit','adjectivd','id'])) {
         adjectivAddEditForm = <AdjectivdEditForm {...props} />
-    } else if (props.adjectivd.getIn(['addEditAdjectivd','addAdjectivd'])) {
+    } else if (props.adjectivd.getIn(['addedit','addAdjectivd'])) {
         adjectivAddEditForm = <AdjectivdAddForm {...props} />
     } else {
         // Do nothing

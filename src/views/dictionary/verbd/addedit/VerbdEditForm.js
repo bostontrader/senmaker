@@ -12,10 +12,10 @@ function VerbdEditForm(props) {
     }
 
     const onClickSave = () => VerbdAEActions.onClickSaveVerbd({
-        id: props.verbd.getIn(['addEditVerbd','verbd','id']),
-        base: props.verbd.getIn(['addEditVerbd','verbd','base'])
+        id: props.verbd.getIn(['addedit','verbd','id']),
+        base: props.verbd.getIn(['addedit','verbd','base'])
     })
-    const onDelete = () => VerbdAEActions.onClickDeleteVerbd(props.verbd.getIn(['addEditVerbd','verbd','id']))
+    const onDelete = () => VerbdAEActions.onClickDeleteVerbd(props.verbd.getIn(['addedit','verbd','id']))
     const s = props.strings
 
     let verbdEditForm = null
@@ -35,7 +35,7 @@ function VerbdEditForm(props) {
             <div id="verbd-edit-form" style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
-                    value={props.verbd.getIn(['addEditVerbd','verbd','base'])}
+                    value={props.verbd.getIn(['addedit','verbd','base'])}
                     onChange={(e)=>VerbdAEActions.onChangeBase(e.target.value)}
                 />
                 <button id='save-verbd'   onClick={onClickSave}>{s.save}</button>

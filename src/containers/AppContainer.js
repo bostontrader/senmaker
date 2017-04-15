@@ -47,27 +47,27 @@ function getState() {
         // A dictionary of available adjectivs.  We will instantiate as many copies of these
         // definitions as we need, as adjectivi.
         adjectivd: Map({
-            addEditAdjectivd: AdjectivdAEStore.getState(),
-            adjectivs: AdjectivdStore.getState(),
+            addedit: AdjectivdAEStore.getState(),
+            dict: AdjectivdStore.getState(),
         }),
         
         // A dictionary of available nouns.  We will instantiate as many copies of these
         // definitions as we need, as nouni.
         nound: Map({
-            addEditNound: NoundAEStore.getState(),
-            nouns: NoundStore.getState(),
+            addedit: NoundAEStore.getState(),
+            dict: NoundStore.getState(),
         }),
 
         // A collection of instantiated nound.
         nouni: Map({
-            addEditNouni: NouniAEStore.getState(),
-            nouns: NouniStore.getState(),
+            addedit: NouniAEStore.getState(),
+            dict: NouniStore.getState(),
         }),
 
         // A collection of available np.
         np: Map({
-            addEditNP: NPAEStore.getState(),
-            nps: NPStore.getState(),
+            addedit: NPAEStore.getState(),
+            dict: NPStore.getState(),
         }),
         
         // The quizzes
@@ -78,8 +78,8 @@ function getState() {
         // A dictionary of available verbs.  We will instantiate as many copies of these
         // definitions as we need, as verbi.
         verbd: Map({
-            addEditVerbd: VerbdAEStore.getState(),
-            verbs: VerbdStore.getState(),
+            addedit: VerbdAEStore.getState(),
+            dict: VerbdStore.getState(),
         })
     }
 }

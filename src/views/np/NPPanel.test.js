@@ -18,7 +18,7 @@ describe("NPPanel", () => {
     it("Renders a NPPanel w/o add/edit", () => {
         const props = {
             np: Map({
-                addEditNP: NPAEStore.getInitialState(),
+                addedit: NPAEStore.getInitialState(),
                 nps: Map()
             }),
             strings:StringStore.getInitialState()
@@ -38,12 +38,12 @@ describe("NPPanel", () => {
     /*it("Renders a NPPanel with a NPAddForm", () => {
         let props = {
             np: Map({
-                addEditNP: NPAEStore.getInitialState(),
+                addedit: NPAEStore.getInitialState(),
                 nps: Map()
             }),
             strings:StringStore.getInitialState()
         }
-        props.np = props.np.setIn(['addEditNP','addNP'],true)
+        props.np = props.np.setIn(['addedit','addNP'],true)
 
         const renderExpression = <NPPanel {...props} />
         const npPanel = TestUtils.createRenderer().render(renderExpression)
@@ -60,12 +60,12 @@ describe("NPPanel", () => {
     it("Renders a NPPanel with a NPEditForm", () => {
         const props = {
             np: Map({
-                addEditNP: NPAEStore.getInitialState(),
+                addedit: NPAEStore.getInitialState(),
                 nps: Map()
             }),
             strings:StringStore.getInitialState()
         }
-        props.np = props.np.setIn(['addEditNP','np','id'],"0") // don't let this string become falsey
+        props.np = props.np.setIn(['addedit','np','id'],"0") // don't let this string become falsey
 
         const renderExpression = <NPPanel {...props} />
         const npPanel = TestUtils.createRenderer().render(renderExpression)

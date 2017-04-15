@@ -18,7 +18,7 @@ describe("Definiteness", () => {
 
     it("Renders Definiteness", () => {
         const props = {
-            addEditNound: NounAddEditStore.getInitialState(),
+            addedit: NounAddEditStore.getInitialState(),
             level:AppStore.getInitialState(),
             nouns: OrderedMap(),
             strings:StringStore.getInitialState(),

@@ -12,7 +12,7 @@ describe('NoundStore', function() {
 
         // This function gets a more readable form of the nound that we can pass
         // to expect(). It strips away the id.
-        this.nouns = () => Array.from(this.state.values()).map(noun => ({
+        this.nouns = () => Array.from(this.state.getIn(['coll']).values()).map(noun => ({
             base: noun.base,
             plural: noun.plural,
             pluralization_rule: noun.pluralization_rule
@@ -21,12 +21,12 @@ describe('NoundStore', function() {
         // This function is for setting up data, it will add all the nound to the
         // state in a direct way.
         this.addNouns = (nouns) => {
-            let id = 1
+            let id = 0
             nouns.forEach(noun => {
-                this.state = this.state.set(
-                    id++,
+                this.state = this.state.setIn(['coll',id],
                     new Nound({id, base: noun.base, plural: noun.plural, pluralization_rule: noun.pluralization_rule})
                 )
+                id++
             })
         }
         
@@ -34,43 +34,43 @@ describe('NoundStore', function() {
         // nound. This will get the id of a particular noun based on the index it
         // was added to state in.
         this.id = (index) => {
-            if (this.state.size <= index) {
+            if (this.state.getIn(['coll']).size <= index) {
                 throw new Error(
                     'Requested id for an index that is larger than the size of the ' +
                     'current state.'
                 )
             }
-            return Array.from(this.state.keys())[index]
+            return Array.from(this.state.getIn(['coll']).keys())[index]
         }
 
-        this.dispatch = action => {
-            this.state = NoundStore.reduce(this.state, action)
-        }
+        this.dispatch = action => {this.state = NoundStore.reduce(this.state, action)}
+
+        this.example0 = {base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s}
+        this.example1 = {base: 'box',   plural: 'boxes',  pluralization_rule: PluralizationRule.Append_es}
+        this.example2 = {base: 'cat',   plural: 'cats',   pluralization_rule: PluralizationRule.Append_s}
     })
 
     it('ON_APP_RESET', function() {
         const initialState = this.state
 
         // Now do anything, doesn't matter what, to change the initial state
-        this.dispatch({
+        this.dispatch({ 
             type: NoundActionTypes.INSERT_NOUND,
-            nound: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
+            nound: this.example0
         })
         expect(initialState).not.toBe(this.state)
 
         // Now reset the state
-        this.dispatch({
-            type: AppActionTypes.ON_APP_RESET
-        })
+        this.dispatch({type: AppActionTypes.ON_APP_RESET})
         expect(initialState).toBe(this.state)
     })
 
     it('ON_CLICK_DELETE_NOUND', function() {
         expect(this.nouns()).toEqual([])
         this.addNouns([
-            {base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s},
-            {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
-            {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
+            this.example0,
+            this.example1,
+            this.example2,
         ])
 
         this.dispatch({
@@ -79,8 +79,8 @@ describe('NoundStore', function() {
         })
 
         expect(this.nouns()).toEqual([
-            {base: 'apple', plural: 'apples', pluralization_rule: PluralizationRule.Append_s},
-            {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            this.example0,
+            this.example1
         ])
 
         this.dispatch({
@@ -88,9 +88,7 @@ describe('NoundStore', function() {
             id: this.id(0),
         })
 
-        expect(this.nouns()).toEqual([
-            {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
-        ])
+        expect(this.nouns()).toEqual([this.example1])
 
         this.dispatch({
             type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
@@ -106,11 +104,9 @@ describe('NoundStore', function() {
         expect(this.nouns()).toEqual([])
         this.dispatch({
             type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND,
-            nound: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
+            nound: this.example0
         })
-        expect(this.nouns()).toEqual([
-            {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
-        ])
+        expect(this.nouns()).toEqual([this.example0])
     })
 
     it('ON_CLICK_SAVE_NOUND, edit nound', function() {
@@ -118,7 +114,7 @@ describe('NoundStore', function() {
         expect(this.nouns()).toEqual([])
         this.dispatch({
             type: NoundActionTypes.INSERT_NOUND,
-            nound: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
+            nound: this.example0
         })
 
         this.dispatch({
@@ -126,9 +122,7 @@ describe('NoundStore', function() {
             nound: Nound({id: this.id(0), base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
         })
 
-        expect(this.nouns()).toEqual([
-            {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
-        ])
+        expect(this.nouns()).toEqual([this.example1])
     })
 
     it('INSERT_NOUND', function() {
@@ -136,21 +130,19 @@ describe('NoundStore', function() {
 
         this.dispatch({
             type: NoundActionTypes.INSERT_NOUND,
-            nound: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
+            nound: this.example0
         })
 
-        expect(this.nouns()).toEqual([
-            {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
-        ])
+        expect(this.nouns()).toEqual([this.example0])
 
         this.dispatch({
             type: NoundActionTypes.INSERT_NOUND,
-            nound: {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            nound: this.example1
         })
 
         expect(this.nouns()).toEqual([
-            {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
-            {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            this.example0,
+            this.example1
         ])
     })
 })

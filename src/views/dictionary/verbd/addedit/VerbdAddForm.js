@@ -12,7 +12,7 @@ function VerbdAddForm(props) {
     }
 
     const onClickSave = () => VerbdAEActions.onClickSaveVerbd({
-        base: props.verbd.getIn(['addEditVerbd','verbd','base'])
+        base: props.verbd.getIn(['addedit','verbd','base'])
     })
     const s = props.strings
 
@@ -33,7 +33,7 @@ function VerbdAddForm(props) {
             <div id="verbd-add-form" style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
-                    value={props.verbd.getIn(['addEditVerbd','verbd','base'])}
+                    value={props.verbd.getIn(['addedit','verbd','base'])}
                     onChange={(e)=>VerbdAEActions.onChangeBase(e.target.value)}
                 />
                 <button id='save-verbd' onClick={onClickSave}>{s.save}</button>

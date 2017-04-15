@@ -1,17 +1,18 @@
-import {Map, OrderedMap} from 'immutable'
-import React from 'react'
+import {Map}          from 'immutable'
+import React          from 'react'
 import ReactTestUtils from 'react-addons-test-utils'
-import rtRenderer from 'react-test-renderer'
+import rtRenderer     from 'react-test-renderer'
 
-import AppStore from '../data/app/AppStore'
-import Intro from './syllabus/Intro'
-import Nound from './syllabus/Nound'
-import Verbd from './syllabus/Verbd'
+import Intro        from './syllabus/Intro'
+import Nound        from './syllabus/Nound'
+import Verbd        from './syllabus/Verbd'
+import AppStore     from '../data/app/AppStore'
+import NoundStore   from '../data/dictionary/nound/NoundStore'
 import NoundAEStore from '../data/dictionary/nound/addedit/NoundAEStore'
-import QuizStore from '../data/quiz/QuizStore'
-
-import StringStore from '../data/strings/StringStore'
+import VerbdStore   from '../data/dictionary/verbd/VerbdStore'
 import VerbdAEStore from '../data/dictionary/verbd/addedit/VerbdAEStore'
+import QuizStore    from '../data/quiz/QuizStore'
+import StringStore  from '../data/strings/StringStore'
 
 it('Renders Intro', () => {
     const props = {app:AppStore.getInitialState(), strings:StringStore.getInitialState(), quiz:QuizStore.getInitialState()}
@@ -28,8 +29,8 @@ it('Renders Nound', () => {
     const props = {
         app:AppStore.getInitialState(),
         nound: Map({
-            addEditNound: NoundAEStore.getInitialState(),
-            nouns: OrderedMap()
+            addedit: NoundAEStore.getInitialState(),
+            dict: NoundStore.getInitialState()
         }),
         quiz:QuizStore.getInitialState(),
         strings:StringStore.getInitialState()
@@ -46,11 +47,10 @@ it('Renders Nound', () => {
 
 it('Renders Verbd', () => {
     const props = {
-        addEditVerb: VerbdAEStore.getInitialState(),
         app:AppStore.getInitialState(),
         verbd: Map({
-            addEditVerbd: VerbdAEStore.getInitialState(),
-            verbs: OrderedMap()
+            addedit: VerbdAEStore.getInitialState(),
+            dict: VerbdStore.getInitialState()
         }),
         quiz:QuizStore.getInitialState(),
         strings:StringStore.getInitialState()

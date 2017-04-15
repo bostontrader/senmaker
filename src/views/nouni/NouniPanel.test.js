@@ -19,7 +19,7 @@ describe("NouniPanel", () => {
     it("Renders a NouniPanel w/o add/edit", () => {
         const props = {
             nouni: Map({
-                addEditNouni: NouniAEStore.getInitialState(),
+                addedit: NouniAEStore.getInitialState(),
                 nouns: Map()
             }),
             strings:StringStore.getInitialState()
@@ -40,16 +40,16 @@ describe("NouniPanel", () => {
         let props = {
             app: AppStore.getState(),
             nound: Map({
-                addEditNound: NoundAEStore.getInitialState(),
+                addedit: NoundAEStore.getInitialState(),
                 nouns: Map()
             }),
             nouni: Map({
-                addEditNouni: NouniAEStore.getInitialState(),
+                addedit: NouniAEStore.getInitialState(),
                 nouns: Map()
             }),
             strings:StringStore.getInitialState()
         }
-        props.nouni = props.nouni.setIn(['addEditNouni','addNouni'],true)
+        props.nouni = props.nouni.setIn(['addedit','addNouni'],true)
 
         const renderExpression = <NouniPanel {...props} />
         const nouniPanel = TestUtils.createRenderer().render(renderExpression)
@@ -67,12 +67,12 @@ describe("NouniPanel", () => {
     /*it("Renders a NouniPanel with a NouniEditForm", () => {
         const props = {
             nouni: Map({
-                addEditNouni: NouniAEStore.getInitialState(),
+                addedit: NouniAEStore.getInitialState(),
                 nouns: Map()
             }),
             strings:StringStore.getInitialState()
         }
-        props.nouni = props.nouni.setIn(['addEditNouni','nouni','id'],"0") // don't let this string become falsey
+        props.nouni = props.nouni.setIn(['addedit','nouni','id'],"0") // don't let this string become falsey
 
         const renderExpression = <NouniPanel {...props} />
         const nouniPanel = TestUtils.createRenderer().render(renderExpression)

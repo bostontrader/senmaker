@@ -21,26 +21,26 @@ const state = {
     // A dictionary of available adjectivs.  We will instantiate as many copies of these
     // definitions as we need, as adjectivi.
     adjectivd: Map({
-        addEditAdjectivd: AdjectivdAEStore.getState(),
+        addedit: AdjectivdAEStore.getState(),
         adjectivs: AdjectivdStore.getState(),
     }),
 
     // A dictionary of available nouns.  We will instantiate as many copies of these
     // definitions as we need, as nouni.
     nound: Map({
-        addEditNound: NoundAEStore.getState(),
+        addedit: NoundAEStore.getState(),
         nouns: NoundStore.getState(),
     }),
 
     // A collection of instantiated nound.
     nouni: Map({
-        addEditNouni: NouniAEStore.getState(),
+        addedit: NouniAEStore.getState(),
         nouns: NouniStore.getState(),
     }),
 
     // A collection of available np.
     np: Map({
-        addEditNP: NPAEStore.getState(),
+        addedit: NPAEStore.getState(),
         nps: NPStore.getState(),
     }),
 
@@ -52,7 +52,7 @@ const state = {
     // A dictionary of available verbs.  We will instantiate as many copies of these
     // definitions as we need, as verbi.
     verbd: Map({
-        addEditVerbd: VerbdAEStore.getState(),
+        addedit: VerbdAEStore.getState(),
         verbs: VerbdStore.getState(),
     })
 }

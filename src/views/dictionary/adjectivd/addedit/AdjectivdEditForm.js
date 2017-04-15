@@ -12,10 +12,10 @@ function AdjectivdEditForm(props) {
     }
 
     const onClickSave = () => AdjectivdAEActions.onClickSaveAdjectivd({
-        id: props.adjectivd.getIn(['addEditAdjectivd','adjectivd','id']),
-        base: props.adjectivd.getIn(['addEditAdjectivd','adjectivd','base'])
+        id: props.adjectivd.getIn(['addedit','adjectivd','id']),
+        base: props.adjectivd.getIn(['addedit','adjectivd','base'])
     })
-    const onDelete = () => AdjectivdAEActions.onClickDeleteAdjectiv(props.adjectivd.getIn(['addEditAdjectivd','adjectivd','id']))
+    const onDelete = () => AdjectivdAEActions.onClickDeleteAdjectiv(props.adjectivd.getIn(['addedit','adjectivd','id']))
     const s = props.strings
 
     let adjectivdEditForm = null
@@ -24,7 +24,7 @@ function AdjectivdEditForm(props) {
         /*adjectivdEditForm =
             <div>
                 <label htmlFor='base'>Base</label>
-                <input id='base' name='base' type='text' value={props.adjectivd.getIn(['addEditAdjectivd','adjectiv','base'])} onChange={(e)=>props.adjectivd.getIn(['onChangeAdjectivBase'])(e.target.value)}/>
+                <input id='base' name='base' type='text' value={props.adjectivd.getIn(['addedit','adjectiv','base'])} onChange={(e)=>props.adjectivd.getIn(['onChangeAdjectivBase'])(e.target.value)}/>
                 <PluralizationRuleSelect pluralization_rule={0}/>
                 <input id='save-adjectivd' type='submit' value={s.save}/>
                 <button id='delete-adjectivd' onClick={onDelete}>{s.delete}</button>
@@ -35,7 +35,7 @@ function AdjectivdEditForm(props) {
             <div id="adjectivd-edit-form" style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
-                    value={props.adjectivd.getIn(['addEditAdjectivd','adjectivd','base'])}
+                    value={props.adjectivd.getIn(['addedit','adjectivd','base'])}
                     onChange={(e)=>AdjectivdAEActions.onChangeBase(e.target.value)}
                 />
                 <button id='save-adjectivd'   onClick={onClickSave}>{s.save}</button>

@@ -16,7 +16,7 @@ describe("NPAddForm", () => {
     it("Renders a NPPanelLevel.BASE NPAddForm", () => {
         const props = {
             np: Map({
-                addEditNP: NPAEStore.getInitialState(),
+                addedit: NPAEStore.getInitialState(),
                 nouns: Map()
             }),
             strings:StringStore.getInitialState()
@@ -40,7 +40,7 @@ describe("NPAddForm", () => {
         const props = {
             level:newState.get('level'),
             np: Map({
-                addEditNP: NPAEStore.getInitialState(),
+                addedit: NPAEStore.getInitialState(),
                 nouns: OrderedMap()
             }),
             strings:strings

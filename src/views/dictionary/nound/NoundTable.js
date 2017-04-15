@@ -42,7 +42,7 @@ function NoundTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {[...props.nound.getIn(['nouns']).values()].map(noun => (
+                    {[...props.nound.getIn(['dict','coll']).values()].map(noun => (
                         <NoundRow key={noun.get('id')} noun={noun} strings={props.strings} />
                     ))}
                 </tbody>

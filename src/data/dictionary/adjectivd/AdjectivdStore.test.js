@@ -12,7 +12,7 @@ describe('AdjectivdStore', function() {
 
         // This function gets a more readable form of the adjectivd that we can pass
         // to expect(). It strips away the id.
-        this.adjectivs = () => Array.from(this.state.values()).map(adjectiv => ({
+        this.adjectivs = () => Array.from(this.state.getIn(['coll']).values()).map(adjectiv => ({
             base: adjectiv.base
             
             
@@ -21,12 +21,12 @@ describe('AdjectivdStore', function() {
         // This function is for setting up data, it will add all the adjectivd to the
         // state in a direct way.
         this.addAdjectivs = (adjectivs) => {
-            let id = 1
+            let id = 0
             adjectivs.forEach(adjectiv => {
-                this.state = this.state.set(
-                    id++,
+                this.state = this.state.setIn(['coll',id],
                     new Adjectivd({id, base: adjectiv.base})
                 )
+                id++
             })
         }
         
@@ -34,18 +34,20 @@ describe('AdjectivdStore', function() {
         // adjectivd. This will get the id of a particular adjectiv based on the index it
         // was added to state in.
         this.id = (index) => {
-            if (this.state.size <= index) {
+            if (this.state.getIn(['coll']).size <= index) {
                 throw new Error(
                     'Requested id for an index that is larger than the size of the ' +
                     'current state.'
                 )
             }
-            return Array.from(this.state.keys())[index]
+            return Array.from(this.state.getIn(['coll']).keys())[index]
         }
         
-        this.dispatch = action => {
-            this.state = AdjectivdStore.reduce(this.state, action)
-        }
+        this.dispatch = action => {this.state = AdjectivdStore.reduce(this.state, action)}
+
+        this.example0 = {base: 'fat'}
+        this.example1 = {base: 'drunk'}
+        this.example2 = {base: 'stupid'}
     })
 
     it('ON_APP_RESET', function() {
@@ -54,23 +56,21 @@ describe('AdjectivdStore', function() {
         // Now do anything, doesn't matter what, to change the initial state
         this.dispatch({
             type: AdjectivdActionTypes.INSERT_ADJECTIVD,
-            adjectivd: {base: 'cat'}
+            adjectivd: this.example0
         })
         expect(initialState).not.toBe(this.state)
 
         // Now reset the state
-        this.dispatch({
-            type: AppActionTypes.ON_APP_RESET
-        })
+        this.dispatch({type: AppActionTypes.ON_APP_RESET})
         expect(initialState).toBe(this.state)
     })
     
     it('ON_CLICK_DELETE_ADJECTIVD', function() {
         expect(this.adjectivs()).toEqual([])
         this.addAdjectivs([
-            {base: 'stupid'},
-            {base: 'fat'},
-            {base: 'lazy'},
+            this.example0,
+            this.example1,
+            this.example2,
         ])
 
         this.dispatch({
@@ -79,8 +79,8 @@ describe('AdjectivdStore', function() {
         })
 
         expect(this.adjectivs()).toEqual([
-            {base: 'stupid'},
-            {base: 'fat'}
+            this.example0,
+            this.example1
         ])
 
         this.dispatch({
@@ -88,9 +88,7 @@ describe('AdjectivdStore', function() {
             id: this.id(0),
         })
 
-        expect(this.adjectivs()).toEqual([
-            {base: 'fat'}
-        ])
+        expect(this.adjectivs()).toEqual([this.example1])
 
         this.dispatch({
             type: AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD,
@@ -106,11 +104,9 @@ describe('AdjectivdStore', function() {
         expect(this.adjectivs()).toEqual([])
         this.dispatch({
             type: AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD,
-            adjectivd: {base: 'fat'}
+            adjectivd: this.example0
         })
-        expect(this.adjectivs()).toEqual([
-            {base: 'fat'}
-        ])
+        expect(this.adjectivs()).toEqual([this.example0])
     })
 
     it('ON_CLICK_SAVE_ADJECTIVD, edit adjectivd', function() {
@@ -118,17 +114,15 @@ describe('AdjectivdStore', function() {
         expect(this.adjectivs()).toEqual([])
         this.dispatch({
             type: AdjectivdActionTypes.INSERT_ADJECTIVD,
-            adjectivd: {base: 'fat'}
+            adjectivd: this.example0
         })
 
         this.dispatch({
             type: AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD,
-            adjectivd: Adjectivd({id: this.id(0), base: 'lazy'})
+            adjectivd: Adjectivd({id: this.id(0), base: 'drunk'})
         })
 
-        expect(this.adjectivs()).toEqual([
-            {base: 'lazy'}
-        ])
+        expect(this.adjectivs()).toEqual([this.example1])
     })
 
     it('INSERT_ADJECTIVD', function() {
@@ -136,21 +130,19 @@ describe('AdjectivdStore', function() {
 
         this.dispatch({
             type: AdjectivdActionTypes.INSERT_ADJECTIVD,
-            adjectivd: {base: 'fat'}
+            adjectivd: this.example0
         })
 
-        expect(this.adjectivs()).toEqual([
-            {base: 'fat'}
-        ])
+        expect(this.adjectivs()).toEqual([this.example0])
 
         this.dispatch({
             type: AdjectivdActionTypes.INSERT_ADJECTIVD,
-            adjectivd: {base: 'lazy'}
+            adjectivd: this.example1
         })
 
         expect(this.adjectivs()).toEqual([
-            {base: 'fat'},
-            {base: 'lazy'}
+            this.example0,
+            this.example1
         ])
     })
 })

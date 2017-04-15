@@ -31,8 +31,9 @@ class NoundStore extends ReduceStore {
     reduce(state, action) {
 
         function insertNewRecord(nound) {
-            const id = state.size + 1
-            return state.set(id, Nound({
+            const id = state.getIn(['nextid'])
+            let newState = state.setIn(['nextid'], id + 1)
+            return newState.setIn(['coll',id], Nound({
                 id: id,
                 base: nound.base,
                 plural: nound.plural,
@@ -53,7 +54,7 @@ class NoundStore extends ReduceStore {
             case NoundAEActionTypes.ON_CLICK_SAVE_NOUND:
                 if(action.nound.id) {
                     // An id exists so update the existing record.
-                    newState = newState.set(action.nound.id, Nound(action.nound))
+                    newState = newState.setIn(['coll', action.nound.id], Nound(action.nound))
                 } else {
                     // No id exists so insert a new record.
                     newState = insertNewRecord(action.nound)
@@ -61,7 +62,7 @@ class NoundStore extends ReduceStore {
                 break
 
             case NoundAEActionTypes.ON_CLICK_DELETE_NOUND:
-                newState = newState.delete(action.id)
+                newState = newState.deleteIn(['coll',action.id])
                 break
 
             // Insert a new record programmatically, w/o a UI.
@@ -80,6 +81,9 @@ class NoundStore extends ReduceStore {
     }
 }
 
-NoundStore.initialState = Map()
+NoundStore.initialState = Map({
+    nextid:1,
+    coll:Map()  // the actual collection of nound
+})
 
 export default new NoundStore()

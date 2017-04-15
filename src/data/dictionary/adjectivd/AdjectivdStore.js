@@ -31,8 +31,9 @@ class AdjectivdStore extends ReduceStore {
     reduce(state, action) {
 
         function insertNewRecord(adjectivd) {
-            const id = state.size + 1
-            return state.set(id, Adjectivd({
+            const id = state.getIn(['nextid'])
+            let newState = state.setIn(['nextid'], id + 1)
+            return newState.setIn(['coll',id], Adjectivd({
                 id: id,
                 base: adjectivd.base
 
@@ -53,7 +54,7 @@ class AdjectivdStore extends ReduceStore {
             case AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD:
                 if(action.adjectivd.id) {
                     // An id exists so update the existing record.
-                    newState = newState.set(action.adjectivd.id, Adjectivd(action.adjectivd))
+                    newState = newState.setIn(['coll', action.adjectivd.id], Adjectivd(action.adjectivd))
                 } else {
                     // No id exists so insert a new record.
                     newState = insertNewRecord(action.adjectivd)
@@ -61,7 +62,7 @@ class AdjectivdStore extends ReduceStore {
                 break
 
             case AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD:
-                newState =  newState.delete(action.id)
+                newState = newState.deleteIn(['coll',action.id])
                 break
 
             // Insert a new record programmatically, w/o a UI.
@@ -80,6 +81,9 @@ class AdjectivdStore extends ReduceStore {
     }
 }
 
-AdjectivdStore.initialState = Map()
+AdjectivdStore.initialState = Map({
+    nextid:1,
+    coll:Map()  // the actual collection of adjectivd
+})
 
 export default new AdjectivdStore()

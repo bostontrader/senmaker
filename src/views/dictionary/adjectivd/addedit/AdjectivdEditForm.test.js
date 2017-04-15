@@ -17,7 +17,7 @@ describe("AdjectivEditForm", () => {
     it("Renders a AdjectivdPanelLevel.BASE AdjectivdEditForm", () => {
         const props = {
             adjectivd: Map({
-                addEditAdjectivd: AdjectivAEStore.getInitialState(),
+                addedit: AdjectivAEStore.getInitialState(),
                 adjectivs: Map()
             }),
             strings:StringStore.getInitialState()
@@ -40,7 +40,7 @@ describe("AdjectivEditForm", () => {
         const props = {
             level:newState.get('level'),
             adjectivd: Map({
-                addEditAdjectivd: AdjectivAEStore.getInitialState(),
+                addedit: AdjectivAEStore.getInitialState(),
                 adjectivs: Map()
             }),
             strings:strings

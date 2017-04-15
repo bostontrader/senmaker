@@ -5,26 +5,28 @@ import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 import {findWithType} from 'react-shallow-testutils'
 
-//import AppStore from '../../../data/app/AppStore'
 import VerbdAddForm  from './addedit/VerbdAddForm'
 import VerbdEditForm from './addedit/VerbdEditForm'
 import VerbdPanel    from './VerbdPanel'
 import VerbdTable    from './VerbdTable'
+import VerbdStore    from '../../../data/dictionary/verbd/VerbdStore'
 import VerbdAEStore  from '../../../data/dictionary/verbd/addedit/VerbdAEStore'
 import StringStore   from '../../../data/strings/StringStore'
 
-describe("VerbdPanel", () => {
+describe("VerbdPanel", function() {
 
-    it("Renders a VerbdPanel", () => {
-        const props = {
+    beforeEach(function() {
+        this.props = {
             verbd: Map({
-                addEditVerbd: VerbdAEStore.getInitialState(),
-                verbs: Map()
+                addedit: VerbdAEStore.getInitialState(),
+                dict: VerbdStore.getInitialState()
             }),
             strings:StringStore.getInitialState()
         }
-
-        const renderExpression = <VerbdPanel {...props} />
+    })
+    
+    it("Renders a VerbdPanel w/o add/edit", function() {
+        const renderExpression = <VerbdPanel {...this.props} />
         const verbdPanel = TestUtils.createRenderer().render(renderExpression)
         expect(verbdPanel.type).toBe('div')
 
@@ -35,17 +37,10 @@ describe("VerbdPanel", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("Renders a VerbdPanel with a VerbdAddForm", () => {
-        let props = {
-            verbd: Map({
-                addEditVerbd: VerbdAEStore.getInitialState(),
-                verbs: Map()
-            }),
-            strings:StringStore.getInitialState()
-        }
-        props.verbd = props.verbd.setIn(['addEditVerbd','addVerbd'],true)
+    it("Renders a VerbdPanel with a VerbdAddForm", function() {
+        this.props.verbd = this.props.verbd.setIn(['addedit','addVerbd'],true)
 
-        const renderExpression = <VerbdPanel {...props} />
+        const renderExpression = <VerbdPanel {...this.props} />
         const verbdPanel = TestUtils.createRenderer().render(renderExpression)
         expect(verbdPanel.type).toBe('div')
 
@@ -57,17 +52,10 @@ describe("VerbdPanel", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("Renders a VerbdPanel with a VerbdEditForm", () => {
-        const props = {
-            verbd: Map({
-                addEditVerbd: VerbdAEStore.getInitialState(),
-                verbs: Map()
-            }),
-            strings:StringStore.getInitialState()
-        }
-        props.verbd = props.verbd.setIn(['addEditVerbd','verbd','id'],"0") // don't let this string become falsey
+    it("Renders a VerbdPanel with a VerbdEditForm", function() {
+        this.props.verbd = this.props.verbd.setIn(['addedit','verbd','id'],"0") // don't let this string become falsey
 
-        const renderExpression = <VerbdPanel {...props} />
+        const renderExpression = <VerbdPanel {...this.props} />
         const verbdPanel = TestUtils.createRenderer().render(renderExpression)
         expect(verbdPanel.type).toBe('div')
 

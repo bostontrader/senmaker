@@ -31,8 +31,9 @@ class VerbdStore extends ReduceStore {
     reduce(state, action) {
 
         function insertNewRecord(verbd) {
-            const id = state.size + 1
-            return state.set(id, Verbd({
+            const id = state.getIn(['nextid'])
+            let newState = state.setIn(['nextid'], id + 1)
+            return newState.setIn(['coll',id], Verbd({
                 id: id,
                 base: verbd.base,
                 pastTense: verbd.pastTense,
@@ -53,7 +54,7 @@ class VerbdStore extends ReduceStore {
             case VerbdAEActionTypes.ON_CLICK_SAVE_VERBD:
                 if(action.verbd.id) {
                     // An id exists so update the existing record.
-                    newState = newState.set(action.verbd.id, Verbd(action.verbd))
+                    newState = newState.setIn(['coll', action.verbd.id], Verbd(action.verbd))
                 } else {
                     // No id exists so insert a new record.
                     newState = insertNewRecord(action.verbd)
@@ -61,7 +62,7 @@ class VerbdStore extends ReduceStore {
                 break
 
             case VerbdAEActionTypes.ON_CLICK_DELETE_VERBD:
-                newState = newState.delete(action.id)
+                newState = newState.deleteIn(['coll',action.id])
                 break
 
             // Insert a new record programmatically, w/o a UI.
@@ -80,6 +81,9 @@ class VerbdStore extends ReduceStore {
     }
 }
 
-VerbdStore.initialState = Map()
+VerbdStore.initialState = Map({
+    nextid:1,
+    coll:Map()  // the actual collection of verbd
+})
 
 export default new VerbdStore()

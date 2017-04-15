@@ -12,7 +12,7 @@ function AdjectivdAddForm(props) {
     }
 
     const onClickSave = () => AdjectivdAEActions.onClickSaveAdjectivd({
-        base: props.adjectivd.getIn(['addEditAdjectivd','adjectivd','base'])
+        base: props.adjectivd.getIn(['addedit','adjectivd','base'])
     })
     const s = props.strings
 
@@ -33,7 +33,7 @@ function AdjectivdAddForm(props) {
             <div id="adjectivd-add-form" style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
-                    value={props.adjectivd.getIn(['addEditAdjectivd','adjectivd','base'])}
+                    value={props.adjectivd.getIn(['addedit','adjectivd','base'])}
                     onChange={(e)=>AdjectivdAEActions.onChangeBase(e.target.value)}
                 />
                 <button id='save-adjectivd' onClick={onClickSave}>{s.save}</button>

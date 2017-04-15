@@ -23,9 +23,9 @@ function VerbdPanel(props) {
 
     // What should be displayed in the verbd add/edit panel?
     let verbAddEditForm = <div></div>  // we really want nothing here
-    if(props.verbd.getIn(['addEditVerbd','verbd','id'])) {
+    if(props.verbd.getIn(['addedit','verbd','id'])) {
         verbAddEditForm = <VerbdEditForm {...props} />
-    } else if (props.verbd.getIn(['addEditVerbd','addVerbd'])) {
+    } else if (props.verbd.getIn(['addedit','addVerbd'])) {
         verbAddEditForm = <VerbdAddForm {...props} />
     } else {
         // Do nothing

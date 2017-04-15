@@ -17,7 +17,7 @@ describe("NoundEditForm", () => {
     it("Renders a NoundPanelLevel.BASE NoundEditForm", () => {
         const props = {
             nound: Map({
-                addEditNound: NoundAEStore.getInitialState(),
+                addedit: NoundAEStore.getInitialState(),
                 nouns: Map()
             }),
             strings:StringStore.getInitialState()
@@ -39,7 +39,7 @@ describe("NoundEditForm", () => {
         const strings = StringStore.getInitialState()
         const props = {
             nound: Map({
-                addEditNound: NounAEStore.getInitialState(),
+                addedit: NounAEStore.getInitialState(),
                 nouns: OrderedMap()
             }),
             strings:strings

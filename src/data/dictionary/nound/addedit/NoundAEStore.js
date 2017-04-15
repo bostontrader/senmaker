@@ -3,8 +3,8 @@ import {fromJS, Map} from 'immutable'
 
 import NoundAEActionTypes from './NoundAEActionTypes'
 import Nound              from '../Nound'
-import AppActionTypes     from '../../../app/AppActionTypes'
 import AppDispatcher      from '../../../AppDispatcher'
+import AppActionTypes     from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../../LocalStorage'
 const localStorageKey = 'NoundAEStore'

@@ -42,7 +42,7 @@ function AdjectivdTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {[...props.adjectivd.getIn(['adjectivs']).values()].map(adjectiv => (
+                    {[...props.adjectivd.getIn(['dict','coll']).values()].map(adjectiv => (
                         <AdjectivdRow key={adjectiv.get('id')} adjectiv={adjectiv} strings={props.strings} />
                     ))}
                 </tbody>

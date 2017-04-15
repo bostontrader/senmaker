@@ -52,19 +52,23 @@ describe('NouniStore', function() {
         }
     })
 
-    /*it('ON_APP_RESET', function() {
+    it('ON_APP_RESET', function() {
         const initialState = this.state
 
         // Now do anything, doesn't matter what, to change the initial state
         this.dispatch({
-            type: NouniActionTypes.INSERT_NOUNI
-            //nouni: {base: 'cat'}
+            type: NouniActionTypes.INSERT_NOUNI,
+            nouni: {
+                nound: {id:'1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
+                definiteness: DefinitenessSelect.Definite,
+                generatedText: 'the cat'
+            }
         })
         expect(this.state).not.toBe(initialState)
 
         this.dispatch({type: AppActionTypes.ON_APP_RESET})
         expect(this.state).toBe(initialState)
-    })*/
+    })
 
     /*it('ON_CLICK_DELETE_NOUNI', function() {
         expect(this.nouns()).toEqual([])
@@ -168,13 +172,11 @@ describe('NouniStore', function() {
             }
         })
 
-        expect(this.nouns()).toEqual([
-            {
+        expect(this.nouns()).toEqual([{
                 nound: {id:'1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
                 definiteness: DefinitenessSelect.Definite,
                 generatedText: 'the cat'
-            },
-            {
+            }, {
                 nound: {id:'2', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
                 definiteness: DefinitenessSelect.Indefinite,
                 generatedText: 'a box'

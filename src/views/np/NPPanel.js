@@ -21,9 +21,9 @@ function NPPanel(props) {
 
     // What should be displayed in the np add/edit panel?
     let npAddEditForm = <div></div>  // we really want nothing here
-    if(props.np.getIn(['addEditNP','np','id'])) {
+    if(props.np.getIn(['addedit','np','id'])) {
         npAddEditForm = <NPEditForm {...props} />
-    } else if (props.np.getIn(['addEditNP','addNP'])) {
+    } else if (props.np.getIn(['addedit','addNP'])) {
         npAddEditForm = <NPAddForm {...props} />
     } else {
         // Do nothing

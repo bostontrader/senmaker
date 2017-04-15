@@ -6,6 +6,7 @@ import Nouni              from './Nouni'
 import NouniActionTypes   from './NouniActionTypes'
 import NouniAEActionTypes from './addedit/NouniAEActionTypes'
 import AppDispatcher      from '../AppDispatcher'
+import AppActionTypes     from '../app/AppActionTypes'
 import Nound              from '../dictionary/nound/Nound'
 
 import {localStorageAvailable} from '../../LocalStorage'
@@ -47,6 +48,11 @@ class NouniStore extends ReduceStore {
         let newState = state
         
         switch (action.type) {
+
+            // AppActionTypes
+            case AppActionTypes.ON_APP_RESET:
+                newState = NouniStore.initialState
+                break
 
             // Insert a new record or update an existing one, originating from a UI.
             case NouniAEActionTypes.ON_CLICK_SAVE_NOUNI:

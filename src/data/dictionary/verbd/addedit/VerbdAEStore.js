@@ -1,12 +1,12 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import AppActionTypes from '../../../app/AppActionTypes'
-import Verbd from '../Verbd'
 import VerbdAEActionTypes from './VerbdAEActionTypes'
-import AppDispatcher from '../../../AppDispatcher'
-import {localStorageAvailable} from '../../../../LocalStorage'
+import Verbd              from '../Verbd'
+import AppDispatcher      from '../../../AppDispatcher'
+import AppActionTypes     from '../../../app/AppActionTypes'
 
+import {localStorageAvailable} from '../../../../LocalStorage'
 const localStorageKey = 'VerbdAEStore'
 
 /*

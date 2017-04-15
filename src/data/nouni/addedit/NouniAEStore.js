@@ -209,6 +209,7 @@ class NouniAEStore extends ReduceStore {
                 break
 
             case NoundActionTypes.ON_CHANGE_SELECTED_NOUND:
+                console.log('NAT OCSN',action)
                 presentDefiniteness = state.getIn(['nouni','definiteness'])
                 presentNound = action.nound
                 generatedText = calcResultText(presentDefiniteness, presentNound)

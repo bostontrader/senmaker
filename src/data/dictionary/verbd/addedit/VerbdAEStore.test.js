@@ -80,11 +80,6 @@ describe('VerbdAEStore', function() {
     //
     // This action should have a verbd that will be used for insert or update in VerbdStore.  But
     // here we only close the UI and the value of verbd is unimportant.
-    // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't test these two separately,
-    // the same state should close either one.
-    //
-    // This action should have a verbd that will be used for insert or update in VerbdStore.  But
-    // here we only close the UI and the value of verbd is unimportant.
     it('ON_CLICK_SAVE_VERBD, new verbd', function() {
         const initialState = this.state
         this.perturbState()
@@ -95,11 +90,8 @@ describe('VerbdAEStore', function() {
     })
 
     it('ON_CHANGE_BASE', function() {
-        this.dispatch({
-            type: VerbdAEActionTypes.ON_CHANGE_BASE,
-            base: 'catfood'
-        })
-        expect(this.state.getIn(['verbd','base'])).toBe('catfood')
+        this.dispatch({type: VerbdAEActionTypes.ON_CHANGE_BASE, base: 'talk'})
+        expect(this.state.getIn(['verbd','base'])).toBe('talk')
     })
 
 })
