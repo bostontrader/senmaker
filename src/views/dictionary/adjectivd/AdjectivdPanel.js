@@ -1,10 +1,9 @@
 import React from 'react'
 
-import AdjectivdAEActions from '../../../data/dictionary/adjectivd/addedit/AdjectivdAEActions'
-
+import AdjectivdTable    from './AdjectivdTable'
 import AdjectivdAddForm  from './addedit/AdjectivdAddForm'
 import AdjectivdEditForm from './addedit/AdjectivdEditForm'
-import AdjectivdTable    from './AdjectivdTable'
+import AdjectivdActions  from '../../../data/dictionary/adjectivd/AdjectivdActions'
 
 /*
 The AdjectivdPanel is responsible for displaying everything about our list of adjectivd.  Such
@@ -34,7 +33,7 @@ function AdjectivdPanel(props) {
     // The appearance of a AdjectivdPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-adjectivd" onClick={AdjectivdAEActions.onClickAddAdjectivd}>{s.add_new} {s.adjectiv}</button>
+            <button id="add-adjectivd" onClick={AdjectivdActions.onClickAddAdjectivd}>{s.add_new} {s.adjectiv}</button>
             <AdjectivdTable {...props} />
         </div>
         <div>

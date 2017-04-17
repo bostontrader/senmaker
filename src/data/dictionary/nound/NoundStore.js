@@ -1,7 +1,6 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import NoundAEActionTypes from './addedit/NoundAEActionTypes'
 import Nound              from './Nound'
 import NoundActionTypes   from './NoundActionTypes'
 import AppActionTypes     from '../../app/AppActionTypes'
@@ -51,7 +50,7 @@ class NoundStore extends ReduceStore {
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
-            case NoundAEActionTypes.ON_CLICK_SAVE_NOUND:
+            case NoundActionTypes.ON_CLICK_SAVE_NOUND:
                 if(action.nound.id) {
                     // An id exists so update the existing record.
                     newState = newState.setIn(['coll', action.nound.id], Nound(action.nound))
@@ -61,7 +60,7 @@ class NoundStore extends ReduceStore {
                 }
                 break
 
-            case NoundAEActionTypes.ON_CLICK_DELETE_NOUND:
+            case NoundActionTypes.ON_CLICK_DELETE_NOUND:
                 newState = newState.deleteIn(['coll',action.id])
                 break
 

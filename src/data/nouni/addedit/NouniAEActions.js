@@ -13,12 +13,13 @@ const NouniAEActions = {
             type: NouniAEActionTypes.ON_CLICK_CANCEL
         })
     },
-    //onClickDeleteNouni(id) {
-        //AppDispatcher.dispatch({
-            //type: NouniAEActionTypes.ON_CLICK_DELETE_NOUNI,
-            //id
-        //})
-    //},
+    onClickDeleteNouni(id) {
+        console.log('NouniAEActions',id)
+        AppDispatcher.dispatch({
+            type: NouniAEActionTypes.ON_CLICK_DELETE_NOUNI,
+            id
+        })
+    },
     onClickEditNouni(nouni) {
         AppDispatcher.dispatch({
             type: NouniAEActionTypes.ON_CLICK_EDIT_NOUNI,

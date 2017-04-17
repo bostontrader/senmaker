@@ -1,7 +1,6 @@
-import AdjectivdAEActionTypes  from './AdjectivdAEActionTypes'
-import AdjectivdAEStore        from './AdjectivdAEStore'
-import AppActionTypes      from '../../../app/AppActionTypes'
-
+import AdjectivdAEStore     from './AdjectivdAEStore'
+import AdjectivdActionTypes from '../AdjectivdActionTypes'
+import AppActionTypes       from '../../../app/AppActionTypes'
 
 // The AdjectivdAEStore is responsible for setting a small bit of state to signal
 // that AdjectivdAddForm or AdjectivdEditForm should be opened or closed, as well as a bit of state
@@ -20,7 +19,7 @@ describe('AdjectivdAEStore', function() {
         // verify that our reset really does reset the state back to the initial state.
         this.perturbState = () => {
             this.dispatch({
-                type: AdjectivdAEActionTypes.ON_CLICK_ADD_ADJECTIVD
+                type: AdjectivdActionTypes.ON_CLICK_ADD_ADJECTIVD
             })
         }
     })
@@ -36,7 +35,7 @@ describe('AdjectivdAEStore', function() {
 
     // Signal the UI to open the AdjectivdAddForm
     it('ON_CLICK_ADD_ADJECTIVD', function() {
-        this.dispatch({type: AdjectivdAEActionTypes.ON_CLICK_ADD_ADJECTIVD})
+        this.dispatch({type: AdjectivdActionTypes.ON_CLICK_ADD_ADJECTIVD})
         expect(this.state.get('addAdjectivd')).toBe(true)
     })
 
@@ -47,7 +46,7 @@ describe('AdjectivdAEStore', function() {
         expect(this.state).not.toBe(initialState)
 
         // Now cancel.  This should reset the state.
-        this.dispatch({type: AdjectivdAEActionTypes.ON_CLICK_CANCEL})
+        this.dispatch({type: AdjectivdActionTypes.ON_CLICK_CANCEL})
         expect(this.state).toBe(initialState)
     })
 
@@ -60,7 +59,7 @@ describe('AdjectivdAEStore', function() {
 
         // Now close it
         this.dispatch({
-            type: AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD,
+            type: AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD,
             adjectivd: {} // This action doesn't care about the adjectivd
         })
         expect(this.state).toBe(initialState)
@@ -69,7 +68,7 @@ describe('AdjectivdAEStore', function() {
     // Signal the UI to open AdjectivdEditForm and populate with the given data.
     it('ON_CLICK_EDIT_ADJECTIVD', function() {
         this.dispatch({
-            type: AdjectivdAEActionTypes.ON_CLICK_EDIT_ADJECTIVD,
+            type: AdjectivdActionTypes.ON_CLICK_EDIT_ADJECTIVD,
             adjectivd: {id: '1', base: 'fat'}
         })
         expect(this.state.get('adjectivd').toJSON()).toEqual({id: '1', base: 'fat'})
@@ -85,13 +84,13 @@ describe('AdjectivdAEStore', function() {
         this.perturbState()
         expect(this.state).not.toBe(initialState)
 
-        this.dispatch({type: AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD, adjectivd: {}})
+        this.dispatch({type: AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD, adjectivd: {}})
         expect(this.state).toBe(initialState)
     })
 
     it('ON_CHANGE_BASE', function() {
         this.dispatch({
-            type: AdjectivdAEActionTypes.ON_CHANGE_BASE,
+            type: AdjectivdActionTypes.ON_CHANGE_BASE,
             base: 'fat'
         })
         expect(this.state.getIn(['adjectivd','base'])).toBe('fat')

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AdjectivdAEActions from '../../../../data/dictionary/adjectivd/addedit/AdjectivdAEActions'
+import AdjectivdActions from '../../../../data/dictionary/adjectivd/AdjectivdActions'
 
 
 
@@ -11,11 +11,11 @@ function AdjectivdEditForm(props) {
         margin: '5px'
     }
 
-    const onClickSave = () => AdjectivdAEActions.onClickSaveAdjectivd({
+    const onClickSave = () => AdjectivdActions.onClickSaveAdjectivd({
         id: props.adjectivd.getIn(['addedit','adjectivd','id']),
         base: props.adjectivd.getIn(['addedit','adjectivd','base'])
     })
-    const onDelete = () => AdjectivdAEActions.onClickDeleteAdjectiv(props.adjectivd.getIn(['addedit','adjectivd','id']))
+    const onDelete = () => AdjectivdActions.onClickDeleteAdjectiv(props.adjectivd.getIn(['addedit','adjectivd','id']))
     const s = props.strings
 
     let adjectivdEditForm = null
@@ -36,11 +36,11 @@ function AdjectivdEditForm(props) {
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
                     value={props.adjectivd.getIn(['addedit','adjectivd','base'])}
-                    onChange={(e)=>AdjectivdAEActions.onChangeBase(e.target.value)}
+                    onChange={(e)=>AdjectivdActions.onChangeBase(e.target.value)}
                 />
                 <button id='save-adjectivd'   onClick={onClickSave}>{s.save}</button>
                 <button id='delete-adjectivd' onClick={onDelete}>{s.delete}</button>
-                <button id='cancel'           onClick={AdjectivdAEActions.onClickCancel}>{s.cancel}</button>
+                <button id='cancel'           onClick={AdjectivdActions.onClickCancel}>{s.cancel}</button>
             </div>
     //}
 

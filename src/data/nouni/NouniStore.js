@@ -1,7 +1,6 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import Counter            from './Counter'
 import Nouni              from './Nouni'
 import NouniActionTypes   from './NouniActionTypes'
 import NouniAEActionTypes from './addedit/NouniAEActionTypes'
@@ -33,11 +32,9 @@ class NouniStore extends ReduceStore {
     reduce(state, action) {
 
         function insertNewRecord(nouni) {
-            //console.log(nouni.toJSON())
-            //console.log(nouni.nound.toJSON())
-
-            const id = Counter.increment()
-            return state.set(id, Nouni({
+            const id = state.getIn(['nextid'])
+            let newState = state.setIn(['nextid'], id + 1)
+            return newState.setIn(['coll',id], Nouni({
                 id: id,
                 nound: Nound(nouni.nound),
                 definiteness: nouni.definiteness,
@@ -58,19 +55,18 @@ class NouniStore extends ReduceStore {
             case NouniAEActionTypes.ON_CLICK_SAVE_NOUNI:
                 if(action.nouni.id) {
                     // An id exists so update the existing record.
-                    //const nound = Nound(action.nouni.noud)
-                    //const nouni = Nouni
-                    const nouni = Nouni(action.nouni)
-                    console.log(nouni)
-                    newState = newState.set(action.nouni.id, Nouni(action.nouni))
+                    newState = newState.setIn(['coll', action.nouni.id], Nouni(action.nouni))
                 } else {
                     // No id exists so insert a new record.
                     newState = insertNewRecord(action.nouni)
                 }
                 break
             
-            //case NoundActionTypes.DELETE_NOUN:
-                //return state.delete(action.id)
+            case NouniAEActionTypes.ON_CLICK_DELETE_NOUNI:
+                // Use them both to make the UI and the test work. Why?
+                newState = newState.deleteIn(['coll',action.id.toString()]) // this works for the UI
+                newState = newState.deleteIn(['coll',action.id]) // this works for the test
+                break
 
             //case NoundActionTypes.INSERT_NOUN:
                 //const id = Counter.increment()
@@ -101,6 +97,9 @@ class NouniStore extends ReduceStore {
     }
 }
 
-NouniStore.initialState = Map()
+NouniStore.initialState = Map({
+    nextid:1,
+    coll:Map()  // the actual collection of nouni
+})
 
 export default new NouniStore()

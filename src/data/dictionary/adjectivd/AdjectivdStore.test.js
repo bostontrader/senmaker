@@ -1,8 +1,7 @@
-import Adjectivd              from './Adjectivd'
-import AdjectivdActionTypes   from './AdjectivdActionTypes'
-import AdjectivdStore         from './AdjectivdStore'
-import AdjectivdAEActionTypes from './addedit/AdjectivdAEActionTypes'
-import AppActionTypes      from '../../app/AppActionTypes'
+import Adjectivd            from './Adjectivd'
+import AdjectivdActionTypes from './AdjectivdActionTypes'
+import AdjectivdStore       from './AdjectivdStore'
+import AppActionTypes       from '../../app/AppActionTypes'
 
 
 describe('AdjectivdStore', function() {
@@ -74,7 +73,7 @@ describe('AdjectivdStore', function() {
         ])
 
         this.dispatch({
-            type: AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD,
+            type: AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD,
             id: this.id(2),
         })
 
@@ -84,14 +83,14 @@ describe('AdjectivdStore', function() {
         ])
 
         this.dispatch({
-            type: AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD,
+            type: AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD,
             id: this.id(0),
         })
 
         expect(this.adjectivs()).toEqual([this.example1])
 
         this.dispatch({
-            type: AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD,
+            type: AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD,
             id: this.id(0),
         })
 
@@ -103,7 +102,7 @@ describe('AdjectivdStore', function() {
         // We know that this is a new record because adjectivd has no id.
         expect(this.adjectivs()).toEqual([])
         this.dispatch({
-            type: AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD,
+            type: AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD,
             adjectivd: this.example0
         })
         expect(this.adjectivs()).toEqual([this.example0])
@@ -118,7 +117,7 @@ describe('AdjectivdStore', function() {
         })
 
         this.dispatch({
-            type: AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD,
+            type: AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD,
             adjectivd: Adjectivd({id: this.id(0), base: 'drunk'})
         })
 

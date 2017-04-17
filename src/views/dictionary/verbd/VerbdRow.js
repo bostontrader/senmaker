@@ -1,8 +1,8 @@
 import React from 'react'
 import {Map} from 'immutable'
 
-import Verbd          from '../../../data/dictionary/verbd/Verbd'
-import VerbdAEActions from '../../../data/dictionary/verbd/addedit/VerbdAEActions'
+import Verbd               from '../../../data/dictionary/verbd/Verbd'
+import VerbdActions        from '../../../data/dictionary/verbd/VerbdActions'
 //import {VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'
 
 function VerbdRow(props) {
@@ -13,7 +13,7 @@ function VerbdRow(props) {
     if(verb instanceof(Map))
         verb = Verbd(verb)
     
-    const onClickEditVerbd = () => VerbdAEActions.onClickEditVerbd(verb)
+    const onClickEditVerbd = () => VerbdActions.onClickEditVerbd(verb)
 
     let verbdRow = <div>verb item</div>
     //if( props.level >= VerbdPanelLevel.PAST_TENSE) {

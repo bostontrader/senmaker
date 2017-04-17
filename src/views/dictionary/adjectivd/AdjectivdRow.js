@@ -1,8 +1,8 @@
 import React from 'react'
 import {Map} from 'immutable'
 
-import Adjectivd          from '../../../data/dictionary/adjectivd/Adjectivd'
-import AdjectivdAEActions from '../../../data/dictionary/adjectivd/addedit/AdjectivdAEActions'
+import Adjectivd        from '../../../data/dictionary/adjectivd/Adjectivd'
+import AdjectivdActions from '../../../data/dictionary/adjectivd/AdjectivdActions'
 
 
 function AdjectivdRow(props) {
@@ -13,7 +13,7 @@ function AdjectivdRow(props) {
     if(adjectiv instanceof(Map))
         adjectiv = Adjectivd(adjectiv)
     
-    const onClickEditAdjectivd = () => AdjectivdAEActions.onClickEditAdjectivd(adjectiv)
+    const onClickEditAdjectivd = () => AdjectivdActions.onClickEditAdjectivd(adjectiv)
 
     let adjectivdRow = <div>adjectiv item</div>
     //if( props.level >= AdjectivdPanelLevel.PLURALIZATION) {

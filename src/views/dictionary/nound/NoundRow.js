@@ -1,9 +1,8 @@
 import React from 'react'
 import {Map} from 'immutable'
 
-import Nound          from '../../../data/dictionary/nound/Nound'
-import NoundAEActions from '../../../data/dictionary/nound/addedit/NoundAEActions'
-//import {NoundPanelLevel} from '../../../data/dictionary/nound/NoundConstants'
+import Nound        from '../../../data/dictionary/nound/Nound'
+import NoundActions from '../../../data/dictionary/nound/NoundActions'
 
 function NoundRow(props) {
     let {noun} = props
@@ -13,7 +12,7 @@ function NoundRow(props) {
     if(noun instanceof(Map))
         noun = Nound(noun)
 
-    const onClickEditNound = () => NoundAEActions.onClickEditNound(noun)
+    const onClickEditNound = () => NoundActions.onClickEditNound(noun)
 
     let noundRow = <div>noun item</div>
     //if( props.level >= NoundPanelLevel.PLURALIZATION) {

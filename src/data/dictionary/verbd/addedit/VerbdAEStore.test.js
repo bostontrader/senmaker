@@ -1,5 +1,5 @@
-import VerbdAEActionTypes from './VerbdAEActionTypes'
 import VerbdAEStore       from './VerbdAEStore'
+import VerbdActionTypes   from '../VerbdActionTypes'
 import {PastTenseRule}    from '../VerbdConstants'
 import AppActionTypes     from '../../../app/AppActionTypes'
 
@@ -20,7 +20,7 @@ describe('VerbdAEStore', function() {
         // verify that our reset really does reset the state back to the initial state.
         this.perturbState = () => {
             this.dispatch({
-                type: VerbdAEActionTypes.ON_CLICK_ADD_VERBD
+                type: VerbdActionTypes.ON_CLICK_ADD_VERBD
             })
         }
     })
@@ -36,7 +36,7 @@ describe('VerbdAEStore', function() {
 
     // Signal the UI to open the VerbdAddForm
     it('ON_CLICK_ADD_VERBD', function() {
-        this.dispatch({type: VerbdAEActionTypes.ON_CLICK_ADD_VERBD})
+        this.dispatch({type: VerbdActionTypes.ON_CLICK_ADD_VERBD})
         expect(this.state.get('addVerbd')).toBe(true)
     })
 
@@ -47,7 +47,7 @@ describe('VerbdAEStore', function() {
         expect(this.state).not.toBe(initialState)
 
         // Now cancel.  This should reset the state.
-        this.dispatch({type: VerbdAEActionTypes.ON_CLICK_CANCEL})
+        this.dispatch({type: VerbdActionTypes.ON_CLICK_CANCEL})
         expect(this.state).toBe(initialState)
     })
 
@@ -60,7 +60,7 @@ describe('VerbdAEStore', function() {
 
         // Now close it
         this.dispatch({
-            type: VerbdAEActionTypes.ON_CLICK_DELETE_VERBD,
+            type: VerbdActionTypes.ON_CLICK_DELETE_VERBD,
             verbd: {} // This action doesn't care about the verbd
         })
         expect(this.state).toBe(initialState)
@@ -69,7 +69,7 @@ describe('VerbdAEStore', function() {
     // Signal the UI to open VerbdEditForm and populate with the given data.
     it('ON_CLICK_EDIT_VERBD', function() {
         this.dispatch({
-            type: VerbdAEActionTypes.ON_CLICK_EDIT_VERBD,
+            type: VerbdActionTypes.ON_CLICK_EDIT_VERBD,
             verbd: {id: '1', base: 'run', pastTense: 'ran', pastTense_rule: PastTenseRule.Irregular}
         })
         expect(this.state.get('verbd').toJSON()).toEqual({id: '1', base: 'run', pastTense: 'ran', pastTense_rule: PastTenseRule.Irregular})
@@ -85,12 +85,12 @@ describe('VerbdAEStore', function() {
         this.perturbState()
         expect(this.state).not.toBe(initialState)
 
-        this.dispatch({type: VerbdAEActionTypes.ON_CLICK_SAVE_VERBD, verbd: {}})
+        this.dispatch({type: VerbdActionTypes.ON_CLICK_SAVE_VERBD, verbd: {}})
         expect(this.state).toBe(initialState)
     })
 
     it('ON_CHANGE_BASE', function() {
-        this.dispatch({type: VerbdAEActionTypes.ON_CHANGE_BASE, base: 'talk'})
+        this.dispatch({type: VerbdActionTypes.ON_CHANGE_BASE, base: 'talk'})
         expect(this.state.getIn(['verbd','base'])).toBe('talk')
     })
 

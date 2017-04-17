@@ -1,11 +1,10 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import Adjectivd              from './Adjectivd'
-import AdjectivdActionTypes   from './AdjectivdActionTypes'
-import AdjectivdAEActionTypes from './addedit/AdjectivdAEActionTypes'
-import AppDispatcher          from '../../AppDispatcher'
-import AppActionTypes         from '../../app/AppActionTypes'
+import Adjectivd            from './Adjectivd'
+import AdjectivdActionTypes from './AdjectivdActionTypes'
+import AppDispatcher        from '../../AppDispatcher'
+import AppActionTypes       from '../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'AdjectivdStore'
@@ -51,7 +50,7 @@ class AdjectivdStore extends ReduceStore {
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
-            case AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD:
+            case AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD:
                 if(action.adjectivd.id) {
                     // An id exists so update the existing record.
                     newState = newState.setIn(['coll', action.adjectivd.id], Adjectivd(action.adjectivd))
@@ -61,7 +60,7 @@ class AdjectivdStore extends ReduceStore {
                 }
                 break
 
-            case AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD:
+            case AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD:
                 newState = newState.deleteIn(['coll',action.id])
                 break
 

@@ -9,7 +9,7 @@ import Nound           from './Nound'
 
 import AppActionTypes     from '../../data/app/AppActionTypes'
 import AppStore           from '../../data/app/AppStore'
-import NoundAEActionTypes from '../../data/dictionary/nound/addedit/NoundAEActionTypes'
+import NoundActionTypes   from '../../data/dictionary/nound/NoundActionTypes'
 import NoundStore         from '../../data/dictionary/nound/NoundStore'
 import QuizStore          from '../../data/quiz/QuizStore'
 import StringStore        from '../../data/strings/StringStore'
@@ -127,9 +127,9 @@ describe("Nound", function() {
 
         // Now verify correct operation of each permutation.
         heapsPermute([
-            {type:NoundAEActionTypes.ON_CLICK_SAVE_NOUND,   i:'insertNoundCheck', nound:{}},
-            {type:NoundAEActionTypes.ON_CLICK_SAVE_NOUND,   i:'updateNoundCheck', nound:{id:'1'}},
-            {type:NoundAEActionTypes.ON_CLICK_DELETE_NOUND, i:'deleteNoundCheck'}
+            {type:NoundActionTypes.ON_CLICK_SAVE_NOUND,   i:'insertNoundCheck', nound:{}},
+            {type:NoundActionTypes.ON_CLICK_SAVE_NOUND,   i:'updateNoundCheck', nound:{id:'1'}},
+            {type:NoundActionTypes.ON_CLICK_DELETE_NOUND, i:'deleteNoundCheck'}
             ], testSinglePermutation)
     })
 })

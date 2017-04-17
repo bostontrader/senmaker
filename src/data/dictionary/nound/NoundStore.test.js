@@ -2,7 +2,6 @@ import Nound               from './Nound'
 import NoundActionTypes    from './NoundActionTypes'
 import NoundStore          from './NoundStore'
 import {PluralizationRule} from './NoundConstants'
-import NoundAEActionTypes  from './addedit/NoundAEActionTypes'
 import AppActionTypes      from '../../app/AppActionTypes'
 
 describe('NoundStore', function() {
@@ -74,7 +73,7 @@ describe('NoundStore', function() {
         ])
 
         this.dispatch({
-            type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
+            type: NoundActionTypes.ON_CLICK_DELETE_NOUND,
             id: this.id(2),
         })
 
@@ -84,14 +83,14 @@ describe('NoundStore', function() {
         ])
 
         this.dispatch({
-            type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
+            type: NoundActionTypes.ON_CLICK_DELETE_NOUND,
             id: this.id(0),
         })
 
         expect(this.nouns()).toEqual([this.example1])
 
         this.dispatch({
-            type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
+            type: NoundActionTypes.ON_CLICK_DELETE_NOUND,
             id: this.id(0),
         })
 
@@ -103,7 +102,7 @@ describe('NoundStore', function() {
         // We know that this is a new record because nound has no id.
         expect(this.nouns()).toEqual([])
         this.dispatch({
-            type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND,
+            type: NoundActionTypes.ON_CLICK_SAVE_NOUND,
             nound: this.example0
         })
         expect(this.nouns()).toEqual([this.example0])
@@ -118,7 +117,7 @@ describe('NoundStore', function() {
         })
 
         this.dispatch({
-            type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND,
+            type: NoundActionTypes.ON_CLICK_SAVE_NOUND,
             nound: Nound({id: this.id(0), base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
         })
 

@@ -1,16 +1,13 @@
 import React from 'react'
 
-import NoundAEActions from '../../../data/dictionary/nound/addedit/NoundAEActions'
-
 import NoundAddForm  from './addedit/NoundAddForm'
 import NoundEditForm from './addedit/NoundEditForm'
 import NoundTable    from './NoundTable'
+import NoundActions  from '../../../data/dictionary/nound/NoundActions'
 
 /*
 The NoundPanel is responsible for displaying everything about our list of nound.  Such
 the table of Nound, and the add or edit forms.
-
-Specifically excluded from this are any help or navigation features to proceed to different levels.
  */
 function NoundPanel(props) {
 
@@ -34,7 +31,7 @@ function NoundPanel(props) {
     // The appearance of a NoundPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-nound" onClick={NoundAEActions.onClickAddNound}>{s.add_new} {s.noun}</button>
+            <button id="add-nound" onClick={NoundActions.onClickAddNound}>{s.add_new} {s.noun}</button>
             <NoundTable {...props} />
         </div>
         <div>

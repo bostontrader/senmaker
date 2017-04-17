@@ -1,10 +1,10 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import NoundAEActionTypes from './NoundAEActionTypes'
-import Nound              from '../Nound'
-import AppDispatcher      from '../../../AppDispatcher'
-import AppActionTypes     from '../../../app/AppActionTypes'
+import Nound            from '../Nound'
+import NoundActionTypes from '../NoundActionTypes'
+import AppDispatcher    from '../../../AppDispatcher'
+import AppActionTypes   from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../../LocalStorage'
 const localStorageKey = 'NoundAEStore'
@@ -52,24 +52,24 @@ class NoundAEStore extends ReduceStore {
                 break
 
             // Signal the UI to open the NoundAddForm
-            case NoundAEActionTypes.ON_CLICK_ADD_NOUND:
+            case NoundActionTypes.ON_CLICK_ADD_NOUND:
                 newState = newState.set('addNound', true)
                 break
 
             // Signal the UI to close NoundAddForm or NoundEditForm
-            case NoundAEActionTypes.ON_CLICK_CANCEL:
+            case NoundActionTypes.ON_CLICK_CANCEL:
                 newState = NoundAEStore.initialState
                 break
 
             // Signal the UI to close NoundAddForm or NoundEditForm (but the delete button
             // is only present on NounEditForm.)
             // NoundStore will also catch this event and it's responsible for the actual deletion.
-            case NoundAEActionTypes.ON_CLICK_DELETE_NOUND:
+            case NoundActionTypes.ON_CLICK_DELETE_NOUND:
                 newState = NoundAEStore.initialState
                 break
 
             // Signal the UI to open NoundEditForm and populate with the given data.
-            case NoundAEActionTypes.ON_CLICK_EDIT_NOUND:
+            case NoundActionTypes.ON_CLICK_EDIT_NOUND:
                 newState = newState.set('nound', Nound({
                     id: action.nound.id,
                     base: action.nound.base,
@@ -80,11 +80,11 @@ class NoundAEStore extends ReduceStore {
 
             // Signal the UI to close NoundAddForm or NoundEditForm. We don't need to specify which,
             // the same state should close either one.
-            case NoundAEActionTypes.ON_CLICK_SAVE_NOUND:
+            case NoundActionTypes.ON_CLICK_SAVE_NOUND:
                 newState = NoundAEStore.initialState
                 break
 
-            case NoundAEActionTypes.ON_CHANGE_BASE:
+            case NoundActionTypes.ON_CHANGE_BASE:
                 newState = newState.updateIn(['nound','base'],value => action.base)
                 break
 

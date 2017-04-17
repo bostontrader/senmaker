@@ -1,10 +1,10 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import AdjectivdAEActionTypes  from './AdjectivdAEActionTypes'
-import Adjectivd               from '../Adjectivd'
-import AppDispatcher           from '../../../AppDispatcher'
-import AppActionTypes          from '../../../app/AppActionTypes'
+import Adjectivd             from '../Adjectivd'
+import AdjectivdActionTypes  from '../AdjectivdActionTypes'
+import AppDispatcher         from '../../../AppDispatcher'
+import AppActionTypes        from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../../LocalStorage'
 const localStorageKey = 'AdjectivdAEStore'
@@ -52,24 +52,24 @@ class AdjectivdAEStore extends ReduceStore {
                 break
 
             // Signal the UI to open the AdjectivdAddForm
-            case AdjectivdAEActionTypes.ON_CLICK_ADD_ADJECTIVD:
+            case AdjectivdActionTypes.ON_CLICK_ADD_ADJECTIVD:
                 newState = newState.set('addAdjectivd', true)
                 break
 
             // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm
-            case AdjectivdAEActionTypes.ON_CLICK_CANCEL:
+            case AdjectivdActionTypes.ON_CLICK_CANCEL:
                 newState = AdjectivdAEStore.initialState
                 break
 
             // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm (but the delete button
             // is only present on AdjectivEditForm.)
             // AdjectivdStore will also catch this event and it's responsible for the actual deletion.
-            case AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD:
+            case AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD:
                 newState = AdjectivdAEStore.initialState
                 break
 
             // Signal the UI to open AdjectivdEditForm and populate with the given data.
-            case AdjectivdAEActionTypes.ON_CLICK_EDIT_ADJECTIVD:
+            case AdjectivdActionTypes.ON_CLICK_EDIT_ADJECTIVD:
                 newState = newState.set('adjectivd', Adjectivd({
                     id: action.adjectivd.id,
                     base: action.adjectivd.base
@@ -80,11 +80,11 @@ class AdjectivdAEStore extends ReduceStore {
 
             // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm. We don't need to specify which,
             // the same state should close either one.
-            case AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD:
+            case AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD:
                 newState = AdjectivdAEStore.initialState
                 break
 
-            case AdjectivdAEActionTypes.ON_CHANGE_BASE:
+            case AdjectivdActionTypes.ON_CHANGE_BASE:
                 newState = newState.updateIn(['adjectivd','base'],value => action.base)
                 break
 

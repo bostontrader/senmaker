@@ -1,5 +1,5 @@
-import NoundAEActionTypes  from './NoundAEActionTypes'
 import NoundAEStore        from './NoundAEStore'
+import NoundActionTypes    from '../NoundActionTypes'
 import {PluralizationRule} from '../NoundConstants'
 import AppActionTypes      from '../../../app/AppActionTypes'
 
@@ -20,7 +20,7 @@ describe('NoundAEStore', function() {
         // verify that our reset really does reset the state back to the initial state.
         this.perturbState = () => {
             this.dispatch({
-                type: NoundAEActionTypes.ON_CLICK_ADD_NOUND
+                type: NoundActionTypes.ON_CLICK_ADD_NOUND
             })
         }
     })
@@ -36,7 +36,7 @@ describe('NoundAEStore', function() {
 
     // Signal the UI to open the NoundAddForm
     it('ON_CLICK_ADD_NOUND', function() {
-        this.dispatch({type: NoundAEActionTypes.ON_CLICK_ADD_NOUND})
+        this.dispatch({type: NoundActionTypes.ON_CLICK_ADD_NOUND})
         expect(this.state.get('addNound')).toBe(true)
     })
 
@@ -47,7 +47,7 @@ describe('NoundAEStore', function() {
         expect(this.state).not.toBe(initialState)
 
         // Now cancel.  This should reset the state.
-        this.dispatch({type: NoundAEActionTypes.ON_CLICK_CANCEL})
+        this.dispatch({type: NoundActionTypes.ON_CLICK_CANCEL})
         expect(this.state).toBe(initialState)
     })
 
@@ -60,7 +60,7 @@ describe('NoundAEStore', function() {
 
         // Now close it
         this.dispatch({
-            type: NoundAEActionTypes.ON_CLICK_DELETE_NOUND,
+            type: NoundActionTypes.ON_CLICK_DELETE_NOUND,
             nound: {} // This action doesn't care about the nound
         })
         expect(this.state).toBe(initialState)
@@ -69,7 +69,7 @@ describe('NoundAEStore', function() {
     // Signal the UI to open NoundEditForm and populate with the given data.
     it('ON_CLICK_EDIT_NOUND', function() {
         this.dispatch({
-            type: NoundAEActionTypes.ON_CLICK_EDIT_NOUND,
+            type: NoundActionTypes.ON_CLICK_EDIT_NOUND,
             nound: {id: '1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
         })
         expect(this.state.get('nound').toJSON()).toEqual({id: '1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s})
@@ -85,12 +85,12 @@ describe('NoundAEStore', function() {
         this.perturbState()
         expect(this.state).not.toBe(initialState)
 
-        this.dispatch({type: NoundAEActionTypes.ON_CLICK_SAVE_NOUND, nound: {}})
+        this.dispatch({type: NoundActionTypes.ON_CLICK_SAVE_NOUND, nound: {}})
         expect(this.state).toBe(initialState)
     })
 
     it('ON_CHANGE_BASE', function() {
-        this.dispatch({type: NoundAEActionTypes.ON_CHANGE_BASE, base: 'catfood'})
+        this.dispatch({type: NoundActionTypes.ON_CHANGE_BASE, base: 'catfood'})
         expect(this.state.getIn(['nound','base'])).toBe('catfood')
     })
 

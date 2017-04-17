@@ -1,10 +1,10 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import VerbdAEActionTypes from './VerbdAEActionTypes'
-import Verbd              from '../Verbd'
-import AppDispatcher      from '../../../AppDispatcher'
-import AppActionTypes     from '../../../app/AppActionTypes'
+import Verbd            from '../Verbd'
+import VerbdActionTypes from '../VerbdActionTypes'
+import AppDispatcher    from '../../../AppDispatcher'
+import AppActionTypes   from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../../LocalStorage'
 const localStorageKey = 'VerbdAEStore'
@@ -52,24 +52,24 @@ class VerbdAEStore extends ReduceStore {
                 break
 
             // Signal the UI to open the VerbdAddForm
-            case VerbdAEActionTypes.ON_CLICK_ADD_VERBD:
+            case VerbdActionTypes.ON_CLICK_ADD_VERBD:
                 newState = newState.set('addVerbd', true)
                 break
 
             // Signal the UI to close VerbdAddForm or VerbdEditForm
-            case VerbdAEActionTypes.ON_CLICK_CANCEL:
+            case VerbdActionTypes.ON_CLICK_CANCEL:
                 newState = VerbdAEStore.initialState
                 break
 
             // Signal the UI to close VerbdAddForm or VerbdEditForm (but the delete button
             // is only present on VerbEditForm.)
             // VerbdStore will also catch this event and it's responsible for the actual deletion.
-            case VerbdAEActionTypes.ON_CLICK_DELETE_VERBD:
+            case VerbdActionTypes.ON_CLICK_DELETE_VERBD:
                 newState = VerbdAEStore.initialState
                 break
 
             // Signal the UI to open VerbdEditForm and populate with the given data.
-            case VerbdAEActionTypes.ON_CLICK_EDIT_VERBD:
+            case VerbdActionTypes.ON_CLICK_EDIT_VERBD:
                 newState = newState.set('verbd', Verbd({
                     id: action.verbd.id,
                     base: action.verbd.base,
@@ -80,11 +80,11 @@ class VerbdAEStore extends ReduceStore {
 
             // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't need to specify which,
             // the same state should close either one.
-            case VerbdAEActionTypes.ON_CLICK_SAVE_VERBD:
+            case VerbdActionTypes.ON_CLICK_SAVE_VERBD:
                 newState = VerbdAEStore.initialState
                 break
 
-            case VerbdAEActionTypes.ON_CHANGE_BASE:
+            case VerbdActionTypes.ON_CHANGE_BASE:
                 newState = newState.updateIn(['verbd','base'],value => action.base)
                 break
 

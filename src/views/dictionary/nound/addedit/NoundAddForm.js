@@ -1,6 +1,6 @@
 import React from 'react'
 
-import NoundAEActions from '../../../../data/dictionary/nound/addedit/NoundAEActions'
+import NoundActions from '../../../../data/dictionary/nound/NoundActions'
 //import {NoundPanelLevel} from '../../../../data/dictionary/nound/NoundConstants'
 //import PluralizationSelect from '../../../nouni/PluralizationSelect'
 
@@ -11,7 +11,7 @@ function NoundAddForm(props) {
         margin: '5px'
     }
 
-    const onClickSave = () => NoundAEActions.onClickSaveNound({
+    const onClickSave = () => NoundActions.onClickSaveNound({
         base: props.nound.getIn(['addedit','nound','base'])
     })
     const s = props.strings
@@ -34,10 +34,10 @@ function NoundAddForm(props) {
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
                     value={props.nound.getIn(['addedit','nound','base'])}
-                    onChange={(e)=>NoundAEActions.onChangeBase(e.target.value)}
+                    onChange={(e)=>NoundActions.onChangeBase(e.target.value)}
                 />
                 <button id='save-nound' onClick={onClickSave}>{s.save}</button>
-                <button id='cancel'     onClick={NoundAEActions.onClickCancel}>{s.cancel}</button>
+                <button id='cancel'     onClick={NoundActions.onClickCancel}>{s.cancel}</button>
             </div>
     //}
 

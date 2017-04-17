@@ -54,7 +54,7 @@ describe('NouniAEStore', function() {
 
     // Signal the UI to close NouniAddForm or NouniEditForm. We don't test these two separately,
     // the same state should close either one. But the delete button is only available on NouniEditForm.
-    /*it('ON_CLICK_DELETE_NOUNI', function() {
+    it('ON_CLICK_DELETE_NOUNI', function() {
         const initialState = this.state
         this.perturbState()
         expect(this.state).not.toBe(initialState)
@@ -65,7 +65,7 @@ describe('NouniAEStore', function() {
             nouni: {} // This action doesn't care about the nouni
         })
         expect(this.state).toBe(initialState)
-    })*/
+    })
 
     // Signal the UI to open NouniEditForm and populate with the given data.
     it('ON_CLICK_EDIT_NOUNI', function() {
@@ -143,9 +143,9 @@ describe('NouniAEStore', function() {
         })
         expect(this.state.getIn(['nouni','generatedText'])).toEqual('an elephant')
 
-    })
+    })*/
 
-    it('ON_CHANGE_SELECTED_NOUNI', function() {
+    /*it('ON_CHANGE_SELECTED_NOUNI', function() {
 
         // In this test, the value of id is unused.
         this.dispatch({

@@ -1,16 +1,15 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import QuizActionTypes        from './QuizActionTypes'
-import AppDispatcher          from '../AppDispatcher'
-import AppActionTypes         from '../app/AppActionTypes'
-import AdjectivdAEActionTypes from '../dictionary/adjectivd/addedit/AdjectivdAEActionTypes'
-import NoundActionTypes       from '../dictionary/nound/NoundActionTypes'
-import NoundAEActionTypes     from '../dictionary/nound/addedit/NoundAEActionTypes'
-import VerbdAEActionTypes     from '../dictionary/verbd/addedit/VerbdAEActionTypes'
-import NouniAEActionTypes     from '../nouni/addedit/NouniAEActionTypes'
-import {localStorageAvailable} from '../../LocalStorage'
+import QuizActionTypes         from './QuizActionTypes'
+import AppDispatcher           from '../AppDispatcher'
+import AppActionTypes          from '../app/AppActionTypes'
+import AdjectivdAEActionTypes  from '../dictionary/adjectivd/addedit/AdjectivdAEActionTypes'
+import NoundActionTypes        from '../dictionary/nound/NoundActionTypes'
+import VerbdActionTypes        from '../dictionary/verbd/VerbdActionTypes'
+import NouniAEActionTypes      from '../nouni/addedit/NouniAEActionTypes'
 
+import {localStorageAvailable} from '../../LocalStorage'
 const localStorageKey = 'QuizStore'
 
 /*
@@ -74,7 +73,7 @@ class QuizStore extends ReduceStore {
                 break
 
             // 1. nound
-            case NoundAEActionTypes.ON_CLICK_SAVE_NOUND:
+            case NoundActionTypes.ON_CLICK_SAVE_NOUND:
                 if(action.nound.id) { // if an id is present then this is an update
                     newState = newState.setIn(['nound','updateNound'],true)
                     newState = newState.setIn(['nound','passed'],noundQuizPassed(newState))
@@ -84,13 +83,13 @@ class QuizStore extends ReduceStore {
                 }
                 break
 
-            case NoundAEActionTypes.ON_CLICK_DELETE_NOUND:
+            case NoundActionTypes.ON_CLICK_DELETE_NOUND:
                 newState = newState.setIn(['nound','deleteNound'],true)
                 newState = newState.setIn(['nound','passed'],noundQuizPassed(newState))
                 break
 
             // 2. verbd
-            case VerbdAEActionTypes.ON_CLICK_SAVE_VERBD:
+            case VerbdActionTypes.ON_CLICK_SAVE_VERBD:
                 if(action.verbd.id) { // if an id is present then this is an update
                     newState = newState.setIn(['verbd','updateVerbd'],true)
                     newState = newState.setIn(['verbd','passed'],verbdQuizPassed(newState))
@@ -100,7 +99,7 @@ class QuizStore extends ReduceStore {
                 }
                 break
 
-            case VerbdAEActionTypes.ON_CLICK_DELETE_VERBD:
+            case VerbdActionTypes.ON_CLICK_DELETE_VERBD:
                 newState = newState.setIn(['verbd','deleteVerbd'],true)
                 newState = newState.setIn(['verbd','passed'],verbdQuizPassed(newState))
                 break

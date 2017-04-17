@@ -1,11 +1,10 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import VerbdAEActionTypes from './addedit/VerbdAEActionTypes'
-import Verbd              from './Verbd'
-import VerbdActionTypes   from './VerbdActionTypes'
-import AppActionTypes from '../../app/AppActionTypes'
-import AppDispatcher  from '../../AppDispatcher'
+import Verbd            from './Verbd'
+import VerbdActionTypes from './VerbdActionTypes'
+import AppActionTypes   from '../../app/AppActionTypes'
+import AppDispatcher    from '../../AppDispatcher'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'VerbdStore'
@@ -51,7 +50,7 @@ class VerbdStore extends ReduceStore {
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
-            case VerbdAEActionTypes.ON_CLICK_SAVE_VERBD:
+            case VerbdActionTypes.ON_CLICK_SAVE_VERBD:
                 if(action.verbd.id) {
                     // An id exists so update the existing record.
                     newState = newState.setIn(['coll', action.verbd.id], Verbd(action.verbd))
@@ -61,7 +60,7 @@ class VerbdStore extends ReduceStore {
                 }
                 break
 
-            case VerbdAEActionTypes.ON_CLICK_DELETE_VERBD:
+            case VerbdActionTypes.ON_CLICK_DELETE_VERBD:
                 newState = newState.deleteIn(['coll',action.id])
                 break
 

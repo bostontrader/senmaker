@@ -1,43 +1,82 @@
-import {Map, OrderedMap} from 'immutable'
+import {Map} from 'immutable'
 import React from 'react'
+import {RadioGroup} from 'react-radio-group'
 
 import TestUtils         from 'react-addons-test-utils'
-import rtRenderer        from 'react-test-renderer'
+//import rtRenderer        from 'react-test-renderer'
+import {findAll}         from 'react-shallow-testutils'
+import {findWithType}    from 'react-shallow-testutils'
 
-import AppActionTypes from '../../../data/app/AppActionTypes'
 import AppStore       from '../../../data/app/AppStore'
-import Nound          from '../../../data/dictionary/nound/Nound'
+import NouniStore     from '../../../data/nouni/NouniStore'
 import NouniAEStore   from '../../../data/nouni/addedit/NouniAEStore'
 import StringStore    from '../../../data/strings/StringStore'
-
 import NouniAddForm from './NouniAddForm'
+import NoundSelect from '../../dictionary/nound/NoundSelect'
 
-describe("NouniAddForm", () => {
+describe("NouniAddForm", function() {
 
-    it("Renders a NouniAddForm", () => {
-        let newState = AppStore.getInitialState()
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const strings = StringStore.getInitialState()
-        const props = {
-            level:newState.get('level'),
-            mostRecentlySelectedNound: Nound(),
-            nound: Map({
-                nouns: OrderedMap()
-            }),
+    beforeEach(function() {
+
+        this.state = {
+            app: AppStore.getInitialState(),
             nouni: Map({
-                addedit: NouniAEStore.getState(),
+                addedit: NouniAEStore.getInitialState(),
+                dict: NouniStore.getInitialState()
             }),
-            strings:strings
+            strings:StringStore.getInitialState()
         }
 
-        const renderExpression = <NouniAddForm {...props} />
+        // This "dispatches" an action to our stores. We can bypass the dispatcher
+        // and just call the store's reduce function directly.
+        //this.dispatch = action => {
+            //this.state.app   = AppStore .reduce(this.state.app, action)
+            //this.state.quiz  = QuizStore.reduce(this.state.quiz, action)
+        //}
+
+        // Return the count of elements that match the given css_id
+        this.countElements = function(lessonNavigator, css_id) {
+            const n = findAll(lessonNavigator, (element) => {
+                return (element && element.props && element.props.id===css_id)
+            })
+            return n.length
+        }
+
+    })
+
+    it("Renders a NouniAddForm < level 5", function() {
+        const renderExpression = <NouniAddForm {...this.state} />
         const nouniAddForm = TestUtils.createRenderer().render(renderExpression)
         expect(nouniAddForm.type).toBe('div')
-        //expect(nouniAddForm.props.children.length).toBe(4)
+
+        expect(findWithType(nouniAddForm,NoundSelect))
+        expect(findWithType(nouniAddForm,RadioGroup))
+        expect( this.countElements(nouniAddForm, 'save-nouni')).toBe(0)
+        expect( this.countElements(nouniAddForm, 'cancel')).toBe(0)
+        expect( this.countElements(nouniAddForm, 'generatedText')).toBe(1)
 
         // TypeError: Cannot read property 'style' of null
         // What is this? I don't have time for this now! :-(
         //const tree = rtRenderer.create(renderExpression).toJSON()
         //expect(tree).toMatchSnapshot()
     })
+
+    it("Renders a NouniAddForm == level 5", function() {
+        this.state.app = this.state.app.setIn(['level','currentLevel'],5)
+        const renderExpression = <NouniAddForm {...this.state} />
+        const nouniAddForm = TestUtils.createRenderer().render(renderExpression)
+        expect(nouniAddForm.type).toBe('div')
+
+        expect(findWithType(nouniAddForm,NoundSelect))
+        expect(findWithType(nouniAddForm,RadioGroup))
+        expect( this.countElements(nouniAddForm, 'save-nouni')).toBe(1)
+        expect( this.countElements(nouniAddForm, 'cancel')).toBe(1)
+        expect( this.countElements(nouniAddForm, 'generatedText')).toBe(1)
+
+        // TypeError: Cannot read property 'style' of null
+        // What is this? I don't have time for this now! :-(
+        //const tree = rtRenderer.create(renderExpression).toJSON()
+        //expect(tree).toMatchSnapshot()
+    })
+
 })

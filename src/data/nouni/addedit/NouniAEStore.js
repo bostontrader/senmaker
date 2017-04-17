@@ -47,6 +47,7 @@ class NouniAEStore extends ReduceStore {
         let newState = state
 
         const calcResultText = (definiteness, nound) => {
+            console.log(nound)
             // Graft in this ugly code from another project...
             // http://www.ef.com/english-resources/english-grammar/singular-and-plural-nouns
             //const noun = this.state.selectedNoun
@@ -179,9 +180,9 @@ class NouniAEStore extends ReduceStore {
             // Signal the UI to close NouniAddForm or NouniEditForm (but the delete button
             // is only present on NounEditForm.)
             // NouniStore will also catch this event and it's responsible for the actual deletion.
-            //case NouniAEActionTypes.ON_CLICK_DELETE_NOUNI:
-                //newState = NouniAEStore.initialState
-                //break
+            case NouniAEActionTypes.ON_CLICK_DELETE_NOUNI:
+                newState = NouniAEStore.initialState
+                break
 
             // Signal the UI to open NouniEditForm and populate with the given data.
             case NouniAEActionTypes.ON_CLICK_EDIT_NOUNI:

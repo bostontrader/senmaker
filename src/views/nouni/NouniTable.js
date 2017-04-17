@@ -42,7 +42,7 @@ function NouniTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {[...props.nouni.getIn(['nouns']).values()].map(noun => (
+                    {[...props.nouni.getIn(['dict','coll']).values()].map(noun => (
                         <NouniRow key={noun.get('id')} noun={noun} strings={props.strings} />
                     ))}
                 </tbody>

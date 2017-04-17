@@ -16,22 +16,24 @@ function NouniAddForm(props) {
         props.nouni.getIn(['addedit','nouni'])
     )
 
-    //console.log('NouniAddForm definiteness=',props.nouni.getIn(['addedit','nouni','definiteness']))
+    let theButtons = []
+    if ( props.app.getIn(['level','currentLevel']) >= 5)
+        theButtons = [
+            <button id='save-nouni' key='1' onClick={onClickSave}>{s.save}</button>,
+            <button id='cancel'     key='2' onClick={NouniAEActions.onClickCancel}>{s.cancel}</button>
+        ]
+
     return(
-        <div>
-            <div style={style}>
-                <NoundSelect {...props} />
-                <RadioGroup name="definiteness" selectedValue={props.nouni.getIn(['addedit','nouni','definiteness'])} onChange={(e)=>{NouniAEActions.onChangeDefiniteness(e)}}>
-                    <Radio value="definite" />Definite
-                    <Radio value="indefinite" />Indefinite
-                </RadioGroup>
-                <p>{props.nouni.getIn(['addedit','nouni','generatedText'])}</p>
-                <button id='save-nouni' onClick={onClickSave}>{s.save}</button>
-                <button id='cancel'     onClick={NouniAEActions.onClickCancel}>{s.cancel}</button>
-            </div>
+        <div style={style}>
+            <NoundSelect {...props} />
+            <RadioGroup name="definiteness" selectedValue={props.nouni.getIn(['addedit','nouni','definiteness'])} onChange={(e)=>{NouniAEActions.onChangeDefiniteness(e)}}>
+                <Radio value="definite" />Definite
+                <Radio value="indefinite" />Indefinite
+            </RadioGroup>
+            <p id="generatedText">{props.nouni.getIn(['addedit','nouni','generatedText'])}</p>
+            {theButtons}
         </div>
     )
-
 
 }
 

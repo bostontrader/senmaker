@@ -7,12 +7,12 @@ import {findAllWithClass, findWithClass, findWithType} from 'react-shallow-testu
 import LessonNavigator from './LessonNavigator'
 import Verbd           from './Verbd'
 
-import AppActionTypes     from '../../data/app/AppActionTypes'
-import AppStore           from '../../data/app/AppStore'
-import VerbdAEActionTypes from '../../data/dictionary/verbd/addedit/VerbdAEActionTypes'
-import VerbdStore         from '../../data/dictionary/verbd/VerbdStore'
-import QuizStore          from '../../data/quiz/QuizStore'
-import StringStore        from '../../data/strings/StringStore'
+import AppActionTypes   from '../../data/app/AppActionTypes'
+import AppStore         from '../../data/app/AppStore'
+import VerbdActionTypes from '../../data/dictionary/verbd/VerbdActionTypes'
+import VerbdStore       from '../../data/dictionary/verbd/VerbdStore'
+import QuizStore        from '../../data/quiz/QuizStore'
+import StringStore      from '../../data/strings/StringStore'
 
 import VerbdPanel from '../dictionary/verbd/VerbdPanel'
 
@@ -127,9 +127,9 @@ describe("Verbd", function() {
 
         // Now verify correct operation of each permutation.
         heapsPermute([
-            {type:VerbdAEActionTypes.ON_CLICK_SAVE_NOUND,   i:'insertVerbdCheck', nound:{}},
-            {type:VerbdAEActionTypes.ON_CLICK_SAVE_NOUND,   i:'updateVerbdCheck', nound:{id:'1'}},
-            {type:VerbdAEActionTypes.ON_CLICK_DELETE_NOUND, i:'deleteVerbdCheck'}
+            {type:VerbdActionTypes.ON_CLICK_SAVE_NOUND,   i:'insertVerbdCheck', nound:{}},
+            {type:VerbdActionTypes.ON_CLICK_SAVE_NOUND,   i:'updateVerbdCheck', nound:{id:'1'}},
+            {type:VerbdActionTypes.ON_CLICK_DELETE_NOUND, i:'deleteVerbdCheck'}
             ], testSinglePermutation)
     })
 })

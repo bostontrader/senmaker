@@ -1,4 +1,3 @@
-import VerbdAEActionTypes from './addedit/VerbdAEActionTypes'
 import Verbd              from './Verbd'
 import VerbdActionTypes   from './VerbdActionTypes'
 import VerbdStore         from './VerbdStore'
@@ -74,7 +73,7 @@ describe('VerbdStore', function() {
         ])
 
         this.dispatch({
-            type: VerbdAEActionTypes.ON_CLICK_DELETE_VERBD,
+            type: VerbdActionTypes.ON_CLICK_DELETE_VERBD,
             id: this.id(2),
         })
 
@@ -84,14 +83,14 @@ describe('VerbdStore', function() {
         ])
 
         this.dispatch({
-            type: VerbdAEActionTypes.ON_CLICK_DELETE_VERBD,
+            type: VerbdActionTypes.ON_CLICK_DELETE_VERBD,
             id: this.id(0),
         })
 
         expect(this.verbs()).toEqual([this.example1])
 
         this.dispatch({
-            type: VerbdAEActionTypes.ON_CLICK_DELETE_VERBD,
+            type: VerbdActionTypes.ON_CLICK_DELETE_VERBD,
             id: this.id(0),
         })
 
@@ -103,7 +102,7 @@ describe('VerbdStore', function() {
         // We know that this is a new record because verbd has no id.
         expect(this.verbs()).toEqual([])
         this.dispatch({
-            type: VerbdAEActionTypes.ON_CLICK_SAVE_VERBD,
+            type: VerbdActionTypes.ON_CLICK_SAVE_VERBD,
             verbd: this.example0
         })
         expect(this.verbs()).toEqual([this.example0])
@@ -118,7 +117,7 @@ describe('VerbdStore', function() {
         })
 
         this.dispatch({
-            type: VerbdAEActionTypes.ON_CLICK_SAVE_VERBD,
+            type: VerbdActionTypes.ON_CLICK_SAVE_VERBD,
             verbd: Verbd({id: this.id(0), base: 'run', pastTense: 'ran', pastTense_rule: PastTenseRule.NoChange})
         })
         expect(this.verbs()).toEqual([this.example1])
