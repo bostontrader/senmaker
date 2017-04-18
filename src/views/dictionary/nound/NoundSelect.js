@@ -4,13 +4,11 @@ import NoundActions from '../../../data/dictionary/nound/NoundActions'
 
 function NoundSelect(props) {
 
-    const options = props.nound.getIn(['dict','coll']).toArray().map(function(noun) {
-        return {value:noun.get('id'), label:noun.get('base')}
-    })
-    const selectedValue = props.app.getIn(['mostRecentlySelectedNound','id'])
-    return <Select options={options} value={selectedValue} placeholder="Select a noun..." onChange={(e)=>{
-        NoundActions.onChangeSelectedNound(props.nound.getIn(['dict','coll']).get(e.value.toString()))
-    }}/>
+    //return <Select options={props.options} value={props.selectedValue} placeholder="Select a noun..." onChange={(e)=>{
+        //NoundActions.onChangeSelectedNound(props.dict.get(e.value.toString()))
+    //}}/>
+    console.log('sv=',props)
+    return <Select options={props.options} value={props.value} placeholder="Select a noun..." onChange={(e)=>{props.onChange(e.value)}}/>
 
 }
 

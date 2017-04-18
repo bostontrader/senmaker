@@ -12,7 +12,7 @@ const NoundActionTypes = {
     INSERT_NOUND:             'INSERT_NOUND',
 
     // Special for NoundSelect
-    ON_CHANGE_SELECTED_NOUND: 'ON_CHANGE_SELECTED_NOUND'
+    //ON_CHANGE_SELECTED_NOUND: 'ON_CHANGE_SELECTED_NOUND'
 }
 
 export default NoundActionTypes

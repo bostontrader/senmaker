@@ -1,4 +1,4 @@
-import NouniAEActionTypes from './NouniAEActionTypes'
+/*import NouniAEActionTypes from './NouniAEActionTypes'
 import AppDispatcher from '../../AppDispatcher'
 
 const NouniAEActions = {
@@ -52,4 +52,4 @@ const NouniAEActions = {
 
 }
 
-export default NouniAEActions
+export default NouniAEActions*/

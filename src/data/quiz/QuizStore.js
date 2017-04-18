@@ -1,13 +1,13 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import QuizActionTypes         from './QuizActionTypes'
-import AppDispatcher           from '../AppDispatcher'
-import AppActionTypes          from '../app/AppActionTypes'
-import AdjectivdAEActionTypes  from '../dictionary/adjectivd/addedit/AdjectivdAEActionTypes'
-import NoundActionTypes        from '../dictionary/nound/NoundActionTypes'
-import VerbdActionTypes        from '../dictionary/verbd/VerbdActionTypes'
-import NouniAEActionTypes      from '../nouni/addedit/NouniAEActionTypes'
+import QuizActionTypes      from './QuizActionTypes'
+import AppDispatcher        from '../AppDispatcher'
+import AppActionTypes       from '../app/AppActionTypes'
+import AdjectivdActionTypes from '../dictionary/adjectivd/AdjectivdActionTypes'
+import NoundActionTypes     from '../dictionary/nound/NoundActionTypes'
+import VerbdActionTypes     from '../dictionary/verbd/VerbdActionTypes'
+import NouniAEActionTypes   from '../nouni/addedit/NouniAEActionTypes'
 
 import {localStorageAvailable} from '../../LocalStorage'
 const localStorageKey = 'QuizStore'
@@ -105,7 +105,7 @@ class QuizStore extends ReduceStore {
                 break
 
             // 3. adjectivd
-            case AdjectivdAEActionTypes.ON_CLICK_SAVE_ADJECTIVD:
+            case AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD:
                 if(action.adjectivd.id) { // if an id is present then this is an update
                     newState = newState.setIn(['adjectivd','updateAdjectivd'],true)
                     newState = newState.setIn(['adjectivd','passed'],adjectivdQuizPassed(newState))
@@ -115,7 +115,7 @@ class QuizStore extends ReduceStore {
                 }
                 break
 
-            case AdjectivdAEActionTypes.ON_CLICK_DELETE_ADJECTIVD:
+            case AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD:
                 newState = newState.setIn(['adjectivd','deleteAdjectivd'],true)
                 newState = newState.setIn(['adjectivd','passed'],adjectivdQuizPassed(newState))
                 break

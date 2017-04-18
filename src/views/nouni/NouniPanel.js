@@ -1,10 +1,9 @@
 import React from 'react'
 
-import NouniAEActions from '../../data/nouni/addedit/NouniAEActions'
-
 import NouniAddForm  from './addedit/NouniAddForm'
 import NouniEditForm from './addedit/NouniEditForm'
 import NouniTable    from './NouniTable'
+import NouniActions  from '../../data/nouni/NouniActions'
 
 /*
 The NouniPanel is responsible for displaying everything about our list of nouni.  Such
@@ -34,7 +33,7 @@ function NouniPanel(props) {
     // The appearance of a NouniPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-nouni" onClick={NouniAEActions.onClickAddNouni}>{s.add_new} {s.noun}</button>
+            <button id="add-nouni" onClick={NouniActions.onClickAddNouni}>{s.add_new} {s.noun}</button>
             <NouniTable {...props} />
         </div>
         <div>

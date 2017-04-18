@@ -1,4 +1,4 @@
-const NouniAEActionTypes = {
+/*const NouniAEActionTypes = {
     ON_CLICK_ADD_NOUNI:    'ON_CLICK_ADD_NOUNI',
     ON_CLICK_CANCEL:       'ON_CLICK_CANCEL',
     ON_CLICK_DELETE_NOUNI: 'ON_CLICK_DELETE_NOUNI',
@@ -9,4 +9,4 @@ const NouniAEActionTypes = {
     ON_CHANGE_DEFINITENESS: 'ON_CHANGE_DEFINITENESS'
 }
 
-export default NouniAEActionTypes
+export default NouniAEActionTypes*/

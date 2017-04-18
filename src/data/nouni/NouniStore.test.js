@@ -1,10 +1,7 @@
-import {Map} from 'immutable'
-
 import Nouni                from './Nouni'
 import NouniActionTypes     from './NouniActionTypes'
 import {DefinitenessSelect} from './NouniConstants'
 import NouniStore           from './NouniStore'
-import NouniAEActionTypes   from './addedit/NouniAEActionTypes'
 import AppActionTypes       from '../app/AppActionTypes'
 import Nound                from '../dictionary/nound/Nound'
 import {PluralizationRule}  from '../dictionary/nound/NoundConstants'
@@ -90,7 +87,7 @@ describe('NouniStore', function() {
         ])
 
         this.dispatch({
-            type: NouniAEActionTypes.ON_CLICK_DELETE_NOUNI,
+            type: NouniActionTypes.ON_CLICK_DELETE_NOUNI,
             id: this.id(2),
         })
 
@@ -100,14 +97,14 @@ describe('NouniStore', function() {
         ])
 
         this.dispatch({
-            type: NouniAEActionTypes.ON_CLICK_DELETE_NOUNI,
+            type: NouniActionTypes.ON_CLICK_DELETE_NOUNI,
             id: this.id(0),
         })
 
         expect(this.nouns()).toEqual([this.example1])
 
         this.dispatch({
-            type: NouniAEActionTypes.ON_CLICK_DELETE_NOUNI,
+            type: NouniActionTypes.ON_CLICK_DELETE_NOUNI,
             id: this.id(0),
         })
 
@@ -115,44 +112,40 @@ describe('NouniStore', function() {
 
     })
 
-    /*it('ON_CLICK_SAVE_NOUNI, new nouni', function() {
+    it('ON_CLICK_SAVE_NOUNI, new nouni', function() {
         // We know that this is a new record because nouni has no id.
         expect(this.nouns()).toEqual([])
-
         this.dispatch({
-            type: NouniAEActionTypes.ON_CLICK_SAVE_NOUNI,
-            nouni: {
-                nound: {id:'1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
-                definiteness: DefinitenessSelect.Definite,
-                generatedText: 'the cat'
-            }
+            type: NouniActionTypes.ON_CLICK_SAVE_NOUNI,
+            nouni: this.example0
         })
+        expect(this.nouns()).toEqual([this.example0])
+    })
 
-        expect(this.nouns()).toEqual([{
-            nound: {id:'1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
-            definiteness: DefinitenessSelect.Definite,
-            generatedText: 'the cat'
-        }])
-
-    })*/
-
-    /*it('ON_CLICK_SAVE_NOUNI, edit nouni', function() {
+    it('ON_CLICK_SAVE_NOUNI, edit nouni', function() {
         // We know that this is an update to an existing record because nouni has an id.
         expect(this.nouns()).toEqual([])
         this.dispatch({
             type: NouniActionTypes.INSERT_NOUNI,
-            nouni: {base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
+            nouni: this.example0
         })
 
         this.dispatch({
-            type: NouniAEActionTypes.ON_CLICK_SAVE_NOUNI,
-            nouni: Nouni({id: this.id(0), base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
+            type: NouniActionTypes.ON_CLICK_SAVE_NOUNI,
+            nouni: {
+                id: this.id(0),
+                nound: Nound( {id:'1', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}),
+                definiteness: DefinitenessSelect.Indefinite,
+                generatedText: 'a box'
+            }
         })
 
-        expect(this.nouns()).toEqual([
-            {base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
-        ])
-    })*/
+        expect(this.nouns()).toEqual([{
+            nound: {id:'1', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
+            definiteness: DefinitenessSelect.Indefinite,
+            generatedText: 'a box'
+        }])
+    })
 
     it('INSERT_NOUNI', function() {
         expect(this.nouns()).toEqual([])

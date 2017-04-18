@@ -1,7 +1,7 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import NouniAEActionTypes   from './NouniAEActionTypes'
+import NouniActionTypes     from '../NouniActionTypes'
 import {DefinitenessSelect} from '../NouniConstants'
 import Nouni                from '../Nouni'
 import AppDispatcher        from '../../AppDispatcher'
@@ -47,7 +47,6 @@ class NouniAEStore extends ReduceStore {
         let newState = state
 
         const calcResultText = (definiteness, nound) => {
-            console.log(nound)
             // Graft in this ugly code from another project...
             // http://www.ef.com/english-resources/english-grammar/singular-and-plural-nouns
             //const noun = this.state.selectedNoun
@@ -168,40 +167,39 @@ class NouniAEStore extends ReduceStore {
                 break
 
             // Signal the UI to open the NouniAddForm
-            case NouniAEActionTypes.ON_CLICK_ADD_NOUNI:
+            case NouniActionTypes.ON_CLICK_ADD_NOUNI:
                 newState = newState.set('addNouni', true)
                 break
 
             // Signal the UI to close NouniAddForm or NouniEditForm
-            case NouniAEActionTypes.ON_CLICK_CANCEL:
+            case NouniActionTypes.ON_CLICK_CANCEL:
                 newState = NouniAEStore.initialState
                 break
 
             // Signal the UI to close NouniAddForm or NouniEditForm (but the delete button
             // is only present on NounEditForm.)
             // NouniStore will also catch this event and it's responsible for the actual deletion.
-            case NouniAEActionTypes.ON_CLICK_DELETE_NOUNI:
+            case NouniActionTypes.ON_CLICK_DELETE_NOUNI:
                 newState = NouniAEStore.initialState
                 break
 
             // Signal the UI to open NouniEditForm and populate with the given data.
-            case NouniAEActionTypes.ON_CLICK_EDIT_NOUNI:
-                newState = newState.set('nouni', Nouni({
-                    id: action.nouni.id,
-                    nound: action.nouni.nound,
-                    definiteness: action.nouni.definiteness,
-                    generatedText: action.nouni.generatedText
-                }))
-                break
+            //case NouniActionTypes.ON_CLICK_EDIT_NOUNI:
+                //newState = newState.set('nouni', Nouni({
+                    //id: action.nouni.id,
+                    //nound: action.nouni.nound,
+                    //definiteness: action.nouni.definiteness,
+                    //generatedText: action.nouni.generatedText
+                //}))
+                //break
 
             // Signal the UI to close NouniAddForm or NouniEditForm. We don't need to specify which,
             // the same state should close either one.
-            case NouniAEActionTypes.ON_CLICK_SAVE_NOUNI:
+            case NouniActionTypes.ON_CLICK_SAVE_NOUNI:
                 newState = NouniAEStore.initialState
                 break
 
-            case NouniAEActionTypes.ON_CHANGE_DEFINITENESS:
-
+            case NouniActionTypes.ON_CHANGE_DEFINITENESS:
                 presentDefiniteness = action.newDefiniteness
                 presentNound = state.getIn(['nouni','nound'])
                 generatedText = calcResultText(presentDefiniteness, presentNound)
@@ -209,10 +207,9 @@ class NouniAEStore extends ReduceStore {
                 newState = newState.updateIn(['nouni','generatedText'], value => generatedText)
                 break
 
-            case NoundActionTypes.ON_CHANGE_SELECTED_NOUND:
-                console.log('NAT OCSN',action)
+            case NouniActionTypes.ON_CHANGE_SELECTED_NOUND:
                 presentDefiniteness = state.getIn(['nouni','definiteness'])
-                presentNound = action.nound
+                presentNound = action.newNound
                 generatedText = calcResultText(presentDefiniteness, presentNound)
                 newState = newState.updateIn(['nouni','nound'],value => presentNound)
                 newState = newState.updateIn(['nouni','generatedText'], value => generatedText)

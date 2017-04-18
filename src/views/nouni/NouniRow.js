@@ -1,8 +1,8 @@
 import React from 'react'
 import {Map} from 'immutable'
 
-import Nouni          from '../../data/nouni/Nouni'
-import NouniAEActions from '../../data/nouni/addedit/NouniAEActions'
+import Nouni        from '../../data/nouni/Nouni'
+import NouniActions from '../../data/nouni/NouniActions'
 //import {NouniPanelLevel} from '../../../data/dictionary/nouni/NouniConstants'
 
 function NouniRow(props) {
@@ -13,7 +13,7 @@ function NouniRow(props) {
     if(noun instanceof(Map))
         noun = Nouni(noun)
 
-    const onClickEditNouni = () => NouniAEActions.onClickEditNouni(noun)
+    const onClickEditNouni = () => NouniActions.onClickEditNouni(noun)
 
     let nouniRow = <div>noun item</div>
     //if( props.level >= NouniPanelLevel.PLURALIZATION) {

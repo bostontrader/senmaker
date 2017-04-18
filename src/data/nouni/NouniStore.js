@@ -1,12 +1,11 @@
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import Nouni              from './Nouni'
-import NouniActionTypes   from './NouniActionTypes'
-import NouniAEActionTypes from './addedit/NouniAEActionTypes'
-import AppDispatcher      from '../AppDispatcher'
-import AppActionTypes     from '../app/AppActionTypes'
-import Nound              from '../dictionary/nound/Nound'
+import Nouni            from './Nouni'
+import NouniActionTypes from './NouniActionTypes'
+import AppDispatcher    from '../AppDispatcher'
+import AppActionTypes   from '../app/AppActionTypes'
+import Nound            from '../dictionary/nound/Nound'
 
 import {localStorageAvailable} from '../../LocalStorage'
 const localStorageKey = 'NouniStore'
@@ -52,7 +51,7 @@ class NouniStore extends ReduceStore {
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
-            case NouniAEActionTypes.ON_CLICK_SAVE_NOUNI:
+            case NouniActionTypes.ON_CLICK_SAVE_NOUNI:
                 if(action.nouni.id) {
                     // An id exists so update the existing record.
                     newState = newState.setIn(['coll', action.nouni.id], Nouni(action.nouni))
@@ -62,23 +61,11 @@ class NouniStore extends ReduceStore {
                 }
                 break
             
-            case NouniAEActionTypes.ON_CLICK_DELETE_NOUNI:
+            case NouniActionTypes.ON_CLICK_DELETE_NOUNI:
                 // Use them both to make the UI and the test work. Why?
                 newState = newState.deleteIn(['coll',action.id.toString()]) // this works for the UI
                 newState = newState.deleteIn(['coll',action.id]) // this works for the test
                 break
-
-            //case NoundActionTypes.INSERT_NOUN:
-                //const id = Counter.increment()
-                //return state.set(id, new Nound({
-                    //id: id,
-                    //base: action.noun.base,
-                    //plural: action.noun.plural,
-                    //pluralization_rule: action.noun.pluralization_rule
-                //}))
-
-            //case NoundActionTypes.UPDATE_NOUN:
-                //return state.set(action.noun.get('id'), action.noun)
 
             // Insert a new record programmatically, w/o a UI.
             case NouniActionTypes.INSERT_NOUNI:
