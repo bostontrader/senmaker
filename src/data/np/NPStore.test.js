@@ -1,10 +1,10 @@
-//import Counter             from './Counter'
-//import NP               from './NP'
-import NPActionTypes    from './NPActionTypes'
-import NPStore          from './NPStore'
-//import {PluralizationRule} from './NPConstants'
-//import NPAEActionTypes  from './addedit/NPAEActionTypes'
-import AppActionTypes      from '../app/AppActionTypes'
+import NP                   from './NP'
+import NPActionTypes        from './NPActionTypes'
+import {DefinitenessSelect} from './NPConstants'
+import NPStore              from './NPStore'
+import AppActionTypes       from '../app/AppActionTypes'
+import Nound                from '../dictionary/nound/Nound'
+import {PluralizationRule}  from '../dictionary/nound/NoundConstants'
 
 describe('NPStore', function() {
 
@@ -13,37 +13,54 @@ describe('NPStore', function() {
 
         // This function gets a more readable form of the np that we can pass
         // to expect(). It strips away the id.
-        this.nps = () => Array.from(this.state.values()).map(np => ({
-            base: np.base
+        this.nouns = () => Array.from(this.state.getIn(['coll']).values()).map(np => ({
+            nound: np.nound.toJSON(),
+            definiteness: np.definiteness,
+            generatedText: np.generatedText
         }))
 
         // This function is for setting up data, it will add all the np to the
         // state in a direct way.
-        this.addNouns = (nps) => {
-            nps.forEach(np => {
-                const id = Counter.increment()
-                this.state = this.state.set(
-                    id,
-                    new NP({id, base: np.base})
+        this.addNouns = (nouns) => {
+            let id = 0
+            nouns.forEach(noun => {
+                const nound = Nound(noun.nound)
+                this.state = this.state.setIn(['coll',id],
+                    new NP({id, nound: nound, definiteness: noun.definiteness, generatedText: noun.generatedText})
                 )
+                id++
             })
         }
         
         // Because of how NPStore is set up it's not easy to get access to ids of
-        // np. This will get the id of a particular np based on the index it
+        // np. This will get the id of a particular noun based on the index it
         // was added to state in.
         this.id = (index) => {
-            if (this.state.size <= index) {
+            if (this.state.getIn(['coll']).size <= index) {
                 throw new Error(
                     'Requested id for an index that is larger than the size of the ' +
                     'current state.'
                 )
             }
-            return Array.from(this.state.keys())[index]
+            return Array.from(this.state.getIn(['coll']).keys())[index]
         }
 
-        this.dispatch = action => {
-            this.state = NPStore.reduce(this.state, action)
+        this.dispatch = action => {this.state = NPStore.reduce(this.state, action)}
+
+        this.example0 = {
+            nound: {id:'1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
+            definiteness: DefinitenessSelect.Definite,
+            generatedText: 'the cat'
+        }
+        this.example1 = {
+            nound: {id:'2', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
+            definiteness: DefinitenessSelect.Indefinite,
+            generatedText: 'a box'
+        }
+        this.example2 = {
+            nound: {id:'3', base: 'fish', plural: 'fish', pluralization_rule: PluralizationRule.NoChange},
+            definiteness: DefinitenessSelect.Definite,
+            generatedText: 'the fish'
         }
     })
 
@@ -51,105 +68,66 @@ describe('NPStore', function() {
         const initialState = this.state
 
         // Now do anything, doesn't matter what, to change the initial state
-        this.dispatch({
-            type: NPActionTypes.INSERT_NP,
-            np: {base: 'cat'}
-        })
+        this.dispatch({type: NPActionTypes.INSERT_NP, np: NP(this.example0)})
         expect(initialState).not.toBe(this.state)
 
-        // Now reset the state
-        this.dispatch({
-            type: AppActionTypes.ON_APP_RESET
-        })
+        this.dispatch({type: AppActionTypes.ON_APP_RESET})
         expect(initialState).toBe(this.state)
     })
 
-    /*it('ON_CLICK_DELETE_NP', function() {
-        expect(this.nps()).toEqual([])
+    it('ON_CLICK_DELETE_NP', function() {
+        expect(this.nouns()).toEqual([])
         this.addNouns([
-            {base: 'apple'},
-            {base: 'box'},
-            {base: 'cat'},
+            this.example0,
+            this.example1,
+            this.example2,
         ])
 
-        this.dispatch({
-            type: NPAEActionTypes.ON_CLICK_DELETE_NP,
-            id: this.id(2),
-        })
+        this.dispatch({type: NPActionTypes.ON_CLICK_DELETE_NP, id: this.id(2),})
+        expect(this.nouns()).toEqual([this.example0, this.example1])
 
-        expect(this.nps()).toEqual([
-            {base: 'apple'},
-            {base: 'box'}
-        ])
+        this.dispatch({type: NPActionTypes.ON_CLICK_DELETE_NP, id: this.id(0),})
+        expect(this.nouns()).toEqual([this.example1])
 
-        this.dispatch({
-            type: NPAEActionTypes.ON_CLICK_DELETE_NP,
-            id: this.id(0),
-        })
-
-        expect(this.nps()).toEqual([
-            {base: 'box'}
-        ])
-
-        this.dispatch({
-            type: NPAEActionTypes.ON_CLICK_DELETE_NP,
-            id: this.id(0),
-        })
-
-        expect(this.nps()).toEqual([])
+        this.dispatch({type: NPActionTypes.ON_CLICK_DELETE_NP, id: this.id(0),})
+        expect(this.nouns()).toEqual([])
 
     })
 
     it('ON_CLICK_SAVE_NP, new np', function() {
         // We know that this is a new record because np has no id.
-        expect(this.nps()).toEqual([])
-        this.dispatch({
-            type: NPAEActionTypes.ON_CLICK_SAVE_NP,
-            np: {base: 'cat'}
-        })
-        expect(this.nps()).toEqual([
-            {base: 'cat'}
-        ])
+        expect(this.nouns()).toEqual([])
+        this.dispatch({type: NPActionTypes.ON_CLICK_SAVE_NP, np: NP(this.example0)})
+        expect(this.nouns()).toEqual([this.example0])
     })
 
     it('ON_CLICK_SAVE_NP, edit np', function() {
         // We know that this is an update to an existing record because np has an id.
-        expect(this.nps()).toEqual([])
-        this.dispatch({
-            type: NPActionTypes.INSERT_NP,
-            np: {base: 'cat'}
-        })
+        expect(this.nouns()).toEqual([])
+        this.dispatch({type: NPActionTypes.INSERT_NP, np: NP(this.example0)})
 
         this.dispatch({
-            type: NPAEActionTypes.ON_CLICK_SAVE_NP,
-            np: NP({id: this.id(0), base: 'box'})
+            type: NPActionTypes.ON_CLICK_SAVE_NP,
+            np: NP({
+                id: this.id(0),
+                nound: Nound( {id:'1', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}),
+                definiteness: DefinitenessSelect.Indefinite,
+                generatedText: 'a box'
+            })
         })
 
-        expect(this.nps()).toEqual([
-            {base: 'box'}
-        ])
+        expect(this.nouns()).toEqual([{
+            nound: {id:'1', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
+            definiteness: DefinitenessSelect.Indefinite,
+            generatedText: 'a box'
+        }])
     })
 
     it('INSERT_NP', function() {
-        expect(this.nps()).toEqual([])
-
-        this.dispatch({
-            type: NPActionTypes.INSERT_NP,
-            np: {base: 'cat'}
-        })
-
-        expect(this.nps()).toEqual([
-            {base: 'cat'}
-        ])
-
-        this.dispatch({
-            type: NPActionTypes.INSERT_NP,
-            np: {base: 'box'}
-        })
-
-        expect(this.nps()).toEqual([
-            {base: 'cat'},
-            {base: 'box'}
-        ])
-    })*/
+        expect(this.nouns()).toEqual([])
+        this.dispatch({type: NPActionTypes.INSERT_NP, np: NP(this.example0)})
+        expect(this.nouns()).toEqual([this.example0])
+        this.dispatch({type: NPActionTypes.INSERT_NP, np: NP(this.example1)})
+        expect(this.nouns()).toEqual([this.example0, this.example1])
+    })
 })

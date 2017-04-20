@@ -5,7 +5,7 @@ import AppActionTypes from './AppActionTypes'
 
 import AppDispatcher    from '../AppDispatcher'
 import Nound            from '../dictionary/nound/Nound'
-import NoundActionTypes from '../dictionary/nound/NoundActionTypes'
+//import NoundActionTypes from '../dictionary/nound/NoundActionTypes'
 import syllabus         from '../Syllabus'
 
 import {localStorageAvailable} from '../../LocalStorage'
@@ -74,11 +74,11 @@ class AppStore extends ReduceStore {
                 break
 
             // NoundActiontypes
-            case NoundActionTypes.ON_CHANGE_SELECTED_NOUND:
-                newState = newState.set('mostRecentlySelectedNound',action.nound)
-                break
+            //case NoundActionTypes.ON_CHANGE_SELECTED_NOUND:
+                //newState = newState.set('mostRecentlySelectedNound',action.nound)
+                //break
 
-            default:
+            //default:
                 // do nothing, newState is already set to the existing state
         }
 

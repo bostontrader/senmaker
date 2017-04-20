@@ -9,8 +9,6 @@ import NPAEStore        from '../data/np/addedit/NPAEStore'
 import NPStore          from '../data/np/NPStore'
 import VerbdAEStore     from '../data/dictionary/verbd/addedit/VerbdAEStore'
 import VerbdStore       from '../data/dictionary/verbd/VerbdStore'
-import NouniAEStore     from '../data/nouni/addedit/NouniAEStore'
-import NouniStore       from '../data/nouni/NouniStore'
 import QuizStore        from '../data/quiz/QuizStore'
 import StringStore      from '../data/strings/StringStore'
 
@@ -22,26 +20,20 @@ const state = {
     // definitions as we need, as adjectivi.
     adjectivd: Map({
         addedit: AdjectivdAEStore.getState(),
-        adjectivs: AdjectivdStore.getState(),
+        dict: AdjectivdStore.getState(),
     }),
 
     // A dictionary of available nouns.  We will instantiate as many copies of these
     // definitions as we need, as nouni.
     nound: Map({
         addedit: NoundAEStore.getState(),
-        nouns: NoundStore.getState(),
-    }),
-
-    // A collection of instantiated nound.
-    nouni: Map({
-        addedit: NouniAEStore.getState(),
-        nouns: NouniStore.getState(),
+        dict: NoundStore.getState(),
     }),
 
     // A collection of available np.
     np: Map({
         addedit: NPAEStore.getState(),
-        nps: NPStore.getState(),
+        dict: NPStore.getState(),
     }),
 
     // The quizzes
@@ -53,7 +45,7 @@ const state = {
     // definitions as we need, as verbi.
     verbd: Map({
         addedit: VerbdAEStore.getState(),
-        verbs: VerbdStore.getState(),
+        dict: VerbdStore.getState(),
     })
 }
 

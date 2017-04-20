@@ -1,48 +1,50 @@
 import React from 'react'
+import {RadioGroup, Radio} from 'react-radio-group'
 
-import NPAEActions from '../../../data/np/addedit/NPAEActions'
-//import {NPPanelLevel} from '../../../../data/dictionary/np/NPConstants'
-//import PluralizationSelect from '../../../nouni/PluralizationSelect'
+import NoundSelect  from '../../dictionary/nound/NoundSelect'
+import NPActions from '../../../data/np/NPActions'
 
+// should be all global props, an object that contains several immutables
 function NPAddForm(props) {
 
     const style = {
         border: '1px solid black',
         margin: '5px'
     }
-
-    const onClickSave = () => NPAEActions.onClickSaveNP({
-        base: props.np.getIn(['addedit','np','base'])
-    })
     const s = props.strings
 
-    let npAddForm = null
+    const onClickSave = () => NPActions.onClickSaveNP(
+        props.np.getIn(['addedit','np'])  // NP
+    )
 
-    //if(props.level.getIn(['currentAppLevelConfig', 'npPanel']) >= NPPanelLevel.PLURALIZATION) {
-        /*npAddForm =
-            <div>
-                <label htmlFor='base'>Base</label>
-                <input name='base' type='text'  />
-                <PluralizationSelect pluralization_rule={0}/>
-                <input type='submit' value={s.save} onClick={onInsert}/>
-                <button onClick={props.onCancelNoun}>{s.cancel}</button>
-            </div>*/
+    let theButtons = []
+    if ( props.app.getIn(['level','currentLevel']) >= 6) // currentLevel:number
+        theButtons = [
+            <button id='save-np' key='1' onClick={onClickSave}>{s.save}</button>,
+            <button id='cancel'  key='2' onClick={NPActions.onClickCancel}>{s.cancel}</button>
+        ]
 
-    //} else if(props.level.getIn(['currentAppLevelConfig', 'npPanel']) >= NPPanelLevel.BASE) {
-        npAddForm =
-            <div id="np-add-form" style={style}>
-                <label htmlFor='base'>Base</label>
-                <input id='base' name='base' type='text'
-                    value={props.np.getIn(['addedit','np','base'])}
-                    onChange={(e)=>NPAEActions.onChangeBase(e.target.value)}
-                />
-                <button id='save-np' onClick={onClickSave}>{s.save}</button>
-                <button id='cancel'     onClick={NPAEActions.onClickCancel}>{s.cancel}</button>
-            </div>
-    //}
+    // should be nound because we want a select list of nound!
+    const options = props.nound.getIn(['dict','coll']).toArray().map(function(noun) {
+        return {value:noun.get('id').toString(), label:noun.get('base')}
+    })
+    const selectedValue = props.np.getIn(['addedit','np','nound','id']) // sb nound
 
-    return npAddForm
+    const onChange = (id) => { // id should be a number
+        NPActions.onChangeSelectedNound(props.nound.getIn(['dict','coll',id.toString()]))
+    }
+    return(
+        <div style={style}>
+            <NoundSelect options={options} value={selectedValue} onChange={onChange} />
+            <RadioGroup name="definiteness" selectedValue={props.np.getIn(['addedit','np','definiteness'])} onChange={(e)=>{NPActions.onChangeDefiniteness(e)}}>
+                <Radio value="definite" />Definite
+                <Radio value="indefinite" />Indefinite
+            </RadioGroup>
+            <p id="generatedText">{props.np.getIn(['addedit','np','generatedText'])}</p>
+            {theButtons}
+        </div>
+    )
+
 }
-
 
 export default NPAddForm

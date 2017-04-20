@@ -1,14 +1,15 @@
 import React from 'react'
 
-import NPAEActions from '../../data/np/addedit/NPAEActions'
-
 import NPAddForm  from './addedit/NPAddForm'
 import NPEditForm from './addedit/NPEditForm'
 import NPTable    from './NPTable'
+import NPActions  from '../../data/np/NPActions'
 
 /*
-The NPPanel is responsible for displaying everything about our list of NP.  Such as
+The NPPanel is responsible for displaying everything about our list of np.  Such
 the table of NP, and the add or edit forms.
+
+Specifically excluded from this are any help or navigation features to proceed to different levels.
  */
 function NPPanel(props) {
 
@@ -20,26 +21,26 @@ function NPPanel(props) {
     const s = props.strings
 
     // What should be displayed in the np add/edit panel?
-    let npAddEditForm = <div></div>  // we really want nothing here
+    let nounAddEditForm = <div></div>  // we really want nothing here
     if(props.np.getIn(['addedit','np','id'])) {
-        npAddEditForm = <NPEditForm {...props} />
+        nounAddEditForm = <NPEditForm {...props} />
     } else if (props.np.getIn(['addedit','addNP'])) {
-        npAddEditForm = <NPAddForm {...props} />
+        nounAddEditForm = <NPAddForm {...props} />
     } else {
         // Do nothing
     }
 
-    return(
-        <div style={style}>
-            <div>
-                <button id="add-np" onClick={NPAEActions.onClickAddNP}>{s.add_new} {s.noun_phrase}</button>
-                <NPTable {...props} />
-            </div>
-            <div>
-                {npAddEditForm}
-            </div>
+    // The appearance of a NPPanel is not affected by the level.
+    return( <div style={style}>
+        <div>
+            <button id="add-np" onClick={NPActions.onClickAddNP}>{s.add_new} {s.noun}</button>
+            <NPTable {...props} />
         </div>
-    )
+        <div>
+            {nounAddEditForm}
+        </div>
+    </div>)
+
 }
 
 export default NPPanel

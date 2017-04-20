@@ -10,8 +10,8 @@ import NPAEStore        from '../data/np/addedit/NPAEStore'
 import NPStore          from '../data/np/NPStore'
 import VerbdAEStore     from '../data/dictionary/verbd/addedit/VerbdAEStore'
 import VerbdStore       from '../data/dictionary/verbd/VerbdStore'
-import NouniAEStore     from '../data/nouni/addedit/NouniAEStore'
-import NouniStore       from '../data/nouni/NouniStore'
+//import NouniAEStore     from '../data/nouni/addedit/NouniAEStore'
+//import NouniStore       from '../data/nouni/NouniStore'
 import QuizStore        from '../data/quiz/QuizStore'
 import StringStore      from '../data/strings/StringStore'
 
@@ -24,8 +24,8 @@ function getStores() {
         AdjectivdAEStore,
         NoundStore,
         NoundAEStore,
-        NouniStore,
-        NouniAEStore,
+        //NouniStore,
+        //NouniAEStore,
         NPAEStore,
         NPStore,
         QuizStore,
@@ -59,10 +59,10 @@ function getState() {
         }),
 
         // A collection of instantiated nound.
-        nouni: Map({
-            addedit: NouniAEStore.getState(),
-            dict: NouniStore.getState(),
-        }),
+        //nouni: Map({
+            //addedit: NouniAEStore.getState(),
+            //dict: NouniStore.getState(),
+        //}),
 
         // A collection of available np.
         np: Map({

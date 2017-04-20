@@ -1,24 +1,25 @@
 import React from "react"
 import TestUtils from "react-addons-test-utils"
 
-import NPRow    from './NPRow'
-import NP       from '../../data/np/NP'
+import NPRow       from './NPRow'
+import NP          from '../../data/np/NP'
 import StringStore from '../../data/strings/StringStore'
-//import {NPPanelLevel} from '../../../data/dictionary/np/NPConstants'
 
 describe("NPRow", () => {
 
     let tuRenderer, npRow
 
-    const np = new NP({
+    const noun = new NP({
         id: 1,
-        base: 'cat'
+        base: 'cat',
+        plural: 'cats',
+        pluralization_rule: 1
     })
 
     it("renders a NPPanelLevel.BASE NPRow", () => {
         tuRenderer = TestUtils.createRenderer()
         const strings = StringStore.getInitialState()
-        const props = {np:np, strings: strings}
+        const props = {noun:noun, strings: strings}
         npRow = tuRenderer.render(<NPRow {...props} />)
         expect(npRow.type).toBe('tr')
         expect(npRow.props.children.length).toBe(2)  // noun, edit

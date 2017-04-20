@@ -1,7 +1,6 @@
 import React from 'react'
 
 import LessonNavigator from './LessonNavigator'
-import QuizActions     from '../../data/quiz/QuizActions'
 import NPPanel from '../np/NPPanel'
 
 function NounPhrases(props) {
@@ -14,9 +13,16 @@ function NounPhrases(props) {
     const q = props.quiz
     const s = props.strings.np
 
-    const iunderstandCheck = q.getIn(['nounPhrases','iunderstand']) ?
-        <img id="iunderstandCheck" src="/img/Checked.png" alt="checkmark"/> : ''
+    console.log(s.quiz10)
+    const quizInsertNP = q.getIn(['np','insertNP']) ?
+        <img id="insertNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
+    const quizUpdateNP = q.getIn(['np','updateNP']) ?
+        <img id="updateNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+
+    const quizDeleteNP = q.getIn(['np','deleteNP']) ?
+        <img id="deleteNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+    
     return (
         <div>
             <div className="help" style={style}>
@@ -34,9 +40,16 @@ function NounPhrases(props) {
                 <table>
                     <tbody>
                     <tr>
-                        <td><p><input id="iunderstandCheck" onChange={QuizActions.nounPhrases.onIUnderstand} type="checkbox" checked={q.getIn(['nounPhrases','iunderstand'])} />
-                            {props.strings.i_understand}</p></td>
-                        <td>{iunderstandCheck}</td>
+                        <td><p>{s.quiz1}</p></td>
+                        <td>{quizInsertNP}</td>
+                    </tr>
+                    <tr>
+                        <td><p>{s.quiz3}</p></td>
+                        <td>{quizUpdateNP}</td>
+                    </tr>
+                    <tr>
+                        <td><p>{s.quiz2}</p></td>
+                        <td>{quizDeleteNP}</td>
                     </tr>
                     </tbody>
                 </table>

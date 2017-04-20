@@ -47,15 +47,7 @@ const VerbdActions = {
             type: VerbdActionTypes.INSERT_VERBD,
             verbd: verbd
         })
-    },
-
-    // Special for VerbdSelect
-    //onChangeSelectedVerbd(verbd) {
-        //AppDispatcher.dispatch({
-            //type: VerbdActionTypes.ON_CHANGE_SELECTED_VERBD,
-            //verbd: verbd
-        //})
-    //}
+    }
 }
 
 export default VerbdActions

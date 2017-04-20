@@ -9,10 +9,7 @@ const VerbdActionTypes = {
     ON_CHANGE_BASE:        'ON_CHANGE_VERBD_BASE',
 
     // Pump a new verbd directly into the db w/o dealing with any UI.
-    INSERT_VERBD:             'INSERT_VERBD',
-
-    // Special for NoundSelect
-    //ON_CHANGE_SELECTED_VERBD: 'ON_CHANGE_SELECTED_VERBD'
+    INSERT_VERBD:             'INSERT_VERBD'
 }
 
 export default VerbdActionTypes

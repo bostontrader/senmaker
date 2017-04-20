@@ -134,8 +134,11 @@ StringStore.en = {
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
         help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
         help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.',
-        help13: 'Here we repackage that into an explicit noun phrase format.'
+        help13: 'Here we repackage that into an explicit noun phrase format.',
         // although a noun phrase is usually more than one word, it could be just a single noun.
+        quiz1: 'Can you add a new noun phrase?',
+        quiz2: 'Can you delete a noun phrase from this list?',
+        quiz3: 'Can you change the spelling of a noun phrase?'
     },
     npWithAdjectives: {
         help10: '',
@@ -253,10 +256,14 @@ StringStore.zh = {
     np: {
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
         help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
-        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting a definiten or indefinite, and a noun, you produced a two-word noun phrase.',
-        help13: 'Here we repackage that into an explicit noun phrase format.'
+        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.',
+        help13: 'Here we repackage that into an explicit noun phrase format.',
         // although a noun phrase is usually more than one word, it could be just a single noun.
+        quiz1: 'Can you add a new noun phrase?',
+        quiz2: 'Can you delete a noun phrase from this list?',
+        quiz3: 'Can you change the spelling of a noun phrase?'
     },
+
     // plural
     //xLevel03: {
         //help10: '当我们写名词时必须知道名词的形式。.',

@@ -105,19 +105,19 @@ describe('AppStore', function() {
 
     })
 
-    describe('Nound', function() {
+    //describe('Nound', function() {
 
-        it('ON_CHANGE_SELECTED_NOUND', function() {
-            this.dispatch({
-                type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
-                nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
-            })
+        //it('ON_CHANGE_SELECTED_NOUND', function() {
+            //this.dispatch({
+                //type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
+                //nound: {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            //})
             //console.log('AppStore.test',this.state)
-            expect(this.state.get('mostRecentlySelectedNound')).toEqual(
-                {id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
-            )
-        })
+            //expect(this.state.get('mostRecentlySelectedNound')).toEqual(
+                //{id:'n-666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es}
+            //)
+        //})
 
-    })
+    //})
 
 })

@@ -1,33 +1,32 @@
 import React from 'react'
 import {Map} from 'immutable'
 
-import NP          from '../../data/np/NP'
-import NPAEActions from '../../data/np/addedit/NPAEActions'
-//import {NPPanelLevel} from '../../../data/dictionary/np/NPConstants'
+import NP        from '../../data/np/NP'
+import NPActions from '../../data/np/NPActions'
 
 function NPRow(props) {
-    let {np} = props
+    let {noun} = props
 
     // The original state is a NP Record, but when round-tripped to/from localStorage
     // it gets turned into a Map.  This should be corrected, but until then, apply this hack.
-    if(np instanceof(Map))
-        np = NP(np)
+    if(noun instanceof(Map))
+        noun = NP(noun)
 
-    const onClickEditNP = () => NPAEActions.onClickEditNP(np)
+    const onClickEditNP = () => NPActions.onClickEditNP(noun)
 
-    let npRow = <div>np item</div>
+    let npRow = <div>noun item</div>
     //if( props.level >= NPPanelLevel.PLURALIZATION) {
         /*npRow =
             <tr>
-                <td>{np.base}</td>
-                <td>{np.plural}</td>
-                <td><button id={np.id} type="button" onClick={onClickEditNP} >{props.strings.edit}</button></td>
+                <td>{noun.base}</td>
+                <td>{noun.plural}</td>
+                <td><button id={noun.id} type="button" onClick={onClickEditNP} >{props.strings.edit}</button></td>
             </tr>*/
     //} else if( props.level >= NPPanelLevel.BASE) {
         npRow =
             <tr>
-                <td>{np.base}</td>
-                <td><button id={np.id} type="button" onClick={onClickEditNP} >{props.strings.edit}</button></td>
+                <td>{noun.generatedText}</td>
+                <td><button id={noun.id} type="button" onClick={onClickEditNP} >{props.strings.edit}</button></td>
             </tr>
     //}
 

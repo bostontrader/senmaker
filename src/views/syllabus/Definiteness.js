@@ -4,7 +4,7 @@ import AppActions  from '../../data/app/AppActions'
 import QuizActions from '../../data/quiz/QuizActions'
 
 import LessonNavigator from './LessonNavigator'
-import NouniAddForm from '../nouni/addedit/NouniAddForm'
+import NPAddForm       from '../np/addedit/NPAddForm'
 
 function Definiteness(props) {
 
@@ -38,7 +38,7 @@ function Definiteness(props) {
                 <p>{s.help15}</p>
             </div>
 
-            <NouniAddForm {...props} />
+            <NPAddForm {...props} />
 
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>

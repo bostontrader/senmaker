@@ -1,3 +1,4 @@
+// @flow
 const DefinitenessSelect = {
     'NoneSelected':100,
     'Definite':101,

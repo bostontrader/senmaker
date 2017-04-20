@@ -47,15 +47,7 @@ const NoundActions = {
             type: NoundActionTypes.INSERT_NOUND,
             nound: nound
         })
-    },
-
-    // Special for NoundSelect
-    //onChangeSelectedNound(nound) {
-        //AppDispatcher.dispatch({
-            //type: NoundActionTypes.ON_CHANGE_SELECTED_NOUND,
-            //nound: nound
-        //})
-    //}
+    }
 }
 
 export default NoundActions
