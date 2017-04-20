@@ -19,14 +19,18 @@ function NPEditForm(props:Object) {
 
     const onDelete = () => NPActions.onClickDeleteNP(props.np.getIn(['addedit','np','id']))
 
-    const options = props.np.getIn(['dict','coll']).toArray().map(function(noun) {
+    // should be nound because we want a select list of nound!
+    const options = props.nound.getIn(['dict','coll']).toArray().map(function(noun) {
         return {value:noun.get('id').toString(), label:noun.get('base')}
     })
-    const selectedValue = props.np.getIn(['addedit','np','np','id'])
+    const selectedValue = props.np.getIn(['addedit','np','nound','id']).toString()
 
+    const onChange = (id) => { // id should be a number
+        NPActions.onChangeSelectedNound(props.nound.getIn(['dict','coll',id.toString()]))
+    }
     return(
         <div style={style}>
-            <NoundSelect options={options} value={selectedValue}  />
+            <NoundSelect options={options} value={selectedValue} onChange={onChange} />
             <RadioGroup name="definiteness" selectedValue={props.np.getIn(['addedit','np','definiteness'])} onChange={(e)=>{NPActions.onChangeDefiniteness(e)}}>
                 <Radio value="definite" />Definite
                 <Radio value="indefinite" />Indefinite

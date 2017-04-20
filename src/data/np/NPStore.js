@@ -58,7 +58,9 @@ class NPStore extends ReduceStore {
             case NPActionTypes.ON_CLICK_SAVE_NP: // string
                 if(action.np.id) {
                     // An id exists so update the existing record.
+                    console.log(newState)
                     newState = newState.setIn(['coll', action.np.id], NP(action.np))
+                    console.log(newState)
                 } else {
                     // No id exists so insert a new record.
                     newState = insertNewRecord(action.np)
