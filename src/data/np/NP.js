@@ -1,6 +1,6 @@
 // @flow
-
 import {Record} from 'immutable'
+
 import {DefinitenessSelect} from './NPConstants'
 import Nound                from '../dictionary/nound/Nound'
 

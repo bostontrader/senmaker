@@ -126,7 +126,7 @@ StringStore.en = {
         quiz2: 'Select \'definite\' or \'indefinite\'.',
         quiz3: 'Can you see that the article changes?'
     },
-    phrases: {
+    phrase: {
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
     },
@@ -140,6 +140,25 @@ StringStore.en = {
         quiz2: 'Can you delete a noun phrase from this list?',
         quiz3: 'Can you change the spelling of a noun phrase?'
     },
+    pastTense: {
+        help10:'We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.',
+        help11:'For example: If we performed the verb in the past we use the \'past tense\' form of the verb.',
+        help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
+    },
+    vp: {
+        help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
+        help11: 'In a verb phrase we start with a single verb and then add other words to enhance the meaning.',
+        help12: 'You have already seen your first verb phrase in the \'future tense\' lesson.  By selecting \'future tense\' and a verb, you produced a two-word verb phrase.',
+        help13: 'Here we repackage that into an explicit verb phrase format.',
+        // although a verb phrase is usually more than one word, it could be just a single verb.
+        quiz1: 'Can you add a new verb phrase?',
+        quiz2: 'Can you delete a verb phrase from this list?',
+        quiz3: 'Can you change the spelling of a verb phrase?'
+    },
+    clause: {
+        
+    },
+
     npWithAdjectives: {
         help10: '',
         help11: ''
@@ -262,6 +281,9 @@ StringStore.zh = {
         quiz1: 'Can you add a new noun phrase?',
         quiz2: 'Can you delete a noun phrase from this list?',
         quiz3: 'Can you change the spelling of a noun phrase?'
+    },
+    pastTense: {
+        help10: ''
     },
 
     // plural

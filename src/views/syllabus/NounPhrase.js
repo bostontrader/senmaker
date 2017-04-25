@@ -1,9 +1,10 @@
+// @flow
 import React from 'react'
 
 import LessonNavigator from './LessonNavigator'
 import NPPanel from '../np/NPPanel'
 
-function NounPhrases(props) {
+function NounPhrases(props:Object):Object {
 
     const style = {
         border: '1px solid black',

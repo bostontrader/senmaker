@@ -1,9 +1,12 @@
-import NPAEStore         from './NPAEStore'
-import NPActionTypes     from '../NPActionTypes'
+import NPAEStore            from './NPAEStore'
+import NPActionTypes        from '../NPActionTypes'
 import {DefinitenessSelect} from '../NPConstants'
+import {noundExamples}      from '../../TestData'
+import {npExamples}         from '../../TestData'
 import AppActionTypes       from '../../app/AppActionTypes'
 import Nound                from '../../dictionary/nound/Nound'
 import {PluralizationRule}  from '../../dictionary/nound/NoundConstants'
+
 
 describe('NPAEStore', function() {
 
@@ -50,18 +53,14 @@ describe('NPAEStore', function() {
         expect(this.state).toBe(initialState)
     })
 
-    // Signal the UI to close NPAddForm or NPEditForm. We don't test these two separately,
-    // the same state should close either one. But the delete button is only available on NPEditForm.
+    // Signal the UI to close NPAddForm or NPEditForm.
     it('ON_CLICK_DELETE_NP', function() {
         const initialState = this.state
         this.perturbState()
         expect(this.state).not.toBe(initialState)
 
         // Now close it
-        this.dispatch({
-            type: NPActionTypes.ON_CLICK_DELETE_NP,
-            np: {} // This action doesn't care about the np
-        })
+        this.dispatch({type: NPActionTypes.ON_CLICK_DELETE_NP})
         expect(this.state).toBe(initialState)
     })
 
@@ -69,19 +68,9 @@ describe('NPAEStore', function() {
     it('ON_CLICK_EDIT_NP', function() {
         this.dispatch({
             type: NPActionTypes.ON_CLICK_EDIT_NP,
-            np: {
-                id: '1',
-                nound: {id: '1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
-                definiteness: DefinitenessSelect.Definite,
-                generatedText: 'the cat'
-            }
+            np: npExamples.a
         })
-        expect(this.state.get('np').toJSON()).toEqual({
-            id: '1',
-            nound: {id: '1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
-            definiteness: DefinitenessSelect.Definite,
-            generatedText: 'the cat'
-        })
+        expect(this.state.get('np').toJSON()).toEqual(npExamples.a.toJSON())
     })
 
     // Signal the UI to close NPAddForm or NPEditForm. We don't test these two separately,
@@ -148,10 +137,9 @@ describe('NPAEStore', function() {
         // In this test, the value of id is unused.
         this.dispatch({
             type: NPActionTypes.ON_CHANGE_SELECTED_NOUND,
-            newNound: Nound({id:'666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
+            newNound: noundExamples.a
         })
-        expect(true)
-        //expect(this.state.getIn(['np','nound']).toJSON()).toEqual({id:'666', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es})
+        expect(this.state.getIn(['np','nound']).toJSON()).toEqual(noundExamples.a.toJSON())
     })
     
     it('ON_CHANGE_DEFINITENESS', function() {

@@ -1,3 +1,4 @@
+// @flow
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
@@ -27,7 +28,7 @@ class AdjectivdStore extends ReduceStore {
 
     }
 
-    reduce(state, action) {
+    reduce(state:Object, action:Object) {
 
         function insertNewRecord(adjectivd) {
             const id = state.getIn(['nextid'])
@@ -82,7 +83,11 @@ class AdjectivdStore extends ReduceStore {
 
 AdjectivdStore.initialState = Map({
     nextid:1,
-    coll:Map()  // the actual collection of adjectivd
+    coll:Map([
+        ['1',Adjectivd({id: '1', base: 'short'})],
+        ['2',Adjectivd({id: '2', base: 'fat'})],
+        ['3',Adjectivd({id: '3', base: 'stupid'})]
+    ])
 })
 
 export default new AdjectivdStore()

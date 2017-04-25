@@ -29,6 +29,7 @@ const VerbdActions = {
     // The Save button for an add or edit is clicked.
     // For programmatic insert see VerbdActionTypes INSERT_VERBD
     onClickSaveVerbd(verbd) {
+        console.log(verbd)
         AppDispatcher.dispatch({
             type: VerbdActionTypes.ON_CLICK_SAVE_VERBD,
             verbd: verbd
@@ -40,7 +41,12 @@ const VerbdActions = {
             base: base
         })
     },
-
+    onChangePastTense(pastTense) {
+        AppDispatcher.dispatch({
+            type: VerbdActionTypes.ON_CHANGE_PAST_TENSE,
+            pastTense: pastTense
+        })
+    },
     // Pump a new verbd directly into the db w/o dealing with any UI.
     insertVerbd(verbd) {
         AppDispatcher.dispatch({

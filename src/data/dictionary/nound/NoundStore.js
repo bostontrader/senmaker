@@ -1,10 +1,12 @@
+// @flow
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import Nound              from './Nound'
-import NoundActionTypes   from './NoundActionTypes'
-import AppActionTypes     from '../../app/AppActionTypes'
-import AppDispatcher      from '../../AppDispatcher'
+import Nound               from './Nound'
+import NoundActionTypes    from './NoundActionTypes'
+import {PluralizationRule} from './NoundConstants'
+import AppActionTypes      from '../../app/AppActionTypes'
+import AppDispatcher       from '../../AppDispatcher'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'NoundStore'
@@ -27,8 +29,7 @@ class NoundStore extends ReduceStore {
 
     }
 
-    reduce(state, action) {
-
+    reduce(state:Object, action:Object) {
         function insertNewRecord(nound) {
             const id = state.getIn(['nextid'])
             let newState = state.setIn(['nextid'], id + 1)
@@ -82,7 +83,12 @@ class NoundStore extends ReduceStore {
 
 NoundStore.initialState = Map({
     nextid:1,
-    coll:Map()  // the actual collection of nound
+    coll:Map([
+        ['1',Nound({id: '1', base: 'apple',  plural: 'apples', pluralization_rule: PluralizationRule.Append_s})],
+        ['2',Nound({id: '2', base: 'box',    plural: 'boxes',  pluralization_rule: PluralizationRule.Append_es})],
+        ['3',Nound({id: '3', base: 'fish',   plural: 'fish',   pluralization_rule: PluralizationRule.NoChange})],
+        ['4',Nound({id: '4', base: 'person', plural: 'people', pluralization_rule: PluralizationRule.Irregular})]
+    ])
 })
 
 export default new NoundStore()

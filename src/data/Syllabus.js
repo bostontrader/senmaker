@@ -5,9 +5,11 @@ import Nound        from '../views/syllabus/Nound'
 import Verbd        from '../views/syllabus/Verbd'
 import Adjectivd    from '../views/syllabus/Adjectivd'
 import Definiteness from '../views/syllabus/Definiteness'
-import Phrases      from '../views/syllabus/Phrases'
-import NounPhrases  from '../views/syllabus/NounPhrases'
-
+import Phrase       from '../views/syllabus/Phrase'
+import NounPhrase   from '../views/syllabus/NounPhrase'
+import PastTense    from '../views/syllabus/PastTense'
+import VerbPhrase   from '../views/syllabus/VerbPhrase'
+import Clause       from '../views/syllabus/Clause'
 /**
  * We have a series of lessons that we want to progress through, in both directions, in a specific order.
  *
@@ -27,16 +29,22 @@ import NounPhrases  from '../views/syllabus/NounPhrases'
  */
 
 const syllabus = {
-    intro:        {l:0, comp:Intro,        prev:null,           next:'nound'},
-    nound:        {l:1, comp:Nound,        prev:'intro',        next:'verbd'},
-    verbd:        {l:2, comp:Verbd,        prev:'nound',        next:'adjectivd'},
-    adjectivd:    {l:3, comp:Adjectivd,    prev:'verbd',        next:'definiteness'},
-    definiteness: {l:4, comp:Definiteness, prev:'adjectivd',    next:'phrases'},
-    phrases:      {l:5, comp:Phrases,      prev:'definiteness', next:'nounPhrases'},
-    nounPhrases:  {l:6, comp:NounPhrases,  prev:'phrases',      next:null},
+    intro:        {level:0, comp:Intro,        prev:null,           next:'nound'},
+    nound:        {level:1, comp:Nound,        prev:'intro',        next:'verbd'},
+    verbd:        {level:2, comp:Verbd,        prev:'nound',        next:'adjectivd'},
+    adjectivd:    {level:3, comp:Adjectivd,    prev:'verbd',        next:'definiteness'},
+    definiteness: {level:4, comp:Definiteness, prev:'adjectivd',    next:'phrase'},
+    phrase:       {level:5, comp:Phrase,       prev:'definiteness', next:'nounPhrase'},
+    nounPhrase:   {level:6, comp:NounPhrase,   prev:'phrase',       next:'pastTense'},
+    pastTense:    {level:7, comp:PastTense,    prev:'nounPhrase',   next:'verbPhrase'},
+    verbPhrase:   {level:8, comp:VerbPhrase,   prev:'pastTense',    next:'clause'},
+    clause:       {level:9, comp:Clause,       prev:'verbPhrase',   next:null},
+
+    // verbPhrases
+    // clauses
+
 
     // pluralization
-    // past tense
     // adjectives in noun phrases
 
     // Adverbs

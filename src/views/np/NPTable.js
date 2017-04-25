@@ -1,10 +1,11 @@
+// @flow
 import React from 'react'
 
 import NPRow from './NPRow'
 
-function NPTable(props) {
+function NPTable(props:Object):Object {
 
-    let npTable = null
+    let npTable:Object
     //const level = props.level.getIn(['currentAppLevelConfig','npPanel'])
     /*if( level >= NPPanelLevel.PLURALIZATION) {
         npTable =
@@ -36,13 +37,13 @@ function NPTable(props) {
             <table id="np-list">
                 <thead>
                     <tr>
-                        <th>Noun</th>
+                        <th>Noun Phrase</th>
                         <th> </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {[...props.np.getIn(['dict','coll']).values()].map(noun => (
-                        <NPRow key={noun.get('id')} noun={noun} strings={props.strings} />
+                    {[...props.np.getIn(['dict','coll']).values()].map(np => (
+                        <NPRow key={np.get('id')} np={np} strings={props.strings} />
                     ))}
                 </tbody>
             </table>

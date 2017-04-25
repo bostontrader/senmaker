@@ -7,7 +7,7 @@ import {findWithClass, findWithType} from 'react-shallow-testutils'
 
 //import AppActionTypes from '../data/app/AppActionTypes'
 //import AppStore from '../data/app/AppStore'
-import NounPhrases from './NounPhrases'
+import NounPhrase from './NounPhrase'
 //import LevelControl from './LevelControl'
 //import StringStore from '../data/strings/StringStore'
 //import VerbAddEditStore from '../data/dictionary/verbd/VerbdAddEditStore'

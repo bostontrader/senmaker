@@ -8,6 +8,7 @@ import rtRenderer        from 'react-test-renderer'
 import NPRow   from './NPRow'
 import NPTable from './NPTable'
 
+import {npExamples}         from '../../data/TestData'
 import AppStore             from '../../data/app/AppStore'
 import {PluralizationRule}  from '../../data/dictionary/nound/NoundConstants'
 import NP                   from '../../data/np/NP'
@@ -32,16 +33,6 @@ describe("NPTable", function() {
             this.state.np = this.state.np.set('dict',n)
         }
 
-        this.example0 = {
-            nound: {id:'1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s},
-            definiteness: DefinitenessSelect.Definite,
-            generatedText: 'the cat'
-        }
-        this.example1 = {
-            nound: {id:'2', base: 'box', plural: 'boxes', pluralization_rule: PluralizationRule.Append_es},
-            definiteness: DefinitenessSelect.Indefinite,
-            generatedText: 'a box'
-        }
     })
 
     it("Renders a NPTable", function() {
@@ -57,7 +48,7 @@ describe("NPTable", function() {
     })
 
     it("Will render one NPRow", function() {
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: NP(this.example0)})
+        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.a})
         
         const renderExpression = <NPTable {...this.state} />
         const npTable = TestUtils.createRenderer().render(renderExpression)
@@ -69,8 +60,8 @@ describe("NPTable", function() {
     })
 
     it("Will render two NPRow", function() {
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: NP(this.example0)})
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: NP(this.example1)})
+        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.a})
+        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.b})
 
         const renderExpression = <NPTable {...this.state} />
         const npTable = TestUtils.createRenderer().render(renderExpression)

@@ -1,11 +1,15 @@
+// @flow
 import React from 'react'
-import {RadioGroup, Radio} from 'react-radio-group'
+import {Radio}      from 'react-radio-group'
+import {RadioGroup} from 'react-radio-group'
 
 import NoundSelect  from '../../dictionary/nound/NoundSelect'
 import NPActions from '../../../data/np/NPActions'
+import {validateVerbd} from '../../../data/Validator'
+import {validateVP}    from '../../../data/Validator'
 
 // should be all global props, an object that contains several immutables
-function NPAddForm(props) {
+function NPAddForm(props:Object):Object {
 
     const style = {
         border: '1px solid black',
@@ -13,9 +17,11 @@ function NPAddForm(props) {
     }
     const s = props.strings
 
-    const onClickSave = () => NPActions.onClickSaveNP(
-        props.np.getIn(['addedit','np'])  // NP
-    )
+    const onClickSave = () => {
+        const vp = props.vp.getIn(['addedit','vp'])
+        validateVP(vp)
+        VPActions.onClickSaveVP(vp)
+    }
 
     let theButtons = []
     if ( props.app.getIn(['level','currentLevel']) >= 6) // currentLevel:number
@@ -25,17 +31,18 @@ function NPAddForm(props) {
         ]
 
     // should be nound because we want a select list of nound!
-    const options = props.nound.getIn(['dict','coll']).toArray().map(function(noun) {
-        return {value:noun.get('id').toString(), label:noun.get('base')}
+    const selectOptions = props.nound.getIn(['dict','coll']).toArray().map(function(noun) {
+        return {value:noun.get('id'), label:noun.get('base')}
     })
-    const selectedValue = props.np.getIn(['addedit','np','nound','id']) // sb nound
+    const selectedValue:string = props.np.getIn(['addedit','np','nound','id'])
 
-    const onChange = (id) => { // id should be a number
-        NPActions.onChangeSelectedNound(props.nound.getIn(['dict','coll',id.toString()]))
+    const onChangeNound = (id) => { // id should be a number
+        NPActions.onChangeSelectedNound(props.nound.getIn(['dict','coll',id]))
     }
+
     return(
         <div style={style}>
-            <NoundSelect options={options} value={selectedValue} onChange={onChange} />
+            <NoundSelect options={selectOptions} value={selectedValue} onChange={onChangeNound} />
             <RadioGroup name="definiteness" selectedValue={props.np.getIn(['addedit','np','definiteness'])} onChange={(e)=>{NPActions.onChangeDefiniteness(e)}}>
                 <Radio value="definite" />Definite
                 <Radio value="indefinite" />Indefinite

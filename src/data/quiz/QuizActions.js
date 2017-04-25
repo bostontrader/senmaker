@@ -17,10 +17,10 @@ const QuizActions = {
             })
         }
     },
-    phrases: {
+    phrase: {
         onIUnderstand() {
             AppDispatcher.dispatch({
-                type: QuizActionTypes.phrases.ON_I_UNDERSTAND
+                type: QuizActionTypes.phrase.ON_I_UNDERSTAND
             })
         },
     }

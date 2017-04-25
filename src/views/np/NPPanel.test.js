@@ -1,18 +1,20 @@
 import {Map} from 'immutable'
 import React from 'react'
 
-import TestUtils         from 'react-addons-test-utils'
-import rtRenderer        from 'react-test-renderer'
+import TestUtils      from 'react-addons-test-utils'
+import rtRenderer     from 'react-test-renderer'
 import {findWithType} from 'react-shallow-testutils'
 
-import AppStore from '../../data/app/AppStore'
-import NPAddForm  from './addedit/NPAddForm'
-//import NPEditForm from './addedit/NPEditForm'
-import NPPanel    from './NPPanel'
-import NPTable    from './NPTable'
-import NoundAEStore  from '../../data/dictionary/nound/addedit/NoundAEStore'
-import NPAEStore  from '../../data/np/addedit/NPAEStore'
-import StringStore   from '../../data/strings/StringStore'
+import NPPanel      from './NPPanel'
+import NPTable      from './NPTable'
+import NPAddForm    from './addedit/NPAddForm'
+import NPEditForm   from './addedit/NPEditForm'
+import AppStore     from '../../data/app/AppStore'
+import NoundStore   from '../../data/dictionary/nound/NoundStore'
+import NoundAEStore from '../../data/dictionary/nound/addedit/NoundAEStore'
+import NPStore      from '../../data/np/NPStore'
+import NPAEStore    from '../../data/np/addedit/NPAEStore'
+import StringStore  from '../../data/strings/StringStore'
 
 describe("NPPanel", () => {
 
@@ -20,7 +22,7 @@ describe("NPPanel", () => {
         const props = {
             np: Map({
                 addedit: NPAEStore.getInitialState(),
-                np: Map()
+                dict: Map()
             }),
             strings:StringStore.getInitialState()
         }
@@ -32,7 +34,9 @@ describe("NPPanel", () => {
         expect(findWithType(npPanel,'button'))
         expect(findWithType(npPanel,NPTable))
 
-        //const tree = rtRenderer.create(renderExpression).toJSON()
+        // This code errors with "Cannot read property 'style' of null"
+        // I think this is because of the select statement
+        // const tree = rtRenderer.create(renderExpression).toJSON()
         //expect(tree).toMatchSnapshot()
     })
 
@@ -41,11 +45,11 @@ describe("NPPanel", () => {
             app: AppStore.getState(),
             nound: Map({
                 addedit: NoundAEStore.getInitialState(),
-                nouns: Map()
+                dict: NoundStore.getInitialState()
             }),
             np: Map({
                 addedit: NPAEStore.getInitialState(),
-                nouns: Map()
+                dict: NPStore.getInitialState()
             }),
             strings:StringStore.getInitialState()
         }
@@ -64,11 +68,16 @@ describe("NPPanel", () => {
         //expect(tree).toMatchSnapshot()
     })
 
-    /*it("Renders a NPPanel with a NPEditForm", () => {
-        const props = {
+    it("Renders a NPPanel with a NPEditForm", () => {
+        let props = {
+            app: AppStore.getState(),
+            nound: Map({
+                addedit: NoundAEStore.getInitialState(),
+                dict: NoundStore.getInitialState()
+            }),
             np: Map({
                 addedit: NPAEStore.getInitialState(),
-                nouns: Map()
+                dict: NPStore.getInitialState()
             }),
             strings:StringStore.getInitialState()
         }
@@ -82,7 +91,9 @@ describe("NPPanel", () => {
         expect(findWithType(npPanel,NPEditForm))
         expect(findWithType(npPanel,NPTable))
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
-    })*/
+        // This code errors with "Cannot read property 'style' of null"
+        // I think this is because of the select statement
+        //const tree = rtRenderer.create(renderExpression).toJSON()
+        //expect(tree).toMatchSnapshot()
+    })
 })

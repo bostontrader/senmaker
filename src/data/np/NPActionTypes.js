@@ -1,3 +1,4 @@
+// @flow
 const NPActionTypes = {
 
     // add/edit UI

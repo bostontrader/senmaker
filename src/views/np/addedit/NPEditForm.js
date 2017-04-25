@@ -1,11 +1,12 @@
 // @flow
-import React from 'react'
-import {RadioGroup, Radio} from 'react-radio-group'
+import React        from 'react'
+import {Radio}      from 'react-radio-group'
+import {RadioGroup} from 'react-radio-group'
 
 import NoundSelect  from '../../dictionary/nound/NoundSelect'
 import NPActions    from '../../../data/np/NPActions'
 
-function NPEditForm(props:Object) {
+function NPEditForm(props:Object):Object {
 
     const style = {
         border: '1px solid black',
@@ -20,17 +21,17 @@ function NPEditForm(props:Object) {
     const onDelete = () => NPActions.onClickDeleteNP(props.np.getIn(['addedit','np','id']))
 
     // should be nound because we want a select list of nound!
-    const options = props.nound.getIn(['dict','coll']).toArray().map(function(noun) {
-        return {value:noun.get('id').toString(), label:noun.get('base')}
+    const selectOptions = props.nound.getIn(['dict','coll']).toArray().map(function(noun) {
+        return {value:noun.get('id'), label:noun.get('base')}
     })
     const selectedValue = props.np.getIn(['addedit','np','nound','id']).toString()
 
-    const onChange = (id) => { // id should be a number
-        NPActions.onChangeSelectedNound(props.nound.getIn(['dict','coll',id.toString()]))
+    const onChange = (id) => {
+        NPActions.onChangeSelectedNound(props.nound.getIn(['dict','coll',parseInt(id)]))
     }
     return(
         <div style={style}>
-            <NoundSelect options={options} value={selectedValue} onChange={onChange} />
+            <NoundSelect options={selectOptions} value={selectedValue} onChange={onChange} />
             <RadioGroup name="definiteness" selectedValue={props.np.getIn(['addedit','np','definiteness'])} onChange={(e)=>{NPActions.onChangeDefiniteness(e)}}>
                 <Radio value="definite" />Definite
                 <Radio value="indefinite" />Indefinite

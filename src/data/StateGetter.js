@@ -5,12 +5,15 @@ import AdjectivdAEStore from '../data/dictionary/adjectivd/addedit/AdjectivdAESt
 import AdjectivdStore   from '../data/dictionary/adjectivd/AdjectivdStore'
 import NoundAEStore     from '../data/dictionary/nound/addedit/NoundAEStore'
 import NoundStore       from '../data/dictionary/nound/NoundStore'
-import NPAEStore        from '../data/np/addedit/NPAEStore'
-import NPStore          from '../data/np/NPStore'
 import VerbdAEStore     from '../data/dictionary/verbd/addedit/VerbdAEStore'
 import VerbdStore       from '../data/dictionary/verbd/VerbdStore'
+import NPAEStore        from '../data/np/addedit/NPAEStore'
+import NPStore          from '../data/np/NPStore'
 import QuizStore        from '../data/quiz/QuizStore'
 import StringStore      from '../data/strings/StringStore'
+import VPAEStore        from '../data/vp/addedit/VPAEStore'
+import VPStore          from '../data/vp/VPStore'
+
 
 const state = {
 
@@ -46,7 +49,13 @@ const state = {
     verbd: Map({
         addedit: VerbdAEStore.getState(),
         dict: VerbdStore.getState(),
-    })
+    }),
+
+    // A collection of available vp.
+    vp: Map({
+        addedit: VPAEStore.getState(),
+        dict: VPStore.getState(),
+    }),
 }
 
 export default state

@@ -1,11 +1,14 @@
+// @flow
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
-import NP            from './NP'
-import NPActionTypes from './NPActionTypes'
-import AppDispatcher    from '../AppDispatcher'
-import AppActionTypes   from '../app/AppActionTypes'
-import Nound            from '../dictionary/nound/Nound'
+import NP             from './NP'
+import NPActionTypes  from './NPActionTypes'
+import AppDispatcher  from '../AppDispatcher'
+import {MakeMapOfNP}  from '../JSONParseUtils'
+import {validateNP}   from '../Validator'
+import AppActionTypes from '../app/AppActionTypes'
+import Nound          from '../dictionary/nound/Nound'
 
 import {localStorageAvailable} from '../../LocalStorage'
 const localStorageKey = 'NPStore'
@@ -18,34 +21,34 @@ class NPStore extends ReduceStore {
     getInitialState() {
 
         if (localStorageAvailable) {
-            const localStorageState = localStorage.getItem(localStorageKey)
+            const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return fromJS(JSON.parse(localStorageState))
+            if(localStorageState) {
+                let originalParse = fromJS(JSON.parse(localStorageState))
+                let newColl = MakeMapOfNP(originalParse.getIn(['coll']))
+                return originalParse.set('coll',newColl)
+            }
         }
-
         return NPStore.initialState
 
     }
 
-    reduce(state, action) {
+    reduce(state:Object, action:Object):Object {
 
-        function insertNewRecord(np:NP) {
-            const id:string = state.getIn(['nextid'])
+        function insertNewRecord(np:Object):Object {
+            validateNP(np)
+            const id:number = state.getIn(['nextid'])
             let newState = state.setIn(['nextid'], id + 1)
 
-            return newState.setIn(['coll',id], NP({
-                id: id,
-                nound: Nound(np.get('nound')),
+            return newState.setIn(['coll',id.toString()], NP({
+                id: id.toString(),
+                nound: np.get('nound'),
                 definiteness: np.get('definiteness'),
                 generatedText: np.get('generatedText')
-                //nound: Nound(np.nound),
-                //definiteness: np.definiteness,
-                //generatedText: np.generatedText
             }))
         }
 
-        let newState = state
+        let newState:Object = state
         
         switch (action.type) {
 
@@ -56,11 +59,10 @@ class NPStore extends ReduceStore {
 
             // Insert a new record or update an existing one, originating from a UI.
             case NPActionTypes.ON_CLICK_SAVE_NP: // string
+                validateNP(action.np)
                 if(action.np.id) {
                     // An id exists so update the existing record.
-                    console.log(newState)
                     newState = newState.setIn(['coll', action.np.id], NP(action.np))
-                    console.log(newState)
                 } else {
                     // No id exists so insert a new record.
                     newState = insertNewRecord(action.np)
@@ -68,13 +70,12 @@ class NPStore extends ReduceStore {
                 break
             
             case NPActionTypes.ON_CLICK_DELETE_NP:
-                // Use them both to make the UI and the test work. Why?
-                newState = newState.deleteIn(['coll',action.id.toString()]) // this works for the UI
-                newState = newState.deleteIn(['coll',action.id]) // this works for the test
+                newState = newState.deleteIn(['coll',action.id])
                 break
 
             // Insert a new record programmatically, w/o a UI.
             case NPActionTypes.INSERT_NP:
+                validateNP(action.np)
                 newState = insertNewRecord(action.np)
                 break
 

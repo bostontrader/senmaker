@@ -1,8 +1,7 @@
 import React from 'react'
 
 import VerbdActions from '../../../../data/dictionary/verbd/VerbdActions'
-//import {VerbdPanelLevel} from '../../../../data/dictionary/verbd/VerbdConstants'
-//import PastTenseRuleSelect from '../PastTenseRuleSelect'
+import PastTenseRuleSelect from '../PastTenseRuleSelect'
 
 function VerbdEditForm(props) {
 
@@ -13,24 +12,35 @@ function VerbdEditForm(props) {
 
     const onClickSave = () => VerbdActions.onClickSaveVerbd({
         id: props.verbd.getIn(['addedit','verbd','id']),
-        base: props.verbd.getIn(['addedit','verbd','base'])
+        base: props.verbd.getIn(['addedit','verbd','base']),
+        pastTense: props.verbd.getIn(['addedit','verbd','pastTense'])
+
     })
     const onDelete = () => VerbdActions.onClickDeleteVerbd(props.verbd.getIn(['addedit','verbd','id']))
     const s = props.strings
 
     let verbdEditForm = null
 
-    /*if(props.level.getIn(['currentAppLevelConfig','verbdPanel']) >= VerbdPanelLevel.PAST_TENSE) {
+    if(props.app.getIn(['level','currentLevel'])) {
         verbdEditForm =
-            <div id="verbd-edit-form">
+            <div>
                 <label htmlFor='base'>Base</label>
-                <input id='base' name='base' type='text' value={props.addEditVerb.getIn(['verb','base'])} onChange={(e)=>props.onChangeVerbBase(e.target.value)}/>
-                <PastTenseRuleSelect pastTense_rule={props.editingVerb.pastTense_rule}/>
-                <input id='save' type='submit' value={s.save}/>
-                <button id='delete' onClick={onDelete}>{s.delete}</button>
-                <button onClick={props.onCancelVerb}>{s.cancel}</button>
-            </div>*/
-    //} else if(props.level.getIn(['currentAppLevelConfig','verbdPanel']) >= VerbdPanelLevel.BASE) {
+                <input id='base' name='base' type='text'
+                    value={props.verbd.getIn(['addedit','verbd','base'])}
+                    onChange={(e)=>VerbdActions.onChangeBase(e.target.value)}
+                />
+                <label htmlFor='pastTense'>Past Tense</label>
+                <input id='pastTense' name='pastTense' type='text'
+                    value={props.verbd.getIn(['addedit','verbd','pastTense'])}
+                    onChange={(e)=>VerbdActions.onChangePastTense(e.target.value)}
+                />
+                <PastTenseRuleSelect pastTense_rule={0}/>
+
+                <button id='save-verbd' onClick={onClickSave}>{s.save}</button>
+                <button id='cancel'     onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
+            </div>
+
+    } else {
         verbdEditForm =
             <div id="verbd-edit-form" style={style}>
                 <label htmlFor='base'>Base</label>
@@ -42,7 +52,7 @@ function VerbdEditForm(props) {
                 <button id='delete-verbd' onClick={onDelete}>{s.delete}</button>
                 <button id='cancel'       onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
             </div>
-    //}
+    }
 
     return verbdEditForm
 

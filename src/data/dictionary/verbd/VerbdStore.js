@@ -1,8 +1,10 @@
+// @flow
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
 import Verbd            from './Verbd'
 import VerbdActionTypes from './VerbdActionTypes'
+import {PastTenseRule}  from './VerbdConstants'
 import AppActionTypes   from '../../app/AppActionTypes'
 import AppDispatcher    from '../../AppDispatcher'
 
@@ -17,17 +19,23 @@ class VerbdStore extends ReduceStore {
     getInitialState() {
 
         if (localStorageAvailable) {
-            const localStorageState = localStorage.getItem(localStorageKey)
+            const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return fromJS(JSON.parse(localStorageState))
+            if(localStorageState) {
+                let n = fromJS(JSON.parse(localStorageState))
+                n = n.set('coll',n.getIn(['coll']).map(verbd => (Verbd(verbd))))
+                return n
+            } else {
+                return VerbdStore.initialState
+            }
+
         }
 
         return VerbdStore.initialState
 
     }
 
-    reduce(state, action) {
+    reduce(state:Object, action:Object) {
 
         function insertNewRecord(verbd) {
             const id = state.getIn(['nextid'])
@@ -82,7 +90,11 @@ class VerbdStore extends ReduceStore {
 
 VerbdStore.initialState = Map({
     nextid:1,
-    coll:Map()  // the actual collection of verbd
+    coll:Map([
+        ['1',Verbd({id: '1', base: 'eat',  pastTense: 'ate',    pastTense_rule: PastTenseRule.Irregular})],
+        ['2',Verbd({id: '2', base: 'hit',  pastTense: 'hit',    pastTense_rule: PastTenseRule.NoChange})],
+        ['3',Verbd({id: '3', base: 'jump', pastTense: 'jumped', pastTense_rule: PastTenseRule.Append_ed})]
+    ])
 })
 
 export default new VerbdStore()

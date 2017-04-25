@@ -1,3 +1,4 @@
+// @flow
 /**
  * What is the rule for transforming the base form of the verb into the plural?
  */

@@ -88,6 +88,10 @@ class VerbdAEStore extends ReduceStore {
                 newState = newState.updateIn(['verbd','base'],value => action.base)
                 break
 
+            case VerbdActionTypes.ON_CHANGE_PAST_TENSE:
+                newState = newState.updateIn(['verbd','pastTense'],value => action.pastTense)
+                break
+
             default:
                 // do nothing, newState is already set to the existing state
         }

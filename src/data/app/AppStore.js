@@ -49,12 +49,12 @@ class AppStore extends ReduceStore {
                 // not present a choice to advance to the non-existent prior lesson.
                 // Nevertheless, catch that here also.
 
-                if(syllabusEntry.prev) {
-                    const newCurrentLevel = state.getIn(['level','currentLevel']) - 1
-                    newState = newState.setIn(['level','currentLevel'],newCurrentLevel)
-                    newState = newState.setIn(['level','currentLesson'],syllabusEntry.prev)
-                    newState = newState.setIn(['level','firstLesson'], newCurrentLevel === 0)
-                    newState = newState.setIn(['level','lastLesson'],false)
+                if (syllabusEntry.prev) {
+                    const newCurrentLevel = state.getIn(['level', 'currentLevel']) - 1
+                    newState = newState.setIn(['level', 'currentLevel'], newCurrentLevel)
+                    newState = newState.setIn(['level', 'currentLesson'], syllabusEntry.prev)
+                    newState = newState.setIn(['level', 'firstLesson'], newCurrentLevel === 0)
+                    newState = newState.setIn(['level', 'lastLesson'], false)
                 }
                 break
 
@@ -62,23 +62,18 @@ class AppStore extends ReduceStore {
                 // If the current lesson is the last lesson then the UI should
                 // not present a choice to advance to the non-existent next lesson.
                 // Nevertheless, catch that here also.
-                const lessonCount  = Object.keys(syllabus).length
-                if(syllabusEntry.next) {
-                    const newCurrentLevel = state.getIn(['level','currentLevel']) + 1
+                const lessonCount = Object.keys(syllabus).length
+                if (syllabusEntry.next) {
+                    const newCurrentLevel = state.getIn(['level', 'currentLevel']) + 1
 
-                    newState = newState.setIn(['level','currentLevel'],newCurrentLevel)
-                    newState = newState.setIn(['level','currentLesson'],syllabusEntry.next)
-                    newState = newState.setIn(['level','firstLesson'],false)
-                    newState = newState.setIn(['level','lastLesson'],newCurrentLevel >= lessonCount -1)
+                    newState = newState.setIn(['level', 'currentLevel'], newCurrentLevel)
+                    newState = newState.setIn(['level', 'currentLesson'], syllabusEntry.next)
+                    newState = newState.setIn(['level', 'firstLesson'], false)
+                    newState = newState.setIn(['level', 'lastLesson'], newCurrentLevel >= lessonCount - 1)
                 }
                 break
 
-            // NoundActiontypes
-            //case NoundActionTypes.ON_CHANGE_SELECTED_NOUND:
-                //newState = newState.set('mostRecentlySelectedNound',action.nound)
-                //break
-
-            //default:
+            default:
                 // do nothing, newState is already set to the existing state
         }
 
@@ -95,8 +90,7 @@ AppStore.initialState = Map({
         currentLesson:'intro',  // should stay in sync
         firstLesson:true,       // is this the first lesson?
         lastLesson:false,
-    }),
-    mostRecentlySelectedNound:Nound()
+    })
 })
 
 export default new AppStore()

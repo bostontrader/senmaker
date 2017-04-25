@@ -1,8 +1,7 @@
 import React from 'react'
 
 import VerbdActions from '../../../../data/dictionary/verbd/VerbdActions'
-//import PastTenseRuleSelect from '../PastTenseRuleSelect'
-//import {VerbdPanelLevel} from '../../../../data/dictionary/verbd/VerbdConstants'
+import PastTenseRuleSelect from '../PastTenseRuleSelect'
 
 function VerbdAddForm(props) {
 
@@ -17,18 +16,27 @@ function VerbdAddForm(props) {
     const s = props.strings
 
     let verbdAddForm = null
-    
-    /*if(props.level.getIn(['currentAppLevelConfig', 'verbdPanel']) >= VerbdPanelLevel.PAST_TENSE) {
+
+    if(props.app.getIn(['level','currentLevel'])) {
         verbdAddForm =
             <div>
                 <label htmlFor='base'>Base</label>
-                <input name='base' type='text'  />
+                <input id='base' name='base' type='text'
+                       value={props.verbd.getIn(['addedit','verbd','base'])}
+                       onChange={(e)=>VerbdActions.onChangeBase(e.target.value)}
+                />
+                <label htmlFor='pastTense'>Past Tense</label>
+                <input id='pastTense' name='pastTense' type='text'
+                       value={props.verbd.getIn(['addedit','verbd','pastTense'])}
+                       onChange={(e)=>VerbdActions.onChangePastTense(e.target.value)}
+                />
                 <PastTenseRuleSelect pastTense_rule={0}/>
-                <input type='submit' value={s.save} onClick={onInsert}/>
-                <button onClick={props.onCancelVerb}>{s.cancel}</button>
+
+                <button id='save-verbd' onClick={onClickSave}>{s.save}</button>
+                <button id='cancel'     onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
             </div>
 
-    } else if(props.level.getIn(['currentAppLevelConfig', 'verbdPanel']) >= VerbdPanelLevel.BASE) {*/
+    } else {
         verbdAddForm =
             <div id="verbd-add-form" style={style}>
                 <label htmlFor='base'>Base</label>
@@ -39,7 +47,7 @@ function VerbdAddForm(props) {
                 <button id='save-verbd' onClick={onClickSave}>{s.save}</button>
                 <button id='cancel'     onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
             </div>
-    //}
+    }
 
     return verbdAddForm
 }

@@ -6,8 +6,10 @@ import VerbdRow from './VerbdRow'
 function VerbdTable(props) {
 
     let verbdTable = null
-    /*const level = props.level.getIn(['currentAppLevelConfig','verbdPanel'])
-    if( level >= VerbdPanelLevel.PAST_TENSE) {
+    //const level = props.level.getIn(['currentAppLevelConfig','verbdPanel'])
+    const level = props.app.getIn(['level','currentLevel'])
+    //if( level >= VerbdPanelLevel.PAST_TENSE) {
+    if (level >= 7) {
         verbdTable =
             <table id="verbd-list">
                 <thead>
@@ -18,20 +20,13 @@ function VerbdTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {[...props.verbs.values()].reverse().map(verb => (
-                        <VerbdRow
-                            key={verb.id}
-                            editing={props.editingVerb}
-                            level={level}
-                            verb={verb}
-                            onDeleteVerb={props.onDeleteVerb}
-                            onEditVerb={props.onEditVerb}
-                            strings = {props.strings}
-                        />
-                    ))}
+                {[...props.verbd.getIn(['dict','coll']).values()].map(verb => (
+                    <VerbdRow key={verb.get('id')} verb={verb} level={level} strings={props.strings} />
+                ))}
                 </tbody>
             </table>
-    } else if (level >= VerbdPanelLevel.BASE) {*/
+
+    } else {
 
         verbdTable =
             <table id="verbd-list">
@@ -43,11 +38,11 @@ function VerbdTable(props) {
                 </thead>
                 <tbody>
                     {[...props.verbd.getIn(['dict','coll']).values()].map(verb => (
-                        <VerbdRow key={verb.get('id')} verb={verb} strings={props.strings} />
+                        <VerbdRow key={verb.get('id')} verb={verb} level={level} strings={props.strings} />
                     ))}
                 </tbody>
             </table>
-    //}
+    }
 
     return(verbdTable)
 

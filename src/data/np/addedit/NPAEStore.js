@@ -1,3 +1,4 @@
+// @flow
 import {ReduceStore} from 'flux/utils'
 import {fromJS, Map} from 'immutable'
 
@@ -5,8 +6,10 @@ import NP                   from '../NP'
 import NPActionTypes        from '../NPActionTypes'
 import {DefinitenessSelect} from '../NPConstants'
 import AppDispatcher        from '../../AppDispatcher'
+import {MakeNP}             from '../../JSONParseUtils'
+import {validateNound}      from '../../Validator'
+import {validateNP}         from '../../Validator'
 import AppActionTypes       from '../../app/AppActionTypes'
-//import NPActionTypes     from '../../dictionary/nound/NPActionTypes'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'NPAEStore'
@@ -32,21 +35,25 @@ class NPAEStore extends ReduceStore {
     getInitialState() {
 
         if (localStorageAvailable) {
-            const localStorageState = localStorage.getItem(localStorageKey)
+            const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return fromJS(JSON.parse(localStorageState))
+            if(localStorageState) {
+                let originalParse = fromJS(JSON.parse(localStorageState))
+                let newNP = MakeNP(originalParse.getIn(['np']))
+                return originalParse.set('np',newNP)
+            }
+
         }
-
         return NPAEStore.initialState
 
     }
 
-    reduce(state, action) {
+    reduce(state:Object, action:Object):Object {
 
-        let newState = state
+        let newState:Object = state
 
-        const calcResultText = (definiteness, nound) => {
+        const calcResultText = (definiteness:string, nound:Object):string => {
+            validateNound(nound)
             // Graft in this ugly code from another project...
             // http://www.ef.com/english-resources/english-grammar/singular-and-plural-nouns
             //const noun = this.state.selectedNoun
@@ -155,9 +162,9 @@ class NPAEStore extends ReduceStore {
             //return definiteness.concat(presentNPId)
         }
 
-        let presentDefiniteness
-        let presentNP
-        let generatedText
+        let presentDefiniteness:number
+        let presentNound:Object
+        let generatedText:string
 
         switch (action.type) {
 
@@ -185,6 +192,7 @@ class NPAEStore extends ReduceStore {
 
             // Signal the UI to open NPEditForm and populate with the given data.
             case NPActionTypes.ON_CLICK_EDIT_NP:
+                validateNP(action.np)
                 newState = newState.set('np', NP({
                     id: action.np.id,
                     nound: action.np.nound,
@@ -201,18 +209,19 @@ class NPAEStore extends ReduceStore {
 
             case NPActionTypes.ON_CHANGE_DEFINITENESS:
                 presentDefiniteness = action.newDefiniteness
-                presentNP = state.getIn(['np','nound'])
-                generatedText = calcResultText(presentDefiniteness, presentNP)
+                presentNound = state.getIn(['np','nound'])
+                generatedText = calcResultText(presentDefiniteness, presentNound)
                 newState = newState.updateIn(['np','definiteness'],value => action.newDefiniteness)
                 newState = newState.updateIn(['np','generatedText'], value => generatedText)
                 break
 
             // Should be NOUND because that's what's being changed!
             case NPActionTypes.ON_CHANGE_SELECTED_NOUND:
+                validateNound(action.newNound)
                 presentDefiniteness = state.getIn(['np','definiteness'])
-                presentNP = action.newNound
-                generatedText = calcResultText(presentDefiniteness, presentNP)
-                newState = newState.updateIn(['np','nound'],value => presentNP)
+                presentNound = action.newNound
+                generatedText = calcResultText(presentDefiniteness, presentNound)
+                newState = newState.updateIn(['np','nound'],value => presentNound)
                 newState = newState.updateIn(['np','generatedText'], value => generatedText)
                 break
 

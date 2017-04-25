@@ -1,5 +1,5 @@
-import {Map} from 'immutable'
-import React from 'react'
+import {Map}        from 'immutable'
+import React        from 'react'
 import {RadioGroup} from 'react-radio-group'
 
 import TestUtils         from 'react-addons-test-utils'
@@ -43,7 +43,6 @@ describe("NPAddForm", function() {
 
     it("Renders a NPAddForm < level 5", function() {
         const renderExpression = <NPAddForm {...this.state} />
-        expect(true)
         const npAddForm = TestUtils.createRenderer().render(renderExpression)
         expect(npAddForm.type).toBe('div')
 
