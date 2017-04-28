@@ -1,3 +1,4 @@
+//@flow
 import {Record} from 'immutable'
 import {PluralizationRule} from './NoundConstants'
 
@@ -11,7 +12,7 @@ import {PluralizationRule} from './NoundConstants'
  * never say never, (except when quoting this rule,) especially with English.
  * So store all three and use this redundancy as a basis for error detection.
  *
- * In constructing larger English structures, we'll instantiate any number of actual Nouni
+ * In constructing larger English structures, we'll instantiate any number of actual NounPhrases
  * and we'll use Nound to do so.
  */
 const Nound = Record({

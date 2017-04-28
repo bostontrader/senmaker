@@ -1,4 +1,5 @@
-const VerbdActionTypes = {
+// @flow
+const VerbdActionTypes:Object = {
 
     // add/edit UI
     ON_CLICK_ADD_VERBD:    'ON_CLICK_ADD_VERBD',

@@ -81,7 +81,6 @@ class NoundStore extends ReduceStore {
 
             default:
                 // do nothing, newState is already set to the existing state
-
         }
 
         if(localStorageAvailable)

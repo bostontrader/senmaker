@@ -2,7 +2,7 @@
 /**
  * What is the rule for transforming the base form of the verb into the plural?
  */
-const PluralizationRule = {
+const PluralizationRule:Object = {
     'NoneSelected': 0,
     'NoChange':   101,
     'Append_s':   102,
@@ -20,10 +20,10 @@ const PluralizationRule = {
  of intermediate granularity.  Here we define the levels available for the NoundPanel component.
  This level drives the level of all of the child components as well.
  */
-const NoundPanelLevel = {
+const NoundPanelLevel:Object = {
     'BASE':          100,
     'PLURALIZATION': 200
 }
 
-export {PluralizationRule}
 export {NoundPanelLevel}
+export {PluralizationRule}

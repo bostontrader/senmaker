@@ -1,6 +1,5 @@
 import NoundAEStore        from './NoundAEStore'
 import NoundActionTypes    from '../NoundActionTypes'
-import {PluralizationRule} from '../NoundConstants'
 import {noundExamples}     from '../../../TestData'
 import AppActionTypes      from '../../../app/AppActionTypes'
 
@@ -82,7 +81,7 @@ describe('NoundAEStore', function() {
         this.perturbState()
         expect(this.state).not.toBe(initialState)
 
-        this.dispatch({type: NoundActionTypes.ON_CLICK_SAVE_NOUND, nound: {}})
+        this.dispatch({type: NoundActionTypes.ON_CLICK_SAVE_NOUND})
         expect(this.state).toBe(initialState)
     })
 

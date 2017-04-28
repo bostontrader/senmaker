@@ -1,24 +1,27 @@
+// @flow
 import React from 'react'
 
 import NoundActions from '../../../../data/dictionary/nound/NoundActions'
 //import {NoundPanelLevel} from '../../../../data/dictionary/nound/NoundConstants'
 //import PluralizationRuleSelect from './PluralizationRuleSelect'
 
-function NoundEditForm(props) {
+function NoundEditForm(props:Object):Object {
 
-    const style = {
+    const style:Object = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const onClickSave = () => NoundActions.onClickSaveNound({
-        id: props.nound.getIn(['addedit','nound','id']),
-        base: props.nound.getIn(['addedit','nound','base'])
-    })
-    const onDelete = () => NoundActions.onClickDeleteNound(props.nound.getIn(['addedit','nound','id']))
-    const s = props.strings
+    const s:Object = props.strings
 
-    let noundEditForm = null
+    const onClickSave:Function = () => NoundActions.onClickSaveNound({
+        id: props.nound.getIn(['addedit','nound','id']),
+        base: props.nound.getIn(['addedit','nound','base']),
+        //plural: props.nound.getIn(['addedit','nound','plural'])
+    })
+    const onDelete:Function = () => NoundActions.onClickDeleteNound(props.nound.getIn(['addedit','nound','id']))
+
+    let noundEditForm:Object
 
     //if(props.level.getIn(['currentAppLevelConfig','noundPanel']) >= NoundPanelLevel.PLURALIZATION) {
         /*noundEditForm =

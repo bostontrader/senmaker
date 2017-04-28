@@ -1,3 +1,4 @@
+// @flow
 import {Record} from 'immutable'
 import {PastTenseRule} from './VerbdConstants'
 
@@ -11,7 +12,7 @@ import {PastTenseRule} from './VerbdConstants'
  * never say never, (except when quoting this rule,) especially with English.
  * So store all three and use this redundancy as a basis for error detection.
  *
- * In constructing larger English structures, we'll instantiate any number of actual Verbi
+ * In constructing larger English structures, we'll instantiate any number of actual VerbPhrases
  * and we'll use Verbd to do so.
  */
 const Verbd = Record({

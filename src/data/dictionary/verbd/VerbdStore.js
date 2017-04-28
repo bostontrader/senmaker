@@ -7,6 +7,8 @@ import VerbdActionTypes from './VerbdActionTypes'
 import {PastTenseRule}  from './VerbdConstants'
 import AppActionTypes   from '../../app/AppActionTypes'
 import AppDispatcher    from '../../AppDispatcher'
+import {MakeMapOfVerbd} from '../../JSONParseUtils'
+import {validateVerbd}  from '../../Validator'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'VerbdStore'
@@ -22,33 +24,32 @@ class VerbdStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let n = fromJS(JSON.parse(localStorageState))
-                n = n.set('coll',n.getIn(['coll']).map(verbd => (Verbd(verbd))))
-                return n
-            } else {
-                return VerbdStore.initialState
+                let originalParse = fromJS(JSON.parse(localStorageState))
+                let newColl = MakeMapOfVerbd(originalParse.getIn(['coll']))
+                return originalParse.set('coll',newColl)
             }
-
         }
 
         return VerbdStore.initialState
 
     }
 
-    reduce(state:Object, action:Object) {
+    reduce(state:Object, action:Object):Object {
 
         function insertNewRecord(verbd) {
-            const id = state.getIn(['nextid'])
+            validateVerbd(verbd)
+            const id:number = state.getIn(['nextid'])
             let newState = state.setIn(['nextid'], id + 1)
-            return newState.setIn(['coll',id], Verbd({
-                id: id,
-                base: verbd.base,
-                pastTense: verbd.pastTense,
-                pastTense_rule: verbd.pastTense_rule
+
+            return newState.setIn(['coll',id.toString()], Verbd({
+                id: id.toString(),
+                base: verbd.get('base'),
+                pastTense: verbd.get('pastTense'),
+                pastTense_rule: verbd.get('pastTense_rule')
             }))
         }
 
-        let newState = state
+        let newState:Object = state
 
         switch (action.type) {
 
@@ -59,6 +60,7 @@ class VerbdStore extends ReduceStore {
 
             // Insert a new record or update an existing one, originating from a UI.
             case VerbdActionTypes.ON_CLICK_SAVE_VERBD:
+                validateVerbd(action.verbd)
                 if(action.verbd.id) {
                     // An id exists so update the existing record.
                     newState = newState.setIn(['coll', action.verbd.id], Verbd(action.verbd))

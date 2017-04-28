@@ -1,25 +1,26 @@
+// @flow
 import React from 'react'
 
 import VerbdActions from '../../../../data/dictionary/verbd/VerbdActions'
-import PastTenseRuleSelect from '../PastTenseRuleSelect'
+//import PastTenseRuleSelect from '../PastTenseRuleSelect'
 
-function VerbdEditForm(props) {
+function VerbdEditForm(props:Object):Object {
 
-    const style = {
+    const style:Object = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const onClickSave = () => VerbdActions.onClickSaveVerbd({
+    const s:Object = props.strings
+
+    const onClickSave:Function = () => VerbdActions.onClickSaveVerbd({
         id: props.verbd.getIn(['addedit','verbd','id']),
         base: props.verbd.getIn(['addedit','verbd','base']),
-        pastTense: props.verbd.getIn(['addedit','verbd','pastTense'])
-
+        //pastTense: props.verbd.getIn(['addedit','verbd','pastTense'])
     })
-    const onDelete = () => VerbdActions.onClickDeleteVerbd(props.verbd.getIn(['addedit','verbd','id']))
-    const s = props.strings
+    const onDelete:Function = () => VerbdActions.onClickDeleteVerbd(props.verbd.getIn(['addedit','verbd','id']))
 
-    let verbdEditForm = null
+    let verbdEditForm:Object
 
     /*if(props.app.getIn(['level','currentLevel'])) {
         verbdEditForm =

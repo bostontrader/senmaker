@@ -25,7 +25,7 @@ describe("VerbdEditForm", () => {
         const renderExpression = <VerbdEditForm {...props} />
         const verbdEditForm = TestUtils.createRenderer().render(renderExpression)
         expect(verbdEditForm.type).toBe('div')
-        expect(verbdEditForm.props.children.length).toBe(5) // noun, input, save, delete, cancel
+        expect(verbdEditForm.props.children.length).toBe(5) // verb, input, save, delete, cancel
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()

@@ -1,9 +1,13 @@
+// @flow
 import {ReduceStore} from 'flux/utils'
-import {fromJS, Map} from 'immutable'
+import {fromJS}      from 'immutable'
+import {Map}         from 'immutable'
 
 import Verbd            from '../Verbd'
 import VerbdActionTypes from '../VerbdActionTypes'
 import AppDispatcher    from '../../../AppDispatcher'
+import {MakeVerbd}      from '../../../JSONParseUtils'
+import {validateVerbd}  from '../../../Validator'
 import AppActionTypes   from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../../LocalStorage'
@@ -24,7 +28,7 @@ We use the onClickAddVerbd flag for purposes of code clarity.
  */
 class VerbdAEStore extends ReduceStore {
     constructor() {
-        super(AppDispatcher);
+        super(AppDispatcher)
     }
 
     getInitialState() {
@@ -32,17 +36,21 @@ class VerbdAEStore extends ReduceStore {
         if (localStorageAvailable) {
             const localStorageState = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return fromJS(JSON.parse(localStorageState))
+            if(localStorageState) {
+                let originalParse = fromJS(JSON.parse(localStorageState))
+                let newVerbd = MakeVerbd(originalParse.getIn(['nound']))
+                return originalParse.set('nound',newVerbd)
+            }
+
         }
 
         return VerbdAEStore.initialState
 
     }
 
-    reduce(state, action) {
+    reduce(state:Object, action:Object):Object {
 
-        let newState = state
+        let newState:Object = state
 
         switch (action.type) {
 
@@ -70,6 +78,7 @@ class VerbdAEStore extends ReduceStore {
 
             // Signal the UI to open VerbdEditForm and populate with the given data.
             case VerbdActionTypes.ON_CLICK_EDIT_VERBD:
+                validateVerbd(action.verbd)
                 newState = newState.set('verbd', Verbd({
                     id: action.verbd.id,
                     base: action.verbd.base,

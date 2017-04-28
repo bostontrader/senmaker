@@ -1,4 +1,5 @@
-const NoundActionTypes = {
+// @flow
+const NoundActionTypes:Object = {
 
     // add/edit UI
     ON_CLICK_ADD_NOUND:    'ON_CLICK_ADD_NOUND',

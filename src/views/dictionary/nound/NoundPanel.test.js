@@ -53,7 +53,7 @@ describe("NoundPanel", function() {
     })
 
     it("Renders a NoundPanel with a NoundEditForm", function() {
-        this.props.nound = this.props.nound.setIn(['addedit','nound','id'],"0") // don't let this string become falsey
+        this.props.nound = this.props.nound.setIn(['addedit','nound','id'],"1")
 
         const renderExpression = <NoundPanel {...this.props} />
         const noundPanel = TestUtils.createRenderer().render(renderExpression)

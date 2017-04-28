@@ -1,42 +1,40 @@
+// @flow
 import React from 'react'
-import {Map} from 'immutable'
 
-import Verbd               from '../../../data/dictionary/verbd/Verbd'
-import VerbdActions        from '../../../data/dictionary/verbd/VerbdActions'
-//import {VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'
+import Verbd             from '../../../data/dictionary/verbd/Verbd'
+import VerbdActions      from '../../../data/dictionary/verbd/VerbdActions'
+import {VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'
 
-function VerbdRow(props) {
-    let {verb} = props
+function VerbdRow(props:Object):Object {
 
-    // The original state is a Verbd Record, but when round-tripped to/from localStorage
-    // it gets turned into a Map.  This should be corrected, but until then, apply this hack.
-    if(verb instanceof(Map))
-        verb = Verbd(verb)
-    
-    const onClickEditVerbd = () => VerbdActions.onClickEditVerbd(verb)
+    let {verbd}:Object = props
 
-    let verbdRow = <div>verb item</div>
+    const onClickEditVerbd:Function = () => VerbdActions.onClickEditVerbd(verbd)
+    const editButton:Object = <button id={'id'+verbd.id} type="button" onClick={onClickEditVerbd} >{props.strings.edit}</button>
 
+    let verbdRow:Object = <div></div>
 
-    //if( props.level >= VerbdPanelLevel.PAST_TENSE) {
-    console.log(props.level >= 7)
-    if ( props.level >= 7) { // currentLevel:number
-        verbdRow =
-            <tr>
-                <td>{verb.base}</td>
-                <td>{verb.pastTense}</td>
-                <td><button id={'id'+verb.id} type="button" onClick={onClickEditVerbd} >{props.strings.edit}</button></td>
-            </tr>
-    //} else if( props.level >= VerbdPanelLevel.BASE) {
-    } else {
-        verbdRow =
-            <tr>
-                <td>{verb.base}</td>
-                <td><button id={'id'+verb.id} type="button" onClick={onClickEditVerbd} >{props.strings.edit}</button></td>
-            </tr>
+    switch(props.verbdPanelLevel) {
+        case VerbdPanelLevel.BASE:
+            verbdRow =
+                <tr>
+                    <td>{verbd.base}</td>
+                    <td>{editButton}</td>
+                </tr>
+            break
+        case VerbdPanelLevel.PLURALIZATION:
+            verbdRow =
+                <tr>
+                    <td>{verbd.base}</td>
+                    <td>{verbd.pastTense}</td>
+                    <td>{editButton}</td>
+                </tr>
+            break
+        default:
+            // noundRow already has a suitable default. Do nothing.
     }
 
-    return (verbdRow)
+    return verbdRow
 
 }
 

@@ -1,6 +1,6 @@
 import VerbdAEStore       from './VerbdAEStore'
 import VerbdActionTypes   from '../VerbdActionTypes'
-import {PastTenseRule}    from '../VerbdConstants'
+import {verbdExamples}     from '../../../TestData'
 import AppActionTypes     from '../../../app/AppActionTypes'
 
 // The VerbdAEStore is responsible for setting a small bit of state to signal
@@ -51,18 +51,14 @@ describe('VerbdAEStore', function() {
         expect(this.state).toBe(initialState)
     })
 
-    // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't test these two separately,
-    // the same state should close either one. But the delete button is only available on VerbdEditForm.
+    // Signal the UI to close VerbdAddForm or VerbdEditForm.
     it('ON_CLICK_DELETE_VERBD', function() {
         const initialState = this.state
         this.perturbState()
         expect(this.state).not.toBe(initialState)
 
         // Now close it
-        this.dispatch({
-            type: VerbdActionTypes.ON_CLICK_DELETE_VERBD,
-            verbd: {} // This action doesn't care about the verbd
-        })
+        this.dispatch({type: VerbdActionTypes.ON_CLICK_DELETE_VERBD})
         expect(this.state).toBe(initialState)
     })
 
@@ -70,9 +66,9 @@ describe('VerbdAEStore', function() {
     it('ON_CLICK_EDIT_VERBD', function() {
         this.dispatch({
             type: VerbdActionTypes.ON_CLICK_EDIT_VERBD,
-            verbd: {id: '1', base: 'run', pastTense: 'ran', pastTense_rule: PastTenseRule.Irregular}
+            verbd: verbdExamples.a
         })
-        expect(this.state.get('verbd').toJSON()).toEqual({id: '1', base: 'run', pastTense: 'ran', pastTense_rule: PastTenseRule.Irregular})
+        expect(this.state.get('verbd').toJSON()).toEqual(verbdExamples.a.toJSON())
     })
 
     // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't test these two separately,
@@ -85,13 +81,18 @@ describe('VerbdAEStore', function() {
         this.perturbState()
         expect(this.state).not.toBe(initialState)
 
-        this.dispatch({type: VerbdActionTypes.ON_CLICK_SAVE_VERBD, verbd: {}})
+        this.dispatch({type: VerbdActionTypes.ON_CLICK_SAVE_VERBD})
         expect(this.state).toBe(initialState)
     })
 
     it('ON_CHANGE_BASE', function() {
         this.dispatch({type: VerbdActionTypes.ON_CHANGE_BASE, base: 'talk'})
         expect(this.state.getIn(['verbd','base'])).toBe('talk')
+    })
+
+    it('ON_CHANGE_PAST_TENSE', function() {
+        this.dispatch({type: VerbdActionTypes.ON_CHANGE_PAST_TENSE, pastTense: 'talked'})
+        expect(this.state.getIn(['verbd','pastTense'])).toBe('talked')
     })
 
 })

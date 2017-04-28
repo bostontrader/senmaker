@@ -28,7 +28,7 @@ const localStorageKey = 'NoundAEStore'
  */
 class NoundAEStore extends ReduceStore {
     constructor() {
-        super(AppDispatcher);
+        super(AppDispatcher)
     }
 
     getInitialState():Object {

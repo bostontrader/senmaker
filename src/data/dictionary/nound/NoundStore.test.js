@@ -1,4 +1,3 @@
-import Nound               from './Nound'
 import NoundActionTypes    from './NoundActionTypes'
 import NoundStore          from './NoundStore'
 import {PluralizationRule} from './NoundConstants'
@@ -10,11 +9,11 @@ describe('NoundStore', function() {
     beforeEach(function() {
         this.state = NoundStore.getInitialState()
         
-        this.nounds = () => Array.from(this.state.getIn(['coll']).values()).map(noun => ({
-            id: noun.id,
-            base: noun.base,
-            plural: noun.plural,
-            pluralization_rule: noun.pluralization_rule
+        this.nounds = () => Array.from(this.state.getIn(['coll']).values()).map(nound => ({
+            id: nound.id,
+            base: nound.base,
+            plural: nound.plural,
+            pluralization_rule: nound.pluralization_rule
         }))
 
         this.dispatch = action => {this.state = NoundStore.reduce(this.state, action)}

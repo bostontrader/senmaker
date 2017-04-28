@@ -1,39 +1,39 @@
-import React from "react"
-import TestUtils from "react-addons-test-utils"
+import React      from "react"
+import TestUtils  from "react-addons-test-utils"
+import rtRenderer from 'react-test-renderer'
 
-import VerbdRow    from './VerbdRow'
-import Verbd       from '../../../data/dictionary/verbd/Verbd'
-import StringStore from '../../../data/strings/StringStore'
-import {PastTenseRule} from '../../../data/dictionary/verbd/VerbdConstants'
-//import {PastTenseRule, VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'
+import VerbdRow          from './VerbdRow'
+import {verbdExamples}   from '../../../data/TestData'
+import Verbd             from '../../../data/dictionary/verbd/Verbd'
+import {VerbdPanelLevel} from '../../../data/dictionary/verbd/VerbdConstants'
+import StringStore       from '../../../data/strings/StringStore'
 
 describe("VerbdRow", () => {
 
-    let tuRenderer, verbdRow
-
-    const verb = new Verbd({
-        id: 1,
-        base: 'run',
-        pastTense: 'ran',
-        pastTense_rule: PastTenseRule.Irregular
-    })
+    let verbdRow
+    let props
+    let renderExpression
 
     it("renders a VerbdPanelLevel.BASE VerbdRow", () => {
-        tuRenderer = TestUtils.createRenderer()
-        const strings = StringStore.getInitialState()
-        const props = {verb:verb, strings: strings}
-        verbdRow = tuRenderer.render(<VerbdRow {...props} />)
+        props = {verbd:verbdExamples.a, verbdPanelLevel:VerbdPanelLevel.BASE, strings: StringStore.getInitialState()}
+        renderExpression = <VerbdRow {...props} />
+        verbdRow = TestUtils.createRenderer().render(renderExpression)
         expect(verbdRow.type).toBe('tr')
-        expect(verbdRow.props.children.length).toBe(2) // verb, edit
+        expect(verbdRow.props.children.length).toBe(2)  // base, edit
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
     })
 
-    //it("renders a VerbdPanelLevel.PAST_TENSE", () => {
-        //tuRenderer = TestUtils.createRenderer()
-        //const strings = StringStore.getInitialState()
-        //const props = {level:VerbdPanelLevel.PAST_TENSE, verb:verb, strings: strings}
-        //verbdRow = tuRenderer.render(<VerbdRow {...props} />)
-        //expect(verbdRow.type).toBe('tr')
-        //expect(verbdRow.props.children.length).toBe(3)
-    //})
+    it("renders a VerbdPanelLevel.PLURALIZATION VerbdRow", () => {
+        props = {verbd:verbdExamples.a, verbdPanelLevel:VerbdPanelLevel.PLURALIZATION, strings: StringStore.getInitialState()}
+        renderExpression = <VerbdRow {...props} />
+        verbdRow = TestUtils.createRenderer().render(renderExpression)
+        expect(verbdRow.type).toBe('tr')
+        expect(verbdRow.props.children.length).toBe(3)  // base, plural, edit
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 
 })

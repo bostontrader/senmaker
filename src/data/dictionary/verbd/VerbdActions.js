@@ -1,26 +1,29 @@
+// @flow
 import VerbdActionTypes from './VerbdActionTypes'
 import AppDispatcher    from '../../AppDispatcher'
+import {validateVerbd}  from '../../Validator'
 
 const VerbdActions = {
 
     // add/edit UI
-    onClickAddVerbd() {
+    onClickAddVerbd():void {
         AppDispatcher.dispatch({
             type: VerbdActionTypes.ON_CLICK_ADD_VERBD
         })
     },
-    onClickCancel() {
+    onClickCancel():void {
         AppDispatcher.dispatch({
             type: VerbdActionTypes.ON_CLICK_CANCEL
         })
     },
-    onClickDeleteVerbd(id) {
+    onClickDeleteVerbd(id:string):void {
         AppDispatcher.dispatch({
             type: VerbdActionTypes.ON_CLICK_DELETE_VERBD,
             id
         })
     },
-    onClickEditVerbd(verbd) {
+    onClickEditVerbd(verbd:Object):void {
+        validateVerbd(verbd)
         AppDispatcher.dispatch({
             type: VerbdActionTypes.ON_CLICK_EDIT_VERBD,
             verbd: verbd
@@ -28,27 +31,29 @@ const VerbdActions = {
     },
     // The Save button for an add or edit is clicked.
     // For programmatic insert see VerbdActionTypes INSERT_VERBD
-    onClickSaveVerbd(verbd) {
-        console.log(verbd)
+    // If verbd has an id then update an existing verbd else insert a new one
+    onClickSaveVerbd(verbd:Object):void {
+        validateVerbd(verbd)
         AppDispatcher.dispatch({
             type: VerbdActionTypes.ON_CLICK_SAVE_VERBD,
             verbd: verbd
         })
     },
-    onChangeBase(base) {
+    onChangeBase(base:string):void {
         AppDispatcher.dispatch({
             type: VerbdActionTypes.ON_CHANGE_BASE,
             base: base
         })
     },
-    onChangePastTense(pastTense) {
+    onChangePastTense(pastTense:string):void {
         AppDispatcher.dispatch({
             type: VerbdActionTypes.ON_CHANGE_PAST_TENSE,
             pastTense: pastTense
         })
     },
     // Pump a new verbd directly into the db w/o dealing with any UI.
-    insertVerbd(verbd) {
+    insertVerbd(verbd:Object):void {
+        validateVerbd(verbd)
         AppDispatcher.dispatch({
             type: VerbdActionTypes.INSERT_VERBD,
             verbd: verbd

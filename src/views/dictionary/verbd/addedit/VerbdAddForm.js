@@ -1,21 +1,27 @@
+// @flow
 import React from 'react'
 
 import VerbdActions from '../../../../data/dictionary/verbd/VerbdActions'
-import PastTenseRuleSelect from '../PastTenseRuleSelect'
+import {validateVerbd} from '../../../../data/Validator'
 
-function VerbdAddForm(props) {
+//import PastTenseRuleSelect from '../PastTenseRuleSelect'
 
-    const style = {
+function VerbdAddForm(props:Object):Object {
+
+    const style:Object = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const onClickSave = () => VerbdActions.onClickSaveVerbd({
-        base: props.verbd.getIn(['addedit','verbd','base'])
-    })
-    const s = props.strings
+    const s:Object = props.strings
+    
+    const onClickSave:Function = () => {
+        const verbd:Object = props.verbd.getIn(['addedit','verbd'])
+        validateVerbd(verbd)
+        VerbdActions.onClickSaveVerbd(verbd)
+    }
 
-    let verbdAddForm = null
+    let verbdAddForm:Object
 
     /*if(props.app.getIn(['level','currentLevel'])) {
         verbdAddForm =

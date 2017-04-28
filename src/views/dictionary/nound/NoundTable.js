@@ -6,7 +6,7 @@ import {NoundPanelLevel} from '../../../data/dictionary/nound/NoundConstants'
 
 function NoundTable(props:Object):Object {
 
-    let noundTable = <div></div>
+    let noundTable:Object = <div></div>
 
     switch(props.noundPanelLevel) {
         case NoundPanelLevel.BASE:
