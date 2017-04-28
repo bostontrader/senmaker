@@ -1,22 +1,28 @@
+// @flow
 import React from 'react'
 
-import NoundActions from '../../../../data/dictionary/nound/NoundActions'
+import NoundActions    from '../../../../data/dictionary/nound/NoundActions'
+import {validateNound} from '../../../../data/Validator'
+
 //import {NoundPanelLevel} from '../../../../data/dictionary/nound/NoundConstants'
 //import PluralizationSelect from '../../../nouni/PluralizationSelect'
 
-function NoundAddForm(props) {
+function NoundAddForm(props:Object):Object {
 
-    const style = {
+    const style:Object = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const onClickSave = () => NoundActions.onClickSaveNound({
-        base: props.nound.getIn(['addedit','nound','base'])
-    })
-    const s = props.strings
+    const s:Object = props.strings
 
-    let noundAddForm = null
+    const onClickSave:Function = () => {
+        const nound:Object = props.nound.getIn(['addedit','nound'])
+        validateNound(nound)
+        NoundActions.onClickSaveNound(nound)
+    }
+
+    let noundAddForm:Object
 
     //if(props.level.getIn(['currentAppLevelConfig', 'noundPanel']) >= NoundPanelLevel.PLURALIZATION) {
         /*noundAddForm =
@@ -30,7 +36,7 @@ function NoundAddForm(props) {
 
     //} else if(props.level.getIn(['currentAppLevelConfig', 'noundPanel']) >= NoundPanelLevel.BASE) {
         noundAddForm =
-            <div id="nound-add-form" style={style}>
+            <div id='nound-add-form' style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
                     value={props.nound.getIn(['addedit','nound','base'])}

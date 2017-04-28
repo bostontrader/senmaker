@@ -7,29 +7,18 @@ import TestUtils      from 'react-addons-test-utils'
 import {findAll}      from 'react-shallow-testutils'
 import {findWithType} from 'react-shallow-testutils'
 
-import VPAddForm   from './VPAddForm'
-import VerbdSelect from '../../dictionary/verbd/VerbdSelect'
-import AppStore    from '../../../data/app/AppStore'
-import VerbdStore  from '../../../data/dictionary/verbd/VerbdStore'
-import StringStore from '../../../data/strings/StringStore'
-import VPStore     from '../../../data/vp/VPStore'
-import VPAEStore   from '../../../data/vp/addedit/VPAEStore'
+import VPAddForm    from './VPAddForm'
+import VerbdSelect  from '../../dictionary/verbd/VerbdSelect'
+import AppStore     from '../../../data/app/AppStore'
+import VerbdStore   from '../../../data/dictionary/verbd/VerbdStore'
+import StringStore  from '../../../data/strings/StringStore'
+import VPStore      from '../../../data/vp/VPStore'
+import VPAEStore    from '../../../data/vp/addedit/VPAEStore'
+import initialState from '../../../data/StateGetter'
 
 describe("VPAddForm", function() {
 
     beforeEach(function() {
-
-        this.state = {
-            app: AppStore.getInitialState(),
-            verbd: Map({
-                dict: VerbdStore.getInitialState()
-            }),
-            vp: Map({
-                addedit: VPAEStore.getInitialState(),
-                dict: VPStore.getInitialState()
-            }),
-            strings:StringStore.getInitialState()
-        }
 
         // Return the count of elements that match the given css_id
         this.countElements = function(lessonNavigator, css_id) {
@@ -42,7 +31,7 @@ describe("VPAddForm", function() {
     })
 
     it("Renders a VPAddForm < level 5", function() {
-        const renderExpression = <VPAddForm {...this.state} />
+        const renderExpression = <VPAddForm {...initialState} />
         const vpAddForm = TestUtils.createRenderer().render(renderExpression)
         expect(vpAddForm.type).toBe('div')
 
@@ -59,8 +48,8 @@ describe("VPAddForm", function() {
     })
 
     it("Renders a VPAddForm == level 6", function() {
-        this.state.app = this.state.app.setIn(['level','currentLevel'],6)
-        const renderExpression = <VPAddForm {...this.state} />
+        initialState.app = initialState.app.setIn(['level','currentLevel'],6)
+        const renderExpression = <VPAddForm {...initialState} />
         const vpAddForm = TestUtils.createRenderer().render(renderExpression)
         expect(vpAddForm.type).toBe('div')
 

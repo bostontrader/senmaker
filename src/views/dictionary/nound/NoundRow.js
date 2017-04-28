@@ -1,36 +1,40 @@
+// @flow
 import React from 'react'
-import {Map} from 'immutable'
 
-import Nound        from '../../../data/dictionary/nound/Nound'
-import NoundActions from '../../../data/dictionary/nound/NoundActions'
+import Nound             from '../../../data/dictionary/nound/Nound'
+import NoundActions      from '../../../data/dictionary/nound/NoundActions'
+import {NoundPanelLevel} from '../../../data/dictionary/nound/NoundConstants'
 
-function NoundRow(props) {
-    let {noun} = props
+function NoundRow(props:Object):Object {
 
-    // The original state is a Nound Record, but when round-tripped to/from localStorage
-    // it gets turned into a Map.  This should be corrected, but until then, apply this hack.
-    if(noun instanceof(Map))
-        noun = Nound(noun)
+    let {nound}:Object = props
 
-    const onClickEditNound = () => NoundActions.onClickEditNound(noun)
+    const onClickEditNound:Function = () => NoundActions.onClickEditNound(nound)
+    const editButton:Object = <button id={'id'+nound.id} type="button" onClick={onClickEditNound} >{props.strings.edit}</button>
 
-    let noundRow = <div>noun item</div>
-    //if( props.level >= NoundPanelLevel.PLURALIZATION) {
-        /*noundRow =
-            <tr>
-                <td>{noun.base}</td>
-                <td>{noun.plural}</td>
-                <td><button id={noun.id} type="button" onClick={onClickEditNound} >{props.strings.edit}</button></td>
-            </tr>*/
-    //} else if( props.level >= NoundPanelLevel.BASE) {
-        noundRow =
-            <tr>
-                <td>{noun.base}</td>
-                <td><button id={'id'+noun.id} type="button" onClick={onClickEditNound} >{props.strings.edit}</button></td>
-            </tr>
-    //}
+    let noundRow:Object = <div></div>
 
-    return (noundRow)
+    switch(props.noundPanelLevel) {
+        case NoundPanelLevel.BASE:
+            noundRow =
+                <tr>
+                    <td>{nound.base}</td>
+                    <td>{editButton}</td>
+                </tr>
+            break
+        case NoundPanelLevel.PLURALIZATION:
+            noundRow =
+                <tr>
+                    <td>{nound.base}</td>
+                    <td>{nound.plural}</td>
+                    <td>{editButton}</td>
+                </tr>
+            break
+        default:
+            // noundRow already has a suitable default. Do nothing.
+    }
+
+    return noundRow
 
 }
 

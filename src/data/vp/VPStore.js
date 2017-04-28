@@ -5,10 +5,11 @@ import {fromJS, Map} from 'immutable'
 import VP             from './VP'
 import VPActionTypes  from './VPActionTypes'
 import AppDispatcher  from '../AppDispatcher'
+import {MakeMapOfVP}  from '../JSONParseUtils'
+import {vpExamples}   from '../TestData'
+import {validateVP}   from '../Validator'
 import AppActionTypes from '../app/AppActionTypes'
 import Verbd          from '../dictionary/verbd/Verbd'
-import {MakeMapOfVP}  from '../JSONParseUtils'
-import {validateVP}   from '../Validator'
 
 import {localStorageAvailable} from '../../LocalStorage'
 const localStorageKey = 'VPStore'
@@ -18,7 +19,7 @@ class VPStore extends ReduceStore {
         super(AppDispatcher)
     }
 
-    getInitialState() {
+    getInitialState():Object {
 
         if (localStorageAvailable) {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
@@ -93,7 +94,11 @@ class VPStore extends ReduceStore {
 
 VPStore.initialState = Map({
     nextid:1,
-    coll:Map()  // the actual collection of vp
+    coll:Map([
+        ['1',vpExamples.a],
+        ['2',vpExamples.b],
+        ['3',vpExamples.c]
+    ])  // the actual collection of vp
 })
 
 export default new VPStore()

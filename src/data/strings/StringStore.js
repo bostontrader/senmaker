@@ -1,3 +1,4 @@
+// @flow
 import {fromJS} from 'immutable'
 import {ReduceStore} from 'flux/utils'
 
@@ -15,7 +16,7 @@ class StringStore extends ReduceStore {
         super(AppDispatcher);
     }
 
-    getInitialState() {
+    getInitialState():Object {
         if (localStorageAvailable) {
             const localStorageState = localStorage.getItem(localStorageKey)
 
@@ -25,9 +26,9 @@ class StringStore extends ReduceStore {
         return StringStore.initialState
     }
 
-    reduce(state, action) {
+    reduce(state:Object, action:Object):Object {
 
-        let newState = state
+        let newState:Object = state
 
         switch (action.type) {
 
@@ -156,7 +157,7 @@ StringStore.en = {
         quiz3: 'Can you change the spelling of a verb phrase?'
     },
     clause: {
-        
+        help10: 'A clause has a noun phrase and a verb phrase.'
     },
 
     npWithAdjectives: {
@@ -192,7 +193,6 @@ StringStore.en = {
         //help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
     //},
 
-    // Adjectives
 
     // Adjectives as part of noun phrases
 
@@ -200,8 +200,7 @@ StringStore.en = {
 
     // Adverbs as part of verb phrases
 
-    // Clause.  A clause has a noun phrase and a verb phrase.
-    // go ahead an make a noun phrase and a verb phrase.
+
 
     // Sentence. A sentence can have many clauses, or it may just have a single clause.
     // If you can put all these pieces together and the indicator turns green, then you have built a complete, grammatically correct sentence.
@@ -253,6 +252,15 @@ StringStore.zh = {
         quiz2: '你可以从这个列表中删除一个动词吗?',
         quiz3: '你能改变一个动词的拼写吗?'
     },
+    adjectivd: {
+        help10: 'We modify the meaning of nouns by using adjectives.',
+        help11: 'In order to write English you will use many adjectives.',
+        help12: 'This is the dictionary of adjectives that you can use.',
+        help13: 'At this time there are very few adjectives but you can add more adjectives whenever you like.',
+        quiz1: 'Can you add a new adjective?',
+        quiz2: 'Can you delete a adjective from this list?',
+        quiz3: 'Can you change the spelling of a adjective?'
+    },
     // Definite or Indefinite noun
     definiteness: {
         help10: '确定（Definite）或不确定（Indefinite）',
@@ -268,7 +276,7 @@ StringStore.zh = {
         quiz2: '选择 确定（\'definite\'） 或 不确定（\'indefinite\'）.',
         quiz3: '你能看到名词的变化吗?'
     },
-    phrases: {
+    phrase: {
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
     },
@@ -283,7 +291,27 @@ StringStore.zh = {
         quiz3: 'Can you change the spelling of a noun phrase?'
     },
     pastTense: {
-        help10: ''
+        help10:'We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.',
+        help11:'For example: If we performed the verb in the past we use the \'past tense\' form of the verb.',
+        help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
+    },
+    vp: {
+        help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
+        help11: 'In a verb phrase we start with a single verb and then add other words to enhance the meaning.',
+        help12: 'You have already seen your first verb phrase in the \'future tense\' lesson.  By selecting \'future tense\' and a verb, you produced a two-word verb phrase.',
+        help13: 'Here we repackage that into an explicit verb phrase format.',
+        // although a verb phrase is usually more than one word, it could be just a single verb.
+        quiz1: 'Can you add a new verb phrase?',
+        quiz2: 'Can you delete a verb phrase from this list?',
+        quiz3: 'Can you change the spelling of a verb phrase?'
+    },
+    clause: {
+        help10: 'A clause has a noun phrase and a verb phrase.'
+    },
+
+    npWithAdjectives: {
+        help10: '',
+        help11: ''
     },
 
     // plural

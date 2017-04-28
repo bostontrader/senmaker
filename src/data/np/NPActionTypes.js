@@ -10,7 +10,7 @@ const NPActionTypes = {
     ON_CHANGE_DEFINITENESS:   'ON_CHANGE_DEFINITENESS',
     ON_CHANGE_SELECTED_NOUND: 'ON_CHANGE_SELECTED_NOUND',
 
-    // Pump a new nouni directly into the db w/o dealing with any UI.
+    // Pump a new NP directly into the db w/o dealing with any UI.
     INSERT_NP: 'INSERT_NP'
 }
 

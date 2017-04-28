@@ -1,8 +1,27 @@
 // @flow
 // Various functions intended to validate the structure and content of the several objects.
 
+
+const validateClause = (clause:Object):boolean => {
+    if(clause.constructor.name !== 'Record') {
+        console.log('Clause must be of type Record.  Instead it is a ',clause.constructor.name)
+        console.log(clause)
+        //throw('clause.constructor.name==='+clause.constructor.name)
+    }
+    if(typeof(clause.get('id')) !== 'string') {
+        console.log('Clause id must be a string.  Instead it is a ',typeof(clause.get('id')))
+        //throw('up')
+    }
+
+    if(!validateNP( clause.getIn(['np']))) throw('up')
+    if(!validateVP( clause.getIn(['vp']))) throw('up')
+
+    return true
+}
+
 const validateNound = (nound:Object):boolean => {
     if(nound.constructor.name !== 'Record') {
+        // This is coming from Clause -> NP -> Nound.  Make clause is not doing the nound
         console.log('Nound must be of type Record.  Instead it is a ',nound.constructor.name)
         console.log(nound)
         //throw('nound.constructor.name==='+nound.constructor.name)
@@ -57,6 +76,7 @@ const validateVP = (vp:Object):boolean => {
     return true
 }
 
+export {validateClause}
 export {validateVerbd}
 export {validateVP}
 export {validateNound}

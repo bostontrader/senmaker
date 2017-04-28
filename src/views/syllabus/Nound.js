@@ -31,7 +31,7 @@ function Nound(props) {
                 <p>{s.help12}</p>
                 <p>{s.help13}</p>
             </div>
-            <NoundPanel {...props} />
+            <NoundPanel noundPanelLevel='dogfood' {...props} />
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>

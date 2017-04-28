@@ -1,9 +1,13 @@
+// @flow
 import {ReduceStore} from 'flux/utils'
-import {fromJS, Map} from 'immutable'
+import {fromJS}      from 'immutable'
+import {Map}         from 'immutable'
 
 import Nound            from '../Nound'
 import NoundActionTypes from '../NoundActionTypes'
 import AppDispatcher    from '../../../AppDispatcher'
+import {MakeNound}      from '../../../JSONParseUtils'
+import {validateNound}  from '../../../Validator'
 import AppActionTypes   from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../../LocalStorage'
@@ -27,22 +31,26 @@ class NoundAEStore extends ReduceStore {
         super(AppDispatcher);
     }
 
-    getInitialState() {
+    getInitialState():Object {
 
         if (localStorageAvailable) {
             const localStorageState = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return fromJS(JSON.parse(localStorageState))
+            if(localStorageState) {
+                let originalParse = fromJS(JSON.parse(localStorageState))
+                let newNound = MakeNound(originalParse.getIn(['nound']))
+                return originalParse.set('nound',newNound)
+            }
+
         }
 
         return NoundAEStore.initialState
 
     }
 
-    reduce(state, action) {
+    reduce(state:Object, action:Object):Object {
 
-        let newState = state
+        let newState:Object = state
 
         switch (action.type) {
 
@@ -70,6 +78,7 @@ class NoundAEStore extends ReduceStore {
 
             // Signal the UI to open NoundEditForm and populate with the given data.
             case NoundActionTypes.ON_CLICK_EDIT_NOUND:
+                validateNound(action.nound)
                 newState = newState.set('nound', Nound({
                     id: action.nound.id,
                     base: action.nound.base,

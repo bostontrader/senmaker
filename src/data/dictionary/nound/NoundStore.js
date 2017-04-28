@@ -7,6 +7,8 @@ import NoundActionTypes    from './NoundActionTypes'
 import {PluralizationRule} from './NoundConstants'
 import AppActionTypes      from '../../app/AppActionTypes'
 import AppDispatcher       from '../../AppDispatcher'
+import {MakeMapOfNound}    from '../../JSONParseUtils'
+import {validateNound}     from '../../Validator'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'NoundStore'
@@ -19,29 +21,35 @@ class NoundStore extends ReduceStore {
     getInitialState() {
 
         if (localStorageAvailable) {
-            const localStorageState = localStorage.getItem(localStorageKey)
+            const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return fromJS(JSON.parse(localStorageState))
+            if(localStorageState) {
+                let originalParse = fromJS(JSON.parse(localStorageState))
+                let newColl = MakeMapOfNound(originalParse.getIn(['coll']))
+                return originalParse.set('coll',newColl)
+            }
         }
 
         return NoundStore.initialState
 
     }
 
-    reduce(state:Object, action:Object) {
+    reduce(state:Object, action:Object):Object {
+
         function insertNewRecord(nound) {
-            const id = state.getIn(['nextid'])
+            validateNound(nound)
+            const id:number = state.getIn(['nextid'])
             let newState = state.setIn(['nextid'], id + 1)
-            return newState.setIn(['coll',id], Nound({
-                id: id,
-                base: nound.base,
-                plural: nound.plural,
-                pluralization_rule: nound.pluralization_rule
+
+            return newState.setIn(['coll',id.toString()], Nound({
+                id: id.toString(),
+                base: nound.get('base'),
+                plural: nound.get('plural'),
+                pluralization_rule: nound.get('pluralization_rule')
             }))
         }
 
-        let newState = state
+        let newState:Object = state
 
         switch (action.type) {
 
@@ -52,6 +60,7 @@ class NoundStore extends ReduceStore {
 
             // Insert a new record or update an existing one, originating from a UI.
             case NoundActionTypes.ON_CLICK_SAVE_NOUND:
+                validateNound(action.nound)
                 if(action.nound.id) {
                     // An id exists so update the existing record.
                     newState = newState.setIn(['coll', action.nound.id], Nound(action.nound))
@@ -72,6 +81,7 @@ class NoundStore extends ReduceStore {
 
             default:
                 // do nothing, newState is already set to the existing state
+
         }
 
         if(localStorageAvailable)
@@ -84,10 +94,10 @@ class NoundStore extends ReduceStore {
 NoundStore.initialState = Map({
     nextid:1,
     coll:Map([
-        ['1',Nound({id: '1', base: 'apple',  plural: 'apples', pluralization_rule: PluralizationRule.Append_s})],
-        ['2',Nound({id: '2', base: 'box',    plural: 'boxes',  pluralization_rule: PluralizationRule.Append_es})],
-        ['3',Nound({id: '3', base: 'fish',   plural: 'fish',   pluralization_rule: PluralizationRule.NoChange})],
-        ['4',Nound({id: '4', base: 'person', plural: 'people', pluralization_rule: PluralizationRule.Irregular})]
+        //['1',Nound({id: '1', base: 'apple',  plural: 'apples', pluralization_rule: PluralizationRule.Append_s})],
+        //['2',Nound({id: '2', base: 'box',    plural: 'boxes',  pluralization_rule: PluralizationRule.Append_es})],
+        //['3',Nound({id: '3', base: 'fish',   plural: 'fish',   pluralization_rule: PluralizationRule.NoChange})],
+        //['4',Nound({id: '4', base: 'person', plural: 'people', pluralization_rule: PluralizationRule.Irregular})]
     ])
 })
 

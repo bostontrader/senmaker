@@ -1,3 +1,5 @@
+import {Map} from 'immutable'
+
 import Adjectivd            from './Adjectivd'
 import AdjectivdActionTypes from './AdjectivdActionTypes'
 import AdjectivdStore       from './AdjectivdStore'
@@ -7,7 +9,9 @@ import AppActionTypes       from '../../app/AppActionTypes'
 describe('AdjectivdStore', function() {
 
     beforeEach(function() {
-        this.state = AdjectivdStore.getInitialState()
+        //this.state = AdjectivdStore.getInitialState()
+        // AdjectivdStore.getInitialState w/o any pre-loaded examples.
+        this.state = Map({nextid:1, coll:Map()})
 
         // This function gets a more readable form of the adjectivd that we can pass
         // to expect(). It strips away the id.

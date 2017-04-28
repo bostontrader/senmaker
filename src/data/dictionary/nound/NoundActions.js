@@ -1,26 +1,29 @@
+// @flow
 import NoundActionTypes from './NoundActionTypes'
 import AppDispatcher    from '../../AppDispatcher'
+import {validateNound}  from '../../Validator'
 
 const NoundActions = {
 
     // add/edit UI
-    onClickAddNound() {
+    onClickAddNound():void {
         AppDispatcher.dispatch({
             type: NoundActionTypes.ON_CLICK_ADD_NOUND
         })
     },
-    onClickCancel() {
+    onClickCancel():void {
         AppDispatcher.dispatch({
             type: NoundActionTypes.ON_CLICK_CANCEL
         })
     },
-    onClickDeleteNound(id) {
+    onClickDeleteNound(id:string):void {
         AppDispatcher.dispatch({
             type: NoundActionTypes.ON_CLICK_DELETE_NOUND,
             id
         })
     },
-    onClickEditNound(nound) {
+    onClickEditNound(nound:Object):void {
+        validateNound(nound)
         AppDispatcher.dispatch({
             type: NoundActionTypes.ON_CLICK_EDIT_NOUND,
             nound: nound
@@ -28,13 +31,15 @@ const NoundActions = {
     },
     // The Save button for an add or edit is clicked.
     // For programmatic insert see NoundActionTypes INSERT_NOUND
-    onClickSaveNound(nound) {
+    // If nound has an id then update an existing nound else insert a new one
+    onClickSaveNound(nound:Object):void {
+        validateNound(nound)
         AppDispatcher.dispatch({
             type: NoundActionTypes.ON_CLICK_SAVE_NOUND,
             nound: nound
         })
     },
-    onChangeBase(base) {
+    onChangeBase(base:string):void {
         AppDispatcher.dispatch({
             type: NoundActionTypes.ON_CHANGE_BASE,
             base: base
@@ -42,7 +47,8 @@ const NoundActions = {
     },
 
     // Pump a new nound directly into the db w/o dealing with any UI.
-    insertNound(nound) {
+    insertNound(nound:Object):void {
+        validateNound(nound)
         AppDispatcher.dispatch({
             type: NoundActionTypes.INSERT_NOUND,
             nound: nound

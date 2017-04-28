@@ -1,6 +1,7 @@
 import NoundAEStore        from './NoundAEStore'
 import NoundActionTypes    from '../NoundActionTypes'
 import {PluralizationRule} from '../NoundConstants'
+import {noundExamples}     from '../../../TestData'
 import AppActionTypes      from '../../../app/AppActionTypes'
 
 // The NoundAEStore is responsible for setting a small bit of state to signal
@@ -51,18 +52,14 @@ describe('NoundAEStore', function() {
         expect(this.state).toBe(initialState)
     })
 
-    // Signal the UI to close NoundAddForm or NoundEditForm. We don't test these two separately,
-    // the same state should close either one. But the delete button is only available on NoundEditForm.
+    // Signal the UI to close NoundAddForm or NoundEditForm.
     it('ON_CLICK_DELETE_NOUND', function() {
         const initialState = this.state
         this.perturbState()
         expect(this.state).not.toBe(initialState)
 
         // Now close it
-        this.dispatch({
-            type: NoundActionTypes.ON_CLICK_DELETE_NOUND,
-            nound: {} // This action doesn't care about the nound
-        })
+        this.dispatch({type: NoundActionTypes.ON_CLICK_DELETE_NOUND})
         expect(this.state).toBe(initialState)
     })
 
@@ -70,9 +67,9 @@ describe('NoundAEStore', function() {
     it('ON_CLICK_EDIT_NOUND', function() {
         this.dispatch({
             type: NoundActionTypes.ON_CLICK_EDIT_NOUND,
-            nound: {id: '1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s}
+            nound: noundExamples.a
         })
-        expect(this.state.get('nound').toJSON()).toEqual({id: '1', base: 'cat', plural: 'cats', pluralization_rule: PluralizationRule.Append_s})
+        expect(this.state.get('nound').toJSON()).toEqual(noundExamples.a.toJSON())
     })
 
     // Signal the UI to close NoundAddForm or NoundEditForm. We don't test these two separately,

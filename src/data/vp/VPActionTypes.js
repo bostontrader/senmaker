@@ -10,7 +10,7 @@ const VPActionTypes = {
     ON_CHANGE_ACTION_TIME:    'ON_CHANGE_ACTION_TIME',
     ON_CHANGE_SELECTED_VERBD: 'ON_CHANGE_SELECTED_VERBD',
 
-    // Pump a new nouni directly into the db w/o dealing with any UI.
+    // Pump a new VP directly into the db w/o dealing with any UI.
     INSERT_VP: 'INSERT_VP'
 }
 

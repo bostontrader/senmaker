@@ -91,9 +91,9 @@ class VerbdStore extends ReduceStore {
 VerbdStore.initialState = Map({
     nextid:1,
     coll:Map([
-        ['1',Verbd({id: '1', base: 'eat',  pastTense: 'ate',    pastTense_rule: PastTenseRule.Irregular})],
-        ['2',Verbd({id: '2', base: 'hit',  pastTense: 'hit',    pastTense_rule: PastTenseRule.NoChange})],
-        ['3',Verbd({id: '3', base: 'jump', pastTense: 'jumped', pastTense_rule: PastTenseRule.Append_ed})]
+        //['1',Verbd({id: '1', base: 'eat',  pastTense: 'ate',    pastTense_rule: PastTenseRule.Irregular})],
+        //['2',Verbd({id: '2', base: 'hit',  pastTense: 'hit',    pastTense_rule: PastTenseRule.NoChange})],
+        //['3',Verbd({id: '3', base: 'jump', pastTense: 'jumped', pastTense_rule: PastTenseRule.Append_ed})]
     ])
 })
 

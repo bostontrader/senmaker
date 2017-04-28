@@ -1,10 +1,10 @@
 var Nightmare = require('nightmare')
 
 var nightmareLanguage     = require('./nightmareLanguage')
-var nightmareNound        = require('./nightmareNound')
-var nightmareVerbd        = require('./nightmareVerbd')
-var nightmareAdjectivd    = require('./nightmareVerbd')
-var nightmareDefiniteness = require('./nightmareDefiniteness')
+//var nightmareNound        = require('./nightmareNound')
+//var nightmareVerbd        = require('./nightmareVerbd')
+//var nightmareAdjectivd    = require('./nightmareVerbd')
+//var nightmareDefiniteness = require('./nightmareDefiniteness')
 
 describe('In the beginning...', () => {
 
@@ -18,7 +18,7 @@ describe('In the beginning...', () => {
      *
      */
     it('Should work correctly', (done) => {
-        const nightmare = new Nightmare({show:true, width:600, height:800})
+        const nightmare = new Nightmare({show:true, width:600, height:800}) // zoomFactor: 0.8
         const delayA = 10
         const delayB = 250
         const delayC = 1800
@@ -54,14 +54,14 @@ describe('In the beginning...', () => {
                 throw('iunderstandCheck was not found')
         })
 
-        .then( res => {return nightmareNound(nightmare, delayA)})
-        .then( res => {return nightmareVerbd(nightmare, delayA)})
+        //.then( res => {return nightmareNound(nightmare, delayA)})
+        //.then( res => {return nightmareVerbd(nightmare, delayA)})
         //.then( res => {return nightmareAdjectivd(nightmare, delayC)})
 
         // I want to factor out this code into nightmareAdjectivd.  But when I do so
         // I get mysterious errors re: cannot find add-verbd.  But if I keep it here, then all is well.
         //.then( res => {return nightmareAdjectivd(nightmare, 5000)})
-        .then( res => {
+        /*.then( res => {
             return nightmare
                 .click('#lesson-next').wait(delayC)
                 .click('#add-adjectivd').wait(delayC)

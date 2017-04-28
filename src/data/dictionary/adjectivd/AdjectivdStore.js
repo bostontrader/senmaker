@@ -84,9 +84,9 @@ class AdjectivdStore extends ReduceStore {
 AdjectivdStore.initialState = Map({
     nextid:1,
     coll:Map([
-        ['1',Adjectivd({id: '1', base: 'short'})],
-        ['2',Adjectivd({id: '2', base: 'fat'})],
-        ['3',Adjectivd({id: '3', base: 'stupid'})]
+        //['1',Adjectivd({id: '1', base: 'short'})],
+        //['2',Adjectivd({id: '2', base: 'fat'})],
+        //['3',Adjectivd({id: '3', base: 'stupid'})]
     ])
 })
 

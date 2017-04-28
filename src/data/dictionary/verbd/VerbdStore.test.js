@@ -1,3 +1,5 @@
+import {Map} from 'immutable'
+
 import Verbd              from './Verbd'
 import VerbdActionTypes   from './VerbdActionTypes'
 import VerbdStore         from './VerbdStore'
@@ -7,7 +9,9 @@ import AppActionTypes     from '../../app/AppActionTypes'
 describe('VerbdStore', function() {
 
     beforeEach(function() {
-        this.state = VerbdStore.getInitialState()
+        //this.state = VerbdStore.getInitialState()
+        // VerbdStore.getInitialState w/o any pre-loaded examples.
+        this.state = Map({nextid:1, coll:Map()})
 
         // This function gets a more readable form of the verbd that we can pass
         // to expect(). It strips away the id.

@@ -1,4 +1,5 @@
 // @flow
+import Clause               from './clause/Clause'
 import Nound                from './dictionary/nound/Nound'
 import {PluralizationRule}  from './dictionary/nound/NoundConstants'
 import Verbd                from './dictionary/verbd/Verbd'
@@ -83,6 +84,28 @@ const vpExamples = {
 
 }
 
+const clauseExamples = {
+    a:Clause({
+        id:'1',
+        np:NP(npExamples.a),
+        vp:VP(vpExamples.a),
+        generatedText:'apple will eat'
+    }),
+    b:Clause({
+        id:'2',
+        np:NP(npExamples.b),
+        vp:VP(vpExamples.b),
+        generatedText:'the box talked'
+    }),
+    c:Clause({
+        id:'3',
+        np:NP(npExamples.c),
+        vp:VP(npExamples.c),
+        generatedText:'a fish hit'
+    }),
+}
+
+export {clauseExamples}
 export {noundExamples}
 export {npExamples}
 export {verbdExamples}

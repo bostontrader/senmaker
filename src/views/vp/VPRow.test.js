@@ -3,7 +3,6 @@ import TestUtils from "react-addons-test-utils"
 
 import VPRow        from './VPRow'
 import {vpExamples} from '../../data/TestData'
-import VP           from '../../data/vp/VP'
 import StringStore  from '../../data/strings/StringStore'
 
 describe("VPRow", () => {

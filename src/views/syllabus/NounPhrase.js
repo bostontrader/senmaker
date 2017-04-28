@@ -2,7 +2,7 @@
 import React from 'react'
 
 import LessonNavigator from './LessonNavigator'
-import NPPanel from '../np/NPPanel'
+import NPPanel         from '../np/NPPanel'
 
 function NounPhrases(props:Object):Object {
 

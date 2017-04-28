@@ -36,8 +36,8 @@ const VPActions = {
     onClickSaveVP(vp:Object):void {
         validateVP(vp)
         AppDispatcher.dispatch({
-            type: VPActionTypes.ON_CLICK_SAVE_VP, // string
-            vp: vp // VP
+            type: VPActionTypes.ON_CLICK_SAVE_VP,
+            vp: vp
         })
     },
     onChangeActionTime(newActionTime:number):void {

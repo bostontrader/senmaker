@@ -9,7 +9,6 @@ describe("NoundSelect", () => {
         const tuRenderer = TestUtils.createRenderer()
         const props = {}
         const noundSelect = tuRenderer.render(<NoundSelect {...props} />)
-        expect(true)
     })
 
 })

@@ -13,6 +13,7 @@ Specifically excluded from this are any help or navigation features to proceed t
  */
 function VerbdPanel(props) {
 
+    console.log('props.verbdPanelLevel',props.verbdPanelLevel)
     const style = {
         border: '1px solid black',
         margin: '5px'

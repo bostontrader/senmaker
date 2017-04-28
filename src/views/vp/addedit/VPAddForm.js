@@ -11,14 +11,14 @@ import VPActions       from '../../../data/vp/VPActions'
 
 function VPAddForm(props:Object):Object {
 
-    const style = {
+    const style:Object = {
         border: '1px solid black',
         margin: '5px'
     }
-    const s = props.strings
+    const s:Object = props.strings
 
-    const onClickSave = () => {
-        const vp = props.vp.getIn(['addedit','vp'])
+    const onClickSave:Function = () => {
+        const vp:Object = props.vp.getIn(['addedit','vp'])
         validateVP(vp)
         VPActions.onClickSaveVP(vp)
     }

@@ -31,7 +31,7 @@ function PastTense(props) {
                 <p>{s.help12}</p>
                 <p>{s.help13}</p>
             </div>
-            <VerbdPanel {...props} />
+            <VerbdPanel verbdPanelLevel='catfood' {...props} />
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>

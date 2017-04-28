@@ -1,31 +1,23 @@
 import React from 'react'
 
-import TestUtils  from 'react-addons-test-utils'
-import rtRenderer from 'react-test-renderer'
-import {findWithClass, findWithType} from 'react-shallow-testutils'
+import TestUtils       from 'react-addons-test-utils'
+import {findWithClass} from 'react-shallow-testutils'
+import {findWithType}  from 'react-shallow-testutils'
+import rtRenderer      from 'react-test-renderer'
 
-import AppStore    from '../../data/app/AppStore'
-import QuizStore   from '../../data/quiz/QuizStore'
-import StringStore from '../../data/strings/StringStore'
-
-import Intro from './Intro'
+import Intro           from './Intro'
 import LessonNavigator from './LessonNavigator'
+import initialState    from '../../data/StateGetter'
 
 describe("Intro", () => {
 
     it("Renders Intro", () => {
-        const props = {
-            app:AppStore.getInitialState(),
-            quiz: QuizStore.getInitialState(),
-            strings:StringStore.getInitialState()
-        }
-        const renderExpression = <Intro {...props} />
-        const introRenderer = TestUtils.createRenderer().render(renderExpression)
-        expect(introRenderer.type).toBe('div')
-
-        expect(findWithClass(introRenderer,'help'))
-        expect(findWithClass(introRenderer,'quiz'))
-        expect(findWithType(introRenderer,LessonNavigator))
+        const renderExpression = <Intro {...initialState} />
+        const clauseComponent = TestUtils.createRenderer().render(renderExpression)
+        expect(clauseComponent.type).toBe('div')
+        expect(findWithClass(clauseComponent,'help'))
+        expect(findWithClass(clauseComponent,'quiz'))
+        expect(findWithType(clauseComponent,LessonNavigator))
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()

@@ -1,14 +1,14 @@
 import React        from 'react'
 import {RadioGroup} from 'react-radio-group'
 
-import TestUtils         from 'react-addons-test-utils'
-//import rtRenderer        from 'react-test-renderer'
-import {findAll}         from 'react-shallow-testutils'
-import {findWithType}    from 'react-shallow-testutils'
+import TestUtils      from 'react-addons-test-utils'
+//import rtRenderer   from 'react-test-renderer'
+import {findAll}      from 'react-shallow-testutils'
+import {findWithType} from 'react-shallow-testutils'
 
-import VPEditForm    from './VPEditForm'
-import VerbdSelect   from '../../dictionary/verbd/VerbdSelect'
-import initialState  from '../../../data/StateGetter'
+import VPEditForm   from './VPEditForm'
+import VerbdSelect  from '../../dictionary/verbd/VerbdSelect'
+import initialState from '../../../data/StateGetter'
 
 describe("VPEditForm", () => {
 

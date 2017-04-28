@@ -6,6 +6,7 @@ import NP             from './NP'
 import NPActionTypes  from './NPActionTypes'
 import AppDispatcher  from '../AppDispatcher'
 import {MakeMapOfNP}  from '../JSONParseUtils'
+import {npExamples}   from '../TestData'
 import {validateNP}   from '../Validator'
 import AppActionTypes from '../app/AppActionTypes'
 import Nound          from '../dictionary/nound/Nound'
@@ -18,7 +19,7 @@ class NPStore extends ReduceStore {
         super(AppDispatcher)
     }
 
-    getInitialState() {
+    getInitialState():Object {
 
         if (localStorageAvailable) {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
@@ -93,7 +94,11 @@ class NPStore extends ReduceStore {
 
 NPStore.initialState = Map({
     nextid:1,
-    coll:Map()  // the actual collection of np
+    coll:Map([
+        ['1',npExamples.a],
+        ['2',npExamples.b],
+        ['3',npExamples.c]
+    ])  // the actual collection of np
 })
 
 export default new NPStore()

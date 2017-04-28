@@ -18,20 +18,9 @@ import React from 'react'
 
 describe("PastTense", function() {
 
-    function getInitialState() {
-        return {
-            app:     AppStore.getInitialState(),
-            quiz:    QuizStore.getInitialState(),
-            strings: StringStore.getInitialState(),
-            nound:Map({
-                nouns:PastTenseStore.getInitialState()
-            })
-        }
-    }
-
     beforeEach(function() {
 
-        this.state = getInitialState()
+        //this.state = getInitialState()
 
         this.dispatch = action => {
             this.state.app   = AppStore .reduce(this.state.app, action)

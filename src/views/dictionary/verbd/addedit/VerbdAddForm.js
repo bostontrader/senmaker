@@ -17,7 +17,7 @@ function VerbdAddForm(props) {
 
     let verbdAddForm = null
 
-    if(props.app.getIn(['level','currentLevel'])) {
+    /*if(props.app.getIn(['level','currentLevel'])) {
         verbdAddForm =
             <div>
                 <label htmlFor='base'>Base</label>
@@ -36,9 +36,9 @@ function VerbdAddForm(props) {
                 <button id='cancel'     onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
             </div>
 
-    } else {
+    } else {*/
         verbdAddForm =
-            <div id="verbd-add-form" style={style}>
+            <div id='verbd-add-form' style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
                     value={props.verbd.getIn(['addedit','verbd','base'])}
@@ -47,7 +47,7 @@ function VerbdAddForm(props) {
                 <button id='save-verbd' onClick={onClickSave}>{s.save}</button>
                 <button id='cancel'     onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
             </div>
-    }
+    //}
 
     return verbdAddForm
 }
