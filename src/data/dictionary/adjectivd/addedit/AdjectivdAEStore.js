@@ -1,10 +1,14 @@
+// @flow
 import {ReduceStore} from 'flux/utils'
-import {fromJS, Map} from 'immutable'
+import {fromJS}      from 'immutable'
+import {Map}         from 'immutable'
 
-import Adjectivd             from '../Adjectivd'
-import AdjectivdActionTypes  from '../AdjectivdActionTypes'
-import AppDispatcher         from '../../../AppDispatcher'
-import AppActionTypes        from '../../../app/AppActionTypes'
+import Adjectivd            from '../Adjectivd'
+import AdjectivdActionTypes from '../AdjectivdActionTypes'
+import AppDispatcher    from '../../../AppDispatcher'
+import {MakeAdjectivd}      from '../../../JSONParseUtils'
+import {validateAdjectivd}  from '../../../Validator'
+import AppActionTypes   from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../../LocalStorage'
 const localStorageKey = 'AdjectivdAEStore'
@@ -24,25 +28,29 @@ const localStorageKey = 'AdjectivdAEStore'
  */
 class AdjectivdAEStore extends ReduceStore {
     constructor() {
-        super(AppDispatcher);
+        super(AppDispatcher)
     }
 
-    getInitialState() {
+    getInitialState():Object {
 
         if (localStorageAvailable) {
             const localStorageState = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return fromJS(JSON.parse(localStorageState))
+            if(localStorageState) {
+                let originalParse = fromJS(JSON.parse(localStorageState))
+                let newAdjectivd = MakeAdjectivd(originalParse.getIn(['adjectivd']))
+                return originalParse.set('adjectivd',newAdjectivd)
+            }
+
         }
 
         return AdjectivdAEStore.initialState
 
     }
 
-    reduce(state, action) {
+    reduce(state:Object, action:Object):Object {
 
-        let newState = state
+        let newState:Object = state
 
         switch (action.type) {
 
@@ -62,7 +70,7 @@ class AdjectivdAEStore extends ReduceStore {
                 break
 
             // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm (but the delete button
-            // is only present on AdjectivEditForm.)
+            // is only present on NounEditForm.)
             // AdjectivdStore will also catch this event and it's responsible for the actual deletion.
             case AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD:
                 newState = AdjectivdAEStore.initialState
@@ -70,11 +78,12 @@ class AdjectivdAEStore extends ReduceStore {
 
             // Signal the UI to open AdjectivdEditForm and populate with the given data.
             case AdjectivdActionTypes.ON_CLICK_EDIT_ADJECTIVD:
+                validateAdjectivd(action.adjectivd)
                 newState = newState.set('adjectivd', Adjectivd({
                     id: action.adjectivd.id,
-                    base: action.adjectivd.base
-
-
+                    base: action.adjectivd.base,
+                    plural: action.adjectivd.plural,
+                    pluralization_rule: action.adjectivd.pluralization_rule
                 }))
                 break
 
@@ -89,7 +98,7 @@ class AdjectivdAEStore extends ReduceStore {
                 break
 
             default:
-                // do nothing, newState is already set to the existing state
+            // do nothing, newState is already set to the existing state
         }
 
         if(localStorageAvailable)

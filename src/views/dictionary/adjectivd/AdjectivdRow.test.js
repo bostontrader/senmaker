@@ -1,38 +1,27 @@
-import React from "react"
-import TestUtils from "react-addons-test-utils"
+import React      from "react"
+import TestUtils  from "react-addons-test-utils"
+import rtRenderer from 'react-test-renderer'
 
-import AdjectivdRow from './AdjectivdRow'
-import Adjectivd    from '../../../data/dictionary/adjectivd/Adjectivd'
-import StringStore  from '../../../data/strings/StringStore'
-
+import AdjectivdRow        from './AdjectivdRow'
+import {adjectivdExamples} from '../../../data/TestData'
+import Adjectivd           from '../../../data/dictionary/adjectivd/Adjectivd'
+import StringStore         from '../../../data/strings/StringStore'
 
 describe("AdjectivdRow", () => {
 
-    let tuRenderer, adjectivdRow
+    let adjectivdRow
+    let props
+    let renderExpression
 
-    const adjectiv = new Adjectivd({
-        id: 1,
-        base: 'fat'
-    })
-
-
-
-    it("renders a AdjectivdPanelLevel.BASE AdjectivdRow", () => {
-        tuRenderer = TestUtils.createRenderer()
-        const strings = StringStore.getInitialState()
-        const props = {adjectiv:adjectiv, strings: strings}
-        adjectivdRow = tuRenderer.render(<AdjectivdRow {...props} />)
+    it("renders an AdjectivdRow", () => {
+        props = {adjectivd:adjectivdExamples.a, strings: StringStore.getInitialState()}
+        renderExpression = <AdjectivdRow {...props} />
+        adjectivdRow = TestUtils.createRenderer().render(renderExpression)
         expect(adjectivdRow.type).toBe('tr')
-        expect(adjectivdRow.props.children.length).toBe(2) // adjective, edit
-    })
+        expect(adjectivdRow.props.children.length).toBe(2)  // base, edit
 
-    //it("renders a AdjectivdPanelLevel.PLURALIZATION AdjectivdRow", () => {
-        //tuRenderer = TestUtils.createRenderer()
-        //const strings = StringStore.getInitialState()
-        //const props = {level:AdjectivdPanelLevel.PLURALIZATION, adjectiv:adjectiv, strings: strings}
-        //adjectivdRow = tuRenderer.render(<AdjectivdRow {...props} />)
-        //expect(adjectivdRow.type).toBe('tr')
-        //expect(adjectivdRow.props.children.length).toBe(3)
-    //})
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 
 })

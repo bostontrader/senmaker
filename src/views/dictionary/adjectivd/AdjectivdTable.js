@@ -1,55 +1,26 @@
+// @flow
 import React from 'react'
 
+import AdjectivdRow          from './AdjectivdRow'
 
-import AdjectivdRow from './AdjectivdRow'
+function AdjectivdTable(props:Object):Object {
 
-function AdjectivdTable(props) {
+    let adjectivdTable:Object =
+        <table id="adjectivd-list">
+            <thead>
+            <tr>
+                <th>Base</th>
+                <th> </th>
+            </tr>
+            </thead>
+            <tbody>
+            {[...props.adjectivd.getIn(['dict','coll']).values()].map(adjectivd => (
+                <AdjectivdRow key={adjectivd.get('id')} adjectivd={adjectivd} strings={props.strings} />
+            ))}
+            </tbody>
+        </table>
 
-    let adjectivdTable = null
-    //const level = props.level.getIn(['currentAppLevelConfig','adjectivdPanel'])
-    /*if( level >= AdjectivdPanelLevel.PLURALIZATION) {
-        adjectivdTable =
-            <table id="adjectivd-list">
-                <thead>
-                    <tr>
-                        <th>Base</th>
-                        <th>Plural</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {[...props.adjectivs.values()].reverse().map(adjectiv => (
-                        <AdjectivdRow
-                            key={adjectiv.id}
-                            editing={props.editingAdjectiv}
-                            level={level}
-                            adjectiv={adjectiv}
-                            onDeleteAdjectiv={props.onDeleteAdjectiv}
-                            onClickEditAdjectivd={props.onClickEditAdjectivd}
-                            strings = {props.strings}
-                        />
-                    ))}
-                </tbody>
-            </table>
-    } else if( level >= AdjectivdPanelLevel.BASE) {*/
-
-        adjectivdTable =
-            <table id="adjectivd-list">
-                <thead>
-                    <tr>
-                        <th>Adjectiv</th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {[...props.adjectivd.getIn(['dict','coll']).values()].map(adjectiv => (
-                        <AdjectivdRow key={adjectiv.get('id')} adjectiv={adjectiv} strings={props.strings} />
-                    ))}
-                </tbody>
-            </table>
-    //}
-
-    return(adjectivdTable)
+    return adjectivdTable
 }
 
 export default AdjectivdTable

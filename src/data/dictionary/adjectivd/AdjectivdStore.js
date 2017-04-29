@@ -4,8 +4,10 @@ import {fromJS, Map} from 'immutable'
 
 import Adjectivd            from './Adjectivd'
 import AdjectivdActionTypes from './AdjectivdActionTypes'
-import AppDispatcher        from '../../AppDispatcher'
 import AppActionTypes       from '../../app/AppActionTypes'
+import AppDispatcher        from '../../AppDispatcher'
+import {MakeMapOfAdjectivd} from '../../JSONParseUtils'
+import {validateAdjectivd}  from '../../Validator'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'AdjectivdStore'
@@ -18,30 +20,33 @@ class AdjectivdStore extends ReduceStore {
     getInitialState() {
 
         if (localStorageAvailable) {
-            const localStorageState = localStorage.getItem(localStorageKey)
+            const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return fromJS(JSON.parse(localStorageState))
+            if(localStorageState) {
+                let originalParse = fromJS(JSON.parse(localStorageState))
+                let newColl = MakeMapOfAdjectivd(originalParse.getIn(['coll']))
+                return originalParse.set('coll',newColl)
+            }
         }
 
         return AdjectivdStore.initialState
 
     }
 
-    reduce(state:Object, action:Object) {
+    reduce(state:Object, action:Object):Object {
 
         function insertNewRecord(adjectivd) {
-            const id = state.getIn(['nextid'])
+            validateAdjectivd(adjectivd)
+            const id:number = state.getIn(['nextid'])
             let newState = state.setIn(['nextid'], id + 1)
-            return newState.setIn(['coll',id], Adjectivd({
-                id: id,
-                base: adjectivd.base
 
-
+            return newState.setIn(['coll',id.toString()], Adjectivd({
+                id: id.toString(),
+                base: adjectivd.get('base')
             }))
         }
 
-        let newState = state
+        let newState:Object = state
 
         switch (action.type) {
 
@@ -52,6 +57,7 @@ class AdjectivdStore extends ReduceStore {
 
             // Insert a new record or update an existing one, originating from a UI.
             case AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD:
+                validateAdjectivd(action.adjectivd)
                 if(action.adjectivd.id) {
                     // An id exists so update the existing record.
                     newState = newState.setIn(['coll', action.adjectivd.id], Adjectivd(action.adjectivd))
@@ -71,7 +77,7 @@ class AdjectivdStore extends ReduceStore {
                 break
 
             default:
-                // do nothing, newState is already set to the existing state
+            // do nothing, newState is already set to the existing state
         }
 
         if(localStorageAvailable)
@@ -83,11 +89,7 @@ class AdjectivdStore extends ReduceStore {
 
 AdjectivdStore.initialState = Map({
     nextid:1,
-    coll:Map([
-        //['1',Adjectivd({id: '1', base: 'short'})],
-        //['2',Adjectivd({id: '2', base: 'fat'})],
-        //['3',Adjectivd({id: '3', base: 'stupid'})]
-    ])
+    coll:Map()
 })
 
 export default new AdjectivdStore()

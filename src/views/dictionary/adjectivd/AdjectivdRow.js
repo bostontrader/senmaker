@@ -1,37 +1,23 @@
+// @flow
 import React from 'react'
-import {Map} from 'immutable'
 
-import Adjectivd        from '../../../data/dictionary/adjectivd/Adjectivd'
-import AdjectivdActions from '../../../data/dictionary/adjectivd/AdjectivdActions'
+import Adjectivd             from '../../../data/dictionary/adjectivd/Adjectivd'
+import AdjectivdActions      from '../../../data/dictionary/adjectivd/AdjectivdActions'
 
+function AdjectivdRow(props:Object):Object {
 
-function AdjectivdRow(props) {
-    let {adjectiv} = props
+    let {adjectivd}:Object = props
 
-    // The original state is a Adjectivd Record, but when round-tripped to/from localStorage
-    // it gets turned into a Map.  This should be corrected, but until then, apply this hack.
-    if(adjectiv instanceof(Map))
-        adjectiv = Adjectivd(adjectiv)
-    
-    const onClickEditAdjectivd = () => AdjectivdActions.onClickEditAdjectivd(adjectiv)
+    const onClickEditAdjectivd:Function = () => AdjectivdActions.onClickEditAdjectivd(adjectivd)
+    const editButton:Object = <button id={'id'+adjectivd.id} type="button" onClick={onClickEditAdjectivd} >{props.strings.edit}</button>
 
-    let adjectivdRow = <div>adjectiv item</div>
-    //if( props.level >= AdjectivdPanelLevel.PLURALIZATION) {
-        /*adjectivdRow =
-            <tr>
-                <td>{adjectiv.base}</td>
-                <td>{adjectiv.plural}</td>
-                <td><button id={adjectiv.id} type="button" onClick={onClickEditAdjectivd} >{props.strings.edit}</button></td>
-            </tr>*/
-    //} else if( props.level >= AdjectivdPanelLevel.BASE) {
-        adjectivdRow =
-            <tr>
-                <td>{adjectiv.base}</td>
-                <td><button id={'id'+adjectiv.id} type="button" onClick={onClickEditAdjectivd} >{props.strings.edit}</button></td>
-            </tr>
-    //}
+    let adjectivdRow:Object =
+        <tr>
+            <td>{adjectivd.base}</td>
+            <td>{editButton}</td>
+        </tr>
 
-    return (adjectivdRow)
+    return adjectivdRow
 
 }
 

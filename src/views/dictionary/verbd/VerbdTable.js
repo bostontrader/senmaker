@@ -20,7 +20,7 @@ function VerbdTable(props:Object):Object {
                     </thead>
                     <tbody>
                     {[...props.verbd.getIn(['dict','coll']).values()].map(verbd => (
-                        <VerbdRow key={verbd.get('id')} verbd={verbd} strings={props.strings} />
+                        <VerbdRow key={verbd.get('id')} verbd={verbd} verbdPanelLevel={props.verbdPanelLevel} strings={props.strings} />
                     ))}
                     </tbody>
                 </table>
@@ -37,7 +37,7 @@ function VerbdTable(props:Object):Object {
                     </thead>
                     <tbody>
                     {[...props.verbd.getIn(['dict','coll']).values()].map(verbd => (
-                        <VerbdRow key={verbd.get('id')} verbd={verbd} strings={props.strings} />
+                        <VerbdRow key={verbd.get('id')} verbd={verbd} verbdPanelLevel={props.verbdPanelLevel} strings={props.strings} />
                     ))}
                     </tbody>
                 </table>

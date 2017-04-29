@@ -1,25 +1,27 @@
+// @flow
 import React from 'react'
 
-import LessonNavigator from './LessonNavigator'
-import VerbdPanel from '../dictionary/verbd/VerbdPanel'
+import LessonNavigator   from './LessonNavigator'
+import VerbdPanel        from '../dictionary/verbd/VerbdPanel'
+import {VerbdPanelLevel} from '../../data/dictionary/verbd/VerbdConstants'
 
-function Verbd(props) {
+function Verbd(props:Object):Object {
 
-    const style = {
+    const style:Object = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const q = props.quiz
-    const s = props.strings.verbd
+    const q:Object = props.quiz
+    const s:Object = props.strings.verbd
 
-    const quizInsertVerbFlag = q.getIn(['verbd','insertVerbd']) ?
+    const quizInsertVerbFlag:string | Object = q.getIn(['verbd','insertVerbd']) ?
         <img id="insertVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizUpdateVerbFlag = q.getIn(['verbd','updateVerbd']) ?
+    const quizUpdateVerbFlag:string | Object = q.getIn(['verbd','updateVerbd']) ?
         <img id="updateVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizDeleteVerbFlag = q.getIn(['verbd','deleteVerbd']) ?
+    const quizDeleteVerbFlag:string | Object = q.getIn(['verbd','deleteVerbd']) ?
         <img id="deleteVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
     return(
@@ -31,7 +33,7 @@ function Verbd(props) {
                 <p>{s.help12}</p>
                 <p>{s.help13}</p>
             </div>
-            <VerbdPanel {...props} />
+            <VerbdPanel verbdPanelLevel={VerbdPanelLevel.BASE} {...props} />
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>

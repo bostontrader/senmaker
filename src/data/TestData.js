@@ -1,5 +1,6 @@
 // @flow
 import Clause               from './clause/Clause'
+import Adjectivd            from './dictionary/adjectivd/Adjectivd'
 import Nound                from './dictionary/nound/Nound'
 import {PluralizationRule}  from './dictionary/nound/NoundConstants'
 import Verbd                from './dictionary/verbd/Verbd'
@@ -13,7 +14,13 @@ import {ActionTimeSelect}   from './vp/VPConstants'
 // However, in order to properly use these examples, we must sometimes set the id to null
 // to reflect actual usage of an insert operation.  Be aware the the first id starts at '1'.
 
-const noundExamples = {
+const adjectivdExamples:Object = {
+    a:Adjectivd({id:'1', base: 'fat'}),
+    b:Adjectivd({id:'2', base: 'drunk'}),
+    c:Adjectivd({id:'3', base: 'stupid'})
+}
+
+const noundExamples:Object = {
     a:Nound({
         id:'1', base: 'apple',  plural: 'apples', pluralization_rule: PluralizationRule.Append_s
     }),
@@ -28,7 +35,7 @@ const noundExamples = {
     })
 }
 
-const npExamples = {
+const npExamples:Object = {
     a:NP({
         id:'1',
         nound: noundExamples.a,
@@ -50,7 +57,7 @@ const npExamples = {
 
 }
 
-const verbdExamples = {
+const verbdExamples:Object = {
     a:Verbd({
         id:'1', base: 'eat', pastTense: 'ate', pastTense_rule: PastTenseRule.Irregular
     }),
@@ -62,7 +69,7 @@ const verbdExamples = {
     })
 }
 
-const vpExamples = {
+const vpExamples:Object = {
     a:VP({
         id:'1',
         verbd: verbdExamples.a,
@@ -84,7 +91,7 @@ const vpExamples = {
 
 }
 
-const clauseExamples = {
+const clauseExamples:Object = {
     a:Clause({
         id:'1',
         np:NP(npExamples.a),
@@ -105,6 +112,7 @@ const clauseExamples = {
     }),
 }
 
+export {adjectivdExamples}
 export {clauseExamples}
 export {noundExamples}
 export {npExamples}

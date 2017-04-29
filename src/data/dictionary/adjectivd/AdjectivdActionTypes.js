@@ -1,4 +1,5 @@
-const AdjectivdActionTypes = {
+// @flow
+const AdjectivdActionTypes:Object = {
 
     // add/edit UI
     ON_CLICK_ADD_ADJECTIVD:    'ON_CLICK_ADD_ADJECTIVD',

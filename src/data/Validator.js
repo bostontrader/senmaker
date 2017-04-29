@@ -1,6 +1,19 @@
 // @flow
 // Various functions intended to validate the structure and content of the several objects.
 
+const validateAdjectivd = (adjectivd:Object):boolean => {
+    if(adjectivd.constructor.name !== 'Record') {
+        // This is coming from Clause -> NP -> Adjectivd.  Make clause is not doing the adjectivd
+        console.log('Adjectivd must be of type Record.  Instead it is a ',adjectivd.constructor.name)
+        console.log(adjectivd)
+        //throw('adjectivd.constructor.name==='+adjectivd.constructor.name)
+    }
+    if(typeof(adjectivd.get('id')) !== 'string') {
+        console.log('Adjectivd id must be a string.  Instead it is a ',typeof(adjectivd.get('id')))
+        //throw('up')
+    }
+    return true
+}
 
 const validateClause = (clause:Object):boolean => {
     if(clause.constructor.name !== 'Record') {
@@ -76,8 +89,9 @@ const validateVP = (vp:Object):boolean => {
     return true
 }
 
+export {validateAdjectivd}
 export {validateClause}
-export {validateVerbd}
-export {validateVP}
 export {validateNound}
 export {validateNP}
+export {validateVerbd}
+export {validateVP}

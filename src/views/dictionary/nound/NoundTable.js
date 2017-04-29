@@ -10,6 +10,7 @@ function NoundTable(props:Object):Object {
 
     switch(props.noundPanelLevel) {
         case NoundPanelLevel.BASE:
+            console.log('into base')
             noundTable =
                 <table id="nound-list">
                     <thead>
@@ -20,7 +21,7 @@ function NoundTable(props:Object):Object {
                     </thead>
                     <tbody>
                     {[...props.nound.getIn(['dict','coll']).values()].map(nound => (
-                        <NoundRow key={nound.get('id')} nound={nound} strings={props.strings} />
+                        <NoundRow key={nound.get('id')} nound={nound} noundPanelLevel={props.noundPanelLevel} strings={props.strings} />
                     ))}
                     </tbody>
                 </table>
@@ -37,7 +38,7 @@ function NoundTable(props:Object):Object {
                     </thead>
                     <tbody>
                     {[...props.nound.getIn(['dict','coll']).values()].map(nound => (
-                        <NoundRow key={nound.get('id')} nound={nound} strings={props.strings} />
+                        <NoundRow key={nound.get('id')} nound={nound}  noundPanelLevel={props.noundPanelLevel} strings={props.strings} />
                     ))}
                     </tbody>
                 </table>
@@ -46,7 +47,6 @@ function NoundTable(props:Object):Object {
             // noundTable already has a suitable default. Do nothing.
 
     }
-
     return noundTable
 }
 

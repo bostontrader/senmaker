@@ -1,8 +1,7 @@
-import NoundActionTypes    from './NoundActionTypes'
-import NoundStore          from './NoundStore'
-import {PluralizationRule} from './NoundConstants'
-import AppActionTypes      from '../../app/AppActionTypes'
-import {noundExamples}     from '../../TestData'
+import NoundActionTypes from './NoundActionTypes'
+import NoundStore       from './NoundStore'
+import AppActionTypes   from '../../app/AppActionTypes'
+import {noundExamples}  from '../../TestData'
 
 describe('NoundStore', function() {
 

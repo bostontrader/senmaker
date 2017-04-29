@@ -4,7 +4,6 @@ import {fromJS, Map} from 'immutable'
 
 import Nound               from './Nound'
 import NoundActionTypes    from './NoundActionTypes'
-import {PluralizationRule} from './NoundConstants'
 import AppActionTypes      from '../../app/AppActionTypes'
 import AppDispatcher       from '../../AppDispatcher'
 import {MakeMapOfNound}    from '../../JSONParseUtils'
@@ -92,12 +91,7 @@ class NoundStore extends ReduceStore {
 
 NoundStore.initialState = Map({
     nextid:1,
-    coll:Map([
-        //['1',Nound({id: '1', base: 'apple',  plural: 'apples', pluralization_rule: PluralizationRule.Append_s})],
-        //['2',Nound({id: '2', base: 'box',    plural: 'boxes',  pluralization_rule: PluralizationRule.Append_es})],
-        //['3',Nound({id: '3', base: 'fish',   plural: 'fish',   pluralization_rule: PluralizationRule.NoChange})],
-        //['4',Nound({id: '4', base: 'person', plural: 'people', pluralization_rule: PluralizationRule.Irregular})]
-    ])
+    coll:Map()
 })
 
 export default new NoundStore()

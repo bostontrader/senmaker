@@ -1,5 +1,6 @@
 import AdjectivdAEStore     from './AdjectivdAEStore'
 import AdjectivdActionTypes from '../AdjectivdActionTypes'
+import {adjectivdExamples}  from '../../../TestData'
 import AppActionTypes       from '../../../app/AppActionTypes'
 
 // The AdjectivdAEStore is responsible for setting a small bit of state to signal
@@ -50,18 +51,14 @@ describe('AdjectivdAEStore', function() {
         expect(this.state).toBe(initialState)
     })
 
-    // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm. We don't test these two separately,
-    // the same state should close either one. But the delete button is only available on AdjectivdEditForm.
+    // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm.
     it('ON_CLICK_DELETE_ADJECTIVD', function() {
         const initialState = this.state
         this.perturbState()
         expect(this.state).not.toBe(initialState)
 
         // Now close it
-        this.dispatch({
-            type: AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD,
-            adjectivd: {} // This action doesn't care about the adjectivd
-        })
+        this.dispatch({type: AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD})
         expect(this.state).toBe(initialState)
     })
 
@@ -69,9 +66,9 @@ describe('AdjectivdAEStore', function() {
     it('ON_CLICK_EDIT_ADJECTIVD', function() {
         this.dispatch({
             type: AdjectivdActionTypes.ON_CLICK_EDIT_ADJECTIVD,
-            adjectivd: {id: '1', base: 'fat'}
+            adjectivd: adjectivdExamples.a
         })
-        expect(this.state.get('adjectivd').toJSON()).toEqual({id: '1', base: 'fat'})
+        expect(this.state.get('adjectivd').toJSON()).toEqual(adjectivdExamples.a.toJSON())
     })
 
     // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm. We don't test these two separately,
@@ -84,16 +81,13 @@ describe('AdjectivdAEStore', function() {
         this.perturbState()
         expect(this.state).not.toBe(initialState)
 
-        this.dispatch({type: AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD, adjectivd: {}})
+        this.dispatch({type: AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD})
         expect(this.state).toBe(initialState)
     })
 
     it('ON_CHANGE_BASE', function() {
-        this.dispatch({
-            type: AdjectivdActionTypes.ON_CHANGE_BASE,
-            base: 'fat'
-        })
-        expect(this.state.getIn(['adjectivd','base'])).toBe('fat')
+        this.dispatch({type: AdjectivdActionTypes.ON_CHANGE_BASE, base: 'catfood'})
+        expect(this.state.getIn(['adjectivd','base'])).toBe('catfood')
     })
 
 })

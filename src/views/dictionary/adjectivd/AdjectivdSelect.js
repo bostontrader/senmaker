@@ -1,4 +1,14 @@
+// @flow
 import React  from 'react'
+import Select from 'react-select'
+
+function AdjectivdSelect(props:Object) {
+    return <Select options={props.options} value={props.value} placeholder="Select an adjective..." onChange={(e)=>{props.onChange(e.value)}}/>
+}
+
+export default AdjectivdSelect
+
+/*import React  from 'react'
 import Select from 'react-select'
 import AdjectivdActions from '../../../data/dictionary/adjectivd/AdjectivdActions'
 
@@ -18,3 +28,4 @@ function AdjectivdSelect(props) {
 }
 
 export default AdjectivdSelect
+*/
