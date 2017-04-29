@@ -33,7 +33,7 @@ function VPPanel(props) {
     // The appearance of a VPPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-vp" onClick={VPActions.onClickAddVP}>{s.add_new} {'verb'}</button>
+            <button id="add-vp" onClick={VPActions.onClickAddVP}>{s.add_new} {'Verb Phrase'}</button>
             <VPTable {...props} />
         </div>
         <div>

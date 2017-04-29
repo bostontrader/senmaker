@@ -44,17 +44,17 @@ describe("VerbdTable", function() {
         expect(tree).toMatchSnapshot()
     })
 
-    //it("Renders a VerbdPanelLevel.PLURALIZATION VerbdTable", function() {
-        //const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PLURALIZATION} {...this.state} />
-        //const verbdTable = TestUtils.createRenderer().render(renderExpression)
-        //expect(verbdTable.type).toBe('table')
+    it("Renders a VerbdPanelLevel.PAST_TENSE VerbdTable", function() {
+        const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...this.state} />
+        const verbdTable = TestUtils.createRenderer().render(renderExpression)
+        expect(verbdTable.type).toBe('table')
 
         // Three columns in the thead
-        //expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base, plural, edit
+        expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base, past_tense, edit
 
-        //const tree = rtRenderer.create(renderExpression).toJSON()
-        //expect(tree).toMatchSnapshot()
-    //})
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
 
     it("Will render one VerbdRow", function() {
         this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.a})

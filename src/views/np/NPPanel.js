@@ -33,7 +33,7 @@ function NPPanel(props) {
     // The appearance of a NPPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-np" onClick={NPActions.onClickAddNP}>{s.add_new} {s.noun}</button>
+            <button id="add-np" onClick={NPActions.onClickAddNP}>{s.add_new} {'Noun Phrase'}</button>
             <NPTable {...props} />
         </div>
         <div>

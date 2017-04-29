@@ -6,7 +6,7 @@ import {RadioGroup} from 'react-radio-group'
 import NoundSelect  from '../../dictionary/nound/NoundSelect'
 import NPActions from '../../../data/np/NPActions'
 import {validateVerbd} from '../../../data/Validator'
-import {validateVP}    from '../../../data/Validator'
+import {validateNP}    from '../../../data/Validator'
 
 // should be all global props, an object that contains several immutables
 function NPAddForm(props:Object):Object {
@@ -18,9 +18,9 @@ function NPAddForm(props:Object):Object {
     const s = props.strings
 
     const onClickSave = () => {
-        const vp = props.vp.getIn(['addedit','vp'])
-        validateVP(vp)
-        VPActions.onClickSaveVP(vp)
+        const np = props.np.getIn(['addedit','np'])
+        validateNP(np)
+        NPActions.onClickSaveNP(np)
     }
 
     let theButtons = []

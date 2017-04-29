@@ -94,11 +94,7 @@ class NPStore extends ReduceStore {
 
 NPStore.initialState = Map({
     nextid:1,
-    coll:Map([
-        ['1',npExamples.a],
-        ['2',npExamples.b],
-        ['3',npExamples.c]
-    ])  // the actual collection of np
+    coll:Map()  // the actual collection of np
 })
 
 export default new NPStore()

@@ -1,14 +1,14 @@
 import React     from "react"
 import TestUtils from "react-addons-test-utils"
 
-import NoundSelect    from './NoundSelect'
+import NPSelect    from './NPSelect'
 
-describe("NoundSelect", () => {
+describe("NPSelect", () => {
 
-    it("renders a NoundSelect", () => {
+    it("renders a NPSelect", () => {
         const tuRenderer = TestUtils.createRenderer()
         const props = {}
-        const noundSelect = tuRenderer.render(<NoundSelect {...props} />)
+        const noundSelect = tuRenderer.render(<NPSelect {...props} />)
         expect(true)
     })
 

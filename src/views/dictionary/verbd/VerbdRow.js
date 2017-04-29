@@ -12,7 +12,7 @@ function VerbdRow(props:Object):Object {
     const onClickEditVerbd:Function = () => VerbdActions.onClickEditVerbd(verbd)
     const editButton:Object = <button id={'id'+verbd.id} type="button" onClick={onClickEditVerbd} >{props.strings.edit}</button>
 
-    let verbdRow:Object = <div></div>
+    let verbdRow:Object = <tr></tr>
 
     switch(props.verbdPanelLevel) {
         case VerbdPanelLevel.BASE:
@@ -22,7 +22,7 @@ function VerbdRow(props:Object):Object {
                     <td>{editButton}</td>
                 </tr>
             break
-        case VerbdPanelLevel.PLURALIZATION:
+        case VerbdPanelLevel.PAST_TENSE:
             verbdRow =
                 <tr>
                     <td>{verbd.base}</td>

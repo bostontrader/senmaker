@@ -6,22 +6,21 @@ import NPPanel         from '../np/NPPanel'
 
 function NounPhrases(props:Object):Object {
 
-    const style = {
+    const style:Object = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const q = props.quiz
-    const s = props.strings.np
+    const q:Object = props.quiz
+    const s:Object = props.strings.np
 
-    console.log(s.quiz10)
-    const quizInsertNP = q.getIn(['np','insertNP']) ?
+    const quizInsertNP:Object | string = q.getIn(['np','insertNP']) ?
         <img id="insertNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizUpdateNP = q.getIn(['np','updateNP']) ?
+    const quizUpdateNP:Object | string = q.getIn(['np','updateNP']) ?
         <img id="updateNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
 
-    const quizDeleteNP = q.getIn(['np','deleteNP']) ?
+    const quizDeleteNP:Object | string = q.getIn(['np','deleteNP']) ?
         <img id="deleteNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
     
     return (

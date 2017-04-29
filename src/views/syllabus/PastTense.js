@@ -1,17 +1,19 @@
+// @flow
 import React from 'react'
 
-import LessonNavigator from './LessonNavigator'
-import VerbdPanel from '../dictionary/verbd/VerbdPanel'
+import LessonNavigator   from './LessonNavigator'
+import VerbdPanel        from '../dictionary/verbd/VerbdPanel'
+import {VerbdPanelLevel} from '../../data/dictionary/verbd/VerbdConstants'
 
-function PastTense(props) {
+function PastTense(props:Object):Object {
 
-    const style = {
+    const style:Object = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const q = props.quiz
-    const s = props.strings.pastTense
+    const q:Object = props.quiz
+    const s:Object = props.strings.pastTense
 
     /*const quizInsertVerbFlag = q.getIn(['verbd','insertPastTense']) ?
         <img id="insertPastTenseCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
@@ -31,7 +33,7 @@ function PastTense(props) {
                 <p>{s.help12}</p>
                 <p>{s.help13}</p>
             </div>
-            <VerbdPanel verbdPanelLevel='catfood' {...props} />
+            <VerbdPanel verbdPanelLevel={VerbdPanelLevel.PAST_TENSE} {...props} />
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>

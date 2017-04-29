@@ -4,13 +4,10 @@ import React from 'react'
 import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 
-import VerbdEditForm from './VerbdEditForm'
-import VerbdAEStore  from '../../../../data/dictionary/verbd/addedit/VerbdAEStore'
-import StringStore   from '../../../../data/strings/StringStore'
-
-//import AppActionTypes from '../../../../data/app/AppActionTypes'
-//import AppStore from '../../../../data/app/AppStore'
-
+import VerbdEditForm     from './VerbdEditForm'
+import {VerbdPanelLevel} from '../../../../data/dictionary/verbd/VerbdConstants'
+import VerbdAEStore      from '../../../../data/dictionary/verbd/addedit/VerbdAEStore'
+import StringStore       from '../../../../data/strings/StringStore'
 
 describe("VerbdEditForm", () => {
 
@@ -22,32 +19,30 @@ describe("VerbdEditForm", () => {
             }),
             strings:StringStore.getInitialState()
         }
-        const renderExpression = <VerbdEditForm {...props} />
+        const renderExpression = <VerbdEditForm verbdPanelLevel = {VerbdPanelLevel.BASE} {...props} />
         const verbdEditForm = TestUtils.createRenderer().render(renderExpression)
         expect(verbdEditForm.type).toBe('div')
-        expect(verbdEditForm.props.children.length).toBe(5) // verb, input, save, delete, cancel
+        expect(verbdEditForm.props.children.length).toBe(5) // base, input, save, delete, cancel
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
     })
 
-    /*it("renders a VerbPanelLevel.PAST_TENSE VerbdEditForm", () => {
-        let newState = AppStore.getInitialState()
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const strings = StringStore.getInitialState()
+    it("Renders a VerbPanelLevel.PAST_TENSE VerbdEditForm", () => {
         const props = {
-            verbs: OrderedMap(),
-            addEditVerb: VerbAEStore.getInitialState(), strings:strings}
-        
-        const renderExpression = <VerbdEditForm {...props} />
+            verbd: Map({
+                addedit: VerbdAEStore.getInitialState(),
+                verbs: Map()
+            }),
+            strings:StringStore.getInitialState()
+        }
+        const renderExpression = <VerbdEditForm verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...props} />
         const verbdEditForm = TestUtils.createRenderer().render(renderExpression)
         expect(verbdEditForm.type).toBe('div')
-        //expect(verbdEditForm.props.children.length).toBe(6)
+        expect(verbdEditForm.props.children.length).toBe(7) // base, input, pastTense, input, save, delete, cancel
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
-    })*/
+    })
 
 })

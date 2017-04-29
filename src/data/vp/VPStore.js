@@ -94,11 +94,7 @@ class VPStore extends ReduceStore {
 
 VPStore.initialState = Map({
     nextid:1,
-    coll:Map([
-        ['1',vpExamples.a],
-        ['2',vpExamples.b],
-        ['3',vpExamples.c]
-    ])  // the actual collection of vp
+    coll:Map()  // the actual collection of vp
 })
 
 export default new VPStore()

@@ -1,8 +1,9 @@
 // @flow
 import React from 'react'
 
-import VerbdActions from '../../../../data/dictionary/verbd/VerbdActions'
-import {validateVerbd} from '../../../../data/Validator'
+import VerbdActions      from '../../../../data/dictionary/verbd/VerbdActions'
+import {VerbdPanelLevel} from '../../../../data/dictionary/verbd/VerbdConstants'
+import {validateVerbd}   from '../../../../data/Validator'
 
 //import PastTenseRuleSelect from '../PastTenseRuleSelect'
 
@@ -21,41 +22,45 @@ function VerbdAddForm(props:Object):Object {
         VerbdActions.onClickSaveVerbd(verbd)
     }
 
-    let verbdAddForm:Object
+    let verbdAddForm:Object = <div></div>
 
-    /*if(props.app.getIn(['level','currentLevel'])) {
-        verbdAddForm =
-            <div>
-                <label htmlFor='base'>Base</label>
-                <input id='base' name='base' type='text'
-                       value={props.verbd.getIn(['addedit','verbd','base'])}
-                       onChange={(e)=>VerbdActions.onChangeBase(e.target.value)}
-                />
-                <label htmlFor='pastTense'>Past Tense</label>
-                <input id='pastTense' name='pastTense' type='text'
-                       value={props.verbd.getIn(['addedit','verbd','pastTense'])}
-                       onChange={(e)=>VerbdActions.onChangePastTense(e.target.value)}
-                />
-                <PastTenseRuleSelect pastTense_rule={0}/>
+    switch(props.verbdPanelLevel) {
+        case VerbdPanelLevel.BASE:
+            verbdAddForm =
+                <div id="verbd-edit-form" style={style}>
+                    <label htmlFor='base'>Base</label>
+                    <input id='base' name='base' type='text'
+                        value={props.verbd.getIn(['addedit','verbd','base'])}
+                        onChange={(e)=>VerbdActions.onChangeBase(e.target.value)}
+                    />
+                    <button id='save-verbd'   onClick={onClickSave}>{s.save}</button>
+                    <button id='cancel'       onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
+                </div>
+            break
+        case VerbdPanelLevel.PAST_TENSE:
+            verbdAddForm =
+                <div id="verbd-edit-form" style={style}>
+                    <label htmlFor='base'>Base</label>
+                    <input id='base' name='base' type='text'
+                        value={props.verbd.getIn(['addedit','verbd','base'])}
+                        onChange={(e)=>VerbdActions.onChangeBase(e.target.value)}
+                    />
+                    <label htmlFor='pastTense'>Past Tense</label>
+                    <input id='pastTense' name='pastTense' type='text'
+                           value={props.verbd.getIn(['addedit','verbd','pastTense'])}
+                           onChange={(e)=>VerbdActions.onChangePastTense(e.target.value)}
+                    />
+                    <button id='save-verbd'   onClick={onClickSave}>{s.save}</button>
+                    <button id='cancel'       onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
+                </div>
+            break
+        default:
+            // verbdAddForm already has a suitable default. Do nothing.
 
-                <button id='save-verbd' onClick={onClickSave}>{s.save}</button>
-                <button id='cancel'     onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
-            </div>
-
-    } else {*/
-        verbdAddForm =
-            <div id='verbd-add-form' style={style}>
-                <label htmlFor='base'>Base</label>
-                <input id='base' name='base' type='text'
-                    value={props.verbd.getIn(['addedit','verbd','base'])}
-                    onChange={(e)=>VerbdActions.onChangeBase(e.target.value)}
-                />
-                <button id='save-verbd' onClick={onClickSave}>{s.save}</button>
-                <button id='cancel'     onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
-            </div>
-    //}
+    }
 
     return verbdAddForm
+
 }
 
 export default VerbdAddForm
