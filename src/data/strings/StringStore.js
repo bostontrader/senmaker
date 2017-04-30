@@ -159,7 +159,15 @@ StringStore.en = {
     clause: {
         help10: 'A clause has a noun phrase and a verb phrase.'
     },
-
+    sentence: {
+        help10: 'A sentence can have many clauses, or it may just have a single clause.'
+    },
+    pluralization: {
+        help10: 'When we write a noun we must specifiy how many of something we are writing about.',
+        help11: 'For example are we writing about one cat or more than one cat?',
+        help12: 'If we are writing about only one of something, then we use the base form of the noun.',
+        help13: 'If we are writing about more than one, then we use the plural form of the noun.'
+    },
     npWithAdjectives: {
         help10: '',
         help11: ''
@@ -170,10 +178,7 @@ StringStore.en = {
 
     // Plural or Singular
     //Level06: {
-        //help10: 'When we write a noun we must specifiy how many of something we are writing about.',
-        //help11: 'For example are we writing about one cat or more than one cat?',
-        //help12: 'If we are writing about only one of something, then we use the base form of the noun.',
-        //help13: 'If we are writing about more than one, then we use the plural form of the noun.'
+
         //quiz:
     //},
 
@@ -308,19 +313,19 @@ StringStore.zh = {
     clause: {
         help10: 'A clause has a noun phrase and a verb phrase.'
     },
-
+    sentence: {
+        help10: 'A sentence can have many clauses, or it may just have a single clause.'
+    },
+    pluralization: {
+        help10: '当我们写名词时必须知道名词的形式。.',
+        help11: '例如我们写关于一只猫或多只猫吗?',
+        help12: '如果我们只写一个东西,我们用名词的基本形式。',
+        help13: '如果我们写不止一个,那么我们使用名词的复数形式。'
+    },
     npWithAdjectives: {
         help10: '',
         help11: ''
     },
-
-    // plural
-    //xLevel03: {
-        //help10: '当我们写名词时必须知道名词的形式。.',
-        //help11: '例如我们写关于一只猫或多只猫吗?',
-        //help12: '如果我们只写一个东西,我们用名词的基本形式。',
-        //help13: '如果我们写不止一个,那么我们使用名词的复数形式。'
-    //},
     lessonNavigator: {
         level: '级',
         nextLevel: '下一級',

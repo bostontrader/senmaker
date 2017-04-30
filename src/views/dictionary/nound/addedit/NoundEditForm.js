@@ -1,9 +1,10 @@
 // @flow
 import React from 'react'
 
-import NoundActions from '../../../../data/dictionary/nound/NoundActions'
-//import {NoundPanelLevel} from '../../../../data/dictionary/nound/NoundConstants'
-//import PluralizationRuleSelect from './PluralizationRuleSelect'
+import PluralizationRuleSelect from './PluralizationRuleSelect'
+import NoundActions            from '../../../../data/dictionary/nound/NoundActions'
+import {NoundPanelLevel}       from '../../../../data/dictionary/nound/NoundConstants'
+import {validateNound}         from '../../../../data/Validator'
 
 function NoundEditForm(props:Object):Object {
 
@@ -14,14 +15,63 @@ function NoundEditForm(props:Object):Object {
 
     const s:Object = props.strings
 
-    const onClickSave:Function = () => NoundActions.onClickSaveNound({
-        id: props.nound.getIn(['addedit','nound','id']),
-        base: props.nound.getIn(['addedit','nound','base']),
-        //plural: props.nound.getIn(['addedit','nound','plural'])
-    })
+    const onClickSave:Function = () => {
+        const nound:Object = props.nound.getIn(['addedit','nound'])
+        validateNound(nound)
+        NoundActions.onClickSaveNound(nound)
+    }
+
     const onDelete:Function = () => NoundActions.onClickDeleteNound(props.nound.getIn(['addedit','nound','id']))
 
-    let noundEditForm:Object
+    const buttonSave:Object   = <button id='save-nound' onClick={onClickSave}>{s.save}</button>
+    const buttonDelete:Object = <button id='delete-nound' onClick={onDelete}>{s.delete}</button>
+    const buttonCancel:Object = <button id='cancel'     onClick={NoundActions.onClickCancel}>{s.cancel}</button>
+
+    const theButtons:Object = (props.nound.getIn(['addedit','nound','id'])) ?
+        <div>{buttonSave}{buttonDelete}{buttonCancel}</div> : <div>{buttonSave}{buttonCancel}</div>
+
+    let noundEditForm:Object = <div></div>
+
+    switch(props.noundPanelLevel) {
+        case NoundPanelLevel.BASE:
+            noundEditForm =
+                <div id='nound-add-form' style={style}>
+                    <label htmlFor='base'>Base Noun</label>
+                    <input id='base' name='base' type='text'
+                        value={props.nound.getIn(['addedit','nound','base'])}
+                        onChange={(e)=>NoundActions.onChangeBase(e.target.value)}
+                    />
+                    <button id='save-nound' onClick={onClickSave}>{s.save}</button>
+                    <button id='delete-nound' onClick={onDelete}>{s.delete}</button>
+                    <button id='cancel'     onClick={NoundActions.onClickCancel}>{s.cancel}</button>
+                </div>
+            break
+        case NoundPanelLevel.PLURALIZATION:
+            noundEditForm =
+                <div id='nound-add-form' style={style}>
+                    <label htmlFor='base'>Base Noun</label>
+                    <input id='base' name='base' type='text'
+                        value={props.nound.getIn(['addedit','nound','base'])}
+                        onChange={(e)=>NoundActions.onChangeBase(e.target.value)}
+                    />
+                    <PluralizationRuleSelect pluralization_rule={0}/>
+                    <label htmlFor='plural'>Plural</label>
+                    <input id='plural' name='plural' type='text'
+                        value={props.nound.getIn(['addedit','nound','plural'])}
+                        onChange={(e)=>NoundActions.onChangePlural(e.target.value)}
+                    />
+                    <button id='save-nound' onClick={onClickSave}>{s.save}</button>
+                    <button id='delete-nound' onClick={onDelete}>{s.delete}</button>
+                    <button id='cancel'     onClick={NoundActions.onClickCancel}>{s.cancel}</button>
+                </div>
+            break
+        default:
+            // noundEditForm already has a suitable default. Do nothing.
+
+    }
+
+    return noundEditForm
+
 
     //if(props.level.getIn(['currentAppLevelConfig','noundPanel']) >= NoundPanelLevel.PLURALIZATION) {
         /*noundEditForm =
@@ -34,7 +84,7 @@ function NoundEditForm(props:Object):Object {
                 <button onClick={props.onCancelNoun}>{s.cancel}</button>
             </div>*/
     //} else if(props.level.getIn(['currentAppLevelConfig','noundPanel']) >= NoundPanelLevel.BASE) {
-        noundEditForm =
+        /*noundEditForm =
             <div id="nound-edit-form" style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
@@ -47,7 +97,7 @@ function NoundEditForm(props:Object):Object {
             </div>
     //}
 
-    return noundEditForm
+    return noundEditForm*/
 
 }
 

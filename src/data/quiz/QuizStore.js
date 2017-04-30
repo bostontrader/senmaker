@@ -144,9 +144,9 @@ class QuizStore extends ReduceStore {
                 break
 
             // 5. phrases
-            case QuizActionTypes.phrases.ON_I_UNDERSTAND:
-                newState = newState.setIn(['phrases','iunderstand'],true)
-                newState = newState.setIn(['phrases','passed'],true)
+            case QuizActionTypes.phrase.ON_I_UNDERSTAND:
+                newState = newState.setIn(['phrase','iunderstand'],true)
+                newState = newState.setIn(['phrase','passed'],true)
                 break
 
             // 6. nounPhrases
@@ -158,6 +158,18 @@ class QuizStore extends ReduceStore {
                     newState = newState.setIn(['np','insertNP'],true)
                     newState = newState.setIn(['np','passed'],npQuizPassed(newState))
                 }
+                break
+
+            // 10. sentences
+            case QuizActionTypes.sentence.ON_I_UNDERSTAND:
+                newState = newState.setIn(['sentence','iunderstand'],true)
+                newState = newState.setIn(['sentence','passed'],true)
+                break
+
+            // 11. pluralization
+            case QuizActionTypes.pluralization.ON_I_UNDERSTAND:
+                newState = newState.setIn(['pluralization','iunderstand'],true)
+                newState = newState.setIn(['pluralization','passed'],true)
                 break
 
             case NPActionTypes.ON_CLICK_DELETE_NP:
@@ -205,7 +217,7 @@ QuizStore.initialState = Map({
         iseeArticleChanged : false,
         passed: false
     }),
-    phrases: Map({
+    phrase: Map({
         iunderstand: false,
         passed: false
     }),
@@ -214,7 +226,15 @@ QuizStore.initialState = Map({
         updateNP: false,
         deleteNP: false,
         passed: false
-    })
+    }),
+    sentence: Map({
+        iunderstand: false,
+        passed: false
+    }),
+    pluralization: Map({
+        iunderstand: false,
+        passed: false
+    }),
 })
 
 export default new QuizStore()

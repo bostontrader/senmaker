@@ -94,11 +94,7 @@ class ClauseStore extends ReduceStore {
 
 ClauseStore.initialState = Map({
     nextid:1,
-    coll:Map([
-        ['1',clauseExamples.a],
-        ['2',clauseExamples.b],
-        ['3',clauseExamples.c]
-    ])  // the actual collection of clause
+    coll:Map()  // the actual collection of clause
 })
 
 export default new ClauseStore()

@@ -1,8 +1,7 @@
 // @flow
 import React from 'react'
 
-import NoundAddForm  from './addedit/NoundAddForm'
-import NoundEditForm from './addedit/NoundEditForm'
+import NoundAEForm  from './addedit/NoundAEForm'
 import NoundTable    from './NoundTable'
 import NoundActions  from '../../../data/dictionary/nound/NoundActions'
 
@@ -20,11 +19,11 @@ function NoundPanel(props:Object):Object {
     const s:Object = props.strings
 
     // What should be displayed in the nound add/edit panel?
-    let nounAddEditForm:Object = <div></div>  // we really want nothing here
-    if(props.nound.getIn(['addedit','nound','id'])) {
-        nounAddEditForm = <NoundEditForm {...props} />
-    } else if (props.nound.getIn(['addedit','addNound'])) {
-        nounAddEditForm = <NoundAddForm {...props} />
+    let noundAEForm:Object = <div></div>  // we really want nothing here
+    if(props.nound.getIn(['addedit','nound','id']) || props.nound.getIn(['addedit','addNound'])) {
+        noundAEForm = <NoundAEForm {...props} />
+    //} else if (props.nound.getIn(['addedit','addNound'])) {
+        //noundAEForm = <NoundAEForm {...props} />
     } else {
         // A suitable default is already set, so do nothing
     }
@@ -36,7 +35,7 @@ function NoundPanel(props:Object):Object {
             <NoundTable {...props} />
         </div>
         <div>
-            {nounAddEditForm}
+            {noundAEForm}
         </div>
     </div>)
 

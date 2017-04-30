@@ -1,7 +1,8 @@
+// @flow
 import QuizActionTypes from './QuizActionTypes'
 import AppDispatcher from '../AppDispatcher'
 
-const QuizActions = {
+const QuizActions:Object = {
 
     intro: {
         onIUnderstand() {
@@ -20,7 +21,21 @@ const QuizActions = {
     phrase: {
         onIUnderstand() {
             AppDispatcher.dispatch({
-                type: QuizActionTypes.phrase.ON_I_UNDERSTAND
+                type: QuizActionTypes.phrase.ON_I_UNDERSTAND2
+            })
+        },
+    },
+    sentence: {
+        onIUnderstand() {
+            AppDispatcher.dispatch({
+                type: QuizActionTypes.sentence.ON_I_UNDERSTAND3
+            })
+        },
+    },
+    pluralization: {
+        onIUnderstand() {
+            AppDispatcher.dispatch({
+                type: QuizActionTypes.pluralization.ON_I_UNDERSTAND4
             })
         },
     }

@@ -1,5 +1,6 @@
 import NoundAEStore        from './NoundAEStore'
 import NoundActionTypes    from '../NoundActionTypes'
+import {PluralizationRule} from '../NoundConstants'
 import {noundExamples}     from '../../../TestData'
 import AppActionTypes      from '../../../app/AppActionTypes'
 
@@ -88,6 +89,21 @@ describe('NoundAEStore', function() {
     it('ON_CHANGE_BASE', function() {
         this.dispatch({type: NoundActionTypes.ON_CHANGE_BASE, base: 'catfood'})
         expect(this.state.getIn(['nound','base'])).toBe('catfood')
+    })
+
+    it('ON_CHANGE_PLURALIZATION_RULE', function() {
+        expect(this.state.getIn(['nound','pluralization_rule'])).toBe(PluralizationRule.NoneSelected)
+
+        this.dispatch({
+            type: NoundActionTypes.ON_CHANGE_PLURALIZATION_RULE,
+            newPluralizationRule: PluralizationRule.Append_es
+        })
+        expect(this.state.getIn(['nound','pluralization_rule'])).toBe(PluralizationRule.Append_es)
+    })
+
+    it('ON_CHANGE_PLURAL', function() {
+        this.dispatch({type: NoundActionTypes.ON_CHANGE_PLURAL, plural: 'catfood'})
+        expect(this.state.getIn(['nound','plural'])).toBe('catfood')
     })
 
 })

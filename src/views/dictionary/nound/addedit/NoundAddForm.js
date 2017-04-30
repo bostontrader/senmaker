@@ -1,11 +1,10 @@
 // @flow
 import React from 'react'
 
-import NoundActions    from '../../../../data/dictionary/nound/NoundActions'
-import {validateNound} from '../../../../data/Validator'
-
-//import {NoundPanelLevel} from '../../../../data/dictionary/nound/NoundConstants'
-//import PluralizationSelect from '../../../nouni/PluralizationSelect'
+import PluralizationRuleSelect from './PluralizationRuleSelect'
+import NoundActions            from '../../../../data/dictionary/nound/NoundActions'
+import {NoundPanelLevel}       from '../../../../data/dictionary/nound/NoundConstants'
+import {validateNound}         from '../../../../data/Validator'
 
 function NoundAddForm(props:Object):Object {
 
@@ -22,7 +21,52 @@ function NoundAddForm(props:Object):Object {
         NoundActions.onClickSaveNound(nound)
     }
 
-    let noundAddForm:Object
+
+
+    let noundAddForm:Object = <div></div>
+
+    switch(props.noundPanelLevel) {
+        case NoundPanelLevel.BASE:
+            noundAddForm =
+                <div id='nound-add-form' style={style}>
+                    <label htmlFor='base'>Base Noun</label>
+                    <input id='base' name='base' type='text'
+                        value={props.nound.getIn(['addedit','nound','base'])}
+                        onChange={(e)=>NoundActions.onChangeBase(e.target.value)}
+                    />
+                    <button id='save-nound' onClick={onClickSave}>{s.save}</button>
+                    <button id='cancel'     onClick={NoundActions.onClickCancel}>{s.cancel}</button>
+                </div>
+            break
+        case NoundPanelLevel.PLURALIZATION:
+            noundAddForm =
+                <div id='nound-add-form' style={style}>
+                    <label htmlFor='base'>Base Noun</label>
+                    <input id='base' name='base' type='text'
+                        value={props.nound.getIn(['addedit','nound','base'])}
+                        onChange={(e)=>NoundActions.onChangeBase(e.target.value)}
+                    />
+                    <PluralizationRuleSelect pluralization_rule={0}/>
+                    <label htmlFor='plural'>Plural</label>
+                    <input id='plural' name='plural' type='text'
+                        value={props.nound.getIn(['addedit','nound','plural'])}
+                        onChange={(e)=>NoundActions.onChangePlural(e.target.value)}
+                    />
+                    <button id='save-nound' onClick={onClickSave}>{s.save}</button>
+                    <button id='cancel'     onClick={NoundActions.onClickCancel}>{s.cancel}</button>
+                </div>
+            break
+        default:
+            // noundAddForm already has a suitable default. Do nothing.
+
+    }
+
+    return noundAddForm
+
+
+
+
+    //let noundAddForm:Object
 
     //if(props.level.getIn(['currentAppLevelConfig', 'noundPanel']) >= NoundPanelLevel.PLURALIZATION) {
         /*noundAddForm =
@@ -35,7 +79,7 @@ function NoundAddForm(props:Object):Object {
             </div>*/
 
     //} else if(props.level.getIn(['currentAppLevelConfig', 'noundPanel']) >= NoundPanelLevel.BASE) {
-        noundAddForm =
+        /*noundAddForm =
             <div id='nound-add-form' style={style}>
                 <label htmlFor='base'>Base</label>
                 <input id='base' name='base' type='text'
@@ -44,10 +88,10 @@ function NoundAddForm(props:Object):Object {
                 />
                 <button id='save-nound' onClick={onClickSave}>{s.save}</button>
                 <button id='cancel'     onClick={NoundActions.onClickCancel}>{s.cancel}</button>
-            </div>
+            </div>*/
     //}
 
-    return noundAddForm
+    //return noundAddForm
 }
 
 export default NoundAddForm

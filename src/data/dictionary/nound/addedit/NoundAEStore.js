@@ -19,11 +19,16 @@ const localStorageKey = 'NoundAEStore'
  If said nound has an id, then this is an edit, otherwise we're creating a new nound.
 
  We can use this information to manage the display of a suitable add/edit component.
- If the nound has an id then we are editing a nound and we thus want to display the NoundEditForm component.
- If the onClickAddNound flag = true, then we are adding a new nound and we want to display the NoundAddForm component.
+
+ If the nound has an id then we are editing an existing nound and we thus want to display the
+ NoundAEForm component in edit mode.
+
+ If the addNound flag = true, then we are adding a new nound and we want to display the
+ NoundAEForm component in add mode.
+
  Else display nothing.
 
- We use the onClickAddNound flag for purposes of code clarity.
+ We use the addNound flag for purposes of code clarity.
 
  */
 class NoundAEStore extends ReduceStore {
@@ -95,6 +100,14 @@ class NoundAEStore extends ReduceStore {
 
             case NoundActionTypes.ON_CHANGE_BASE:
                 newState = newState.updateIn(['nound','base'],value => action.base)
+                break
+
+            case NoundActionTypes.ON_CHANGE_PLURALIZATION_RULE:
+                newState = newState.updateIn(['nound','pluralization_rule'],value => action.newPluralizationRule)
+                break
+
+            case NoundActionTypes.ON_CHANGE_PLURAL:
+                newState = newState.updateIn(['nound','plural'],value => action.plural)
                 break
 
             default:

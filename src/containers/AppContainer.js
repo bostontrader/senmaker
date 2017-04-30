@@ -94,8 +94,6 @@ function getState():Object {
     }
 
     // Why are these different?
-    console.log(initialState)
-    console.log(a)
     return a
     //return initialState
 

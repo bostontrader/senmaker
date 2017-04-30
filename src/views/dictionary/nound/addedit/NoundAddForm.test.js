@@ -4,12 +4,10 @@ import React from 'react'
 import TestUtils         from 'react-addons-test-utils'
 import rtRenderer        from 'react-test-renderer'
 
-import NoundAddForm from './NoundAddForm'
-import NoundAEStore from '../../../../data/dictionary/nound/addedit/NoundAEStore'
-import StringStore  from '../../../../data/strings/StringStore'
-//import AppActionTypes from '../../../../data/app/AppActionTypes'
-//import AppStore from '../../../../data/app/AppStore'
-//import {NoundPanelLevel} from '../../../../data/dictionary/nound/NoundConstants'
+import NoundAddForm      from './NoundAddForm'
+import {NoundPanelLevel} from '../../../../data/dictionary/nound/NoundConstants'
+import NoundAEStore      from '../../../../data/dictionary/nound/addedit/NoundAEStore'
+import StringStore       from '../../../../data/strings/StringStore'
 
 describe("NoundAddForm", () => {
 
@@ -22,7 +20,7 @@ describe("NoundAddForm", () => {
             strings:StringStore.getInitialState()
         }
 
-        const renderExpression = <NoundAddForm {...props} />
+        const renderExpression = <NoundAddForm noundPanelLevel = {NoundPanelLevel.BASE} {...props} />
         const noundAddForm = TestUtils.createRenderer().render(renderExpression)
         expect(noundAddForm.type).toBe('div')
         expect(noundAddForm.props.children.length).toBe(4) // noun, input, save, cancel
@@ -31,27 +29,22 @@ describe("NoundAddForm", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    /*it("Renders a NoundPanelLevel.PAST_TENSE NoundAddForm", () => {
-        let newState = AppStore.getInitialState()
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        newState = AppStore.reduce(newState, {type: AppActionTypes.LEVEL_NEXT})
-        const strings = StringStore.getInitialState()
+    it("Renders a NoundPanelLevel.PLURALIZATION NoundAddForm", () => {
         const props = {
-            level:newState.get('level'),
             nound: Map({
                 addedit: NoundAEStore.getInitialState(),
-                nouns: OrderedMap()
+                nouns: Map()
             }),
-            strings:strings
+            strings:StringStore.getInitialState()
         }
-        const renderExpression = <NoundAddForm {...props} />
+
+        const renderExpression = <NoundAddForm noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...props} />
         const noundAddForm = TestUtils.createRenderer().render(renderExpression)
         expect(noundAddForm.type).toBe('div')
-        //expect(noundAddForm.props.children.length).toBe(5)
+        expect(noundAddForm.props.children.length).toBe(4) // noun, input, save, cancel
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
-    })*/
+    })
 
 })

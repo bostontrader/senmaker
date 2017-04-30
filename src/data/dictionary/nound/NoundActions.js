@@ -45,7 +45,18 @@ const NoundActions = {
             base: base
         })
     },
-
+    /*onChangeBase(base:string):void {
+        AppDispatcher.dispatch({
+            type: NoundActionTypes.ON_CHANGE_BASE,
+            base: base
+        })
+    },*/
+    onChangePlural(plural:string):void {
+        AppDispatcher.dispatch({
+            type: NoundActionTypes.ON_CHANGE_PLURAL,
+            plural: plural
+        })
+    },
     // Pump a new nound directly into the db w/o dealing with any UI.
     insertNound(nound:Object):void {
         validateNound(nound)
