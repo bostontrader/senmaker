@@ -2,8 +2,8 @@
 import React from 'react'
 
 import NoundAEForm  from './addedit/NoundAEForm'
-import NoundTable    from './NoundTable'
-import NoundActions  from '../../../data/dictionary/nound/NoundActions'
+import NoundTable   from './NoundTable'
+import NoundActions from '../../../data/dictionary/nound/NoundActions'
 
 /*
 The NoundPanel is responsible for displaying everything about our list of nound.  Such

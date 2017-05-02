@@ -1,50 +1,50 @@
 var Nightmare = require('nightmare')
 
-describe('In the beginning...', () => {
+//describe('In the beginning D...', () => {
 
 
-    const nightmareVerbd = (nightmare, delay) => {
+    const AdjectivdTest = (nightmare, delay) => {
         return nightmare
-            .click('#lesson-next').wait(delay)
-            .click('#lesson-next').wait(delay)
+            //.click('#lesson-next').wait(delay)
+            //.click('#lesson-next').wait(delay)
+            //.click('#lesson-next').wait(delay)
 
-            .click('#add-verbd').wait(delay)
-            .click('#verbd-add-form #cancel').wait(delay)
+            .click('#add-adjectivd').wait(delay)
+            .click('#adjectivd-addedit-form #cancel').wait(delay)
 
-            // The verbdAddForm should now go away.
+            // The adjectivdAddForm should now go away.
             .evaluate(function () {
-                return document.querySelector('#verbd-add-form') === null
+                return document.querySelector('#adjectivd-addedit-form') === null
             })
 
-            .then(
-                verbd_add_form_gone => {
-                    if (!verbd_add_form_gone)
-                        throw('verbd-add-form has not gone away after cancel')
-                })
+            .then(adjectivd_add_form_gone => {
+                if (!adjectivd_add_form_gone)
+                    throw('adjectivd-addedit-form has not gone away after cancel')
+            })
             .then( res => {
                 return nightmare
-                    .click('#add-verbd').wait(delay)
+                    .click('#add-adjectivd').wait(delay)
                     .type('#base', 'carrot').wait(delay)
-                    .click('#save-verbd').wait(delay)
+                    .click('#save-adjectivd').wait(delay)
 
-                    // The VerbdAddForm should now go away.
+                    // The AdjectivdAddForm should now go away.
                     .evaluate(function() {
-                        return document.querySelector('#verbd-add-form') === null
+                        return document.querySelector('#adjectivd-addedit-form') === null
                     })
             })
-            .then(verbd_add_form_gone => {
-                if (!verbd_add_form_gone)
-                    throw('verbd-add-form has not gone away after save')
+            .then(adjectivd_add_form_gone => {
+                if (!adjectivd_add_form_gone)
+                    throw('adjectivd-addedit-form has not gone away after save')
             })
             .then( res => {
                 return nightmare
                     .evaluate(function() {
-                        return document.querySelector('#insertVerbdCheck') !== null
+                        return document.querySelector('#insertAdjectivdCheck') !== null
                     })
             })
-            .then(insertVerbdCheckFound => {
-                if (!insertVerbdCheckFound)
-                    throw('insertVerbdCheck did not appear after save')
+            .then(insertAdjectivdCheckFound => {
+                if (!insertAdjectivdCheckFound)
+                    throw('insertAdjectivdCheck did not appear after save')
             })
 
             .then( res => {
@@ -52,60 +52,57 @@ describe('In the beginning...', () => {
                     .click('#id1').wait(delay)
                     .click('#cancel').wait(delay)
                     .evaluate(function() {
-                        return document.querySelector('#verbd-edit-form') === null
+                        return document.querySelector('#adjectivd-addeditedit-form') === null
                     })
             })
-            .then(verbd_edit_form_gone => {
-                if (!verbd_edit_form_gone)
-                    throw('verbd-edit-form has not gone away after cancel')
+            .then(adjectivd_edit_form_gone => {
+                if (!adjectivd_edit_form_gone)
+                    throw('adjectivd-addeditedit-form has not gone away after cancel')
             })
 
             .then( res => {
                 return nightmare
                     .click('#id1').wait(delay)
                     .type('#base', 'beaver').wait(delay)
-                    .click('#save-verbd').wait(delay)
+                    .click('#save-adjectivd').wait(delay)
                     .evaluate(function() {
-                        return document.querySelector('#verbd-edit-form') === null
+                        return document.querySelector('#adjectivd-addeditedit-form') === null
                     })
             })
-            .then(verbd_edit_form_gone => {
-                if (!verbd_edit_form_gone)
-                    throw('verbd-edit-form has not gone away after save')
-            })
-            .then( res => {
+            .then(adjectivd_edit_form_gone => {
+                if (!adjectivd_edit_form_gone)
+                    throw('adjectivd-addeditedit-form has not gone away after save')
+            }).then( res => {
                 return nightmare
                     .evaluate(function() {
-                        return document.querySelector('#updateVerbdCheck') !== null
+                        return document.querySelector('#updateAdjectivdCheck') !== null
                     })
             })
-            .then(updateVerbdCheckFound => {
-                if (!updateVerbdCheckFound)
-                    throw('updateVerbdCheck did not appear after save')
-            })
-            .then( res => {
+            .then(updateAdjectivdCheckFound => {
+                if (!updateAdjectivdCheckFound)
+                    throw('updateAdjectivdCheck did not appear after save')
+            }).then( res => {
                 return nightmare
                     .click('#id1').wait(delay)
-                    .click('#delete-verbd').wait(delay)
+                    .click('#delete-adjectivd').wait(delay)
                     .evaluate(function() {
-                        return document.querySelector('#verbd-edit-form') === null
+                        return document.querySelector('#adjectivd-addeditedit-form') === null
                     })
             })
-            .then(verbd_edit_form_gone => {
-                if (!verbd_edit_form_gone)
-                    throw('verbd-edit-form has not gone away after delete')
+            .then(adjectivd_edit_form_gone => {
+                if (!adjectivd_edit_form_gone)
+                    throw('adjectivd-addeditedit-form has not gone away after delete')
             })
             .then( res => {
                 return nightmare
                     .evaluate(function() {
-                        return document.querySelector('#deleteVerbdCheck') !== null
+                        return document.querySelector('#deleteAdjectivdCheck') !== null
                     })
             })
-            .then(deleteVerbdCheckFound => {
-                if (!deleteVerbdCheckFound)
-                    throw('deleteVerbdCheck did not appear after delete')
+            .then(deleteAdjectivdCheckFound => {
+                if (!deleteAdjectivdCheckFound)
+                    throw('deleteAdjectivdCheck did not appear after delete')
             })
-
     }
 
     //module.exports = nightmareNound
@@ -113,7 +110,7 @@ describe('In the beginning...', () => {
 
 
 
-    const url = 'http://localhost:8081'
+    //const url = 'http://localhost:8081'
 
     /**
      * Our primary task to to push buttons, enter text, and walk our way through the app. Our secondary task
@@ -122,8 +119,8 @@ describe('In the beginning...', () => {
      * cases, eases our nerves re: is unit testing thorough enough?
      *
      */
-    it('Should work correctly', (done) => {
-        const nightmare = new Nightmare({show:true, width:600, height:800, zoomFactor: 0.5})
+    /*it('Should work correctly', (done) => {
+        const nightmare = new Nightmare({show:true, width:600, height:800})
         const delayA = 10
         const delayB = 250
         const delayC = 1800
@@ -141,7 +138,7 @@ describe('In the beginning...', () => {
             .then( enFlagFound => {
                 if (!enFlagFound)
                     throw('enFlagFound was not found')
-            })
+            })*/
 
             /*.then( res => {return nightmareLanguage(nightmare, delayA)})
 
@@ -160,26 +157,26 @@ describe('In the beginning...', () => {
              })*/
 
             //.then( res => {return nightmareNound(nightmare, delayA)})
-            .then( res => {return nightmareVerbd(nightmare, delayA)})
-             /*//.then( res => {return nightmareAdjectivd(nightmare, delayC)})
+            //.then( res => {return nightmareVerbd(nightmare, delayA)})
+            //.then( res => {return AdjectivdTest(nightmare, delayC)})
 
-             // I want to factor out this code into nightmareAdjectivd.  But when I do so
+            /*// I want to factor out this code into AdjectivdTest.  But when I do so
              // I get mysterious errors re: cannot find add-verbd.  But if I keep it here, then all is well.
-             //.then( res => {return nightmareAdjectivd(nightmare, 5000)})
+             //.then( res => {return AdjectivdTest(nightmare, 5000)})
              /*.then( res => {
              return nightmare
              .click('#lesson-next').wait(delayC)
              .click('#add-adjectivd').wait(delayC)
-             .click('#adjectivd-add-form #cancel').wait(delayC)
+             .click('#adjectivd-addedit-form #cancel').wait(delayC)
 
              // The adjectivdAddForm should now go away.
              .evaluate(function () {
-             return document.querySelector('#adjectivd-add-form') === null
+             return document.querySelector('#adjectivd-addedit-form') === null
              })
              })
              .then( adjectivd_add_form_gone => {
              if (!adjectivd_add_form_gone)
-             throw('adjectivd-add-form has not gone away after cancel')
+             throw('adjectivd-addedit-form has not gone away after cancel')
              })
              .then( res => {
              return nightmare
@@ -189,12 +186,12 @@ describe('In the beginning...', () => {
 
              // The AdjectivdAddForm should now go away.
              .evaluate(function() {
-             return document.querySelector('#adjectivd-add-form') === null
+             return document.querySelector('#adjectivd-addedit-form') === null
              })
              })
              .then(adjectivd_add_form_gone => {
              if (!adjectivd_add_form_gone)
-             throw('adjectivd-add-form has not gone away after save')
+             throw('adjectivd-addedit-form has not gone away after save')
              })
              .then( res => {
              return nightmare
@@ -211,12 +208,12 @@ describe('In the beginning...', () => {
              .click('#id1').wait(delayC)
              .click('#cancel').wait(delayC)
              .evaluate(function() {
-             return document.querySelector('#adjectivd-edit-form') === null
+             return document.querySelector('#adjectivd-addeditedit-form') === null
              })
              })
              .then(adjectivd_edit_form_gone => {
              if (!adjectivd_edit_form_gone)
-             throw('adjectivd-edit-form has not gone away after cancel')
+             throw('adjectivd-addeditedit-form has not gone away after cancel')
              })
              .then( res => {
              return nightmare
@@ -224,12 +221,12 @@ describe('In the beginning...', () => {
              .type('#base', 'beaver').wait(delayC)
              .click('#save-adjectivd').wait(delayC)
              .evaluate(function() {
-             return document.querySelector('#adjectivd-edit-form') === null
+             return document.querySelector('#adjectivd-addeditedit-form') === null
              })
              })
              .then(adjectivd_edit_form_gone => {
              if (!adjectivd_edit_form_gone)
-             throw('adjectivd-edit-form has not gone away after save')
+             throw('adjectivd-addeditedit-form has not gone away after save')
              })
              .then( res => {
              return nightmare
@@ -246,12 +243,12 @@ describe('In the beginning...', () => {
              .click('#id1').wait(delayC)
              .click('#delete-adjectivd').wait(delayC)
              .evaluate(function() {
-             return document.querySelector('#adjectivd-edit-form') === null
+             return document.querySelector('#adjectivd-addeditedit-form') === null
              })
              })
              .then(adjectivd_edit_form_gone => {
              if (!adjectivd_edit_form_gone)
-             throw('adjectivd-edit-form has not gone away after delete')
+             throw('adjectivd-addeditedit-form has not gone away after delete')
              })
              .then( res => {
              return nightmare
@@ -260,27 +257,18 @@ describe('In the beginning...', () => {
              })
              })
 
-             //.then( res => {return nightmareAdjectivd(nightmare, 4000)})
+             //.then( res => {return AdjectivdTest(nightmare, 4000)})
              .then(deleteAdjectivdCheckFound => {
              if (!deleteAdjectivdCheckFound)
              throw('deleteAdjectivdCheck did not appear after delete')
              })
 
              //.then( res => {return nightmareDefiniteness(nightmare, delayC)})*/
-            .then(resolve => {done()})
-            .catch(err => {console.log(err),done()})
+            //.then(resolve => {done()})
+            //.catch(err => {console.log(err),done()})
 
-    }).timeout(35000)
+    //}).timeout(35000)
 
-})
+//})
 
-
-
-
-
-
-
-
-
-
-//module.exports = nightmareVerbd
+module.exports = AdjectivdTest

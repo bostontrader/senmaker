@@ -5,13 +5,12 @@ import TestUtils      from 'react-addons-test-utils'
 import rtRenderer     from 'react-test-renderer'
 import {findWithType} from 'react-shallow-testutils'
 
-import VerbdAddForm  from './addedit/VerbdAddForm'
-import VerbdEditForm from './addedit/VerbdEditForm'
-import VerbdPanel    from './VerbdPanel'
-import VerbdTable    from './VerbdTable'
-import VerbdStore    from '../../../data/dictionary/verbd/VerbdStore'
-import VerbdAEStore  from '../../../data/dictionary/verbd/addedit/VerbdAEStore'
-import StringStore   from '../../../data/strings/StringStore'
+import VerbdAEForm  from './addedit/VerbdAEForm'
+import VerbdPanel   from './VerbdPanel'
+import VerbdTable   from './VerbdTable'
+import VerbdStore   from '../../../data/dictionary/verbd/VerbdStore'
+import VerbdAEStore from '../../../data/dictionary/verbd/addedit/VerbdAEStore'
+import StringStore  from '../../../data/strings/StringStore'
 
 describe("VerbdPanel", function() {
 
@@ -37,7 +36,7 @@ describe("VerbdPanel", function() {
         expect(tree).toMatchSnapshot()
     })
 
-    it("Renders a VerbdPanel with a VerbdAddForm", function() {
+    it("Renders a VerbdPanel with a VerbdAEForm in add mode", function() {
         this.props.verbd = this.props.verbd.setIn(['addedit','addVerbd'],true)
 
         const renderExpression = <VerbdPanel {...this.props} />
@@ -45,14 +44,14 @@ describe("VerbdPanel", function() {
         expect(verbdPanel.type).toBe('div')
 
         expect(findWithType(verbdPanel,'button'))
-        expect(findWithType(verbdPanel,VerbdAddForm))
+        expect(findWithType(verbdPanel,VerbdAEForm))
         expect(findWithType(verbdPanel,VerbdTable))
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
     })
 
-    it("Renders a VerbdPanel with a VerbdEditForm", function() {
+    it("Renders a VerbdPanel with a VerbdAEForm in edit mode", function() {
         this.props.verbd = this.props.verbd.setIn(['addedit','verbd','id'],"1")
 
         const renderExpression = <VerbdPanel {...this.props} />
@@ -60,7 +59,7 @@ describe("VerbdPanel", function() {
         expect(verbdPanel.type).toBe('div')
 
         expect(findWithType(verbdPanel,'button'))
-        expect(findWithType(verbdPanel,VerbdEditForm))
+        expect(findWithType(verbdPanel,VerbdAEForm))
         expect(findWithType(verbdPanel,VerbdTable))
 
         const tree = rtRenderer.create(renderExpression).toJSON()

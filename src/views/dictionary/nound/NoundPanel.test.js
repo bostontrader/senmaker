@@ -5,13 +5,12 @@ import TestUtils      from 'react-addons-test-utils'
 import rtRenderer     from 'react-test-renderer'
 import {findWithType} from 'react-shallow-testutils'
 
-import NoundAddForm  from './addedit/NoundAddForm'
-import NoundEditForm from './addedit/NoundEditForm'
-import NoundPanel    from './NoundPanel'
-import NoundTable    from './NoundTable'
-import NoundStore    from '../../../data/dictionary/nound/NoundStore'
-import NoundAEStore  from '../../../data/dictionary/nound/addedit/NoundAEStore'
-import StringStore   from '../../../data/strings/StringStore'
+import NoundAEForm  from './addedit/NoundAEForm'
+import NoundPanel   from './NoundPanel'
+import NoundTable   from './NoundTable'
+import NoundStore   from '../../../data/dictionary/nound/NoundStore'
+import NoundAEStore from '../../../data/dictionary/nound/addedit/NoundAEStore'
+import StringStore  from '../../../data/strings/StringStore'
 
 describe("NoundPanel", function() {
 
@@ -37,7 +36,7 @@ describe("NoundPanel", function() {
         expect(tree).toMatchSnapshot()
     })
 
-    it("Renders a NoundPanel with a NoundAddForm", function() {
+    it("Renders a NoundPanel with a NoundAEForm in add mode", function() {
         this.props.nound = this.props.nound.setIn(['addedit','addNound'],true)
 
         const renderExpression = <NoundPanel {...this.props} />
@@ -45,14 +44,14 @@ describe("NoundPanel", function() {
         expect(noundPanel.type).toBe('div')
 
         expect(findWithType(noundPanel,'button'))
-        expect(findWithType(noundPanel,NoundAddForm))
+        expect(findWithType(noundPanel,NoundAEForm))
         expect(findWithType(noundPanel,NoundTable))
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
     })
 
-    it("Renders a NoundPanel with a NoundEditForm", function() {
+    it("Renders a NoundPanel with a NoundAEForm in edit mode", function() {
         this.props.nound = this.props.nound.setIn(['addedit','nound','id'],"1")
 
         const renderExpression = <NoundPanel {...this.props} />
@@ -60,7 +59,7 @@ describe("NoundPanel", function() {
         expect(noundPanel.type).toBe('div')
 
         expect(findWithType(noundPanel,'button'))
-        expect(findWithType(noundPanel,NoundEditForm))
+        expect(findWithType(noundPanel,NoundAEForm))
         expect(findWithType(noundPanel,NoundTable))
 
         const tree = rtRenderer.create(renderExpression).toJSON()

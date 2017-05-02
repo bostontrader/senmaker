@@ -1,8 +1,7 @@
 // @flow
 import React from 'react'
 
-import VerbdAddForm  from './addedit/VerbdAddForm'
-import VerbdEditForm from './addedit/VerbdEditForm'
+import VerbdAEForm   from './addedit/VerbdAEForm'
 import VerbdTable    from './VerbdTable'
 import VerbdActions  from '../../../data/dictionary/verbd/VerbdActions'
 
@@ -20,11 +19,11 @@ function VerbdPanel(props:Object):Object {
     const s:Object = props.strings
 
     // What should be displayed in the verbd add/edit panel?
-    let verbAddEditForm:Object = <div></div>  // we really want nothing here
-    if(props.verbd.getIn(['addedit','verbd','id'])) {
-        verbAddEditForm = <VerbdEditForm {...props} />
-    } else if (props.verbd.getIn(['addedit','addVerbd'])) {
-        verbAddEditForm = <VerbdAddForm {...props} />
+    let noundAEForm:Object = <div></div>  // we really want nothing here
+    if(props.verbd.getIn(['addedit','verbd','id']) || props.verbd.getIn(['addedit','addVerbd'])) {
+        noundAEForm = <VerbdAEForm {...props} />
+    //} else if (props.verbd.getIn(['addedit','addVerbd'])) {
+        //noundAEForm = <VerbdAddForm {...props} />
     } else {
         // A suitable default is already set, so do nothing
     }
@@ -36,7 +35,7 @@ function VerbdPanel(props:Object):Object {
             <VerbdTable {...props} />
         </div>
         <div>
-            {verbAddEditForm}
+            {noundAEForm}
         </div>
     </div>)
     

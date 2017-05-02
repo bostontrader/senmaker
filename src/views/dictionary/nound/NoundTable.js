@@ -10,7 +10,6 @@ function NoundTable(props:Object):Object {
 
     switch(props.noundPanelLevel) {
         case NoundPanelLevel.BASE:
-            console.log('into base')
             noundTable =
                 <table id="nound-list">
                     <thead>

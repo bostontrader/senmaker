@@ -1,12 +1,12 @@
 var Nightmare = require('nightmare')
 
 var nightmareLanguage     = require('./nightmareLanguage')
-//var nightmareNound        = require('./nightmareNound')
-//var nightmareVerbd        = require('./nightmareVerbd')
+var nightmareNound        = require('./nightmareNound')
+var nightmareVerbd        = require('./nightmareVerbd')
 //var nightmareAdjectivd    = require('./nightmareVerbd')
 //var nightmareDefiniteness = require('./nightmareDefiniteness')
 
-describe('In the beginning...', () => {
+describe('In the beginning B...', () => {
 
     const url = 'http://localhost:8081'
 

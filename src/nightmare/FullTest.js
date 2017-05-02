@@ -1,12 +1,15 @@
 var Nightmare = require('nightmare')
 
-var nightmareLanguage     = require('./nightmareLanguage')
-//var nightmareNound        = require('./nightmareNound')
-//var nightmareVerbd        = require('./nightmareVerbd')
-//var nightmareAdjectivd    = require('./nightmareVerbd')
+//var nightmareIntro        = require('./nightmareIntro')
+var nightmareLanguage = require('./nightmareLanguage')
+var NoundTest         = require('./NoundTest')
+var VerbdTest         = require('./VerbdTest')
+var AdjectivdTest     = require('./AdjectivdTest')
+
+//var nightmareAdjectivd    = require('./VerbdTest')
 //var nightmareDefiniteness = require('./nightmareDefiniteness')
 
-describe('In the beginning...', () => {
+describe('Full Test...', () => {
 
     const url = 'http://localhost:8081'
 
@@ -20,8 +23,8 @@ describe('In the beginning...', () => {
     it('Should work correctly', (done) => {
         const nightmare = new Nightmare({show:true, width:600, height:800, zoomFactor: 0.5})
         //const delayA = 10
-        //const delayB = 250
-        const delayC = 1800
+        const delayB = 250
+        const delayC = 1000
 
 
         nightmare.goto(url).wait(delayC)
@@ -35,11 +38,56 @@ describe('In the beginning...', () => {
                 throw('enFlagFound was not found')
         })
         .then( res => {return nightmareLanguage(nightmare, delayC)})
-        .then(result => {
-            console.log('then',result)
-            done()
+        //.then( res => {return nightmareIntro(nightmare, delayC)})
+
+
+        // Advance to NoundTest
+        .then( res => {
+            return nightmare.click('#lesson-next').wait(delayB)
+        })
+        .then( res => {return NoundTest(nightmare, delayB)})
+        // Rewind to the beginning
+        .then( res => {
+            return nightmare.click('#lesson-previous').wait(delayC)
         })
 
+
+
+        // Advance to VerbdTest
+        .then( res => {
+            return nightmare
+                .click('#lesson-next').wait(delayC)
+                .click('#lesson-next').wait(delayC)
+        })
+        .then( res => {return VerbdTest(nightmare, delayB)})
+        // Rewind to the beginning
+        .then( res => {
+            return nightmare
+                .click('#lesson-previous').wait(delayC)
+                .click('#lesson-previous').wait(delayC)
+        })
+
+
+        // Advance to AdjectivdTest
+        .then( res => {
+            return nightmare
+                .click('#lesson-next').wait(delayC)
+                .click('#lesson-next').wait(delayC)
+                .click('#lesson-next').wait(delayC)
+        })
+        .then( res => {return AdjectivdTest(nightmare, delayB)})
+        // Rewind to the beginning
+        .then( res => {
+            return nightmare
+                .click('#lesson-previous').wait(delayC)
+                .click('#lesson-previous').wait(delayC)
+                .click('#lesson-previous').wait(delayC)
+        })
+        .then(result => {
+            done()
+        })
+        
+        
         // Verify that we can switch between languages and that the correct language switch/flag is
         // displayed.
 
@@ -68,8 +116,8 @@ describe('In the beginning...', () => {
                     //throw('iunderstandCheck was not found')
             //})
 
-            //.then( res => {return nightmareNound(nightmare, delayA)})
-            //.then( res => {return nightmareVerbd(nightmare, delayA)})
+            //.then( res => {return NoundTest(nightmare, delayA)})
+            //.then( res => {return VerbdTest(nightmare, delayA)})
             //.then( res => {return nightmareAdjectivd(nightmare, delayC)})
 
             // I want to factor out this code into nightmareAdjectivd.  But when I do so
@@ -179,6 +227,6 @@ describe('In the beginning...', () => {
             //.then(resolve => {done()})
             //.catch(err => {console.log(err),done()})
 
-    }).timeout(10000)
+    }).timeout(40000)
 
 })

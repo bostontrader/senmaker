@@ -39,19 +39,19 @@ function NoundAEForm(props:Object):Object {
     const theButtons:Object = (props.nound.getIn(['addedit','nound','id'])) ?
         <div>{buttonSave}{buttonDelete}{buttonCancel}</div> : <div>{buttonSave}{buttonCancel}</div>
 
-    let noundEditForm:Object = <div></div>
+    let noundAEForm:Object = <div></div>
 
     switch(props.noundPanelLevel) {
         case NoundPanelLevel.BASE:
-            noundEditForm =
-                <div id='nound-add-form' style={style}>
+            noundAEForm =
+                <div id='nound-addedit-form' style={style}>
                     {baseControls}
                     {theButtons}
                 </div>
             break
         case NoundPanelLevel.PLURALIZATION:
-            noundEditForm =
-                <div id='nound-add-form' style={style}>
+            noundAEForm =
+                <div id='nound-addedit-form' style={style}>
                     {baseControls}
                     <PluralizationRuleSelect pluralization_rule={0}/>
                     <label htmlFor='plural'>Plural</label>
@@ -63,11 +63,11 @@ function NoundAEForm(props:Object):Object {
                 </div>
             break
         default:
-            // noundEditForm already has a suitable default. Do nothing.
+            // noundAEForm already has a suitable default. Do nothing.
 
     }
 
-    return noundEditForm
+    return noundAEForm
 
 }
 

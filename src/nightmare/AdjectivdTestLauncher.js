@@ -1,9 +1,12 @@
 var Nightmare = require('nightmare')
 
-describe('In the beginning...', () => {
+var AdjectivdTest         = require('./AdjectivdTest')
+var nightmareLanguage = require('./nightmareLanguage')
+
+describe('Adjectivd', () => {
 
 
-    const nightmareAdjectivd = (nightmare, delay) => {
+    /*const nightmareAdjectivd = (nightmare, delay) => {
         return nightmare
             .click('#lesson-next').wait(delay)
             .click('#lesson-next').wait(delay)
@@ -103,7 +106,7 @@ describe('In the beginning...', () => {
         if (!deleteAdjectivdCheckFound)
         throw('deleteAdjectivdCheck did not appear after delete')
         })
-    }
+    }*/
 
     //module.exports = nightmareNound
 
@@ -140,7 +143,7 @@ describe('In the beginning...', () => {
                     throw('enFlagFound was not found')
             })
 
-            /*.then( res => {return nightmareLanguage(nightmare, delayA)})
+            .then( res => {return nightmareLanguage(nightmare, delayA)})
 
              // Now answer the intro lesson question. Can I see the checkmark?
              .then( res => {
@@ -154,11 +157,22 @@ describe('In the beginning...', () => {
              .then( iunderstandCheck => {
              if (!iunderstandCheck)
              throw('iunderstandCheck was not found')
-             })*/
+             })
 
             //.then( res => {return nightmareNound(nightmare, delayA)})
             //.then( res => {return nightmareVerbd(nightmare, delayA)})
-            .then( res => {return nightmareAdjectivd(nightmare, delayC)})
+
+             // Advance to AdjectivdTest
+            .then( res => {
+                return nightmare
+                    .click('#lesson-next').wait(delayC)
+                    .click('#lesson-next').wait(delayC)
+                    .click('#lesson-next').wait(delayC)
+
+            })
+
+            .then( res => {return AdjectivdTest(nightmare, delayC)})
+            // No need to rewind
 
              /*// I want to factor out this code into nightmareAdjectivd.  But when I do so
              // I get mysterious errors re: cannot find add-verbd.  But if I keep it here, then all is well.

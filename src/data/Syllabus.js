@@ -12,7 +12,7 @@ import VerbPhrase    from '../views/syllabus/VerbPhrase'
 import Clause        from '../views/syllabus/Clause'
 import Sentence      from '../views/syllabus/Sentence'
 import Pluralization from '../views/syllabus/Pluralization'
-
+import NPAdjective   from '../views/syllabus/NPAdjective'
 /**
  * We have a series of lessons that we want to progress through, in both directions, in a specific order.
  *
@@ -32,20 +32,19 @@ import Pluralization from '../views/syllabus/Pluralization'
  */
 
 const syllabus = {
-    intro:         {level: 0, comp:Intro,         prev:null,           next:'nound'},
-    nound:         {level: 1, comp:Nound,         prev:'intro',        next:'verbd'},
-    verbd:         {level: 2, comp:Verbd,         prev:'nound',        next:'adjectivd'},
-    adjectivd:     {level: 3, comp:Adjectivd,     prev:'verbd',        next:'definiteness'},
-    definiteness:  {level: 4, comp:Definiteness,  prev:'adjectivd',    next:'phrase'},
-    phrase:        {level: 5, comp:Phrase,        prev:'definiteness', next:'nounPhrase'},
-    nounPhrase:    {level: 6, comp:NounPhrase,    prev:'phrase',       next:'pastTense'},
-    pastTense:     {level: 7, comp:PastTense,     prev:'nounPhrase',   next:'verbPhrase'},
-    verbPhrase:    {level: 8, comp:VerbPhrase,    prev:'pastTense',    next:'clause'},
-    clause:        {level: 9, comp:Clause,        prev:'verbPhrase',   next:'sentence'},
-    sentence:      {level:10, comp:Sentence,      prev:'clause',       next: 'pluralization'},
-    pluralization: {level:11, comp:Pluralization, prev:'sentence',     next: null}
-
-    // adjectives in noun phrases
+    intro:         {level: 0, comp:Intro,         prev:null,            next:'nound'},
+    nound:         {level: 1, comp:Nound,         prev:'intro',         next:'verbd'},
+    verbd:         {level: 2, comp:Verbd,         prev:'nound',         next:'adjectivd'},
+    adjectivd:     {level: 3, comp:Adjectivd,     prev:'verbd',         next:'definiteness'},
+    definiteness:  {level: 4, comp:Definiteness,  prev:'adjectivd',     next:'phrase'},
+    phrase:        {level: 5, comp:Phrase,        prev:'definiteness',  next:'nounPhrase'},
+    nounPhrase:    {level: 6, comp:NounPhrase,    prev:'phrase',        next:'pastTense'},
+    pastTense:     {level: 7, comp:PastTense,     prev:'nounPhrase',    next:'verbPhrase'},
+    verbPhrase:    {level: 8, comp:VerbPhrase,    prev:'pastTense',     next:'clause'},
+    clause:        {level: 9, comp:Clause,        prev:'verbPhrase',    next:'sentence'},
+    sentence:      {level:10, comp:Sentence,      prev:'clause',        next: 'pluralization'},
+    pluralization: {level:11, comp:Pluralization, prev:'sentence',      next: 'npAdjective'},
+    npAdjective:   {level:12, comp:NPAdjective,   prev:'pluralization', next: null}
 
     // Adverbs
 

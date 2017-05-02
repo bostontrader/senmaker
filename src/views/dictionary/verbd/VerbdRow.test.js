@@ -25,12 +25,12 @@ describe("VerbdRow", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("renders a VerbdPanelLevel.PLURALIZATION VerbdRow", () => {
-        props = {verbd:verbdExamples.a, verbdPanelLevel:VerbdPanelLevel.PLURALIZATION, strings: StringStore.getInitialState()}
+    it("renders a VerbdPanelLevel.PAST_TENSE VerbdRow", () => {
+        props = {verbd:verbdExamples.a, verbdPanelLevel:VerbdPanelLevel.PAST_TENSE, strings: StringStore.getInitialState()}
         renderExpression = <VerbdRow {...props} />
         verbdRow = TestUtils.createRenderer().render(renderExpression)
         expect(verbdRow.type).toBe('tr')
-        expect(verbdRow.props.children.length).toBe(3)  // base, plural, edit
+        expect(verbdRow.props.children.length).toBe(3)  // base, past tense, edit
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
