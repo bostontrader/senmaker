@@ -45,7 +45,7 @@ function NoundTable(props:Object):?Object {
             <table id="nound-list">
                 {header}
                 <tbody>
-                {noundRows}
+                    {noundRows}
                 </tbody>
             </table>
     }

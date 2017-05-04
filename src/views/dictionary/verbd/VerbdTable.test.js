@@ -32,53 +32,110 @@ describe("VerbdTable", function() {
         }
     })
 
-    it("Renders a VerbdPanelLevel.BASE VerbdTable", function() {
-        const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.BASE} {...this.state} />
-        const verbdTable = TestUtils.createRenderer().render(renderExpression)
-        expect(verbdTable.type).toBe('table')
+    describe("An Empty VerbdTable", function() {
+        it("Renders a VerbdPanelLevel.BASE VerbdTable", function() {
+            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.BASE} {...this.state} />
+            const verbdTable = TestUtils.createRenderer().render(renderExpression)
 
-        // Two columns in the thead
-        expect(verbdTable.props.children[0].props.children.props.children.length).toBe(2) // base, edit
+            // Zero VerbdTable
+            const verbdRows = findAllWithType(verbdTable, VerbdTable)
+            expect(verbdRows.length).toBe(0)
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
+
+        it("Renders a VerbdPanelLevel.PAST_TENSE VerbdTable", function() {
+            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...this.state} />
+            const verbdTable = TestUtils.createRenderer().render(renderExpression)
+
+            // Zero VerbdTable
+            const verbdRows = findAllWithType(verbdTable, VerbdTable)
+            expect(verbdRows.length).toBe(0)
+
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
     })
 
-    it("Renders a VerbdPanelLevel.PAST_TENSE VerbdTable", function() {
-        const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...this.state} />
-        const verbdTable = TestUtils.createRenderer().render(renderExpression)
-        expect(verbdTable.type).toBe('table')
 
-        // Three columns in the thead
-        expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base, past_tense, edit
+    describe("A VerbdTable with one item", function() {
+        it("Renders a VerbdPanelLevel.BASE VerbdTable", function() {
+            this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.a})
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
+            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.BASE} {...this.state} />
+            const verbdTable = TestUtils.createRenderer().render(renderExpression)
+            expect(verbdTable.type).toBe('table')
+
+            // Two columns in the thead
+            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(2) // base verb, edit
+
+            // One VerbdRow
+            const verbdRows = findAllWithType(verbdTable, VerbdRow)
+            expect(verbdRows.length).toBe(1)
+
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
+
+        it("Renders a VerbdPanelLevel.PAST_TENSE VerbdTable", function() {
+            this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.a})
+
+            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...this.state} />
+            const verbdTable = TestUtils.createRenderer().render(renderExpression)
+            expect(verbdTable.type).toBe('table')
+
+            // Three columns in the thead
+            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base verb, past tense, edit
+
+            // One VerbdRow
+            const verbdRows = findAllWithType(verbdTable, VerbdRow)
+            expect(verbdRows.length).toBe(1)
+
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
     })
 
-    it("Will render one VerbdRow", function() {
-        this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.a})
 
-        const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.BASE} {...this.state} />
-        const verbdTable = TestUtils.createRenderer().render(renderExpression)
-        const nounItems = findAllWithType(verbdTable, VerbdRow)
-        expect(nounItems.length).toBe(1)
+    describe("A VerbdTable with more than one item", function() {
+        it("Renders a VerbdPanelLevel.BASE VerbdTable", function() {
+            this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.a})
+            this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.b})
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
-    })
+            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.BASE} {...this.state} />
+            const verbdTable = TestUtils.createRenderer().render(renderExpression)
+            expect(verbdTable.type).toBe('table')
 
-    it("Will render two VerbdRow", function() {
-        this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.a})
-        this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.b})
+            // Two columns in the thead
+            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(2) // base verb, edit
 
-        const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.BASE} {...this.state} />
-        const verbdTable = TestUtils.createRenderer().render(renderExpression)
-        const nounItems = findAllWithType(verbdTable, VerbdRow)
-        expect(nounItems.length).toBe(2)
+            // Two VerbdRow
+            const verbdRows = findAllWithType(verbdTable, VerbdRow)
+            expect(verbdRows.length).toBe(2)
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
+
+        it("Renders a VerbdPanelLevel.PAST_TENSE VerbdTable", function() {
+            this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.a})
+            this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.b})
+
+            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...this.state} />
+            const verbdTable = TestUtils.createRenderer().render(renderExpression)
+            expect(verbdTable.type).toBe('table')
+
+            // Three columns in the thead
+            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base verb, past tense, edit
+
+            // Two VerbdRow
+            const verbdRows = findAllWithType(verbdTable, VerbdRow)
+            expect(verbdRows.length).toBe(2)
+
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
     })
 
 })

@@ -38,8 +38,8 @@ describe("NoundTable", function() {
             const noundTable = TestUtils.createRenderer().render(renderExpression)
 
             // Zero NoundTable
-            const nounItems = findAllWithType(noundTable, NoundTable)
-            expect(nounItems.length).toBe(0)
+            const noundRows = findAllWithType(noundTable, NoundTable)
+            expect(noundRows.length).toBe(0)
 
             const tree = rtRenderer.create(renderExpression).toJSON()
             expect(tree).toMatchSnapshot()
@@ -50,8 +50,8 @@ describe("NoundTable", function() {
             const noundTable = TestUtils.createRenderer().render(renderExpression)
 
             // Zero NoundTable
-            const nounItems = findAllWithType(noundTable, NoundTable)
-            expect(nounItems.length).toBe(0)
+            const noundRows = findAllWithType(noundTable, NoundTable)
+            expect(noundRows.length).toBe(0)
 
             const tree = rtRenderer.create(renderExpression).toJSON()
             expect(tree).toMatchSnapshot()
@@ -71,8 +71,8 @@ describe("NoundTable", function() {
             expect(noundTable.props.children[0].props.children.props.children.length).toBe(2) // base noun, edit
 
             // One NoundRow
-            const nounItems = findAllWithType(noundTable, NoundRow)
-            expect(nounItems.length).toBe(1)
+            const noundRows = findAllWithType(noundTable, NoundRow)
+            expect(noundRows.length).toBe(1)
 
             const tree = rtRenderer.create(renderExpression).toJSON()
             expect(tree).toMatchSnapshot()
@@ -89,8 +89,8 @@ describe("NoundTable", function() {
             expect(noundTable.props.children[0].props.children.props.children.length).toBe(3) // base noun, plural, edit
 
             // One NoundRow
-            const nounItems = findAllWithType(noundTable, NoundRow)
-            expect(nounItems.length).toBe(1)
+            const noundRows = findAllWithType(noundTable, NoundRow)
+            expect(noundRows.length).toBe(1)
 
             const tree = rtRenderer.create(renderExpression).toJSON()
             expect(tree).toMatchSnapshot()
@@ -111,8 +111,8 @@ describe("NoundTable", function() {
             expect(noundTable.props.children[0].props.children.props.children.length).toBe(2) // base noun, edit
 
             // Two NoundRow
-            const nounItems = findAllWithType(noundTable, NoundRow)
-            expect(nounItems.length).toBe(2)
+            const noundRows = findAllWithType(noundTable, NoundRow)
+            expect(noundRows.length).toBe(2)
 
             const tree = rtRenderer.create(renderExpression).toJSON()
             expect(tree).toMatchSnapshot()
@@ -130,8 +130,8 @@ describe("NoundTable", function() {
             expect(noundTable.props.children[0].props.children.props.children.length).toBe(3) // base noun, plural, edit
 
             // Two NoundRow
-            const nounItems = findAllWithType(noundTable, NoundRow)
-            expect(nounItems.length).toBe(2)
+            const noundRows = findAllWithType(noundTable, NoundRow)
+            expect(noundRows.length).toBe(2)
 
             const tree = rtRenderer.create(renderExpression).toJSON()
             expect(tree).toMatchSnapshot()
