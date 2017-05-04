@@ -31,41 +31,54 @@ describe("AdjectivdTable", function() {
         }
     })
 
-    it("Renders an AdjectivdTable", function() {
+    it("Renders no AdjectivdTable", function() {
+        const renderExpression = <AdjectivdTable {...this.state} />
+        const adjectivdTable = TestUtils.createRenderer().render(renderExpression)
+
+        // Zero AdjectivdTable
+        const adjectivdRows = findAllWithType(adjectivdTable, AdjectivdTable)
+        expect(adjectivdRows.length).toBe(0)
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
+
+    it("Renders an AdjectivdPanelLevel with one item.", function() {
+        this.dispatch({type: AdjectivdActionTypes.INSERT_ADJECTIVD, adjectivd: adjectivdExamples.a})
+
         const renderExpression = <AdjectivdTable {...this.state} />
         const adjectivdTable = TestUtils.createRenderer().render(renderExpression)
         expect(adjectivdTable.type).toBe('table')
 
         // Two columns in the thead
-        expect(adjectivdTable.props.children[0].props.children.props.children.length).toBe(2) // adjective, edit
+        expect(adjectivdTable.props.children[0].props.children.props.children.length).toBe(2) // base noun, edit
+
+        // One AdjectivdRow
+        const adjectivdRows = findAllWithType(adjectivdTable, AdjectivdRow)
+        expect(adjectivdRows.length).toBe(1)
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
     })
 
-    it("Will render one AdjectivdRow", function() {
-        this.dispatch({type: AdjectivdActionTypes.INSERT_ADJECTIVD, adjectivd: adjectivdExamples.a})
-
-        const renderExpression = <AdjectivdTable {...this.state} />
-        const adjectivdTable = TestUtils.createRenderer().render(renderExpression)
-        const nounItems = findAllWithType(adjectivdTable, AdjectivdRow)
-        expect(nounItems.length).toBe(1)
-
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
-    })
-
-    it("Will render two AdjectivdRow", function() {
+    it("Renders an AdjectivdTable with more than one item.", function() {
         this.dispatch({type: AdjectivdActionTypes.INSERT_ADJECTIVD, adjectivd: adjectivdExamples.a})
         this.dispatch({type: AdjectivdActionTypes.INSERT_ADJECTIVD, adjectivd: adjectivdExamples.b})
 
         const renderExpression = <AdjectivdTable {...this.state} />
         const adjectivdTable = TestUtils.createRenderer().render(renderExpression)
-        const nounItems = findAllWithType(adjectivdTable, AdjectivdRow)
-        expect(nounItems.length).toBe(2)
+        expect(adjectivdTable.type).toBe('table')
+
+        // Two columns in the thead
+        expect(adjectivdTable.props.children[0].props.children.props.children.length).toBe(2) // base noun, edit
+
+        // Two AdjectivdRow
+        const adjectivdRows = findAllWithType(adjectivdTable, AdjectivdRow)
+        expect(adjectivdRows.length).toBe(2)
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
     })
+
 
 })

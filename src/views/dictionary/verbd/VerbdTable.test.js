@@ -33,7 +33,7 @@ describe("VerbdTable", function() {
     })
 
     describe("An Empty VerbdTable", function() {
-        it("Renders a VerbdPanelLevel.BASE VerbdTable", function() {
+        it("Renders no VerbdPanelLevel.BASE VerbdTable", function() {
             const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.BASE} {...this.state} />
             const verbdTable = TestUtils.createRenderer().render(renderExpression)
 
@@ -45,7 +45,7 @@ describe("VerbdTable", function() {
             expect(tree).toMatchSnapshot()
         })
 
-        it("Renders a VerbdPanelLevel.PAST_TENSE VerbdTable", function() {
+        it("Renders no VerbdPanelLevel.PAST_TENSE VerbdTable", function() {
             const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...this.state} />
             const verbdTable = TestUtils.createRenderer().render(renderExpression)
 

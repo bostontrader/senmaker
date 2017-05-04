@@ -1,9 +1,10 @@
 import {Map} from 'immutable'
 import React from 'react'
 
-import TestUtils      from 'react-addons-test-utils'
-import rtRenderer     from 'react-test-renderer'
-import {findWithType} from 'react-shallow-testutils'
+import TestUtils         from 'react-addons-test-utils'
+import rtRenderer        from 'react-test-renderer'
+import {findWithType}    from 'react-shallow-testutils'
+import {findAllWithType} from 'react-shallow-testutils'
 
 import NoundAEForm  from './addedit/NoundAEForm'
 import NoundPanel   from './NoundPanel'
@@ -31,6 +32,10 @@ describe("NoundPanel", function() {
 
         expect(findWithType(noundPanel,'button'))
         expect(findWithType(noundPanel,NoundTable))
+
+        // No NoundAEForm
+        const noundAEForm = findAllWithType(noundPanel, NoundAEForm)
+        expect(noundAEForm.length).toBe(0)
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()

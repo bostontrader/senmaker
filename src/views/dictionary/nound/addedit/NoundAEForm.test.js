@@ -1,89 +1,79 @@
 import {Map} from 'immutable'
 import React from 'react'
 
-import TestUtils         from 'react-addons-test-utils'
-import rtRenderer        from 'react-test-renderer'
+import TestUtils  from 'react-addons-test-utils'
+import rtRenderer from 'react-test-renderer'
 
-import {NoundPanelLevel} from '../../../../data/dictionary/nound/NoundConstants'
 import NoundAEForm       from './NoundAEForm'
+import {NoundPanelLevel} from '../../../../data/dictionary/nound/NoundConstants'
 import NoundAEStore      from '../../../../data/dictionary/nound/addedit/NoundAEStore'
 import StringStore       from '../../../../data/strings/StringStore'
 
-describe("NoundEditForm", () => {
+describe("NoundAEForm", function() {
 
-    it("Renders a NoundAEForm, add mode, NoundPanelLevel.BASE", () => {
-        const props = {
+    beforeEach( function() {
+        this.state = {
             nound: Map({
-                addedit: NoundAEStore.getInitialState().setIn(['addNound'],true),
+                addedit: NoundAEStore.getInitialState(),
                 nouns: Map()
             }),
             strings:StringStore.getInitialState()
         }
-
-        const renderExpression = <NoundAEForm noundPanelLevel = {NoundPanelLevel.BASE} {...props} />
-        const noundAEForm = TestUtils.createRenderer().render(renderExpression)
-        expect(noundAEForm.type).toBe('div')
-        expect(noundAEForm.props.children.length).toBe(2) // base controls, buttons
-        expect(noundAEForm.props.children[1].props.children.length).toBe(2) // save, cancel
-
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
     })
 
-    it("Renders a NoundAEForm, add mode, NoundPanelLevel.PLURALIZATION", () => {
-        const props = {
-            nound: Map({
-                addedit: NoundAEStore.getInitialState().setIn(['addNound'],true),
-                nouns: Map()
-            }),
-            strings:StringStore.getInitialState()
-        }
+    describe("NoundPanelLevel.BASE", function() {
 
-        const renderExpression = <NoundAEForm noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...props} />
-        const noundAEForm = TestUtils.createRenderer().render(renderExpression)
-        expect(noundAEForm.type).toBe('div')
-        expect(noundAEForm.props.children.length).toBe(5) // base controls, plural, input, pluraliation_rule_select, buttons
-        expect(noundAEForm.props.children[4].props.children.length).toBe(2) // save, cancel
+        it("add mode", function() {
+            this.state.nound = this.state.nound.setIn(['addedit','addNound'],true)
+            const renderExpression = <NoundAEForm noundPanelLevel = {NoundPanelLevel.BASE} {...this.state} />
+            const noundAEForm = TestUtils.createRenderer().render(renderExpression)
+            expect(noundAEForm.type).toBe('div')
+            expect(noundAEForm.props.children.length).toBe(2) // base controls, buttons
+            expect(noundAEForm.props.children[1].props.children.length).toBe(2) // save, cancel
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
+
+        it("edit mode", function() {
+            this.state.nound = this.state.nound.setIn(['addedit','nound','id'],'1')
+            const renderExpression = <NoundAEForm noundPanelLevel = {NoundPanelLevel.BASE} {...this.state}/>
+            const noundAEForm = TestUtils.createRenderer().render(renderExpression)
+            expect(noundAEForm.type).toBe('div')
+            expect(noundAEForm.props.children.length).toBe(2) // base controls, buttons
+            expect(noundAEForm.props.children[1].props.children.length).toBe(3) // save, delete, cancel
+
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
+
     })
 
+    describe("NoundPanelLevel.PLURALIZATION", function() {
 
-    it("Renders a NoundAEForm, edit mode, NoundPanelLevel.BASE", () => {
-        const props = {
-            nound: Map({
-                addedit: NoundAEStore.getInitialState().setIn(['nound','id'],'1'),
-                nouns: Map()
-            }),
-            strings:StringStore.getInitialState()
-        }
-        const renderExpression = <NoundAEForm noundPanelLevel = {NoundPanelLevel.BASE} {...props}/>
-        const noundAEForm = TestUtils.createRenderer().render(renderExpression)
-        expect(noundAEForm.type).toBe('div')
-        expect(noundAEForm.props.children.length).toBe(2) // base controls, buttons
-        expect(noundAEForm.props.children[1].props.children.length).toBe(3) // save, delete, cancel
+        it("add mode", function() {
+            this.state.nound = this.state.nound.setIn(['addedit','addNound'],true)
+            const renderExpression = <NoundAEForm noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...this.state} />
+            const noundAEForm = TestUtils.createRenderer().render(renderExpression)
+            expect(noundAEForm.type).toBe('div')
+            expect(noundAEForm.props.children.length).toBe(5) // base controls, plural, input, pluraliation_rule_select, buttons
+            expect(noundAEForm.props.children[4].props.children.length).toBe(2) // save, cancel
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
-    })
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
 
-    it("Renders a NoundAEForm, edit mode, NoundPanelLevel.PLURALIZATION", () => {
-        const props = {
-            nound: Map({
-                addedit: NoundAEStore.getInitialState().setIn(['nound','id'],'1'),
-                nouns: Map()
-            }),
-            strings:StringStore.getInitialState()
-        }
-        const renderExpression = <NoundAEForm noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...props}/>
-        const noundAEForm = TestUtils.createRenderer().render(renderExpression)
-        expect(noundAEForm.type).toBe('div')
-        expect(noundAEForm.props.children.length).toBe(5) // base controls, plural, input, pluraliation_rule_select, buttons
-        expect(noundAEForm.props.children[4].props.children.length).toBe(3) // save, delete, cancel
+        it("edit mode", function() {
+            this.state.nound = this.state.nound.setIn(['addedit','nound','id'],'1')
+            const renderExpression = <NoundAEForm noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...this.state}/>
+            const noundAEForm = TestUtils.createRenderer().render(renderExpression)
+            expect(noundAEForm.type).toBe('div')
+            expect(noundAEForm.props.children.length).toBe(5) // base controls, plural, input, pluraliation_rule_select, buttons
+            expect(noundAEForm.props.children[4].props.children.length).toBe(3) // save, delete, cancel
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
     })
 
 })

@@ -169,8 +169,7 @@ StringStore.en = {
         help13: 'If we are writing about more than one, then we use the plural form of the noun.'
     },
     npWithAdjectives: {
-        help10: '',
-        help11: ''
+        help10: 'A Noun Phrase can have any number of adjectives.'
     },
     /**
      * workbench
@@ -323,8 +322,7 @@ StringStore.zh = {
         help13: '如果我们写不止一个,那么我们使用名词的复数形式。'
     },
     npWithAdjectives: {
-        help10: '',
-        help11: ''
+        help10: 'A Noun Phrase can have any number of adjectives.'
     },
     lessonNavigator: {
         level: '级',

@@ -7,7 +7,7 @@ import rtRenderer      from 'react-test-renderer'
 
 import Definiteness    from './Definiteness'
 import LessonNavigator from './LessonNavigator'
-import NPAddForm       from '../np/addedit/NPAddForm'
+import NPAEForm        from '../np/addedit/NPAEForm'
 import initialState    from '../../data/StateGetter'
 
 describe("Definiteness", () => {
@@ -18,7 +18,7 @@ describe("Definiteness", () => {
         expect(definitenessComponent.type).toBe('div')
 
         expect(findWithClass(definitenessComponent,'help'))
-        expect(findWithType(definitenessComponent,NPAddForm))
+        expect(findWithType(definitenessComponent,NPAEForm))
         expect(findWithClass(definitenessComponent,'quiz'))
         expect(findWithType(definitenessComponent,LessonNavigator))
 

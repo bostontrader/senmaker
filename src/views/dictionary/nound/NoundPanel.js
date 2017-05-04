@@ -19,14 +19,9 @@ function NoundPanel(props:Object):Object {
     const s:Object = props.strings
 
     // What should be displayed in the nound add/edit panel?
-    let noundAEForm:Object = <div></div>  // we really want nothing here
-    if(props.nound.getIn(['addedit','nound','id']) || props.nound.getIn(['addedit','addNound'])) {
+    let noundAEForm:?Object = null
+    if(props.nound.getIn(['addedit','nound','id']) || props.nound.getIn(['addedit','addNound']))
         noundAEForm = <NoundAEForm {...props} />
-    //} else if (props.nound.getIn(['addedit','addNound'])) {
-        //noundAEForm = <NoundAEForm {...props} />
-    } else {
-        // A suitable default is already set, so do nothing
-    }
 
     // The appearance of a NoundPanel is not affected by the level.
     return( <div style={style}>

@@ -3,6 +3,7 @@ import React from 'react'
 
 import LessonNavigator from './LessonNavigator'
 import NPPanel         from '../np/NPPanel'
+import {NPPanelLevel}  from '../../data/np/NPConstants'
 
 function NounPhrases(props:Object):Object {
 
@@ -33,7 +34,7 @@ function NounPhrases(props:Object):Object {
                 <p>{s.help13}</p>
             </div>
 
-            <NPPanel {...props} />
+            <NPPanel npPanelLevel={NPPanelLevel.L2} {...props} />
 
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>

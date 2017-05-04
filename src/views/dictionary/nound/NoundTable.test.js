@@ -33,7 +33,7 @@ describe("NoundTable", function() {
     })
 
     describe("An Empty NoundTable", function() {
-        it("Renders a NoundPanelLevel.BASE NoundTable", function() {
+        it("Renders no NoundPanelLevel.BASE NoundTable", function() {
             const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...this.state} />
             const noundTable = TestUtils.createRenderer().render(renderExpression)
 
@@ -45,7 +45,7 @@ describe("NoundTable", function() {
             expect(tree).toMatchSnapshot()
         })
 
-        it("Renders a NoundPanelLevel.PLURALIZATION NoundTable", function() {
+        it("Renders no NoundPanelLevel.PLURALIZATION NoundTable", function() {
             const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...this.state} />
             const noundTable = TestUtils.createRenderer().render(renderExpression)
 

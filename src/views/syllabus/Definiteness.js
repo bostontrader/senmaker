@@ -4,7 +4,8 @@ import AppActions  from '../../data/app/AppActions'
 import QuizActions from '../../data/quiz/QuizActions'
 
 import LessonNavigator from './LessonNavigator'
-import NPAddForm       from '../np/addedit/NPAddForm'
+import NPAEForm        from '../np/addedit/NPAEForm'
+import {NPPanelLevel}  from '../../data/np/NPConstants'
 
 function Definiteness(props) {
 
@@ -38,7 +39,7 @@ function Definiteness(props) {
                 <p>{s.help15}</p>
             </div>
 
-            <NPAddForm {...props} />
+            <NPAEForm npPanelLevel={NPPanelLevel.L1} {...props} />
 
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
