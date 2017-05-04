@@ -32,53 +32,110 @@ describe("NoundTable", function() {
         }
     })
 
-    it("Renders a NoundPanelLevel.BASE NoundTable", function() {
-        const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...this.state} />
-        const noundTable = TestUtils.createRenderer().render(renderExpression)
-        expect(noundTable.type).toBe('table')
+    describe("An Empty NoundTable", function() {
+        it("Renders a NoundPanelLevel.BASE NoundTable", function() {
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...this.state} />
+            const noundTable = TestUtils.createRenderer().render(renderExpression)
 
-        // Two columns in the thead
-        expect(noundTable.props.children[0].props.children.props.children.length).toBe(2) // base, edit
+            // Zero NoundTable
+            const nounItems = findAllWithType(noundTable, NoundTable)
+            expect(nounItems.length).toBe(0)
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
+
+        it("Renders a NoundPanelLevel.PLURALIZATION NoundTable", function() {
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...this.state} />
+            const noundTable = TestUtils.createRenderer().render(renderExpression)
+
+            // Zero NoundTable
+            const nounItems = findAllWithType(noundTable, NoundTable)
+            expect(nounItems.length).toBe(0)
+
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
     })
 
-    it("Renders a NoundPanelLevel.PLURALIZATION NoundTable", function() {
-        const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...this.state} />
-        const noundTable = TestUtils.createRenderer().render(renderExpression)
-        expect(noundTable.type).toBe('table')
 
-        // Three columns in the thead
-        expect(noundTable.props.children[0].props.children.props.children.length).toBe(3) // base, plural, edit
+    describe("A NoundTable with one item", function() {
+        it("Renders a NoundPanelLevel.BASE NoundTable", function() {
+            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...this.state} />
+            const noundTable = TestUtils.createRenderer().render(renderExpression)
+            expect(noundTable.type).toBe('table')
+
+            // Two columns in the thead
+            expect(noundTable.props.children[0].props.children.props.children.length).toBe(2) // base noun, edit
+
+            // One NoundRow
+            const nounItems = findAllWithType(noundTable, NoundRow)
+            expect(nounItems.length).toBe(1)
+
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
+
+        it("Renders a NoundPanelLevel.PLURALIZATION NoundTable", function() {
+            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
+
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...this.state} />
+            const noundTable = TestUtils.createRenderer().render(renderExpression)
+            expect(noundTable.type).toBe('table')
+
+            // Three columns in the thead
+            expect(noundTable.props.children[0].props.children.props.children.length).toBe(3) // base noun, plural, edit
+
+            // One NoundRow
+            const nounItems = findAllWithType(noundTable, NoundRow)
+            expect(nounItems.length).toBe(1)
+
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
     })
 
-    it("Will render one NoundRow", function() {
-        this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
 
-        const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...this.state} />
-        const noundTable = TestUtils.createRenderer().render(renderExpression)
-        const nounItems = findAllWithType(noundTable, NoundRow)
-        expect(nounItems.length).toBe(1)
+    describe("A NoundTable with more than one item", function() {
+        it("Renders a NoundPanelLevel.BASE NoundTable", function() {
+            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
+            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.b})
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
-    })
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...this.state} />
+            const noundTable = TestUtils.createRenderer().render(renderExpression)
+            expect(noundTable.type).toBe('table')
 
-    it("Will render two NoundRow", function() {
-        this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
-        this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.b})
+            // Two columns in the thead
+            expect(noundTable.props.children[0].props.children.props.children.length).toBe(2) // base noun, edit
 
-        const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...this.state} />
-        const noundTable = TestUtils.createRenderer().render(renderExpression)
-        const nounItems = findAllWithType(noundTable, NoundRow)
-        expect(nounItems.length).toBe(2)
+            // Two NoundRow
+            const nounItems = findAllWithType(noundTable, NoundRow)
+            expect(nounItems.length).toBe(2)
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
+
+        it("Renders a NoundPanelLevel.PLURALIZATION NoundTable", function() {
+            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
+            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.b})
+
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...this.state} />
+            const noundTable = TestUtils.createRenderer().render(renderExpression)
+            expect(noundTable.type).toBe('table')
+
+            // Three columns in the thead
+            expect(noundTable.props.children[0].props.children.props.children.length).toBe(3) // base noun, plural, edit
+
+            // Two NoundRow
+            const nounItems = findAllWithType(noundTable, NoundRow)
+            expect(nounItems.length).toBe(2)
+
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
     })
 
 })

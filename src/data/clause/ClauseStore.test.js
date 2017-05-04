@@ -11,7 +11,6 @@ describe('ClauseStore', function() {
         //this.state = ClauseStore.getInitialState()
         // ClauseStore.getInitialState w/o any pre-loaded examples.
         this.state = Map({nextid:1, coll:Map()})
-        console.log(this.state)
 
         this.clauses = () => Array.from(this.state.getIn(['coll']).values()).map(clause => ({
             id: clause.id,

@@ -73,7 +73,11 @@ exports[`AppContainer 's Alive! 1`] = `
           0
         </p>
         
-        
+        <button
+          id="lesson-next"
+          onClick={[Function]}>
+          下一級
+        </button>
         <button
           id="level-reset"
           onClick={[Function]}>

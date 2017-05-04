@@ -268,15 +268,15 @@ describe('QuizStore', function() {
     
     // 5. phrases
     it('phrases ON_I_UNDERSTAND', function() {
-        expect(this.state.getIn(['phrases','iunderstand'])).toBe(false)
-        expect(this.state.getIn(['phrases','passed'])).toBe(false)
+        expect(this.state.getIn(['phrase','iunderstand'])).toBe(false)
+        expect(this.state.getIn(['phrase','passed'])).toBe(false)
 
         this.dispatch({
-            type: QuizActionTypes.phrases.ON_I_UNDERSTAND
+            type: QuizActionTypes.phrase.ON_I_UNDERSTAND
         })
 
-        expect(this.state.getIn(['phrases','iunderstand'])).toBe(true)
-        expect(this.state.getIn(['phrases','passed'])).toBe(true)
+        expect(this.state.getIn(['phrase','iunderstand'])).toBe(true)
+        expect(this.state.getIn(['phrase','passed'])).toBe(true)
     })
 
     // 6. nounPhrases
