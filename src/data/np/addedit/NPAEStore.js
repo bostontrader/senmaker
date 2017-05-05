@@ -7,6 +7,7 @@ import NPActionTypes        from '../NPActionTypes'
 import {DefinitenessSelect} from '../NPConstants'
 import AppDispatcher        from '../../AppDispatcher'
 import {MakeNP}             from '../../JSONParseUtils'
+import {validateAdjectivd}  from '../../Validator'
 import {validateNound}      from '../../Validator'
 import {validateNP}         from '../../Validator'
 import AppActionTypes       from '../../app/AppActionTypes'
@@ -52,24 +53,23 @@ class NPAEStore extends ReduceStore {
 
         let newState:Object = state
 
-        const calcResultText = (definiteness:string, nound:Object):string => {
+        // http://www.ef.com/english-resources/english-grammar/singular-and-plural-nouns
+        const calcResultText = (definiteness:number, nound:Object, adjectivs:Array<Object>):string => {
             validateNound(nound)
+            adjectivs.map( (adjectivd) => {validateAdjectivd(adjectivd)})
+
             // Graft in this ugly code from another project...
-            // http://www.ef.com/english-resources/english-grammar/singular-and-plural-nouns
-            //const noun = this.state.selectedNoun
-            //const nound = {base:'cat'}
             //let suffix = ''
             //let root = noun
             //const es = {"s":'',"x":'',"z":'',"ch":'',"sh":''}
             const vowels = {'a':'','e':'','i':'','o':'','u':''}
 
-
-            //const n1 = noun.slice(-1)
-            //const n2 = noun.slice(-2)
-            //const n3 = noun.slice(-2,2)
             const base = nound.get('base')
-            const n4 = base.slice(0,1)
-
+            const n1 = base.slice(-1) // last char
+            const n2 = base.slice(-2) // last two chars
+            const n3 = base.slice(-2,2)
+            const n4 = base.slice(0,1) // first char
+            console.log(base, n1, n2, n3, n4)
             //const test1 = !(n[noun] === undefined)
             //const test2 = !(es[n1] === undefined && es[n2] === undefined)
             //const test3 = (vowels[n3] === undefined) && n1 === 'y'
@@ -106,27 +106,48 @@ class NPAEStore extends ReduceStore {
             }
 
             let generatedText = ''
+
+            //let adjectives = ""
+
+            //for (var i = 0, l = this.state.newAdjectives.length; i < l; i++) {
+            //if (i === 0) {
+            //adjectives = this.state.newAdjectives[i].value
+            //} else {
+            //adjectives = adjectives + ', ' + this.state.newAdjectives[i].value
+            //}
+            //}
+            let adjString = ''
+            let firstTime = true
+            for( let adjectivd:Object of adjectivs) {
+                if (firstTime) {
+                    adjString = adjectivd.get('base')
+                    firstTime = false
+                }
+                else
+                    adjString += ' ' + adjectivd.get('base')
+
+            }
+
+
+
             if(article === '') {
                 if(base === '') {
                     // no article, no base, no result
                 } else {
                     // no article, but there is a base, so use that as the result
-                    generatedText = base
+                    generatedText = adjString + base
                 }
             } else {
                 if(base === '') {
                     // an article, but no base, no result
                 } else {
                     // an article and a base, we can use that
-                    generatedText = article + ' ' + base
+                    generatedText = article + ' ' + adjString + ' ' + base
                 }
             }
 
 
-            //if(article !== '' && nound.base !=='')
-                //generatedText = article + ' ' + nound.base
 
-            return generatedText
             // if indefinite, then disable plural and singular
             //if(this.state.definitenessSelectedOption === DefinitenessRadio.INDEFINITE) {
             //this.setState({pluralityDisabled:true})
@@ -141,29 +162,18 @@ class NPAEStore extends ReduceStore {
             //this.setState({definitenessDisabled:false})
             //}
 
-            //let adjectives = ""
-
-            //for (var i = 0, l = this.state.newAdjectives.length; i < l; i++) {
-            //if (i === 0) {
-            //adjectives = this.state.newAdjectives[i].value
-            //} else {
-            //adjectives = adjectives + ', ' + this.state.newAdjectives[i].value
-            //}
-            //}
-
-
-
             //if(this.state.pluralitySelectedOption === PluralityRadio.PLURAL) {
             //return article + ' ' + adjectives + " " +root + suffix
             //} else {
             //return article + ' ' + adjectives + " " + noun
             //}
 
-            //return definiteness.concat(presentNPId)
+            return generatedText
         }
 
         let presentDefiniteness:number
         let presentNound:Object
+        let presentAdjectivds:Array<Object>
         let generatedText:string
 
         switch (action.type) {
@@ -210,7 +220,9 @@ class NPAEStore extends ReduceStore {
             case NPActionTypes.ON_CHANGE_DEFINITENESS:
                 presentDefiniteness = action.newDefiniteness
                 presentNound = state.getIn(['np','nound'])
-                generatedText = calcResultText(presentDefiniteness, presentNound)
+                presentAdjectivds = state.getIn(['np','adjectivds'])
+
+                generatedText = calcResultText(presentDefiniteness, presentNound, presentAdjectivds)
                 newState = newState.updateIn(['np','definiteness'],value => action.newDefiniteness)
                 newState = newState.updateIn(['np','generatedText'], value => generatedText)
                 break
@@ -220,8 +232,20 @@ class NPAEStore extends ReduceStore {
                 validateNound(action.newNound)
                 presentDefiniteness = state.getIn(['np','definiteness'])
                 presentNound = action.newNound
-                generatedText = calcResultText(presentDefiniteness, presentNound)
+                presentAdjectivds = state.getIn(['np','adjectivds'])
+                generatedText = calcResultText(presentDefiniteness, presentNound, presentAdjectivds)
                 newState = newState.updateIn(['np','nound'],value => presentNound)
+                newState = newState.updateIn(['np','generatedText'], value => generatedText)
+                break
+
+            // Should be ADJECTIVD because that's what's being changed!
+            case NPActionTypes.ON_CHANGE_SELECTED_ADJECTIVD:
+                //validateAdjectivd(action.newAdjectivd)
+                presentDefiniteness = state.getIn(['np','definiteness'])
+                presentNound = state.getIn(['np','nound'])
+                console.log('NPAEStore',action.newAdjectivds)
+                generatedText = calcResultText(presentDefiniteness, presentNound, action.newAdjectivds)
+                newState = newState.updateIn(['np','adjectivds'],value => action.newAdjectivds)
                 newState = newState.updateIn(['np','generatedText'], value => generatedText)
                 break
 

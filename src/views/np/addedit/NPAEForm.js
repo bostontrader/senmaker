@@ -3,6 +3,7 @@ import React from 'react'
 import {Radio}      from 'react-radio-group'
 import {RadioGroup} from 'react-radio-group'
 
+import AdjectivdSelect from '../../dictionary/adjectivd/AdjectivdSelect'
 import NoundSelect     from '../../dictionary/nound/NoundSelect'
 import NPActions       from '../../../data/np/NPActions'
 import {validateVerbd} from '../../../data/Validator'
@@ -18,7 +19,7 @@ function NPAEForm(props:Object):?Object {
 
     const s:Object = props.strings
 
-    const onClickSave = () => {
+    const onClickSave:Function = () => {
         const np:Object = props.np.getIn(['addedit','np'])
         validateNP(np)
         NPActions.onClickSaveNP(np)
@@ -35,13 +36,27 @@ function NPAEForm(props:Object):?Object {
         <div>{buttonSave}{buttonDelete}{buttonCancel}</div> : <div>{buttonSave}{buttonCancel}</div>
 
     // should be nound because we want a select list of nound!
-    const selectOptions = props.nound.getIn(['dict','coll']).toArray().map(function(nound) {
+    const availableNounds:Array<Object> = props.nound.getIn(['dict','coll']).toArray().map(function(nound) {
         return {value:nound.get('id'), label:nound.get('base')}
     })
-    const selectedValue:string = props.np.getIn(['addedit','np','nound','id'])
+    const selectedNound:string = props.np.getIn(['addedit','np','nound','id'])
 
-    const onChangeNound = (id) => {
-        NPActions.onChangeSelectedNound(props.nound.getIn(['dict','coll',id]))
+    // should be adjectivd because we want a select list of adjectivd!
+    const availableAdjectivds:Array<Object> = props.adjectivd.getIn(['dict','coll']).toArray().map(function(adjectivd) {
+        return {value:adjectivd.get('id'), label:adjectivd.get('base')}
+    })
+
+    //const selectedAdjectivds:Array<string> = ['1','3']
+    const selectedAdjectivds:Array<string> = Array.from(props.np.getIn(['addedit','np','adjectivds']), adjectivd =>
+        adjectivd.get('id')
+    )
+
+    const onChangeNound:Function = (id) => {NPActions.onChangeSelectedNound(props.nound.getIn(['dict','coll',id]))}
+    const onChangeAdjectivd:Function = (ids) => {
+        // ids is an array of objects. Use this to build an array of Adjectivd
+        NPActions.onChangeSelectedAdjectivds(
+            ids.map( (id) => {return props.adjectivd.getIn(['dict','coll',id.value])})
+        )
     }
 
     let npAEForm:?Object = null
@@ -51,7 +66,7 @@ function NPAEForm(props:Object):?Object {
         case NPPanelLevel.L1:
             npAEForm =
                 <div style={style}>
-                    <NoundSelect options={selectOptions} value={selectedValue} onChange={onChangeNound} />
+                    <NoundSelect options={availableNounds} value={selectedNound} onChange={onChangeNound} />
                     <RadioGroup name="definiteness" selectedValue={props.np.getIn(['addedit','np','definiteness'])} onChange={(e)=>{NPActions.onChangeDefiniteness(e)}}>
                         <Radio value="definite" />Definite
                         <Radio value="indefinite" />Indefinite
@@ -63,7 +78,7 @@ function NPAEForm(props:Object):?Object {
         case NPPanelLevel.L2:
             npAEForm =
                 <div style={style}>
-                    <NoundSelect options={selectOptions} value={selectedValue} onChange={onChangeNound} />
+                    <NoundSelect options={availableNounds} value={selectedNound} onChange={onChangeNound} />
                     <RadioGroup name="definiteness" selectedValue={props.np.getIn(['addedit','np','definiteness'])} onChange={(e)=>{NPActions.onChangeDefiniteness(e)}}>
                         <Radio value="definite" />Definite
                         <Radio value="indefinite" />Indefinite
@@ -76,11 +91,13 @@ function NPAEForm(props:Object):?Object {
         case NPPanelLevel.ADJECTIVES:
             npAEForm =
                 <div style={style}>
-                    <NoundSelect options={selectOptions} value={selectedValue} onChange={onChangeNound} />
+                    <NoundSelect options={availableNounds} value={selectedNound} onChange={onChangeNound} />
                     <RadioGroup name="definiteness" selectedValue={props.np.getIn(['addedit','np','definiteness'])} onChange={(e)=>{NPActions.onChangeDefiniteness(e)}}>
                         <Radio value="definite" />Definite
                         <Radio value="indefinite" />Indefinite
                     </RadioGroup>
+                    <AdjectivdSelect options={availableAdjectivds} value={selectedAdjectivds}   onChange={onChangeAdjectivd} />
+
                     <p id="generatedText">{props.np.getIn(['addedit','np','generatedText'])}</p>
                     {theButtons}
                 </div>

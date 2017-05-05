@@ -4,18 +4,23 @@ import React from 'react'
 import TestUtils  from 'react-addons-test-utils'
 import rtRenderer from 'react-test-renderer'
 
-import NPAEForm       from './NPAEForm'
-import {NPPanelLevel} from '../../../data/np/NPConstants'
-import NoundStore     from '../../../data/dictionary/nound/NoundStore'
-import NoundAEStore   from '../../../data/dictionary/nound/addedit/NoundAEStore'
-import NPAEStore      from '../../../data/np/addedit/NPAEStore'
-import StringStore    from '../../../data/strings/StringStore'
-
+import NPAEForm         from './NPAEForm'
+import {NPPanelLevel}   from '../../../data/np/NPConstants'
+import AdjectivdStore   from '../../../data/dictionary/adjectivd/AdjectivdStore'
+import AdjectivdAEStore from '../../../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
+import NoundStore       from '../../../data/dictionary/nound/NoundStore'
+import NoundAEStore     from '../../../data/dictionary/nound/addedit/NoundAEStore'
+import NPAEStore        from '../../../data/np/addedit/NPAEStore'
+import StringStore      from '../../../data/strings/StringStore'
 
 describe("NPAEForm", function() {
 
     beforeEach( function() {
         this.state = {
+            adjectivd: Map({
+                addedit: AdjectivdAEStore.getInitialState(),
+                dict: AdjectivdStore.getInitialState()
+            }),
             nound: Map({
                 addedit: NoundAEStore.getInitialState(),
                 dict: NoundStore.getInitialState()
@@ -36,6 +41,7 @@ describe("NPAEForm", function() {
             const npAEForm = TestUtils.createRenderer().render(renderExpression)
             expect(npAEForm.type).toBe('div')
             expect(npAEForm.props.children.length).toBe(3) // nound select, radio group, generatedText
+            // No buttons on this level
             //expect(npAEForm.props.children[1].props.children.length).toBe(2) // save, cancel
 
             // The Select control fubars this

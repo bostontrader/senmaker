@@ -1,8 +1,9 @@
 // @flow
-import NPActionTypes   from './NPActionTypes'
-import AppDispatcher   from '../AppDispatcher'
-import {validateNound} from '../Validator'
-import {validateNP}    from '../Validator'
+import NPActionTypes       from './NPActionTypes'
+import AppDispatcher       from '../AppDispatcher'
+import {validateAdjectivd} from '../Validator'
+import {validateNound}     from '../Validator'
+import {validateNP}        from '../Validator'
 
 const NPActions = {
     
@@ -53,7 +54,14 @@ const NPActions = {
             newNound: newNound
         })
     },
-
+    onChangeSelectedAdjectivds(newAdjectivds:Array<Object>):void {
+        newAdjectivds.map( (adjectivd) => {validateAdjectivd(adjectivd)})
+        AppDispatcher.dispatch({
+            type: NPActionTypes.ON_CHANGE_SELECTED_ADJECTIVD,
+            newAdjectivds: newAdjectivds.map( (adjectivd) => {validateAdjectivd(adjectivd)})
+        })
+    },
+    
     // Pump a new np directly into the db w/o dealing with any UI.
     insertNP(np:Object):void {
         validateNP(np)

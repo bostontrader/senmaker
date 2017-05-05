@@ -1,12 +1,12 @@
 import NPAEStore            from './NPAEStore'
 import NPActionTypes        from '../NPActionTypes'
 import {DefinitenessSelect} from '../NPConstants'
+import {adjectivdExamples}  from '../../TestData'
 import {noundExamples}      from '../../TestData'
 import {npExamples}         from '../../TestData'
 import AppActionTypes       from '../../app/AppActionTypes'
 import Nound                from '../../dictionary/nound/Nound'
 import {PluralizationRule}  from '../../dictionary/nound/NoundConstants'
-
 
 describe('NPAEStore', function() {
 
@@ -140,6 +140,16 @@ describe('NPAEStore', function() {
             newNound: noundExamples.a
         })
         expect(this.state.getIn(['np','nound']).toJSON()).toEqual(noundExamples.a.toJSON())
+    })
+
+    it('ON_CHANGE_SELECTED_ADJECTIVD', function() {
+
+        // In this test, the value of id is unused.
+        this.dispatch({
+            type: NPActionTypes.ON_CHANGE_SELECTED_ADJECTIVD,
+            newAdjectivds: [adjectivdExamples.a]
+        })
+        expect(this.state.getIn(['np','adjectivds'])[0].toJSON()).toEqual(adjectivdExamples.a.toJSON())
     })
     
     it('ON_CHANGE_DEFINITENESS', function() {

@@ -1,14 +1,16 @@
 // @flow
+import {List}    from 'immutable'
 import {Record} from 'immutable'
 
 import {DefinitenessSelect} from './NPConstants'
 import Nound                from '../dictionary/nound/Nound'
 
 const NP = Record({
-    id: '', // string
+    id: '',
     nound: Nound(),
-    definiteness: DefinitenessSelect.NoneSelected, // number
-    generatedText: '' // string
+    definiteness: DefinitenessSelect.NoneSelected,
+    adjectivds: List(),
+    generatedText: ''
 })
 
 export default NP

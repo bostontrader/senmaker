@@ -1,4 +1,6 @@
 // @flow
+import {List} from 'immutable'
+
 import Clause               from './clause/Clause'
 import Adjectivd            from './dictionary/adjectivd/Adjectivd'
 import Nound                from './dictionary/nound/Nound'
@@ -40,18 +42,21 @@ const npExamples:Object = {
         id:'1',
         nound: noundExamples.a,
         definiteness: DefinitenessSelect.NoneSelected,
+        adjectivds: List(),
         generatedText: 'apple'
     }),
     b:NP({
         id:'2',
         nound: noundExamples.b,
         definiteness: DefinitenessSelect.Definite,
+        adjectivds: List(),
         generatedText: 'the box'
     }),
     c:NP({
         id:'3',
         nound: noundExamples.c,
         definiteness: DefinitenessSelect.Indefinite,
+        adjectivds: List(),
         generatedText: 'a fish'
     })
 

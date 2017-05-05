@@ -16,7 +16,8 @@ describe('NPStore', function() {
             id: np.id,
             nound: np.nound.toJSON(),
             definiteness: np.definiteness,
-            generatedText: np.generatedText
+            generatedText: np.generatedText,
+            adjectivds: np.adjectivds.toJSON()
         }))
         
         this.dispatch = action => {this.state = NPStore.reduce(this.state, action)}
