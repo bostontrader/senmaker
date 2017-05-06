@@ -56,7 +56,7 @@ class NPAEStore extends ReduceStore {
         // http://www.ef.com/english-resources/english-grammar/singular-and-plural-nouns
         const calcResultText = (definiteness:number, nound:Object, adjectivs:Array<Object>):string => {
             validateNound(nound)
-            adjectivs.map( (adjectivd) => {validateAdjectivd(adjectivd)})
+            //adjectivs.map( (adjectivd) => {validateAdjectivd(adjectivd)})
 
             // Graft in this ugly code from another project...
             //let suffix = ''
@@ -240,7 +240,9 @@ class NPAEStore extends ReduceStore {
 
             // Should be ADJECTIVD because that's what's being changed!
             case NPActionTypes.ON_CHANGE_SELECTED_ADJECTIVD:
-                //validateAdjectivd(action.newAdjectivd)
+                console.log('NPAEStore',action.newAdjectivds)
+                action.newAdjectivds.map( (adjectivd) => {validateAdjectivd(adjectivd)})
+
                 presentDefiniteness = state.getIn(['np','definiteness'])
                 presentNound = state.getIn(['np','nound'])
                 console.log('NPAEStore',action.newAdjectivds)

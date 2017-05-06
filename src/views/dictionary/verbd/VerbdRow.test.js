@@ -36,4 +36,15 @@ describe("VerbdRow", () => {
         expect(tree).toMatchSnapshot()
     })
 
+    it("renders a VerbdPanelLevel.MAX VerbdRow", () => {
+        props = {verbd:verbdExamples.a, verbdPanelLevel:VerbdPanelLevel.MAX, strings: StringStore.getInitialState()}
+        renderExpression = <VerbdRow {...props} />
+        verbdRow = TestUtils.createRenderer().render(renderExpression)
+        expect(verbdRow.type).toBe('tr')
+        expect(verbdRow.props.children.length).toBe(3)  // base, past tense, edit
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
+
 })

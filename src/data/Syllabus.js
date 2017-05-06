@@ -13,6 +13,8 @@ import Clause        from '../views/syllabus/Clause'
 import Sentence      from '../views/syllabus/Sentence'
 import Pluralization from '../views/syllabus/Pluralization'
 import NPAdjective   from '../views/syllabus/NPAdjective'
+import VerbMax       from '../views/syllabus/VerbMax'
+
 /**
  * We have a series of lessons that we want to progress through, in both directions, in a specific order.
  *
@@ -44,7 +46,8 @@ const syllabus = {
     clause:        {level: 9, comp:Clause,        prev:'verbPhrase',    next:'sentence'},
     sentence:      {level:10, comp:Sentence,      prev:'clause',        next: 'pluralization'},
     pluralization: {level:11, comp:Pluralization, prev:'sentence',      next: 'npAdjective'},
-    npAdjective:   {level:12, comp:NPAdjective,   prev:'pluralization', next: null}
+    npAdjective:   {level:12, comp:NPAdjective,   prev:'pluralization', next: 'verbMax'},
+    verbMax:       {level:13, comp:VerbMax,       prev:'npAdjective',   next: null}
 
     // Adverbs
 

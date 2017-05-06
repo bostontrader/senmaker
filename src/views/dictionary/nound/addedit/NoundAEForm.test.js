@@ -14,8 +14,7 @@ describe("NoundAEForm", function() {
     beforeEach( function() {
         this.state = {
             nound: Map({
-                addedit: NoundAEStore.getInitialState(),
-                nouns: Map()
+                addedit: NoundAEStore.getInitialState()
             }),
             strings:StringStore.getInitialState()
         }

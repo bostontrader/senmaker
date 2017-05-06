@@ -36,8 +36,18 @@ function VerbdTable(props:Object):?Object {
                     </tr>
                     </thead>
                 break
+            case VerbdPanelLevel.MAX:
+                header =
+                    <thead>
+                    <tr>
+                        <th>Base Form</th>
+                        <th>Past Tense</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                break
             default:
-            // header already has a suitable default. Do nothing.
+                // header already has a suitable default. Do nothing.
 
         }
 

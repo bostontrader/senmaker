@@ -77,6 +77,7 @@ class VerbdStore extends ReduceStore {
             // Insert a new record programmatically, w/o a UI.
             case VerbdActionTypes.INSERT_VERBD:
                 newState = insertNewRecord(action.verbd)
+
                 break
             
             default:

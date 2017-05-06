@@ -55,10 +55,11 @@ const NPActions = {
         })
     },
     onChangeSelectedAdjectivds(newAdjectivds:Array<Object>):void {
+        console.log('NPActions',newAdjectivds)
         newAdjectivds.map( (adjectivd) => {validateAdjectivd(adjectivd)})
         AppDispatcher.dispatch({
             type: NPActionTypes.ON_CHANGE_SELECTED_ADJECTIVD,
-            newAdjectivds: newAdjectivds.map( (adjectivd) => {validateAdjectivd(adjectivd)})
+            newAdjectivds: newAdjectivds
         })
     },
     

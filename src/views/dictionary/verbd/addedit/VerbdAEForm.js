@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 
-//import PluralizationRuleSelect from './PluralizationRuleSelect'
 import VerbdActions            from '../../../../data/dictionary/verbd/VerbdActions'
 import {VerbdPanelLevel}       from '../../../../data/dictionary/verbd/VerbdConstants'
 import {validateVerbd}         from '../../../../data/Validator'
@@ -50,6 +49,18 @@ function VerbdAEForm(props:Object):Object {
                 </div>
             break
         case VerbdPanelLevel.PAST_TENSE:
+            verbdAEForm =
+                <div id="verbd-addedit-form" style={style}>
+                    {baseControls}
+                    <label htmlFor='pastTense'>Past Tense</label>
+                    <input id='pastTense' name='pastTense' type='text'
+                           value={props.verbd.getIn(['addedit','verbd','pastTense'])}
+                           onChange={(e)=>VerbdActions.onChangePastTense(e.target.value)}
+                    />
+                    {theButtons}
+                </div>
+            break
+        case VerbdPanelLevel.MAX:
             verbdAEForm =
                 <div id="verbd-addedit-form" style={style}>
                     {baseControls}

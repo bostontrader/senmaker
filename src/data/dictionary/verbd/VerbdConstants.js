@@ -15,6 +15,28 @@ const ActionTime:Object = {
     'Present':   200,
     'Future':    300
 }
+
+
+/*
+Aspect and AspectOrSimple work together and must be configured consistently.
+
+The verb can either be:
+
+ AspectOrSimple.Simple -or-
+ AspectOrSimple.Aspect -and- at least one and possibly both of Aspect.Perfect and Aspect.Continuous.
+*/
+
+const Aspect:Object = {
+    'Perfect'   : 100,
+    'Continuous': 200
+}
+
+const AspectOrSimple = {
+    'Simple': 100,  // default
+    'Aspect': 200
+}
+
+
 /**
 The UI should generally adapt to a particular level.  Although we have a global app level,
 it's not feasible to have all the UI components track this.  Instead, we maintain levels
@@ -23,9 +45,12 @@ This level drives the level of all of the child components as well.
  */
 const VerbdPanelLevel:Object = {
     'BASE':       100,
-    'PAST_TENSE': 200
+    'PAST_TENSE': 200,
+    'MAX':        999
 }
 
 export {ActionTime}
+export {Aspect}
+export {AspectOrSimple}
 export {PastTenseRule}
 export {VerbdPanelLevel}

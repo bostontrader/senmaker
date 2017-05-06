@@ -6,6 +6,7 @@ import Adjectivd            from './dictionary/adjectivd/Adjectivd'
 import Nound                from './dictionary/nound/Nound'
 import {PluralizationRule}  from './dictionary/nound/NoundConstants'
 import Verbd                from './dictionary/verbd/Verbd'
+import {AspectOrSimple}     from './dictionary/verbd/VerbdConstants'
 import {PastTenseRule}      from './dictionary/verbd/VerbdConstants'
 import NP                   from './np/NP'
 import {DefinitenessSelect} from './np/NPConstants'
@@ -64,13 +65,28 @@ const npExamples:Object = {
 
 const verbdExamples:Object = {
     a:Verbd({
-        id:'1', base: 'eat', pastTense: 'ate', pastTense_rule: PastTenseRule.Irregular
+        id:'1',
+        base: 'eat',
+        pastTense: 'ate',
+        pastTense_rule: PastTenseRule.Irregular,
+        aspectOrSimple: AspectOrSimple.Simple,
+        aspect: []
     }),
     b:Verbd({
-        id:'2', base: 'talk', pastTense: 'talked', pastTense_Rule: PastTenseRule.Append_ed
+        id:'2',
+        base: 'talk',
+        pastTense: 'talked',
+        pastTense_Rule: PastTenseRule.Append_ed,
+        aspectOrSimple: AspectOrSimple.Simple,
+        aspect: []
     }),
     c:Verbd({
-        id:'3', base: 'hit', pastTense: 'hit', pastTense_Rule: PastTenseRule.NoChange
+        id:'3',
+        base: 'hit',
+        pastTense: 'hit',
+        pastTense_Rule: PastTenseRule.NoChange,
+        aspectOrSimple: AspectOrSimple.Simple,
+        aspect: []
     })
 }
 

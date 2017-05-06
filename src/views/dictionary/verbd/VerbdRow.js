@@ -30,6 +30,14 @@ function VerbdRow(props:Object):Object {
                     <td>{editButton}</td>
                 </tr>
             break
+        case VerbdPanelLevel.MAX:
+            verbdRow =
+                <tr>
+                    <td>{verbd.base}</td>
+                    <td>{verbd.pastTense}</td>
+                    <td>{editButton}</td>
+                </tr>
+            break
         default:
             // noundRow already has a suitable default. Do nothing.
     }

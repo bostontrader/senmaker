@@ -1,6 +1,9 @@
 // @flow
 import {Record} from 'immutable'
-import {PastTenseRule} from './VerbdConstants'
+
+import {Aspect}         from './VerbdConstants'
+import {AspectOrSimple} from './VerbdConstants'
+import {PastTenseRule}  from './VerbdConstants'
 
 /**
  * A Verbd provides the minimal information we need to instantiate a verb.
@@ -19,7 +22,9 @@ const Verbd = Record({
     id: '',
     base: '',
     pastTense: '',
-    pastTense_rule: PastTenseRule.NoneSelected
+    pastTense_rule: PastTenseRule.NoneSelected,
+    aspectOrSimple: AspectOrSimple.Simple,
+    aspect: [] // An array of chosen aspects
 })
 
 export default Verbd

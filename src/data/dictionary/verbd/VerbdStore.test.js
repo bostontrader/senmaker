@@ -13,7 +13,9 @@ describe('VerbdStore', function() {
             id: verbd.id,
             base: verbd.base,
             pastTense: verbd.pastTense,
-            pastTense_rule: verbd.pastTense_rule
+            pastTense_rule: verbd.pastTense_rule,
+            aspectOrSimple: verbd.aspectOrSimple,
+            aspect: verbd.aspect
         }))
         
         this.dispatch = action => {this.state = VerbdStore.reduce(this.state, action)}
@@ -31,7 +33,7 @@ describe('VerbdStore', function() {
         this.dispatch({type: AppActionTypes.ON_APP_RESET})
         expect(initialState).toBe(this.state)
     })
-    
+
     it('ON_CLICK_DELETE_VERBD', function() {
         expect(this.verbds()).toEqual([])
 
