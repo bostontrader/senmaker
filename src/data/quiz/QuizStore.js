@@ -160,6 +160,12 @@ class QuizStore extends ReduceStore {
                 }
                 break
 
+            // 7. verbConjugation
+            case QuizActionTypes.verbConjugation.ON_I_UNDERSTAND:
+                newState = newState.setIn(['verbConjugation','iunderstand'],true)
+                newState = newState.setIn(['verbConjugation','passed'],true)
+                break
+
             // 10. sentences
             case QuizActionTypes.sentence.ON_I_UNDERSTAND:
                 newState = newState.setIn(['sentence','iunderstand'],true)
@@ -218,6 +224,10 @@ QuizStore.initialState = Map({
         passed: false
     }),
     phrase: Map({
+        iunderstand: false,
+        passed: false
+    }),
+    verbConjugation: Map({
         iunderstand: false,
         passed: false
     }),

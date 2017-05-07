@@ -5,18 +5,18 @@ import React from 'react'
 //import {findAllWithClass, findWithClass, findWithType} from 'react-shallow-testutils'
 
 //import LessonNavigator from './LessonNavigator'
-//import PastTense           from './PastTense'
+//import PastForm           from './PastForm'
 
 //import AppActionTypes   from '../../data/app/AppActionTypes'
 //import AppStore         from '../../data/app/AppStore'
-//import PastTenseActionTypes from '../../data/dictionary/verbd/PastTenseActionTypes'
-//import PastTenseStore       from '../../data/dictionary/verbd/PastTenseStore'
+//import PastFormActionTypes from '../../data/dictionary/verbd/PastFormActionTypes'
+//import PastFormStore       from '../../data/dictionary/verbd/PastFormStore'
 //import QuizStore        from '../../data/quiz/QuizStore'
 //import StringStore      from '../../data/strings/StringStore'
 
-//import PastTensePanel from '../dictionary/verbd/PastTensePanel'
+//import PastFormPanel from '../dictionary/verbd/PastFormPanel'
 
-describe("PastTense", function() {
+describe("PastForm", function() {
 
     beforeEach(function() {
 
@@ -34,7 +34,7 @@ describe("PastTense", function() {
      * the quiz questions. Therefore test this component using every possible
      * order of answering the quiz questions.
      */
-    it("Renders PastTense in all its glory.", function() {
+    it("Renders PastForm in all its glory.", function() {
 
         expect(true)
         /*const swap = (array, pos1, pos2) => {
@@ -64,7 +64,7 @@ describe("PastTense", function() {
         const verifyBasicLayout = (noundRenderer) => {
             expect(noundRenderer.type).toBe('div')
             expect(findWithClass(noundRenderer,'help'))
-            expect(findWithType(noundRenderer,PastTensePanel))
+            expect(findWithType(noundRenderer,PastFormPanel))
             expect(findWithClass(noundRenderer,'quiz'))
             expect(findWithType(noundRenderer,LessonNavigator))
         }
@@ -75,7 +75,7 @@ describe("PastTense", function() {
                 type: AppActionTypes.ON_LESSON_NEXT    // advance to lesson nound
             })
 
-            const renderExpression = <PastTense {...this.state} />
+            const renderExpression = <PastForm {...this.state} />
             const noundRenderer = TestUtils.createRenderer().render(renderExpression)
 
             // no need to check basic layout or the fact that none of the checks are displayed
@@ -88,7 +88,7 @@ describe("PastTense", function() {
                     nound: quizItem.nound
                 })
                 checks.push(quizItem.i)
-                let renderExpression = <PastTense {...this.state} />
+                let renderExpression = <PastForm {...this.state} />
                 let noundRenderer = TestUtils.createRenderer().render(renderExpression)
 
                 verifyBasicLayout(noundRenderer)
@@ -107,7 +107,7 @@ describe("PastTense", function() {
             type: AppActionTypes.ON_LESSON_NEXT    // advance to lesson nound
         })
 
-        const renderExpression = <PastTense {...this.state} />
+        const renderExpression = <PastForm {...this.state} />
         const noundRenderer = TestUtils.createRenderer().render(renderExpression)
 
         verifyBasicLayout(noundRenderer)
@@ -117,9 +117,9 @@ describe("PastTense", function() {
 
         // Now verify correct operation of each permutation.
         heapsPermute([
-            {type:PastTenseActionTypes.ON_CLICK_SAVE_NOUND,   i:'insertPastTenseCheck', nound:{}},
-            {type:PastTenseActionTypes.ON_CLICK_SAVE_NOUND,   i:'updatePastTenseCheck', nound:{id:'1'}},
-            {type:PastTenseActionTypes.ON_CLICK_DELETE_NOUND, i:'deletePastTenseCheck'}
+            {type:PastFormActionTypes.ON_CLICK_SAVE_NOUND,   i:'insertPastFormCheck', nound:{}},
+            {type:PastFormActionTypes.ON_CLICK_SAVE_NOUND,   i:'updatePastFormCheck', nound:{id:'1'}},
+            {type:PastFormActionTypes.ON_CLICK_DELETE_NOUND, i:'deletePastFormCheck'}
             ], testSinglePermutation)*/
     })
 })

@@ -5,7 +5,7 @@ import LessonNavigator   from './LessonNavigator'
 import VerbdPanel        from '../dictionary/verbd/VerbdPanel'
 import {VerbdPanelLevel} from '../../data/dictionary/verbd/VerbdConstants'
 
-function PastTense(props:Object):Object {
+function PastForm(props:Object):Object {
 
     const style:Object = {
         border: '1px solid black',
@@ -13,7 +13,7 @@ function PastTense(props:Object):Object {
     }
 
     const q:Object = props.quiz
-    //const s:Object = props.strings.pastTense
+    //const s:Object = props.strings.pastForm
 
     return(
         <div>
@@ -34,4 +34,4 @@ function PastTense(props:Object):Object {
     )
 }
 
-export default PastTense
+export default PastForm

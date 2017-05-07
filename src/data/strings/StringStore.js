@@ -141,15 +141,25 @@ StringStore.en = {
         quiz2: 'Can you delete a noun phrase from this list?',
         quiz3: 'Can you change the spelling of a noun phrase?'
     },
-    pastTense: {
-        help10:'We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.',
-        help11:'For example: If we performed the verb in the past we use the \'past tense\' form of the verb.',
+    verbConjugation: [
+        'Every verb has a \'base\' form and four other variations.',
+        'Given the \'base\' form of a verb we can make the other variations according to various rules.',
+        'We use the different variations according to the rules of grammar.',
+        'The process of making these variations is called \'conjugation\'.'
+    ],
+    pastForm: {
+        help10:'The first verb conjugation that we will examine is the \'past\' form.',
+        help11:'When an action happens in the past then we use the \'past\' form of the verb.',
         help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
+    },
+    ingForm: {
+        help10:'Another variation of the verb is called the \'-ing\' form.',
+        help11:'We usually use this when something is happening in the present.'
     },
     vp: {
         help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
         help11: 'In a verb phrase we start with a single verb and then add other words to enhance the meaning.',
-        help12: 'You have already seen your first verb phrase in the \'future tense\' lesson.  By selecting \'future tense\' and a verb, you produced a two-word verb phrase.',
+        help12: 'You have already seen your first verb phrase in the \'past tense\' lesson.  By selecting \'future tense\' and a verb, you produced a two-word verb phrase.',
         help13: 'Here we repackage that into an explicit verb phrase format.',
         // although a verb phrase is usually more than one word, it could be just a single verb.
         quiz1: 'Can you add a new verb phrase?',
@@ -294,10 +304,20 @@ StringStore.zh = {
         quiz2: 'Can you delete a noun phrase from this list?',
         quiz3: 'Can you change the spelling of a noun phrase?'
     },
-    pastTense: {
-        help10:'We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.',
-        help11:'For example: If we performed the verb in the past we use the \'past tense\' form of the verb.',
+    verbConjugation: [
+        'Every verb has a \'base\' form and four other variations.',
+        'Given the \'base\' form of a verb we can make the other variations according to various rules.',
+        'We use the different variations according to the rules of grammar.',
+        'The process of making these variations is called \'conjugation\'.'
+    ],
+    pastForm: {
+        help10:'The first verb conjugation that we will examine is the \'past\' form.',
+        help11:'When an action happens in the past then we use the \'past\' form of the verb.',
         help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
+    },
+    ingForm: {
+        help10:'Another variation of the verb is called the \'-ing\' form.',
+        help11:'We usually use this when something is happening in the present.'
     },
     vp: {
         help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',

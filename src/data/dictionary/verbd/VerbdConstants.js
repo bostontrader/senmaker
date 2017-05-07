@@ -2,7 +2,7 @@
 /**
  * What is the rule for transforming the base form of the verb into the past tense?
  */
-const PastTenseRule:Object = {
+const PastFormRule:Object = {
     'NoneSelected':0,
     'NoChange':  101,
     'Append_ed': 102,
@@ -45,12 +45,12 @@ This level drives the level of all of the child components as well.
  */
 const VerbdPanelLevel:Object = {
     'BASE':       100,
-    'PAST_TENSE': 200,
+    'PAST_FORM': 200,
     'MAX':        999
 }
 
 export {ActionTime}
 export {Aspect}
 export {AspectOrSimple}
-export {PastTenseRule}
+export {PastFormRule}
 export {VerbdPanelLevel}

@@ -22,11 +22,11 @@ function VerbdRow(props:Object):Object {
                     <td>{editButton}</td>
                 </tr>
             break
-        case VerbdPanelLevel.PAST_TENSE:
+        case VerbdPanelLevel.PAST_FORM:
             verbdRow =
                 <tr>
                     <td>{verbd.base}</td>
-                    <td>{verbd.pastTense}</td>
+                    <td>{verbd.pastForm}</td>
                     <td>{editButton}</td>
                 </tr>
             break
@@ -34,7 +34,7 @@ function VerbdRow(props:Object):Object {
             verbdRow =
                 <tr>
                     <td>{verbd.base}</td>
-                    <td>{verbd.pastTense}</td>
+                    <td>{verbd.pastForm}</td>
                     <td>{editButton}</td>
                 </tr>
             break

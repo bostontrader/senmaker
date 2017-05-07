@@ -1,22 +1,14 @@
 /**
  * These are actions that only affect the quiz.
+ * Not all lessons have action types defined here.
  */
 const QuizActionTypes = {
-    intro: {
-        ON_I_UNDERSTAND: 'ON_I_UNDERSTAND',
-    },
-    definiteness: {
-        ON_ISEE_CHANGE_ARTICLE: 'ON_ISEE_CHANGE_ARTICLE'
-    },
-    phrase: {
-        ON_I_UNDERSTAND: 'ON_I_UNDERSTAND2',
-    },
-    sentence: {
-        ON_I_UNDERSTAND: 'ON_I_UNDERSTAND3',
-    },
-    pluralization: {
-        ON_I_UNDERSTAND: 'ON_I_UNDERSTAND4',
-    }
+    intro:           {ON_I_UNDERSTAND:        'ON_I_UNDERSTAND'},        //  0
+    definiteness:    {ON_ISEE_CHANGE_ARTICLE: 'ON_ISEE_CHANGE_ARTICLE'}, //  4
+    phrase:          {ON_I_UNDERSTAND:        'ON_I_UNDERSTAND2'},       //  5
+    verbConjugation: {ON_I_UNDERSTAND:        500,},                     //  7
+    sentence:        {ON_I_UNDERSTAND:        'ON_I_UNDERSTAND4'},       // 11
+    pluralization:   {ON_I_UNDERSTAND:        'ON_I_UNDERSTAND5'}        // 12
 }
 
 export default QuizActionTypes

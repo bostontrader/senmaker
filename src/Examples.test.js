@@ -53,6 +53,14 @@ describe("NPPanel", function() {
     it("Know Grammar", function() {
         //console.log(this.state)
         //this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.a})
+
+        //                               past                present                 future
+        // simple                        walked                walk                will walk
+        // continuous                   walking         are walking          will be walking
+        // perfect                   had walked         have walked         will have walked
+        // perfect, continuous had been walking   have been walking   will have been walking
+
+
     })
 
 })

@@ -1,6 +1,6 @@
 import VerbdActionTypes from './VerbdActionTypes'
 import VerbdStore       from './VerbdStore'
-import {PastTenseRule}  from './VerbdConstants'
+//import {PastFormRule}   from './VerbdConstants'
 import AppActionTypes   from '../../app/AppActionTypes'
 import {verbdExamples}  from '../../TestData'
 
@@ -12,8 +12,8 @@ describe('VerbdStore', function() {
         this.verbds = () => Array.from(this.state.getIn(['coll']).values()).map(verbd => ({
             id: verbd.id,
             base: verbd.base,
-            pastTense: verbd.pastTense,
-            pastTense_rule: verbd.pastTense_rule,
+            pastForm: verbd.pastForm,
+            pastForm_rule: verbd.pastForm_rule,
             aspectOrSimple: verbd.aspectOrSimple,
             aspect: verbd.aspect
         }))

@@ -4,6 +4,7 @@ import AppDispatcher from '../AppDispatcher'
 
 const QuizActions:Object = {
 
+    // 0
     intro: {
         onIUnderstand() {
             AppDispatcher.dispatch({
@@ -11,6 +12,8 @@ const QuizActions:Object = {
             })
         },
     },
+
+    // 4
     definiteness: {
         onIseeArticleChanged() {
             AppDispatcher.dispatch({
@@ -18,24 +21,39 @@ const QuizActions:Object = {
             })
         }
     },
+
+    // 5
     phrase: {
         onIUnderstand() {
             AppDispatcher.dispatch({
-                type: QuizActionTypes.phrase.ON_I_UNDERSTAND2
+                type: QuizActionTypes.phrase.ON_I_UNDERSTAND
             })
         },
     },
+
+    // 7
+    verbConjugation: {
+        onIUnderstand() {
+            AppDispatcher.dispatch({
+                type: QuizActionTypes.verbConjugation.ON_I_UNDERSTAND
+            })
+        },
+    },
+
+    // 11
     sentence: {
         onIUnderstand() {
             AppDispatcher.dispatch({
-                type: QuizActionTypes.sentence.ON_I_UNDERSTAND3
+                type: QuizActionTypes.sentence.ON_I_UNDERSTAND
             })
         },
     },
+
+    // 12
     pluralization: {
         onIUnderstand() {
             AppDispatcher.dispatch({
-                type: QuizActionTypes.pluralization.ON_I_UNDERSTAND4
+                type: QuizActionTypes.pluralization.ON_I_UNDERSTAND
             })
         },
     }

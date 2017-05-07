@@ -4,7 +4,7 @@ import {fromJS, Map} from 'immutable'
 
 import Verbd            from './Verbd'
 import VerbdActionTypes from './VerbdActionTypes'
-import {PastTenseRule}  from './VerbdConstants'
+import {PastFormRule}   from './VerbdConstants'
 import AppActionTypes   from '../../app/AppActionTypes'
 import AppDispatcher    from '../../AppDispatcher'
 import {MakeMapOfVerbd} from '../../JSONParseUtils'
@@ -44,8 +44,8 @@ class VerbdStore extends ReduceStore {
             return newState.setIn(['coll',id.toString()], Verbd({
                 id: id.toString(),
                 base: verbd.get('base'),
-                pastTense: verbd.get('pastTense'),
-                pastTense_rule: verbd.get('pastTense_rule')
+                pastForm: verbd.get('pastForm'),
+                pastForm_rule: verbd.get('pastForm_rule')
             }))
         }
 
@@ -94,9 +94,9 @@ class VerbdStore extends ReduceStore {
 VerbdStore.initialState = Map({
     nextid:1,
     coll:Map([
-        //['1',Verbd({id: '1', base: 'eat',  pastTense: 'ate',    pastTense_rule: PastTenseRule.Irregular})],
-        //['2',Verbd({id: '2', base: 'hit',  pastTense: 'hit',    pastTense_rule: PastTenseRule.NoChange})],
-        //['3',Verbd({id: '3', base: 'jump', pastTense: 'jumped', pastTense_rule: PastTenseRule.Append_ed})]
+        //['1',Verbd({id: '1', base: 'eat',  pastForm: 'ate',    pastForm_rule: PastFormRule.Irregular})],
+        //['2',Verbd({id: '2', base: 'hit',  pastForm: 'hit',    pastForm_rule: PastFormRule.NoChange})],
+        //['3',Verbd({id: '3', base: 'jump', pastForm: 'jumped', pastForm_rule: PastFormRule.Append_ed})]
     ])
 })
 

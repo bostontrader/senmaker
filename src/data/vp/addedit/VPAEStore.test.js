@@ -5,7 +5,7 @@ import {verbdExamples}    from '../../TestData'
 import {vpExamples}       from '../../TestData'
 import AppActionTypes     from '../../app/AppActionTypes'
 import Verbd              from '../../dictionary/verbd/Verbd'
-import {PastTenseRule}    from '../../dictionary/verbd/VerbdConstants'
+//import {PastFormRule}     from '../../dictionary/verbd/VerbdConstants'
 
 describe('VPAEStore', function() {
 
@@ -113,7 +113,7 @@ describe('VPAEStore', function() {
             type: VPActionTypes.ON_CHANGE_SELECTED_VERBD,
             newVerbd: verbdExamples.a
         })
-        expect(this.state.getIn(['vp','generatedText'])).toEqual(verbdExamples.a.get('pastTense'))
+        expect(this.state.getIn(['vp','generatedText'])).toEqual(verbdExamples.a.get('pastForm'))
 
         // 4. Now change to present tense
         this.dispatch({

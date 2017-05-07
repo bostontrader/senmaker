@@ -48,15 +48,15 @@ describe("VerbdAEForm", function() {
 
     })
 
-    describe("VerbdPanelLevel.PAST_TENSE", function() {
+    describe("VerbdPanelLevel.PAST_FORM", function() {
 
         it("add mode", function() {
             this.state.verbd = this.state.verbd.setIn(['addedit','addNound'],true)
-            const renderExpression = <VerbdAEForm verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...this.state} />
+            const renderExpression = <VerbdAEForm verbdPanelLevel = {VerbdPanelLevel.PAST_FORM} {...this.state} />
             const verbdAEForm = TestUtils.createRenderer().render(renderExpression)
             expect(verbdAEForm.type).toBe('div')
-            expect(verbdAEForm.props.children.length).toBe(4) // base controls, past tense, input, buttons
-            expect(verbdAEForm.props.children[3].props.children.length).toBe(2) // save, cancel
+            expect(verbdAEForm.props.children.length).toBe(5) // base controls, past form rule select, past form, input, buttons
+            expect(verbdAEForm.props.children[4].props.children.length).toBe(2) // save, cancel
 
             const tree = rtRenderer.create(renderExpression).toJSON()
             expect(tree).toMatchSnapshot()
@@ -64,11 +64,11 @@ describe("VerbdAEForm", function() {
 
         it("edit mode", function() {
             this.state.verbd = this.state.verbd.setIn(['addedit','verbd','id'],'1')
-            const renderExpression = <VerbdAEForm verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...this.state}/>
+            const renderExpression = <VerbdAEForm verbdPanelLevel = {VerbdPanelLevel.PAST_FORM} {...this.state}/>
             const verbdAEForm = TestUtils.createRenderer().render(renderExpression)
             expect(verbdAEForm.type).toBe('div')
-            expect(verbdAEForm.props.children.length).toBe(4) // base controls, past tense, input, buttons
-            expect(verbdAEForm.props.children[3].props.children.length).toBe(3) // save, delete, cancel
+            expect(verbdAEForm.props.children.length).toBe(5) // base controls,  past form rule select, past form, input, buttons
+            expect(verbdAEForm.props.children[4].props.children.length).toBe(3) // save, delete, cancel
 
             const tree = rtRenderer.create(renderExpression).toJSON()
             expect(tree).toMatchSnapshot()
@@ -82,8 +82,8 @@ describe("VerbdAEForm", function() {
             const renderExpression = <VerbdAEForm verbdPanelLevel = {VerbdPanelLevel.MAX} {...this.state} />
             const verbdAEForm = TestUtils.createRenderer().render(renderExpression)
             expect(verbdAEForm.type).toBe('div')
-            expect(verbdAEForm.props.children.length).toBe(4) // base controls, past tense, input, buttons
-            expect(verbdAEForm.props.children[3].props.children.length).toBe(2) // save, cancel
+            expect(verbdAEForm.props.children.length).toBe(5) // base controls, past form rule select, past form, input, buttons
+            expect(verbdAEForm.props.children[4].props.children.length).toBe(2) // save, cancel
 
             const tree = rtRenderer.create(renderExpression).toJSON()
             expect(tree).toMatchSnapshot()
@@ -94,8 +94,8 @@ describe("VerbdAEForm", function() {
             const renderExpression = <VerbdAEForm verbdPanelLevel = {VerbdPanelLevel.MAX} {...this.state}/>
             const verbdAEForm = TestUtils.createRenderer().render(renderExpression)
             expect(verbdAEForm.type).toBe('div')
-            expect(verbdAEForm.props.children.length).toBe(4) // base controls, past tense, input, buttons
-            expect(verbdAEForm.props.children[3].props.children.length).toBe(3) // save, delete, cancel
+            expect(verbdAEForm.props.children.length).toBe(5) // base controls, past form rule select, past form, input, buttons
+            expect(verbdAEForm.props.children[4].props.children.length).toBe(3) // save, delete, cancel
 
             const tree = rtRenderer.create(renderExpression).toJSON()
             expect(tree).toMatchSnapshot()

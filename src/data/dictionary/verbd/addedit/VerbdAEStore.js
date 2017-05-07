@@ -82,8 +82,8 @@ class VerbdAEStore extends ReduceStore {
                 newState = newState.set('verbd', Verbd({
                     id: action.verbd.id,
                     base: action.verbd.base,
-                    pastTense: action.verbd.pastTense,
-                    pastTense_rule: action.verbd.pastTense_rule
+                    pastForm: action.verbd.pastForm,
+                    pastForm_rule: action.verbd.pastForm_rule
                 }))
                 break
 
@@ -97,8 +97,8 @@ class VerbdAEStore extends ReduceStore {
                 newState = newState.updateIn(['verbd','base'],value => action.base)
                 break
 
-            case VerbdActionTypes.ON_CHANGE_PAST_TENSE:
-                newState = newState.updateIn(['verbd','pastTense'],value => action.pastTense)
+            case VerbdActionTypes.ON_CHANGE_PAST_FORM:
+                newState = newState.updateIn(['verbd','pastForm'],value => action.pastForm)
                 break
 
             default:

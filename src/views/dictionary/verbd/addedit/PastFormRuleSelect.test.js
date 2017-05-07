@@ -1,10 +1,10 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import TenseSelect from './PastTenseRuleSelect'
+import PastFormRuleSelect from './PastFormRuleSelect'
 
 it('renders correctly', () => {
     const tree = renderer.create(
-        <TenseSelect />
+        <PastFormRuleSelect />
     ).toJSON()
     expect(tree).toMatchSnapshot()
 })

@@ -20,18 +20,18 @@ function VerbdTable(props:Object):?Object {
                 header =
                     <thead>
                     <tr>
-                        <th>Base Form</th>
+                        <th>Verb</th>
                         <th> </th>
                     </tr>
                     </thead>
 
                 break
-            case VerbdPanelLevel.PAST_TENSE:
+            case VerbdPanelLevel.PAST_FORM:
                 header =
                     <thead>
                     <tr>
                         <th>Base Form</th>
-                        <th>Past Tense</th>
+                        <th>Past Form</th>
                         <th> </th>
                     </tr>
                     </thead>
@@ -41,7 +41,7 @@ function VerbdTable(props:Object):?Object {
                     <thead>
                     <tr>
                         <th>Base Form</th>
-                        <th>Past Tense</th>
+                        <th>Past Form</th>
                         <th> </th>
                     </tr>
                     </thead>

@@ -45,10 +45,10 @@ const VerbdActions = {
             base: base
         })
     },
-    onChangePastTense(pastTense:string):void {
+    onChangePastForm(pastForm:string):void {
         AppDispatcher.dispatch({
-            type: VerbdActionTypes.ON_CHANGE_PAST_TENSE,
-            pastTense: pastTense
+            type: VerbdActionTypes.ON_CHANGE_PAST_FORM,
+            pastForm: pastForm
         })
     },
     // Pump a new verbd directly into the db w/o dealing with any UI.

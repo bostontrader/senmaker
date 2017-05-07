@@ -45,8 +45,8 @@ describe("VerbdTable", function() {
             expect(tree).toMatchSnapshot()
         })
 
-        it("Renders no VerbdPanelLevel.PAST_TENSE VerbdTable", function() {
-            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...this.state} />
+        it("Renders no VerbdPanelLevel.PAST_FORM VerbdTable", function() {
+            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_FORM} {...this.state} />
             const verbdTable = TestUtils.createRenderer().render(renderExpression)
 
             // Zero VerbdTable
@@ -90,10 +90,10 @@ describe("VerbdTable", function() {
             expect(tree).toMatchSnapshot()
         })
 
-        it("Renders a VerbdPanelLevel.PAST_TENSE VerbdTable", function() {
+        it("Renders a VerbdPanelLevel.PAST_FORM VerbdTable", function() {
             this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.a})
 
-            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...this.state} />
+            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_FORM} {...this.state} />
             const verbdTable = TestUtils.createRenderer().render(renderExpression)
             expect(verbdTable.type).toBe('table')
 
@@ -148,11 +148,11 @@ describe("VerbdTable", function() {
             expect(tree).toMatchSnapshot()
         })
 
-        it("Renders a VerbdPanelLevel.PAST_TENSE VerbdTable", function() {
+        it("Renders a VerbdPanelLevel.PAST_FORM VerbdTable", function() {
             this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.a})
             this.dispatch({type: VerbdActionTypes.INSERT_VERBD, verbd: verbdExamples.b})
 
-            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_TENSE} {...this.state} />
+            const renderExpression = <VerbdTable verbdPanelLevel = {VerbdPanelLevel.PAST_FORM} {...this.state} />
             const verbdTable = TestUtils.createRenderer().render(renderExpression)
             expect(verbdTable.type).toBe('table')
 

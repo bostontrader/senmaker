@@ -90,9 +90,9 @@ describe('VerbdAEStore', function() {
         expect(this.state.getIn(['verbd','base'])).toBe('talk')
     })
 
-    it('ON_CHANGE_PAST_TENSE', function() {
-        this.dispatch({type: VerbdActionTypes.ON_CHANGE_PAST_TENSE, pastTense: 'talked'})
-        expect(this.state.getIn(['verbd','pastTense'])).toBe('talked')
+    it('ON_CHANGE_PAST_FORM', function() {
+        this.dispatch({type: VerbdActionTypes.ON_CHANGE_PAST_FORM, pastForm: 'talked'})
+        expect(this.state.getIn(['verbd','pastForm'])).toBe('talked')
     })
 
 })

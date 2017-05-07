@@ -61,7 +61,7 @@ class VPAEStore extends ReduceStore {
 
             switch(parseInt(actionTime)) {
                 case ActionTime.Past:
-                    generatedText = verbd.get('pastTense')
+                    generatedText = verbd.get('pastForm')
                     break
                 case ActionTime.Present:
                     generatedText = verbd.get('base') + 's'

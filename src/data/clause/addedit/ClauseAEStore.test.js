@@ -111,7 +111,7 @@ describe('ClauseAEStore', function() {
             type: ClauseActionTypes.ON_CHANGE_SELECTED_VERBD,
             newVerbd: verbdExamples.a
         })
-        expect(this.state.getIn(['clause','generatedText'])).toEqual(verbdExamples.a.get('pastTense'))
+        expect(this.state.getIn(['clause','generatedText'])).toEqual(verbdExamples.a.get('pastForm'))
 
         // 4. Now change to present tense
         this.dispatch({

@@ -4,7 +4,7 @@ import VPStore         from './VPStore'
 import {vpExamples}    from '../TestData'
 import AppActionTypes  from '../app/AppActionTypes'
 import Verbd           from '../dictionary/verbd/Verbd'
-import {PastTenseRule} from '../dictionary/verbd/VerbdConstants'
+//import {PastFormRule}  from '../dictionary/verbd/VerbdConstants'
 
 describe('VPStore', function() {
 

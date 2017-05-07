@@ -25,8 +25,8 @@ describe("VerbdRow", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("renders a VerbdPanelLevel.PAST_TENSE VerbdRow", () => {
-        props = {verbd:verbdExamples.a, verbdPanelLevel:VerbdPanelLevel.PAST_TENSE, strings: StringStore.getInitialState()}
+    it("renders a VerbdPanelLevel.PAST_FORM VerbdRow", () => {
+        props = {verbd:verbdExamples.a, verbdPanelLevel:VerbdPanelLevel.PAST_FORM, strings: StringStore.getInitialState()}
         renderExpression = <VerbdRow {...props} />
         verbdRow = TestUtils.createRenderer().render(renderExpression)
         expect(verbdRow.type).toBe('tr')

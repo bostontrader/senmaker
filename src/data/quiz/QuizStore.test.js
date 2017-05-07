@@ -323,4 +323,17 @@ describe('QuizStore', function() {
         })
     })
 
+    // 7. verbConjugation
+    it('verbConjugation ON_I_UNDERSTAND', function() {
+        expect(this.state.getIn(['verbConjugation','iunderstand'])).toBe(false)
+        expect(this.state.getIn(['verbConjugation','passed'])).toBe(false)
+
+        this.dispatch({
+            type: QuizActionTypes.verbConjugation.ON_I_UNDERSTAND
+        })
+
+        expect(this.state.getIn(['verbConjugation','iunderstand'])).toBe(true)
+        expect(this.state.getIn(['verbConjugation','passed'])).toBe(true)
+    })
+
 })

@@ -1,9 +1,10 @@
 // @flow
 import React from 'react'
 
-import VerbdActions            from '../../../../data/dictionary/verbd/VerbdActions'
-import {VerbdPanelLevel}       from '../../../../data/dictionary/verbd/VerbdConstants'
-import {validateVerbd}         from '../../../../data/Validator'
+import PastFormRuleSelect from './PastFormRuleSelect'
+import {validateVerbd}    from '../../../../data/Validator'
+import VerbdActions       from '../../../../data/dictionary/verbd/VerbdActions'
+import {VerbdPanelLevel}  from '../../../../data/dictionary/verbd/VerbdConstants'
 
 function VerbdAEForm(props:Object):Object {
 
@@ -22,7 +23,7 @@ function VerbdAEForm(props:Object):Object {
 
     const baseControls:Object =
         <div>
-            <label htmlFor='base'>Base Verb</label>
+            <label htmlFor='base'>Base Form</label>
             <input id='base' name='base' type='text'
                    value={props.verbd.getIn(['addedit','verbd','base'])}
                    onChange={(e)=>VerbdActions.onChangeBase(e.target.value)}
@@ -48,14 +49,15 @@ function VerbdAEForm(props:Object):Object {
                     {theButtons}
                 </div>
             break
-        case VerbdPanelLevel.PAST_TENSE:
+        case VerbdPanelLevel.PAST_FORM:
             verbdAEForm =
                 <div id="verbd-addedit-form" style={style}>
                     {baseControls}
-                    <label htmlFor='pastTense'>Past Tense</label>
-                    <input id='pastTense' name='pastTense' type='text'
-                           value={props.verbd.getIn(['addedit','verbd','pastTense'])}
-                           onChange={(e)=>VerbdActions.onChangePastTense(e.target.value)}
+                    <PastFormRuleSelect />
+                    <label htmlFor='pastForm'>Past Form</label>
+                    <input id='pastForm' name='pastForm' type='text'
+                           value={props.verbd.getIn(['addedit','verbd','pastForm'])}
+                           onChange={(e)=>VerbdActions.onChangePastForm(e.target.value)}
                     />
                     {theButtons}
                 </div>
@@ -64,10 +66,11 @@ function VerbdAEForm(props:Object):Object {
             verbdAEForm =
                 <div id="verbd-addedit-form" style={style}>
                     {baseControls}
-                    <label htmlFor='pastTense'>Past Tense</label>
-                    <input id='pastTense' name='pastTense' type='text'
-                           value={props.verbd.getIn(['addedit','verbd','pastTense'])}
-                           onChange={(e)=>VerbdActions.onChangePastTense(e.target.value)}
+                    <PastFormRuleSelect />
+                    <label htmlFor='pastForm'>Past Form</label>
+                    <input id='pastForm' name='pastForm' type='text'
+                           value={props.verbd.getIn(['addedit','verbd','pastForm'])}
+                           onChange={(e)=>VerbdActions.onChangePastForm(e.target.value)}
                     />
                     {theButtons}
                 </div>

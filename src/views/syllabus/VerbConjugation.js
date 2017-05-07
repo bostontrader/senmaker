@@ -5,7 +5,7 @@ import LessonNavigator from './LessonNavigator'
 import QuizActions     from '../../data/quiz/QuizActions'
 
 
-function Phrase(props:Object):Object {
+function VerbConjugation(props:Object):Object {
 
     const style:Object = {
         border: '1px solid black',
@@ -13,24 +13,25 @@ function Phrase(props:Object):Object {
     }
 
     const q:Object = props.quiz
-    const s:Object = props.strings.phrase
+    const s:Object = props.strings.verbConjugation
 
-    const iunderstandCheck:Object | string = q.getIn(['phrase','iunderstand']) ?
+    const iunderstandCheck:Object | string = q.getIn(['verbConjugation','iunderstand']) ?
         <img id="iunderstandCheck" src="/img/Checked.png" alt="checkmark"/> : ''
 
     return(
         <div>
             <div className="help" style={style}>
-                <h1>Phrases</h1>
-                <p>{s.help10}</p>
-                <p>{s.help11}</p>
+                <h1>Verb Conjugations</h1>
+                {s.map(h => (
+                    <p>{h}</p>
+                ))}
             </div>
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>
                     <tbody>
                     <tr>
-                        <td><p><input id="iunderstandCheck" onChange={QuizActions.phrase.onIUnderstand} type="checkbox" checked={q.getIn(['phrase','iunderstand'])} />
+                        <td><p><input id="iunderstandCheck" onChange={QuizActions.verbConjugation.onIUnderstand} type="checkbox" checked={q.getIn(['verbConjugation','iunderstand'])} />
                             {props.strings.i_understand}</p></td>
                         <td>{iunderstandCheck}</td>
                     </tr>
@@ -42,4 +43,4 @@ function Phrase(props:Object):Object {
     )
 }
 
-export default Phrase
+export default VerbConjugation
