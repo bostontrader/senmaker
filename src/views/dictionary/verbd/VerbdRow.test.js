@@ -30,7 +30,7 @@ describe("VerbdRow", () => {
         renderExpression = <VerbdRow {...props} />
         verbdRow = TestUtils.createRenderer().render(renderExpression)
         expect(verbdRow.type).toBe('tr')
-        expect(verbdRow.props.children.length).toBe(3)  // base, past tense, edit
+        expect(verbdRow.props.children.length).toBe(3)  // base, past form, edit
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
@@ -41,7 +41,7 @@ describe("VerbdRow", () => {
         renderExpression = <VerbdRow {...props} />
         verbdRow = TestUtils.createRenderer().render(renderExpression)
         expect(verbdRow.type).toBe('tr')
-        expect(verbdRow.props.children.length).toBe(3)  // base, past tense, edit
+        expect(verbdRow.props.children.length).toBe(3)  // base, past form, edit
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()

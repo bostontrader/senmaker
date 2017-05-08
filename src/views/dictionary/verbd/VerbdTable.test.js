@@ -98,7 +98,7 @@ describe("VerbdTable", function() {
             expect(verbdTable.type).toBe('table')
 
             // Three columns in the thead
-            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base verb, past tense, edit
+            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base verb, past form, edit
 
             // One VerbdRow
             const verbdRows = findAllWithType(verbdTable, VerbdRow)
@@ -116,7 +116,7 @@ describe("VerbdTable", function() {
             expect(verbdTable.type).toBe('table')
 
             // Three columns in the thead
-            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base verb, past tense, edit
+            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base verb, past form, edit
 
             // One VerbdRow
             const verbdRows = findAllWithType(verbdTable, VerbdRow)
@@ -157,7 +157,7 @@ describe("VerbdTable", function() {
             expect(verbdTable.type).toBe('table')
 
             // Three columns in the thead
-            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base verb, past tense, edit
+            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base verb, past form, edit
 
             // Two VerbdRow
             const verbdRows = findAllWithType(verbdTable, VerbdRow)
@@ -176,7 +176,7 @@ describe("VerbdTable", function() {
             expect(verbdTable.type).toBe('table')
 
             // Three columns in the thead
-            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base verb, past tense, edit
+            expect(verbdTable.props.children[0].props.children.props.children.length).toBe(3) // base verb, past form, edit
 
             // Two VerbdRow
             const verbdRows = findAllWithType(verbdTable, VerbdRow)

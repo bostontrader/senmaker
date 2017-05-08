@@ -1,6 +1,6 @@
 // @flow
 /**
- * What is the rule for transforming the base form of the verb into the past tense?
+ * What is the rule for transforming the base form of the verb into the past form?
  */
 const PastFormRule:Object = {
     'NoneSelected':0,

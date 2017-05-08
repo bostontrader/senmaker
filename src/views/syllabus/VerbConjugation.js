@@ -22,9 +22,7 @@ function VerbConjugation(props:Object):Object {
         <div>
             <div className="help" style={style}>
                 <h1>Verb Conjugations</h1>
-                {s.map(h => (
-                    <p>{h}</p>
-                ))}
+                {s.map(h => (<p>{h}</p>))}
             </div>
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>

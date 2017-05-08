@@ -9,6 +9,8 @@ import Phrase          from '../views/syllabus/Phrase'
 import NounPhrase      from '../views/syllabus/NounPhrase'
 import VerbConjugation from '../views/syllabus/VerbConjugation'
 import PastForm        from '../views/syllabus/PastForm'
+import Tense           from '../views/syllabus/Tense'
+import Aspect          from '../views/syllabus/Aspect'
 import VerbPhrase      from '../views/syllabus/VerbPhrase'
 import Clause          from '../views/syllabus/Clause'
 import Sentence        from '../views/syllabus/Sentence'
@@ -43,13 +45,15 @@ const syllabus = {
     phrase:          {level: 5, comp:Phrase,          prev:'definiteness',    next:'nounPhrase'},
     nounPhrase:      {level: 6, comp:NounPhrase,      prev:'phrase',          next:'verbConjugation'},
     verbConjugation: {level: 7, comp:VerbConjugation, prev:'nounPhrase',      next:'pastForm'},
-    pastForm:        {level: 8, comp:PastForm,        prev:'verbConjugation', next:'verbPhrase'},
-    verbPhrase:      {level: 9, comp:VerbPhrase,      prev:'pastForm',        next:'clause'},
-    clause:          {level:10, comp:Clause,          prev:'verbPhrase',      next:'sentence'},
-    sentence:        {level:11, comp:Sentence,        prev:'clause',          next:'pluralization'},
-    pluralization:   {level:12, comp:Pluralization,   prev:'sentence',        next:'npAdjective'},
-    npAdjective:     {level:13, comp:NPAdjective,     prev:'pluralization',   next:'verbMax'},
-    verbMax:         {level:14, comp:VerbMax,         prev:'npAdjective',     next: null}
+    pastForm:        {level: 8, comp:PastForm,        prev:'verbConjugation', next:'tense'},
+    tense:           {level: 9, comp:Tense,           prev:'pastForm',        next:'verbPhrase'},
+    verbPhrase:      {level:10, comp:VerbPhrase,      prev:'tense',           next:'aspect'},
+    aspect:          {level:11, comp:Aspect,          prev:'verbPhrase',      next:'clause'},
+    clause:          {level:12, comp:Clause,          prev:'aspect',          next:'sentence'},
+    sentence:        {level:13, comp:Sentence,        prev:'clause',          next:'pluralization'},
+    pluralization:   {level:14, comp:Pluralization,   prev:'sentence',        next:'npAdjective'},
+    npAdjective:     {level:15, comp:NPAdjective,     prev:'pluralization',   next:'verbMax'},
+    verbMax:         {level:16, comp:VerbMax,         prev:'npAdjective',     next: null}
 
     // Adverbs
 

@@ -108,7 +108,7 @@ describe('VPAEStore', function() {
         })
         expect(this.state.getIn(['vp','generatedText'])).toEqual('')
 
-        // 3. Now give it a verbd and expect the past tense form.
+        // 3. Now give it a verbd and expect the past form form.
         this.dispatch({
             type: VPActionTypes.ON_CHANGE_SELECTED_VERBD,
             newVerbd: verbdExamples.a

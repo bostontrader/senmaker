@@ -8,7 +8,7 @@ function PastFormRuleSelect(props:Object):Object {
 
     return (
         <div>
-            <label htmlFor='pastForm_rule'>Past Tense Rule</label>
+            <label htmlFor='pastForm_rule'>Past Form Rule</label>
             <select  name='pastForm_rule' value={props.pastForm_rule} onChange={onChange}>
                 <option value={PastFormRule.NoneSelected}>No selection</option>
                 <option value={PastFormRule.NoChange}>No change</option>

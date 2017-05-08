@@ -2,7 +2,8 @@
 import React from 'react'
 
 import LessonNavigator from './LessonNavigator'
-import VPPanel from '../vp/VPPanel'
+import VPPanel         from '../vp/VPPanel'
+import {VPPanelLevel}  from '../../data/vp/VPConstants'
 
 function VerbPhrase(props:Object):Object {
 
@@ -33,7 +34,7 @@ function VerbPhrase(props:Object):Object {
                 <p>{s.help13}</p>
             </div>
 
-            <VPPanel {...props} />
+            <VPPanel vpPanelLevel={VPPanelLevel.BASE} {...props} />
 
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
@@ -57,29 +58,7 @@ function VerbPhrase(props:Object):Object {
             <LessonNavigator {...props} />
         </div>
     )
-    /*return(
-        <div>
-            <div className="help" style={style}>
-                <h1>Noun Phrases</h1>
 
-
-            </div>
-            <VPPanel {...props} />
-            <div className="quiz" style={style}>
-                <h3>{props.strings.quiz}</h3>
-                <table>
-                    <tbody>
-                    <tr>
-                        <td><p><ivput id="iunderstandCheck" onChange={QuizActions.nounPhrases.onIUnderstand} type="checkbox" checked={q.getIn(['nounPhrases','iunderstand'])} />
-                            {props.strings.i_understand}</p></td>
-                        <td>{iunderstandCheck}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <LessonNavigator {...props} />
-        </div>
-    )*/
 }
 
 export default VerbPhrase

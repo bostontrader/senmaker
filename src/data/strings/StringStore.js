@@ -74,7 +74,7 @@ StringStore.en = {
     verb: 'Verb',
     verbs: 'Verbs',
 
-    intro: {
+    intro: { // 0
         help1: 'This program will help you build an English composition.',
         help2: 'In order to do that you must first learn how to build smaller pieces of English.',
         help3: 'You can then assemble the small pieces of English into larger components.',
@@ -82,8 +82,8 @@ StringStore.en = {
         help5: 'You are presently on Level 0. In order to proceed to the next level you will need to pass the quiz.'
     },
 
-    nound: {
-        help10: 'The things around us are called <strong>nouns</strong>.',
+    nound: { // 1
+        help10: 'The things around us are called nouns.',
         help11: 'In order to write English you will use many nouns.',
         help12: 'This is the dictionary of nouns that you can use.',
         help13: 'At this time there are very few nouns but you can add more nouns whenever you like.',
@@ -92,7 +92,7 @@ StringStore.en = {
         quiz3: 'Can you change the spelling of a noun?'
     },
 
-    verbd: {
+    verbd: { // 2
         help10: 'The actions we can take are called <strong>verbs</strong>',
         help11: 'In order to write English you will use many verbs.',
         help12: 'This is the dictionary of verbs that you can use.',
@@ -102,7 +102,7 @@ StringStore.en = {
         quiz3: 'Can you change the spelling of a verb?'
     },
 
-    adjectivd: {
+    adjectivd: { // 3
         help10: 'We modify the meaning of nouns by using adjectives.',
         help11: 'In order to write English you will use many adjectives.',
         help12: 'This is the dictionary of adjectives that you can use.',
@@ -111,9 +111,8 @@ StringStore.en = {
         quiz2: 'Can you delete a adjective from this list?',
         quiz3: 'Can you change the spelling of a adjective?'
     },
-    
-    // Definite or Indefinite noun
-    definiteness: {
+
+    definiteness: { // 4
         help10: 'Definite or Indefinite.',
         help11: 'Nouns are usually preceded by the word \'a\', \'an\', or \'the\'.',
         help12: 'If we have a group of similar items and we are talking about any one of them, then which particular item we are talking about is said to be \'indefinite\' and we use \'a\' or \'an\'.',
@@ -127,11 +126,11 @@ StringStore.en = {
         quiz2: 'Select \'definite\' or \'indefinite\'.',
         quiz3: 'Can you see that the article changes?'
     },
-    phrase: {
+    phrase: { // 5
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
     },
-    np: {
+    np: { // 6
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
         help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
         help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.',
@@ -141,30 +140,37 @@ StringStore.en = {
         quiz2: 'Can you delete a noun phrase from this list?',
         quiz3: 'Can you change the spelling of a noun phrase?'
     },
-    verbConjugation: [
+    verbConjugation: [ // 7
         'Every verb has a \'base\' form and four other variations.',
         'Given the \'base\' form of a verb we can make the other variations according to various rules.',
         'We use the different variations according to the rules of grammar.',
         'The process of making these variations is called \'conjugation\'.'
     ],
-    pastForm: {
+    pastForm: { // 8
         help10:'The first verb conjugation that we will examine is the \'past\' form.',
         help11:'When an action happens in the past then we use the \'past\' form of the verb.',
-        help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
+        help12:'The base form of the verb is changed into the past form according to certain rules.'
     },
-    ingForm: {
-        help10:'Another variation of the verb is called the \'-ing\' form.',
-        help11:'We usually use this when something is happening in the present.'
-    },
-    vp: {
+    tense: [ // 9
+        'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
+        'The verb will change to communicate this information.  The variations of the verb are called \'verb tenses\'.',
+        'Sometimes the verb will change to one of its conjugations. Sometimes the verb will sprout additional words.  Sometime the verb will not change at all.'
+    ],
+    vp: { // 10
         help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
         help11: 'In a verb phrase we start with a single verb and then add other words to enhance the meaning.',
-        help12: 'You have already seen your first verb phrase in the \'past tense\' lesson.  By selecting \'future tense\' and a verb, you produced a two-word verb phrase.',
-        help13: 'Here we repackage that into an explicit verb phrase format.',
         // although a verb phrase is usually more than one word, it could be just a single verb.
         quiz1: 'Can you add a new verb phrase?',
         quiz2: 'Can you delete a verb phrase from this list?',
         quiz3: 'Can you change the spelling of a verb phrase?'
+    },
+    aspect: [ // 11
+        'In addition to knowing when a verb happens, we may also want to know if the verb has finished or is still happening.',
+        'These things are called \'aspect\'.'
+    ],
+    ingForm: {
+        help10:'Another variation of the verb is called the \'-ing\' form.',
+        help11:'We usually use this when something is happening in the present.'
     },
     clause: {
         help10: 'A clause has a noun phrase and a verb phrase.'
@@ -199,16 +205,7 @@ StringStore.en = {
     // Sometimes the plural form cannot be made using a simple rule, it's just different.
     // For example, one man, two men.  Another example: one person, two people.
     // quiz: enter into the noun dictionary:
-
-    // Past Tense
-    //Level07: {
-        //help10:'We start with a \'base\' form of the verb and then we make changes to it according to the rules of grammar.',
-        //help11:'For example: If we performed the verb in the past we use the \'past tense\' form of the verb.',
-        //help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
-    //},
-
-
-    // Adjectives as part of noun phrases
+    
 
     // Adverbs
 
@@ -313,8 +310,17 @@ StringStore.zh = {
     pastForm: {
         help10:'The first verb conjugation that we will examine is the \'past\' form.',
         help11:'When an action happens in the past then we use the \'past\' form of the verb.',
-        help12:'The base form of the verb is changed into the past-tense form according to certain rules.'
+        help12:'The base form of the verb is changed into the past form according to certain rules.'
     },
+    tense: [
+        'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
+        'The verb will change to communicate this information.  The variations of the verb are called \'verb tenses\'.',
+        'Sometimes the verb will change to one of its conjugations. Sometimes the verb will sprout additional words.  Sometime the verb will not change at all.'
+    ],
+    aspect: [
+        'In addition to knowing when a verb happens, we may also want to know if the verb has finished or is still happening.',
+        'These things are called \'aspect\'.'
+    ],
     ingForm: {
         help10:'Another variation of the verb is called the \'-ing\' form.',
         help11:'We usually use this when something is happening in the present.'
@@ -322,7 +328,7 @@ StringStore.zh = {
     vp: {
         help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
         help11: 'In a verb phrase we start with a single verb and then add other words to enhance the meaning.',
-        help12: 'You have already seen your first verb phrase in the \'future tense\' lesson.  By selecting \'future tense\' and a verb, you produced a two-word verb phrase.',
+        help12: 'You have already seen your first verb phrase in the \'past form\' lesson.  By selecting \'future tense\' and a verb, you produced a two-word verb phrase.',
         help13: 'Here we repackage that into an explicit verb phrase format.',
         // although a verb phrase is usually more than one word, it could be just a single verb.
         quiz1: 'Can you add a new verb phrase?',

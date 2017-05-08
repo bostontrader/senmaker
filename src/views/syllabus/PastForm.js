@@ -27,7 +27,7 @@ function PastForm(props:Object):Object {
     return(
         <div>
             <div className="help" style={style}>
-                <h1>Past Verb Form</h1>
+                <h1>Verb Past Form</h1>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
                 <p>{s.help12}</p>
