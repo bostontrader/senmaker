@@ -5,7 +5,7 @@ import LessonNavigator from './LessonNavigator'
 import VPPanel         from '../vp/VPPanel'
 import {VPPanelLevel}  from '../../data/vp/VPConstants'
 
-function VerbPhrase(props:Object):Object {
+function VPAspect(props:Object):Object {
 
     const style = {
         border: '1px solid black',
@@ -27,13 +27,10 @@ function VerbPhrase(props:Object):Object {
     return (
         <div>
             <div className="help" style={style}>
-                <h1>Verb Phrases</h1>
-                <p>{s.help10}</p>
-                <p>{s.help11}</p>
-                <p>{s.help12}</p>
+                <h1>Verb Phrases with Aspect</h1>
             </div>
 
-            <VPPanel vpPanelLevel={VPPanelLevel.L1} {...props} />
+            <VPPanel vpPanelLevel={VPPanelLevel.L2} {...props} />
 
             <div className="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
@@ -60,4 +57,4 @@ function VerbPhrase(props:Object):Object {
 
 }
 
-export default VerbPhrase
+export default VPAspect

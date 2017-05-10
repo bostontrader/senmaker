@@ -1,19 +1,20 @@
+// @flow
 import React from 'react'
 
 import LessonNavigator from '../syllabus/LessonNavigator'
 import QuizActions     from '../../data/quiz/QuizActions'
 
-function Intro(props) {
+function Intro(props:Object):Object {
 
-    const style = {
+    const style:Object = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const q = props.quiz
-    const s = props.strings.intro
+    const q:Object = props.quiz
+    const s:Object = props.strings.intro
 
-    const iunderstandCheck = q.getIn(['intro','iunderstand']) ?
+    const iunderstandCheck:Object | string = q.getIn(['intro','iunderstand']) ?
         <img id="iunderstandCheck" src="/img/Checked.png" alt="checkmark"/> : ''
 
     return (

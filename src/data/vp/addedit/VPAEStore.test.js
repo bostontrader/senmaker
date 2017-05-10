@@ -132,22 +132,79 @@ describe('VPAEStore', function() {
     })
 
     it('ON_CHANGE_SELECTED_VERBD', function() {
-
-        // In this test, the value of id is unused.
-        this.dispatch({
-            type: VPActionTypes.ON_CHANGE_SELECTED_VERBD,
-            newVerbd: verbdExamples.a
-        })
+        this.dispatch({type: VPActionTypes.ON_CHANGE_SELECTED_VERBD, newVerbd: verbdExamples.a})
         expect(this.state.getIn(['vp','verbd']).toJSON()).toEqual(verbdExamples.a.toJSON())
     })
     
     it('ON_CHANGE_ACTION_TIME', function() {
-        expect(this.state.getIn(['vp','actionTime'])).toBe(ActionTimeSelect.NoneSelected)
-
-        this.dispatch({
-            type: VPActionTypes.ON_CHANGE_ACTION_TIME,
-            newActionTime: ActionTimeSelect.Past
-        })
+        expect(this.state.getIn(['vp','actionTime'])).toBe(ActionTimeSelect.Present)
+        this.dispatch({type: VPActionTypes.ON_CHANGE_ACTION_TIME, newActionTime: ActionTimeSelect.Past})
         expect(this.state.getIn(['vp','actionTime'])).toBe(ActionTimeSelect.Past)
     })
+
+    // We cannot directly change simple from true to false because
+    // if we could then perfect and progressive would also be false and that does not compute.
+    it('ON_CHANGE_SIMPLE from true to false', function() {
+        expect(this.state.getIn(['vp','simple'])).toBe(true)
+        this.dispatch({type: VPActionTypes.ON_CHANGE_SIMPLE, newSimple: false})
+        expect(this.state.getIn(['vp','simple'])).toBe(true) // no change
+    })
+
+    // This should set perfect and progressive to false
+    it('ON_CHANGE_SIMPLE from false to true', function() {
+        // this.dispatch({type: VPActionTypes.ON_CHANGE_SIMPLE,      newSimple: false}) cannot do this
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PERFECT,     newPerfect: true})
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PROGRESSIVE, newProgressive: true})
+        expect(this.state.getIn(['vp','simple'])).toBe(false)
+        expect(this.state.getIn(['vp','perfect'])).toBe(true)
+        expect(this.state.getIn(['vp','progressive'])).toBe(true)
+
+        this.dispatch({type: VPActionTypes.ON_CHANGE_SIMPLE, newSimple: true})
+        expect(this.state.getIn(['vp','simple'])).toBe(true)
+        expect(this.state.getIn(['vp','perfect'])).toBe(false)
+        expect(this.state.getIn(['vp','progressive'])).toBe(false)
+    })
+
+    it('ON_CHANGE_PERFECT to true', function() {
+        expect(this.state.getIn(['vp','simple'])).toBe(true)
+        expect(this.state.getIn(['vp','perfect'])).toBe(false)
+
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PERFECT, newPerfect: true})
+        expect(this.state.getIn(['vp','simple'])).toBe(false)
+        expect(this.state.getIn(['vp','perfect'])).toBe(true)
+    })
+
+    it('ON_CHANGE_PROGRESSIVE to true', function() {
+        expect(this.state.getIn(['vp','simple'])).toBe(true)
+        expect(this.state.getIn(['vp','progressive'])).toBe(false)
+
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PROGRESSIVE, newProgressive: true})
+        expect(this.state.getIn(['vp','simple'])).toBe(false)
+        expect(this.state.getIn(['vp','progressive'])).toBe(true)
+    })
+
+    it('ON_CHANGE_PERFECT to false and then ON_CHANGE_PROGRESSIVE to false', function() {
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PERFECT, newPerfect: true})
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PROGRESSIVE, newProgressive: true})
+        expect(this.state.getIn(['vp','simple'])).toBe(false)
+
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PERFECT, newPerfect: false})
+        expect(this.state.getIn(['vp','simple'])).toBe(false)
+
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PROGRESSIVE, newProgressive: false})
+        expect(this.state.getIn(['vp','simple'])).toBe(true)
+    })
+
+    it('ON_CHANGE_PROGRESSIVE to false and then ON_CHANGE_PERFECT to false', function() {
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PERFECT, newPerfect: true})
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PROGRESSIVE, newProgressive: true})
+        expect(this.state.getIn(['vp','simple'])).toBe(false)
+
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PROGRESSIVE, newProgressive: false})
+        expect(this.state.getIn(['vp','simple'])).toBe(false)
+
+        this.dispatch({type: VPActionTypes.ON_CHANGE_PERFECT, newPerfect: false})
+        expect(this.state.getIn(['vp','simple'])).toBe(true)
+    })
+
 })

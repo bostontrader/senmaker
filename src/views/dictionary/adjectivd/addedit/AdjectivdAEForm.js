@@ -22,7 +22,7 @@ function AdjectivdAEForm(props:Object):Object {
 
     const baseControls:Object =
         <div>
-            <label htmlFor='base'>Base Noun</label>
+            <label htmlFor='base'>Adjective</label>
             <input id='base' name='base' type='text'
                 value={props.adjectivd.getIn(['addedit','adjectivd','base'])}
                 onChange={(e)=>AdjectivdActions.onChangeBase(e.target.value)}

@@ -4,7 +4,6 @@ import VPStore         from './VPStore'
 import {vpExamples}    from '../TestData'
 import AppActionTypes  from '../app/AppActionTypes'
 import Verbd           from '../dictionary/verbd/Verbd'
-//import {PastFormRule}  from '../dictionary/verbd/VerbdConstants'
 
 describe('VPStore', function() {
 
@@ -15,6 +14,9 @@ describe('VPStore', function() {
             id: vp.id,
             verbd: vp.verbd.toJSON(),
             actionTime: vp.actionTime,
+            simple: vp.simple,
+            perfect: vp.perfect,
+            progressive: vp.progressive,
             generatedText: vp.generatedText
         }))
 

@@ -95,18 +95,27 @@ const vpExamples:Object = {
         id:'1',
         verbd: verbdExamples.a,
         actionTime: ActionTimeSelect.Future,
+        simple: true,
+        perfect: false,
+        progressive: false,
         generatedText: 'will eat'
     }),
     b:VP({
         id:'2',
         verbd: verbdExamples.b,
         actionTime: ActionTimeSelect.Past,
+        simple: true,
+        perfect: false,
+        progressive: false,
         generatedText: 'talked'
     }),
     c:VP({
         id:'3',
         verbd: verbdExamples.c,
         actionTime: ActionTimeSelect.Present,
+        simple: true,
+        perfect: false,
+        progressive: false,
         generatedText: 'hit'
     })
 

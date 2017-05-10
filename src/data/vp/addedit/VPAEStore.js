@@ -3,15 +3,16 @@ import {ReduceStore} from 'flux/utils'
 import {fromJS}      from 'immutable'
 import {Map}         from 'immutable'
 
-import VP              from '../VP'
-import VPActionTypes   from '../VPActionTypes'
-import AppDispatcher   from '../../AppDispatcher'
-import {MakeVP}        from '../../JSONParseUtils'
-import {validateVerbd} from '../../Validator'
-import {validateVP}    from '../../Validator'
-import AppActionTypes  from '../../app/AppActionTypes'
-import Verbd           from '../../dictionary/verbd/Verbd'
-import {ActionTime}    from '../../dictionary/verbd/VerbdConstants'
+import VP                 from '../VP'
+import VPActionTypes      from '../VPActionTypes'
+import AppDispatcher      from '../../AppDispatcher'
+import {MakeVP}           from '../../JSONParseUtils'
+import {validateVerbd}    from '../../Validator'
+import {validateVP}       from '../../Validator'
+import AppActionTypes     from '../../app/AppActionTypes'
+import Verbd              from '../../dictionary/verbd/Verbd'
+//import {ActionTime}     from '../../dictionary/verbd/VerbdConstants'
+import {ActionTimeSelect} from '../../vp/VPConstants'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'VPAEStore'
@@ -54,24 +55,88 @@ class VPAEStore extends ReduceStore {
 
         let newState:Object = state
 
-        const calcResultText = (actionTime:string, verbd:Object):string => {
-            validateVerbd(verbd)
+        const calcResultText:Function = (vp:Object):string => {
 
-            let generatedText:string = verbd.get('base')
+            let baseForm = vp.getIn(['verbd','base'])
+            let ingForm = baseForm + 'ing'
+            let pastForm = vp.getIn(['verbd','pastForm'])
 
-            switch(parseInt(actionTime)) {
-                case ActionTime.Past:
-                    generatedText = verbd.get('pastForm')
-                    break
-                case ActionTime.Present:
-                    generatedText = verbd.get('base') + 's'
-                    break
-                case ActionTime.Future:
-                    generatedText = 'will ' + verbd.get('base')
-                    break
-                default:
-                    // do nothing
+
+            let generatedText:string = ''
+
+            if(vp.getIn(['simple']) ) {
+                switch(parseInt(vp.getIn(['actionTime']))) {
+                    case ActionTimeSelect.Past:
+                        generatedText = vp.getIn(['verbd','pastForm'])
+                        break
+                    case ActionTimeSelect.Present:
+                        generatedText = vp.getIn(['verbd','base'])
+                        break
+                    case ActionTimeSelect.Future:
+                        generatedText = 'will ' + baseForm
+                        break
+                    default:
+                        // shouldn't ever get here
+                }
+
+            // perfect, continuous had been walking   have been walking   will have been walking
+            } else if(vp.getIn(['perfect']) && vp.getIn(['progressive']) ) {
+
+                switch(parseInt(vp.getIn(['actionTime']))) {
+                    case ActionTimeSelect.Past:
+                        generatedText = 'had been ' + ingForm
+                        break
+                    case ActionTimeSelect.Present:
+                        generatedText = 'have been ' + ingForm
+                        break
+                    case ActionTimeSelect.Future:
+                        generatedText = 'will have been ' + ingForm
+                        break
+                    default:
+                        // shouldn't ever get here
+                }
+
+            // perfect                   had walked         have walked         will have walked
+            } else if(vp.getIn(['perfect']) ) {
+                console.log('c')
+
+                switch(parseInt(vp.getIn(['actionTime']))) {
+                    case ActionTimeSelect.Past:
+                        generatedText = 'had ' + pastForm
+                        break
+                    case ActionTimeSelect.Present:
+                        generatedText = 'have ' + pastForm
+                        break
+                    case ActionTimeSelect.Future:
+                        generatedText = 'will have ' + pastForm
+                        break
+                    default:
+                    // shouldn't ever get here
+                }
+
+            // continuous                   walking         are walking          will be walking
+            } else if(vp.getIn(['progressive']) ) {
+
+                switch(parseInt(vp.getIn(['actionTime']))) {
+                    case ActionTimeSelect.Past:
+                        generatedText = ingForm
+                        break
+                    case ActionTimeSelect.Present:
+                        generatedText = 'are ' + ingForm
+                        break
+                    case ActionTimeSelect.Future:
+                        generatedText = 'will be ' + ingForm
+                        break
+                    default:
+                    // shouldn't ever get here
+                }
             }
+
+            //                               past                present                 future
+            // simple                        walked                walk                will walk
+            // continuous                   walking         are walking          will be walking
+            // perfect                   had walked         have walked         will have walked
+            // perfect, continuous had been walking   have been walking   will have been walking
 
             return generatedText
         }
@@ -122,20 +187,53 @@ class VPAEStore extends ReduceStore {
                 break
 
             case VPActionTypes.ON_CHANGE_ACTION_TIME:
-                presentActionTime = action.newActionTime
-                presentVerbd = state.getIn(['vp','verbd'])
-                generatedText = calcResultText(presentActionTime, presentVerbd)
                 newState = newState.updateIn(['vp','actionTime'],value => action.newActionTime)
+                generatedText = calcResultText(newState.getIn(['vp']))
                 newState = newState.updateIn(['vp','generatedText'], value => generatedText)
                 break
 
             // Should be VERBD because that's what's being changed!
             case VPActionTypes.ON_CHANGE_SELECTED_VERBD:
-                validateVerbd(action.newVerbd)
-                presentActionTime = state.getIn(['vp','actionTime'])
-                presentVerbd = action.newVerbd
-                generatedText = calcResultText(presentActionTime, presentVerbd)
-                newState = newState.updateIn(['vp','verbd'],value => presentVerbd)
+                newState = newState.updateIn(['vp','verbd'],value => action.newVerbd)
+                generatedText = calcResultText(newState.getIn(['vp']))
+                newState = newState.updateIn(['vp','generatedText'], value => generatedText)
+                break
+
+            case VPActionTypes.ON_CHANGE_SIMPLE:
+                // We can only change simple to true with this action.  We cannot change it to false
+                // otherwise perfect and progressive would be also false.
+                if(action.newSimple) {
+                    newState = newState.updateIn(['vp','simple'],value => true)
+                    newState = newState.updateIn(['vp','perfect'],value => false)
+                    newState = newState.updateIn(['vp','progressive'],value => false)
+                }
+                generatedText = calcResultText(newState.getIn(['vp']))
+                newState = newState.updateIn(['vp','generatedText'], value => generatedText)
+                break
+
+            case VPActionTypes.ON_CHANGE_PERFECT:
+                newState = newState.updateIn(['vp', 'perfect'], value => action.newPerfect)
+                if( action.newPerfect) {
+                    newState = newState.updateIn(['vp','simple'],value => false)
+                } else {
+                    // if progressive is also false, then set simple to true
+                    if( !newState.getIn(['vp','progressive']))
+                        newState = newState.updateIn(['vp','simple'],value => true)
+                }
+                generatedText = calcResultText(newState.getIn(['vp']))
+                newState = newState.updateIn(['vp','generatedText'], value => generatedText)
+                break
+
+            case VPActionTypes.ON_CHANGE_PROGRESSIVE:
+                newState = newState.updateIn(['vp', 'progressive'], value => action.newProgressive)
+                if( action.newProgressive) {
+                    newState = newState.updateIn(['vp','simple'],value => false)
+                } else {
+                    // if perfect is also false, then set simple to true
+                    if( !newState.getIn(['vp','perfect']))
+                        newState = newState.updateIn(['vp','simple'],value => true)
+                }
+                generatedText = calcResultText(newState.getIn(['vp']))
                 newState = newState.updateIn(['vp','generatedText'], value => generatedText)
                 break
 

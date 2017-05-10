@@ -45,6 +45,9 @@ class VPStore extends ReduceStore {
                 id: id.toString(),
                 verbd: vp.get('verbd'),
                 actionTime: vp.get('actionTime'),
+                simple: vp.get('simple'),
+                perfect: vp.get('perfect'),
+                progressive: vp.get('progressive'),
                 generatedText: vp.get('generatedText')
             }))
         }

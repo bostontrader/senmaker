@@ -12,7 +12,7 @@ function Aspect(props:Object):Object {
     }
 
     const q:Object = props.quiz
-    const s:Object = props.strings.tense
+    const s:Object = props.strings.aspect
 
     /*const quizInsertVerbFlag = q.getIn(['verbd','insertAspect']) ?
         <img id="insertAspectCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''

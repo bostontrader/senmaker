@@ -108,8 +108,8 @@ StringStore.en = {
         help12: 'This is the dictionary of adjectives that you can use.',
         help13: 'At this time there are very few adjectives but you can add more adjectives whenever you like.',
         quiz1: 'Can you add a new adjective?',
-        quiz2: 'Can you delete a adjective from this list?',
-        quiz3: 'Can you change the spelling of a adjective?'
+        quiz2: 'Can you delete an adjective from this list?',
+        quiz3: 'Can you change the spelling of an adjective?'
     },
 
     definiteness: { // 4
@@ -158,7 +158,7 @@ StringStore.en = {
     ],
     vp: { // 10
         help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
-        help11: 'In a verb phrase we start with a single verb and then add other words to enhance the meaning.',
+        help11: 'In a verb phrase we select the verb tense that we want.  This will cause the verb to change and maybe add some extra words of grammar.',
         // although a verb phrase is usually more than one word, it could be just a single verb.
         quiz1: 'Can you add a new verb phrase?',
         quiz2: 'Can you delete a verb phrase from this list?',

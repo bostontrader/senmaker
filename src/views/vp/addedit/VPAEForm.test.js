@@ -24,15 +24,15 @@ describe("VPAEForm", function() {
         }
     })
 
-    describe("VPPanelLevel.BASE", function() {
+    describe("VPPanelLevel.L1", function() {
 
         it("add mode", function() {
             this.state.vp = this.state.vp.setIn(['addedit','addVP'],true)
-            const renderExpression = <VPAEForm vpPanelLevel = {VPPanelLevel.BASE} {...this.state} />
+            const renderExpression = <VPAEForm vpPanelLevel = {VPPanelLevel.L1} {...this.state} />
             const vpAEForm = TestUtils.createRenderer().render(renderExpression)
             expect(vpAEForm.type).toBe('div')
-            expect(vpAEForm.props.children.length).toBe(4) // verbd select, radio group, generatedText, theButtons
-            expect(vpAEForm.props.children[1].props.children.length).toBe(4) // past, present x 2
+            expect(vpAEForm.props.children.length).toBe(4) // verbd select, time radio group, generatedText, theButtons
+            expect(vpAEForm.props.children[1].props.children.length).toBe(6) // past, present, future x 2
             expect(vpAEForm.props.children[3].props.children.length).toBe(2) // save, cancel
 
             // The Select control fubars this
@@ -43,11 +43,11 @@ describe("VPAEForm", function() {
 
         it("edit mode", function() {
             this.state.vp = this.state.vp.setIn(['addedit','vp','id'],'1')
-            const renderExpression = <VPAEForm vpPanelLevel = {VPPanelLevel.BASE} {...this.state} />
+            const renderExpression = <VPAEForm vpPanelLevel = {VPPanelLevel.L1} {...this.state} />
             const vpAEForm = TestUtils.createRenderer().render(renderExpression)
             expect(vpAEForm.type).toBe('div')
-            expect(vpAEForm.props.children.length).toBe(4) // verbd select, radio group, generatedText, theButtons
-            expect(vpAEForm.props.children[1].props.children.length).toBe(4) // past, present x 2
+            expect(vpAEForm.props.children.length).toBe(4) // verbd select, time radio group, generatedText, theButtons
+            expect(vpAEForm.props.children[1].props.children.length).toBe(6) // past, present, future x 2
             expect(vpAEForm.props.children[3].props.children.length).toBe(3) // save, delete, cancel
 
             // The Select control fubars this
@@ -57,15 +57,16 @@ describe("VPAEForm", function() {
 
     })
 
-    /*describe("VPPanelLevel.L2", () => {
+    describe("VPPanelLevel.L2", () => {
 
         it("add mode", function() {
             this.state.vp = this.state.vp.setIn(['addedit','addVP'],true)
             const renderExpression = <VPAEForm vpPanelLevel = {VPPanelLevel.L2} {...this.state} />
             const vpAEForm = TestUtils.createRenderer().render(renderExpression)
             expect(vpAEForm.type).toBe('div')
-            expect(vpAEForm.props.children.length).toBe(4) // verbd select, radio group, generatedText, theButtons
-            expect(vpAEForm.props.children[3].props.children.length).toBe(2) // save, cancel
+
+            expect(vpAEForm.props.children.length).toBe(7) // verbd select, time radio group, simple, perfect, progressive, generatedText, theButtons
+            expect(vpAEForm.props.children[6].props.children.length).toBe(2) // save, cancel
 
             // The Select control fubars this
             //const tree = rtRenderer.create(renderExpression).toJSON()
@@ -77,8 +78,8 @@ describe("VPAEForm", function() {
             const renderExpression = <VPAEForm vpPanelLevel = {VPPanelLevel.L2} {...this.state} />
             const vpAEForm = TestUtils.createRenderer().render(renderExpression)
             expect(vpAEForm.type).toBe('div')
-            expect(vpAEForm.props.children.length).toBe(4) // verbd select, radio group, generatedText, theButtons
-            expect(vpAEForm.props.children[3].props.children.length).toBe(3) // save, delete, cancel
+            expect(vpAEForm.props.children.length).toBe(7) // verbd select, time radio group, simple, perfect, progressive, generatedText, theButtons
+            expect(vpAEForm.props.children[6].props.children.length).toBe(3) // save, delete, cancel
 
             // The Select control fubars this
             //const tree = rtRenderer.create(renderExpression).toJSON()
@@ -87,7 +88,4 @@ describe("VPAEForm", function() {
 
     })
 
-
-
-    })*/
 })

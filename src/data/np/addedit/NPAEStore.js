@@ -69,7 +69,7 @@ class NPAEStore extends ReduceStore {
             const n2 = base.slice(-2) // last two chars
             const n3 = base.slice(-2,2)
             const n4 = base.slice(0,1) // first char
-            console.log(base, n1, n2, n3, n4)
+            //console.log(base, n1, n2, n3, n4)
             //const test1 = !(n[noun] === undefined)
             //const test2 = !(es[n1] === undefined && es[n2] === undefined)
             //const test3 = (vowels[n3] === undefined) && n1 === 'y'
