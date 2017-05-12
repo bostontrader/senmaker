@@ -16,17 +16,18 @@ function Nound(props:Object):Object {
     const s:Object = props.strings.nound
 
     const quizInsertNounFlag:string | Object = q.getIn(['nound','insertNound']) ?
-        <img id="insertNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="insertNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
     const quizUpdateNounFlag:string | Object = q.getIn(['nound','updateNound']) ?
-        <img id="updateNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="updateNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
     const quizDeleteNounFlag:string | Object = q.getIn(['nound','deleteNound']) ?
-        <img id="deleteNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="deleteNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
     return(
         <div>
-            <div className="help" style={style}>
+            <LessonNavigator {...props} />
+            <div id="help" style={style}>
                 <h1>{props.strings.nouns}</h1>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
@@ -34,7 +35,7 @@ function Nound(props:Object):Object {
                 <p>{s.help13}</p>
             </div>
             <NoundPanel noundPanelLevel={NoundPanelLevel.BASE} {...props} />
-            <div className="quiz" style={style}>
+            <div id="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>
                     <tbody>
@@ -53,7 +54,6 @@ function Nound(props:Object):Object {
                     </tbody>
                 </table>
             </div>
-            <LessonNavigator {...props} />
         </div>
     )
 }

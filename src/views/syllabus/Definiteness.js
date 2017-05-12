@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 
 import AppActions  from '../../data/app/AppActions'
@@ -7,29 +8,30 @@ import LessonNavigator from './LessonNavigator'
 import NPAEForm        from '../np/addedit/NPAEForm'
 import {NPPanelLevel}  from '../../data/np/NPConstants'
 
-function Definiteness(props) {
+function Definiteness(props:Object):Object {
 
-    const style = {
+    const style:Object = {
         border: '1px solid black',
         margin: '5px'
     }
 
-    const q = props.quiz
-    const s = props.strings.definiteness
+    const q:Object = props.quiz
+    const s:Object = props.strings.definiteness
 
-    const onChange = QuizActions.definiteness.onIseeArticleChanged
+    //const onChange = QuizActions.definiteness.onIseeArticleChanged
 
-    const quizOnNoundChangedFlag = q.getIn(['definiteness','noundChanged']) ?
-        <img id="changeNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+    const quizOnNoundChangedFlag:Object | string = q.getIn(['definiteness','noundChanged']) ?
+        <img id="changeNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
-    const quizOnDefinitenessChangedFlag = q.getIn(['definiteness','definitenessChanged']) ?
-        <img id="changeDefinitenessCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+    const quizOnDefinitenessChangedFlag:Object | string = q.getIn(['definiteness','definitenessChanged']) ?
+        <img id="changeDefinitenessCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
-    const quizIseeArticleChangedFlag = q.getIn(['definiteness','iseeArticleChanged']) ?
-        <img id="iseeArticleChangedCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+    const quizIseeArticleChangedFlag:Object | string = q.getIn(['definiteness','iseeArticleChanged']) ?
+        <img id="iseeArticleChangedCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
     return(
         <div>
+            <LessonNavigator {...props} />
             <div className="help" style={style}>
                 <h1>{s.help10}</h1>
                 <p>{s.help11}</p>
@@ -37,6 +39,8 @@ function Definiteness(props) {
                 <p>{s.help13}</p>
                 <p>{s.help14}</p>
                 <p>{s.help15}</p>
+                <p>{s.help16}</p>
+                <p>{s.help17}</p>
             </div>
 
             <NPAEForm npPanelLevel={NPPanelLevel.L1} {...props} />
@@ -57,7 +61,7 @@ function Definiteness(props) {
                         <td>
                             <p>{s.quiz3}</p>
                             <p>
-                                <input  id="iseeArticleChanged" onChange={onChange} type="checkbox" checked={q.getIn(['definiteness','iseeArticleChanged'])} />
+                                <input  id="iseeArticleChanged" onChange={QuizActions.definiteness.onIseeArticleChanged} type="checkbox" checked={q.getIn(['definiteness','iseeArticleChanged'])} />
                                 {'I can see it change'}
                             </p>
                         </td>
@@ -67,7 +71,6 @@ function Definiteness(props) {
                 </table>
 
             </div>
-            <LessonNavigator {...props} />
         </div>
     )
 }

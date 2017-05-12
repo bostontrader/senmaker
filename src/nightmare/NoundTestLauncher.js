@@ -1,6 +1,8 @@
 var Nightmare = require('nightmare')
 
-var NoundTest         = require('./NoundTest')
+//var NoundTest         = require('./NoundTest')
+var IntroTest         = require('./IntroTest')
+
 var nightmareLanguage = require('./nightmareLanguage')
 
 describe('Nound', () => {
@@ -20,7 +22,6 @@ describe('Nound', () => {
         const delayB = 250
         const delayC = 1800
 
-        // test reset at the end
         nightmare.goto(url).wait(delayC)
 
         // Verify that we can switch between languages and that the correct language switch is
@@ -38,24 +39,24 @@ describe('Nound', () => {
             .then( res => {return nightmareLanguage(nightmare, delayA)})
 
             // Now answer the intro lesson question. Can I see the checkmark?
-            .then( res => {
-                return nightmare
-                    .click('#iunderstandCheck').wait(delayA)
-                    .evaluate(function () {
-                        return document.querySelector('#iunderstandCheck') !== null
-                    })
-            })
+            //.then( res => {
+                //return nightmare
+                    //.click('#iunderstandCheck').wait(delayA)
+                    //.evaluate(function () {
+                        //return document.querySelector('#iunderstandCheck') !== null
+                    //})
+            //})
 
-            .then( iunderstandCheck => {
-                if (!iunderstandCheck)
-                    throw('iunderstandCheck was not found')
-            })
+            //.then( iunderstandCheck => {
+                //if (!iunderstandCheck)
+                    //throw('iunderstandCheck was not found')
+            //})
 
             // Advance to NoundTest
-            .then( res => {
-                return nightmare.click('#lesson-next').wait(delayC)
-            })
-            .then( res => {return NoundTest(nightmare, delayC)})
+            //.then( res => {
+                //return nightmare.click('#lesson-next').wait(delayC)
+            //})
+            //.then( res => {return NoundTest(nightmare, delayC)})
             // No need to rewind
 
             .then(resolve => {done()})

@@ -23,7 +23,7 @@ function NoundAEForm(props:Object):Object {
 
     const baseControls:Object =
         <div>
-            <label htmlFor='base'>Base Noun</label>
+            <label htmlFor='base'>Noun</label>
             <input id='base' name='base' type='text'
                    value={props.nound.getIn(['addedit','nound','base'])}
                    onChange={(e)=>NoundActions.onChangeBase(e.target.value)}

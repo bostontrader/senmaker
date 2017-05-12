@@ -16,10 +16,11 @@ function Phrase(props:Object):Object {
     const s:Object = props.strings.phrase
 
     const iunderstandCheck:Object | string = q.getIn(['phrase','iunderstand']) ?
-        <img id="iunderstandCheck" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="iunderstandCheck" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
     return(
         <div>
+            <LessonNavigator {...props} />
             <div className="help" style={style}>
                 <h1>Phrases</h1>
                 <p>{s.help10}</p>
@@ -37,7 +38,6 @@ function Phrase(props:Object):Object {
                     </tbody>
                 </table>
             </div>
-            <LessonNavigator {...props} />
         </div>
     )
 }

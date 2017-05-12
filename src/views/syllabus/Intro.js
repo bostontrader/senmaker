@@ -14,31 +14,32 @@ function Intro(props:Object):Object {
     const q:Object = props.quiz
     const s:Object = props.strings.intro
 
-    const iunderstandCheck:Object | string = q.getIn(['intro','iunderstand']) ?
-        <img id="iunderstandCheck" src="/img/Checked.png" alt="checkmark"/> : ''
+    const iunderstandCheckmark:Object | string = q.getIn(['intro','iunderstand']) ?
+        <img id="iunderstandCheckmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
     return (
         <div>
-            <div className="help" style={style}>
+            <LessonNavigator {...props} />
+            <div id="help" style={style}>
+                <h1>Welcome to Senmaker</h1>
                 <p>{s.help1}</p>
                 <p>{s.help2}</p>
                 <p>{s.help3}</p>
                 <p>{s.help4}</p>
                 <p>{s.help5}</p>
             </div>
-            <div className="quiz" style={style}>
+            <div id="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>
                     <tbody>
                     <tr>
-                        <td><p><input id="iunderstandCheck" onChange={QuizActions.intro.onIUnderstand} type="checkbox" checked={q.getIn(['intro','iunderstand'])} />
+                        <td><p><input id="iunderstandCheckbox" onChange={QuizActions.intro.onIUnderstand} type="checkbox" checked={q.getIn(['intro','iunderstand'])} />
                             {props.strings.i_understand}</p></td>
-                        <td>{iunderstandCheck}</td>
+                        <td>{iunderstandCheckmark}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <LessonNavigator {...props} />
         </div>
     )
 }

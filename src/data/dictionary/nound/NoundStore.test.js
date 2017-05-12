@@ -7,7 +7,6 @@ describe('NoundStore', function() {
 
     beforeEach(function() {
         this.state = NoundStore.getInitialState()
-        
         this.nounds = () => Array.from(this.state.getIn(['coll']).values()).map(nound => ({
             id: nound.id,
             base: nound.base,

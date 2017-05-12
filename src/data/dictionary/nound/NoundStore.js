@@ -1,21 +1,35 @@
 // @flow
+import {fromJS}      from 'immutable'
+import {Map}         from 'immutable'
 import {ReduceStore} from 'flux/utils'
-import {fromJS, Map} from 'immutable'
 
-import Nound               from './Nound'
-import NoundActionTypes    from './NoundActionTypes'
-import AppActionTypes      from '../../app/AppActionTypes'
-import AppDispatcher       from '../../AppDispatcher'
-import {MakeMapOfNound}    from '../../JSONParseUtils'
-import {validateNound}     from '../../Validator'
+import Nound            from './Nound'
+import NoundActionTypes from './NoundActionTypes'
+import AppActionTypes   from '../../app/AppActionTypes'
+import AppDispatcher    from '../../AppDispatcher'
+import {MakeMapOfNound} from '../../JSONParseUtils'
+import {validateNound}  from '../../Validator'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey = 'NoundStore'
 
+// We want to provide a migration capacity for the format of this store.  It's serialized
+// into localStorage and there's no telling when old versions will be seen in the future.
+const initialStates:Array<Object> = [
+    Map({
+        nextid:1,
+        coll:Map()
+    }),
+    Map({
+        version:1,
+        nextid:1,
+        coll:Map()
+    })
+]
+
 class NoundStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher)
-    }
+
+    constructor() {super(AppDispatcher)}
 
     getInitialState() {
 
@@ -23,14 +37,33 @@ class NoundStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = fromJS(JSON.parse(localStorageState))
+                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
                 let newColl = MakeMapOfNound(originalParse.getIn(['coll']))
                 return originalParse.set('coll',newColl)
             }
         }
 
-        return NoundStore.initialState
+        return initialStates.slice(-1)[0]
 
+    }
+
+    // Given an originalFormat state object migrate to the most current version
+    migrate(originalFormat:Object):Object {
+        const currentInitialState:Object = initialStates.slice(-1)[0]
+        const originalVersion:number = originalFormat.getIn(['version'])
+
+        // If the version is undefined then we start fresh
+        if(originalVersion === undefined)
+            return currentInitialState
+
+        // If the version is the most recent
+        if (originalVersion === currentInitialState.getIn(['version']))
+            return originalFormat
+
+        // Else migrate from the originalVersion to the current version
+        // But at this time there are no intermediate version to migrate through
+        // so do nothing
+        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {
@@ -54,7 +87,7 @@ class NoundStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_APP_RESET:
-                newState = NoundStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
@@ -89,9 +122,5 @@ class NoundStore extends ReduceStore {
     }
 }
 
-NoundStore.initialState = Map({
-    nextid:1,
-    coll:Map()
-})
-
 export default new NoundStore()
+export {initialStates}

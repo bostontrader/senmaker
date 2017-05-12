@@ -5,6 +5,35 @@ exports[`AppContainer 's Alive! 1`] = `
     className="row">
     <div>
       <div
+        className="lesson-navigator"
+        style={
+          Object {
+            "border": "1px solid black",
+            "margin": "5px",
+          }
+        }>
+        <p>
+          级
+           
+          0
+        </p>
+        
+        
+        <button
+          id="level-reset"
+          onClick={[Function]}>
+          返回
+        </button>
+        <img
+          alt=""
+          height="24"
+          id="enFlag"
+          onClick={[Function]}
+          src="/img/us_flag.gif"
+          width="32" />
+        
+      </div>
+      <div
         className="help"
         style={
           Object {
@@ -12,6 +41,9 @@ exports[`AppContainer 's Alive! 1`] = `
             "margin": "5px",
           }
         }>
+        <h1>
+          Welcome to Senmaker
+        </h1>
         <p>
           这个程序将帮助您建立一个英语文章。
         </p>
@@ -58,39 +90,6 @@ exports[`AppContainer 's Alive! 1`] = `
             </tr>
           </tbody>
         </table>
-      </div>
-      <div
-        className="lesson-navigator"
-        style={
-          Object {
-            "border": "1px solid black",
-            "margin": "5px",
-          }
-        }>
-        <p>
-          级
-           
-          0
-        </p>
-        
-        <button
-          id="lesson-next"
-          onClick={[Function]}>
-          下一級
-        </button>
-        <button
-          id="level-reset"
-          onClick={[Function]}>
-          返回
-        </button>
-        <img
-          alt=""
-          height="20"
-          id="enFlag"
-          onClick={[Function]}
-          src="/img/us_flag.gif"
-          width="28" />
-        
       </div>
     </div>
   </div>

@@ -91,6 +91,36 @@ StringStore.en = {
         quiz2: 'Can you delete a noun from this list?',
         quiz3: 'Can you change the spelling of a noun?'
     },
+    definiteness: { // 2
+        help10: 'Definite or Indefinite.',
+        help11: 'Nouns are usually preceded by the word \'a\', \'an\', or \'the\'.  These three words are called \'articles\'.',
+        help12: 'The word \'the\' is called the \'definite article\'. Nouns in English are frequently preceded by the definite article when the speaker believes that the listener already knows what he is referring to.',
+        help13: 'For example: Buy the car. Which particular car is already known and is definite.',
+        help14: 'The words \'a\' and \'an\' are called  \'indefinite articles\'. Nouns in English are frequently preceded by an indefinite article when the speaker is talking about any one of a class of similar items and does not think that the listener already knows what he is referring to.',
+        help15: 'In this case we use \'a\' when the noun starts with a consonant and \'an\' when the noun starts with a vowel. We use this rule in order to make pronunciation better.',
+        help16: 'For example: Buy a car. Which car to buy is indefinite.',
+        help17: 'For example: Buy an apple. Which apple to buy is also indefinite.',
+
+        quiz1: 'Select a noun',
+        quiz2: 'Select \'definite\' or \'indefinite\'.',
+        quiz3: 'Can you see that the article changes?'
+    },
+    phrase: { // 3
+        help10: 'A group of words that work together is called a \'phrase\'.',
+        help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
+    },
+    np: { // 4
+        help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
+        help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
+        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.',
+        help13: 'Here we repackage that into an explicit noun phrase format.',
+        // although a noun phrase is usually more than one word, it could be just a single noun.
+        quiz1: 'Can you add a new noun phrase?',
+        quiz2: 'Can you delete a noun phrase from this list?',
+        quiz3: 'Can you change the spelling of a noun phrase?'
+    },
+
+
 
     verbd: { // 2
         help10: 'The actions we can take are called <strong>verbs</strong>',
@@ -112,34 +142,8 @@ StringStore.en = {
         quiz3: 'Can you change the spelling of an adjective?'
     },
 
-    definiteness: { // 4
-        help10: 'Definite or Indefinite.',
-        help11: 'Nouns are usually preceded by the word \'a\', \'an\', or \'the\'.',
-        help12: 'If we have a group of similar items and we are talking about any one of them, then which particular item we are talking about is said to be \'indefinite\' and we use \'a\' or \'an\'.',
-        help13: 'In this case we use \'a\' when the noun starts with a consonant and \'an\' when the noun starts with a vowel. We use this rule in order to make pronunciation better.',
-        help14: 'For example: Buy a car. Which car to buy is indefinite.',
-        help15: 'For example: Buy an apple. Which apple to buy is also indefinite.',
 
-        help16: 'If we only have a single item, then the identity of that items is definite, so we can use \'the.\'.',
-        help17: 'For example: Buy the car. Which particular car is already known and is definite.',
-        quiz1: 'Select a noun',
-        quiz2: 'Select \'definite\' or \'indefinite\'.',
-        quiz3: 'Can you see that the article changes?'
-    },
-    phrase: { // 5
-        help10: 'A group of words that work together is called a \'phrase\'.',
-        help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
-    },
-    np: { // 6
-        help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
-        help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
-        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.',
-        help13: 'Here we repackage that into an explicit noun phrase format.',
-        // although a noun phrase is usually more than one word, it could be just a single noun.
-        quiz1: 'Can you add a new noun phrase?',
-        quiz2: 'Can you delete a noun phrase from this list?',
-        quiz3: 'Can you change the spelling of a noun phrase?'
-    },
+
     verbConjugation: [ // 7
         'Every verb has a \'base\' form and four other variations.',
         'Given the \'base\' form of a verb we can make the other variations according to various rules.',

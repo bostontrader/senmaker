@@ -16,16 +16,17 @@ function NounPhrases(props:Object):Object {
     const s:Object = props.strings.np
 
     const quizInsertNP:Object | string = q.getIn(['np','insertNP']) ?
-        <img id="insertNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="insertNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
     const quizUpdateNP:Object | string = q.getIn(['np','updateNP']) ?
-        <img id="updateNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="updateNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
     const quizDeleteNP:Object | string = q.getIn(['np','deleteNP']) ?
-        <img id="deleteNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id="deleteNPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
     
     return (
         <div>
+            <LessonNavigator {...props} />
             <div className="help" style={style}>
                 <h1>Noun Phrases</h1>
                 <p>{s.help10}</p>
@@ -55,32 +56,9 @@ function NounPhrases(props:Object):Object {
                     </tbody>
                 </table>
             </div>
-            <LessonNavigator {...props} />
         </div>
     )
-    /*return(
-        <div>
-            <div className="help" style={style}>
-                <h1>Noun Phrases</h1>
 
-
-            </div>
-            <NPPanel {...props} />
-            <div className="quiz" style={style}>
-                <h3>{props.strings.quiz}</h3>
-                <table>
-                    <tbody>
-                    <tr>
-                        <td><p><input id="iunderstandCheck" onChange={QuizActions.nounPhrases.onIUnderstand} type="checkbox" checked={q.getIn(['nounPhrases','iunderstand'])} />
-                            {props.strings.i_understand}</p></td>
-                        <td>{iunderstandCheck}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <LessonNavigator {...props} />
-        </div>
-    )*/
 }
 
 export default NounPhrases

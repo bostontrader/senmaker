@@ -23,5 +23,9 @@ module.exports = {
             }
         ]
     },
-    debug: true
+    debug: true,
+    devServer: {
+        compress: true,
+        disableHostCheck: true
+    }
 }

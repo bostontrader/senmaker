@@ -33,7 +33,6 @@ class QuizStore extends ReduceStore {
     }
 
     reduce(state, action) {
-
         const noundQuizPassed = (state) => {
             return state.getIn(['nound','updateNound']) &&
             state.getIn(['nound','insertNound']) &&

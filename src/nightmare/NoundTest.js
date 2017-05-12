@@ -1,6 +1,7 @@
 var Nightmare = require('nightmare')
 
 const NoundTest = (nightmare, delay) => {
+
     return nightmare
         //.click('#lesson-next').wait(delay)
         .click('#add-nound').wait(delay)
@@ -19,7 +20,7 @@ const NoundTest = (nightmare, delay) => {
         .then( res => {
             return nightmare
                 .click('#add-nound').wait(delay)
-                .type('#base', 'ccarrot').wait(delay)
+                .type('#base', 'carrot').wait(delay)
                 .click('#save-nound').wait(delay)
 
                 // The NoundAddForm should now go away.

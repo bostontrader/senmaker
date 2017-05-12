@@ -36,24 +36,25 @@ import VPAspect        from '../views/syllabus/VPAspect'
  * 
  */
 
+// If you change these lessons be sure to review the initialState in AppStore
 const syllabus = {
     intro:           {level: 0, comp:Intro,           prev:null,              next:'nound'},
-    nound:           {level: 1, comp:Nound,           prev:'intro',           next:'verbd'},
-    verbd:           {level: 2, comp:Verbd,           prev:'nound',           next:'adjectivd'},
-    adjectivd:       {level: 3, comp:Adjectivd,       prev:'verbd',           next:'definiteness'},
-    definiteness:    {level: 4, comp:Definiteness,    prev:'adjectivd',       next:'phrase'},
-    phrase:          {level: 5, comp:Phrase,          prev:'definiteness',    next:'nounPhrase'},
-    nounPhrase:      {level: 6, comp:NounPhrase,      prev:'phrase',          next:'verbConjugation'},
-    verbConjugation: {level: 7, comp:VerbConjugation, prev:'nounPhrase',      next:'pastForm'},
-    pastForm:        {level: 8, comp:PastForm,        prev:'verbConjugation', next:'tense'},
-    tense:           {level: 9, comp:Tense,           prev:'pastForm',        next:'verbPhrase'},
-    verbPhrase:      {level:10, comp:VerbPhrase,      prev:'tense',           next:'aspect'},
-    aspect:          {level:11, comp:Aspect,          prev:'verbPhrase',      next:'clause'},
-    clause:          {level:12, comp:Clause,          prev:'aspect',          next:'sentence'},
-    sentence:        {level:13, comp:Sentence,        prev:'clause',          next:'pluralization'},
-    pluralization:   {level:14, comp:Pluralization,   prev:'sentence',        next:'npAdjective'},
-    npAdjective:     {level:15, comp:NPAdjective,     prev:'pluralization',   next:'vpAspect'},
-    vpAspect:        {level:16, comp:VPAspect,        prev:'npAdjective',     next: null}
+    nound:           {level: 1, comp:Nound,           prev:'intro',           next:'definiteness'},
+    definiteness:    {level: 2, comp:Definiteness,    prev:'nound',           next:null},
+    //phrase:          {level: 3, comp:Phrase,          prev:'definiteness',    next:'nounPhrase'},
+    //nounPhrase:      {level: 4, comp:NounPhrase,      prev:'phrase',          next:'adjectivd'},
+    //adjectivd:       {level: 5, comp:Adjectivd,       prev:'nounPhrase',      next:'npAdjective'},
+    //npAdjective:     {level: 6, comp:NPAdjective,     prev:'adjectivd',       next:'verbd'},
+    //verbd:           {level: 7, comp:Verbd,           prev:'npAdjective',     next:'verbConjugation'},
+    //verbConjugation: {level: 8, comp:VerbConjugation, prev:'verbd',           next:'pastForm'},
+    //pastForm:        {level: 9, comp:PastForm,        prev:'verbConjugation', next:'tense'},
+    //tense:           {level:10, comp:Tense,           prev:'pastForm',        next:'verbPhrase'},
+    //verbPhrase:      {level:11, comp:VerbPhrase,      prev:'tense',           next:'aspect'},
+    //aspect:          {level:12, comp:Aspect,          prev:'verbPhrase',      next:'clause'},
+    //clause:          {level:13, comp:Clause,          prev:'aspect',          next:'sentence'},
+    //sentence:        {level:14, comp:Sentence,        prev:'clause',          next:'pluralization'},
+    //pluralization:   {level:15, comp:Pluralization,   prev:'sentence',        next:'vpAspect'},
+    //vpAspect:        {level:16, comp:VPAspect,        prev:'pluralization',   next: null}
 
     // Adverbs
 

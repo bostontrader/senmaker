@@ -19,19 +19,19 @@ function LessonNavigator(props:Object):Object {
     const s:Object = props.strings.lessonNavigator
 
     const enFlag:Object | string = (props.strings.lang ===langCode.en) ? '' :
-        <img id="enFlag" onClick={StringActions.onLangEN} src="/img/us_flag.gif" width="28" height="20" alt=""/>
+        <img id="enFlag" onClick={StringActions.onLangEN} src="/img/us_flag.gif" width="48" height="40" alt=""/>
 
     const zhFlag:Object | string = (props.strings.lang ===langCode.zh) ? '' :
-        <img id="zhFlag" onClick={StringActions.onLangZH} src="/img/chinese_flag.gif" width="28" height="20" alt=""/>
+        <img id="zhFlag" onClick={StringActions.onLangZH} src="/img/chinese_flag.gif" width="48" height="40" alt=""/>
 
     const previousButton:Object | string = (props.app.getIn(['level','firstLesson'])) ? '' :
         <button id="lesson-previous" onClick={AppActions.onLessonPrevious}>{s.previousLevel}</button>
 
     const currentLesson:Object  = props.app.getIn(['level','currentLesson'])
     const currentQuizPassed:Object = props.quiz.getIn([currentLesson,'passed'])
-    //const nextButton = ( currentQuizPassed && !props.app.getIn(['level','lastLesson'])) ?
-        //<button id="lesson-next" onClick={AppActions.onLessonNext}>{s.nextLevel}</button> : ''
-    const nextButton = <button id="lesson-next" onClick={AppActions.onLessonNext}>{s.nextLevel}</button>
+    const nextButton = ( currentQuizPassed && !props.app.getIn(['level','lastLesson'])) ?
+        <button id="lesson-next" onClick={AppActions.onLessonNext}>{s.nextLevel}</button> : ''
+    //const nextButton = <button id="lesson-next" onClick={AppActions.onLessonNext}>{s.nextLevel}</button>
 
     // Always have a reset button.  Maybe we don't want this if the state has just been reset
     // but that's of minor importance.
@@ -40,7 +40,7 @@ function LessonNavigator(props:Object):Object {
 
     return (
         <div className="lesson-navigator" style={style}>
-            <p>{s.level} {props.app.getIn(['level','currentLevel'])}</p>
+            <h3>{s.level} {props.app.getIn(['level','currentLevel'])}</h3>
             {previousButton}
             {nextButton}
             {resetButton}
