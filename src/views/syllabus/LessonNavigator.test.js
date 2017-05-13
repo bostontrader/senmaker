@@ -69,7 +69,7 @@ describe("LessonNavigator", function () {
         while(!this.state.app.getIn(['level','lastLesson'])) {
 
             this.dispatch({
-                type: AppActionTypes.ON_LESSON_NEXT
+                type: AppActionTypes.ON_CLICK_LESSON_NEXT
             })
 
             currentLesson = this.state.app.getIn(['level','currentLesson'])

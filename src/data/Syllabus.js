@@ -40,9 +40,9 @@ import VPAspect        from '../views/syllabus/VPAspect'
 const syllabus = {
     intro:           {level: 0, comp:Intro,           prev:null,              next:'nound'},
     nound:           {level: 1, comp:Nound,           prev:'intro',           next:'definiteness'},
-    definiteness:    {level: 2, comp:Definiteness,    prev:'nound',           next:null},
-    //phrase:          {level: 3, comp:Phrase,          prev:'definiteness',    next:'nounPhrase'},
-    //nounPhrase:      {level: 4, comp:NounPhrase,      prev:'phrase',          next:'adjectivd'},
+    definiteness:    {level: 2, comp:Definiteness,    prev:'nound',           next:'phrase'},
+    phrase:          {level: 3, comp:Phrase,          prev:'definiteness',    next:'nounPhrase'},
+    nounPhrase:      {level: 4, comp:NounPhrase,      prev:'phrase',          next:null}
     //adjectivd:       {level: 5, comp:Adjectivd,       prev:'nounPhrase',      next:'npAdjective'},
     //npAdjective:     {level: 6, comp:NPAdjective,     prev:'adjectivd',       next:'verbd'},
     //verbd:           {level: 7, comp:Verbd,           prev:'npAdjective',     next:'verbConjugation'},

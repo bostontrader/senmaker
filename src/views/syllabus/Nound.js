@@ -26,7 +26,7 @@ function Nound(props:Object):Object {
 
     return(
         <div>
-            <LessonNavigator {...props} />
+            <LessonNavigator cheat={true} {...props} />
             <div id="help" style={style}>
                 <h1>{props.strings.nouns}</h1>
                 <p>{s.help10}</p>

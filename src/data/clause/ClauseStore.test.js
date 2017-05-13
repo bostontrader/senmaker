@@ -23,13 +23,13 @@ describe('ClauseStore', function() {
 
     })
 
-    it('ON_APP_RESET', function() {
+    it('ON_CLICK_APP_RESET', function() {
         const initialState = this.state
         // Now do anything, doesn't matter what, to change the initial state
         this.dispatch({type: ClauseActionTypes.INSERT_CLAUSE, clause: clauseExamples.a})
         expect(initialState).not.toBe(this.state)
 
-        //this.dispatch({type: AppActionTypes.ON_APP_RESET})
+        //this.dispatch({type: AppActionTypes.ON_CLICK_APP_RESET})
         //expect(initialState).toBe(this.state)
     })
 

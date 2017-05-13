@@ -1,7 +1,6 @@
 import React from 'react'
 
-import TestUtils      from 'react-dom/test-utils'
-
+import ReactTestUtils from 'react-dom/test-utils'
 import {findWithType} from 'react-shallow-testutils'
 import rtRenderer     from 'react-test-renderer'
 
@@ -15,7 +14,7 @@ import QuizStore       from '../../data/quiz/QuizStore'
 describe("Intro", () => {
 
     const verifyBasicLayout = (renderExpression) => {
-        const introComponent = TestUtils.createRenderer().render(renderExpression)
+        const introComponent = ReactTestUtils.createRenderer().render(renderExpression)
         expect(introComponent.type).toBe('div')
         expect(findWithType(introComponent,LessonNavigator))
         expect(countWithId(introComponent,'help')).toBe(1)

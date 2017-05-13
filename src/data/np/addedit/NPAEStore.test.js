@@ -27,12 +27,12 @@ describe('NPAEStore', function() {
         }
     })
 
-    it('ON_APP_RESET', function() {
+    it('ON_CLICK_APP_RESET', function() {
         const initialState = this.state
         this.perturbState()
         expect(this.state).not.toBe(initialState)
 
-        this.dispatch({type: AppActionTypes.ON_APP_RESET})
+        this.dispatch({type: AppActionTypes.ON_CLICK_APP_RESET})
         expect(this.state).toBe(initialState)
     })
 

@@ -1,7 +1,7 @@
 var Nightmare = require('nightmare')
 var NTU       = require('./NightmareTestUtils')
 
-const IntroTest = (nightmare, delay) => {
+const PhraseTest = (nightmare, delay) => {
 
     return nightmare
 
@@ -11,4 +11,4 @@ const IntroTest = (nightmare, delay) => {
 
 }
 
-module.exports = IntroTest
+module.exports = PhraseTest

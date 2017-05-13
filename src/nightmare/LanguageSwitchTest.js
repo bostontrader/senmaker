@@ -3,6 +3,7 @@ const LanguageSwitchTest = (nightmare, delay) => {
     // Initially, the language should be set to chinese and so the English flag should be visible,
     // but not the chinese flag.
     return nightmare
+        // (look for something that should not be there)
         .evaluate(function () {return document.querySelector('#zhFlag') === null})
 
         .then( zhFlagNotFound => {
@@ -10,6 +11,7 @@ const LanguageSwitchTest = (nightmare, delay) => {
                 throw('The Chinese flag was found, but it shouldn\'t be there.')
         })
 
+        // (look for something that should be there)
         .then( res => {
             return nightmare.evaluate(function () {return document.querySelector('#enFlag') !== null})
         })
@@ -25,6 +27,7 @@ const LanguageSwitchTest = (nightmare, delay) => {
             .click('#enFlag').wait(delay)
 
             // Verify that we can see the zhFlag
+            // (look for something that should be there)
             .evaluate(function () {
                 return document.querySelector('#zhFlag') !== null
             })

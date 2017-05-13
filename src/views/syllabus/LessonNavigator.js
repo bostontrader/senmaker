@@ -7,7 +7,7 @@ import StringActions from '../../data/strings/StringActions'
 
 /**
 The LessonNavigator is responsible for displaying the control to navigate
- between lessons.  This obviously means next and previous lessons, but it also does reset.
+ between lessons.  This obviously means next and previous lessons, but it also does reset and cheat.
  */
 function LessonNavigator(props:Object):Object {
 
@@ -38,12 +38,17 @@ function LessonNavigator(props:Object):Object {
     const resetButton:Object = //(props.level.get('minLevel') && !currentQuizState) ? '' :
         <button id="level-reset" onClick={AppActions.onAppReset}>{s.reset}</button>
 
+    // Only some lessons support the cheat button.
+    const cheatButton:Object | string = (props.cheat) ?
+        <button id="cheat" onClick={AppActions.onCheat()}>{'Cheat'}</button> : ''
+
     return (
         <div className="lesson-navigator" style={style}>
             <h3>{s.level} {props.app.getIn(['level','currentLevel'])}</h3>
             {previousButton}
             {nextButton}
             {resetButton}
+            {cheatButton}
             {enFlag}
             {zhFlag}
         </div>

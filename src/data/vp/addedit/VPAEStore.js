@@ -148,7 +148,7 @@ class VPAEStore extends ReduceStore {
         switch (action.type) {
 
             // AppActionTypes
-            case AppActionTypes.ON_APP_RESET:
+            case AppActionTypes.ON_CLICK_APP_RESET:
                 newState = VPAEStore.initialState
                 break
 

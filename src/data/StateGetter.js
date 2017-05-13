@@ -16,7 +16,7 @@ import StringStore      from '../data/strings/StringStore'
 //import VPAEStore        from '../data/vp/addedit/VPAEStore'
 //import VPStore          from '../data/vp/VPStore'
 
-const initialState = Map({
+const initialState = {
 
     app: AppStore.getState(),
 
@@ -63,6 +63,6 @@ const initialState = Map({
         addedit: VPAEStore.getState(),
         dict: VPStore.getState(),
     })*/
-})
+}
 
 export default initialState

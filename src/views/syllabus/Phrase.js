@@ -15,8 +15,8 @@ function Phrase(props:Object):Object {
     const q:Object = props.quiz
     const s:Object = props.strings.phrase
 
-    const iunderstandCheck:Object | string = q.getIn(['phrase','iunderstand']) ?
-        <img id="iunderstandCheck" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
+    const iunderstandCheckmark:Object | string = q.getIn(['phrase','iunderstand']) ?
+        <img id="iunderstandCheckmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
     return(
         <div>
@@ -31,9 +31,9 @@ function Phrase(props:Object):Object {
                 <table>
                     <tbody>
                     <tr>
-                        <td><p><input id="iunderstandCheck" onChange={QuizActions.phrase.onIUnderstand} type="checkbox" checked={q.getIn(['phrase','iunderstand'])} />
+                        <td><p><input id="iunderstandCheckbox" onChange={QuizActions.phrase.onIUnderstand} type="checkbox" checked={q.getIn(['phrase','iunderstand'])} />
                             {props.strings.i_understand}</p></td>
-                        <td>{iunderstandCheck}</td>
+                        <td>{iunderstandCheckmark}</td>
                     </tr>
                     </tbody>
                 </table>

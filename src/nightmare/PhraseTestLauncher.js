@@ -3,8 +3,10 @@ var Nightmare = require('nightmare')
 var LanguageSwitchTest = require('./LanguageSwitchTest')
 var IntroTest          = require('./IntroTest')
 var NoundTest          = require('./NoundTest')
+var DefinitenessTest   = require('./DefinitenessTest')
+var PhraseTest         = require('./PhraseTest')
 
-describe('Nound', () => {
+describe('Phrase', () => {
 
     const url = 'http://localhost:8081'
 
@@ -21,11 +23,17 @@ describe('Nound', () => {
 
             // And the rest of the test runs in English
 
-            // Advance to NoundTest
-            .then( res => {return IntroTest(nightmare, delayC)})
-            .then( res => {return nightmare.click('#lesson-next').wait(delayC)})
-
+            // Advance to DefinitenessTest
+            .then( res => {return IntroTest(nightmare, delayB)})
+            .then( res => {return nightmare.click('#lesson-next').wait(delayB)})
             .then( res => {return NoundTest(nightmare, delayB)})
+            .then( res => {return nightmare.click('#lesson-next').wait(delayB)})
+            .then( res => {return DefinitenessTest(nightmare, delayB)})
+            .then( res => {return nightmare.click('#lesson-next').wait(delayB)})
+
+            .then( res => {return PhraseTest(nightmare, delayC)})
+
+
             .then(result => {done()})
 
     }).timeout(16000)

@@ -15,12 +15,12 @@ describe('Intro', () => {
 
         nightmare.goto(url).wait(delayC)
 
-        // By default it start in Chinese.  Test that we can switch the language to English
-        .then( res => {return LanguageSwitchTest(nightmare, delayC)})
+            // By default the app starts in Chinese.  Test that we can switch the language to English
+            .then( res => {return LanguageSwitchTest(nightmare, delayC)})
 
-        // And the rest of the test runs in English
-        .then( res => {return IntroTest(nightmare, delayB)})
-        .then(result => {done()})
+            // And the rest of the test runs in English
+            .then( res => {return IntroTest(nightmare, delayB)})
+            .then(result => {done()})
 
     }).timeout(4000)
 

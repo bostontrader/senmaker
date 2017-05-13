@@ -79,11 +79,11 @@ class AppStore extends ReduceStore {
         switch (action.type) {
 
             // AppActionTypes
-            case AppActionTypes.ON_APP_RESET:
+            case AppActionTypes.ON_CLICK_APP_RESET:
                 newState = initialStates.slice(-1)[0]
                 break
 
-            case AppActionTypes.ON_LESSON_PREVIOUS:
+            case AppActionTypes.ON_CLICK_LESSON_PREVIOUS:
                 // If the current lesson is the first lesson then the UI should
                 // not present a choice to advance to the non-existent prior lesson.
                 // Nevertheless, catch that here also.
@@ -97,7 +97,7 @@ class AppStore extends ReduceStore {
                 }
                 break
 
-            case AppActionTypes.ON_LESSON_NEXT:
+            case AppActionTypes.ON_CLICK_LESSON_NEXT:
                 // If the current lesson is the last lesson then the UI should
                 // not present a choice to advance to the non-existent next lesson.
                 // Nevertheless, catch that here also.

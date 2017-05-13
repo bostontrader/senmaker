@@ -19,7 +19,6 @@ import StringStore      from '../data/strings/StringStore'
 //import VPStore          from '../data/vp/VPStore'
 
 import AppView      from '../views/AppView'
-//import initialState from '../data/StateGetter'
 
 function getStores() {
     return [
@@ -43,8 +42,10 @@ function getStores() {
 
 function getState():Object {
 
-
-    const a = {
+    // This will build an ordinary JSON object.  The values can be immutable but the object itself is not.
+    // I have tried to make a single immutable atom here, but the immutable object created here
+    // is somewhere converted back into ordinary JSON by the time it gets to AppView.
+    const state = {
 
         app: AppStore.getState(),
 
@@ -93,9 +94,8 @@ function getState():Object {
         //}),
     }
 
-    // Why are these different?
-    return a
-    //return initialState
+
+    return state
 
 }
 

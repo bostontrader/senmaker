@@ -5,7 +5,7 @@ import StringActionTypes from './StringActionTypes'
 const StringActions = {
     onAppReset() {
         AppDispatcher.dispatch({
-            type: AppActionTypes.ON_APP_RESET
+            type: AppActionTypes.ON_CLICK_APP_RESET
         })
     },
     onLangEN() {

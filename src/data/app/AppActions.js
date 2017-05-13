@@ -1,21 +1,27 @@
+// @flow
 import AppActionTypes from './AppActionTypes'
 import AppDispatcher from '../AppDispatcher'
 
-const AppActions = {
+const AppActions:Object = {
 
-    onAppReset() {
+    onAppReset():void {
         AppDispatcher.dispatch({
-            type: AppActionTypes.ON_APP_RESET
+            type: AppActionTypes.ON_CLICK_APP_RESET
         })
     },
-    onLessonPrevious() {
+    onCheat():void {
         AppDispatcher.dispatch({
-            type: AppActionTypes.ON_LESSON_PREVIOUS
+            type: AppActionTypes.ON_CLICK_CHEAT
         })
     },
-    onLessonNext() {
+    onLessonPrevious():void {
         AppDispatcher.dispatch({
-            type: AppActionTypes.ON_LESSON_NEXT
+            type: AppActionTypes.ON_CLICK_LESSON_PREVIOUS
+        })
+    },
+    onLessonNext():void {
+        AppDispatcher.dispatch({
+            type: AppActionTypes.ON_CLICK_LESSON_NEXT
         })
     }
 

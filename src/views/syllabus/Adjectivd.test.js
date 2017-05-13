@@ -82,7 +82,7 @@ describe("Nound", function() {
         const testSinglePermutation = (quizSequence) => {
             this.state = getInitialState()
             this.dispatch({
-                type: AppActionTypes.ON_LESSON_NEXT    // advance to lesson nound
+                type: AppActionTypes.ON_CLICK_LESSON_NEXT    // advance to lesson nound
             })
 
             const renderExpression = <Nound {...this.state} />
@@ -114,7 +114,7 @@ describe("Nound", function() {
 
         // Starting from the beginning,
         this.dispatch({
-            type: AppActionTypes.ON_LESSON_NEXT    // advance to lesson nound
+            type: AppActionTypes.ON_CLICK_LESSON_NEXT    // advance to lesson nound
         })
 
         const renderExpression = <Nound {...this.state} />

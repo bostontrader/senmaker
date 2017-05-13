@@ -19,7 +19,7 @@ function Intro(props:Object):Object {
 
     return (
         <div>
-            <LessonNavigator {...props} />
+            <LessonNavigator cheat={false} {...props} />
             <div id="help" style={style}>
                 <h1>Welcome to Senmaker</h1>
                 <p>{s.help1}</p>

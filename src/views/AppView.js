@@ -1,11 +1,12 @@
-import React from 'react'
+// @flow
+import React    from 'react'
 
 import syllabus from '../data/Syllabus'
 
-function AppView(props) {
+function AppView(props:Object):Object {
 
     const currentLesson = props.app.getIn(['level', 'currentLesson'])
-    const SpecificLesson = syllabus[currentLesson].comp
+    const SpecificLesson:Object = syllabus[currentLesson].comp
 
     return (
         <div className="container">
