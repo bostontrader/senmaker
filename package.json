@@ -26,7 +26,6 @@
     "jest": "^20.0.1",
     "mocha": "^3.2.0",
     "nightmare": "^2.10.0",
-    "react-addons-test-utils": "^15.5.1",
     "react-shallow-testutils": "^3.0.0",
     "react-test-renderer": "^15.5.4",
     "webpack": "^1.14.0",

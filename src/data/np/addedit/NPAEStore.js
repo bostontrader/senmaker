@@ -1,6 +1,7 @@
 // @flow
 import {ReduceStore} from 'flux/utils'
-import {fromJS, Map} from 'immutable'
+import {fromJS}      from 'immutable'
+import {Map}         from 'immutable'
 
 import NP                   from '../NP'
 import NPActionTypes        from '../NPActionTypes'
@@ -13,7 +14,7 @@ import {validateNP}         from '../../Validator'
 import AppActionTypes       from '../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../LocalStorage'
-const localStorageKey = 'NPAEStore'
+const localStorageKey:string = 'NPAEStore'
 
 /*
  This store manages all state required to support the add/edit operations on a np.
@@ -28,25 +29,60 @@ const localStorageKey = 'NPAEStore'
  We use the clickAddNP flag for purposes of code clarity.
 
  */
-class NPAEStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher);
-    }
 
-    getInitialState() {
+// We want to provide a migration capacity for the format of this store.  It's serialized
+// into localStorage and there's no telling when old versions will be seen in the future.
+const initialStates:Array<Object> = [
+    Map({
+        addNP: false,
+        np: new NP()
+    }),
+    Map({
+        version:1,
+        addNP: false,
+        np: new NP()
+    })
+
+]
+
+class NPAEStore extends ReduceStore {
+
+    constructor() {super(AppDispatcher)}
+
+    getInitialState():Object {
 
         if (localStorageAvailable) {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = fromJS(JSON.parse(localStorageState))
+                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
                 let newNP = MakeNP(originalParse.getIn(['np']))
                 return originalParse.set('np',newNP)
             }
 
         }
-        return NPAEStore.initialState
 
+        return initialStates.slice(-1)[0]
+
+    }
+
+    // Given an originalFormat state object migrate to the most current version
+    migrate(originalFormat:Object):Object {
+        const currentInitialState:Object = initialStates.slice(-1)[0]
+        const originalVersion:number = originalFormat.getIn(['version'])
+
+        // If the version is undefined then we start fresh
+        if(originalVersion === undefined)
+            return currentInitialState
+
+        // If the version is the most recent
+        if (originalVersion === currentInitialState.getIn(['version']))
+            return originalFormat
+
+        // Else migrate from the originalVersion to the current version
+        // But at this time there are no intermediate version to migrate through
+        // so do nothing
+        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {
@@ -180,7 +216,7 @@ class NPAEStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = NPAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open the NPAddForm
@@ -190,14 +226,14 @@ class NPAEStore extends ReduceStore {
 
             // Signal the UI to close NPAddForm or NPEditForm
             case NPActionTypes.ON_CLICK_CANCEL:
-                newState = NPAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to close NPAddForm or NPEditForm (but the delete button
             // is only present on NounEditForm.)
             // NPStore will also catch this event and it's responsible for the actual deletion.
             case NPActionTypes.ON_CLICK_DELETE_NP:
-                newState = NPAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open NPEditForm and populate with the given data.
@@ -214,7 +250,7 @@ class NPAEStore extends ReduceStore {
             // Signal the UI to close NPAddForm or NPEditForm. We don't need to specify which,
             // the same state should close either one.
             case NPActionTypes.ON_CLICK_SAVE_NP:
-                newState = NPAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             case NPActionTypes.ON_CHANGE_DEFINITENESS:
@@ -240,12 +276,9 @@ class NPAEStore extends ReduceStore {
 
             // Should be ADJECTIVD because that's what's being changed!
             case NPActionTypes.ON_CHANGE_SELECTED_ADJECTIVD:
-                console.log('NPAEStore',action.newAdjectivds)
                 action.newAdjectivds.map( (adjectivd) => {validateAdjectivd(adjectivd)})
-
                 presentDefiniteness = state.getIn(['np','definiteness'])
                 presentNound = state.getIn(['np','nound'])
-                console.log('NPAEStore',action.newAdjectivds)
                 generatedText = calcResultText(presentDefiniteness, presentNound, action.newAdjectivds)
                 newState = newState.updateIn(['np','adjectivds'],value => action.newAdjectivds)
                 newState = newState.updateIn(['np','generatedText'], value => generatedText)
@@ -262,9 +295,5 @@ class NPAEStore extends ReduceStore {
     }
 }
 
-NPAEStore.initialState =  Map({
-    addNP: false,
-    np: new NP()
-})
-
 export default new NPAEStore()
+export {initialStates}

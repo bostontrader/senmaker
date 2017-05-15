@@ -1,5 +1,6 @@
-import React     from "react"
-import TestUtils from "react-addons-test-utils"
+import React          from "react"
+import ReactTestUtils from "react-dom/test-utils"
+import rtRenderer     from 'react-test-renderer'
 
 import NPRow        from './NPRow'
 import {npExamples} from '../../data/TestData'
@@ -8,18 +9,15 @@ import StringStore  from '../../data/strings/StringStore'
 
 describe("NPRow", () => {
 
-    let tuRenderer
-    let npRow
-
     it("Renders a NPRow", () => {
-        tuRenderer = TestUtils.createRenderer()
-        const props = {
-            np:npExamples.a,
-            strings: StringStore.getInitialState()
-        }
-        npRow = tuRenderer.render(<NPRow {...props} />)
+        const props = {np:npExamples.a, strings: StringStore.getInitialState()}
+        const renderExpression = <NPRow {...props} />
+        const npRow = ReactTestUtils.createRenderer().render(renderExpression)
         expect(npRow.type).toBe('tr')
-        expect(npRow.props.children.length).toBe(2)  // vp, edit
+        expect(npRow.props.children.length).toBe(2)  // np, edit
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
     })
 
 })

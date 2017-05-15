@@ -1,7 +1,7 @@
 import {Map} from 'immutable'
 import React from 'react'
 
-import TestUtils      from 'react-addons-test-utils'
+import ReactTestUtils      from 'react-dom/test-utils'
 import rtRenderer     from 'react-test-renderer'
 import {findWithType} from 'react-shallow-testutils'
 
@@ -27,7 +27,7 @@ describe("ClausePanel", () => {
         }
 
         const renderExpression = <ClausePanel {...props} />
-        const clausePanel = TestUtils.createRenderer().render(renderExpression)
+        const clausePanel = ReactTestUtils.createRenderer().render(renderExpression)
         expect(clausePanel.type).toBe('div')
 
         expect(findWithType(clausePanel,'button'))
@@ -57,7 +57,7 @@ describe("ClausePanel", () => {
         props.clause = props.clause.setIn(['addedit','addClause'],true)
 
         const renderExpression = <ClausePanel {...props} />
-        const clausePanel = TestUtils.createRenderer().render(renderExpression)
+        const clausePanel = ReactTestUtils.createRenderer().render(renderExpression)
         expect(clausePanel.type).toBe('div')
 
         expect(findWithType(clausePanel,'button'))
@@ -88,7 +88,7 @@ describe("ClausePanel", () => {
         props.clause = props.clause.setIn(['addedit','clause','id'],"1")
 
         const renderExpression = <ClausePanel {...props} />
-        const clausePanel = TestUtils.createRenderer().render(renderExpression)
+        const clausePanel = ReactTestUtils.createRenderer().render(renderExpression)
         expect(clausePanel.type).toBe('div')
 
         expect(findWithType(clausePanel,'button'))

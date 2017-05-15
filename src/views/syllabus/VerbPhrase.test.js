@@ -1,7 +1,7 @@
 import {OrderedMap} from 'immutable'
 import React from 'react'
 
-import TestUtils         from 'react-addons-test-utils'
+import ReactTestUtils         from 'react-dom/test-utils'
 import rtRenderer        from 'react-test-renderer'
 import {findWithClass, findWithType} from 'react-shallow-testutils'
 
@@ -26,7 +26,7 @@ describe("VerbPhrases", () => {
 
         expect(true)
         //const renderExpression = <VerbPhrase {...props} />
-        //const verbPhrase = TestUtils.createRenderer().render(renderExpression)
+        //const verbPhrase = ReactTestUtils.createRenderer().render(renderExpression)
         //expect(verbPhrase.type).toBe('div')
 
         //expect(findWithClass(verbPhrase,'help'))

@@ -1,7 +1,7 @@
 import {OrderedMap} from 'immutable'
 import React from 'react'
 
-import TestUtils         from 'react-addons-test-utils'
+import ReactTestUtils         from 'react-dom/test-utils'
 import rtRenderer        from 'react-test-renderer'
 import {findWithClass, findWithType} from 'react-shallow-testutils'
 
@@ -24,7 +24,7 @@ describe("NounPhrases", () => {
         //}
 
         //const renderExpression = <NounPhrases {...props} />
-        //const levelControl = TestUtils.createRenderer().render(renderExpression)
+        //const levelControl = ReactTestUtils.createRenderer().render(renderExpression)
         expect(true)
         //expect(levelControl.type).toBe('div')
 

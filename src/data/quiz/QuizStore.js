@@ -16,9 +16,8 @@ const localStorageKey = 'QuizStore'
  This store manages all state required to support the quizzes at the end of each lesson.
  */
 class QuizStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher)
-    }
+
+    constructor() {super(AppDispatcher)}
 
     getInitialState() {
 

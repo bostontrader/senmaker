@@ -24,6 +24,7 @@ function Adjectivd(props) {
 
     return(
         <div>
+            <LessonNavigator {...props} />
             <div className="help" style={style}>
                 <h1>{props.strings.adjectivs}</h1>
                 <p>{s.help10}</p>
@@ -51,7 +52,6 @@ function Adjectivd(props) {
                     </tbody>
                 </table>
             </div>
-            <LessonNavigator {...props} />
         </div>
     )
 }

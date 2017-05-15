@@ -1,6 +1,6 @@
 import React from 'react'
 
-import TestUtils       from 'react-addons-test-utils'
+import ReactTestUtils       from 'react-dom/test-utils'
 import {findWithClass} from 'react-shallow-testutils'
 import {findWithType}  from 'react-shallow-testutils'
 import rtRenderer      from 'react-test-renderer'
@@ -14,7 +14,7 @@ describe("Definiteness", () => {
 
     it("Renders Definiteness", () => {
         const renderExpression = <Definiteness {...initialState} />
-        const definitenessComponent = TestUtils.createRenderer().render(renderExpression)
+        const definitenessComponent = ReactTestUtils.createRenderer().render(renderExpression)
         expect(definitenessComponent.type).toBe('div')
 
         expect(findWithClass(definitenessComponent,'help'))

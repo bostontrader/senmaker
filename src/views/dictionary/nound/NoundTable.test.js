@@ -1,41 +1,37 @@
-import {Map} from 'immutable'
 import React from 'react'
 
-import TestUtils         from 'react-addons-test-utils'
+import ReactTestUtils    from 'react-dom/test-utils'
 import {findAllWithType} from 'react-shallow-testutils'
 import rtRenderer        from 'react-test-renderer'
 
 import NoundRow   from './NoundRow'
 import NoundTable from './NoundTable'
 
-import {noundExamples}     from '../../../data/TestData'
-import AppStore            from '../../../data/app/AppStore'
-import NoundActionTypes    from '../../../data/dictionary/nound/NoundActionTypes'
-import {NoundPanelLevel}   from '../../../data/dictionary/nound/NoundConstants'
-import NoundStore          from '../../../data/dictionary/nound/NoundStore'
-import StringStore         from '../../../data/strings/StringStore'
+import initialState      from '../../../data/StateGetter'
+import {noundExamples}   from '../../../data/TestData'
+import NoundActionTypes  from '../../../data/dictionary/nound/NoundActionTypes'
+import {NoundPanelLevel} from '../../../data/dictionary/nound/NoundConstants'
+import NoundStore        from '../../../data/dictionary/nound/NoundStore'
 
-describe("NoundTable", function() {
+describe("NoundTable", () => {
 
-    beforeEach(function() {
-        this.state = {}
-        this.state.app     = AppStore.getInitialState()
-        this.state.strings = StringStore.getInitialState()
-        this.state.nound = Map({
-            dict:NoundStore.getInitialState()
-        })
+    let state
+    
+    let dispatch = action => {
+        const n = NoundStore.reduce(state.nound.get('dict'), action)
+        state.nound = state.nound.set('dict',n)
+    }
 
-        this.dispatch = action => {
-            this.state.app   = AppStore .reduce(this.state.app, action)
-            const n = NoundStore.reduce(this.state.nound.get('dict'), action)
-            this.state.nound = this.state.nound.set('dict',n)
-        }
+    beforeEach(() => {
+        state = {}
+        state.strings = initialState.strings
+        state.nound   = initialState.nound
     })
 
-    describe("An Empty NoundTable", function() {
-        it("Renders no NoundPanelLevel.BASE NoundTable", function() {
-            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...this.state} />
-            const noundTable = TestUtils.createRenderer().render(renderExpression)
+    describe("An Empty NoundTable", () => {
+        it("Renders no NoundPanelLevel.BASE NoundTable", () => {
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...state} />
+            const noundTable = ReactTestUtils.createRenderer().render(renderExpression)
 
             // Zero NoundTable
             const noundRows = findAllWithType(noundTable, NoundTable)
@@ -45,9 +41,9 @@ describe("NoundTable", function() {
             expect(tree).toMatchSnapshot()
         })
 
-        it("Renders no NoundPanelLevel.PLURALIZATION NoundTable", function() {
-            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...this.state} />
-            const noundTable = TestUtils.createRenderer().render(renderExpression)
+        it("Renders no NoundPanelLevel.PLURALIZATION NoundTable", () => {
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...state} />
+            const noundTable = ReactTestUtils.createRenderer().render(renderExpression)
 
             // Zero NoundTable
             const noundRows = findAllWithType(noundTable, NoundTable)
@@ -59,12 +55,12 @@ describe("NoundTable", function() {
     })
 
 
-    describe("A NoundTable with one item", function() {
-        it("Renders a NoundPanelLevel.BASE NoundTable", function() {
-            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
+    describe("A NoundTable with one item", () => {
+        it("Renders a NoundPanelLevel.BASE NoundTable", () => {
+            dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
 
-            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...this.state} />
-            const noundTable = TestUtils.createRenderer().render(renderExpression)
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...state} />
+            const noundTable = ReactTestUtils.createRenderer().render(renderExpression)
             expect(noundTable.type).toBe('table')
 
             // Two columns in the thead
@@ -78,11 +74,11 @@ describe("NoundTable", function() {
             expect(tree).toMatchSnapshot()
         })
 
-        it("Renders a NoundPanelLevel.PLURALIZATION NoundTable", function() {
-            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
+        it("Renders a NoundPanelLevel.PLURALIZATION NoundTable", () => {
+            dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
 
-            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...this.state} />
-            const noundTable = TestUtils.createRenderer().render(renderExpression)
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...state} />
+            const noundTable = ReactTestUtils.createRenderer().render(renderExpression)
             expect(noundTable.type).toBe('table')
 
             // Three columns in the thead
@@ -98,13 +94,13 @@ describe("NoundTable", function() {
     })
 
 
-    describe("A NoundTable with more than one item", function() {
-        it("Renders a NoundPanelLevel.BASE NoundTable", function() {
-            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
-            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.b})
+    describe("A NoundTable with more than one item", () => {
+        it("Renders a NoundPanelLevel.BASE NoundTable", () => {
+            dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
+            dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.b})
 
-            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...this.state} />
-            const noundTable = TestUtils.createRenderer().render(renderExpression)
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.BASE} {...state} />
+            const noundTable = ReactTestUtils.createRenderer().render(renderExpression)
             expect(noundTable.type).toBe('table')
 
             // Two columns in the thead
@@ -118,12 +114,12 @@ describe("NoundTable", function() {
             expect(tree).toMatchSnapshot()
         })
 
-        it("Renders a NoundPanelLevel.PLURALIZATION NoundTable", function() {
-            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
-            this.dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.b})
+        it("Renders a NoundPanelLevel.PLURALIZATION NoundTable", () => {
+            dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.a})
+            dispatch({type: NoundActionTypes.INSERT_NOUND, nound: noundExamples.b})
 
-            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...this.state} />
-            const noundTable = TestUtils.createRenderer().render(renderExpression)
+            const renderExpression = <NoundTable noundPanelLevel = {NoundPanelLevel.PLURALIZATION} {...state} />
+            const noundTable = ReactTestUtils.createRenderer().render(renderExpression)
             expect(noundTable.type).toBe('table')
 
             // Three columns in the thead

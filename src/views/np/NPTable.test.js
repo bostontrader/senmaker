@@ -1,75 +1,88 @@
-import {Map} from 'immutable'
 import React from 'react'
 
-import TestUtils         from 'react-addons-test-utils'
+import ReactTestUtils    from 'react-dom/test-utils'
 import {findAllWithType} from 'react-shallow-testutils'
 import rtRenderer        from 'react-test-renderer'
 
 import NPRow   from './NPRow'
 import NPTable from './NPTable'
 
+import initialState         from '../../data/StateGetter'
 import {npExamples}         from '../../data/TestData'
-import AppStore             from '../../data/app/AppStore'
-import {PluralizationRule}  from '../../data/dictionary/nound/NoundConstants'
-import NP                   from '../../data/np/NP'
 import NPActionTypes        from '../../data/np/NPActionTypes'
-import {DefinitenessSelect} from '../../data/np/NPConstants'
 import NPStore              from '../../data/np/NPStore'
-import StringStore          from '../../data/strings/StringStore'
 
-describe("NPTable", function() {
+describe("NPTable", () => {
 
-    beforeEach(function() {
-        this.state = {}
-        this.state.app     = AppStore.getInitialState()
-        this.state.strings = StringStore.getInitialState()
-        this.state.np = Map({
-            dict:NPStore.getInitialState()
+    let state
+
+    let dispatch = action => {
+        const n = NPStore.reduce(state.np.get('dict'), action)
+        state.np = state.np.set('dict',n)
+    }
+
+    beforeEach(() => {
+        state = {}
+        state.strings = initialState.strings
+        state.np      = initialState.np
+    })
+
+    describe("An Empty NPTable", () => {
+        it("Renders no NPTable", () => {
+            const renderExpression = <NPTable {...state} />
+            const npTable = ReactTestUtils.createRenderer().render(renderExpression)
+
+            // Zero NPTable
+            const npRows = findAllWithType(npTable, NPTable)
+            expect(npRows.length).toBe(0)
+
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
+    })
+
+    describe("An NPTable with one item", () => {
+        it("Renders an NPTable", () => {
+            dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.a})
+
+            const renderExpression = <NPTable {...state} />
+            const npTable = ReactTestUtils.createRenderer().render(renderExpression)
+            expect(npTable.type).toBe('table')
+
+            // Two columns in the thead
+            expect(npTable.props.children[0].props.children.props.children.length).toBe(2) // np, edit
+
+            // One NPRow
+            const npRows = findAllWithType(npTable, NPRow)
+            expect(npRows.length).toBe(1)
+
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
         })
 
-        this.dispatch = action => {
-            this.state.app   = AppStore .reduce(this.state.app, action)
-            const n = NPStore.reduce(this.state.np.get('dict'), action)
-            this.state.np = this.state.np.set('dict',n)
-        }
-
     })
 
-    it("Renders a NPTable", function() {
-        const renderExpression = <NPTable {...this.state} />
-        const npTable = TestUtils.createRenderer().render(renderExpression)
-        expect(npTable.type).toBe('table')
 
-        // Two columns in the thead
-        expect(npTable.props.children[0].props.children.props.children.length).toBe(2)
+    describe("An NPTable with more than one item", () => {
+        it("Renders an NPTable", () => {
+            dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.a})
+            dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.b})
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
-    })
+            const renderExpression = <NPTable {...state} />
+            const npTable = ReactTestUtils.createRenderer().render(renderExpression)
+            expect(npTable.type).toBe('table')
 
-    it("Will render one NPRow", function() {
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.a})
-        
-        const renderExpression = <NPTable {...this.state} />
-        const npTable = TestUtils.createRenderer().render(renderExpression)
-        const nounItems = findAllWithType(npTable, NPRow)
-        expect(nounItems.length).toBe(1)
+            // Two columns in the thead
+            expect(npTable.props.children[0].props.children.props.children.length).toBe(2) // np, edit
 
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
-    })
+            // Two NPRow
+            const npRows = findAllWithType(npTable, NPRow)
+            expect(npRows.length).toBe(2)
 
-    it("Will render two NPRow", function() {
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.a})
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.b})
+            const tree = rtRenderer.create(renderExpression).toJSON()
+            expect(tree).toMatchSnapshot()
+        })
 
-        const renderExpression = <NPTable {...this.state} />
-        const npTable = TestUtils.createRenderer().render(renderExpression)
-        const nounItems = findAllWithType(npTable, NPRow)
-        expect(nounItems.length).toBe(2)
-
-        const tree = rtRenderer.create(renderExpression).toJSON()
-        expect(tree).toMatchSnapshot()
     })
 
 })

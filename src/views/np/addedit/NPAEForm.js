@@ -32,8 +32,8 @@ function NPAEForm(props:Object):?Object {
     const buttonCancel:Object = <button id='cancel'    onClick={NPActions.onClickCancel}>{s.cancel}</button>
 
     // add mode or edit mode?
-    const theButtons:Object = (props.np.getIn(['addedit','np','id'])) ?
-        <div>{buttonSave}{buttonDelete}{buttonCancel}</div> : <div>{buttonSave}{buttonCancel}</div>
+    const theButtons:Object = (props.np.getIn(['addedit','addNP'])) ?
+        <div>{buttonSave}{buttonCancel}</div> : <div>{buttonSave}{buttonDelete}{buttonCancel}</div>
 
     // should be nound because we want a select list of nound!
     const availableNounds:Array<Object> = props.nound.getIn(['dict','coll']).toArray().map(function(nound) {

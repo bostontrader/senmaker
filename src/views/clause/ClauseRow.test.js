@@ -1,5 +1,5 @@
 import React     from "react"
-import TestUtils from "react-addons-test-utils"
+import ReactTestUtils from "react-dom/test-utils"
 
 import ClauseRow        from './ClauseRow'
 import {clauseExamples} from '../../data/TestData'
@@ -11,7 +11,7 @@ describe("ClauseRow", () => {
     let clauseRow
 
     it("Renders a ClauseRow", () => {
-        tuRenderer = TestUtils.createRenderer()
+        tuRenderer = ReactTestUtils.createRenderer()
         const props = {
             clause:clauseExamples.a, 
             strings: StringStore.getInitialState()

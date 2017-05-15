@@ -1,5 +1,5 @@
 import React      from "react"
-import TestUtils  from "react-addons-test-utils"
+import ReactTestUtils  from "react-dom/test-utils"
 import rtRenderer from 'react-test-renderer'
 
 import AdjectivdRow        from './AdjectivdRow'
@@ -16,7 +16,7 @@ describe("AdjectivdRow", () => {
     it("renders an AdjectivdRow", () => {
         props = {adjectivd:adjectivdExamples.a, strings: StringStore.getInitialState()}
         renderExpression = <AdjectivdRow {...props} />
-        adjectivdRow = TestUtils.createRenderer().render(renderExpression)
+        adjectivdRow = ReactTestUtils.createRenderer().render(renderExpression)
         expect(adjectivdRow.type).toBe('tr')
         expect(adjectivdRow.props.children.length).toBe(2)  // base, edit
 

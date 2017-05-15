@@ -94,7 +94,6 @@ function getState():Object {
         //}),
     }
 
-
     return state
 
 }

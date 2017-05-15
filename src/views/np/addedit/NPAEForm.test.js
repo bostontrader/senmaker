@@ -1,10 +1,11 @@
 import {Map} from 'immutable'
 import React from 'react'
 
-import TestUtils  from 'react-addons-test-utils'
+import ReactTestUtils  from 'react-dom/test-utils'
 import rtRenderer from 'react-test-renderer'
 
 import NPAEForm         from './NPAEForm'
+import initialState     from '../../../data/StateGetter'
 import {NPPanelLevel}   from '../../../data/np/NPConstants'
 import AdjectivdStore   from '../../../data/dictionary/adjectivd/AdjectivdStore'
 import AdjectivdAEStore from '../../../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
@@ -13,32 +14,18 @@ import NoundAEStore     from '../../../data/dictionary/nound/addedit/NoundAEStor
 import NPAEStore        from '../../../data/np/addedit/NPAEStore'
 import StringStore      from '../../../data/strings/StringStore'
 
-describe("NPAEForm", function() {
+describe("NPAEForm", () => {
 
-    beforeEach( function() {
-        this.state = {
-            adjectivd: Map({
-                addedit: AdjectivdAEStore.getInitialState(),
-                dict: AdjectivdStore.getInitialState()
-            }),
-            nound: Map({
-                addedit: NoundAEStore.getInitialState(),
-                dict: NoundStore.getInitialState()
-            }),
-            np: Map({
-                addedit: NPAEStore.getInitialState(),
-                nouns: Map()
-            }),
-            strings:StringStore.getInitialState()
-        }
-    })
+    let state
 
-    describe("NPPanelLevel.L1", function() {
+    beforeEach( () => {state = initialState})
 
-        it("add mode", function() {
-            this.state.np = this.state.np.setIn(['addedit','addNP'],true)
-            const renderExpression = <NPAEForm npPanelLevel = {NPPanelLevel.L1} {...this.state} />
-            const npAEForm = TestUtils.createRenderer().render(renderExpression)
+    describe("NPPanelLevel.L1", () => {
+
+        it("add mode", () => {
+            state.np = state.np.setIn(['addedit','addNP'],true)
+            const renderExpression = <NPAEForm npPanelLevel = {NPPanelLevel.L1} {...state} />
+            const npAEForm = ReactTestUtils.createRenderer().render(renderExpression)
             expect(npAEForm.type).toBe('div')
             expect(npAEForm.props.children.length).toBe(3) // nound select, radio group, generatedText
             // No buttons on this level
@@ -54,10 +41,10 @@ describe("NPAEForm", function() {
 
     describe("NPPanelLevel.L2", () => {
 
-        it("add mode", function() {
-            this.state.np = this.state.np.setIn(['addedit','addNP'],true)
-            const renderExpression = <NPAEForm npPanelLevel = {NPPanelLevel.L2} {...this.state} />
-            const npAEForm = TestUtils.createRenderer().render(renderExpression)
+        it("add mode", () => {
+            state.np = state.np.setIn(['addedit','addNP'],true)
+            const renderExpression = <NPAEForm npPanelLevel = {NPPanelLevel.L2} {...state} />
+            const npAEForm = ReactTestUtils.createRenderer().render(renderExpression)
             expect(npAEForm.type).toBe('div')
             expect(npAEForm.props.children.length).toBe(4) // nound select, radio group, generatedText, theButtons
             expect(npAEForm.props.children[3].props.children.length).toBe(2) // save, cancel
@@ -67,10 +54,11 @@ describe("NPAEForm", function() {
             //expect(tree).toMatchSnapshot()
         })
 
-        it("edit mode", function() {
-            this.state.np = this.state.np.setIn(['addedit','np','id'],'1')
-            const renderExpression = <NPAEForm npPanelLevel = {NPPanelLevel.L2} {...this.state} />
-            const npAEForm = TestUtils.createRenderer().render(renderExpression)
+        it("edit mode", () => {
+            state.np = state.np.setIn(['addedit','addNP'],false)
+            state.np = state.np.setIn(['addedit','np','id'],'1')
+            const renderExpression = <NPAEForm npPanelLevel = {NPPanelLevel.L2} {...state} />
+            const npAEForm = ReactTestUtils.createRenderer().render(renderExpression)
             expect(npAEForm.type).toBe('div')
             expect(npAEForm.props.children.length).toBe(4) // nound select, radio group, generatedText, theButtons
             expect(npAEForm.props.children[3].props.children.length).toBe(3) // save, delete, cancel
@@ -84,26 +72,27 @@ describe("NPAEForm", function() {
 
     describe("NPPanelLevel.ADJECTIVES", () => {
 
-        it("add mode", function() {
-            this.state.np = this.state.np.setIn(['addedit','addNP'],true)
-            const renderExpression = <NPAEForm npPanelLevel = {NPPanelLevel.L2} {...this.state} />
-            const npAEForm = TestUtils.createRenderer().render(renderExpression)
+        it("add mode", () => {
+            state.np = state.np.setIn(['addedit','addNP'],true)
+            const renderExpression = <NPAEForm npPanelLevel = {NPPanelLevel.ADJECTIVES} {...state} />
+            const npAEForm = ReactTestUtils.createRenderer().render(renderExpression)
             expect(npAEForm.type).toBe('div')
-            expect(npAEForm.props.children.length).toBe(4) // nound select, radio group, generatedText, theButtons
-            expect(npAEForm.props.children[3].props.children.length).toBe(2) // save, cancel
+            expect(npAEForm.props.children.length).toBe(5) // nound select, radio group, adjectivd select, generatedText, theButtons
+            expect(npAEForm.props.children[4].props.children.length).toBe(2) // save, cancel
 
             // The Select control fubars this
             //const tree = rtRenderer.create(renderExpression).toJSON()
             //expect(tree).toMatchSnapshot()
         })
 
-        it("edit mode", function() {
-            this.state.np = this.state.np.setIn(['addedit','np','id'],'1')
-            const renderExpression = <NPAEForm npPanelLevel = {NPPanelLevel.L2} {...this.state} />
-            const npAEForm = TestUtils.createRenderer().render(renderExpression)
+        it("edit mode", () => {
+            state.np = state.np.setIn(['addedit','addNP'],false)
+            state.np = state.np.setIn(['addedit','np','id'],'1')
+            const renderExpression = <NPAEForm npPanelLevel = {NPPanelLevel.ADJECTIVES} {...state} />
+            const npAEForm = ReactTestUtils.createRenderer().render(renderExpression)
             expect(npAEForm.type).toBe('div')
-            expect(npAEForm.props.children.length).toBe(4) // nound select, radio group, generatedText, theButtons
-            expect(npAEForm.props.children[3].props.children.length).toBe(3) // save, delete, cancel
+            expect(npAEForm.props.children.length).toBe(5) // nound select, radio group, adjectivd select, generatedText, theButtons
+            expect(npAEForm.props.children[4].props.children.length).toBe(3) // save, delete, cancel
 
             // The Select control fubars this
             //const tree = rtRenderer.create(renderExpression).toJSON()

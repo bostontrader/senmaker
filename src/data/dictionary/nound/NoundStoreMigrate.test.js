@@ -1,4 +1,4 @@
-import NoundStore from './NoundStore'
+import NoundStore      from './NoundStore'
 import {initialStates} from './NoundStore'
 
 describe('NoundStore Migrations', function() {

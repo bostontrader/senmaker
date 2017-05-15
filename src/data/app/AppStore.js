@@ -1,15 +1,14 @@
 // @flow
-//import {fromJS}      from 'immutable'
+import {fromJS}      from 'immutable'
 import {Map}         from 'immutable'
 import {ReduceStore} from 'flux/utils'
 
 import AppActionTypes from './AppActionTypes'
 import AppDispatcher  from '../AppDispatcher'
 import syllabus       from '../Syllabus'
-//import Nound          from '../dictionary/nound/Nound'
 
-//import {localStorageAvailable} from '../../LocalStorage'
-//const localStorageKey:string = 'AppStore'
+import {localStorageAvailable} from '../../LocalStorage'
+const localStorageKey:string = 'AppStore'
 
 // We want to provide a migration capacity for the format of this store.  It's serialized
 // into localStorage and there's no telling when old versions will be seen in the future.
@@ -40,18 +39,18 @@ class AppStore extends ReduceStore {
 
     getInitialState() {
 
-        /*if (localStorageAvailable) {
+        if (localStorageAvailable) {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState)
                 return this.migrate(fromJS(JSON.parse(localStorageState)))
-        }*/
+        }
 
         return initialStates.slice(-1)[0]
     }
 
     // Given an originalFormat state object migrate to the most current version
-    /*migrate(originalFormat:Object):Object {
+    migrate(originalFormat:Object):Object {
         const currentInitialState:Object = initialStates.slice(-1)[0]
         const originalVersion:number = originalFormat.getIn(['version'])
 
@@ -67,7 +66,7 @@ class AppStore extends ReduceStore {
         // But at this time there are no intermediate version to migrate through
         // so do nothing
         return currentInitialState
-    }*/
+    }
 
     reduce(state:Object, action:Object):Object {
 
@@ -115,8 +114,8 @@ class AppStore extends ReduceStore {
                 // do nothing, newState is already set to the existing state
         }
 
-        //if(localStorageAvailable)
-            //localStorage.setItem(localStorageKey, JSON.stringify(newState.toJSON()))
+        if(localStorageAvailable)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState.toJSON()))
 
         return newState
     }

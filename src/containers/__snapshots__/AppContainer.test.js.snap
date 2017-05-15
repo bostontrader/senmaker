@@ -1,8 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`AppContainer 's Alive! 1`] = `
 <div
-  className="container">
+  className="container"
+>
   <div
-    className="row">
+    className="row"
+  >
     <div>
       <div
         className="lesson-navigator"
@@ -11,36 +15,41 @@ exports[`AppContainer 's Alive! 1`] = `
             "border": "1px solid black",
             "margin": "5px",
           }
-        }>
-        <p>
+        }
+      >
+        <h3>
           级
            
           0
-        </p>
+        </h3>
         
         
         <button
           id="level-reset"
-          onClick={[Function]}>
+          onClick={[Function]}
+        >
           返回
         </button>
+        
         <img
           alt=""
-          height="24"
+          height="40"
           id="enFlag"
           onClick={[Function]}
           src="/img/us_flag.gif"
-          width="32" />
+          width="48"
+        />
         
       </div>
       <div
-        className="help"
+        id="help"
         style={
           Object {
             "border": "1px solid black",
             "margin": "5px",
           }
-        }>
+        }
+      >
         <h1>
           Welcome to Senmaker
         </h1>
@@ -61,13 +70,14 @@ exports[`AppContainer 's Alive! 1`] = `
         </p>
       </div>
       <div
-        className="quiz"
+        id="quiz"
         style={
           Object {
             "border": "1px solid black",
             "margin": "5px",
           }
-        }>
+        }
+      >
         <h3>
           测试
         </h3>
@@ -78,9 +88,10 @@ exports[`AppContainer 's Alive! 1`] = `
                 <p>
                   <input
                     checked={false}
-                    id="iunderstandCheck"
+                    id="iunderstandCheckbox"
                     onChange={[Function]}
-                    type="checkbox" />
+                    type="checkbox"
+                  />
                   我明白
                 </p>
               </td>

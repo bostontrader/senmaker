@@ -11,7 +11,7 @@ import {validateNound}  from '../../../Validator'
 import AppActionTypes   from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../../LocalStorage'
-const localStorageKey = 'NoundAEStore'
+const localStorageKey:string = 'NoundAEStore'
 
 /*
  This store manages all state required to support the add/edit operations on a nound.
@@ -31,26 +31,59 @@ const localStorageKey = 'NoundAEStore'
  We use the addNound flag for purposes of code clarity.
 
  */
+
+// We want to provide a migration capacity for the format of this store.  It's serialized
+// into localStorage and there's no telling when old versions will be seen in the future.
+const initialStates:Array<Object> = [
+    Map({
+        addNound: false,
+        nound: new Nound()
+    }),
+    Map({
+        version:1,
+        addNound: false,
+        nound: new Nound()
+    })
+]
+
 class NoundAEStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher)
-    }
+
+    constructor() {super(AppDispatcher)}
 
     getInitialState():Object {
 
         if (localStorageAvailable) {
-            const localStorageState = localStorage.getItem(localStorageKey)
+            const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = fromJS(JSON.parse(localStorageState))
+                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
                 let newNound = MakeNound(originalParse.getIn(['nound']))
                 return originalParse.set('nound',newNound)
             }
 
         }
 
-        return NoundAEStore.initialState
+        return initialStates.slice(-1)[0]
 
+    }
+
+    // Given an originalFormat state object migrate to the most current version
+    migrate(originalFormat:Object):Object {
+        const currentInitialState:Object = initialStates.slice(-1)[0]
+        const originalVersion:number = originalFormat.getIn(['version'])
+
+        // If the version is undefined then we start fresh
+        if(originalVersion === undefined)
+            return currentInitialState
+
+        // If the version is the most recent
+        if (originalVersion === currentInitialState.getIn(['version']))
+            return originalFormat
+
+        // Else migrate from the originalVersion to the current version
+        // But at this time there are no intermediate version to migrate through
+        // so do nothing
+        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {
@@ -61,7 +94,7 @@ class NoundAEStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = NoundAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open the NoundAddForm
@@ -71,14 +104,14 @@ class NoundAEStore extends ReduceStore {
 
             // Signal the UI to close NoundAddForm or NoundEditForm
             case NoundActionTypes.ON_CLICK_CANCEL:
-                newState = NoundAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to close NoundAddForm or NoundEditForm (but the delete button
             // is only present on NounEditForm.)
             // NoundStore will also catch this event and it's responsible for the actual deletion.
             case NoundActionTypes.ON_CLICK_DELETE_NOUND:
-                newState = NoundAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open NoundEditForm and populate with the given data.
@@ -95,7 +128,7 @@ class NoundAEStore extends ReduceStore {
             // Signal the UI to close NoundAddForm or NoundEditForm. We don't need to specify which,
             // the same state should close either one.
             case NoundActionTypes.ON_CLICK_SAVE_NOUND:
-                newState = NoundAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             case NoundActionTypes.ON_CHANGE_BASE:
@@ -121,9 +154,5 @@ class NoundAEStore extends ReduceStore {
     }
 }
 
-NoundAEStore.initialState = Map({
-    addNound: false,
-    nound: new Nound()
-})
-
 export default new NoundAEStore()
+export {initialStates}

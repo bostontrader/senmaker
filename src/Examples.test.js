@@ -7,7 +7,7 @@ import {verbdExamples}  from './data/TestData'
 
 //import React from 'react'
 
-//import TestUtils         from 'react-addons-test-utils'
+//import ReactTestUtils         from 'react-dom/test-utils'
 //import rtRenderer        from 'react-test-renderer'
 //import {findWithType}    from 'react-shallow-testutils'
 //import {findAllWithType} from 'react-shallow-testutils'

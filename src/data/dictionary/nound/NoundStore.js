@@ -31,7 +31,7 @@ class NoundStore extends ReduceStore {
 
     constructor() {super(AppDispatcher)}
 
-    getInitialState() {
+    getInitialState():Object {
 
         if (localStorageAvailable) {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)

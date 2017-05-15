@@ -1,6 +1,6 @@
 import React from 'react'
 
-import TestUtils       from 'react-addons-test-utils'
+import ReactTestUtils       from 'react-dom/test-utils'
 import {findWithClass} from 'react-shallow-testutils'
 import {findWithType}  from 'react-shallow-testutils'
 import rtRenderer      from 'react-test-renderer'
@@ -13,7 +13,7 @@ describe("Phrase", () => {
 
     it("Renders Phrase", () => {
         const renderExpression = <Phrase {...initialState} />
-        const clauseComponent = TestUtils.createRenderer().render(renderExpression)
+        const clauseComponent = ReactTestUtils.createRenderer().render(renderExpression)
         expect(clauseComponent.type).toBe('div')
         expect(findWithClass(clauseComponent,'help'))
         expect(findWithClass(clauseComponent,'quiz'))

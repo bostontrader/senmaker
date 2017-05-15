@@ -1,45 +1,30 @@
-import {Map} from 'immutable'
 import React from 'react'
 
-import TestUtils         from 'react-addons-test-utils'
+import ReactTestUtils    from 'react-dom/test-utils'
 import rtRenderer        from 'react-test-renderer'
 import {findWithType}    from 'react-shallow-testutils'
 import {findAllWithType} from 'react-shallow-testutils'
 
-import NPAEForm         from './addedit/NPAEForm'
-import NPPanel          from './NPPanel'
-import NPTable          from './NPTable'
-import AdjectivdStore   from '../../data/dictionary/adjectivd/AdjectivdStore'
-import AdjectivdAEStore from '../../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
-import NoundStore       from '../../data/dictionary/nound/NoundStore'
-import NoundAEStore     from '../../data/dictionary/nound/addedit/NoundAEStore'
-import NPStore          from '../../data/np/NPStore'
-import NPAEStore        from '../../data/np/addedit/NPAEStore'
-import StringStore      from '../../data/strings/StringStore'
+import NPAEForm     from './addedit/NPAEForm'
+import NPPanel      from './NPPanel'
+import NPTable      from './NPTable'
+import initialState from '../../data/StateGetter'
 
 describe("NPPanel", function() {
 
+    let state
+
     beforeEach(function() {
-        this.props = {
-            adjectivd: Map({
-                addedit: AdjectivdAEStore.getInitialState(),
-                dict: AdjectivdStore.getInitialState()
-            }),
-            nound: Map({
-                addedit: NoundAEStore.getInitialState(),
-                dict: NoundStore.getInitialState()
-            }),
-            np: Map({
-                addedit: NPAEStore.getInitialState(),
-                dict: NPStore.getInitialState()
-            }),
-            strings:StringStore.getInitialState()
-        }
+        state = {}
+        state.adjectivd = initialState.adjectivd
+        state.nound     = initialState.nound
+        state.np        = initialState.np
+        state.strings   = initialState.strings
     })
 
     it("Renders a NPPanel w/o add/edit", function() {
-        const renderExpression = <NPPanel {...this.props} />
-        const npPanel = TestUtils.createRenderer().render(renderExpression)
+        const renderExpression = <NPPanel {...state} />
+        const npPanel = ReactTestUtils.createRenderer().render(renderExpression)
         expect(npPanel.type).toBe('div')
 
         expect(findWithType(npPanel,'button'))
@@ -54,10 +39,10 @@ describe("NPPanel", function() {
     })
 
     it("Renders a NPPanel with a NPAEForm in add mode", function() {
-        this.props.np = this.props.np.setIn(['addedit','addNP'],true)
+        state.np = state.np.setIn(['addedit','addNP'],true)
 
-        const renderExpression = <NPPanel {...this.props} />
-        const npPanel = TestUtils.createRenderer().render(renderExpression)
+        const renderExpression = <NPPanel {...state} />
+        const npPanel = ReactTestUtils.createRenderer().render(renderExpression)
         expect(npPanel.type).toBe('div')
 
         expect(findWithType(npPanel,'button'))
@@ -69,10 +54,10 @@ describe("NPPanel", function() {
     })
 
     it("Renders a NPPanel with a NPAEForm in edit mode", function() {
-        this.props.np = this.props.np.setIn(['addedit','np','id'],"1")
+        state.np = state.np.setIn(['addedit','np','id'],"1")
 
-        const renderExpression = <NPPanel {...this.props} />
-        const npPanel = TestUtils.createRenderer().render(renderExpression)
+        const renderExpression = <NPPanel {...state} />
+        const npPanel = ReactTestUtils.createRenderer().render(renderExpression)
         expect(npPanel.type).toBe('div')
 
         expect(findWithType(npPanel,'button'))

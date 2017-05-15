@@ -1,5 +1,5 @@
 import React     from "react"
-import TestUtils from "react-addons-test-utils"
+import ReactTestUtils from "react-dom/test-utils"
 
 import VPRow        from './VPRow'
 import {vpExamples} from '../../data/TestData'
@@ -11,7 +11,7 @@ describe("VPRow", () => {
     let vpRow
 
     it("Renders a VPRow", () => {
-        tuRenderer = TestUtils.createRenderer()
+        tuRenderer = ReactTestUtils.createRenderer()
         const props = {
             vp:vpExamples.a, 
             strings: StringStore.getInitialState()

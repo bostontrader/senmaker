@@ -1,4 +1,4 @@
-import AppStore from './AppStore'
+import AppStore        from './AppStore'
 import {initialStates} from './AppStore'
 
 describe('AppStore Migrations', function() {

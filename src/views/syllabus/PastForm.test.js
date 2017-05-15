@@ -1,7 +1,7 @@
 //import {Map} from 'immutable'
 import React from 'react'
 
-//import TestUtils         from 'react-addons-test-utils'
+//import ReactTestUtils         from 'react-dom/test-utils'
 //import {findAllWithClass, findWithClass, findWithType} from 'react-shallow-testutils'
 
 //import LessonNavigator from './LessonNavigator'
@@ -76,7 +76,7 @@ describe("PastForm", function() {
             })
 
             const renderExpression = <PastForm {...this.state} />
-            const noundRenderer = TestUtils.createRenderer().render(renderExpression)
+            const noundRenderer = ReactTestUtils.createRenderer().render(renderExpression)
 
             // no need to check basic layout or the fact that none of the checks are displayed
             // because we've already checked it for the beginning state.
@@ -89,7 +89,7 @@ describe("PastForm", function() {
                 })
                 checks.push(quizItem.i)
                 let renderExpression = <PastForm {...this.state} />
-                let noundRenderer = TestUtils.createRenderer().render(renderExpression)
+                let noundRenderer = ReactTestUtils.createRenderer().render(renderExpression)
 
                 verifyBasicLayout(noundRenderer)
 
@@ -108,7 +108,7 @@ describe("PastForm", function() {
         })
 
         const renderExpression = <PastForm {...this.state} />
-        const noundRenderer = TestUtils.createRenderer().render(renderExpression)
+        const noundRenderer = ReactTestUtils.createRenderer().render(renderExpression)
 
         verifyBasicLayout(noundRenderer)
 

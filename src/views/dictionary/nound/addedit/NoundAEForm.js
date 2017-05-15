@@ -36,8 +36,8 @@ function NoundAEForm(props:Object):Object {
     const buttonDelete:Object = <button id='delete-nound' onClick={onDelete}>{s.delete}</button>
     const buttonCancel:Object = <button id='cancel'       onClick={NoundActions.onClickCancel}>{s.cancel}</button>
 
-    const theButtons:Object = (props.nound.getIn(['addedit','nound','id'])) ?
-        <div>{buttonSave}{buttonDelete}{buttonCancel}</div> : <div>{buttonSave}{buttonCancel}</div>
+    const theButtons:Object = (props.nound.getIn(['addedit','addNound'])) ?
+        <div>{buttonSave}{buttonCancel}</div> : <div>{buttonSave}{buttonDelete}{buttonCancel}</div>
 
     let noundAEForm:Object = <div></div>
 

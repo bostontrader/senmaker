@@ -1,6 +1,6 @@
 import React from 'react'
 
-import TestUtils          from 'react-dom/test-utils'
+import ReactTestUtils          from 'react-dom/test-utils'
 import {findWithType}     from 'react-shallow-testutils'
 import {findAllWithClass} from 'react-shallow-testutils'
 
@@ -63,7 +63,7 @@ describe("Nound", function() {
             let state = initialState
 
             const renderExpression = <Nound {...state} />
-            const noundComponent = TestUtils.createRenderer().render(renderExpression)
+            const noundComponent = ReactTestUtils.createRenderer().render(renderExpression)
 
             // no need to check basic layout or the fact that none of the checks are displayed
             // because we've already checked it for the beginning state.
@@ -73,7 +73,7 @@ describe("Nound", function() {
                 state.quiz  = QuizStore.reduce(state.quiz, {type: quizItem.type, nound: quizItem.nound})
                 checks.push(quizItem.i)
                 let renderExpression = <Nound {...state} />
-                let noundComponent = TestUtils.createRenderer().render(renderExpression)
+                let noundComponent = ReactTestUtils.createRenderer().render(renderExpression)
 
                 verifyBasicLayout(noundComponent)
 
@@ -84,7 +84,7 @@ describe("Nound", function() {
         }
 
         const renderExpression = <Nound {...initialState} />
-        const noundComponent = TestUtils.createRenderer().render(renderExpression)
+        const noundComponent = ReactTestUtils.createRenderer().render(renderExpression)
 
         verifyBasicLayout(noundComponent)
 

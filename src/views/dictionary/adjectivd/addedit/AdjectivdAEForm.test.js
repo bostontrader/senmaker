@@ -1,7 +1,7 @@
 import {Map} from 'immutable'
 import React from 'react'
 
-import TestUtils         from 'react-addons-test-utils'
+import ReactTestUtils         from 'react-dom/test-utils'
 import rtRenderer        from 'react-test-renderer'
 
 //import {AdjectivdPanelLevel} from '../../../../data/dictionary/adjectivd/AdjectivdConstants'
@@ -21,7 +21,7 @@ describe("AdjectivdEditForm", () => {
         }
 
         const renderExpression = <AdjectivdAEForm {...props} />
-        const adjectivdAEForm = TestUtils.createRenderer().render(renderExpression)
+        const adjectivdAEForm = ReactTestUtils.createRenderer().render(renderExpression)
         expect(adjectivdAEForm.type).toBe('div')
         expect(adjectivdAEForm.props.children.length).toBe(2) // base controls, buttons
         expect(adjectivdAEForm.props.children[1].props.children.length).toBe(2) // save, cancel
@@ -39,7 +39,7 @@ describe("AdjectivdEditForm", () => {
             strings:StringStore.getInitialState()
         }
         const renderExpression = <AdjectivdAEForm {...props}/>
-        const adjectivdAEForm = TestUtils.createRenderer().render(renderExpression)
+        const adjectivdAEForm = ReactTestUtils.createRenderer().render(renderExpression)
         expect(adjectivdAEForm.type).toBe('div')
         expect(adjectivdAEForm.props.children.length).toBe(2) // base controls, buttons
         expect(adjectivdAEForm.props.children[1].props.children.length).toBe(3) // save, delete, cancel

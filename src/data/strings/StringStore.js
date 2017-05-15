@@ -1,20 +1,18 @@
 // @flow
-import {fromJS} from 'immutable'
 import {ReduceStore} from 'flux/utils'
+import {fromJS}      from 'immutable'
 
 import StringActionTypes from './StringActionTypes'
-import AppActionTypes    from '../app/AppActionTypes'
 import AppDispatcher     from '../AppDispatcher'
 import {langCode}        from '../I18NConstants'
+import AppActionTypes    from '../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../LocalStorage'
 const localStorageKey = 'StringStore'
 
 class StringStore extends ReduceStore {
 
-    constructor() {
-        super(AppDispatcher);
-    }
+    constructor() {super(AppDispatcher)}
 
     getInitialState():Object {
         if (localStorageAvailable) {
@@ -191,9 +189,7 @@ StringStore.en = {
     npWithAdjectives: {
         help10: 'A Noun Phrase can have any number of adjectives.'
     },
-    /**
-     * workbench
-     */
+
 
     // Plural or Singular
     //Level06: {
@@ -256,10 +252,26 @@ StringStore.zh = {
         help5: '你目前是0级，为了继续下一个阶段需要通过测验。'
     },
     nound: {
-        help10: '我们周围的人、事物、地点或抽象概念的名称叫做名词',
+        help10: '我们周围的东西叫做名词。',
+        help11: '为了写英文，你将会使用很多名词。',
+        help12: '这是你可以使用的名词字典。',
+        help13: '在开始只有少量的名词，但你可以随时添加更多的名词。',
         quiz1: '你可以添加一个新的名词吗?',
         quiz2: '你可以从这个列表中删除一个名词吗?',
         quiz3: '你能改变一个名词的拼写吗?'
+    },
+    definiteness: {
+        help10: 'Definite（确定）Indefinite（或不确定）',
+        help11: '名词通常这个词之前\'a\', \'an\',或\'the\'. 这三个词被称为\'articles\' （冠词）',
+        help12: '这个单词\'the\'叫做\'definite article\' (定冠词)。在英语中，名词往往在前面的一篇文章中出现，当演讲者相信听众已经知道他指的是什么。',
+        help13: '例如:买汽车。哪辆车已经是已知的，而且是确定的。',
+        help14: '这些单词\'a\'和\'an\'被称为\'indefinite articles\'(不定冠词)。在英语中，名词的前面往往是一篇\'indefinite articles\'，当说话者谈论的是一类类似的东西，而不认为听者已经知道他指的是什么。',
+        help15: '例如: 买一个苹果（an apple). 买哪个苹果？（indefinite）.',
+        help16: '如果我们有一个项目, 物品的身份不明确, 所以我们可以使用\'the.\'.',
+        help17: '例如: 买那辆车`. 已经明确知道哪辆车.',
+        quiz1: '选择一个名词的',
+        quiz2: '选择 确定（\'definite\'） 或 不确定（\'indefinite\'）.',
+        quiz3: '你能看到名词的变化吗?'
     },
     verbd: {
         help10: '陈述人或事物动作、情况、变化的词叫做动词',
@@ -276,21 +288,7 @@ StringStore.zh = {
         quiz2: 'Can you delete a adjective from this list?',
         quiz3: 'Can you change the spelling of a adjective?'
     },
-    // Definite or Indefinite noun
-    definiteness: {
-        help10: '确定（Definite）或不确定（Indefinite）',
-        help11: '名词通常这个词之前\'a\', \'an\',或\'the\'.',
-        help12: '如果我们有一组类似的项目和我们谈论任何其中之一, 哪些特定的项目我们正在讨论 \'indefinite\' 我们使用 \'a\' 或 \'an\'.',
-        help13: '在本例中，如果名词以元音开头则使用\'an\'，如果名词以辅音开头则使用\'a\'. 我们使用这个规则是为了使发音更好.',
-        help14: '例如:买一辆车（a car). 去买哪一辆车？（indefinite）',
-        help15: '例如: 买一个苹果（an apple). 买哪个苹果？（indefinite）.',
 
-        help16: '如果我们有一个项目, 物品的身份不明确, 所以我们可以使用\'the.\'.',
-        help17: '例如: 买那辆车`. 已经明确知道哪辆车.',
-        quiz1: '选择一个名词的',
-        quiz2: '选择 确定（\'definite\'） 或 不确定（\'indefinite\'）.',
-        quiz3: '你能看到名词的变化吗?'
-    },
     phrase: {
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',

@@ -45,12 +45,6 @@ const NoundActions = {
             base: base
         })
     },
-    /*onChangeBase(base:string):void {
-        AppDispatcher.dispatch({
-            type: NoundActionTypes.ON_CHANGE_BASE,
-            base: base
-        })
-    },*/
     onChangePlural(plural:string):void {
         AppDispatcher.dispatch({
             type: NoundActionTypes.ON_CHANGE_PLURAL,
