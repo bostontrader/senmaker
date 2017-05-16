@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 
-import AdjectivdRow          from './AdjectivdRow'
+import AdjectivdRow from './AdjectivdRow'
 
 function AdjectivdTable(props:Object):?Object {
 

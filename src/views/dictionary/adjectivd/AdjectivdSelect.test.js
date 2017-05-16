@@ -1,7 +1,7 @@
-import React     from "react"
+import React          from "react"
 import ReactTestUtils from "react-dom/test-utils"
 
-import AdjectivdSelect    from './AdjectivdSelect'
+import AdjectivdSelect from './AdjectivdSelect'
 
 describe("AdjectivdSelect", () => {
 

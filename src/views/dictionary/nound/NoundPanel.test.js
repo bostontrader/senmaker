@@ -1,14 +1,13 @@
-//import {Map} from 'immutable'
 import React from 'react'
 
 import ReactTestUtils    from 'react-dom/test-utils'
-import rtRenderer        from 'react-test-renderer'
 import {findWithType}    from 'react-shallow-testutils'
 import {findAllWithType} from 'react-shallow-testutils'
+import rtRenderer        from 'react-test-renderer'
 
-import NoundAEForm  from './addedit/NoundAEForm'
 import NoundPanel   from './NoundPanel'
 import NoundTable   from './NoundTable'
+import NoundAEForm  from './addedit/NoundAEForm'
 import initialState from '../../../data/StateGetter'
 
 describe("NoundPanel", function() {

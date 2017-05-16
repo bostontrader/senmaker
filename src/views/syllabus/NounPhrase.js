@@ -27,7 +27,7 @@ function NounPhrases(props:Object):Object {
     return (
         <div>
             <LessonNavigator {...props} />
-            <div className="help" style={style}>
+            <div id="help" style={style}>
                 <h1>Noun Phrases</h1>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
@@ -37,7 +37,7 @@ function NounPhrases(props:Object):Object {
 
             <NPPanel npPanelLevel={NPPanelLevel.L2} {...props} />
 
-            <div className="quiz" style={style}>
+            <div id="quiz" style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>
                     <tbody>

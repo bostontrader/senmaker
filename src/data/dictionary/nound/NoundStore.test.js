@@ -1,5 +1,6 @@
 import NoundActionTypes from './NoundActionTypes'
 import NoundStore       from './NoundStore'
+import initialState     from '../../StateGetter'
 import {noundExamples}  from '../../TestData'
 import AppActionTypes   from '../../app/AppActionTypes'
 
@@ -14,7 +15,7 @@ describe('NoundStore', () => {
         pluralization_rule: nound.pluralization_rule
     }))
 
-    beforeEach(() => {state = NoundStore.getInitialState()})
+    beforeEach(() => {state = initialState.nound.getIn(['dict'])})
 
     it('ON_CLICK_APP_RESET', () => {
         const initialState = state

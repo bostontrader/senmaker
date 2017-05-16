@@ -1,6 +1,7 @@
 import NoundAEStore        from './NoundAEStore'
 import NoundActionTypes    from '../NoundActionTypes'
 import {PluralizationRule} from '../NoundConstants'
+import initialState        from '../../../StateGetter'
 import {noundExamples}     from '../../../TestData'
 import AppActionTypes      from '../../../app/AppActionTypes'
 
@@ -13,7 +14,7 @@ describe('NoundAEStore', () => {
 
     const perturbState = () => {state = NoundAEStore.reduce(state, {type: NoundActionTypes.ON_CLICK_ADD_NOUND})}
 
-    beforeEach(() => {state = NoundAEStore.getInitialState()})
+    beforeEach(() => {state = initialState.nound.getIn(['addedit'])})
 
     it('ON_CLICK_APP_RESET', () => {
         const initialState = state

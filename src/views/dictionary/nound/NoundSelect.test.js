@@ -1,7 +1,7 @@
-import React     from "react"
+import React          from "react"
 import ReactTestUtils from "react-dom/test-utils"
 
-import NoundSelect    from './NoundSelect'
+import NoundSelect from './NoundSelect'
 
 describe("NoundSelect", () => {
 

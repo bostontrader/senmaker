@@ -11,7 +11,7 @@ import {MakeMapOfNound} from '../../JSONParseUtils'
 import {validateNound}  from '../../Validator'
 
 import {localStorageAvailable} from '../../../LocalStorage'
-const localStorageKey = 'NoundStore'
+const localStorageKey:string = 'NoundStore'
 
 // We want to provide a migration capacity for the format of this store.  It's serialized
 // into localStorage and there's no telling when old versions will be seen in the future.

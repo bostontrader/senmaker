@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 
-import Adjectivd             from '../../../data/dictionary/adjectivd/Adjectivd'
-import AdjectivdActions      from '../../../data/dictionary/adjectivd/AdjectivdActions'
+import Adjectivd        from '../../../data/dictionary/adjectivd/Adjectivd'
+import AdjectivdActions from '../../../data/dictionary/adjectivd/AdjectivdActions'
 
 function AdjectivdRow(props:Object):Object {
 

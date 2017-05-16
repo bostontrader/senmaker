@@ -1,6 +1,6 @@
-import React      from "react"
-import ReactTestUtils  from "react-dom/test-utils"
-import rtRenderer from 'react-test-renderer'
+import React          from "react"
+import ReactTestUtils from "react-dom/test-utils"
+import rtRenderer     from 'react-test-renderer'
 
 import AdjectivdRow        from './AdjectivdRow'
 import {adjectivdExamples} from '../../../data/TestData'

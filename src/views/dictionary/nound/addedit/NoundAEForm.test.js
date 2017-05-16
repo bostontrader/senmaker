@@ -16,15 +16,6 @@ describe("NoundAEForm", () => {
 
     beforeEach( () => {state = initialState})
 
-    /*beforeEach( () => {
-        state = {
-            nound: Map({
-                addedit: NoundAEStore.getInitialState()
-            }),
-            strings:StringStore.getInitialState()
-        }
-    })*/
-
     describe("NoundPanelLevel.BASE", () => {
 
         it("add mode", () => {

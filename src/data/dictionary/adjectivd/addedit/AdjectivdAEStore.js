@@ -11,7 +11,7 @@ import {validateAdjectivd}  from '../../../Validator'
 import AppActionTypes   from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../../LocalStorage'
-const localStorageKey = 'AdjectivdAEStore'
+const localStorageKey:string = 'AdjectivdAEStore'
 
 /*
  This store manages all state required to support the add/edit operations on a adjectivd.
@@ -26,10 +26,24 @@ const localStorageKey = 'AdjectivdAEStore'
  We use the onClickAddAdjectivd flag for purposes of code clarity.
 
  */
+
+// We want to provide a migration capacity for the format of this store.  It's serialized
+// into localStorage and there's no telling when old versions will be seen in the future.
+const initialStates:Array<Object> = [
+    Map({
+        addAdjectivd: false,
+        adjectivd: new Adjectivd()
+    }),
+    Map({
+        version:1,
+        addAdjectivd: false,
+        adjectivd: new Adjectivd()
+    })
+]
+
 class AdjectivdAEStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher)
-    }
+
+    constructor() {super(AppDispatcher)}
 
     getInitialState():Object {
 
@@ -37,15 +51,34 @@ class AdjectivdAEStore extends ReduceStore {
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = fromJS(JSON.parse(localStorageState))
+                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
                 let newAdjectivd = MakeAdjectivd(originalParse.getIn(['adjectivd']))
                 return originalParse.set('adjectivd',newAdjectivd)
             }
 
         }
 
-        return AdjectivdAEStore.initialState
+        return initialStates.slice(-1)[0]
 
+    }
+
+    // Given an originalFormat state object migrate to the most current version
+    migrate(originalFormat:Object):Object {
+        const currentInitialState:Object = initialStates.slice(-1)[0]
+        const originalVersion:number = originalFormat.getIn(['version'])
+
+        // If the version is undefined then we start fresh
+        if(originalVersion === undefined)
+            return currentInitialState
+
+        // If the version is the most recent
+        if (originalVersion === currentInitialState.getIn(['version']))
+            return originalFormat
+
+        // Else migrate from the originalVersion to the current version
+        // But at this time there are no intermediate version to migrate through
+        // so do nothing
+        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {
@@ -56,7 +89,7 @@ class AdjectivdAEStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = AdjectivdAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open the AdjectivdAddForm
@@ -66,14 +99,14 @@ class AdjectivdAEStore extends ReduceStore {
 
             // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm
             case AdjectivdActionTypes.ON_CLICK_CANCEL:
-                newState = AdjectivdAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm (but the delete button
             // is only present on NounEditForm.)
             // AdjectivdStore will also catch this event and it's responsible for the actual deletion.
             case AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD:
-                newState = AdjectivdAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open AdjectivdEditForm and populate with the given data.
@@ -90,7 +123,7 @@ class AdjectivdAEStore extends ReduceStore {
             // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm. We don't need to specify which,
             // the same state should close either one.
             case AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD:
-                newState = AdjectivdAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             case AdjectivdActionTypes.ON_CHANGE_BASE:
@@ -108,9 +141,5 @@ class AdjectivdAEStore extends ReduceStore {
     }
 }
 
-AdjectivdAEStore.initialState = Map({
-    addAdjectivd: false,
-    adjectivd: new Adjectivd()
-})
-
 export default new AdjectivdAEStore()
+export {initialStates}

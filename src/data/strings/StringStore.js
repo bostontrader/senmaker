@@ -114,7 +114,7 @@ StringStore.en = {
         help13: 'Here we repackage that into an explicit noun phrase format.',
         // although a noun phrase is usually more than one word, it could be just a single noun.
         quiz1: 'Can you add a new noun phrase?',
-        quiz2: 'Can you delete a noun phrase from this list?',
+        quiz2: 'Can you change the noun or article in a noun phrase?',
         quiz3: 'Can you change the spelling of a noun phrase?'
     },
 

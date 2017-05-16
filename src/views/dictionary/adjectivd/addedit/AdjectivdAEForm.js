@@ -2,7 +2,6 @@
 import React from 'react'
 
 import AdjectivdActions            from '../../../../data/dictionary/adjectivd/AdjectivdActions'
-//import {AdjectivdPanelLevel}       from '../../../../data/dictionary/adjectivd/AdjectivdConstants'
 import {validateAdjectivd}         from '../../../../data/Validator'
 
 function AdjectivdAEForm(props:Object):Object {
@@ -40,31 +39,11 @@ function AdjectivdAEForm(props:Object):Object {
 
     let adjectivdAEForm:Object = <div></div>
 
-    //switch(props.adjectivdPanelLevel) {
-        //case AdjectivdPanelLevel.BASE:
-            adjectivdAEForm =
-                <div id='adjectivd-addedit-form' style={style}>
-                    {baseControls}
-                    {theButtons}
-                </div>
-            //break
-        //case AdjectivdPanelLevel.PLURALIZATION:
-            //adjectivdAEForm =
-                /*<div id='adjectivd-addedit-form' style={style}>
-                    {baseControls}
-                    <PluralizationRuleSelect pluralization_rule={0}/>
-                    <label htmlFor='plural'>Plural</label>
-                    <input id='plural' name='plural' type='text'
-                        value={props.adjectivd.getIn(['addedit','adjectivd','plural'])}
-                        onChange={(e)=>AdjectivdActions.onChangePlural(e.target.value)}
-                    />
-                    {theButtons}
-                </div>*/
-            //break
-        //default:
-            // adjectivdAEForm already has a suitable default. Do nothing.
-
-    //}
+    adjectivdAEForm =
+        <div id='adjectivd-addedit-form' style={style}>
+            {baseControls}
+            {theButtons}
+        </div>
 
     return adjectivdAEForm
 

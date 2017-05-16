@@ -1,26 +1,23 @@
 import {Map} from 'immutable'
 import React from 'react'
 
-import ReactTestUtils         from 'react-dom/test-utils'
-import rtRenderer        from 'react-test-renderer'
+import ReactTestUtils from 'react-dom/test-utils'
+import rtRenderer     from 'react-test-renderer'
 
-//import {AdjectivdPanelLevel} from '../../../../data/dictionary/adjectivd/AdjectivdConstants'
-import AdjectivdAEForm       from './AdjectivdAEForm'
-import AdjectivdAEStore      from '../../../../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
-import StringStore       from '../../../../data/strings/StringStore'
+import AdjectivdAEForm  from './AdjectivdAEForm'
+import initialState     from '../../../../data/StateGetter'
+import AdjectivdAEStore from '../../../../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
+import StringStore      from '../../../../data/strings/StringStore'
 
 describe("AdjectivdEditForm", () => {
 
-    it("Renders a AdjectivdAEForm, add mode", () => {
-        const props = {
-            adjectivd: Map({
-                addedit: AdjectivdAEStore.getInitialState().setIn(['addAdjectivd'],true),
-                nouns: Map()
-            }),
-            strings:StringStore.getInitialState()
-        }
+    let state
 
-        const renderExpression = <AdjectivdAEForm {...props} />
+    beforeEach( () => {state = initialState})
+
+    it("Renders an AdjectivdAEForm, add mode", () => {
+        state.adjectivd = state.adjectivd.setIn(['addedit','addAdjectivd'],true)
+        const renderExpression = <AdjectivdAEForm {...state} />
         const adjectivdAEForm = ReactTestUtils.createRenderer().render(renderExpression)
         expect(adjectivdAEForm.type).toBe('div')
         expect(adjectivdAEForm.props.children.length).toBe(2) // base controls, buttons
@@ -30,15 +27,10 @@ describe("AdjectivdEditForm", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("Renders a AdjectivdAEForm, edit mode", () => {
-        const props = {
-            adjectivd: Map({
-                addedit: AdjectivdAEStore.getInitialState().setIn(['adjectivd','id'],'1'),
-                nouns: Map()
-            }),
-            strings:StringStore.getInitialState()
-        }
-        const renderExpression = <AdjectivdAEForm {...props}/>
+    it("Renders an AdjectivdAEForm, edit mode", () => {
+        state.adjectivd = state.adjectivd.setIn(['addedit','addAdjectivd'],false)
+        state.adjectivd = state.adjectivd.setIn(['addedit','adjectivd','id'],'1')
+        const renderExpression = <AdjectivdAEForm {...state}/>
         const adjectivdAEForm = ReactTestUtils.createRenderer().render(renderExpression)
         expect(adjectivdAEForm.type).toBe('div')
         expect(adjectivdAEForm.props.children.length).toBe(2) // base controls, buttons

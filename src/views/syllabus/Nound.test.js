@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ReactTestUtils          from 'react-dom/test-utils'
+import ReactTestUtils     from 'react-dom/test-utils'
 import {findWithType}     from 'react-shallow-testutils'
 import {findAllWithClass} from 'react-shallow-testutils'
 
@@ -8,6 +8,8 @@ import LessonNavigator  from './LessonNavigator'
 import Nound            from './Nound'
 import NoundPanel       from '../dictionary/nound/NoundPanel'
 import {countWithId}    from '../../TestUtils'
+import {heapsPermute}   from '../../TestUtils'
+import {swap}           from '../../TestUtils'
 import initialState     from '../../data/StateGetter'
 import NoundActionTypes from '../../data/dictionary/nound/NoundActionTypes'
 import QuizStore        from '../../data/quiz/QuizStore'
@@ -28,30 +30,6 @@ describe("Nound", function() {
             expect(findWithType(noundComponent,NoundPanel))
             expect(countWithId(noundComponent,'quiz')).toBe(1)
             expect(findWithType(noundComponent,LessonNavigator))
-        }
-
-        const swap = (array, pos1, pos2) => {
-            const temp = array[pos1]
-            array[pos1] = array[pos2]
-            array[pos2] = temp
-        }
-
-        /*
-        Given an array of actions to execute, enumerate all possible orders of execution
-        and then sequentially pass each permutation to the testFunction to be executed.
-         */
-        const heapsPermute = (actions, testFunction, n) => {
-            n = n || actions.length // set n1 default to actions.length
-            if (n === 1) {
-                // If there is only one element in the actions, then just output that
-                testFunction(actions)
-            } else {
-                for (let i = 1; i <= n; i += 1) {
-                    heapsPermute(actions, testFunction, n - 1)
-                    let j = (n % 2) ? 1 : i
-                    swap(actions, j - 1, n - 1); // -1 to account for javascript zero-indexing
-                }
-            }
         }
 
         /*

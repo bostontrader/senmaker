@@ -1,52 +1,48 @@
-import {Map} from 'immutable'
 import React from 'react'
 
-import ReactTestUtils         from 'react-dom/test-utils'
+import ReactTestUtils    from 'react-dom/test-utils'
 import {findAllWithType} from 'react-shallow-testutils'
 import rtRenderer        from 'react-test-renderer'
 
 import AdjectivdRow   from './AdjectivdRow'
 import AdjectivdTable from './AdjectivdTable'
 
+import initialState      from '../../../data/StateGetter'
 import {adjectivdExamples}  from '../../../data/TestData'
-import AppStore             from '../../../data/app/AppStore'
 import AdjectivdActionTypes from '../../../data/dictionary/adjectivd/AdjectivdActionTypes'
 import AdjectivdStore       from '../../../data/dictionary/adjectivd/AdjectivdStore'
-import StringStore          from '../../../data/strings/StringStore'
 
 describe("AdjectivdTable", function() {
 
-    /*beforeEach(function() {
-        this.state = {}
-        this.state.app     = AppStore.getInitialState()
-        this.state.strings = StringStore.getInitialState()
-        this.state.adjectivd = Map({
-            dict:AdjectivdStore.getInitialState()
-        })
+    let state
 
-        this.dispatch = action => {
-            this.state.app   = AppStore .reduce(this.state.app, action)
-            const n = AdjectivdStore.reduce(this.state.adjectivd.get('dict'), action)
-            this.state.adjectivd = this.state.adjectivd.set('dict',n)
-        }
-    })*/
+    let dispatch = action => {
+        const n = AdjectivdStore.reduce(state.adjectivd.get('dict'), action)
+        state.adjectivd = state.adjectivd.set('dict',n)
+    }
 
-    it("Renders no AdjectivdTable", function() {
-        //const renderExpression = <AdjectivdTable {...this.state} />
-        //const adjectivdTable = ReactTestUtils.createRenderer().render(renderExpression)
-
-        // Zero AdjectivdTable
-        //const adjectivdRows = findAllWithType(adjectivdTable, AdjectivdTable)
-        //expect(adjectivdRows.length).toBe(0)
-
-        //const tree = rtRenderer.create(renderExpression).toJSON()
-        //expect(tree).toMatchSnapshot()
+    beforeEach(() => {
+        state = {}
+        state.strings   = initialState.strings
+        state.adjectivd = initialState.adjectivd
     })
 
-    /*it("Renders an AdjectivdPanelLevel with one item.", function() {
-        this.dispatch({type: AdjectivdActionTypes.INSERT_ADJECTIVD, adjectivd: adjectivdExamples.a})
+    it("Renders no AdjectivdTable", function() {
+        const renderExpression = <AdjectivdTable {...state} />
+        const adjectivdTable = ReactTestUtils.createRenderer().render(renderExpression)
 
-        const renderExpression = <AdjectivdTable {...this.state} />
+        // Zero AdjectivdTable
+        const adjectivdRows = findAllWithType(adjectivdTable, AdjectivdTable)
+        expect(adjectivdRows.length).toBe(0)
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
+
+    it("Renders an AdjectivdPanelLevel with one item.", function() {
+        dispatch({type: AdjectivdActionTypes.INSERT_ADJECTIVD, adjectivd: adjectivdExamples.a})
+
+        const renderExpression = <AdjectivdTable {...state} />
         const adjectivdTable = ReactTestUtils.createRenderer().render(renderExpression)
         expect(adjectivdTable.type).toBe('table')
 
@@ -62,10 +58,10 @@ describe("AdjectivdTable", function() {
     })
 
     it("Renders an AdjectivdTable with more than one item.", function() {
-        this.dispatch({type: AdjectivdActionTypes.INSERT_ADJECTIVD, adjectivd: adjectivdExamples.a})
-        this.dispatch({type: AdjectivdActionTypes.INSERT_ADJECTIVD, adjectivd: adjectivdExamples.b})
+        dispatch({type: AdjectivdActionTypes.INSERT_ADJECTIVD, adjectivd: adjectivdExamples.a})
+        dispatch({type: AdjectivdActionTypes.INSERT_ADJECTIVD, adjectivd: adjectivdExamples.b})
 
-        const renderExpression = <AdjectivdTable {...this.state} />
+        const renderExpression = <AdjectivdTable {...state} />
         const adjectivdTable = ReactTestUtils.createRenderer().render(renderExpression)
         expect(adjectivdTable.type).toBe('table')
 
@@ -78,7 +74,6 @@ describe("AdjectivdTable", function() {
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
-    })*/
-
+    })
 
 })
