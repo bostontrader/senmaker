@@ -5,7 +5,7 @@ import LessonNavigator from './LessonNavigator'
 import NPPanel         from '../np/NPPanel'
 import {NPPanelLevel}  from '../../data/np/NPConstants'
 
-function NounPhrases(props:Object):Object {
+function NPAdjectives(props:Object):Object {
 
     const style:Object = {
         border: '1px solid black',
@@ -13,12 +13,12 @@ function NounPhrases(props:Object):Object {
     }
 
     const q:Object = props.quiz
-    const s:Object = props.strings.npWithAdjectives
+    const s:Object = props.strings.npAdjective
 
     return (
         <div>
+            <LessonNavigator {...props} />
             <div className="help" style={style}>
-                <h1>Noun Phrases with Adjectives</h1>
                 <p>{s.help10}</p>
             </div>
 
@@ -31,10 +31,9 @@ function NounPhrases(props:Object):Object {
                     </tbody>
                 </table>
             </div>
-            <LessonNavigator {...props} />
         </div>
     )
 
 }
 
-export default NounPhrases
+export default NPAdjectives

@@ -1,22 +1,36 @@
 // @flow
+import {fromJS}      from 'immutable'
+import {Map}         from 'immutable'
 import {ReduceStore} from 'flux/utils'
-import {fromJS, Map} from 'immutable'
 
 import Verbd            from './Verbd'
 import VerbdActionTypes from './VerbdActionTypes'
-import {PastFormRule}   from './VerbdConstants'
-import AppActionTypes   from '../../app/AppActionTypes'
+//import {PastFormRule}   from './VerbdConstants'
 import AppDispatcher    from '../../AppDispatcher'
 import {MakeMapOfVerbd} from '../../JSONParseUtils'
 import {validateVerbd}  from '../../Validator'
+import AppActionTypes   from '../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../LocalStorage'
-const localStorageKey = 'VerbdStore'
+const localStorageKey:string = 'VerbdStore'
+
+// We want to provide a migration capacity for the format of this store.  It's serialized
+// into localStorage and there's no telling when old versions will be seen in the future.
+const initialStates:Array<Object> = [
+    Map({
+        nextid:1,
+        coll:Map()
+    }),
+    Map({
+        version:1,
+        nextid:1,
+        coll:Map()
+    })
+]
 
 class VerbdStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher)
-    }
+
+    constructor() {super(AppDispatcher)}
 
     getInitialState() {
 
@@ -24,14 +38,33 @@ class VerbdStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = fromJS(JSON.parse(localStorageState))
+                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
                 let newColl = MakeMapOfVerbd(originalParse.getIn(['coll']))
                 return originalParse.set('coll',newColl)
             }
         }
 
-        return VerbdStore.initialState
+        return initialStates.slice(-1)[0]
 
+    }
+
+    // Given an originalFormat state object migrate to the most current version
+    migrate(originalFormat:Object):Object {
+        const currentInitialState:Object = initialStates.slice(-1)[0]
+        const originalVersion:number = originalFormat.getIn(['version'])
+
+        // If the version is undefined then we start fresh
+        if(originalVersion === undefined)
+            return currentInitialState
+
+        // If the version is the most recent
+        if (originalVersion === currentInitialState.getIn(['version']))
+            return originalFormat
+
+        // Else migrate from the originalVersion to the current version
+        // But at this time there are no intermediate version to migrate through
+        // so do nothing
+        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {
@@ -45,7 +78,9 @@ class VerbdStore extends ReduceStore {
                 id: id.toString(),
                 base: verbd.get('base'),
                 pastForm: verbd.get('pastForm'),
-                pastForm_rule: verbd.get('pastForm_rule')
+                pastForm_rule: verbd.get('pastForm_rule'),
+                aspectOrSimple: verbd.get('aspectOrSimple'),
+                aspect: verbd.get('aspect')
             }))
         }
 
@@ -55,7 +90,7 @@ class VerbdStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = VerbdStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
@@ -77,7 +112,6 @@ class VerbdStore extends ReduceStore {
             // Insert a new record programmatically, w/o a UI.
             case VerbdActionTypes.INSERT_VERBD:
                 newState = insertNewRecord(action.verbd)
-
                 break
             
             default:
@@ -91,13 +125,5 @@ class VerbdStore extends ReduceStore {
     }
 }
 
-VerbdStore.initialState = Map({
-    nextid:1,
-    coll:Map([
-        //['1',Verbd({id: '1', base: 'eat',  pastForm: 'ate',    pastForm_rule: PastFormRule.Irregular})],
-        //['2',Verbd({id: '2', base: 'hit',  pastForm: 'hit',    pastForm_rule: PastFormRule.NoChange})],
-        //['3',Verbd({id: '3', base: 'jump', pastForm: 'jumped', pastForm_rule: PastFormRule.Append_ed})]
-    ])
-})
-
 export default new VerbdStore()
+export {initialStates}

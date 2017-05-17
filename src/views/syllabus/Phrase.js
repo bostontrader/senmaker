@@ -22,7 +22,6 @@ function Phrase(props:Object):Object {
         <div>
             <LessonNavigator {...props} />
             <div className="help" style={style}>
-                <h1>Phrases</h1>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
             </div>

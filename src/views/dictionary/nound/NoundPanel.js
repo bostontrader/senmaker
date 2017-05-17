@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 
-import NoundAEForm  from './addedit/NoundAEForm'
 import NoundTable   from './NoundTable'
+import NoundAEForm  from './addedit/NoundAEForm'
 import NoundActions from '../../../data/dictionary/nound/NoundActions'
 
 /*

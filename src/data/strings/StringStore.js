@@ -18,8 +18,12 @@ class StringStore extends ReduceStore {
         if (localStorageAvailable) {
             const localStorageState = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return JSON.parse(localStorageState) // not immutable
+            //if(localStorageState) {
+                //let n = StringStore.initialState
+                //n.lang = parseInt(localStorageState)
+                //console.log(localStorageState)
+                //return n
+            //}
         }
         return StringStore.initialState
     }
@@ -46,11 +50,10 @@ class StringStore extends ReduceStore {
                 // do nothing, newState is already set to the existing state
         }
 
-        // We don't really need to save all these strings to localStorage.  But presently
-        // we need to do this in order to save the language selection. Find a more elegant way
-        // to do this.
+        // We don't need to save all these strings to localStorage but we do
+        // want to save the language selection.
         if(localStorageAvailable)
-            localStorage.setItem(localStorageKey, JSON.stringify(newState))
+            localStorage.setItem(localStorageKey, newState.lang)
 
         return newState
     }
@@ -73,6 +76,7 @@ StringStore.en = {
     verbs: 'Verbs',
 
     intro: { // 0
+        title: 'Introduction',
         help1: 'This program will help you build an English composition.',
         help2: 'In order to do that you must first learn how to build smaller pieces of English.',
         help3: 'You can then assemble the small pieces of English into larger components.',
@@ -81,6 +85,7 @@ StringStore.en = {
     },
 
     nound: { // 1
+        title: 'Nouns',
         help10: 'The things around us are called nouns.',
         help11: 'In order to write English you will use many nouns.',
         help12: 'This is the dictionary of nouns that you can use.',
@@ -90,24 +95,26 @@ StringStore.en = {
         quiz3: 'Can you change the spelling of a noun?'
     },
     definiteness: { // 2
-        help10: 'Definite or Indefinite.',
-        help11: 'Nouns are usually preceded by the word \'a\', \'an\', or \'the\'.  These three words are called \'articles\'.',
-        help12: 'The word \'the\' is called the \'definite article\'. Nouns in English are frequently preceded by the definite article when the speaker believes that the listener already knows what he is referring to.',
-        help13: 'For example: Buy the car. Which particular car is already known and is definite.',
-        help14: 'The words \'a\' and \'an\' are called  \'indefinite articles\'. Nouns in English are frequently preceded by an indefinite article when the speaker is talking about any one of a class of similar items and does not think that the listener already knows what he is referring to.',
-        help15: 'In this case we use \'a\' when the noun starts with a consonant and \'an\' when the noun starts with a vowel. We use this rule in order to make pronunciation better.',
-        help16: 'For example: Buy a car. Which car to buy is indefinite.',
-        help17: 'For example: Buy an apple. Which apple to buy is also indefinite.',
+        title: 'Definite or Indefinite',
+        help10: 'Nouns are usually preceded by the word \'a\', \'an\', or \'the\'.  These three words are called \'articles\'.',
+        help11: 'The word \'the\' is called the \'definite article\'. Nouns in English are frequently preceded by the definite article when the speaker believes that the listener already knows what he is referring to.',
+        help12: 'For example: Buy the car. Which particular car is already known and is definite.',
+        help13: 'The words \'a\' and \'an\' are called  \'indefinite articles\'. Nouns in English have an indefinte article before them when the speaker is referring to any one of a class of similar items but does not know which particular item.',
+        help14: 'In this case we use \'a\' when the noun starts with a consonant and \'an\' when the noun starts with a vowel. We use this rule in order to make pronunciation better.',
+        help15: 'For example: Buy a car. The particular car to buy is indefinite.',
+        help16: 'For example: Buy an apple. The particular apple to buy is indefinite.',
 
         quiz1: 'Select a noun',
         quiz2: 'Select \'definite\' or \'indefinite\'.',
         quiz3: 'Can you see that the article changes?'
     },
     phrase: { // 3
+        title: 'Phrases',
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
     },
     np: { // 4
+        title: 'Noun Phrases',
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
         help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
         help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.',
@@ -117,7 +124,20 @@ StringStore.en = {
         quiz2: 'Can you change the noun or article in a noun phrase?',
         quiz3: 'Can you change the spelling of a noun phrase?'
     },
-
+    adjectivd: { // 5
+        title: 'Adjectives',
+        help10: 'We modify the meaning of nouns by using adjectives.',
+        help11: 'In order to write English you will use many adjectives.',
+        help12: 'This is the dictionary of adjectives that you can use.',
+        help13: 'At this time there are very few adjectives but you can add more adjectives whenever you like.',
+        quiz1: 'Can you add a new adjective?',
+        quiz2: 'Can you delete an adjective from this list?',
+        quiz3: 'Can you change the spelling of an adjective?'
+    },
+    npAdjective: { // 6
+        title: 'Noun Phrase with Adjectives',
+        help10: 'A Noun Phrase can have any number of adjectives.'
+    },
 
 
     verbd: { // 2
@@ -130,15 +150,7 @@ StringStore.en = {
         quiz3: 'Can you change the spelling of a verb?'
     },
 
-    adjectivd: { // 3
-        help10: 'We modify the meaning of nouns by using adjectives.',
-        help11: 'In order to write English you will use many adjectives.',
-        help12: 'This is the dictionary of adjectives that you can use.',
-        help13: 'At this time there are very few adjectives but you can add more adjectives whenever you like.',
-        quiz1: 'Can you add a new adjective?',
-        quiz2: 'Can you delete an adjective from this list?',
-        quiz3: 'Can you change the spelling of an adjective?'
-    },
+
 
 
 
@@ -186,9 +198,7 @@ StringStore.en = {
         help12: 'If we are writing about only one of something, then we use the base form of the noun.',
         help13: 'If we are writing about more than one, then we use the plural form of the noun.'
     },
-    npWithAdjectives: {
-        help10: 'A Noun Phrase can have any number of adjectives.'
-    },
+
 
 
     // Plural or Singular
@@ -244,14 +254,16 @@ StringStore.zh = {
     verb: 'Verb',
     verbs: '动词 Verbs',
 
-    intro: {
+    intro: { // 0
+        title: 'Introduction',
         help1: '这个程序将帮助您建立一个英语文章。',
         help2: '为了做到这一点你必须首先学习如何构建英语的小块（句子和段落）。',
         help3: '然后,您可以将英语的小块组装成更大的组件。',
         help4: '通过以下课程您将知道如何学习英语。',
         help5: '你目前是0级，为了继续下一个阶段需要通过测验。'
     },
-    nound: {
+    nound: { // 1
+        title: 'Nouns',
         help10: '我们周围的东西叫做名词。',
         help11: '为了写英文，你将会使用很多名词。',
         help12: '这是你可以使用的名词字典。',
@@ -260,40 +272,27 @@ StringStore.zh = {
         quiz2: '你可以从这个列表中删除一个名词吗?',
         quiz3: '你能改变一个名词的拼写吗?'
     },
-    definiteness: {
-        help10: 'Definite（确定）Indefinite（或不确定）',
-        help11: '名词通常这个词之前\'a\', \'an\',或\'the\'. 这三个词被称为\'articles\' （冠词）',
-        help12: '这个单词\'the\'叫做\'definite article\' (定冠词)。在英语中，名词往往在前面的一篇文章中出现，当演讲者相信听众已经知道他指的是什么。',
-        help13: '例如:买汽车。哪辆车已经是已知的，而且是确定的。',
-        help14: '这些单词\'a\'和\'an\'被称为\'indefinite articles\'(不定冠词)。在英语中，名词的前面往往是一篇\'indefinite articles\'，当说话者谈论的是一类类似的东西，而不认为听者已经知道他指的是什么。',
-        help15: '例如: 买一个苹果（an apple). 买哪个苹果？（indefinite）.',
-        help16: '如果我们有一个项目, 物品的身份不明确, 所以我们可以使用\'the.\'.',
-        help17: '例如: 买那辆车`. 已经明确知道哪辆车.',
+    definiteness: { // 2
+        title: 'Definite（确定）or Indefinite（或不确定）',
+        help10: '名词通常这个词之前\'a\', \'an\',或\'the\'. 这三个词被称为\'articles\' （冠词）',
+        help11: '这个单词\'the\'叫做\'definite article\' (定冠词)。在英语中，名词往往在前面的一篇文章中出现，当演讲者相信听众已经知道他指的是什么。',
+        help12: '例如:买 \'the car\'。哪辆车已经是已知的，而且是确定的。',
+        help13: '这些单词\'a\'和\'an\'被称为\'indefinite articles\'(不定冠词)。名词在他们之前有一个不定冠词，指的是同类类似的东西，但不知道具体指的哪个。',
+        help14: '在这种情况下，当名词从辅音开始时，使用\'a\'，当名词从元音开始时，使用\'an\'。 我们使用这个规则来使发音更好。',
+        help15: '例如:买 \'a car\'。 那辆车是不确定的。',
+        help16: '例如:买 \'an apple\'。 苹果是不确定的。',
+
         quiz1: '选择一个名词的',
         quiz2: '选择 确定（\'definite\'） 或 不确定（\'indefinite\'）.',
         quiz3: '你能看到名词的变化吗?'
     },
-    verbd: {
-        help10: '陈述人或事物动作、情况、变化的词叫做动词',
-        quiz1: '你可以添加一个新的动词吗?',
-        quiz2: '你可以从这个列表中删除一个动词吗?',
-        quiz3: '你能改变一个动词的拼写吗?'
-    },
-    adjectivd: {
-        help10: 'We modify the meaning of nouns by using adjectives.',
-        help11: 'In order to write English you will use many adjectives.',
-        help12: 'This is the dictionary of adjectives that you can use.',
-        help13: 'At this time there are very few adjectives but you can add more adjectives whenever you like.',
-        quiz1: 'Can you add a new adjective?',
-        quiz2: 'Can you delete a adjective from this list?',
-        quiz3: 'Can you change the spelling of a adjective?'
-    },
-
-    phrase: {
+    phrase: { // 3
+        title: 'Phrases',
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
     },
-    np: {
+    np: { // 4
+        title: 'Noun Phrases',
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
         help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
         help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.',
@@ -302,6 +301,29 @@ StringStore.zh = {
         quiz1: 'Can you add a new noun phrase?',
         quiz2: 'Can you delete a noun phrase from this list?',
         quiz3: 'Can you change the spelling of a noun phrase?'
+    },
+    adjectivd: { // 5
+        title: 'Adjectives',
+        help10: 'We modify the meaning of nouns by using adjectives.',
+        help11: 'In order to write English you will use many adjectives.',
+        help12: 'This is the dictionary of adjectives that you can use.',
+        help13: 'At this time there are very few adjectives but you can add more adjectives whenever you like.',
+        quiz1: 'Can you add a new adjective?',
+        quiz2: 'Can you delete a adjective from this list?',
+        quiz3: 'Can you change the spelling of a adjective?'
+    },
+    npAdjective: { // 6
+        title: 'Noun Phrase with Adjectives',
+        help10: 'A Noun Phrase can have any number of adjectives.'
+    },
+
+
+
+    verbd: {
+        help10: '陈述人或事物动作、情况、变化的词叫做动词',
+        quiz1: '你可以添加一个新的动词吗?',
+        quiz2: '你可以从这个列表中删除一个动词吗?',
+        quiz3: '你能改变一个动词的拼写吗?'
     },
     verbConjugation: [
         'Every verb has a \'base\' form and four other variations.',
@@ -348,9 +370,6 @@ StringStore.zh = {
         help11: '例如我们写关于一只猫或多只猫吗?',
         help12: '如果我们只写一个东西,我们用名词的基本形式。',
         help13: '如果我们写不止一个,那么我们使用名词的复数形式。'
-    },
-    npWithAdjectives: {
-        help10: 'A Noun Phrase can have any number of adjectives.'
     },
     lessonNavigator: {
         level: '级',

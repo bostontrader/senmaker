@@ -1,7 +1,7 @@
 import React from 'react'
 
 import LessonNavigator from './LessonNavigator'
-import AdjectivdPanel from '../dictionary/adjectivd/AdjectivdPanel'
+import AdjectivdPanel  from '../dictionary/adjectivd/AdjectivdPanel'
 
 function Adjectivd(props) {
 
@@ -26,7 +26,6 @@ function Adjectivd(props) {
         <div>
             <LessonNavigator {...props} />
             <div className="help" style={style}>
-                <h1>{props.strings.adjectivs}</h1>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
                 <p>{s.help12}</p>

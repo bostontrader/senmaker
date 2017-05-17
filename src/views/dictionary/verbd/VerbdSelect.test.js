@@ -1,7 +1,7 @@
-import React     from "react"
+import React          from "react"
 import ReactTestUtils from "react-dom/test-utils"
 
-import VerbdSelect    from './VerbdSelect'
+import VerbdSelect from './VerbdSelect'
 
 describe("VerbdSelect", () => {
 

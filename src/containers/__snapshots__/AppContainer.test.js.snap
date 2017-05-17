@@ -21,6 +21,18 @@ exports[`AppContainer 's Alive! 1`] = `
           级
            
           0
+          . 
+          Introduction
+           
+          <img
+            alt=""
+            height="40"
+            id="enFlag"
+            onClick={[Function]}
+            src="/img/us_flag.gif"
+            width="48"
+          />
+          
         </h3>
         
         
@@ -31,15 +43,7 @@ exports[`AppContainer 's Alive! 1`] = `
           返回
         </button>
         
-        <img
-          alt=""
-          height="40"
-          id="enFlag"
-          onClick={[Function]}
-          src="/img/us_flag.gif"
-          width="48"
-        />
-        
+        v.0.9.3
       </div>
       <div
         id="help"
@@ -50,9 +54,6 @@ exports[`AppContainer 's Alive! 1`] = `
           }
         }
       >
-        <h1>
-          Welcome to Senmaker
-        </h1>
         <p>
           这个程序将帮助您建立一个英语文章。
         </p>

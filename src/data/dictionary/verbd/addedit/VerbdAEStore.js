@@ -11,7 +11,7 @@ import {validateVerbd}  from '../../../Validator'
 import AppActionTypes   from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../../LocalStorage'
-const localStorageKey = 'VerbdAEStore'
+const localStorageKey:string = 'VerbdAEStore'
 
 /*
 This store manages all state required to support the add/edit operations on a verbd.
@@ -26,26 +26,59 @@ Else display nothing.
 We use the onClickAddVerbd flag for purposes of code clarity.
 
  */
-class VerbdAEStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher)
-    }
 
-    getInitialState() {
+// We want to provide a migration capacity for the format of this store.  It's serialized
+// into localStorage and there's no telling when old versions will be seen in the future.
+const initialStates:Array<Object> = [
+    Map({
+        addVerbd: false,
+        verbd: new Verbd()
+    }),
+    Map({
+        version:1,
+        addVerbd: false,
+        verbd: new Verbd()
+    })
+]
+
+class VerbdAEStore extends ReduceStore {
+
+    constructor() {super(AppDispatcher)}
+
+    getInitialState():Object {
 
         if (localStorageAvailable) {
-            const localStorageState = localStorage.getItem(localStorageKey)
+            const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = fromJS(JSON.parse(localStorageState))
-                let newVerbd = MakeVerbd(originalParse.getIn(['nound']))
-                return originalParse.set('nound',newVerbd)
+                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
+                let newVerbd = MakeVerbd(originalParse.getIn(['verbd']))
+                return originalParse.set('verbd',newVerbd)
             }
 
         }
 
-        return VerbdAEStore.initialState
+        return initialStates.slice(-1)[0]
 
+    }
+
+    // Given an originalFormat state object migrate to the most current version
+    migrate(originalFormat:Object):Object {
+        const currentInitialState:Object = initialStates.slice(-1)[0]
+        const originalVersion:number = originalFormat.getIn(['version'])
+
+        // If the version is undefined then we start fresh
+        if(originalVersion === undefined)
+            return currentInitialState
+
+        // If the version is the most recent
+        if (originalVersion === currentInitialState.getIn(['version']))
+            return originalFormat
+
+        // Else migrate from the originalVersion to the current version
+        // But at this time there are no intermediate version to migrate through
+        // so do nothing
+        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {
@@ -56,7 +89,7 @@ class VerbdAEStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = VerbdAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open the VerbdAddForm
@@ -66,14 +99,14 @@ class VerbdAEStore extends ReduceStore {
 
             // Signal the UI to close VerbdAddForm or VerbdEditForm
             case VerbdActionTypes.ON_CLICK_CANCEL:
-                newState = VerbdAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to close VerbdAddForm or VerbdEditForm (but the delete button
             // is only present on VerbEditForm.)
             // VerbdStore will also catch this event and it's responsible for the actual deletion.
             case VerbdActionTypes.ON_CLICK_DELETE_VERBD:
-                newState = VerbdAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open VerbdEditForm and populate with the given data.
@@ -90,7 +123,7 @@ class VerbdAEStore extends ReduceStore {
             // Signal the UI to close VerbdAddForm or VerbdEditForm. We don't need to specify which,
             // the same state should close either one.
             case VerbdActionTypes.ON_CLICK_SAVE_VERBD:
-                newState = VerbdAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             case VerbdActionTypes.ON_CHANGE_BASE:
@@ -112,9 +145,5 @@ class VerbdAEStore extends ReduceStore {
     }
 }
 
-VerbdAEStore.initialState = Map({
-    addVerbd: false,
-    verbd: new Verbd()
-})
-
 export default new VerbdAEStore()
+export {initialStates}

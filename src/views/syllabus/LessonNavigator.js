@@ -44,13 +44,13 @@ function LessonNavigator(props:Object):Object {
 
     return (
         <div className="lesson-navigator" style={style}>
-            <h3>{s.level} {props.app.getIn(['level','currentLevel'])}</h3>
+            <h3>{s.level} {props.app.getIn(['level','currentLevel'])}. {props.strings[props.app.getIn(['level','currentLesson'])].title} {enFlag}{zhFlag}</h3>
             {previousButton}
             {nextButton}
             {resetButton}
             {cheatButton}
-            {enFlag}
-            {zhFlag}
+            v.0.9.3
+
         </div>
     )
 }

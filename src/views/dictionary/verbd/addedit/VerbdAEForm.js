@@ -36,8 +36,8 @@ function VerbdAEForm(props:Object):Object {
     const buttonDelete:Object = <button id='delete-verbd' onClick={onDelete}>{s.delete}</button>
     const buttonCancel:Object = <button id='cancel'       onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
 
-    const theButtons:Object = (props.verbd.getIn(['addedit','verbd','id'])) ?
-        <div>{buttonSave}{buttonDelete}{buttonCancel}</div> : <div>{buttonSave}{buttonCancel}</div>
+    const theButtons:Object = (props.verbd.getIn(['addedit','addVerbd'])) ?
+        <div>{buttonSave}{buttonCancel}</div> : <div>{buttonSave}{buttonDelete}{buttonCancel}</div>
 
     let verbdAEForm:Object = <div></div>
 

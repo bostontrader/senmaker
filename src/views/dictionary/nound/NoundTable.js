@@ -8,7 +8,13 @@ function NoundTable(props:Object):?Object {
 
     let noundTable:?Object = null
 
-    const noundRows:Object = [...props.nound.getIn(['dict','coll']).values()].map(nound => (
+    const sortedNounds:Object = props.nound.getIn(['dict','coll']).sort((a,b)=>{
+        if (a.get('base') <   b.get('base')) {return -1 }
+        if (a.get('base') >   b.get('base')) {return 1 }
+        if (a.get('base') === b.get('base')) {return 0 }
+    })
+
+    const noundRows:Object = [...sortedNounds.values()].map(nound => (
         <NoundRow key={nound.get('id')} nound={nound} noundPanelLevel={props.noundPanelLevel} strings={props.strings} />
     ))
 

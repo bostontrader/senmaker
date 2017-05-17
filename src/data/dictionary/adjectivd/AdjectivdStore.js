@@ -121,3 +121,4 @@ class AdjectivdStore extends ReduceStore {
 }
 
 export default new AdjectivdStore()
+export {initialStates}

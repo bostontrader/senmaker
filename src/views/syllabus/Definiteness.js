@@ -33,14 +33,13 @@ function Definiteness(props:Object):Object {
         <div>
             <LessonNavigator cheat={true} {...props} />
             <div className="help" style={style}>
-                <h1>{s.help10}</h1>
+                <p>{s.help10}</p>
                 <p>{s.help11}</p>
                 <p>{s.help12}</p>
                 <p>{s.help13}</p>
                 <p>{s.help14}</p>
                 <p>{s.help15}</p>
                 <p>{s.help16}</p>
-                <p>{s.help17}</p>
             </div>
 
             <NPAEForm npPanelLevel={NPPanelLevel.L1} {...props} />

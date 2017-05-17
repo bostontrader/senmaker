@@ -1,6 +1,6 @@
-import React      from "react"
-import ReactTestUtils  from "react-dom/test-utils"
-import rtRenderer from 'react-test-renderer'
+import React          from "react"
+import ReactTestUtils from "react-dom/test-utils"
+import rtRenderer     from 'react-test-renderer'
 
 import VerbdRow          from './VerbdRow'
 import {verbdExamples}   from '../../../data/TestData'
@@ -36,7 +36,7 @@ describe("VerbdRow", () => {
         expect(tree).toMatchSnapshot()
     })
 
-    it("renders a VerbdPanelLevel.MAX VerbdRow", () => {
+    /*it("renders a VerbdPanelLevel.MAX VerbdRow", () => {
         props = {verbd:verbdExamples.a, verbdPanelLevel:VerbdPanelLevel.MAX, strings: StringStore.getInitialState()}
         renderExpression = <VerbdRow {...props} />
         verbdRow = ReactTestUtils.createRenderer().render(renderExpression)
@@ -45,6 +45,6 @@ describe("VerbdRow", () => {
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
-    })
+    })*/
 
 })

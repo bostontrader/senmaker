@@ -8,7 +8,13 @@ function VerbdTable(props:Object):?Object {
 
     let verbdTable:?Object = null
 
-    const verbdRows:Object = [...props.verbd.getIn(['dict','coll']).values()].map(verbd => (
+    const sortedVerbds:Object = props.verbd.getIn(['dict','coll']).sort((a,b)=>{
+        if (a.get('base') <   b.get('base')) {return -1 }
+        if (a.get('base') >   b.get('base')) {return 1 }
+        if (a.get('base') === b.get('base')) {return 0 }
+    })
+    
+    const verbdRows:Object = [...sortedVerbds.values()].map(verbd => (
         <VerbdRow key={verbd.get('id')} verbd={verbd} verbdPanelLevel={props.verbdPanelLevel} strings={props.strings} />
     ))
 
@@ -36,7 +42,7 @@ function VerbdTable(props:Object):?Object {
                     </tr>
                     </thead>
                 break
-            case VerbdPanelLevel.MAX:
+            /*case VerbdPanelLevel.MAX:
                 header =
                     <thead>
                     <tr>
@@ -45,7 +51,7 @@ function VerbdTable(props:Object):?Object {
                         <th> </th>
                     </tr>
                     </thead>
-                break
+                break*/
             default:
                 // header already has a suitable default. Do nothing.
 

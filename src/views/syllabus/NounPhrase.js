@@ -28,7 +28,6 @@ function NounPhrases(props:Object):Object {
         <div>
             <LessonNavigator {...props} />
             <div id="help" style={style}>
-                <h1>Noun Phrases</h1>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
                 <p>{s.help12}</p>

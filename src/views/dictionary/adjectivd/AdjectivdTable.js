@@ -7,7 +7,13 @@ function AdjectivdTable(props:Object):?Object {
 
     let adjectivdTable:?Object = null
 
-    const adjectivdRows:Object = [...props.adjectivd.getIn(['dict','coll']).values()].map(adjectivd => (
+    const sortedAdjectivds:Object = props.adjectivd.getIn(['dict','coll']).sort((a,b)=>{
+        if (a.get('base') <   b.get('base')) {return -1 }
+        if (a.get('base') >   b.get('base')) {return 1 }
+        if (a.get('base') === b.get('base')) {return 0 }
+    })
+
+    const adjectivdRows:Object = [...sortedAdjectivds.values()].map(adjectivd => (
         <AdjectivdRow key={adjectivd.get('id')} adjectivd={adjectivd} adjectivdPanelLevel={props.adjectivdPanelLevel} strings={props.strings} />
     ))
 

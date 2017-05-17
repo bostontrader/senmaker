@@ -5,10 +5,10 @@ import {ReduceStore} from 'flux/utils'
 
 import Nound            from './Nound'
 import NoundActionTypes from './NoundActionTypes'
-import AppActionTypes   from '../../app/AppActionTypes'
 import AppDispatcher    from '../../AppDispatcher'
 import {MakeMapOfNound} from '../../JSONParseUtils'
 import {validateNound}  from '../../Validator'
+import AppActionTypes   from '../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey:string = 'NoundStore'
