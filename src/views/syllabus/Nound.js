@@ -24,6 +24,28 @@ function Nound(props:Object):Object {
     const quizDeleteNounFlag:string | Object = q.getIn(['nound','deleteNound']) ?
         <img id="deleteNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
+    const quizBox:Object | null = q.getIn(['nound','passed']) ? null :
+        <div id="quiz" style={style}>
+            <h3>{props.strings.quiz}</h3>
+            <table>
+                <tbody>
+                <tr>
+                    <td><p>{s.quiz1}</p></td>
+                    <td>{quizInsertNounFlag}</td>
+                </tr>
+                <tr>
+                    <td><p>{s.quiz3}</p></td>
+                    <td>{quizUpdateNounFlag}</td>
+                </tr>
+                <tr>
+                    <td><p>{s.quiz2}</p></td>
+                    <td>{quizDeleteNounFlag}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
     return(
         <div>
             <LessonNavigator cheat={true} {...props} />
@@ -34,25 +56,7 @@ function Nound(props:Object):Object {
                 <p>{s.help13}</p>
             </div>
             <NoundPanel noundPanelLevel={NoundPanelLevel.BASE} {...props} />
-            <div id="quiz" style={style}>
-                <h3>{props.strings.quiz}</h3>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><p>{s.quiz1}</p></td>
-                            <td>{quizInsertNounFlag}</td>
-                        </tr>
-                        <tr>
-                            <td><p>{s.quiz3}</p></td>
-                            <td>{quizUpdateNounFlag}</td>
-                        </tr>
-                        <tr>
-                            <td><p>{s.quiz2}</p></td>
-                            <td>{quizDeleteNounFlag}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            {quizBox}
         </div>
     )
 }

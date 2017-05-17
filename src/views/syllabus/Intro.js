@@ -31,7 +31,7 @@ function Intro(props:Object):Object {
                 </tbody>
             </table>
         </div>
-    console.log(q.getIn(['intro','passed']))
+
     return (
         <div>
             <LessonNavigator cheat={false} {...props} />

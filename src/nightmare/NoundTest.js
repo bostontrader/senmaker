@@ -51,7 +51,11 @@ const NoundTest = (nightmare, delay) => {
                 .click('#delete-nound').wait(delay)
         })
         .then( res => {return NTU.lookFor(nightmare, '#nound-addedit-form', false)})
-        .then( res => {return NTU.lookFor(nightmare, '#deleteNoundCheck', true)})
+
+        // The above delete action passes the quiz and makes the quizbox go away
+        // So we can't see the deleteNoundCheck and we're not really testing this.
+        //.then( res => {return NTU.lookFor(nightmare, '#deleteNoundCheck', true)})
+        .then( res => {return NTU.lookFor(nightmare, '#quiz', false)})
 
         // After add/edit/delete, there are no items in the dictionary.  Add one example
         // for use by subsequent tests.

@@ -18,7 +18,7 @@ describe("Intro", () => {
         expect(introComponent.type).toBe('div')
         expect(findWithType(introComponent,LessonNavigator))
         expect(countWithId(introComponent,'help')).toBe(1)
-        expect(countWithId(introComponent,'quiz')).toBe( expectQuizBox ? 1 : 0)
+        expect(countWithId(introComponent,'quiz')).toBe(expectQuizBox ? 1 : 0)
 
         return introComponent
     }
@@ -36,8 +36,9 @@ describe("Intro", () => {
         let newState = initialState
         newState.quiz = QuizStore.reduce(initialState.quiz, {type:QuizActionTypes.intro.ON_I_UNDERSTAND})
         const renderExpression = <Intro {...newState} />
+
+        // Answering the quiz will make the quiz box go away
         const introComponent = verifyBasicLayout(renderExpression, false) // don't expectQuizBox
-        //expect(countWithId(introComponent,'iunderstandCheckmark')).toBe(1)
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()

@@ -24,11 +24,11 @@ describe("Nound", function() {
      */
     it("Renders Nound in all its glory.", function() {
 
-        const verifyBasicLayout = (noundComponent) => {
+        const verifyBasicLayout = (noundComponent, expectQuizBox) => {
             expect(noundComponent.type).toBe('div')
             expect(countWithId(noundComponent,'help')).toBe(1)
             expect(findWithType(noundComponent,NoundPanel))
-            expect(countWithId(noundComponent,'quiz')).toBe(1)
+            expect(countWithId(noundComponent,'quiz')).toBe(expectQuizBox ? 1 : 0)
             expect(findWithType(noundComponent,LessonNavigator))
         }
 
@@ -53,18 +53,27 @@ describe("Nound", function() {
                 let renderExpression = <Nound {...state} />
                 let noundComponent = ReactTestUtils.createRenderer().render(renderExpression)
 
-                verifyBasicLayout(noundComponent)
+                if(state.quiz.getIn(['nound','passed'])) {
+                    // If the quiz has pass, don't expect the quiz box and don't look for the checkmarks
+                    verifyBasicLayout(noundComponent, false)
+                } else {
+                    // If the quiz has not passed, expect the quiz box and look
+                    // for the checkmarks
+                    verifyBasicLayout(noundComponent, true)
 
-                // verify that only the currently answered questions are checked
-                for(let check of checks)
-                    expect(countWithId(noundComponent,check)).toBe(1)
+                    // verify that only the currently answered questions are checked
+                    for(let check of checks)
+                        expect(countWithId(noundComponent,check)).toBe(1)
+                }
+
+
             }
         }
 
         const renderExpression = <Nound {...initialState} />
         const noundComponent = ReactTestUtils.createRenderer().render(renderExpression)
 
-        verifyBasicLayout(noundComponent)
+        verifyBasicLayout(noundComponent, true) // expect quizbox
 
         // None of the quiz items should be checked.
         expect(findAllWithClass(noundComponent,'checkmark').length).toBe(0)
