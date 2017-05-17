@@ -43,7 +43,7 @@ exports[`AppContainer 's Alive! 1`] = `
           返回
         </button>
         
-        v.0.9.3
+        v.0.9.4
       </div>
       <div
         id="help"
@@ -66,9 +66,6 @@ exports[`AppContainer 's Alive! 1`] = `
         <p>
           通过以下课程您将知道如何学习英语。
         </p>
-        <p>
-          你目前是0级，为了继续下一个阶段需要通过测验。
-        </p>
       </div>
       <div
         id="quiz"
@@ -82,6 +79,9 @@ exports[`AppContainer 's Alive! 1`] = `
         <h3>
           测试
         </h3>
+        <p>
+          你目前是0级，为了继续下一个阶段需要通过测验。
+        </p>
         <table>
           <tbody>
             <tr>

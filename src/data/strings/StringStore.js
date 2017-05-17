@@ -77,11 +77,11 @@ StringStore.en = {
 
     intro: { // 0
         title: 'Introduction',
-        help1: 'This program will help you build an English composition.',
-        help2: 'In order to do that you must first learn how to build smaller pieces of English.',
-        help3: 'You can then assemble the small pieces of English into larger components.',
-        help4: 'You will learn how to do this by following these lessons.',
-        help5: 'You are presently on Level 0. In order to proceed to the next level you will need to pass the quiz.'
+        help10: 'This program will help you build an English composition.',
+        help11: 'In order to do that you must first learn how to build smaller pieces of English.',
+        help12: 'You can then assemble the small pieces of English into larger components.',
+        help13: 'You will learn how to do this by following these lessons.',
+        quiz10: 'You are presently on Level 0. In order to proceed to the next level you will need to pass the quiz.'
     },
 
     nound: { // 1
@@ -256,11 +256,11 @@ StringStore.zh = {
 
     intro: { // 0
         title: 'Introduction',
-        help1: '这个程序将帮助您建立一个英语文章。',
-        help2: '为了做到这一点你必须首先学习如何构建英语的小块（句子和段落）。',
-        help3: '然后,您可以将英语的小块组装成更大的组件。',
-        help4: '通过以下课程您将知道如何学习英语。',
-        help5: '你目前是0级，为了继续下一个阶段需要通过测验。'
+        help10: '这个程序将帮助您建立一个英语文章。',
+        help11: '为了做到这一点你必须首先学习如何构建英语的小块（句子和段落）。',
+        help12: '然后,您可以将英语的小块组装成更大的组件。',
+        help13: '通过以下课程您将知道如何学习英语。',
+        quiz10: '你目前是0级，为了继续下一个阶段需要通过测验。'
     },
     nound: { // 1
         title: 'Nouns',

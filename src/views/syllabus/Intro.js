@@ -17,28 +17,31 @@ function Intro(props:Object):Object {
     const iunderstandCheckmark:Object | string = q.getIn(['intro','iunderstand']) ?
         <img id="iunderstandCheckmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
 
+    const quizBox:Object | null = q.getIn(['intro','passed']) ? null :
+        <div id="quiz" style={style}>
+            <h3>{props.strings.quiz}</h3>
+            <p>{props.strings.intro.quiz10}</p>
+            <table>
+                <tbody>
+                <tr>
+                    <td><p><input id="iunderstandCheckbox" onChange={QuizActions.intro.onIUnderstand} type="checkbox" checked={q.getIn(['intro','iunderstand'])} />
+                        {props.strings.i_understand}</p></td>
+                    <td>{iunderstandCheckmark}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    console.log(q.getIn(['intro','passed']))
     return (
         <div>
             <LessonNavigator cheat={false} {...props} />
             <div id="help" style={style}>
-                <p>{s.help1}</p>
-                <p>{s.help2}</p>
-                <p>{s.help3}</p>
-                <p>{s.help4}</p>
-                <p>{s.help5}</p>
+                <p>{s.help10}</p>
+                <p>{s.help11}</p>
+                <p>{s.help12}</p>
+                <p>{s.help13}</p>
             </div>
-            <div id="quiz" style={style}>
-                <h3>{props.strings.quiz}</h3>
-                <table>
-                    <tbody>
-                    <tr>
-                        <td><p><input id="iunderstandCheckbox" onChange={QuizActions.intro.onIUnderstand} type="checkbox" checked={q.getIn(['intro','iunderstand'])} />
-                            {props.strings.i_understand}</p></td>
-                        <td>{iunderstandCheckmark}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            {quizBox}
         </div>
     )
 }
