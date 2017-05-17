@@ -15,7 +15,10 @@ const DefinitenessTest = (nightmare, delay) => {
 
         // Can you see that the article has changed?
         .then( res => {return nightmare.click('#iseeArticleChanged').wait(delay)})
-        .then( res => {return NTU.lookFor(nightmare, '#iseeArticleChangedCheck', true)})
+
+        // Clicking the above checkbox passes the quiz and makes the quizbox go away
+        // .then( res => {return NTU.lookFor(nightmare, '#iseeArticleChangedCheck', true)})
+        .then( res => {return NTU.lookFor(nightmare, '#quiz', false)})
 
         // Can I see the cheat button?
         .then( res => {return NTU.lookFor(nightmare, '#cheat', true)})
