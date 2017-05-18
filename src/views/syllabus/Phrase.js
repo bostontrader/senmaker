@@ -16,27 +16,31 @@ function Phrase(props:Object):Object {
     const s:Object = props.strings.phrase
 
     const iunderstandCheckmark:Object | string = q.getIn(['phrase','iunderstand']) ?
-        <img id="iunderstandCheckmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
+        <img id='iunderstandCheckmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
+
+    const quizBox:Object | null = q.getIn(['phrase','passed']) ? null :
+        <div id='quiz' style={style}>
+            <h3>{props.strings.quiz}</h3>
+            <p>{props.strings.intro.quiz10}</p>
+            <table>
+                <tbody>
+                <tr>
+                    <td><p><input id='iunderstandCheckbox' onChange={QuizActions.phrase.onIUnderstand} type='checkbox' checked={q.getIn(['intro','iunderstand'])} />
+                        {props.strings.i_understand}</p></td>
+                    <td>{iunderstandCheckmark}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
     return(
         <div>
             <LessonNavigator {...props} />
-            <div className="help" style={style}>
+            <div id='help' style={style}>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
             </div>
-            <div className="quiz" style={style}>
-                <h3>{props.strings.quiz}</h3>
-                <table>
-                    <tbody>
-                    <tr>
-                        <td><p><input id="iunderstandCheckbox" onChange={QuizActions.phrase.onIUnderstand} type="checkbox" checked={q.getIn(['phrase','iunderstand'])} />
-                            {props.strings.i_understand}</p></td>
-                        <td>{iunderstandCheckmark}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            {quizBox}
         </div>
     )
 }

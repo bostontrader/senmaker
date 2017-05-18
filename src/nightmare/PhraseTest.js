@@ -7,7 +7,10 @@ const PhraseTest = (nightmare, delay) => {
 
         .then( res => {return NTU.lookFor(nightmare, '#cheat', false)})
         .then( res => {return nightmare.click('#iunderstandCheckbox').wait(delay)})
-        .then( res => {return NTU.lookFor(nightmare, '#iunderstandCheckmark', true)})
+
+        // Clicking the above checkbox passes the quiz and makes the quizbox go away
+        //.then( res => {return NTU.lookFor(nightmare, '#iunderstandCheckmark', true)})
+        .then( res => {return NTU.lookFor(nightmare, '#quiz', false)})
 
 }
 

@@ -49,7 +49,7 @@ function LessonNavigator(props:Object):Object {
             {nextButton}
             {resetButton}
             {cheatButton}
-            v.0.9.4
+            v.0.9.5
 
         </div>
     )
