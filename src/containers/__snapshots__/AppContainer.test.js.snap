@@ -18,11 +18,9 @@ exports[`AppContainer 's Alive! 1`] = `
         }
       >
         <h3>
-          级
-           
-          0
+          0 级
           . 
-          Introduction
+          Introduction 引言
            
           <img
             alt=""
@@ -43,7 +41,7 @@ exports[`AppContainer 's Alive! 1`] = `
           返回
         </button>
         
-        v.0.9.4
+        v.0.9.7
       </div>
       <div
         id="help"

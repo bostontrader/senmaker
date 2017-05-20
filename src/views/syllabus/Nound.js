@@ -16,16 +16,16 @@ function Nound(props:Object):Object {
     const s:Object = props.strings.nound
 
     const quizInsertNounFlag:string | Object = q.getIn(['nound','insertNound']) ?
-        <img id="insertNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
+        <img id='insertNoundCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
     const quizUpdateNounFlag:string | Object = q.getIn(['nound','updateNound']) ?
-        <img id="updateNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
+        <img id='updateNoundCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
     const quizDeleteNounFlag:string | Object = q.getIn(['nound','deleteNound']) ?
-        <img id="deleteNoundCheck" className="checkmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
+        <img id='deleteNoundCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
     const quizBox:Object | null = q.getIn(['nound','passed']) ? null :
-        <div id="quiz" style={style}>
+        <div id='quiz' style={style}>
             <h3>{props.strings.quiz}</h3>
             <table>
                 <tbody>
@@ -49,7 +49,7 @@ function Nound(props:Object):Object {
     return(
         <div>
             <LessonNavigator cheat={true} {...props} />
-            <div id="help" style={style}>
+            <div id='help' style={style}>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
                 <p>{s.help12}</p>

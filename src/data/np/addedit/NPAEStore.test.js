@@ -121,11 +121,22 @@ describe('NPAEStore', () => {
 
     })
 
-    it('ON_CHANGE_SELECTED_NOUND', () => {
+    // ON_CHANGE_SELECTED_NOUND_L1 & ON_CHANGE_SELECTED_NOUND_L2 identical. DRY them.
+    it('ON_CHANGE_SELECTED_NOUND_L1', () => {
 
         // In this test, the value of id is unused.
         state = NPAEStore.reduce(state, {
-            type: NPActionTypes.ON_CHANGE_SELECTED_NOUND,
+            type: NPActionTypes.ON_CHANGE_SELECTED_NOUND_L1,
+            newNound: noundExamples.a
+        })
+        expect(state.getIn(['np','nound']).toJSON()).toEqual(noundExamples.a.toJSON())
+    })
+
+    it('ON_CHANGE_SELECTED_NOUND_L2', () => {
+
+        // In this test, the value of id is unused.
+        state = NPAEStore.reduce(state, {
+            type: NPActionTypes.ON_CHANGE_SELECTED_NOUND_L2,
             newNound: noundExamples.a
         })
         expect(state.getIn(['np','nound']).toJSON()).toEqual(noundExamples.a.toJSON())
@@ -140,14 +151,26 @@ describe('NPAEStore', () => {
         })
         expect(state.getIn(['np','adjectivds'])[0].toJSON()).toEqual(adjectivdExamples.a.toJSON())
     })
-    
-    it('ON_CHANGE_DEFINITENESS', () => {
+
+    // ON_CHANGE_DEFINITENESS_L1 & ON_CHANGE_DEFINITENESS_L2 identical. DRY them.
+    it('ON_CHANGE_DEFINITENESS_L1', () => {
         expect(state.getIn(['np','definiteness'])).toBe(DefinitenessSelect.NoneSelected)
 
         state = NPAEStore.reduce(state, {
-            type: NPActionTypes.ON_CHANGE_DEFINITENESS,
+            type: NPActionTypes.ON_CHANGE_DEFINITENESS_L1,
             newDefiniteness: DefinitenessSelect.Definite
         })
         expect(state.getIn(['np','definiteness'])).toBe(DefinitenessSelect.Definite)
     })
+
+    it('ON_CHANGE_DEFINITENESS_L2', () => {
+        expect(state.getIn(['np','definiteness'])).toBe(DefinitenessSelect.NoneSelected)
+
+        state = NPAEStore.reduce(state, {
+            type: NPActionTypes.ON_CHANGE_DEFINITENESS_L2,
+            newDefiniteness: DefinitenessSelect.Definite
+        })
+        expect(state.getIn(['np','definiteness'])).toBe(DefinitenessSelect.Definite)
+    })
+
 })

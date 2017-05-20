@@ -14,7 +14,7 @@ import NPActionTypes   from '../../data/np/NPActionTypes'
 import QuizActionTypes from '../../data/quiz/QuizActionTypes'
 import QuizStore       from '../../data/quiz/QuizStore'
 
-describe("Definiteness", function() {
+describe("Definiteness", () => {
 
     /**
      * This component should be tested as each quiz question is answered.
@@ -22,7 +22,7 @@ describe("Definiteness", function() {
      * the quiz questions. Therefore test this component using every possible
      * order of answering the quiz questions.
      */
-    it("Renders Definiteness in all its glory.", function() {
+    it("Renders Definiteness in all its glory.", () => {
 
         const verifyBasicLayout = (definitenessComponent, expectQuizBox) => {
             expect(definitenessComponent.type).toBe('div')
@@ -48,7 +48,7 @@ describe("Definiteness", function() {
 
             let checks = [] // which check marks should be set?
             for(let quizItem of actions) {
-                state.quiz  = QuizStore.reduce(state.quiz, {type: quizItem.type})
+                state.quiz  = QuizStore.reduce(state.quiz, quizItem)
                 checks.push(quizItem.i)
                 let renderExpression = <Definiteness {...state} />
                 let definitenessComponent = ReactTestUtils.createRenderer().render(renderExpression)
@@ -79,8 +79,8 @@ describe("Definiteness", function() {
 
         // Now verify correct operation of each permutation.
         heapsPermute([
-            {type:NPActionTypes.ON_CHANGE_SELECTED_NOUND, i:'changeNoundCheck'},
-            {type:NPActionTypes.ON_CHANGE_DEFINITENESS, i:'changeDefinitenessCheck'},
+            {type:NPActionTypes.ON_CHANGE_SELECTED_NOUND_L1, i:'changeNoundCheck'},
+            {type:NPActionTypes.ON_CHANGE_DEFINITENESS_L1, i:'changeDefinitenessCheck'},
             {type:QuizActionTypes.definiteness.ON_ISEE_CHANGE_ARTICLE, i:'iseeArticleChangedCheck'}
 
         ], testSinglePermutation)

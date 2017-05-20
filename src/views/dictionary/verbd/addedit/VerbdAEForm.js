@@ -62,7 +62,7 @@ function VerbdAEForm(props:Object):Object {
                     {theButtons}
                 </div>
             break
-        case VerbdPanelLevel.MAX:
+        /*case VerbdPanelLevel.MAX:
             verbdAEForm =
                 <div id="verbd-addedit-form" style={style}>
                     {baseControls}
@@ -74,7 +74,7 @@ function VerbdAEForm(props:Object):Object {
                     />
                     {theButtons}
                 </div>
-            break
+            break*/
         default:
             // verbdAEForm already has a suitable default. Do nothing.
 

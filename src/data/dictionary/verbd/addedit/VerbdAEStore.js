@@ -14,16 +14,21 @@ import {localStorageAvailable} from '../../../../LocalStorage'
 const localStorageKey:string = 'VerbdAEStore'
 
 /*
-This store manages all state required to support the add/edit operations on a verbd.
-This obviously includes the present state of whatever verbd is being added or created.
-If said verbd has an id, then this is an edit, otherwise we're creating a new verbd.
+ This store manages all state required to support the add/edit operations on a verbd.
+ This obviously includes the present state of whatever verbd is being added or created.
+ If said verbd has an id, then this is an edit, otherwise we're creating a new verbd.
 
-We can use this information to manage the display of a suitable add/edit component.
-If the verbd has an id then we are editing a verbd and we thus want to display the VerbdEditForm component.
-If the onClickAddVerbd flag = true, then we are adding a new verbd and we want to display the VerbdAddForm component.
-Else display nothing.
+ We can use this information to manage the display of a suitable add/edit component.
 
-We use the onClickAddVerbd flag for purposes of code clarity.
+ If the verbd has an id then we are editing an existing verbd and we thus want to display the
+ VerbdAEForm component in edit mode.
+
+ If the addVerbd flag = true, then we are adding a new verbd and we want to display the
+ VerbdAEForm component in add mode.
+
+ Else display nothing.
+
+ We use the addVerbd flag for purposes of code clarity.
 
  */
 

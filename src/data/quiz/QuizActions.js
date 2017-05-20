@@ -13,7 +13,7 @@ const QuizActions:Object = {
         },
     },
 
-    // 4
+    // 2
     definiteness: {
         onIseeArticleChanged() {
             AppDispatcher.dispatch({
@@ -22,7 +22,7 @@ const QuizActions:Object = {
         }
     },
 
-    // 5
+    // 3
     phrase: {
         onIUnderstand() {
             AppDispatcher.dispatch({
@@ -31,8 +31,8 @@ const QuizActions:Object = {
         },
     },
 
-    // 7
-    verbConjugation: {
+    //
+    /*verbConjugation: {
         onIUnderstand() {
             AppDispatcher.dispatch({
                 type: QuizActionTypes.verbConjugation.ON_I_UNDERSTAND
@@ -40,7 +40,7 @@ const QuizActions:Object = {
         },
     },
 
-    // 11
+    //
     sentence: {
         onIUnderstand() {
             AppDispatcher.dispatch({
@@ -49,14 +49,14 @@ const QuizActions:Object = {
         },
     },
 
-    // 12
+    //
     pluralization: {
         onIUnderstand() {
             AppDispatcher.dispatch({
                 type: QuizActionTypes.pluralization.ON_I_UNDERSTAND
             })
         },
-    }
+    }*/
 }
 
 export default QuizActions

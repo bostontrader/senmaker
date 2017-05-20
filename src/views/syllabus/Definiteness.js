@@ -45,7 +45,7 @@ function Definiteness(props:Object):Object {
                         <p>{s.quiz3}</p>
                         <p>
                             <input  id='iseeArticleChanged' onChange={QuizActions.definiteness.onIseeArticleChanged} type='checkbox' checked={q.getIn(['definiteness','iseeArticleChanged'])} />
-                            {'I can see it change'}
+                            {s.quiz4}
                         </p>
                     </td>
                     <td>{quizIseeArticleChangedFlag}</td>

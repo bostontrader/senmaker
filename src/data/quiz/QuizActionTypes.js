@@ -4,11 +4,11 @@
  */
 const QuizActionTypes = {
     intro:           {ON_I_UNDERSTAND:        'ON_I_UNDERSTAND'},        //  0
-    definiteness:    {ON_ISEE_CHANGE_ARTICLE: 'ON_ISEE_CHANGE_ARTICLE'}, //  4
-    phrase:          {ON_I_UNDERSTAND:        'ON_I_UNDERSTAND2'},       //  5
-    verbConjugation: {ON_I_UNDERSTAND:        500,},                     //  7
-    sentence:        {ON_I_UNDERSTAND:        'ON_I_UNDERSTAND4'},       // 11
-    pluralization:   {ON_I_UNDERSTAND:        'ON_I_UNDERSTAND5'}        // 12
+    definiteness:    {ON_ISEE_CHANGE_ARTICLE: 'ON_ISEE_CHANGE_ARTICLE'}, //  2
+    phrase:          {ON_I_UNDERSTAND:        'ON_I_UNDERSTAND2'},       //  3
+    //verbConjugation: {ON_I_UNDERSTAND:        500,},                     //
+    //sentence:        {ON_I_UNDERSTAND:        'ON_I_UNDERSTAND4'},       //
+    //pluralization:   {ON_I_UNDERSTAND:        'ON_I_UNDERSTAND5'}        //
 }
 
 export default QuizActionTypes

@@ -21,11 +21,10 @@ function Phrase(props:Object):Object {
     const quizBox:Object | null = q.getIn(['phrase','passed']) ? null :
         <div id='quiz' style={style}>
             <h3>{props.strings.quiz}</h3>
-            <p>{props.strings.intro.quiz10}</p>
             <table>
                 <tbody>
                 <tr>
-                    <td><p><input id='iunderstandCheckbox' onChange={QuizActions.phrase.onIUnderstand} type='checkbox' checked={q.getIn(['intro','iunderstand'])} />
+                    <td><p><input id='iunderstandCheckbox' onChange={QuizActions.phrase.onIUnderstand} type='checkbox' checked={q.getIn(['phrase','iunderstand'])} />
                         {props.strings.i_understand}</p></td>
                     <td>{iunderstandCheckmark}</td>
                 </tr>

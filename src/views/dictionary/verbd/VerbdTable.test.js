@@ -29,21 +29,6 @@ describe("VerbdTable", function() {
         state.strings = initialState.strings
         state.verbd   = initialState.verbd
     })
-    
-    /*beforeEach(function() {
-        state = {}
-        state.app     = AppStore.getInitialState()
-        state.strings = StringStore.getInitialState()
-        state.verbd = Map({
-            dict:VerbdStore.getInitialState()
-        })
-
-        dispatch = action => {
-            state.app   = AppStore .reduce(state.app, action)
-            const n = VerbdStore.reduce(state.verbd.get('dict'), action)
-            state.verbd = state.verbd.set('dict',n)
-        }
-    })*/
 
     describe("An Empty VerbdTable", function() {
         it("Renders no VerbdPanelLevel.BASE VerbdTable", function() {

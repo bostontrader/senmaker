@@ -51,7 +51,7 @@ function NPAEForm(props:Object):?Object {
         adjectivd.get('id')
     )
 
-    const onChangeNound:Function = (id) => {NPActions.onChangeSelectedNound(props.nound.getIn(['dict','coll',id]))}
+    const onChangeNound:Function = (id) => {NPActions.onChangeSelectedNound(props.nound.getIn(['dict','coll',id]), props.npPanelLevel)}
     const onChangeAdjectivd:Function = (ids) => {
         // ids is an array of objects. Use this to build an array of Adjectivd
         NPActions.onChangeSelectedAdjectivds(
@@ -60,9 +60,9 @@ function NPAEForm(props:Object):?Object {
     }
 
     const radioDefiniteness:Object =
-        <RadioGroup name="definiteness" selectedValue={props.np.getIn(['addedit','np','definiteness'])} onChange={(e)=>{NPActions.onChangeDefiniteness(e)}}>
-            <Radio id='definite'   value="definite" />Definite
-            <Radio id='indefinite' value="indefinite" />Indefinite
+        <RadioGroup name='definiteness' selectedValue={props.np.getIn(['addedit','np','definiteness'])} onChange={(e)=>{NPActions.onChangeDefiniteness(e, props.npPanelLevel)}}>
+            <Radio id='definite'   value='definite' />Definite
+            <Radio id='indefinite' value='indefinite' />Indefinite
         </RadioGroup>
 
     let npAEForm:?Object = null
@@ -74,7 +74,7 @@ function NPAEForm(props:Object):?Object {
                 <div style={style}>
                     <NoundSelect options={availableNounds} value={selectedNound} onChange={onChangeNound} />
                     {radioDefiniteness}
-                    <p id="generatedText">{props.np.getIn(['addedit','np','generatedText'])}</p>
+                    <p id='generatedText'>{props.np.getIn(['addedit','np','generatedText'])}</p>
                 </div>
             break
 
@@ -83,7 +83,7 @@ function NPAEForm(props:Object):?Object {
                 <div style={style}>
                     <NoundSelect options={availableNounds} value={selectedNound} onChange={onChangeNound} />
                     {radioDefiniteness}
-                    <p id="generatedText">{props.np.getIn(['addedit','np','generatedText'])}</p>
+                    <p id='generatedText'>{props.np.getIn(['addedit','np','generatedText'])}</p>
                     {theButtons}
                 </div>
             break
@@ -95,7 +95,7 @@ function NPAEForm(props:Object):?Object {
                     {radioDefiniteness}
                     <AdjectivdSelect options={availableAdjectivds} value={selectedAdjectivds}   onChange={onChangeAdjectivd} />
 
-                    <p id="generatedText">{props.np.getIn(['addedit','np','generatedText'])}</p>
+                    <p id='generatedText'>{props.np.getIn(['addedit','np','generatedText'])}</p>
                     {theButtons}
                 </div>
             break

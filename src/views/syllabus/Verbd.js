@@ -16,44 +16,46 @@ function Verbd(props:Object):Object {
     const s:Object = props.strings.verbd
 
     const quizInsertVerbFlag:string | Object = q.getIn(['verbd','insertVerbd']) ?
-        <img id="insertVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id='insertVerbdCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
     const quizUpdateVerbFlag:string | Object = q.getIn(['verbd','updateVerbd']) ?
-        <img id="updateVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id='updateVerbdCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
     const quizDeleteVerbFlag:string | Object = q.getIn(['verbd','deleteVerbd']) ?
-        <img id="deleteVerbdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id='deleteVerbdCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
+
+    const quizBox:Object | null = q.getIn(['verbd','passed']) ? null :
+        <div id='quiz' style={style}>
+            <h3>{props.strings.quiz}</h3>
+            <table>
+                <tbody>
+                <tr>
+                    <td><p>{s.quiz1}</p></td>
+                    <td>{quizInsertVerbFlag}</td>
+                </tr>
+                <tr>
+                    <td><p>{s.quiz3}</p></td>
+                    <td>{quizUpdateVerbFlag}</td>
+                </tr>
+                <tr>
+                    <td><p>{s.quiz2}</p></td>
+                    <td>{quizDeleteVerbFlag}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
     return(
         <div>
-            <div className="help" style={style}>
-                <h1>{props.strings.verbs}</h1>
+            <LessonNavigator {...props} />
+            <div id='help' style={style}>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
                 <p>{s.help12}</p>
                 <p>{s.help13}</p>
             </div>
             <VerbdPanel verbdPanelLevel={VerbdPanelLevel.BASE} {...props} />
-            <div className="quiz" style={style}>
-                <h3>{props.strings.quiz}</h3>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><p>{s.quiz1}</p></td>
-                            <td>{quizInsertVerbFlag}</td>
-                        </tr>
-                        <tr>
-                            <td><p>{s.quiz3}</p></td>
-                            <td>{quizUpdateVerbFlag}</td>
-                        </tr>
-                        <tr>
-                            <td><p>{s.quiz2}</p></td>
-                            <td>{quizDeleteVerbFlag}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <LessonNavigator {...props} />
+            {quizBox}
         </div>
     )
 }

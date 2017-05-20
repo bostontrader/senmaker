@@ -253,7 +253,8 @@ class NPAEStore extends ReduceStore {
                 newState = initialStates.slice(-1)[0]
                 break
 
-            case NPActionTypes.ON_CHANGE_DEFINITENESS:
+            // ON_CHANGE_DEFINITENESS_L1 & ON_CHANGE_DEFINITENESS_L2 identical. DRY them.
+            case NPActionTypes.ON_CHANGE_DEFINITENESS_L1:
                 presentDefiniteness = action.newDefiniteness
                 presentNound = state.getIn(['np','nound'])
                 presentAdjectivds = state.getIn(['np','adjectivds'])
@@ -263,8 +264,29 @@ class NPAEStore extends ReduceStore {
                 newState = newState.updateIn(['np','generatedText'], value => generatedText)
                 break
 
+            case NPActionTypes.ON_CHANGE_DEFINITENESS_L2:
+                presentDefiniteness = action.newDefiniteness
+                presentNound = state.getIn(['np','nound'])
+                presentAdjectivds = state.getIn(['np','adjectivds'])
+
+                generatedText = calcResultText(presentDefiniteness, presentNound, presentAdjectivds)
+                newState = newState.updateIn(['np','definiteness'],value => action.newDefiniteness)
+                newState = newState.updateIn(['np','generatedText'], value => generatedText)
+                break
+
+            // ON_CHANGE_SELECTED_NOUND_L1 & ON_CHANGE_SELECTED_NOUND_L2 identical. DRY them.
             // Should be NOUND because that's what's being changed!
-            case NPActionTypes.ON_CHANGE_SELECTED_NOUND:
+            case NPActionTypes.ON_CHANGE_SELECTED_NOUND_L1:
+                validateNound(action.newNound)
+                presentDefiniteness = state.getIn(['np','definiteness'])
+                presentNound = action.newNound
+                presentAdjectivds = state.getIn(['np','adjectivds'])
+                generatedText = calcResultText(presentDefiniteness, presentNound, presentAdjectivds)
+                newState = newState.updateIn(['np','nound'],value => presentNound)
+                newState = newState.updateIn(['np','generatedText'], value => generatedText)
+                break
+
+            case NPActionTypes.ON_CHANGE_SELECTED_NOUND_L2:
                 validateNound(action.newNound)
                 presentDefiniteness = state.getIn(['np','definiteness'])
                 presentNound = action.newNound

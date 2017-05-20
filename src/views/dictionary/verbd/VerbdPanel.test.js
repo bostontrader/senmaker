@@ -5,12 +5,9 @@ import {findWithType}    from 'react-shallow-testutils'
 import {findAllWithType} from 'react-shallow-testutils'
 import rtRenderer        from 'react-test-renderer'
 
-import VerbdAEForm  from './addedit/VerbdAEForm'
 import VerbdPanel   from './VerbdPanel'
 import VerbdTable   from './VerbdTable'
-//import VerbdStore   from '../../../data/dictionary/verbd/VerbdStore'
-//import VerbdAEStore from '../../../data/dictionary/verbd/addedit/VerbdAEStore'
-//import StringStore  from '../../../data/strings/StringStore'
+import VerbdAEForm  from './addedit/VerbdAEForm'
 import initialState from '../../../data/StateGetter'
 
 describe("VerbdPanel", function() {
@@ -22,16 +19,6 @@ describe("VerbdPanel", function() {
         state.verbd   = initialState.verbd
         state.strings = initialState.strings
     })
-    
-    /*beforeEach(function() {
-        state = {
-            verbd: Map({
-                addedit: VerbdAEStore.getInitialState(),
-                dict: VerbdStore.getInitialState()
-            }),
-            strings:StringStore.getInitialState()
-        }
-    })*/
 
     it("Renders a VerbdPanel w/o add/edit", function() {
         const renderExpression = <VerbdPanel {...state} />

@@ -1,7 +1,7 @@
 // @flow
+import {ReduceStore} from 'flux/utils'
 import {fromJS}      from 'immutable'
 import {Map}         from 'immutable'
-import {ReduceStore} from 'flux/utils'
 
 import Verbd            from './Verbd'
 import VerbdActionTypes from './VerbdActionTypes'

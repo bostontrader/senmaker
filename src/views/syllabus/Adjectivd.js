@@ -14,25 +14,25 @@ function Adjectivd(props) {
     const s = props.strings.adjectivd
 
     const quizInsertAdjectivFlag = q.getIn(['adjectivd','insertAdjectivd']) ?
-        <img id="insertAdjectivdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id='insertAdjectivdCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
     const quizUpdateAdjectivFlag = q.getIn(['adjectivd','updateAdjectivd']) ?
-        <img id="updateAdjectivdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id='updateAdjectivdCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
     const quizDeleteAdjectivFlag = q.getIn(['adjectivd','deleteAdjectivd']) ?
-        <img id="deleteAdjectivdCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id='deleteAdjectivdCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
     return(
         <div>
             <LessonNavigator {...props} />
-            <div className="help" style={style}>
+            <div className='help' style={style}>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
                 <p>{s.help12}</p>
                 <p>{s.help13}</p>
             </div>
             <AdjectivdPanel {...props} />
-            <div className="quiz" style={style}>
+            <div className='quiz' style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>
                     <tbody>

@@ -9,12 +9,11 @@ import NounPhrase      from './NounPhrase'
 import NPPanel         from '../np/NPPanel'
 import {countWithId}   from '../../TestUtils'
 import {heapsPermute}  from '../../TestUtils'
-import {swap}          from '../../TestUtils'
 import initialState    from '../../data/StateGetter'
 import NPActionTypes   from '../../data/np/NPActionTypes'
 import QuizStore       from '../../data/quiz/QuizStore'
 
-describe("NounPhrase", function() {
+describe("NounPhrase", () => {
 
     /**
      * This component should be tested as each quiz question is answered.
@@ -22,13 +21,13 @@ describe("NounPhrase", function() {
      * the quiz questions. Therefore test this component using every possible
      * order of answering the quiz questions.
      */
-    it("Renders NounPhrase in all its glory.", function() {
+    it("Renders NounPhrase in all its glory.", () => {
 
-        const verifyBasicLayout = (npComponent) => {
+        const verifyBasicLayout = (npComponent, expectQuizBox) => {
             expect(npComponent.type).toBe('div')
             expect(countWithId(npComponent,'help')).toBe(1)
             expect(findWithType(npComponent,NPPanel))
-            expect(countWithId(npComponent,'quiz')).toBe(1)
+            expect(countWithId(npComponent,'quiz')).toBe(expectQuizBox ? 1 : 0)
             expect(findWithType(npComponent,LessonNavigator))
         }
 
@@ -48,31 +47,40 @@ describe("NounPhrase", function() {
 
             let checks = [] // which check marks should be set?
             for(let quizItem of actions) {
-                state.quiz  = QuizStore.reduce(state.quiz, {type: quizItem.type, np: quizItem.np})
+                state.quiz  = QuizStore.reduce(state.quiz, quizItem)
+
                 checks.push(quizItem.i)
                 let renderExpression = <NounPhrase {...state} />
                 let npComponent = ReactTestUtils.createRenderer().render(renderExpression)
 
-                verifyBasicLayout(npComponent)
+                if(state.quiz.getIn(['np','passed'])) {
+                    // If the quiz has passed, don't expect the quiz box and don't look for the checkmarks
+                    verifyBasicLayout(npComponent, false)
+                } else {
+                    // If the quiz has not passed, expect the quiz box and look
+                    // for the checkmarks
+                    verifyBasicLayout(npComponent, true)
 
-                // verify that only the currently answered questions are checked
-                for(let check of checks)
-                    expect(countWithId(npComponent,check)).toBe(1)
+                    // verify that only the currently answered questions are checked
+                    for(let check of checks)
+                        expect(countWithId(npComponent,check)).toBe(1)
+                }
             }
         }
 
         const renderExpression = <NounPhrase {...initialState} />
         const npComponent = ReactTestUtils.createRenderer().render(renderExpression)
-        verifyBasicLayout(npComponent)
+        verifyBasicLayout(npComponent, true) // first time, expect the quiz box
 
         // None of the quiz items should be checked.
         expect(findAllWithClass(npComponent,'checkmark').length).toBe(0)
 
         // Now verify correct operation of each permutation.
         heapsPermute([
-            {type:NPActionTypes.ON_CLICK_SAVE_NP,   i:'insertNPCheck', np:{}},
-            {type:NPActionTypes.ON_CLICK_SAVE_NP,   i:'updateNPCheck', np:{id:'1'}},
-            {type:NPActionTypes.ON_CLICK_DELETE_NP, i:'deleteNPCheck'}
+            {type:NPActionTypes.ON_CLICK_SAVE_NP, i:'quizInsertNPMark'},
+            {type:NPActionTypes.ON_CHANGE_SELECTED_NOUND_L2, i:'quizUpdateNPNounMark'},
+            {type:NPActionTypes.ON_CHANGE_DEFINITENESS_L2, i:'quizUpdateNPDefinitenessMark'},
+            {type:NPActionTypes.ON_CLICK_DELETE_NP, i:'quizDeleteNPMark'},
         ], testSinglePermutation)
     })
 })

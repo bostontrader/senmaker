@@ -67,6 +67,7 @@ StringStore.en = {
     delete: 'Delete',
     edit: 'Edit',
     i_understand: 'I understand',
+    introduction: 'Introduction',
     noun: 'Noun',
     nouns: 'Nouns',
     noun_phrase: 'Noun Phrase',
@@ -76,7 +77,7 @@ StringStore.en = {
     verbs: 'Verbs',
 
     intro: { // 0
-        title: 'Introduction',
+        title: 'Introduction 引言',
         help10: 'This program will help you build an English composition.',
         help11: 'In order to do that you must first learn how to build smaller pieces of English.',
         help12: 'You can then assemble the small pieces of English into larger components.',
@@ -85,9 +86,9 @@ StringStore.en = {
     },
 
     nound: { // 1
-        title: 'Nouns',
+        title: 'Nouns 名词',
         help10: 'The things around us are called nouns.',
-        help11: 'In order to write English you will use many nouns.',
+        help11: 'In order to study English you will use many nouns.',
         help12: 'This is the dictionary of nouns that you can use.',
         help13: 'At this time there are very few nouns but you can add more nouns whenever you like.',
         quiz1: 'Can you add a new noun?',
@@ -106,28 +107,29 @@ StringStore.en = {
 
         quiz1: 'Select a noun',
         quiz2: 'Select \'definite\' or \'indefinite\'.',
-        quiz3: 'Can you see that the article changes?'
+        quiz3: 'Can you see that the article changes?',
+        quiz4: 'I can see it change'
     },
     phrase: { // 3
-        title: 'Phrases',
+        title: 'Phrases 短语',
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
     },
     np: { // 4
-        title: 'Noun Phrases',
+        title: 'Noun Phrases 名词短语',
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
-        help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
-        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.',
-        help13: 'Here we repackage that into an explicit noun phrase format.',
-        // although a noun phrase is usually more than one word, it could be just a single noun.
+        help11: 'To make a noun phrase start with a single noun and then add other words to enhance the meaning.',
+        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  When you selected a noun and definite or indefinite you produced a two-word noun phrase.',
+        help13: 'A noun phrase usually has more than one word.  But it might only have a single noun.',
         quiz1: 'Can you add a new noun phrase?',
-        quiz2: 'Can you change the noun or article in a noun phrase?',
-        quiz3: 'Can you change the spelling of a noun phrase?'
+        quiz2: 'Can you change the noun in a noun phrase?',
+        quiz3: 'Can you change the article in a noun phrase?',
+        quiz4: 'Can you delete a noun phrase?'
     },
     adjectivd: { // 5
-        title: 'Adjectives',
-        help10: 'We modify the meaning of nouns by using adjectives.',
-        help11: 'In order to write English you will use many adjectives.',
+        title: 'Adjectives 形容词',
+        help10: 'We add meaning to noun phrases by using adjectives.',
+        help11: 'In order to study English you will use many adjectives.',
         help12: 'This is the dictionary of adjectives that you can use.',
         help13: 'At this time there are very few adjectives but you can add more adjectives whenever you like.',
         quiz1: 'Can you add a new adjective?',
@@ -135,19 +137,18 @@ StringStore.en = {
         quiz3: 'Can you change the spelling of an adjective?'
     },
     npAdjective: { // 6
-        title: 'Noun Phrase with Adjectives',
+        title: 'Noun Phrase 名词短语 with Adjectives 形容词',
         help10: 'A Noun Phrase can have any number of adjectives.'
     },
-
-
-    verbd: { // 2
-        help10: 'The actions we can take are called <strong>verbs</strong>',
-        help11: 'In order to write English you will use many verbs.',
+    verbd: { // 7
+        title: 'Verbs 动词',
+        help10: 'The actions that we can take are called verbs.',
+        help11: 'In order to study English you will use many verbs.',
         help12: 'This is the dictionary of verbs that you can use.',
         help13: 'At this time there are very few verbs but you can add more verbs whenever you like.',
-        quiz1: 'Can you add a new verb?',
-        quiz2: 'Can you delete a verb from this list?',
-        quiz3: 'Can you change the spelling of a verb?'
+        quiz1: 'Can you add a new verbs?',
+        quiz2: 'Can you delete a verbs from this list?',
+        quiz3: 'Can you change the spelling of a verbs?'
     },
 
 
@@ -246,6 +247,7 @@ StringStore.zh = {
     delete: '删除',
     edit: '编辑',
     i_understand: '我明白',
+    introduction: '引言',
     noun: 'Noun',
     nouns: '名词 Nouns',
     noun_phrase: 'Noun Phrase',
@@ -255,7 +257,7 @@ StringStore.zh = {
     verbs: '动词 Verbs',
 
     intro: { // 0
-        title: 'Introduction',
+        title: 'Introduction 引言',
         help10: '这个程序将帮助您建立一个英语文章。',
         help11: '为了做到这一点你必须首先学习如何构建英语的小块（句子和段落）。',
         help12: '然后,您可以将英语的小块组装成更大的组件。',
@@ -263,14 +265,14 @@ StringStore.zh = {
         quiz10: '你目前是0级，为了继续下一个阶段需要通过测验。'
     },
     nound: { // 1
-        title: 'Nouns',
-        help10: '我们周围的东西叫做名词。',
-        help11: '为了写英文，你将会使用很多名词。',
-        help12: '这是你可以使用的名词字典。',
-        help13: '在开始只有少量的名词，但你可以随时添加更多的名词。',
-        quiz1: '你可以添加一个新的名词吗?',
-        quiz2: '你可以从这个列表中删除一个名词吗?',
-        quiz3: '你能改变一个名词的拼写吗?'
+        title: 'Nouns 名词',
+        help10: '我们周围的东西叫做名词(noun)。',
+        help11: '为了学习英文，你将会使用很多名词(noun)。',
+        help12: '这是你可以使用的名词(noun)字典。',
+        help13: '在开始只有少量的名词(noun)，但你可以随时添加更多的名词(noun)。',
+        quiz1: '你可以添加一个新的名词(noun)吗?',
+        quiz2: '你可以从这个列表中删除一个名词(noun)吗?',
+        quiz3: '你能改变一个名词(noun)的拼写吗?'
     },
     definiteness: { // 2
         title: 'Definite（确定）or Indefinite（或不确定）',
@@ -282,49 +284,59 @@ StringStore.zh = {
         help15: '例如:买 \'a car\'。 那辆车是不确定的。',
         help16: '例如:买 \'an apple\'。 苹果是不确定的。',
 
-        quiz1: '选择一个名词的',
+        quiz1: '选择一个noun的',
         quiz2: '选择 确定（\'definite\'） 或 不确定（\'indefinite\'）.',
-        quiz3: '你能看到名词的变化吗?'
+        quiz3: '你能看到冠词(article)的改变吗？',
+        quiz4: '我可以看到它的改变'
     },
     phrase: { // 3
-        title: 'Phrases',
-        help10: 'A group of words that work together is called a \'phrase\'.',
-        help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
+        title: 'Phrases 短语',
+        help10: '一组合作的词汇被称为短语 \'phrase\'。',
+        help11: '建造短语只是开始。 稍后我们会将短语组合成更大的组件。',
     },
     np: { // 4
-        title: 'Noun Phrases',
-        help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
-        help11: 'In a noun phrase we start with a single noun and then add other words to enhance the meaning.',
-        help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.  By selecting definite or indefinite, and a noun, you produced a two-word noun phrase.',
-        help13: 'Here we repackage that into an explicit noun phrase format.',
-        // although a noun phrase is usually more than one word, it could be just a single noun.
-        quiz1: 'Can you add a new noun phrase?',
-        quiz2: 'Can you delete a noun phrase from this list?',
-        quiz3: 'Can you change the spelling of a noun phrase?'
+        title: 'Noun Phrases 名词短语',
+        help10: '学习构建的第一个短语叫\'名词短语\' (noun phrase)',
+        help11: '组建一个名词短语(noun phrase)，从一个名词(noun)开始然后再加上其他词来增强意思。',
+        help12: '你已经见过你的第一个名词(noun)短语\'确定\'（definite)或\'不确定\'(indefinite)课。 当你选择了一个名词,\'确定\'(definite)或\'不确定\'(indefinite)你产生由两个词名词短语(noun phrase)。',
+        help13: '名词短语(noun phrase)通常有不止一个词。它有时可能只有一个名词(noun)。',
+        quiz1: '你能添加一个新的名词短语(noun phrase)吗?',
+        quiz2: '你能改变名词短语(noun phrase)中的名词(noun)吗?',
+        quiz3: '你能改变名词短语(noun phrase)中的冠词(article)吗?',
+        quiz4: '你能删除名词短语(noun phrase)吗?'
     },
     adjectivd: { // 5
-        title: 'Adjectives',
-        help10: 'We modify the meaning of nouns by using adjectives.',
-        help11: 'In order to write English you will use many adjectives.',
-        help12: 'This is the dictionary of adjectives that you can use.',
-        help13: 'At this time there are very few adjectives but you can add more adjectives whenever you like.',
-        quiz1: 'Can you add a new adjective?',
-        quiz2: 'Can you delete a adjective from this list?',
-        quiz3: 'Can you change the spelling of a adjective?'
+        title: 'Adjectives 形容词',
+        help10: '我们可以增加形容词来增强名词短语的意思',
+        help11: '为了学习英文，你将会使用很多形容词(adjective)。',
+        help12: '这是你可以使用的形容词(adjective)字典。',
+        help13: '在开始只有少量的形容词(adjective)，但你可以随时添加更多的形容词(adjective)。',
+        quiz1: '你可以添加一个新的形容词(adjective)吗?',
+        quiz2: '你可以从这个列表中删除一个形容词(adjective)吗?',
+        quiz3: '你能改变一个形容词(adjective)的拼写吗?'
     },
     npAdjective: { // 6
-        title: 'Noun Phrase with Adjectives',
-        help10: 'A Noun Phrase can have any number of adjectives.'
+        title: 'Noun Phrase 名词短语 with Adjectives 形容词',
+        help10: '名词短语可以有任意数量的形容词.'
     },
 
-
-
-    verbd: {
-        help10: '陈述人或事物动作、情况、变化的词叫做动词',
-        quiz1: '你可以添加一个新的动词吗?',
-        quiz2: '你可以从这个列表中删除一个动词吗?',
-        quiz3: '你能改变一个动词的拼写吗?'
+    verbd: { // 7
+        title: 'Verbs 动词',
+        help10: 'The actions that we can take are called verbs.',
+        help11: '为了学习英文，你将会使用很多动词(verb)。',
+        help12: '这是你可以使用的动词(verb)字典。',
+        help13: '在开始只有少量的动词(verb)，但你可以随时添加更多的动词(verb)。',
+        quiz1: '你可以添加一个新的动词(verb)吗?',
+        quiz2: '你可以从这个列表中删除一个动词(verb)吗?',
+        quiz3: '你能改变一个动词(verb)的拼写吗?'
     },
+    //verbd: {
+        //help10: '陈述人或事物动作、情况、变化的词叫做动词',
+        //quiz1: '你可以添加一个新的动词吗?',
+        //quiz2: '你可以从这个列表中删除一个动词吗?',
+        //quiz3: '你能改变一个动词的拼写吗?'
+    //},
+
     verbConjugation: [
         'Every verb has a \'base\' form and four other variations.',
         'Given the \'base\' form of a verb we can make the other variations according to various rules.',

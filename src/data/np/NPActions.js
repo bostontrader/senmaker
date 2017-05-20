@@ -1,5 +1,6 @@
 // @flow
 import NPActionTypes       from './NPActionTypes'
+import {NPPanelLevel}      from './NPConstants'
 import AppDispatcher       from '../AppDispatcher'
 import {validateAdjectivd} from '../Validator'
 import {validateNound}     from '../Validator'
@@ -37,25 +38,37 @@ const NPActions = {
     onClickSaveNP(np:Object):void {
         validateNP(np)
         AppDispatcher.dispatch({
-            type: NPActionTypes.ON_CLICK_SAVE_NP, // string
-            np: np // NP
+            type: NPActionTypes.ON_CLICK_SAVE_NP,
+            np: np
         })
     },
-    onChangeDefiniteness(newDefiniteness:number):void {
-        AppDispatcher.dispatch({
-            type: NPActionTypes.ON_CHANGE_DEFINITENESS,
-            newDefiniteness: newDefiniteness
-        })
+    onChangeDefiniteness(newDefiniteness:number, npPanelLevel:number):void {
+
+        let action
+
+        if(npPanelLevel === NPPanelLevel.L1)
+            action = {type: NPActionTypes.ON_CHANGE_DEFINITENESS_L1, newDefiniteness: newDefiniteness}
+        else if(npPanelLevel === NPPanelLevel.L2)
+            action = {type: NPActionTypes.ON_CHANGE_DEFINITENESS_L2, newDefiniteness: newDefiniteness}
+        // else max fubar error
+
+        AppDispatcher.dispatch(action)
     },
-    onChangeSelectedNound(newNound:Object):void {
+
+    onChangeSelectedNound(newNound:Object, npPanelLevel:number):void {
         validateNound(newNound)
-        AppDispatcher.dispatch({
-            type: NPActionTypes.ON_CHANGE_SELECTED_NOUND,
-            newNound: newNound
-        })
+
+        let action
+
+        if(npPanelLevel === NPPanelLevel.L1)
+            action = {type: NPActionTypes.ON_CHANGE_SELECTED_NOUND_L1,newNound: newNound}
+        else if(npPanelLevel === NPPanelLevel.L2)
+            action = {type: NPActionTypes.ON_CHANGE_SELECTED_NOUND_L2, newNound: newNound}
+
+        AppDispatcher.dispatch(action)
     },
+
     onChangeSelectedAdjectivds(newAdjectivds:Array<Object>):void {
-        console.log('NPActions',newAdjectivds)
         newAdjectivds.map( (adjectivd) => {validateAdjectivd(adjectivd)})
         AppDispatcher.dispatch({
             type: NPActionTypes.ON_CHANGE_SELECTED_ADJECTIVD,

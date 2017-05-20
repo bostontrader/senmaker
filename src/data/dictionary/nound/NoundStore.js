@@ -1,7 +1,7 @@
 // @flow
+import {ReduceStore} from 'flux/utils'
 import {fromJS}      from 'immutable'
 import {Map}         from 'immutable'
-import {ReduceStore} from 'flux/utils'
 
 import Nound            from './Nound'
 import NoundActionTypes from './NoundActionTypes'

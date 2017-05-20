@@ -13,8 +13,8 @@ import NPAEStore        from '../data/np/addedit/NPAEStore'
 import NPStore          from '../data/np/NPStore'
 import QuizStore        from '../data/quiz/QuizStore'
 import StringStore      from '../data/strings/StringStore'
-//import VerbdAEStore     from '../data/dictionary/verbd/addedit/VerbdAEStore'
-//import VerbdStore       from '../data/dictionary/verbd/VerbdStore'
+import VerbdAEStore     from '../data/dictionary/verbd/addedit/VerbdAEStore'
+import VerbdStore       from '../data/dictionary/verbd/VerbdStore'
 //import VPAEStore        from '../data/vp/addedit/VPAEStore'
 //import VPStore          from '../data/vp/VPStore'
 
@@ -32,9 +32,9 @@ function getStores() {
         NPAEStore,
         NPStore,
         QuizStore,
-        StringStore
-        //VerbdStore,
-        //VerbdAEStore,
+        StringStore,
+        VerbdStore,
+        VerbdAEStore,
         //VPAEStore,
         //VPStore,
     ]
@@ -49,8 +49,7 @@ function getState():Object {
 
         app: AppStore.getState(),
 
-        // A dictionary of available adjectivs.  We will instantiate as many copies of these
-        // definitions as we need, as adjectivi.
+        // A dictionary of available adjectives.
         adjectivd: Map({
             addedit: AdjectivdAEStore.getState(),
             dict: AdjectivdStore.getState(),
@@ -62,8 +61,7 @@ function getState():Object {
             //dict: ClauseStore.getState(),
         //}),
 
-        // A dictionary of available nouns.  We will instantiate as many copies of these
-        // definitions as we need, as nouni.
+        // A dictionary of available nouns.
         nound: Map({
             addedit: NoundAEStore.getState(),
             dict: NoundStore.getState(),
@@ -80,12 +78,11 @@ function getState():Object {
 
         strings: StringStore.getState(),
 
-        // A dictionary of available verbs.  We will instantiate as many copies of these
-        // definitions as we need, as verbi.
-        //verbd: Map({
-            //addedit: VerbdAEStore.getState(),
-            //dict: VerbdStore.getState(),
-        //}),
+        // A dictionary of available verbs.
+        verbd: Map({
+            addedit: VerbdAEStore.getState(),
+            dict: VerbdStore.getState(),
+        })
 
         // A collection of available vp.
         //vp: Map({
