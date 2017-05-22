@@ -27,7 +27,7 @@ function NounPhrases(props:Object):Object {
     const quizDeleteNPMark:Object | string = q.getIn(['np','deleteNP']) ?
         <img id='quizDeleteNPMark' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
-    const quizBox:Object | null = q.getIn(['np','passed']) ? null :
+    const quizBox:Object | null = // q.getIn(['np','passed']) ? null :
         <div id='quiz' style={style}>
             <h3>{props.strings.quiz}</h3>
             <table>

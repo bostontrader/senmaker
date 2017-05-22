@@ -113,7 +113,7 @@ StringStore.en = {
     phrase: { // 3
         title: 'Phrases 短语',
         help10: 'A group of words that work together is called a \'phrase\'.',
-        help11: 'Building phrases is just the beginning. Later will we assemble phrases together into larger components.',
+        help11: 'Building phrases is just the beginning. Later we will assemble phrases together into larger components.',
     },
     np: { // 4
         title: 'Noun Phrases 名词短语',
@@ -150,86 +150,14 @@ StringStore.en = {
         quiz2: 'Can you delete a verbs from this list?',
         quiz3: 'Can you change the spelling of a verbs?'
     },
-
-
-
-
-
-    verbConjugation: [ // 7
+    verbConjugation: [ // 8
         'Every verb has a \'base\' form and four other variations.',
-        'Given the \'base\' form of a verb we can make the other variations according to various rules.',
-        'We use the different variations according to the rules of grammar.',
-        'The process of making these variations is called \'conjugation\'.'
+        'We use the different variations of the verbs according to the rules of grammar.',
+        'The process of making these variations is called \'conjugation\'.',
+        'You can find the conjugations of a verb in a dictionary.',
+        'Many of the conjugations have patterns that you will notice.',
+        'However, there are so many exceptions to the patterns that it will be best to use a dictionary in order to conjugate your verbs.'
     ],
-    pastForm: { // 8
-        help10:'The first verb conjugation that we will examine is the \'past\' form.',
-        help11:'When an action happens in the past then we use the \'past\' form of the verb.',
-        help12:'The base form of the verb is changed into the past form according to certain rules.'
-    },
-    tense: [ // 9
-        'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
-        'The verb will change to communicate this information.  The variations of the verb are called \'verb tenses\'.',
-        'Sometimes the verb will change to one of its conjugations. Sometimes the verb will sprout additional words.  Sometime the verb will not change at all.'
-    ],
-    vp: { // 10
-        help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
-        help11: 'In a verb phrase we select the verb tense that we want.  This will cause the verb to change and maybe add some extra words of grammar.',
-        // although a verb phrase is usually more than one word, it could be just a single verb.
-        quiz1: 'Can you add a new verb phrase?',
-        quiz2: 'Can you delete a verb phrase from this list?',
-        quiz3: 'Can you change the spelling of a verb phrase?'
-    },
-    aspect: [ // 11
-        'In addition to knowing when a verb happens, we may also want to know if the verb has finished or is still happening.',
-        'These things are called \'aspect\'.'
-    ],
-    ingForm: {
-        help10:'Another variation of the verb is called the \'-ing\' form.',
-        help11:'We usually use this when something is happening in the present.'
-    },
-    clause: {
-        help10: 'A clause has a noun phrase and a verb phrase.'
-    },
-    sentence: {
-        help10: 'A sentence can have many clauses, or it may just have a single clause.'
-    },
-    pluralization: {
-        help10: 'When we write a noun we must specifiy how many of something we are writing about.',
-        help11: 'For example are we writing about one cat or more than one cat?',
-        help12: 'If we are writing about only one of something, then we use the base form of the noun.',
-        help13: 'If we are writing about more than one, then we use the plural form of the noun.'
-    },
-
-
-
-    // Plural or Singular
-    //Level06: {
-
-        //quiz:
-    //},
-
-    // Pluralization rules.
-    // How do we convert the base form of a noun into its plural form?  There are a few rules for doing this.
-    // We will often simply append the letter 's'.  For example, one cat or two cats.
-    // Sometimes we will append the letters 'es'.  For example, one box or two boxes.
-    // Sometimes the base and plural form are the same.  For example, one fish or two fish.
-    // Sometimes the plural form cannot be made using a simple rule, it's just different.
-    // For example, one man, two men.  Another example: one person, two people.
-    // quiz: enter into the noun dictionary:
-    
-
-    // Adverbs
-
-    // Adverbs as part of verb phrases
-
-
-
-    // Sentence. A sentence can have many clauses, or it may just have a single clause.
-    // If you can put all these pieces together and the indicator turns green, then you have built a complete, grammatically correct sentence.
-    // Until now, all of your writing has used the lower-case letters and no punctuation.  The first rule of capitalization is that the first letter of a sentence should be capitalized.
-    // The first rule of punctuation is that a sentence should be terminated with a period.
-    // You now have a dictionary of nound, verbd, adjectives, and adverbs.
-    // You can create noun phrases and verb phrases.
 
     lessonNavigator: {
         level: 'Level',
@@ -330,59 +258,16 @@ StringStore.zh = {
         quiz2: '你可以从这个列表中删除一个动词(verb)吗?',
         quiz3: '你能改变一个动词(verb)的拼写吗?'
     },
-    //verbd: {
-        //help10: '陈述人或事物动作、情况、变化的词叫做动词',
-        //quiz1: '你可以添加一个新的动词吗?',
-        //quiz2: '你可以从这个列表中删除一个动词吗?',
-        //quiz3: '你能改变一个动词的拼写吗?'
-    //},
 
-    verbConjugation: [
+    verbConjugation: [ // 8
         'Every verb has a \'base\' form and four other variations.',
-        'Given the \'base\' form of a verb we can make the other variations according to various rules.',
-        'We use the different variations according to the rules of grammar.',
-        'The process of making these variations is called \'conjugation\'.'
+        'We use the different variations of the verbs according to the rules of grammar.',
+        'The process of making these variations is called \'conjugation\'.',
+        'You can find the conjugations of a verb in a dictionary.',
+        'Many of the conjugations have patterns that you will notice.',
+        'However, there are so many exceptions to the patterns that it will be best to use a dictionary in order to conjugate your verbs.'
     ],
-    pastForm: {
-        help10:'The first verb conjugation that we will examine is the \'past\' form.',
-        help11:'When an action happens in the past then we use the \'past\' form of the verb.',
-        help12:'The base form of the verb is changed into the past form according to certain rules.'
-    },
-    tense: [
-        'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
-        'The verb will change to communicate this information.  The variations of the verb are called \'verb tenses\'.',
-        'Sometimes the verb will change to one of its conjugations. Sometimes the verb will sprout additional words.  Sometime the verb will not change at all.'
-    ],
-    aspect: [
-        'In addition to knowing when a verb happens, we may also want to know if the verb has finished or is still happening.',
-        'These things are called \'aspect\'.'
-    ],
-    ingForm: {
-        help10:'Another variation of the verb is called the \'-ing\' form.',
-        help11:'We usually use this when something is happening in the present.'
-    },
-    vp: {
-        help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
-        help11: 'In a verb phrase we start with a single verb and then add other words to enhance the meaning.',
-        help12: 'You have already seen your first verb phrase in the \'past form\' lesson.  By selecting \'future tense\' and a verb, you produced a two-word verb phrase.',
-        help13: 'Here we repackage that into an explicit verb phrase format.',
-        // although a verb phrase is usually more than one word, it could be just a single verb.
-        quiz1: 'Can you add a new verb phrase?',
-        quiz2: 'Can you delete a verb phrase from this list?',
-        quiz3: 'Can you change the spelling of a verb phrase?'
-    },
-    clause: {
-        help10: 'A clause has a noun phrase and a verb phrase.'
-    },
-    sentence: {
-        help10: 'A sentence can have many clauses, or it may just have a single clause.'
-    },
-    pluralization: {
-        help10: '当我们写名词时必须知道名词的形式。.',
-        help11: '例如我们写关于一只猫或多只猫吗?',
-        help12: '如果我们只写一个东西,我们用名词的基本形式。',
-        help13: '如果我们写不止一个,那么我们使用名词的复数形式。'
-    },
+
     lessonNavigator: {
         level: '级',
         nextLevel: '下一級',

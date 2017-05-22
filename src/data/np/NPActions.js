@@ -27,6 +27,7 @@ const NPActions = {
     },
     onClickEditNP(np:Object):void {
         validateNP(np)
+        console.log(np)
         AppDispatcher.dispatch({
             type: NPActionTypes.ON_CLICK_EDIT_NP,
             np: np
@@ -48,7 +49,7 @@ const NPActions = {
 
         if(npPanelLevel === NPPanelLevel.L1)
             action = {type: NPActionTypes.ON_CHANGE_DEFINITENESS_L1, newDefiniteness: newDefiniteness}
-        else if(npPanelLevel === NPPanelLevel.L2)
+        else if(npPanelLevel >= NPPanelLevel.L2)
             action = {type: NPActionTypes.ON_CHANGE_DEFINITENESS_L2, newDefiniteness: newDefiniteness}
         // else max fubar error
 
@@ -57,14 +58,16 @@ const NPActions = {
 
     onChangeSelectedNound(newNound:Object, npPanelLevel:number):void {
         validateNound(newNound)
-
+        console.log(npPanelLevel)
         let action
 
         if(npPanelLevel === NPPanelLevel.L1)
             action = {type: NPActionTypes.ON_CHANGE_SELECTED_NOUND_L1,newNound: newNound}
-        else if(npPanelLevel === NPPanelLevel.L2)
+        else if(npPanelLevel >= NPPanelLevel.L2)
             action = {type: NPActionTypes.ON_CHANGE_SELECTED_NOUND_L2, newNound: newNound}
+        // else max fubar error
 
+        console.log(action)
         AppDispatcher.dispatch(action)
     },
 

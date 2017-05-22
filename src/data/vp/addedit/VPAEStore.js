@@ -132,11 +132,24 @@ class VPAEStore extends ReduceStore {
                 }
             }
 
+            // verb conjugation
+            // past tense
             //                               past                present                 future
             // simple                        walked                walk                will walk
-            // continuous                   walking         are walking          will be walking
+            // continuous                was walking         are walking          will be walking
             // perfect                   had walked         have walked         will have walked
             // perfect, continuous had been walking   have been walking   will have been walking
+            // infinitive to walk
+
+            //                               past                present                 future
+            // simple                      went                    go                   will go
+            // continuous                 was going                  am going           will be going
+            // perfect                     had gone           have gone                 will have gone
+            // perfect, continuous         had been going      have been going          will have been going
+            // infinitive to go
+            // participle eaten
+            // gerund eating
+            //
 
             return generatedText
         }

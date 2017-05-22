@@ -18,7 +18,7 @@ function Phrase(props:Object):Object {
     const iunderstandCheckmark:Object | string = q.getIn(['phrase','iunderstand']) ?
         <img id='iunderstandCheckmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
-    const quizBox:Object | null = q.getIn(['phrase','passed']) ? null :
+    const quizBox:Object | null = // q.getIn(['phrase','passed']) ? null :
         <div id='quiz' style={style}>
             <h3>{props.strings.quiz}</h3>
             <table>

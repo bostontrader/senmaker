@@ -89,9 +89,10 @@ class NPAEStore extends ReduceStore {
 
         let newState:Object = state
 
-        // http://www.ef.com/english-resources/english-grammar/singular-and-plural-nouns
         const calcResultText = (definiteness:number, nound:Object, adjectivs:Array<Object>):string => {
             validateNound(nound)
+
+
             //adjectivs.map( (adjectivd) => {validateAdjectivd(adjectivd)})
 
             // Graft in this ugly code from another project...
@@ -171,7 +172,7 @@ class NPAEStore extends ReduceStore {
                     // no article, no base, no result
                 } else {
                     // no article, but there is a base, so use that as the result
-                    generatedText = adjString + base
+                    generatedText = adjString + ' ' + base
                 }
             } else {
                 if(base === '') {

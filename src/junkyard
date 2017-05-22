@@ -1,0 +1,175 @@
+inflection
+conjugation
+past tense    1/2 tenses
+present tense 2/2 tenses
+
+perfect                    1/2 aspects
+continuous aka progressive 2/2 aspects
+
+
+participle a verb form that can be used as an adjective
+  past participle example the risen sun
+  present participle the rising sun
+
+
+infinitive form - to verb (only use base form) 4/4 moods Verbs in the infinitive mood are used as parts of speech more than verbs. It expresses being or action.
+  I may go to the beach later.
+  They came to speak to me.
+  It's important to eat well.
+
+
+finite has a subject and can function as the root of an indepdendnt clause.
+
+non finite verb cannot serve as the root of an independent clause. most are infinitives, gerunds, and participles. typically not inflected.
+
+Indicative, imperative, subjunctive and infinitive are the four moods of English verbs.
+
+indicative   1/4 moods We use the indicative mood to express:
+  Assertion - Heathrow is the world's busiest airport.
+  Denial - Oliver cannot speak English.
+  Question - Do you work in the city?
+
+
+subjunctive  3/4 moods We use the subjunctive mood to express unreal situations, possibility and wish.
+Unreal - If I were rich, I would buy a sports car.
+Possibility - We might find her ring if we were to look hard enough.
+Wish - I wish it would stop raining.
+
+regular verbs vs irregular
+
+imperfect    aka past progressive
+pluperfect   aka past perfect
+conditional
+
+imperative 2/4 moods We use the imperative mood to express requests, commands and advice:
+  Request - Please don't talk in lesson.
+  Advice - Look out!
+  Command - Shut that door.
+
+
+
+preterite aka simple past
+
+
+
+
+pastForm: [ // 8
+        'The first verb conjugation that we will examine is the \'past\' form.',
+        'When an action happens in the past then we use the \'past\' form of the verb.'
+    ],
+
+    tense: [ // 9
+        'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
+        'The verb will change to communicate this information.  The variations of the verb are called \'verb tenses\'.',
+        'Sometimes the verb will change to one of its conjugations. Sometimes the verb will sprout additional words.  Sometime the verb will not change at all.'
+    ],
+    vp: { // 10
+        help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
+        help11: 'In a verb phrase we select the verb tense that we want.  This will cause the verb to change and maybe add some extra words of grammar.',
+        // although a verb phrase is usually more than one word, it could be just a single verb.
+        quiz1: 'Can you add a new verb phrase?',
+        quiz2: 'Can you delete a verb phrase from this list?',
+        quiz3: 'Can you change the spelling of a verb phrase?'
+    },
+    aspect: [ // 11
+        'In addition to knowing when a verb happens, we may also want to know if the verb has finished or is still happening.',
+        'These things are called \'aspect\'.'
+    ],
+    ingForm: {
+        help10:'Another variation of the verb is called the \'-ing\' form.',
+        help11:'We usually use this when something is happening in the present.'
+    },
+    clause: {
+        help10: 'A clause has a noun phrase and a verb phrase.'
+    },
+    sentence: {
+        help10: 'A sentence can have many clauses, or it may just have a single clause.'
+    },
+    pluralization: {
+        help10: 'When we write a noun we must specifiy how many of something we are writing about.',
+        help11: 'For example are we writing about one cat or more than one cat?',
+        help12: 'If we are writing about only one of something, then we use the base form of the noun.',
+        help13: 'If we are writing about more than one, then we use the plural form of the noun.'
+    },
+
+
+
+
+
+    // Plural or Singular
+    //Level06: {
+
+        //quiz:
+    //},
+
+    // Pluralization rules.
+    // How do we convert the base form of a noun into its plural form?  There are a few rules for doing this.
+    // We will often simply append the letter 's'.  For example, one cat or two cats.
+    // Sometimes we will append the letters 'es'.  For example, one box or two boxes.
+    // Sometimes the base and plural form are the same.  For example, one fish or two fish.
+    // Sometimes the plural form cannot be made using a simple rule, it's just different.
+    // For example, one man, two men.  Another example: one person, two people.
+    // quiz: enter into the noun dictionary:
+
+
+    // Adverbs
+
+    // Adverbs as part of verb phrases
+
+
+
+    // Sentence. A sentence can have many clauses, or it may just have a single clause.
+    // If you can put all these pieces together and the indicator turns green, then you have built a complete, grammatically correct sentence.
+    // Until now, all of your writing has used the lower-case letters and no punctuation.  The first rule of capitalization is that the first letter of a sentence should be capitalized.
+    // The first rule of punctuation is that a sentence should be terminated with a period.
+    // You now have a dictionary of nound, verbd, adjectives, and adverbs.
+    // You can create noun phrases and verb phrases.
+
+        //verbd: {
+            //help10: '陈述人或事物动作、情况、变化的词叫做动词',
+            //quiz1: '你可以添加一个新的动词吗?',
+            //quiz2: '你可以从这个列表中删除一个动词吗?',
+            //quiz3: '你能改变一个动词的拼写吗?'
+        //},
+
+
+        pastForm: {
+            help10:'The first verb conjugation that we will examine is the \'past\' form.',
+            help11:'When an action happens in the past then we use the \'past\' form of the verb.',
+            help12:'The base form of the verb is changed into the past form according to certain rules.'
+        },
+        tense: [
+            'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
+            'The verb will change to communicate this information.  The variations of the verb are called \'verb tenses\'.',
+            'Sometimes the verb will change to one of its conjugations. Sometimes the verb will sprout additional words.  Sometime the verb will not change at all.'
+        ],
+        aspect: [
+            'In addition to knowing when a verb happens, we may also want to know if the verb has finished or is still happening.',
+            'These things are called \'aspect\'.'
+        ],
+        ingForm: {
+            help10:'Another variation of the verb is called the \'-ing\' form.',
+            help11:'We usually use this when something is happening in the present.'
+        },
+        vp: {
+            help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
+            help11: 'In a verb phrase we start with a single verb and then add other words to enhance the meaning.',
+            help12: 'You have already seen your first verb phrase in the \'past form\' lesson.  By selecting \'future tense\' and a verb, you produced a two-word verb phrase.',
+            help13: 'Here we repackage that into an explicit verb phrase format.',
+            // although a verb phrase is usually more than one word, it could be just a single verb.
+            quiz1: 'Can you add a new verb phrase?',
+            quiz2: 'Can you delete a verb phrase from this list?',
+            quiz3: 'Can you change the spelling of a verb phrase?'
+        },
+        clause: {
+            help10: 'A clause has a noun phrase and a verb phrase.'
+        },
+        sentence: {
+            help10: 'A sentence can have many clauses, or it may just have a single clause.'
+        },
+        pluralization: {
+            help10: '当我们写名词时必须知道名词的形式。.',
+            help11: '例如我们写关于一只猫或多只猫吗?',
+            help12: '如果我们只写一个东西,我们用名词的基本形式。',
+            help13: '如果我们写不止一个,那么我们使用名词的复数形式。'
+        },

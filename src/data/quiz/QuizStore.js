@@ -103,20 +103,20 @@ const initialStates:Array<Object> = [
             addAdjectivd: false,
             removeAdjectivd: false,
             addTwoAdjectives: false,
-            passed: false
+            passed: true
         }),
         verbd: Map({ // 7
             insertVerbd: false,
             updateVerbd: false,
             deleteVerbd: false,
             passed: false
-        })
-        /*verbConjugation: Map({
-         iunderstand: false,
-         passed: false
-         }),
+        }),
+        verbConjugation: Map({ // 8
+            iunderstand: false,
+            passed: false
+        }),
 
-         sentence: Map({
+         /*sentence: Map({
          iunderstand: false,
          passed: false
          }),

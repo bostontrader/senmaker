@@ -24,7 +24,7 @@ function Nound(props:Object):Object {
     const quizDeleteNounFlag:string | Object = q.getIn(['nound','deleteNound']) ?
         <img id='deleteNoundCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
-    const quizBox:Object | null = q.getIn(['nound','passed']) ? null :
+    const quizBox:Object | null = // q.getIn(['nound','passed']) ? null :
         <div id='quiz' style={style}>
             <h3>{props.strings.quiz}</h3>
             <table>

@@ -45,8 +45,8 @@ const syllabus = {
     np:              {level: 4, comp:NounPhrase,      prev:'phrase',          next:'adjectivd'},
     adjectivd:       {level: 5, comp:Adjectivd,       prev:'np',              next:'npAdjective'},
     npAdjective:     {level: 6, comp:NPAdjective,     prev:'adjectivd',       next:'verbd'},
-    verbd:           {level: 7, comp:Verbd,           prev:'npAdjective',     next:null}
-    //verbConjugation: {level: 8, comp:VerbConjugation, prev:'verbd',           next:'pastForm'},
+    verbd:           {level: 7, comp:Verbd,           prev:'npAdjective',     next:'verbConjugation'},
+    verbConjugation: {level: 8, comp:VerbConjugation, prev:'verbd',           next:null}
     //pastForm:        {level: 9, comp:PastForm,        prev:'verbConjugation', next:'tense'},
     //tense:           {level:10, comp:Tense,           prev:'pastForm',        next:'verbPhrase'},
     //verbPhrase:      {level:11, comp:VerbPhrase,      prev:'tense',           next:'aspect'},

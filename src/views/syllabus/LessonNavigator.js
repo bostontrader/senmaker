@@ -33,9 +33,9 @@ function LessonNavigator(props:Object):Object {
 
     const currentLesson:Object  = props.app.getIn(['level','currentLesson'])
     const currentQuizPassed:Object = props.quiz.getIn([currentLesson,'passed'])
-    //const nextButton = ( currentQuizPassed && !props.app.getIn(['level','lastLesson'])) ?
-        //<button id="lesson-next" onClick={AppActions.onLessonNext}>{s.nextLevel}</button> : ''
-    const nextButton = <button id="lesson-next" onClick={AppActions.onLessonNext}>{s.nextLevel}</button>
+    const nextButton = ( currentQuizPassed && !props.app.getIn(['level','lastLesson'])) ?
+        <button id="lesson-next" onClick={AppActions.onLessonNext}>{s.nextLevel}</button> : ''
+    //const nextButton = <button id="lesson-next" onClick={AppActions.onLessonNext}>{s.nextLevel}</button>
 
     // Always have a reset button.  Maybe we don't want this if the state has just been reset
     // but that's of minor importance.
@@ -53,7 +53,7 @@ function LessonNavigator(props:Object):Object {
             {nextButton}
             {resetButton}
             {cheatButton}
-            v.0.9.8
+            v.0.9.9
 
         </div>
     )
