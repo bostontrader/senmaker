@@ -330,16 +330,14 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['verbd','passed'],verbdQuizPassed(newState))
                 break
 
-
-
-            // 7. verbConjugation
-            /*case QuizActionTypes.verbConjugation.ON_I_UNDERSTAND:
+            // 8. verbConjugation
+            case QuizActionTypes.verbConjugation.ON_I_UNDERSTAND:
                 newState = newState.setIn(['verbConjugation','iunderstand'],true)
                 newState = newState.setIn(['verbConjugation','passed'],true)
                 break
 
             // 10. sentences
-            case QuizActionTypes.sentence.ON_I_UNDERSTAND:
+            /*case QuizActionTypes.sentence.ON_I_UNDERSTAND:
                 newState = newState.setIn(['sentence','iunderstand'],true)
                 newState = newState.setIn(['sentence','passed'],true)
                 break

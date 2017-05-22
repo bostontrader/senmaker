@@ -16,16 +16,16 @@ function Intro(props:Object):Object {
     const sm:Object = props.strings.get('strings').misc
 
     const iunderstandCheckmark:Object | string = q.getIn(['intro','iunderstand']) ?
-        <img id="iunderstandCheckmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
+        <img id='iunderstandCheckmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
     const quizBox:Object | null = // q.getIn(['intro','passed']) ? null :
-        <div id="quiz" style={style}>
+        <div id='quiz' style={style}>
             <h3>{props.strings.quiz}</h3>
             <p>{s.quiz10}</p>
             <table>
                 <tbody>
                 <tr>
-                    <td><p><input id="iunderstandCheckbox" onChange={QuizActions.intro.onIUnderstand} type="checkbox" checked={q.getIn(['intro','iunderstand'])} />
+                    <td><p><input id='iunderstandCheckbox' onChange={QuizActions.intro.onIUnderstand} type='checkbox' checked={q.getIn(['intro','iunderstand'])} />
                         {sm.i_understand}</p></td>
                     <td>{iunderstandCheckmark}</td>
                 </tr>
@@ -36,7 +36,7 @@ function Intro(props:Object):Object {
     return (
         <div>
             <LessonNavigator cheat={false} {...props} />
-            <div id="help" style={style}>
+            <div id='help' style={style}>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
                 <p>{s.help12}</p>

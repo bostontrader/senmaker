@@ -1,6 +1,6 @@
 // @flow
 import QuizActionTypes from './QuizActionTypes'
-import AppDispatcher from '../AppDispatcher'
+import AppDispatcher   from '../AppDispatcher'
 
 const QuizActions:Object = {
 
@@ -31,8 +31,8 @@ const QuizActions:Object = {
         },
     },
 
-    //
-    /*verbConjugation: {
+    // 8
+    verbConjugation: {
         onIUnderstand() {
             AppDispatcher.dispatch({
                 type: QuizActionTypes.verbConjugation.ON_I_UNDERSTAND
@@ -41,7 +41,7 @@ const QuizActions:Object = {
     },
 
     //
-    sentence: {
+    /*sentence: {
         onIUnderstand() {
             AppDispatcher.dispatch({
                 type: QuizActionTypes.sentence.ON_I_UNDERSTAND

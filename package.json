@@ -39,5 +39,5 @@
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "test": "node  ./node_modules/.bin/jest"
   },
-  "version": "0.9.10"
+  "version": "0.9.11"
 }
