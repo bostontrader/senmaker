@@ -23,7 +23,7 @@ function VPRow(props:Object):Object {
         vpRow =
             <tr>
                 <td>{vp.generatedText}</td>
-                <td><button id={vp.id} type="button" onClick={onClickEditVP} >{props.strings.edit}</button></td>
+                <td><button id={vp.id} type="button" onClick={onClickEditVP} >{props.strings.get('strings').misc.edit}</button></td>
             </tr>
     //}
 

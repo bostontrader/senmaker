@@ -13,7 +13,7 @@ function NPAdjectives(props:Object):Object {
     }
 
     const q:Object = props.quiz
-    const s:Object = props.strings.npAdjective
+    const s:Object = props.strings.get('strings').npAdjective
 
     return (
         <div>

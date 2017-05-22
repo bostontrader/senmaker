@@ -11,7 +11,7 @@ function AdjectivdAEForm(props:Object):Object {
         margin: '5px'
     }
 
-    const s:Object = props.strings
+    const sm:Object = props.strings.get('strings').misc
 
     const onClickSave:Function = () => {
         const adjectivd:Object = props.adjectivd.getIn(['addedit','adjectivd'])
@@ -30,9 +30,9 @@ function AdjectivdAEForm(props:Object):Object {
 
     const onDelete:Function = () => AdjectivdActions.onClickDeleteAdjectivd(props.adjectivd.getIn(['addedit','adjectivd','id']))
 
-    const buttonSave:Object   = <button id='save-adjectivd'   onClick={onClickSave}>{s.save}</button>
-    const buttonDelete:Object = <button id='delete-adjectivd' onClick={onDelete}>{s.delete}</button>
-    const buttonCancel:Object = <button id='cancel'       onClick={AdjectivdActions.onClickCancel}>{s.cancel}</button>
+    const buttonSave:Object   = <button id='save-adjectivd'   onClick={onClickSave}>{sm.save}</button>
+    const buttonDelete:Object = <button id='delete-adjectivd' onClick={onDelete}>{sm.delete}</button>
+    const buttonCancel:Object = <button id='cancel'       onClick={AdjectivdActions.onClickCancel}>{sm.cancel}</button>
 
     const theButtons:Object = (props.adjectivd.getIn(['addedit','adjectivd','id'])) ?
         <div>{buttonSave}{buttonDelete}{buttonCancel}</div> : <div>{buttonSave}{buttonCancel}</div>

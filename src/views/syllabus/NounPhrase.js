@@ -13,7 +13,7 @@ function NounPhrases(props:Object):Object {
     }
 
     const q:Object = props.quiz
-    const s:Object = props.strings.np
+    const s:Object = props.strings.get('strings').np
 
     const quizInsertNPMark:Object | string = q.getIn(['np','insertNP']) ?
         <img id='quizInsertNPMark' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''

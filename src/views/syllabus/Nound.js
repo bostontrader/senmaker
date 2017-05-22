@@ -13,7 +13,7 @@ function Nound(props:Object):Object {
     }
 
     const q:Object = props.quiz
-    const s:Object = props.strings.nound
+    const s:Object = props.strings.get('strings').nound
 
     const quizInsertNounFlag:string | Object = q.getIn(['nound','insertNound']) ?
         <img id='insertNoundCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''

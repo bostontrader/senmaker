@@ -10,7 +10,7 @@ function NoundRow(props:Object):Object {
     let {nound}:Object = props
 
     const onClickEditNound:Function = () => NoundActions.onClickEditNound(nound)
-    const editButton:Object = <button id={'id'+nound.id} type="button" onClick={onClickEditNound} >{props.strings.edit}</button>
+    const editButton:Object = <button id={'id'+nound.id} type="button" onClick={onClickEditNound} >{props.strings.get('strings').misc.edit}</button>
 
     let noundRow:Object = <div></div>
 

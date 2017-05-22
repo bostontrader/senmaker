@@ -13,7 +13,7 @@ function VerbdAEForm(props:Object):Object {
         margin: '5px'
     }
 
-    const s:Object = props.strings
+    const sm:Object = props.strings.get('strings').misc
 
     const onClickSave:Function = () => {
         const verbd:Object = props.verbd.getIn(['addedit','verbd'])
@@ -32,9 +32,9 @@ function VerbdAEForm(props:Object):Object {
 
     const onDelete:Function = () => VerbdActions.onClickDeleteVerbd(props.verbd.getIn(['addedit','verbd','id']))
 
-    const buttonSave:Object   = <button id='save-verbd'   onClick={onClickSave}>{s.save}</button>
-    const buttonDelete:Object = <button id='delete-verbd' onClick={onDelete}>{s.delete}</button>
-    const buttonCancel:Object = <button id='cancel'       onClick={VerbdActions.onClickCancel}>{s.cancel}</button>
+    const buttonSave:Object   = <button id='save-verbd'   onClick={onClickSave}>{sm.save}</button>
+    const buttonDelete:Object = <button id='delete-verbd' onClick={onDelete}>{sm.delete}</button>
+    const buttonCancel:Object = <button id='cancel'       onClick={VerbdActions.onClickCancel}>{sm.cancel}</button>
 
     const theButtons:Object = (props.verbd.getIn(['addedit','addVerbd'])) ?
         <div>{buttonSave}{buttonCancel}</div> : <div>{buttonSave}{buttonDelete}{buttonCancel}</div>

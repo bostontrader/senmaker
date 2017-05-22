@@ -16,7 +16,7 @@ function NPPanel(props:Object):Object {
         margin: '5px'
     }
 
-    const s:Object = props.strings
+    const sm:Object = props.strings.get('strings').misc
 
     // What should be displayed in the np add/edit panel?
     let npAEForm:?Object = null
@@ -26,7 +26,7 @@ function NPPanel(props:Object):Object {
     // The appearance of a NPPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-np" onClick={NPActions.onClickAddNP}>{s.add_new} {'Noun Phrase'}</button>
+            <button id="add-np" onClick={NPActions.onClickAddNP}>{sm.add_new} {'Noun Phrase'}</button>
             <NPTable {...props} />
         </div>
         <div>

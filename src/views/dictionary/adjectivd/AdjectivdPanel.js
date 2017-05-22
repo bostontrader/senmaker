@@ -16,7 +16,7 @@ function AdjectivdPanel(props:Object):Object {
         margin: '5px'
     }
 
-    const s:Object = props.strings
+    const sm:Object = props.strings.get('strings').misc
 
     // What should be displayed in the adjectivd add/edit panel?
     let nounAddEditForm:?Object = null
@@ -26,7 +26,7 @@ function AdjectivdPanel(props:Object):Object {
     // The appearance of a AdjectivdPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-adjectivd" onClick={AdjectivdActions.onClickAddAdjectivd}>{s.add_new} {'Adjective'}</button>
+            <button id="add-adjectivd" onClick={AdjectivdActions.onClickAddAdjectivd}>{sm.add_new} {'Adjective'}</button>
             <AdjectivdTable {...props} />
         </div>
         <div>

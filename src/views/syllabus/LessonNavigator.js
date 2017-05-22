@@ -16,15 +16,15 @@ function LessonNavigator(props:Object):Object {
         margin: '5px'
     }
 
-    const s:Object = props.strings.lessonNavigator
+    const s:Object = props.strings.get('strings').lessonNavigator
 
-    const enFlag:Object | string = (props.strings.lang ===langCode.en) ? '' :
+    const enFlag:Object | string = (props.strings.get('lang') ===langCode.en) ? '' :
         <img id="enFlag" onClick={StringActions.onLangEN} src="/img/us_flag.gif" width="48" height="40" alt=""/>
 
-    const zhFlag:Object | string = (props.strings.lang ===langCode.zh) ? '' :
+    const zhFlag:Object | string = (props.strings.get('lang') ===langCode.zh) ? '' :
         <img id="zhFlag" onClick={StringActions.onLangZH} src="/img/chinese_flag.gif" width="48" height="40" alt=""/>
 
-    const levelIndicator:string = (props.strings.lang ===langCode.en) ?
+    const levelIndicator:string = (props.strings.get('lang') ===langCode.en) ?
         s.level + ' ' + props.app.getIn(['level','currentLevel']) :
         props.app.getIn(['level','currentLevel']) + ' ' + s.level
 
@@ -48,12 +48,12 @@ function LessonNavigator(props:Object):Object {
 
     return (
         <div className="lesson-navigator" style={style}>
-            <h3>{levelIndicator}. {props.strings[props.app.getIn(['level','currentLesson'])].title} {enFlag}{zhFlag}</h3>
+            <h3>{levelIndicator}. {props.strings.get('strings')[props.app.getIn(['level','currentLesson'])].title} {enFlag}{zhFlag}</h3>
             {previousButton}
             {nextButton}
             {resetButton}
             {cheatButton}
-            v.0.9.9
+            v.0.9.10
 
         </div>
     )

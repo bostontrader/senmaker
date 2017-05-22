@@ -13,7 +13,8 @@ function Phrase(props:Object):Object {
     }
 
     const q:Object = props.quiz
-    const s:Object = props.strings.phrase
+    const s:Object = props.strings.get('strings').phrase
+    const sm:Object = props.strings.get('strings').misc
 
     const iunderstandCheckmark:Object | string = q.getIn(['phrase','iunderstand']) ?
         <img id='iunderstandCheckmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
@@ -25,7 +26,7 @@ function Phrase(props:Object):Object {
                 <tbody>
                 <tr>
                     <td><p><input id='iunderstandCheckbox' onChange={QuizActions.phrase.onIUnderstand} type='checkbox' checked={q.getIn(['phrase','iunderstand'])} />
-                        {props.strings.i_understand}</p></td>
+                        {sm.i_understand}</p></td>
                     <td>{iunderstandCheckmark}</td>
                 </tr>
                 </tbody>

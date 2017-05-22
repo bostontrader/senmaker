@@ -9,7 +9,7 @@ function AdjectivdRow(props:Object):Object {
     let {adjectivd}:Object = props
 
     const onClickEditAdjectivd:Function = () => AdjectivdActions.onClickEditAdjectivd(adjectivd)
-    const editButton:Object = <button id={'id'+adjectivd.id} type="button" onClick={onClickEditAdjectivd} >{props.strings.edit}</button>
+    const editButton:Object = <button id={'id'+adjectivd.id} type="button" onClick={onClickEditAdjectivd} >{props.strings.get('strings').misc.edit}</button>
 
     let adjectivdRow:Object =
         <tr>

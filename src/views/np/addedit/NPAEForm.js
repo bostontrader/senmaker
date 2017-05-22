@@ -17,7 +17,7 @@ function NPAEForm(props:Object):?Object {
         margin: '5px'
     }
 
-    const s:Object = props.strings
+    const sm:Object = props.strings.get('strings').misc
 
     const onClickSave:Function = () => {
         const np:Object = props.np.getIn(['addedit','np'])
@@ -27,9 +27,9 @@ function NPAEForm(props:Object):?Object {
 
     const onDelete:Function = () => NPActions.onClickDeleteNP(props.np.getIn(['addedit','np','id']))
 
-    const buttonSave:Object   = <button id='save-np'   onClick={onClickSave}>{s.save}</button>
-    const buttonDelete:Object = <button id='delete-np' onClick={onDelete}>{s.delete}</button>
-    const buttonCancel:Object = <button id='cancel'    onClick={NPActions.onClickCancel}>{s.cancel}</button>
+    const buttonSave:Object   = <button id='save-np'   onClick={onClickSave}>{sm.save}</button>
+    const buttonDelete:Object = <button id='delete-np' onClick={onDelete}>{sm.delete}</button>
+    const buttonCancel:Object = <button id='cancel'    onClick={NPActions.onClickCancel}>{sm.cancel}</button>
 
     // add mode or edit mode?
     const theButtons:Object = (props.np.getIn(['addedit','addNP'])) ?

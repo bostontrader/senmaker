@@ -10,7 +10,7 @@ function VerbdRow(props:Object):Object {
     let {verbd}:Object = props
 
     const onClickEditVerbd:Function = () => VerbdActions.onClickEditVerbd(verbd)
-    const editButton:Object = <button id={'id'+verbd.id} type="button" onClick={onClickEditVerbd} >{props.strings.edit}</button>
+    const editButton:Object = <button id={'id'+verbd.id} type="button" onClick={onClickEditVerbd} >{props.strings.get('strings').misc.edit}</button>
 
     let verbdRow:Object = <tr></tr>
 

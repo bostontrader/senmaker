@@ -13,7 +13,7 @@ function NoundAEForm(props:Object):Object {
         margin: '5px'
     }
 
-    const s:Object = props.strings
+    const sm:Object = props.strings.get('strings').misc
 
     const onClickSave:Function = () => {
         const nound:Object = props.nound.getIn(['addedit','nound'])
@@ -32,9 +32,9 @@ function NoundAEForm(props:Object):Object {
 
     const onDelete:Function = () => NoundActions.onClickDeleteNound(props.nound.getIn(['addedit','nound','id']))
 
-    const buttonSave:Object   = <button id='save-nound'   onClick={onClickSave}>{s.save}</button>
-    const buttonDelete:Object = <button id='delete-nound' onClick={onDelete}>{s.delete}</button>
-    const buttonCancel:Object = <button id='cancel'       onClick={NoundActions.onClickCancel}>{s.cancel}</button>
+    const buttonSave:Object   = <button id='save-nound'   onClick={onClickSave}>{sm.save}</button>
+    const buttonDelete:Object = <button id='delete-nound' onClick={onDelete}>{sm.delete}</button>
+    const buttonCancel:Object = <button id='cancel'       onClick={NoundActions.onClickCancel}>{sm.cancel}</button>
 
     const theButtons:Object = (props.nound.getIn(['addedit','addNound'])) ?
         <div>{buttonSave}{buttonCancel}</div> : <div>{buttonSave}{buttonDelete}{buttonCancel}</div>

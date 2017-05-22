@@ -16,7 +16,7 @@ function VPPanel(props:Object):Object {
         margin: '5px'
     }
 
-    const s:Object = props.strings
+    const sm:Object = props.strings.get('strings').misc
 
     // What should be displayed in the vp add/edit panel?
     let vpAEForm:?Object = null
@@ -26,7 +26,7 @@ function VPPanel(props:Object):Object {
     // The appearance of a VPPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-vp" onClick={VPActions.onClickAddVP}>{s.add_new} {'Verb Phrase'}</button>
+            <button id="add-vp" onClick={VPActions.onClickAddVP}>{sm.add_new} {'Verb Phrase'}</button>
             <VPTable {...props} />
         </div>
         <div>

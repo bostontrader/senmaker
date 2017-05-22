@@ -16,7 +16,7 @@ function VerbdPanel(props:Object):Object {
         margin: '5px'
     }
 
-    const s:Object = props.strings
+    const sm:Object = props.strings.get('strings').misc
 
     // What should be displayed in the verbd add/edit panel?
     let verbdAEForm:?Object = null
@@ -26,7 +26,7 @@ function VerbdPanel(props:Object):Object {
     // The appearance of a VerbdPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-verbd" onClick={VerbdActions.onClickAddVerbd}>{s.add_new} {s.verb}</button>
+            <button id="add-verbd" onClick={VerbdActions.onClickAddVerbd}>{sm.add_new} {sm.verb}</button>
             <VerbdTable {...props} />
         </div>
         <div>

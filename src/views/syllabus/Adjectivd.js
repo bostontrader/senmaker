@@ -11,7 +11,7 @@ function Adjectivd(props) {
     }
 
     const q = props.quiz
-    const s = props.strings.adjectivd
+    const s:Object = props.strings.get('strings').adjectivd
 
     const quizInsertAdjectivFlag = q.getIn(['adjectivd','insertAdjectivd']) ?
         <img id='insertAdjectivdCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''

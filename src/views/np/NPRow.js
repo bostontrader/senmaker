@@ -23,7 +23,7 @@ function NPRow(props:Object):Object {
         npRow =
             <tr>
                 <td>{np.generatedText}</td>
-                <td><button id={np.id} type="button" onClick={onClickEditNP} >{props.strings.edit}</button></td>
+                <td><button id={np.id} type="button" onClick={onClickEditNP} >{props.strings.get('strings').misc.edit}</button></td>
             </tr>
     //}
 

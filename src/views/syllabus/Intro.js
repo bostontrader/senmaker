@@ -12,7 +12,8 @@ function Intro(props:Object):Object {
     }
 
     const q:Object = props.quiz
-    const s:Object = props.strings.intro
+    const s:Object = props.strings.get('strings').intro
+    const sm:Object = props.strings.get('strings').misc
 
     const iunderstandCheckmark:Object | string = q.getIn(['intro','iunderstand']) ?
         <img id="iunderstandCheckmark" src="/img/Checked.png" alt="checkmark" width="36" height="36"/> : ''
@@ -20,12 +21,12 @@ function Intro(props:Object):Object {
     const quizBox:Object | null = // q.getIn(['intro','passed']) ? null :
         <div id="quiz" style={style}>
             <h3>{props.strings.quiz}</h3>
-            <p>{props.strings.intro.quiz10}</p>
+            <p>{s.quiz10}</p>
             <table>
                 <tbody>
                 <tr>
                     <td><p><input id="iunderstandCheckbox" onChange={QuizActions.intro.onIUnderstand} type="checkbox" checked={q.getIn(['intro','iunderstand'])} />
-                        {props.strings.i_understand}</p></td>
+                        {sm.i_understand}</p></td>
                     <td>{iunderstandCheckmark}</td>
                 </tr>
                 </tbody>

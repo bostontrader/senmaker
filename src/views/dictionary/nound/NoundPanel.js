@@ -16,7 +16,7 @@ function NoundPanel(props:Object):Object {
         margin: '5px'
     }
 
-    const s:Object = props.strings
+    const sm:Object = props.strings.get('strings').misc
 
     // What should be displayed in the nound add/edit panel?
     let noundAEForm:?Object = null
@@ -26,7 +26,7 @@ function NoundPanel(props:Object):Object {
     // The appearance of a NoundPanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-nound" onClick={NoundActions.onClickAddNound}>{s.add_new} {s.noun}</button>
+            <button id="add-nound" onClick={NoundActions.onClickAddNound}>{sm.add_new} {sm.noun}</button>
             <NoundTable {...props} />
         </div>
         <div>

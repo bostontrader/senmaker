@@ -1,6 +1,7 @@
 // @flow
 import {ReduceStore} from 'flux/utils'
 import {fromJS}      from 'immutable'
+import {Map}         from 'immutable'
 
 import StringActionTypes from './StringActionTypes'
 import AppDispatcher     from '../AppDispatcher'
@@ -8,8 +9,26 @@ import {langCode}        from '../I18NConstants'
 import AppActionTypes    from '../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../LocalStorage'
-const localStorageKey = 'StringStore'
+const localStorageKey:string = 'StringStore'
 
+// We want to provide a migration capacity for the format of this store.  It's serialized
+// into localStorage and there's no telling when old versions will be seen in the future.
+const initialStates:Array<Object> = [
+    Map({
+        version:1,
+        lang: langCode.zh
+    })
+]
+
+/**
+ * This store differs from the others.
+ *
+ * In this store want to save the language choice to
+ * localState and we _do not_ want to save the blizzard of strings.  But for the ordinary
+ * operation of the app, we _do_ want the strings in the state.  We must therefore engage
+ * in contortions to append and prune the strings from the state where applicable.
+ *
+ */
 class StringStore extends ReduceStore {
 
     constructor() {super(AppDispatcher)}
@@ -18,14 +37,36 @@ class StringStore extends ReduceStore {
         if (localStorageAvailable) {
             const localStorageState = localStorage.getItem(localStorageKey)
 
-            //if(localStorageState) {
-                //let n = StringStore.initialState
-                //n.lang = parseInt(localStorageState)
-                //console.log(localStorageState)
-                //return n
-            //}
+            if(localStorageState) {
+                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
+                if(originalParse.get('lang') === langCode.zh) originalParse = originalParse.set('strings', StringStore.zh)
+                else if(originalParse.get('lang') === langCode.en) originalParse = originalParse.set('strings', StringStore.en)
+                // else max fubar error
+
+                return originalParse
+            }
         }
-        return StringStore.initialState
+
+        return initialStates.slice(-1)[0].set('strings', StringStore.zh)
+    }
+
+    // Given an originalFormat state object migrate to the most current version
+    migrate(originalFormat:Object):Object {
+        const currentInitialState:Object = initialStates.slice(-1)[0]
+        const originalVersion:number = originalFormat.getIn(['version'])
+
+        // If the version is undefined then we start fresh
+        if(originalVersion === undefined)
+            return currentInitialState
+
+        // If the version is the most recent
+        if (originalVersion === currentInitialState.getIn(['version']))
+            return originalFormat
+
+        // Else migrate from the originalVersion to the current version
+        // But at this time there are no intermediate version to migrate through
+        // so do nothing
+        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {
@@ -35,15 +76,17 @@ class StringStore extends ReduceStore {
         switch (action.type) {
 
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = StringStore.initialState
+                newState = initialStates.slice(-1)[0].set('strings', StringStore.zh)
                 break
             
             case StringActionTypes.ON_LANG_EN:
-                newState = StringStore.en
+                newState = newState.set('lang', langCode.en)
+                newState = newState.set('strings', StringStore.en)
                 break
 
             case StringActionTypes.ON_LANG_ZH:
-                newState = StringStore.zh
+                newState = newState.set('lang', langCode.zh)
+                newState = newState.set('strings', StringStore.zh)
                 break
 
             default:
@@ -53,28 +96,30 @@ class StringStore extends ReduceStore {
         // We don't need to save all these strings to localStorage but we do
         // want to save the language selection.
         if(localStorageAvailable)
-            localStorage.setItem(localStorageKey, newState.lang)
+            localStorage.setItem(localStorageKey, JSON.stringify(newState.delete('strings').toJSON()))
 
         return newState
     }
 }
 
 StringStore.en = {
-    lang: langCode.en,
-    add_new: 'Add New',
-    adjectivs: 'Adjectives',
-    cancel: 'Cancel',
-    delete: 'Delete',
-    edit: 'Edit',
-    i_understand: 'I understand',
-    introduction: 'Introduction',
-    noun: 'Noun',
-    nouns: 'Nouns',
-    noun_phrase: 'Noun Phrase',
-    quiz: 'Quiz',
-    save: 'Save',
-    verb: 'Verb',
-    verbs: 'Verbs',
+
+    misc: {
+        add_new: 'Add New',
+        adjectivs: 'Adjectives',
+        cancel: 'Cancel',
+        delete: 'Delete',
+        edit: 'Edit',
+        i_understand: 'I understand',
+        introduction: 'Introduction',
+        noun: 'Noun',
+        nouns: 'Nouns',
+        noun_phrase: 'Noun Phrase',
+        quiz: 'Quiz',
+        save: 'Save',
+        verb: 'Verb',
+        verbs: 'Verbs',
+    },
 
     intro: { // 0
         title: 'Introduction 引言',
@@ -95,6 +140,7 @@ StringStore.en = {
         quiz2: 'Can you delete a noun from this list?',
         quiz3: 'Can you change the spelling of a noun?'
     },
+
     definiteness: { // 2
         title: 'Definite or Indefinite',
         help10: 'Nouns are usually preceded by the word \'a\', \'an\', or \'the\'.  These three words are called \'articles\'.',
@@ -110,11 +156,13 @@ StringStore.en = {
         quiz3: 'Can you see that the article changes?',
         quiz4: 'I can see it change'
     },
+
     phrase: { // 3
         title: 'Phrases 短语',
         help10: 'A group of words that work together is called a \'phrase\'.',
         help11: 'Building phrases is just the beginning. Later we will assemble phrases together into larger components.',
     },
+
     np: { // 4
         title: 'Noun Phrases 名词短语',
         help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
@@ -126,6 +174,7 @@ StringStore.en = {
         quiz3: 'Can you change the article in a noun phrase?',
         quiz4: 'Can you delete a noun phrase?'
     },
+
     adjectivd: { // 5
         title: 'Adjectives 形容词',
         help10: 'We add meaning to noun phrases by using adjectives.',
@@ -136,10 +185,12 @@ StringStore.en = {
         quiz2: 'Can you delete an adjective from this list?',
         quiz3: 'Can you change the spelling of an adjective?'
     },
+
     npAdjective: { // 6
         title: 'Noun Phrase 名词短语 with Adjectives 形容词',
         help10: 'A Noun Phrase can have any number of adjectives.'
     },
+
     verbd: { // 7
         title: 'Verbs 动词',
         help10: 'The actions that we can take are called verbs.',
@@ -150,8 +201,10 @@ StringStore.en = {
         quiz2: 'Can you delete a verbs from this list?',
         quiz3: 'Can you change the spelling of a verbs?'
     },
+
     verbConjugation: [ // 8
         'Every verb has a \'base\' form and four other variations.',
+        'For example: \'steals\', \'stole\', \'stealing\', and \'stolen\' are the four variations of the base verb \'steal\',',
         'We use the different variations of the verbs according to the rules of grammar.',
         'The process of making these variations is called \'conjugation\'.',
         'You can find the conjugations of a verb in a dictionary.',
@@ -168,21 +221,23 @@ StringStore.en = {
 }
 
 StringStore.zh = {
-    lang: langCode.zh,
-    add_new: '添加新',
-    adjectivs: 'Adjectives',
-    cancel: '取消',
-    delete: '删除',
-    edit: '编辑',
-    i_understand: '我明白',
-    introduction: '引言',
-    noun: 'Noun',
-    nouns: '名词 Nouns',
-    noun_phrase: 'Noun Phrase',
-    quiz: '测试',
-    save: '保存',
-    verb: 'Verb',
-    verbs: '动词 Verbs',
+
+    misc: {
+        add_new: '添加新',
+        adjectivs: 'Adjectives',
+        cancel: '取消',
+        delete: '删除',
+        edit: '编辑',
+        i_understand: '我明白',
+        introduction: '引言',
+        noun: 'Noun',
+        nouns: '名词 Nouns',
+        noun_phrase: 'Noun Phrase',
+        quiz: '测试',
+        save: '保存',
+        verb: 'Verb',
+        verbs: '动词 Verbs',
+    },
 
     intro: { // 0
         title: 'Introduction 引言',
@@ -192,6 +247,7 @@ StringStore.zh = {
         help13: '通过以下课程您将知道如何学习英语。',
         quiz10: '你目前是0级，为了继续下一个阶段需要通过测验。'
     },
+
     nound: { // 1
         title: 'Nouns 名词',
         help10: '我们周围的东西叫做名词(noun)。',
@@ -202,6 +258,7 @@ StringStore.zh = {
         quiz2: '你可以从这个列表中删除一个名词(noun)吗?',
         quiz3: '你能改变一个名词(noun)的拼写吗?'
     },
+
     definiteness: { // 2
         title: 'Definite（确定）or Indefinite（或不确定）',
         help10: '名词通常这个词之前\'a\', \'an\',或\'the\'. 这三个词被称为\'articles\' （冠词）',
@@ -217,11 +274,13 @@ StringStore.zh = {
         quiz3: '你能看到冠词(article)的改变吗？',
         quiz4: '我可以看到它的改变'
     },
+
     phrase: { // 3
         title: 'Phrases 短语',
         help10: '一组合作的词汇被称为短语 \'phrase\'。',
         help11: '建造短语只是开始。 稍后我们会将短语组合成更大的组件。',
     },
+
     np: { // 4
         title: 'Noun Phrases 名词短语',
         help10: '学习构建的第一个短语叫\'名词短语\' (noun phrase)',
@@ -233,6 +292,7 @@ StringStore.zh = {
         quiz3: '你能改变名词短语(noun phrase)中的冠词(article)吗?',
         quiz4: '你能删除名词短语(noun phrase)吗?'
     },
+
     adjectivd: { // 5
         title: 'Adjectives 形容词',
         help10: '我们可以增加形容词来增强名词短语的意思',
@@ -243,6 +303,7 @@ StringStore.zh = {
         quiz2: '你可以从这个列表中删除一个形容词(adjective)吗?',
         quiz3: '你能改变一个形容词(adjective)的拼写吗?'
     },
+
     npAdjective: { // 6
         title: 'Noun Phrase 名词短语 with Adjectives 形容词',
         help10: '名词短语可以有任意数量的形容词.'
@@ -261,6 +322,7 @@ StringStore.zh = {
 
     verbConjugation: [ // 8
         'Every verb has a \'base\' form and four other variations.',
+        'For example: \'steals\', \'stole\', \'stealing\', and \'stolen\' are the four variations of the base verb \'steal\',',
         'We use the different variations of the verbs according to the rules of grammar.',
         'The process of making these variations is called \'conjugation\'.',
         'You can find the conjugations of a verb in a dictionary.',
