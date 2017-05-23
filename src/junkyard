@@ -53,10 +53,6 @@ preterite aka simple past
 
 
 
-pastForm: [ // 8
-        'The first verb conjugation that we will examine is the \'past\' form.',
-        'When an action happens in the past then we use the \'past\' form of the verb.'
-    ],
 
     tense: [ // 9
         'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',

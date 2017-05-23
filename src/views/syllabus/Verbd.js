@@ -14,6 +14,7 @@ function Verbd(props:Object):Object {
 
     const q:Object = props.quiz
     const s:Object = props.strings.get('strings').verbd
+    const sm:Object = props.strings.get('strings').misc
 
     const quizInsertVerbFlag:string | Object = q.getIn(['verbd','insertVerbd']) ?
         <img id='insertVerbdCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
@@ -24,9 +25,9 @@ function Verbd(props:Object):Object {
     const quizDeleteVerbFlag:string | Object = q.getIn(['verbd','deleteVerbd']) ?
         <img id='deleteVerbdCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
-    const quizBox:Object | null = q.getIn(['verbd','passed']) ? null :
+    const quizBox:Object | null = // q.getIn(['verbd','passed']) ? null :
         <div id='quiz' style={style}>
-            <h3>{props.strings.quiz}</h3>
+            <h3>{sm.quiz}</h3>
             <table>
                 <tbody>
                 <tr>

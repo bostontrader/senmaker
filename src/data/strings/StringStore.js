@@ -212,6 +212,11 @@ StringStore.en = {
         'However, there are so many exceptions to the patterns that it will be best to use a dictionary in order to conjugate your verbs.'
     ],
 
+    pastForm: [ // 9
+        'The first verb conjugation that we will examine is the \'past\' form.',
+        'When an action happens in the past then we use the \'past\' form of the verb.'
+    ],
+
     lessonNavigator: {
         level: 'Level',
         nextLevel: 'Next Level',
@@ -328,6 +333,11 @@ StringStore.zh = {
         'You can find the conjugations of a verb in a dictionary.',
         'Many of the conjugations have patterns that you will notice.',
         'However, there are so many exceptions to the patterns that it will be best to use a dictionary in order to conjugate your verbs.'
+    ],
+
+    pastForm: [ // 9
+        'The first verb conjugation that we will examine is the \'past\' form.',
+        'When an action happens in the past then we use the \'past\' form of the verb.'
     ],
 
     lessonNavigator: {

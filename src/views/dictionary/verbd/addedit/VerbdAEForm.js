@@ -53,7 +53,6 @@ function VerbdAEForm(props:Object):Object {
             verbdAEForm =
                 <div id="verbd-addedit-form" style={style}>
                     {baseControls}
-                    <PastFormRuleSelect />
                     <label htmlFor='pastForm'>Past Form</label>
                     <input id='pastForm' name='pastForm' type='text'
                            value={props.verbd.getIn(['addedit','verbd','pastForm'])}

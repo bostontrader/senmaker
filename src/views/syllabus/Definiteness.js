@@ -17,6 +17,7 @@ function Definiteness(props:Object):Object {
 
     const q:Object = props.quiz
     const s:Object = props.strings.get('strings').definiteness
+    const sm:Object = props.strings.get('strings').misc
 
     const quizOnNoundChangedFlag:Object | string = q.getIn(['definiteness','noundChanged']) ?
         <img id='changeNoundCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
@@ -29,7 +30,7 @@ function Definiteness(props:Object):Object {
 
     const quizBox:Object | null = // q.getIn(['definiteness','passed']) ? null :
         <div id='quiz' style={style}>
-            <h3>{props.strings.quiz}</h3>
+            <h3>{sm.quiz}</h3>
             <table>
                 <tbody>
                 <tr>

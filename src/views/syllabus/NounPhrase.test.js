@@ -53,10 +53,11 @@ describe("NounPhrase", () => {
                 let renderExpression = <NounPhrase {...state} />
                 let npComponent = ReactTestUtils.createRenderer().render(renderExpression)
 
-                if(state.quiz.getIn(['np','passed'])) {
+                // Passed or not, the quiz box should be there
+                //if(state.quiz.getIn(['np','passed'])) {
                     // If the quiz has passed, don't expect the quiz box and don't look for the checkmarks
-                    verifyBasicLayout(npComponent, false)
-                } else {
+                    //verifyBasicLayout(npComponent, false)
+                //} else {
                     // If the quiz has not passed, expect the quiz box and look
                     // for the checkmarks
                     verifyBasicLayout(npComponent, true)
@@ -64,7 +65,7 @@ describe("NounPhrase", () => {
                     // verify that only the currently answered questions are checked
                     for(let check of checks)
                         expect(countWithId(npComponent,check)).toBe(1)
-                }
+                //}
             }
         }
 

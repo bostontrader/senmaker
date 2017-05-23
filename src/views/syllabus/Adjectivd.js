@@ -12,6 +12,7 @@ function Adjectivd(props) {
 
     const q = props.quiz
     const s:Object = props.strings.get('strings').adjectivd
+    const sm:Object = props.strings.get('strings').misc
 
     const quizInsertAdjectivFlag = q.getIn(['adjectivd','insertAdjectivd']) ?
         <img id='insertAdjectivdCheck' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
@@ -25,15 +26,15 @@ function Adjectivd(props) {
     return(
         <div>
             <LessonNavigator {...props} />
-            <div className='help' style={style}>
+            <div id='help' style={style}>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
                 <p>{s.help12}</p>
                 <p>{s.help13}</p>
             </div>
             <AdjectivdPanel {...props} />
-            <div className='quiz' style={style}>
-                <h3>{props.strings.quiz}</h3>
+            <div id='quiz' style={style}>
+                <h3>{sm.quiz}</h3>
                 <table>
                     <tbody>
                         <tr>

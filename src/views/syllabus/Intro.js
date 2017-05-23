@@ -20,7 +20,7 @@ function Intro(props:Object):Object {
 
     const quizBox:Object | null = // q.getIn(['intro','passed']) ? null :
         <div id='quiz' style={style}>
-            <h3>{props.strings.quiz}</h3>
+            <h3>{sm.quiz}</h3>
             <p>{s.quiz10}</p>
             <table>
                 <tbody>

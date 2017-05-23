@@ -13,20 +13,22 @@ function PastForm(props:Object):Object {
     }
 
     const q:Object = props.quiz
-    const s:Object = props.strings.pastForm
+    const s:Object = props.strings.get('strings').pastForm
+    const sm:Object = props.strings.get('strings').misc
 
     /*const quizInsertVerbFlag = q.getIn(['verbd','insertPastForm']) ?
-        <img id="insertPastFormCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id='insertPastFormCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''
 
     const quizUpdateVerbFlag = q.getIn(['verbd','updatePastForm']) ?
-        <img id="updatePastFormCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id='updatePastFormCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''
 
     const quizDeleteVerbFlag = q.getIn(['verbd','deletePastForm']) ?
-        <img id="deletePastFormCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''*/
+        <img id='deletePastFormCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''*/
 
     return(
         <div>
-            <div className="help" style={style}>
+            <LessonNavigator {...props} />
+            <div id='help' style={style}>
                 <h1>Verb Past Form</h1>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
@@ -34,15 +36,14 @@ function PastForm(props:Object):Object {
                 <p>{s.help13}</p>
             </div>
             <VerbdPanel verbdPanelLevel={VerbdPanelLevel.PAST_FORM} {...props} />
-            <div className="quiz" style={style}>
-                <h3>{props.strings.quiz}</h3>
+            <div id='quiz' style={style}>
+                <h3>{sm.quiz}</h3>
                 <table>
                     <tbody>
 
                     </tbody>
                 </table>
             </div>
-            <LessonNavigator {...props} />
         </div>
     )
 }

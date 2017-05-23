@@ -53,10 +53,11 @@ describe("Definiteness", () => {
                 let renderExpression = <Definiteness {...state} />
                 let definitenessComponent = ReactTestUtils.createRenderer().render(renderExpression)
 
-                if(state.quiz.getIn(['definiteness','passed'])) {
+                // Passed or not, the quiz box should be there
+                //if(state.quiz.getIn(['definiteness','passed'])) {
                     // If the quiz has passed, don't expect the quiz box and don't look for the checkmarks
-                    verifyBasicLayout(definitenessComponent, false)
-                } else {
+                    //verifyBasicLayout(definitenessComponent, false)
+                //} else {
                     // If the quiz has not passed, expect the quiz box and look
                     // for the checkmarks
                     verifyBasicLayout(definitenessComponent, true)
@@ -64,7 +65,7 @@ describe("Definiteness", () => {
                     // verify that only the currently answered questions are checked
                     for(let check of checks)
                         expect(countWithId(definitenessComponent,check)).toBe(1)
-                }
+                //}
 
             }
         }

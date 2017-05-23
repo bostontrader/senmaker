@@ -37,8 +37,8 @@ describe("Phrase", () => {
         newState.quiz = QuizStore.reduce(initialState.quiz, {type:QuizActionTypes.phrase.ON_I_UNDERSTAND})
         const renderExpression = <Phrase {...newState} />
 
-        // Answering the quiz will make the quiz box go away
-        const phraseComponent = verifyBasicLayout(renderExpression, false) // don't expectQuizBox
+        const phraseComponent = verifyBasicLayout(renderExpression, true) // expectQuizBox
+        expect(countWithId(phraseComponent,'iunderstandCheckmark')).toBe(1)
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()

@@ -21,7 +21,7 @@ function Phrase(props:Object):Object {
 
     const quizBox:Object | null = // q.getIn(['phrase','passed']) ? null :
         <div id='quiz' style={style}>
-            <h3>{props.strings.quiz}</h3>
+            <h3>{sm.quiz}</h3>
             <table>
                 <tbody>
                 <tr>

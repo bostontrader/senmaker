@@ -14,18 +14,19 @@ function NPAdjectives(props:Object):Object {
 
     const q:Object = props.quiz
     const s:Object = props.strings.get('strings').npAdjective
+    const sm:Object = props.strings.get('strings').misc
 
     return (
         <div>
             <LessonNavigator {...props} />
-            <div className="help" style={style}>
+            <div id='help' style={style}>
                 <p>{s.help10}</p>
             </div>
 
             <NPPanel npPanelLevel={NPPanelLevel.ADJECTIVES} {...props} />
 
-            <div className="quiz" style={style}>
-                <h3>{props.strings.quiz}</h3>
+            <div id='quiz' style={style}>
+                <h3>{sm.quiz}</h3>
                 <table>
                     <tbody>
                     </tbody>

@@ -27,7 +27,7 @@ function VerbConjugation(props:Object):Object {
                 {s.map(h => (<p>{h}</p>))}
             </div>
             <div id='quiz' style={style}>
-                <h3>{props.strings.quiz}</h3>
+                <h3>{sm.quiz}</h3>
                 <table>
                     <tbody>
                     <tr>

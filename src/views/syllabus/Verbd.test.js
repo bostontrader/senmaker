@@ -52,10 +52,11 @@ describe("Verbd", function() {
                 let renderExpression = <Verbd {...state} />
                 let verbdComponent = ReactTestUtils.createRenderer().render(renderExpression)
 
-                if(state.quiz.getIn(['verbd','passed'])) {
+                // Passed or not, the quiz box should be there
+                //if(state.quiz.getIn(['verbd','passed'])) {
                     // If the quiz has pass, don't expect the quiz box and don't look for the checkmarks
-                    verifyBasicLayout(verbdComponent, false)
-                } else {
+                    //verifyBasicLayout(verbdComponent, false)
+                //} else {
                     // If the quiz has not passed, expect the quiz box and look
                     // for the checkmarks
                     verifyBasicLayout(verbdComponent, true)
@@ -63,8 +64,7 @@ describe("Verbd", function() {
                     // verify that only the currently answered questions are checked
                     for(let check of checks)
                         expect(countWithId(verbdComponent,check)).toBe(1)
-                }
-
+                //}
 
             }
         }

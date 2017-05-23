@@ -52,10 +52,11 @@ describe("Nound", function() {
                 let renderExpression = <Nound {...state} />
                 let noundComponent = ReactTestUtils.createRenderer().render(renderExpression)
 
-                if(state.quiz.getIn(['nound','passed'])) {
+                // Passed or not, the quiz box should be there
+                //if(state.quiz.getIn(['nound','passed'])) {
                     // If the quiz has pass, don't expect the quiz box and don't look for the checkmarks
-                    verifyBasicLayout(noundComponent, false)
-                } else {
+                    //verifyBasicLayout(noundComponent, false)
+                //} else {
                     // If the quiz has not passed, expect the quiz box and look
                     // for the checkmarks
                     verifyBasicLayout(noundComponent, true)
@@ -63,7 +64,7 @@ describe("Nound", function() {
                     // verify that only the currently answered questions are checked
                     for(let check of checks)
                         expect(countWithId(noundComponent,check)).toBe(1)
-                }
+                //}
 
 
             }

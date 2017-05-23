@@ -46,8 +46,7 @@ describe("LessonNavigator", () => {
     })
 
     it('It will display the Chinese flag, not the US flag, when set to English.', function() {
-        //const newState = state.strings.setIn(['lang'],langCode.en)
-        state.strings.lang = langCode.en
+        state.strings = state.strings.set('lang', langCode.en)
         let renderExpression = <LessonNavigator {...state} />
         let lessonNavigator = ReactTestUtils.createRenderer().render(renderExpression)
         expect( countWithId(lessonNavigator, 'enFlag')).toBe(0)
