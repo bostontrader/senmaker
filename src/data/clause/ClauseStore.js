@@ -11,7 +11,7 @@ import {clauseExamples}  from '../TestData'
 import {validateClause}  from '../Validator'
 import AppActionTypes    from '../app/AppActionTypes'
 
-import {localStorageAvailable} from '../../LocalStorage'
+import {localStorageAvailable} from '../LocalStorage'
 const localStorageKey = 'ClauseStore'
 
 class ClauseStore extends ReduceStore {

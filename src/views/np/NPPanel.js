@@ -2,8 +2,8 @@
 import React from 'react'
 
 import NPAEForm  from './addedit/NPAEForm'
-import NPTable    from './NPTable'
-import NPActions  from '../../data/np/NPActions'
+import NPTable   from './NPTable'
+import NPActions from '../../data/np/NPActions'
 
 /*
 The NPPanel is responsible for displaying everything about our list of np.  Such

@@ -2,20 +2,21 @@ import React from 'react'
 
 import Intro           from '../views/syllabus/Intro'
 import Nound           from '../views/syllabus/Nound'
-import Verbd           from '../views/syllabus/Verbd'
-import Adjectivd       from '../views/syllabus/Adjectivd'
 import Definiteness    from '../views/syllabus/Definiteness'
 import Phrase          from '../views/syllabus/Phrase'
 import NounPhrase      from '../views/syllabus/NounPhrase'
+import Adjectivd       from '../views/syllabus/Adjectivd'
+import NPAdjective     from '../views/syllabus/NPAdjective'
+import Verbd           from '../views/syllabus/Verbd'
 import VerbConjugation from '../views/syllabus/VerbConjugation'
 import PastForm        from '../views/syllabus/PastForm'
-import Tense           from '../views/syllabus/Tense'
-import Aspect          from '../views/syllabus/Aspect'
+import VerbTime        from '../views/syllabus/VerbTime'
 import VerbPhrase      from '../views/syllabus/VerbPhrase'
+
+import Aspect          from '../views/syllabus/Aspect'
 import Clause          from '../views/syllabus/Clause'
 import Sentence        from '../views/syllabus/Sentence'
 import Pluralization   from '../views/syllabus/Pluralization'
-import NPAdjective     from '../views/syllabus/NPAdjective'
 import VPAspect        from '../views/syllabus/VPAspect'
 
 /**
@@ -47,9 +48,9 @@ const syllabus = {
     npAdjective:     {level: 6, comp:NPAdjective,     prev:'adjectivd',       next:'verbd'},
     verbd:           {level: 7, comp:Verbd,           prev:'npAdjective',     next:'verbConjugation'},
     verbConjugation: {level: 8, comp:VerbConjugation, prev:'verbd',           next:'pastForm'},
-    pastForm:        {level: 9, comp:PastForm,        prev:'verbConjugation', next:null},
-    //tense:           {level:10, comp:Tense,           prev:'pastForm',        next:'verbPhrase'},
-    //verbPhrase:      {level:11, comp:VerbPhrase,      prev:'tense',           next:'aspect'},
+    pastForm:        {level: 9, comp:PastForm,        prev:'verbConjugation', next:'verbTime'},
+    verbTime:        {level:10, comp:VerbTime,        prev:'pastForm',        next:'vp'},
+    vp:              {level:11, comp:VerbPhrase,      prev:'verbTime',        next:null}
     //aspect:          {level:12, comp:Aspect,          prev:'verbPhrase',      next:'clause'},
     //clause:          {level:13, comp:Clause,          prev:'aspect',          next:'sentence'},
     //sentence:        {level:14, comp:Sentence,        prev:'clause',          next:'pluralization'},

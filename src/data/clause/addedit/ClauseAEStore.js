@@ -12,7 +12,7 @@ import {validateNP}      from '../../Validator'
 import {validateVP}      from '../../Validator'
 import AppActionTypes    from '../../app/AppActionTypes'
 
-import {localStorageAvailable} from '../../../LocalStorage'
+import {localStorageAvailable} from '../../LocalStorage'
 const localStorageKey = 'ClauseAEStore'
 
 /*

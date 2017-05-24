@@ -13,7 +13,7 @@ import {validateNound}      from '../../Validator'
 import {validateNP}         from '../../Validator'
 import AppActionTypes       from '../../app/AppActionTypes'
 
-import {localStorageAvailable} from '../../../LocalStorage'
+import {localStorageAvailable} from '../../LocalStorage'
 const localStorageKey:string = 'NPAEStore'
 
 /*
@@ -38,11 +38,10 @@ const initialStates:Array<Object> = [
         np: new NP()
     }),
     Map({
-        version:1,
+        v:1,
         addNP: false,
         np: new NP()
     })
-
 ]
 
 class NPAEStore extends ReduceStore {
@@ -69,14 +68,14 @@ class NPAEStore extends ReduceStore {
     // Given an originalFormat state object migrate to the most current version
     migrate(originalFormat:Object):Object {
         const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['version'])
+        const originalVersion:number = originalFormat.getIn(['v'])
 
         // If the version is undefined then we start fresh
         if(originalVersion === undefined)
             return currentInitialState
 
         // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['version']))
+        if (originalVersion === currentInitialState.getIn(['v']))
             return originalFormat
 
         // Else migrate from the originalVersion to the current version

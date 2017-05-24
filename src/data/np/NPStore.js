@@ -1,6 +1,7 @@
 // @flow
 import {ReduceStore} from 'flux/utils'
-import {fromJS, Map} from 'immutable'
+import {fromJS}      from 'immutable'
+import {Map}         from 'immutable'
 
 import NP             from './NP'
 import NPActionTypes  from './NPActionTypes'
@@ -11,13 +12,12 @@ import {validateNP}   from '../Validator'
 import AppActionTypes from '../app/AppActionTypes'
 import Nound          from '../dictionary/nound/Nound'
 
-import {localStorageAvailable} from '../../LocalStorage'
-const localStorageKey = 'NPStore'
+import {localStorageAvailable} from '../LocalStorage'
+const localStorageKey:string = 'NPStore'
 
 class NPStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher)
-    }
+
+    constructor() {super(AppDispatcher)}
 
     getInitialState():Object {
 

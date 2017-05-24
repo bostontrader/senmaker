@@ -50,8 +50,46 @@ imperative 2/4 moods We use the imperative mood to express requests, commands an
 
 preterite aka simple past
 
+            // verb conjugation
+            // past tense
+            //                               past                present                 future
+            // simple                        walked                walk                will walk
+            // continuous                was walking         are walking          will be walking
+            // perfect                   had walked         have walked         will have walked
+            // perfect, continuous had been walking   have been walking   will have been walking
+            // infinitive to walk
+
+            //                               past                present                 future
+            // simple                      went                    go                   will go
+            // continuous                 was going                  am going           will be going
+            // perfect                     had gone           have gone                 will have gone
+            // perfect, continuous         had been going      have been going          will have been going
+            // infinitive to go
+            // participle eaten
+            // gerund eating
+            //
 
 
+
+
+
+
+    sform: [
+        'The next verb conjugation that we will examine is the \'s\' form.',
+        'When an action happens in the past then we use the \'past\' form of the verb.',
+        'The past form is often created by appending \'ed\' to the base form.  But there are many exceptions to this rule so use a dictionary.'
+    ],
+
+    s-form.  The next variation is called the 's form'.  This is frequently made by just appending an 's'
+    but there are rules and irregularities so just look it up in a dictionary.
+
+
+
+
+    aspect: [ // 11
+            'In addition to knowing when a verb happens, we may also want to know if the verb has finished or is still happening.',
+            'These things are called \'aspect\'.'
+        ],
 
 
     tense: [ // 9
@@ -59,18 +97,8 @@ preterite aka simple past
         'The verb will change to communicate this information.  The variations of the verb are called \'verb tenses\'.',
         'Sometimes the verb will change to one of its conjugations. Sometimes the verb will sprout additional words.  Sometime the verb will not change at all.'
     ],
-    vp: { // 10
-        help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
-        help11: 'In a verb phrase we select the verb tense that we want.  This will cause the verb to change and maybe add some extra words of grammar.',
-        // although a verb phrase is usually more than one word, it could be just a single verb.
-        quiz1: 'Can you add a new verb phrase?',
-        quiz2: 'Can you delete a verb phrase from this list?',
-        quiz3: 'Can you change the spelling of a verb phrase?'
-    },
-    aspect: [ // 11
-        'In addition to knowing when a verb happens, we may also want to know if the verb has finished or is still happening.',
-        'These things are called \'aspect\'.'
-    ],
+
+
     ingForm: {
         help10:'Another variation of the verb is called the \'-ing\' form.',
         help11:'We usually use this when something is happening in the present.'

@@ -10,7 +10,7 @@ import {MakeMapOfNound} from '../../JSONParseUtils'
 import {validateNound}  from '../../Validator'
 import AppActionTypes   from '../../app/AppActionTypes'
 
-import {localStorageAvailable} from '../../../LocalStorage'
+import {localStorageAvailable} from '../../LocalStorage'
 const localStorageKey:string = 'NoundStore'
 
 // We want to provide a migration capacity for the format of this store.  It's serialized
@@ -21,7 +21,7 @@ const initialStates:Array<Object> = [
         coll:Map()
     }),
     Map({
-        version:1,
+        v:1,
         nextid:1,
         coll:Map()
     })
@@ -50,14 +50,14 @@ class NoundStore extends ReduceStore {
     // Given an originalFormat state object migrate to the most current version
     migrate(originalFormat:Object):Object {
         const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['version'])
+        const originalVersion:number = originalFormat.getIn(['v'])
 
         // If the version is undefined then we start fresh
         if(originalVersion === undefined)
             return currentInitialState
 
         // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['version']))
+        if (originalVersion === currentInitialState.getIn(['v']))
             return originalFormat
 
         // Else migrate from the originalVersion to the current version

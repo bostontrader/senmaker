@@ -1,6 +1,7 @@
 // @flow
 import {ReduceStore} from 'flux/utils'
-import {fromJS, Map} from 'immutable'
+import {fromJS}      from 'immutable'
+import {Map}         from 'immutable'
 
 import VP             from './VP'
 import VPActionTypes  from './VPActionTypes'
@@ -11,13 +12,12 @@ import {validateVP}   from '../Validator'
 import AppActionTypes from '../app/AppActionTypes'
 import Verbd          from '../dictionary/verbd/Verbd'
 
-import {localStorageAvailable} from '../../LocalStorage'
-const localStorageKey = 'VPStore'
+import {localStorageAvailable} from '../LocalStorage'
+const localStorageKey:string = 'VPStore'
 
 class VPStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher)
-    }
+
+    constructor() {super(AppDispatcher)}
 
     getInitialState():Object {
 

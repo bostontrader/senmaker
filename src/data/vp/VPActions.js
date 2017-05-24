@@ -53,7 +53,7 @@ const VPActions = {
             newVerbd: newVerbd
         })
     },
-    onChangeSimple(newSimple:boolean):void {
+    /*onChangeSimple(newSimple:boolean):void {
         AppDispatcher.dispatch({
             type: VPActionTypes.ON_CHANGE_SIMPLE,
             newSimple: newSimple
@@ -70,7 +70,7 @@ const VPActions = {
             type: VPActionTypes.ON_CHANGE_PROGRESSIVE,
             newProgressive: newProgressive
         })
-    },
+    },*/
     // Pump a new vp directly into the db w/o dealing with any UI.
     insertVP(vp:Object):void {
         validateVP(vp)

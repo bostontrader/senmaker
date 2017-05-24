@@ -14,8 +14,8 @@ import Verbd              from '../../dictionary/verbd/Verbd'
 //import {ActionTime}     from '../../dictionary/verbd/VerbdConstants'
 import {ActionTimeSelect} from '../../vp/VPConstants'
 
-import {localStorageAvailable} from '../../../LocalStorage'
-const localStorageKey = 'VPAEStore'
+import {localStorageAvailable} from '../../LocalStorage'
+const localStorageKey:string = 'VPAEStore'
 
 /*
  This store manages all state required to support the add/edit operations on a vp.
@@ -30,10 +30,24 @@ const localStorageKey = 'VPAEStore'
  We use the clickAddVP flag for purposes of code clarity.
 
  */
+
+// We want to provide a migration capacity for the format of this store.  It's serialized
+// into localStorage and there's no telling when old versions will be seen in the future.
+const initialStates:Array<Object> = [
+    Map({
+        addVP: false,
+        vp: new VP()
+    }),
+    Map({
+        v:1,
+        addVP: false,
+        vp: new VP()
+    })
+]
+
 class VPAEStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher)
-    }
+
+    constructor() {super(AppDispatcher)}
 
     getInitialState():Object {
 
@@ -41,14 +55,33 @@ class VPAEStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = fromJS(JSON.parse(localStorageState))
+                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
                 let newVP = MakeVP(originalParse.getIn(['vp']))
                 return originalParse.set('vp',newVP)
             }
 
         }
-        return VPAEStore.initialState
+        return initialStates.slice(-1)[0]
 
+    }
+
+    // Given an originalFormat state object migrate to the most current version
+    migrate(originalFormat:Object):Object {
+        const currentInitialState:Object = initialStates.slice(-1)[0]
+        const originalVersion:number = originalFormat.getIn(['v'])
+
+        // If the version is undefined then we start fresh
+        if(originalVersion === undefined)
+            return currentInitialState
+
+        // If the version is the most recent
+        if (originalVersion === currentInitialState.getIn(['v']))
+            return originalFormat
+
+        // Else migrate from the originalVersion to the current version
+        // But at this time there are no intermediate version to migrate through
+        // so do nothing
+        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {
@@ -61,10 +94,9 @@ class VPAEStore extends ReduceStore {
             let ingForm = baseForm + 'ing'
             let pastForm = vp.getIn(['verbd','pastForm'])
 
-
             let generatedText:string = ''
 
-            if(vp.getIn(['simple']) ) {
+            //if(vp.getIn(['simple']) ) {
                 switch(parseInt(vp.getIn(['actionTime']))) {
                     case ActionTimeSelect.Past:
                         generatedText = vp.getIn(['verbd','pastForm'])
@@ -80,7 +112,7 @@ class VPAEStore extends ReduceStore {
                 }
 
             // perfect, continuous had been walking   have been walking   will have been walking
-            } else if(vp.getIn(['perfect']) && vp.getIn(['progressive']) ) {
+            /*} else if(vp.getIn(['perfect']) && vp.getIn(['progressive']) ) {
 
                 switch(parseInt(vp.getIn(['actionTime']))) {
                     case ActionTimeSelect.Past:
@@ -130,26 +162,9 @@ class VPAEStore extends ReduceStore {
                     default:
                     // shouldn't ever get here
                 }
-            }
+            }*/
 
-            // verb conjugation
-            // past tense
-            //                               past                present                 future
-            // simple                        walked                walk                will walk
-            // continuous                was walking         are walking          will be walking
-            // perfect                   had walked         have walked         will have walked
-            // perfect, continuous had been walking   have been walking   will have been walking
-            // infinitive to walk
 
-            //                               past                present                 future
-            // simple                      went                    go                   will go
-            // continuous                 was going                  am going           will be going
-            // perfect                     had gone           have gone                 will have gone
-            // perfect, continuous         had been going      have been going          will have been going
-            // infinitive to go
-            // participle eaten
-            // gerund eating
-            //
 
             return generatedText
         }
@@ -162,7 +177,7 @@ class VPAEStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = VPAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open the VPAddForm
@@ -172,14 +187,14 @@ class VPAEStore extends ReduceStore {
 
             // Signal the UI to close VPAddForm or VPEditForm
             case VPActionTypes.ON_CLICK_CANCEL:
-                newState = VPAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to close VPAddForm or VPEditForm (but the delete button
             // is only present on NounEditForm.)
             // VPStore will also catch this event and it's responsible for the actual deletion.
             case VPActionTypes.ON_CLICK_DELETE_VP:
-                newState = VPAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open VPEditForm and populate with the given data.
@@ -196,7 +211,7 @@ class VPAEStore extends ReduceStore {
             // Signal the UI to close VPAddForm or VPEditForm. We don't need to specify which,
             // the same state should close either one.
             case VPActionTypes.ON_CLICK_SAVE_VP:
-                newState = VPAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             case VPActionTypes.ON_CHANGE_ACTION_TIME:
@@ -212,7 +227,7 @@ class VPAEStore extends ReduceStore {
                 newState = newState.updateIn(['vp','generatedText'], value => generatedText)
                 break
 
-            case VPActionTypes.ON_CHANGE_SIMPLE:
+            /*case VPActionTypes.ON_CHANGE_SIMPLE:
                 // We can only change simple to true with this action.  We cannot change it to false
                 // otherwise perfect and progressive would be also false.
                 if(action.newSimple) {
@@ -248,7 +263,7 @@ class VPAEStore extends ReduceStore {
                 }
                 generatedText = calcResultText(newState.getIn(['vp']))
                 newState = newState.updateIn(['vp','generatedText'], value => generatedText)
-                break
+                break*/
 
             default:
                 // do nothing, newState is already set to the existing state
@@ -261,9 +276,5 @@ class VPAEStore extends ReduceStore {
     }
 }
 
-VPAEStore.initialState =  Map({
-    addVP: false,
-    vp: new VP()
-})
-
 export default new VPAEStore()
+export {initialStates}

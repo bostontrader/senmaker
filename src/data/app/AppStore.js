@@ -7,22 +7,15 @@ import AppActionTypes from './AppActionTypes'
 import AppDispatcher  from '../AppDispatcher'
 import syllabus       from '../Syllabus'
 
-import {localStorageAvailable} from '../../LocalStorage'
+import {localStorageAvailable} from '../LocalStorage'
+import {migrate}               from '../LocalStorage'
 const localStorageKey:string = 'AppStore'
 
 // We want to provide a migration capacity for the format of this store.  It's serialized
 // into localStorage and there's no telling when old versions will be seen in the future.
 const initialStates:Array<Object> = [
     Map({
-        level: Map({
-            currentLevel:0,         // these two should
-            currentLesson:'intro',  // should stay in sync
-            firstLesson:true,       // is this the first lesson?
-            lastLesson:false
-        })
-    }),
-    Map({
-        version:1,
+        v:1,
         // If you change the lessons in data/Syllabus, be sure to review these settings
         level: Map({
             currentLevel: 0,         // these two should
@@ -43,29 +36,10 @@ class AppStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState)
-                return this.migrate(fromJS(JSON.parse(localStorageState)))
+                return migrate(fromJS(JSON.parse(localStorageState)), initialStates)
         }
 
         return initialStates.slice(-1)[0]
-    }
-
-    // Given an originalFormat state object migrate to the most current version
-    migrate(originalFormat:Object):Object {
-        const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['version'])
-
-        // If the version is undefined then we start fresh
-        if(originalVersion === undefined)
-            return currentInitialState
-
-        // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['version']))
-            return originalFormat
-
-        // Else migrate from the originalVersion to the current version
-        // But at this time there are no intermediate version to migrate through
-        // so do nothing
-        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {

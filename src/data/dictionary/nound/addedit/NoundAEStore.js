@@ -10,7 +10,7 @@ import {MakeNound}      from '../../../JSONParseUtils'
 import {validateNound}  from '../../../Validator'
 import AppActionTypes   from '../../../app/AppActionTypes'
 
-import {localStorageAvailable} from '../../../../LocalStorage'
+import {localStorageAvailable} from '../../../LocalStorage'
 const localStorageKey:string = 'NoundAEStore'
 
 /*
@@ -40,7 +40,7 @@ const initialStates:Array<Object> = [
         nound: new Nound()
     }),
     Map({
-        version:1,
+        v:1,
         addNound: false,
         nound: new Nound()
     })
@@ -70,14 +70,14 @@ class NoundAEStore extends ReduceStore {
     // Given an originalFormat state object migrate to the most current version
     migrate(originalFormat:Object):Object {
         const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['version'])
+        const originalVersion:number = originalFormat.getIn(['v'])
 
         // If the version is undefined then we start fresh
         if(originalVersion === undefined)
             return currentInitialState
 
         // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['version']))
+        if (originalVersion === currentInitialState.getIn(['v']))
             return originalFormat
 
         // Else migrate from the originalVersion to the current version

@@ -10,7 +10,8 @@ import {MakeAdjectivd}      from '../../../JSONParseUtils'
 import {validateAdjectivd}  from '../../../Validator'
 import AppActionTypes   from '../../../app/AppActionTypes'
 
-import {localStorageAvailable} from '../../../../LocalStorage'
+import {localStorageAvailable} from '../../../LocalStorage'
+import {migrate}               from '../../../LocalStorage'
 const localStorageKey:string = 'AdjectivdAEStore'
 
 /*
@@ -31,11 +32,7 @@ const localStorageKey:string = 'AdjectivdAEStore'
 // into localStorage and there's no telling when old versions will be seen in the future.
 const initialStates:Array<Object> = [
     Map({
-        addAdjectivd: false,
-        adjectivd: new Adjectivd()
-    }),
-    Map({
-        version:1,
+        v:1,
         addAdjectivd: false,
         adjectivd: new Adjectivd()
     })
@@ -51,7 +48,7 @@ class AdjectivdAEStore extends ReduceStore {
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
+                let originalParse = migrate(fromJS(JSON.parse(localStorageState)))
                 let newAdjectivd = MakeAdjectivd(originalParse.getIn(['adjectivd']))
                 return originalParse.set('adjectivd',newAdjectivd)
             }
@@ -60,25 +57,6 @@ class AdjectivdAEStore extends ReduceStore {
 
         return initialStates.slice(-1)[0]
 
-    }
-
-    // Given an originalFormat state object migrate to the most current version
-    migrate(originalFormat:Object):Object {
-        const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['version'])
-
-        // If the version is undefined then we start fresh
-        if(originalVersion === undefined)
-            return currentInitialState
-
-        // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['version']))
-            return originalFormat
-
-        // Else migrate from the originalVersion to the current version
-        // But at this time there are no intermediate version to migrate through
-        // so do nothing
-        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {

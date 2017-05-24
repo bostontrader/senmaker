@@ -15,8 +15,8 @@ import QuizStore        from '../data/quiz/QuizStore'
 import StringStore      from '../data/strings/StringStore'
 import VerbdAEStore     from '../data/dictionary/verbd/addedit/VerbdAEStore'
 import VerbdStore       from '../data/dictionary/verbd/VerbdStore'
-//import VPAEStore        from '../data/vp/addedit/VPAEStore'
-//import VPStore          from '../data/vp/VPStore'
+import VPAEStore        from '../data/vp/addedit/VPAEStore'
+import VPStore          from '../data/vp/VPStore'
 
 import AppView      from '../views/AppView'
 
@@ -35,8 +35,8 @@ function getStores() {
         StringStore,
         VerbdStore,
         VerbdAEStore,
-        //VPAEStore,
-        //VPStore,
+        VPAEStore,
+        VPStore
     ]
 }
 
@@ -82,13 +82,13 @@ function getState():Object {
         verbd: Map({
             addedit: VerbdAEStore.getState(),
             dict: VerbdStore.getState(),
-        })
+        }),
 
         // A collection of available vp.
-        //vp: Map({
-            //addedit: VPAEStore.getState(),
-            //dict: VPStore.getState(),
-        //}),
+        vp: Map({
+            addedit: VPAEStore.getState(),
+            dict: VPStore.getState(),
+        })
     }
 
     return state

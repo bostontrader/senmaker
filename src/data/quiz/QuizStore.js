@@ -11,7 +11,7 @@ import NoundActionTypes     from '../dictionary/nound/NoundActionTypes'
 import VerbdActionTypes     from '../dictionary/verbd/VerbdActionTypes'
 import NPActionTypes        from '../np/NPActionTypes'
 
-import {localStorageAvailable} from '../../LocalStorage'
+import {localStorageAvailable} from '../LocalStorage'
 const localStorageKey:string = 'QuizStore'
 
 // We want to provide a migration capacity for the format of this store.  It's serialized
@@ -65,7 +65,7 @@ const initialStates:Array<Object> = [
         })
     }),
     Map({
-        version:1,
+        v:1,
         intro: Map({ // 0
             iunderstand: false,
             passed: false
@@ -114,16 +114,75 @@ const initialStates:Array<Object> = [
         verbConjugation: Map({ // 8
             iunderstand: false,
             passed: false
+        })
+    }),
+    Map({
+        v:2,
+        intro: Map({ // 0
+            iunderstand: false,
+            passed: false
         }),
+        nound: Map({ // 1
+            insertNound: false,
+            updateNound: false,
+            deleteNound: false,
+            passed: false
+        }),
+        definiteness: Map({ // 2
+            definitenessChanged: false,
+            noundChanged       : false,
+            iseeArticleChanged : false,
+            passed: false
+        }),
+        phrase: Map({ // 3
+            iunderstand: false,
+            passed: false
+        }),
+        np: Map({ // 4
+            insertNP: false,
+            updateNPNound: false,
+            updateNPDefiniteness: false,
+            deleteNP: false,
+            passed: false
+        }),
+        adjectivd: Map({ // 5
+            insertAdjectivd: false,
+            updateAdjectivd: false,
+            deleteAdjectivd: false,
+            passed: false
+        }),
+        npAdjective: Map({ // 6
+            addAdjectivd: false,
+            removeAdjectivd: false,
+            addTwoAdjectives: false,
+            passed: false
+        }),
+        verbd: Map({ // 7
+            insertVerbd: false,
+            updateVerbd: false,
+            deleteVerbd: false,
+            passed: false
+        }),
+        verbConjugation: Map({ // 8
+            iunderstand: false,
+            passed: false
+        }),
+        pastForm: Map({ // 9
+            iunderstand: false,
+            passed: false
+        }),
+        verbTime: Map({ // 10
+            iunderstand: false,
+            passed: false
+        }),
+        vp: Map({ // 11
+            insertVP: false,
+            changeVPNound: false,
+            changeVerbTime: false,
+            deleteVP: false,
+            passed: false
+        })
 
-         /*sentence: Map({
-         iunderstand: false,
-         passed: false
-         }),
-         pluralization: Map({
-         iunderstand: false,
-         passed: false
-         }),*/
     })
 ]
 
@@ -147,23 +206,26 @@ class QuizStore extends ReduceStore {
         return initialStates.slice(-1)[0]
     }
 
-    // Given an originalFormat state object migrate to the most current version
+    // Given an originalFormat state object, as retrieved from local storage,
+    // migrate to the most current version.
     migrate(originalFormat:Object):Object {
         const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['version'])
+        const originalVersion:number = originalFormat.getIn(['v'])
 
         // If the version is undefined then we start fresh
         if(originalVersion === undefined)
             return currentInitialState
 
-        // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['version']))
+        // If the version is the most recent then use it
+        if (originalVersion === currentInitialState.getIn(['v']))
             return originalFormat
 
         // Else migrate from the originalVersion to the current version
-        // But at this time there are no intermediate version to migrate through
-        // so do nothing
-        return currentInitialState
+        const currentVersion:number = currentInitialState.getIn(['v'])
+        let p = originalVersion
+        while(p < currentVersion)
+            console.log(p++)
+        return originalFormat
     }
 
     reduce(state:Object, action:Object):Object {
@@ -336,6 +398,12 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['verbConjugation','passed'],true)
                 break
 
+            // 10. verbTime
+            case QuizActionTypes.verbTime.ON_I_UNDERSTAND:
+                newState = newState.setIn(['verbTime','iunderstand'],true)
+                newState = newState.setIn(['verbTime','passed'],true)
+                break
+            
             // 10. sentences
             /*case QuizActionTypes.sentence.ON_I_UNDERSTAND:
                 newState = newState.setIn(['sentence','iunderstand'],true)

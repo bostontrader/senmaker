@@ -40,6 +40,14 @@ const QuizActions:Object = {
         },
     },
 
+    // 10
+    verbTime: {
+        onIUnderstand() {
+            AppDispatcher.dispatch({
+                type: QuizActionTypes.verbTime.ON_I_UNDERSTAND
+            })
+        },
+    },
     //
     /*sentence: {
         onIUnderstand() {

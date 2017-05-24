@@ -12,22 +12,23 @@ function VerbPhrase(props:Object):Object {
         margin: '5px'
     }
 
-    const q = props.quiz
-    const s = props.strings.vp
+    const q:Object = props.quiz
+    const s:Object = props.strings.get('strings').vp
+    const sm:Object = props.strings.get('strings').misc
 
     const quizInsertVP = q.getIn(['vp','insertVP']) ?
-        <img id="insertVPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id='insertVPCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''
 
     const quizUpdateVP = q.getIn(['vp','updateVP']) ?
-        <img id="updateVPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id='updateVPCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''
 
     const quizDeleteVP = q.getIn(['vp','deleteVP']) ?
-        <img id="deleteVPCheck" className="checkmark" src="/img/Checked.png" alt="checkmark"/> : ''
+        <img id='deleteVPCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''
     
     return (
         <div>
-            <div className="help" style={style}>
-                <h1>Verb Phrases</h1>
+            <LessonNavigator {...props} />
+            <div id='help' style={style}>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
                 <p>{s.help12}</p>
@@ -35,7 +36,7 @@ function VerbPhrase(props:Object):Object {
 
             <VPPanel vpPanelLevel={VPPanelLevel.L1} {...props} />
 
-            <div className="quiz" style={style}>
+            <div id='quiz' style={style}>
                 <h3>{props.strings.quiz}</h3>
                 <table>
                     <tbody>
@@ -54,7 +55,6 @@ function VerbPhrase(props:Object):Object {
                     </tbody>
                 </table>
             </div>
-            <LessonNavigator {...props} />
         </div>
     )
 

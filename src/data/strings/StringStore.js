@@ -8,14 +8,14 @@ import AppDispatcher     from '../AppDispatcher'
 import {langCode}        from '../I18NConstants'
 import AppActionTypes    from '../app/AppActionTypes'
 
-import {localStorageAvailable} from '../../LocalStorage'
+import {localStorageAvailable} from '../LocalStorage'
 const localStorageKey:string = 'StringStore'
 
 // We want to provide a migration capacity for the format of this store.  It's serialized
 // into localStorage and there's no telling when old versions will be seen in the future.
 const initialStates:Array<Object> = [
     Map({
-        version:1,
+        v:1,
         lang: langCode.zh
     })
 ]
@@ -53,14 +53,14 @@ class StringStore extends ReduceStore {
     // Given an originalFormat state object migrate to the most current version
     migrate(originalFormat:Object):Object {
         const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['version'])
+        const originalVersion:number = originalFormat.getIn(['v'])
 
         // If the version is undefined then we start fresh
         if(originalVersion === undefined)
             return currentInitialState
 
         // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['version']))
+        if (originalVersion === currentInitialState.getIn(['v']))
             return originalFormat
 
         // Else migrate from the originalVersion to the current version
@@ -175,6 +175,14 @@ StringStore.en = {
         quiz4: 'Can you delete a noun phrase?'
     },
 
+    //np: { // 4
+    //title: 'Noun Phrases 名词短语',
+    //help10: 'The first type of phrase to learn to build is called a \'noun phrase\'.',
+    //help12: 'You have already seen your first noun phrase in the \'definite\' or \'indefinite\' lesson.'
+    // In that lesson you made a two-word noun phrase.',
+    //help13: 'A noun phrase usually has more than one word, but it might only have a single noun.',
+    //},
+
     adjectivd: { // 5
         title: 'Adjectives 形容词',
         help10: 'We add meaning to noun phrases by using adjectives.',
@@ -202,20 +210,40 @@ StringStore.en = {
         quiz3: 'Can you change the spelling of a verbs?'
     },
 
-    verbConjugation: [ // 8
-        'Every verb has a \'base\' form and four other variations.',
-        'For example: \'steals\', \'stole\', \'stealing\', and \'stolen\' are the four variations of the base verb \'steal\',',
-        'We use the different variations of the verbs according to the rules of grammar.',
-        'The process of making these variations is called \'conjugation\'.',
-        'You can find the conjugations of a verb in a dictionary.',
-        'Many of the conjugations have patterns that you will notice.',
-        'However, there are so many exceptions to the patterns that it will be best to use a dictionary in order to conjugate your verbs.'
-    ],
+    verbConjugation: { // 8
+        title: 'Verb Conjugation',
+        help10: 'Every verb has a \'base\' form and four other variations.',
+        help11: 'For example: \'steals\', \'stole\', \'stealing\', and \'stolen\' are the four variations of the base verb \'steal\',',
+        help12: 'We use the different variations of the verbs according to the rules of grammar.',
+        help13: 'The process of making these variations is called \'conjugation\'.',
+        help14: 'You can find the conjugations of a verb in a dictionary.',
+        help15: 'Many of the conjugations have patterns that you will notice.',
+        help16: 'However, there are so many exceptions to the patterns that it will be best to use a dictionary in order to conjugate your verbs.'
+    },
 
-    pastForm: [ // 9
-        'The first verb conjugation that we will examine is the \'past\' form.',
-        'When an action happens in the past then we use the \'past\' form of the verb.'
-    ],
+    pastForm: { // 9
+        title: 'Verb Past Form',
+        help10: 'The first verb conjugation that we will examine is the \'past\' form.',
+        help11: 'When an action happens in the past then we use the \'past\' form of the verb.'
+    },
+
+    verbTime: { // 10
+        title: 'Verb Time',
+        help10: 'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
+        help11: 'This choice will determine which conjugation to use.',
+        help12: 'The verb may also need additional words added to it because of this choice.'
+    },
+
+    vp: { // 11
+        title: 'Verb Phrases',
+        help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
+        help11: 'verbs and verb phrases are very complicated so you must proceed slowly and carefully in order to understand them.',
+        help12: 'A verb phrase usually has more than one word, but it might only have a single verb.',
+        quiz1: 'Can you add a new verb phrase?',
+        quiz2: 'Can you change the verb in a verb phrase?',
+        quiz3: 'Can you change the time of a verb phrase?',
+        quiz4: 'Can you delete a verb phrase?'
+    },
 
     lessonNavigator: {
         level: 'Level',
@@ -325,20 +353,40 @@ StringStore.zh = {
         quiz3: '你能改变一个动词(verb)的拼写吗?'
     },
 
-    verbConjugation: [ // 8
-        'Every verb has a \'base\' form and four other variations.',
-        'For example: \'steals\', \'stole\', \'stealing\', and \'stolen\' are the four variations of the base verb \'steal\',',
-        'We use the different variations of the verbs according to the rules of grammar.',
-        'The process of making these variations is called \'conjugation\'.',
-        'You can find the conjugations of a verb in a dictionary.',
-        'Many of the conjugations have patterns that you will notice.',
-        'However, there are so many exceptions to the patterns that it will be best to use a dictionary in order to conjugate your verbs.'
-    ],
+    verbConjugation: { // 8
+        title: 'Verb Conjugation',
+        help10: 'Every verb has a \'base\' form and four other variations.',
+        help11: 'For example: \'steals\', \'stole\', \'stealing\', and \'stolen\' are the four variations of the base verb \'steal\',',
+        help12: 'We use the different variations of the verbs according to the rules of grammar.',
+        help13: 'The process of making these variations is called \'conjugation\'.',
+        help14: 'You can find the conjugations of a verb in a dictionary.',
+        help15: 'Many of the conjugations have patterns that you will notice.',
+        help16: 'However, there are so many exceptions to the patterns that it will be best to use a dictionary in order to conjugate your verbs.'
+    },
 
-    pastForm: [ // 9
-        'The first verb conjugation that we will examine is the \'past\' form.',
-        'When an action happens in the past then we use the \'past\' form of the verb.'
-    ],
+    pastForm: { // 9
+        title: 'Verb Past Form',
+        help10: 'The first verb conjugation that we will examine is the \'past\' form.',
+        help11: 'When an action happens in the past then we use the \'past\' form of the verb.'
+    },
+
+    verbTime: { // 10
+        title: 'Verb Time',
+        help10: 'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
+        help11: 'This choice will determine which conjugation to use.',
+        help12: 'The verb may also need additional words added to it because of this choice.'
+    },
+
+    vp: { // 11
+        title: 'Verb Phrases',
+        help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
+        help11: 'verbs and verb phrases are very complicated so you must proceed slowly and carefully in order to understand them.',
+        help12: 'A verb phrase usually has more than one word, but it might only have a single verb.',
+        quiz1: 'Can you add a new verb phrase?',
+        quiz2: 'Can you change the verb in a verb phrase?',
+        quiz3: 'Can you change the time of a verb phrase?',
+        quiz4: 'Can you delete a verb phrase?'
+    },
 
     lessonNavigator: {
         level: '级',

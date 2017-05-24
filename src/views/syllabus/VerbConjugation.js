@@ -23,8 +23,13 @@ function VerbConjugation(props:Object):Object {
         <div>
             <LessonNavigator {...props} />
             <div id='help' style={style}>
-                <h1>Verb Conjugations</h1>
-                {s.map(h => (<p>{h}</p>))}
+                <p>{s.help10}</p>
+                <p>{s.help11}</p>
+                <p>{s.help12}</p>
+                <p>{s.help13}</p>
+                <p>{s.help14}</p>
+                <p>{s.help15}</p>
+                <p>{s.help16}</p>
             </div>
             <div id='quiz' style={style}>
                 <h3>{sm.quiz}</h3>

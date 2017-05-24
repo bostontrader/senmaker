@@ -16,24 +16,12 @@ function PastForm(props:Object):Object {
     const s:Object = props.strings.get('strings').pastForm
     const sm:Object = props.strings.get('strings').misc
 
-    /*const quizInsertVerbFlag = q.getIn(['verbd','insertPastForm']) ?
-        <img id='insertPastFormCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''
-
-    const quizUpdateVerbFlag = q.getIn(['verbd','updatePastForm']) ?
-        <img id='updatePastFormCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''
-
-    const quizDeleteVerbFlag = q.getIn(['verbd','deletePastForm']) ?
-        <img id='deletePastFormCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''*/
-
     return(
         <div>
             <LessonNavigator {...props} />
             <div id='help' style={style}>
-                <h1>Verb Past Form</h1>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>
-                <p>{s.help12}</p>
-                <p>{s.help13}</p>
             </div>
             <VerbdPanel verbdPanelLevel={VerbdPanelLevel.PAST_FORM} {...props} />
             <div id='quiz' style={style}>
