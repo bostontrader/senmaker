@@ -16,14 +16,43 @@ function VerbPhrase(props:Object):Object {
     const s:Object = props.strings.get('strings').vp
     const sm:Object = props.strings.get('strings').misc
 
-    const quizInsertVP = q.getIn(['vp','insertVP']) ?
-        <img id='insertVPCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''
+    const quizInsertVPMark:Object | string = q.getIn(['vp','insertVP']) ?
+        <img id='quizInsertVPMark' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
-    const quizUpdateVP = q.getIn(['vp','updateVP']) ?
-        <img id='updateVPCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''
+    const quizUpdateVPVerbMark:Object | string = q.getIn(['vp','changeVPVerbd']) ?
+        <img id='quizUpdateVPVerbMark' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
-    const quizDeleteVP = q.getIn(['vp','deleteVP']) ?
-        <img id='deleteVPCheck' className='checkmark' src='/img/Checked.png' alt='checkmark'/> : ''
+    const quizUpdateVPDefinitenessMark:Object | string = q.getIn(['vp','changeVerbTime']) ?
+        <img id='quizUpdateVPDefinitenessMark' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
+
+    const quizDeleteVPMark:Object | string = q.getIn(['vp','deleteVP']) ?
+        <img id='quizDeleteVPMark' className='checkmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
+
+
+    const quizBox:Object | null = // q.getIn(['vp','passed']) ? null :
+        <div id='quiz' style={style}>
+            <h3>{sm.quiz}</h3>
+            <table>
+                <tbody>
+                <tr>
+                    <td><p>{s.quiz1}</p></td>
+                    <td>{quizInsertVPMark}</td>
+                </tr>
+                <tr>
+                    <td><p>{s.quiz2}</p></td>
+                    <td>{quizUpdateVPVerbMark}</td>
+                </tr>
+                <tr>
+                    <td><p>{s.quiz3}</p></td>
+                    <td>{quizUpdateVPDefinitenessMark}</td>
+                </tr>
+                <tr>
+                    <td><p>{s.quiz4}</p></td>
+                    <td>{quizDeleteVPMark}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     
     return (
         <div>
@@ -35,26 +64,7 @@ function VerbPhrase(props:Object):Object {
             </div>
 
             <VPPanel vpPanelLevel={VPPanelLevel.L1} {...props} />
-
-            <div id='quiz' style={style}>
-                <h3>{props.strings.quiz}</h3>
-                <table>
-                    <tbody>
-                    <tr>
-                        <td><p>{s.quiz1}</p></td>
-                        <td>{quizInsertVP}</td>
-                    </tr>
-                    <tr>
-                        <td><p>{s.quiz3}</p></td>
-                        <td>{quizUpdateVP}</td>
-                    </tr>
-                    <tr>
-                        <td><p>{s.quiz2}</p></td>
-                        <td>{quizDeleteVP}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            {quizBox}
         </div>
     )
 

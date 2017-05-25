@@ -5,10 +5,10 @@ import {Map}         from 'immutable'
 
 import Adjectivd            from '../Adjectivd'
 import AdjectivdActionTypes from '../AdjectivdActionTypes'
-import AppDispatcher    from '../../../AppDispatcher'
+import AppDispatcher        from '../../../AppDispatcher'
 import {MakeAdjectivd}      from '../../../JSONParseUtils'
 import {validateAdjectivd}  from '../../../Validator'
-import AppActionTypes   from '../../../app/AppActionTypes'
+import AppActionTypes       from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../LocalStorage'
 import {migrate}               from '../../../LocalStorage'
@@ -48,7 +48,7 @@ class AdjectivdAEStore extends ReduceStore {
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = migrate(fromJS(JSON.parse(localStorageState)))
+                let originalParse = migrate(fromJS(JSON.parse(localStorageState)), initialStates)
                 let newAdjectivd = MakeAdjectivd(originalParse.getIn(['adjectivd']))
                 return originalParse.set('adjectivd',newAdjectivd)
             }

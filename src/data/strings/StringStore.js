@@ -4,21 +4,19 @@ import {fromJS}      from 'immutable'
 import {Map}         from 'immutable'
 
 import StringActionTypes from './StringActionTypes'
+import StringsEN         from './StringsEN'
+import StringsZH         from './StringsZH'
 import AppDispatcher     from '../AppDispatcher'
 import {langCode}        from '../I18NConstants'
 import AppActionTypes    from '../app/AppActionTypes'
 
 import {localStorageAvailable} from '../LocalStorage'
+import {migrate}               from '../LocalStorage'
 const localStorageKey:string = 'StringStore'
 
 // We want to provide a migration capacity for the format of this store.  It's serialized
 // into localStorage and there's no telling when old versions will be seen in the future.
-const initialStates:Array<Object> = [
-    Map({
-        v:1,
-        lang: langCode.zh
-    })
-]
+const initialStates:Array<Object> = [Map({v:1, lang: langCode.zh})]
 
 /**
  * This store differs from the others.
@@ -38,37 +36,18 @@ class StringStore extends ReduceStore {
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
-                if(originalParse.get('lang') === langCode.zh) originalParse = originalParse.set('strings', StringStore.zh)
-                else if(originalParse.get('lang') === langCode.en) originalParse = originalParse.set('strings', StringStore.en)
+                let originalParse = migrate(fromJS(JSON.parse(localStorageState)), initialStates)
+                if(originalParse.get('lang') === langCode.zh) originalParse = originalParse.set('strings', StringsZH)
+                else if(originalParse.get('lang') === langCode.en) originalParse = originalParse.set('strings', StringsEN)
                 // else max fubar error
 
                 return originalParse
             }
         }
 
-        return initialStates.slice(-1)[0].set('strings', StringStore.zh)
+        return initialStates.slice(-1)[0].set('strings', StringsZH)
     }
-
-    // Given an originalFormat state object migrate to the most current version
-    migrate(originalFormat:Object):Object {
-        const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['v'])
-
-        // If the version is undefined then we start fresh
-        if(originalVersion === undefined)
-            return currentInitialState
-
-        // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['v']))
-            return originalFormat
-
-        // Else migrate from the originalVersion to the current version
-        // But at this time there are no intermediate version to migrate through
-        // so do nothing
-        return currentInitialState
-    }
-
+    
     reduce(state:Object, action:Object):Object {
 
         let newState:Object = state
@@ -76,17 +55,17 @@ class StringStore extends ReduceStore {
         switch (action.type) {
 
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = initialStates.slice(-1)[0].set('strings', StringStore.zh)
+                newState = initialStates.slice(-1)[0].set('strings', StringsZH)
                 break
             
             case StringActionTypes.ON_LANG_EN:
                 newState = newState.set('lang', langCode.en)
-                newState = newState.set('strings', StringStore.en)
+                newState = newState.set('strings', StringsEN)
                 break
 
             case StringActionTypes.ON_LANG_ZH:
                 newState = newState.set('lang', langCode.zh)
-                newState = newState.set('strings', StringStore.zh)
+                newState = newState.set('strings', StringsZH)
                 break
 
             default:
@@ -102,7 +81,7 @@ class StringStore extends ReduceStore {
     }
 }
 
-StringStore.en = {
+/*StringsEN = {
 
     misc: {
         add_new: 'Add New',
@@ -196,7 +175,11 @@ StringStore.en = {
 
     npAdjective: { // 6
         title: 'Noun Phrase 名词短语 with Adjectives 形容词',
-        help10: 'A Noun Phrase can have any number of adjectives.'
+        help10: 'A Noun Phrase can have any number of adjectives.',
+        quiz1: 'Can you add an adjective?',
+        quiz2: '',
+        quiz3: '',
+
     },
 
     verbd: { // 7
@@ -253,7 +236,7 @@ StringStore.en = {
     }
 }
 
-StringStore.zh = {
+StringsZH = {
 
     misc: {
         add_new: '添加新',
@@ -396,6 +379,6 @@ StringStore.zh = {
     }
 }
 
-StringStore.initialState = StringStore.zh
+StringStore.initialState = StringsZH*/
 
 export default new StringStore()

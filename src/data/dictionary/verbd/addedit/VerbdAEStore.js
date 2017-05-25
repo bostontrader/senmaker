@@ -11,6 +11,7 @@ import {validateVerbd}  from '../../../Validator'
 import AppActionTypes   from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../LocalStorage'
+import {migrate}               from '../../../LocalStorage'
 const localStorageKey:string = 'VerbdAEStore'
 
 /*
@@ -36,10 +37,6 @@ const localStorageKey:string = 'VerbdAEStore'
 // into localStorage and there's no telling when old versions will be seen in the future.
 const initialStates:Array<Object> = [
     Map({
-        addVerbd: false,
-        verbd: new Verbd()
-    }),
-    Map({
         v:1,
         addVerbd: false,
         verbd: new Verbd()
@@ -56,7 +53,7 @@ class VerbdAEStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
+                let originalParse = migrate(fromJS(JSON.parse(localStorageState)), initialStates)
                 let newVerbd = MakeVerbd(originalParse.getIn(['verbd']))
                 return originalParse.set('verbd',newVerbd)
             }
@@ -65,25 +62,6 @@ class VerbdAEStore extends ReduceStore {
 
         return initialStates.slice(-1)[0]
 
-    }
-
-    // Given an originalFormat state object migrate to the most current version
-    migrate(originalFormat:Object):Object {
-        const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['v'])
-
-        // If the version is undefined then we start fresh
-        if(originalVersion === undefined)
-            return currentInitialState
-
-        // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['v']))
-            return originalFormat
-
-        // Else migrate from the originalVersion to the current version
-        // But at this time there are no intermediate version to migrate through
-        // so do nothing
-        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {

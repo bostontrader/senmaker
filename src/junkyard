@@ -156,6 +156,9 @@ preterite aka simple past
             //quiz3: '你能改变一个动词的拼写吗?'
         //},
 
+Can you add an adjective to a noun phrase?
+Can you add two adjectives to a noun phrase?
+Can you remove an adjectives from a noun phrase?
 
         pastForm: {
             help10:'The first verb conjugation that we will examine is the \'past\' form.',

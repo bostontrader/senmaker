@@ -47,7 +47,7 @@ function VPAEForm(props:Object):?Object {
         <p><input id="progressive" type="checkbox" checked={props.vp.getIn(['addedit','vp','progressive'])} onChange={() => VPActions.onChangeProgressive(!props.vp.getIn(['addedit','vp','progressive']))}/>Progressive</p>
     ]*/
 
-    const onChangeVerbd = (id) => {VPActions.onChangeSelectedVerbd(props.verbd.getIn(['dict','coll',id]))}
+    const onChangeVerbd:Function = (id) => {VPActions.onChangeSelectedVerbd(props.verbd.getIn(['dict','coll',id]))}
 
     let vpAEForm:?Object = null
 

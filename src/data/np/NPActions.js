@@ -58,7 +58,6 @@ const NPActions = {
 
     onChangeSelectedNound(newNound:Object, npPanelLevel:number):void {
         validateNound(newNound)
-        console.log(npPanelLevel)
         let action
 
         if(npPanelLevel === NPPanelLevel.L1)

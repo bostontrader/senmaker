@@ -24,11 +24,11 @@ function Phrase(props:Object):Object {
             <h3>{sm.quiz}</h3>
             <table>
                 <tbody>
-                <tr>
-                    <td><p><input id='iunderstandCheckbox' onChange={QuizActions.phrase.onIUnderstand} type='checkbox' checked={q.getIn(['phrase','iunderstand'])} />
-                        {sm.i_understand}</p></td>
-                    <td>{iunderstandCheckmark}</td>
-                </tr>
+                    <tr>
+                        <td><p><input id='iunderstandCheckbox' onChange={QuizActions.phrase.onIUnderstand} type='checkbox' checked={q.getIn(['phrase','iunderstand'])} />
+                            {sm.i_understand}</p></td>
+                        <td>{iunderstandCheckmark}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

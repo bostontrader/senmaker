@@ -31,11 +31,29 @@ const QuizActions:Object = {
         },
     },
 
+    // 6
+    npAdjective: {
+        onIUnderstand() {
+            AppDispatcher.dispatch({
+                type: QuizActionTypes.npAdjective.ON_I_UNDERSTAND
+            })
+        },
+    },
+
     // 8
     verbConjugation: {
         onIUnderstand() {
             AppDispatcher.dispatch({
                 type: QuizActionTypes.verbConjugation.ON_I_UNDERSTAND
+            })
+        },
+    },
+
+    // 9
+    pastForm: {
+        onIUnderstand() {
+            AppDispatcher.dispatch({
+                type: QuizActionTypes.pastForm.ON_I_UNDERSTAND
             })
         },
     },

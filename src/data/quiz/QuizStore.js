@@ -10,60 +10,15 @@ import AdjectivdActionTypes from '../dictionary/adjectivd/AdjectivdActionTypes'
 import NoundActionTypes     from '../dictionary/nound/NoundActionTypes'
 import VerbdActionTypes     from '../dictionary/verbd/VerbdActionTypes'
 import NPActionTypes        from '../np/NPActionTypes'
+import VPActionTypes        from '../vp/VPActionTypes'
 
 import {localStorageAvailable} from '../LocalStorage'
+import {migrate}               from '../LocalStorage'
 const localStorageKey:string = 'QuizStore'
 
 // We want to provide a migration capacity for the format of this store.  It's serialized
 // into localStorage and there's no telling when old versions will be seen in the future.
 const initialStates:Array<Object> = [
-    Map({
-        intro: Map({ // 0
-            iunderstand: false,
-            passed: false
-        }),
-        nound: Map({ // 1
-            insertNound: false,
-            updateNound: false,
-            deleteNound: false,
-            passed: false
-        }),
-        definiteness: Map({ // 2
-            definitenessChanged: false,
-            noundChanged       : false,
-            iseeArticleChanged : false,
-            passed: false
-        }),
-        phrase: Map({ // 3
-            iunderstand: false,
-            passed: false
-        }),
-        np: Map({ // 4
-            insertNP: false,
-            updateNPNound: false,
-            updateNPDefiniteness: false,
-            deleteNP: false,
-            passed: false
-        }),
-        adjectivd: Map({ // 5
-            insertAdjectivd: false,
-            updateAdjectivd: false,
-            deleteAdjectivd: false,
-            passed: false
-        }),
-        npAdjective: Map({ // 6
-            addAdjectivd: false,
-            removeAdjectivd: false,
-            addTwoAdjectives: false,
-            passed: false
-        }),
-        verbd: Map({ // 7
-            insertVerbd: false,
-            updateVerbd: false,
-            deleteVerbd: false,
-            passed: false
-        })
-    }),
     Map({
         v:1,
         intro: Map({ // 0
@@ -100,58 +55,7 @@ const initialStates:Array<Object> = [
             passed: false
         }),
         npAdjective: Map({ // 6
-            addAdjectivd: false,
-            removeAdjectivd: false,
-            addTwoAdjectives: false,
-            passed: true
-        }),
-        verbd: Map({ // 7
-            insertVerbd: false,
-            updateVerbd: false,
-            deleteVerbd: false,
-            passed: false
-        }),
-        verbConjugation: Map({ // 8
             iunderstand: false,
-            passed: false
-        })
-    }),
-    Map({
-        v:2,
-        intro: Map({ // 0
-            iunderstand: false,
-            passed: false
-        }),
-        nound: Map({ // 1
-            insertNound: false,
-            updateNound: false,
-            deleteNound: false,
-            passed: false
-        }),
-        definiteness: Map({ // 2
-            definitenessChanged: false,
-            noundChanged       : false,
-            iseeArticleChanged : false,
-            passed: false
-        }),
-        phrase: Map({ // 3
-            iunderstand: false,
-            passed: false
-        }),
-        np: Map({ // 4
-            insertNP: false,
-            updateNPNound: false,
-            updateNPDefiniteness: false,
-            deleteNP: false,
-            passed: false
-        }),
-        adjectivd: Map({ // 5
-            insertAdjectivd: false,
-            updateAdjectivd: false,
-            deleteAdjectivd: false,
-            passed: false
-        }),
-        npAdjective: Map({ // 6
             addAdjectivd: false,
             removeAdjectivd: false,
             addTwoAdjectives: false,
@@ -177,7 +81,7 @@ const initialStates:Array<Object> = [
         }),
         vp: Map({ // 11
             insertVP: false,
-            changeVPNound: false,
+            changeVPVerbd: false,
             changeVerbTime: false,
             deleteVP: false,
             passed: false
@@ -278,6 +182,16 @@ class QuizStore extends ReduceStore {
             )
         }
 
+        // 11
+        const vpQuizPassed:Function = (state:Object):boolean => {
+            return(
+                state.getIn(['vp','insertVP']) &&
+                state.getIn(['vp','changeVPVerbd']) &&
+                state.getIn(['vp','changeVerbTime']) &&
+                state.getIn(['vp','deleteVP'])
+            )
+        }
+        
         let newState:Object = state
 
         switch (action.type) {
@@ -375,6 +289,10 @@ class QuizStore extends ReduceStore {
                 break
 
             // 6. npAdjective
+            case QuizActionTypes.npAdjective.ON_I_UNDERSTAND:
+                newState = newState.setIn(['npAdjective','iunderstand'],true)
+                newState = newState.setIn(['npAdjective','passed'],true)
+                break
 
             // 7. verbd
             case VerbdActionTypes.ON_CLICK_SAVE_VERBD:
@@ -398,12 +316,44 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['verbConjugation','passed'],true)
                 break
 
+            // 9. pastForm
+            case QuizActionTypes.pastForm.ON_I_UNDERSTAND:
+                newState = newState.setIn(['pastForm','iunderstand'],true)
+                newState = newState.setIn(['pastForm','passed'],true)
+                break
+
             // 10. verbTime
             case QuizActionTypes.verbTime.ON_I_UNDERSTAND:
                 newState = newState.setIn(['verbTime','iunderstand'],true)
                 newState = newState.setIn(['verbTime','passed'],true)
                 break
-            
+
+            // 11. vp
+            case VPActionTypes.ON_CLICK_SAVE_VP:
+                //if(action.vp.id) { // if an id is present then this is an update
+                //newState = newState.setIn(['vp','updateVP'],true)
+                //newState = newState.setIn(['vp','passed'],vpQuizPassed(newState))
+                //} else { // otherwise it's an insert
+                newState = newState.setIn(['vp','insertVP'],true)
+                newState = newState.setIn(['vp','passed'],vpQuizPassed(newState))
+                //}
+                break
+
+            case VPActionTypes.ON_CHANGE_SELECTED_VERBD:
+                newState = newState.setIn(['vp','changeVPVerbd'],true)
+                newState = newState.setIn(['vp','passed'],vpQuizPassed(newState))
+                break
+
+            // For the quiz we only care if the definiteness has changed, not which particular new value it changed to.
+            case VPActionTypes.ON_CHANGE_ACTION_TIME:
+                newState = newState.setIn(['vp','changeVerbTime'],true)
+                newState = newState.setIn(['vp','passed'],vpQuizPassed(newState))
+                break
+
+            case VPActionTypes.ON_CLICK_DELETE_VP:
+                newState = newState.setIn(['vp','deleteVP'],true)
+                newState = newState.setIn(['vp','passed'],vpQuizPassed(newState))
+                break
             // 10. sentences
             /*case QuizActionTypes.sentence.ON_I_UNDERSTAND:
                 newState = newState.setIn(['sentence','iunderstand'],true)
