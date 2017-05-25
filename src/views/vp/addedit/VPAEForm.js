@@ -67,7 +67,7 @@ function VPAEForm(props:Object):?Object {
                 </div>
             break
 
-        case VPPanelLevel.L2:
+        /*case VPPanelLevel.L2:
             vpAEForm =
                 <div style={style}>
                     <VerbdSelect options={availableVerbds} value={selectedVerbd} onChange={onChangeVerbd} />
@@ -99,7 +99,7 @@ function VPAEForm(props:Object):?Object {
                     <p id="generatedText">{props.vp.getIn(['addedit','vp','generatedText'])}</p>
                     {theButtons}
                 </div>
-            break
+            break*/
         default:
             // vpAEForm already has a suitable default. Do nothing.
 
