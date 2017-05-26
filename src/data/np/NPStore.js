@@ -13,7 +13,18 @@ import AppActionTypes from '../app/AppActionTypes'
 import Nound          from '../dictionary/nound/Nound'
 
 import {localStorageAvailable} from '../LocalStorage'
+import {migrate}               from '../LocalStorage'
 const localStorageKey:string = 'NPStore'
+
+// We want to provide a migration capacity for the format of this store.  It's serialized
+// into localStorage and there's no telling when old versions will be seen in the future.
+const initialStates:Array<Object> = [
+    Map({
+        v:1,
+        nextid:1,
+        coll:Map()
+    })
+]
 
 class NPStore extends ReduceStore {
 
@@ -25,12 +36,12 @@ class NPStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = fromJS(JSON.parse(localStorageState))
+                let originalParse = migrate(fromJS(JSON.parse(localStorageState)), initialStates)
                 let newColl = MakeMapOfNP(originalParse.getIn(['coll']))
                 return originalParse.set('coll',newColl)
             }
         }
-        return NPStore.initialState
+        return initialStates.slice(-1)[0]
 
     }
 
@@ -55,7 +66,7 @@ class NPStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = NPStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
@@ -92,9 +103,5 @@ class NPStore extends ReduceStore {
     }
 }
 
-NPStore.initialState = Map({
-    nextid:1,
-    coll:Map()  // the actual collection of np
-})
-
 export default new NPStore()
+export {initialStates}

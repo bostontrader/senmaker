@@ -35,8 +35,19 @@ class AppStore extends ReduceStore {
         if (localStorageAvailable) {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
-            if(localStorageState)
-                return migrate(fromJS(JSON.parse(localStorageState)), initialStates)
+            if(localStorageState) {
+                let newState:Object = migrate(fromJS(JSON.parse(localStorageState)), initialStates)
+
+                // We need to ensure that 'lastLevel' is still set correctly.  Since the time
+                // of serialization there might have been a new lesson added.
+                const lessonCount:number = Object.keys(syllabus).length
+                const currentLevel = newState.getIn(['level', 'currentLevel'])
+
+                // Recall that the levels start at 0.  Hence -1
+                newState = newState.setIn(['level', 'lastLesson'], currentLevel < lessonCount - 1)
+
+                return newState
+            }
         }
 
         return initialStates.slice(-1)[0]

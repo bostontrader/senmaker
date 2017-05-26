@@ -66,7 +66,15 @@ const QuizActions:Object = {
             })
         },
     },
-    //
+
+    // 12
+    clause: {
+        onIUnderstand() {
+            AppDispatcher.dispatch({
+                type: QuizActionTypes.clause.ON_I_UNDERSTAND
+            })
+        },
+    },    //
     /*sentence: {
         onIUnderstand() {
             AppDispatcher.dispatch({

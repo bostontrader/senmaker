@@ -85,6 +85,10 @@ const initialStates:Array<Object> = [
             changeVerbTime: false,
             deleteVP: false,
             passed: false
+        }),
+        clause: Map({ // 12
+            iunderstand: false,
+            passed: false
         })
 
     })
@@ -354,6 +358,13 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['vp','deleteVP'],true)
                 newState = newState.setIn(['vp','passed'],vpQuizPassed(newState))
                 break
+
+            // 12. clause
+            case QuizActionTypes.clause.ON_I_UNDERSTAND:
+                newState = newState.setIn(['clause','iunderstand'],true)
+                newState = newState.setIn(['clause','passed'],true)
+                break
+            
             // 10. sentences
             /*case QuizActionTypes.sentence.ON_I_UNDERSTAND:
                 newState = newState.setIn(['sentence','iunderstand'],true)

@@ -3,7 +3,7 @@ import ReactTestUtils from "react-dom/test-utils"
 
 import ClauseRow        from './ClauseRow'
 import {clauseExamples} from '../../data/TestData'
-import StringStore  from '../../data/strings/StringStore'
+import StringStore      from '../../data/strings/StringStore'
 
 describe("ClauseRow", () => {
 

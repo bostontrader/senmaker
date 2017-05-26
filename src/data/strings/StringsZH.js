@@ -100,37 +100,42 @@ const StringsZH = {
 
     verbConjugation: { // 8
         title: 'Verb Conjugation 动词词形的变化',
-        help10: '每个动词都有一个\'基本形式\' (basic form)和另外四个变体。',
-        help11: '例如: 基本动词偷\'steal\'的四种变体      \'steals\', \'stole\', \'stealing\', 和 \'stolen\'。',
-        help12: '我们根据语法规则使用动词的不同变体。',
-        help13: 'The process of making these variations is called \'conjugation\'.',
-        help14: 'You can find the conjugations of a verb in a dictionary.',
-        help15: 'Many of the conjugations have patterns that you will notice.',
-        help16: 'However, there are so many exceptions to the patterns that it will be best to use a dictionary in order to conjugate your verbs.'
+        help10: '每个动词都有一个\'基本形式\' (basic form)和另外四个变形体。',
+        help11: '例如: 基本动词偷\'steal\'的四种变形体      \'steals\', \'stole\', \'stealing\', 和 \'stolen\'。',
+        help12: '我们根据语法规则使用动词的不同变形体。',
+        help13: '发现这些变化过程被称为变形\'conjugation\'。',
+        help14: '您可以在字典中找到动词的变体形式。',
+        help15: '你会注意到许多变体形式都会有这种的模式。',
+        help16: '模式有许多例外所以最好使用字典来查找动词的变体形式。'
     },
 
     pastForm: { // 9
-        title: 'Verb Past Form',
-        help10: 'The first verb conjugation that we will examine is the \'past\' form.',
-        help11: 'When an action happens in the past then we use the \'past\' form of the verb.'
+        title: 'Verb Past Form 动词过去式',
+        help10: '我们将要研究的第一个动词变体是过去式\'past form\'。',
+        help11: '当过去发生一个动作时，我们使用动词是过去式\'past form\'动词。'
     },
 
     verbTime: { // 10
-        title: 'Verb Time',
-        help10: 'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
-        help11: 'This choice will determine which conjugation to use.',
-        help12: 'The verb may also need additional words added to it because of this choice.'
+        title: 'Verb Time 动词产生的时间',
+        help10: '动词发生的模式： 过去发生了吗？ 现在发生了吗？ 将来会发生吗？',
+        help11: '这个选择将决定要使用哪个动词变体。',
+        help12: '由于这个选择，动词也可能需要添加其他单词。'
     },
 
     vp: { // 11
-        title: 'Verb Phrases',
-        help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
-        help11: 'verbs and verb phrases are very complicated so you must proceed slowly and carefully in order to understand them.',
-        help12: 'A verb phrase usually has more than one word, but it might only have a single verb.',
-        quiz1: 'Can you add a new verb phrase?',
-        quiz2: 'Can you change the verb in a verb phrase?',
-        quiz3: 'Can you change the time of a verb phrase?',
-        quiz4: 'Can you delete a verb phrase?'
+        title: 'Verb Phrases 动词短语',
+        help10: '学习构建的另一种类型的短语被称为\'动词短语\'(verb phrase)。',
+        help11: '动词和动词短语非常复杂，所以你必须慢慢仔细地进行阅读才能理解。',
+        help12: '动词短语(verb phrase)通常有不止一个词。它有时可能只有一个动词(verb)。',
+        quiz1: '你能添加一个新的动词短语(verb phrase)吗?',
+        quiz2: '你能改变动词短语(verb phrase)中的动词(verb)吗?',
+        quiz3: '你能改变一个动词短语(verb phrase)的变体形式吗？',
+        quiz4: '你能删除动词短语(verb phrase)吗?'
+    },
+
+    clause: { // 12
+        title: 'Clauses',
+        help10: '一个子句有一个名词短语和一个动词短语。'
     },
 
     lessonNavigator: {

@@ -34,7 +34,7 @@ describe("VerbTime", () => {
 
     it("Renders VerbTime after the Quiz", () => {
         let newState = initialState
-        newState.quiz = QuizStore.reduce(initialState.quiz, {type:QuizActionTypes.phrase.ON_I_UNDERSTAND})
+        newState.quiz = QuizStore.reduce(initialState.quiz, {type:QuizActionTypes.verbTime.ON_I_UNDERSTAND})
         const renderExpression = <VerbTime {...newState} />
 
         const verbTimeComponent = verifyBasicLayout(renderExpression, true) // expectQuizBox

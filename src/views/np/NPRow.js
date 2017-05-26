@@ -2,7 +2,7 @@
 import React from 'react'
 
 import {validateNP} from '../../data/Validator'
-import NP           from '../../data/np/NP'
+//import NP           from '../../data/np/NP'
 import NPActions    from '../../data/np/NPActions'
 
 function NPRow(props:Object):Object {

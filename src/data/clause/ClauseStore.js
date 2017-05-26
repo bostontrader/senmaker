@@ -12,12 +12,22 @@ import {validateClause}  from '../Validator'
 import AppActionTypes    from '../app/AppActionTypes'
 
 import {localStorageAvailable} from '../LocalStorage'
+import {migrate}               from '../LocalStorage'
 const localStorageKey = 'ClauseStore'
 
+// We want to provide a migration capacity for the format of this store.  It's serialized
+// into localStorage and there's no telling when old versions will be seen in the future.
+const initialStates:Array<Object> = [
+    Map({
+        v:1,
+        nextid:1,
+        coll:Map()
+    })
+]
+
 class ClauseStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher)
-    }
+
+    constructor() {super(AppDispatcher)}
 
     getInitialState():Object {
 
@@ -25,12 +35,12 @@ class ClauseStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = fromJS(JSON.parse(localStorageState))
+                let originalParse = migrate(fromJS(JSON.parse(localStorageState)), initialStates)
                 let newColl = MakeMapOfClause(originalParse.getIn(['coll']))
                 return originalParse.set('coll',newColl)
             }
         }
-        return ClauseStore.initialState
+        return initialStates.slice(-1)[0]
 
     }
 
@@ -55,7 +65,7 @@ class ClauseStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = ClauseStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
@@ -92,9 +102,5 @@ class ClauseStore extends ReduceStore {
     }
 }
 
-ClauseStore.initialState = Map({
-    nextid:1,
-    coll:Map()  // the actual collection of clause
-})
-
 export default new ClauseStore()
+export {initialStates}

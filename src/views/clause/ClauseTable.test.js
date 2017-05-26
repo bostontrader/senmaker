@@ -1,73 +1,79 @@
-import {Map} from 'immutable'
 import React from 'react'
 
-import ReactTestUtils         from 'react-dom/test-utils'
+import ReactTestUtils    from 'react-dom/test-utils'
 import {findAllWithType} from 'react-shallow-testutils'
 import rtRenderer        from 'react-test-renderer'
 
 import ClauseRow   from './ClauseRow'
 import ClauseTable from './ClauseTable'
 
+import initialState      from '../../data/StateGetter'
 import {clauseExamples}  from '../../data/TestData'
-import AppStore          from '../../data/app/AppStore'
 import ClauseActionTypes from '../../data/clause/ClauseActionTypes'
 import ClauseStore       from '../../data/clause/ClauseStore'
-import StringStore       from '../../data/strings/StringStore'
 
-describe("ClauseTable", function() {
+describe("ClauseTable", () => {
 
-    /*beforeEach(function() {
-        this.state = {}
-        this.state.app     = AppStore.getInitialState()
-        this.state.strings = StringStore.getInitialState()
+    let state
 
-        // ClauseStore.getInitialState w/o any pre-loaded examples.
-        this.state.clause = Map({
-            dict: Map({nextid:1, coll:Map()})
-        })
+    let dispatch = action => {
+        const n = ClauseStore.reduce(state.clause.get('dict'), action)
+        state.clause = state.clause.set('dict',n)
+    }
 
-        this.dispatch = action => {
-            this.state.app   = AppStore .reduce(this.state.app, action)
-            const n = ClauseStore.reduce(this.state.clause.get('dict'), action)
-            this.state.clause = this.state.clause.set('dict',n)
-        }
+    beforeEach(() => {
+        state = {}
+        state.strings = initialState.strings
+        state.clause  = initialState.clause
+    })
 
-    })*/
+    it("Renders no ClauseTable", () => {
+        const renderExpression = <ClauseTable {...state} />
+        const clauseTable = ReactTestUtils.createRenderer().render(renderExpression)
 
-    it("Renders a ClauseTable", function() {
-        //const renderExpression = <ClauseTable {...this.state} />
-        //const clauseTable = ReactTestUtils.createRenderer().render(renderExpression)
-        //expect(clauseTable.type).toBe('table')
+        // Zero ClauseTable
+        const clauseRows = findAllWithType(clauseTable, ClauseTable)
+        expect(clauseRows.length).toBe(0)
+
+        const tree = rtRenderer.create(renderExpression).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
+
+    it("Renders a ClauseTable with one item", () => {
+        dispatch({type: ClauseActionTypes.INSERT_CLAUSE, clause: clauseExamples.a})
+
+        const renderExpression = <ClauseTable {...state} />
+        const clauseTable = ReactTestUtils.createRenderer().render(renderExpression)
+        expect(clauseTable.type).toBe('table')
 
         // Two columns in the thead
-        //expect(clauseTable.props.children[0].props.children.props.children.length).toBe(2)
+        expect(clauseTable.props.children[0].props.children.props.children.length).toBe(2) // base noun, edit
 
-        //const tree = rtRenderer.create(renderExpression).toJSON()
-        //expect(tree).toMatchSnapshot()
-    })
-
-    /*it("Will render one ClauseRow", function() {
-        this.dispatch({type: ClauseActionTypes.INSERT_CLAUSE, clause: clauseExamples.a})
-        const renderExpression = <ClauseTable {...this.state} />
-        const clauseTable = ReactTestUtils.createRenderer().render(renderExpression)
-        const clauseItems = findAllWithType(clauseTable, ClauseRow)
-        expect(clauseItems.length).toBe(1)
+        // One ClauseRow
+        const clauseRows = findAllWithType(clauseTable, ClauseRow)
+        expect(clauseRows.length).toBe(1)
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
     })
 
-    it("Will render two ClauseRow", function() {
-        this.dispatch({type: ClauseActionTypes.INSERT_CLAUSE, clause: clauseExamples.a})
-        this.dispatch({type: ClauseActionTypes.INSERT_CLAUSE, clause: clauseExamples.b})
+    it("Renders a ClauseTable with more than one item", () => {
+        dispatch({type: ClauseActionTypes.INSERT_CLAUSE, clause: clauseExamples.a})
+        dispatch({type: ClauseActionTypes.INSERT_CLAUSE, clause: clauseExamples.b})
 
-        const renderExpression = <ClauseTable {...this.state} />
+        const renderExpression = <ClauseTable {...state} />
         const clauseTable = ReactTestUtils.createRenderer().render(renderExpression)
-        const clauseItems = findAllWithType(clauseTable, ClauseRow)
-        expect(clauseItems.length).toBe(2)
+        expect(clauseTable.type).toBe('table')
+
+        // Two columns in the thead
+        expect(clauseTable.props.children[0].props.children.props.children.length).toBe(2) // base noun, edit
+
+        // Two ClauseRow
+        const clauseRows = findAllWithType(clauseTable, ClauseRow)
+        expect(clauseRows.length).toBe(2)
 
         const tree = rtRenderer.create(renderExpression).toJSON()
         expect(tree).toMatchSnapshot()
-    })*/
+    })
 
 })

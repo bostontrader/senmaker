@@ -4,7 +4,6 @@ import React from 'react'
 import LessonNavigator from './LessonNavigator'
 import QuizActions     from '../../data/quiz/QuizActions'
 
-
 function VerbConjugation(props:Object):Object {
 
     const style:Object = {
@@ -17,7 +16,7 @@ function VerbConjugation(props:Object):Object {
     const sm:Object = props.strings.get('strings').misc
 
     const iunderstandCheck:Object | string = q.getIn(['verbConjugation','iunderstand']) ?
-        <img id='iunderstandCheck' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
+        <img id='iunderstandCheckmark' src='/img/Checked.png' alt='checkmark' width='36' height='36'/> : ''
 
     return(
         <div>

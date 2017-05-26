@@ -47,6 +47,17 @@ imperative 2/4 moods We use the imperative mood to express requests, commands an
   Command - Shut that door.
 
 
+there is a pattern: moshi
+
+regular: guize
+
+irregular: buguize
+
+jargon: shuyu
+
+Conjugate the verb:liejudongci
+
+different forms: bianxing
 
 preterite aka simple past
 
@@ -70,10 +81,6 @@ preterite aka simple past
             //
 
 
-
-
-
-
     sform: [
         'The next verb conjugation that we will examine is the \'s\' form.',
         'When an action happens in the past then we use the \'past\' form of the verb.',
@@ -83,28 +90,18 @@ preterite aka simple past
     s-form.  The next variation is called the 's form'.  This is frequently made by just appending an 's'
     but there are rules and irregularities so just look it up in a dictionary.
 
-
-
-
     aspect: [ // 11
             'In addition to knowing when a verb happens, we may also want to know if the verb has finished or is still happening.',
             'These things are called \'aspect\'.'
         ],
-
-
     tense: [ // 9
         'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
         'The verb will change to communicate this information.  The variations of the verb are called \'verb tenses\'.',
         'Sometimes the verb will change to one of its conjugations. Sometimes the verb will sprout additional words.  Sometime the verb will not change at all.'
     ],
-
-
     ingForm: {
         help10:'Another variation of the verb is called the \'-ing\' form.',
         help11:'We usually use this when something is happening in the present.'
-    },
-    clause: {
-        help10: 'A clause has a noun phrase and a verb phrase.'
     },
     sentence: {
         help10: 'A sentence can have many clauses, or it may just have a single clause.'
@@ -160,11 +157,7 @@ Can you add an adjective to a noun phrase?
 Can you add two adjectives to a noun phrase?
 Can you remove an adjectives from a noun phrase?
 
-        pastForm: {
-            help10:'The first verb conjugation that we will examine is the \'past\' form.',
-            help11:'When an action happens in the past then we use the \'past\' form of the verb.',
-            help12:'The base form of the verb is changed into the past form according to certain rules.'
-        },
+
         tense: [
             'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
             'The verb will change to communicate this information.  The variations of the verb are called \'verb tenses\'.',
@@ -178,19 +171,8 @@ Can you remove an adjectives from a noun phrase?
             help10:'Another variation of the verb is called the \'-ing\' form.',
             help11:'We usually use this when something is happening in the present.'
         },
-        vp: {
-            help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
-            help11: 'In a verb phrase we start with a single verb and then add other words to enhance the meaning.',
-            help12: 'You have already seen your first verb phrase in the \'past form\' lesson.  By selecting \'future tense\' and a verb, you produced a two-word verb phrase.',
-            help13: 'Here we repackage that into an explicit verb phrase format.',
-            // although a verb phrase is usually more than one word, it could be just a single verb.
-            quiz1: 'Can you add a new verb phrase?',
-            quiz2: 'Can you delete a verb phrase from this list?',
-            quiz3: 'Can you change the spelling of a verb phrase?'
-        },
-        clause: {
-            help10: 'A clause has a noun phrase and a verb phrase.'
-        },
+
+
         sentence: {
             help10: 'A sentence can have many clauses, or it may just have a single clause.'
         },

@@ -5,8 +5,8 @@ import {Map}       from 'immutable'
 import AppStore         from '../data/app/AppStore'
 import AdjectivdAEStore from '../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
 import AdjectivdStore   from '../data/dictionary/adjectivd/AdjectivdStore'
-//import ClauseAEStore    from '../data/clause/addedit/ClauseAEStore'
-//import ClauseStore      from '../data/clause/ClauseStore'
+import ClauseAEStore    from '../data/clause/addedit/ClauseAEStore'
+import ClauseStore      from '../data/clause/ClauseStore'
 import NoundAEStore     from '../data/dictionary/nound/addedit/NoundAEStore'
 import NoundStore       from '../data/dictionary/nound/NoundStore'
 import NPAEStore        from '../data/np/addedit/NPAEStore'
@@ -25,8 +25,8 @@ function getStores() {
         AppStore,
         AdjectivdStore,
         AdjectivdAEStore,
-        //ClauseStore,
-        //ClauseAEStore,
+        ClauseStore,
+        ClauseAEStore,
         NoundStore,
         NoundAEStore,
         NPAEStore,
@@ -56,10 +56,10 @@ function getState():Object {
         }),
 
         // A collection of available clauses.
-        //clause: Map({
-            //addedit: ClauseAEStore.getState(),
-            //dict: ClauseStore.getState(),
-        //}),
+        clause: Map({
+            addedit: ClauseAEStore.getState(),
+            dict: ClauseStore.getState(),
+        }),
 
         // A dictionary of available nouns.
         nound: Map({

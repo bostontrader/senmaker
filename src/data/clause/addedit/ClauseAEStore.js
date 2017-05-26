@@ -13,7 +13,8 @@ import {validateVP}      from '../../Validator'
 import AppActionTypes    from '../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../LocalStorage'
-const localStorageKey = 'ClauseAEStore'
+import {migrate}               from '../../LocalStorage'
+const localStorageKey:string = 'ClauseAEStore'
 
 /*
  This store manages all state required to support the add/edit operations on a clause.
@@ -28,10 +29,20 @@ const localStorageKey = 'ClauseAEStore'
  We use the clickAddClause flag for purposes of code clarity.
 
  */
+
+// We want to provide a migration capacity for the format of this store.  It's serialized
+// into localStorage and there's no telling when old versions will be seen in the future.
+const initialStates:Array<Object> = [
+    Map({
+        v:1,
+        addClause: false,
+        clause: new Clause()
+    })
+]
+
 class ClauseAEStore extends ReduceStore {
-    constructor() {
-        super(AppDispatcher)
-    }
+
+    constructor() {super(AppDispatcher)}
 
     getInitialState() {
 
@@ -39,13 +50,13 @@ class ClauseAEStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = fromJS(JSON.parse(localStorageState))
+                let originalParse = migrate(fromJS(JSON.parse(localStorageState)), initialStates)
                 let newClause = MakeClause(originalParse.getIn(['clause']))
                 return originalParse.set('clause',newClause)
             }
 
         }
-        return ClauseAEStore.initialState
+        return initialStates.slice(-1)[0]
 
     }
 
@@ -70,7 +81,7 @@ class ClauseAEStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = ClauseAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open the VPAddForm
@@ -80,14 +91,14 @@ class ClauseAEStore extends ReduceStore {
 
             // Signal the UI to close VPAddForm or VPEditForm
             case ClauseActionTypes.ON_CLICK_CANCEL:
-                newState = ClauseAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to close VPAddForm or VPEditForm (but the delete button
             // is only present on NounEditForm.)
             // VPStore will also catch this event and it's responsible for the actual deletion.
             case ClauseActionTypes.ON_CLICK_DELETE_CLAUSE:
-                newState = ClauseAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Signal the UI to open VPEditForm and populate with the given data.
@@ -104,7 +115,7 @@ class ClauseAEStore extends ReduceStore {
             // Signal the UI to close VPAddForm or VPEditForm. We don't need to specify which,
             // the same state should close either one.
             case ClauseActionTypes.ON_CLICK_SAVE_CLAUSE:
-                newState = ClauseAEStore.initialState
+                newState = initialStates.slice(-1)[0]
                 break
 
             // Should be NP because that's what's being changed!
@@ -138,9 +149,5 @@ class ClauseAEStore extends ReduceStore {
     }
 }
 
-ClauseAEStore.initialState =  Map({
-    addClause: false,
-    clause: new Clause()
-})
-
 export default new ClauseAEStore()
+export {initialStates}

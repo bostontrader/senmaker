@@ -4,7 +4,6 @@ import React from 'react'
 import LessonNavigator from './LessonNavigator'
 import QuizActions     from '../../data/quiz/QuizActions'
 
-
 function VerbTime(props:Object):Object {
 
     const style:Object = {
@@ -24,11 +23,11 @@ function VerbTime(props:Object):Object {
             <h3>{sm.quiz}</h3>
             <table>
                 <tbody>
-                <tr>
-                    <td><p><input id='iunderstandCheckbox' onChange={QuizActions.verbTime.onIUnderstand} type='checkbox' checked={q.getIn(['verbTime','iunderstand'])} />
-                        {sm.i_understand}</p></td>
-                    <td>{iunderstandCheckmark}</td>
-                </tr>
+                    <tr>
+                        <td><p><input id='iunderstandCheckbox' onChange={QuizActions.verbTime.onIUnderstand} type='checkbox' checked={q.getIn(['verbTime','iunderstand'])} />
+                            {sm.i_understand}</p></td>
+                        <td>{iunderstandCheckmark}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

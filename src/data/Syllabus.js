@@ -50,9 +50,9 @@ const syllabus = {
     verbConjugation: {level: 8, comp:VerbConjugation, prev:'verbd',           next:'pastForm'},
     pastForm:        {level: 9, comp:PastForm,        prev:'verbConjugation', next:'verbTime'},
     verbTime:        {level:10, comp:VerbTime,        prev:'pastForm',        next:'vp'},
-    vp:              {level:11, comp:VerbPhrase,      prev:'verbTime',        next:null}
+    vp:              {level:11, comp:VerbPhrase,      prev:'verbTime',        next:'clause'},
+    clause:          {level:12, comp:Clause,          prev:'vp',              next:null},
     //aspect:          {level:12, comp:Aspect,          prev:'verbPhrase',      next:'clause'},
-    //clause:          {level:13, comp:Clause,          prev:'aspect',          next:'sentence'},
     //sentence:        {level:14, comp:Sentence,        prev:'clause',          next:'pluralization'},
     //pluralization:   {level:15, comp:Pluralization,   prev:'sentence',        next:'vpAspect'},
     //vpAspect:        {level:16, comp:VPAspect,        prev:'pluralization',   next: null}

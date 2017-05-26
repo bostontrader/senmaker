@@ -1,10 +1,9 @@
 // @flow
 import React from 'react'
 
-import ClauseTable    from './ClauseTable'
-import ClauseAddForm  from './addedit/ClauseAddForm'
-import ClauseEditForm from './addedit/ClauseEditForm'
-import ClauseActions  from '../../data/clause/ClauseActions'
+import ClauseTable   from './ClauseTable'
+import ClauseAEForm  from './addedit/ClauseAEForm'
+import ClauseActions from '../../data/clause/ClauseActions'
 
 /*
 The ClausePanel is responsible for displaying everything about our list of clause.  Such
@@ -17,8 +16,14 @@ function ClausePanel(props:Object):Object {
         margin: '5px'
     }
 
-    const s:Object = props.strings
+    const sm:Object = props.strings.get('strings').misc
 
+    // What should be displayed in the nound add/edit panel?
+    let clauseAEForm:?Object = null
+    if(props.clause.getIn(['addedit','clause','id']) || props.clause.getIn(['addedit','addClause']))
+        clauseAEForm = <ClauseAEForm {...props} />
+
+    /*
     // What should be displayed in the clause add/edit panel?
     let clauseAddEditForm:Object = <div></div>  // we really want nothing here
     if(props.clause.getIn(['addedit','clause','id'])) {
@@ -27,16 +32,16 @@ function ClausePanel(props:Object):Object {
         clauseAddEditForm = <ClauseAddForm {...props} />
     } else {
         // Do nothing
-    }
+    }*/
 
     // The appearance of a ClausePanel is not affected by the level.
     return( <div style={style}>
         <div>
-            <button id="add-clause" onClick={ClauseActions.onClickAddClause}>{s.add_new} {'clause'}</button>
+            <button id="add-clause" onClick={ClauseActions.onClickAddClause}>{sm.add_new} {'clause'}</button>
             <ClauseTable {...props} />
         </div>
         <div>
-            {clauseAddEditForm}
+            {clauseAEForm}
         </div>
     </div>)
 

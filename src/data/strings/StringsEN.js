@@ -115,36 +115,39 @@ const StringsEN = {
         help10: 'Every verb has a \'base form\' and four other variations.',
         help11: 'For example: \'steals\', \'stole\', \'stealing\', and \'stolen\' are the four variations of the base verb \'steal\',',
         help12: 'We use the different variations of the verbs according to the rules of grammar.',
-        help13: '',
-
         help13: 'The process of making these variations is called \'conjugation\'.',
         help14: 'You can find the conjugations of a verb in a dictionary.',
         help15: 'Many of the conjugations have patterns that you will notice.',
-        help16: 'However, there are so many exceptions to the patterns that it will be best to use a dictionary in order to conjugate your verbs.'
+        help16: 'However, there are so many exceptions to the patterns that it is best to use a dictionary in order to find a conjugation of a verb.'
     },
 
     pastForm: { // 9
-        title: 'Verb Past Form',
+        title: 'Verb Past Form 动词过去式',
         help10: 'The first verb conjugation that we will examine is the \'past\' form.',
         help11: 'When an action happens in the past then we use the \'past\' form of the verb.'
     },
 
     verbTime: { // 10
-        title: 'Verb Time',
+        title: 'Verb Time 动词产生的时间',
         help10: 'When does the verb happen?  Did it happen in the past? Is it happening now?  Will it happen in the future?',
         help11: 'This choice will determine which conjugation to use.',
         help12: 'The verb may also need additional words added to it because of this choice.'
     },
 
     vp: { // 11
-        title: 'Verb Phrases',
-        help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
-        help11: 'verbs and verb phrases are very complicated so you must proceed slowly and carefully in order to understand them.',
+        title: 'Verb Phrases 动词短语',
+        help10: 'The next type of phrase to learn to build is called a学习构建的下一种类型的短语被称为“动词短语”。.',
+        help11: 'Verbs and verb phrases are very complicated so you must proceed slowly and carefully in order to understand them.',
         help12: 'A verb phrase usually has more than one word, but it might only have a single verb.',
         quiz1: 'Can you add a new verb phrase?',
         quiz2: 'Can you change the verb in a verb phrase?',
         quiz3: 'Can you change the time of a verb phrase?',
         quiz4: 'Can you delete a verb phrase?'
+    },
+
+    clause: { // 12
+        title: 'Clauses',
+        help10: 'A clause has a noun phrase and a verb phrase.'
     },
 
     lessonNavigator: {
