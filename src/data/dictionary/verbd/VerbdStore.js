@@ -22,7 +22,7 @@ const initialStates:Array<Object> = [
         coll:Map()
     }),
     Map({
-        v:1,
+        v:0,
         nextid:1,
         coll:Map()
     })

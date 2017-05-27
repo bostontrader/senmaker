@@ -3,6 +3,8 @@ import {Map} from 'immutable'
 import AppStore         from '../data/app/AppStore'
 import AdjectivdAEStore from '../data/dictionary/adjectivd/addedit/AdjectivdAEStore'
 import AdjectivdStore   from '../data/dictionary/adjectivd/AdjectivdStore'
+import AdverbdAEStore   from '../data/dictionary/adverbd/addedit/AdverbdAEStore'
+import AdverbdStore     from '../data/dictionary/adverbd/AdverbdStore'
 import ClauseAEStore    from '../data/clause/addedit/ClauseAEStore'
 import ClauseStore      from '../data/clause/ClauseStore'
 import NoundAEStore     from '../data/dictionary/nound/addedit/NoundAEStore'
@@ -27,6 +29,13 @@ const initialState = {
         dict: AdjectivdStore.getState(),
     }),
 
+    // A dictionary of available adjectivs.  We will instantiate as many copies of these
+    // definitions as we need, as adjectivi.
+    adverbd: Map({
+        addedit: AdverbdAEStore.getState(),
+        dict: AdverbdStore.getState(),
+    }),
+    
     // A collection of available clauses.
     clause: Map({
         addedit: ClauseAEStore.getState(),

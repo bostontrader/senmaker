@@ -1,7 +1,7 @@
 // @flow
 // Various functions intended to validate the structure and content of the several objects.
 
-const validateAdjectivd = (adjectivd:Object):boolean => {
+const validateAdjectivd:Function = (adjectivd:Object):boolean => {
     if(adjectivd.constructor.name !== 'Record') {
         // This is coming from Clause -> NP -> Adjectivd.  Make clause is not doing the adjectivd
         console.log('Adjectivd must be of type Record.  Instead it is a ',adjectivd.constructor.name)
@@ -15,7 +15,21 @@ const validateAdjectivd = (adjectivd:Object):boolean => {
     return true
 }
 
-const validateClause = (clause:Object):boolean => {
+const validateAdverbd:Function = (adverbd:Object):boolean => {
+    //if(adverbd.constructor.name !== 'Record') {
+        // This is coming from Clause -> NP -> Adverbd.  Make clause is not doing the adverbd
+        //console.log('Adverbd must be of type Record.  Instead it is a ',adverbd.constructor.name)
+        //console.log(adverbd)
+        //throw('adverbd.constructor.name==='+adverbd.constructor.name)
+    //}
+    //if(typeof(adverbd.get('id')) !== 'string') {
+        //console.log('Adverbd id must be a string.  Instead it is a ',typeof(adverbd.get('id')))
+        //throw('up')
+    //}
+    return true
+}
+
+const validateClause:Function = (clause:Object):boolean => {
     if(clause.constructor.name !== 'Record') {
         console.log('Clause must be of type Record.  Instead it is a ',clause.constructor.name)
         console.log(clause)
@@ -32,7 +46,7 @@ const validateClause = (clause:Object):boolean => {
     return true
 }
 
-const validateNound = (nound:Object):boolean => {
+const validateNound:Function = (nound:Object):boolean => {
     if(nound.constructor.name !== 'Record') {
         // This is coming from Clause -> NP -> Nound.  Make clause is not doing the nound
         console.log('Nound must be of type Record.  Instead it is a ',nound.constructor.name)
@@ -46,7 +60,7 @@ const validateNound = (nound:Object):boolean => {
     return true
 }
 
-const validateNP = (vp:Object):boolean => {
+const validateNP:Function = (vp:Object):boolean => {
     if(vp.constructor.name !== 'Record') {
         console.log('NP must be of type Record.  Instead it is a ',vp.constructor.name)
         console.log(vp)
@@ -61,7 +75,7 @@ const validateNP = (vp:Object):boolean => {
     return true
 }
 
-const validateVerbd = (verbd:Object):boolean => {
+const validateVerbd:Function = (verbd:Object):boolean => {
     if(verbd.constructor.name !== 'Record') {
         console.log('Verbd must be of type Record.  Instead it is a ',verbd.constructor.name)
         console.log(verbd)
@@ -74,7 +88,7 @@ const validateVerbd = (verbd:Object):boolean => {
     return true
 }
 
-const validateVP = (vp:Object):boolean => {
+const validateVP:Function = (vp:Object):boolean => {
     if(vp.constructor.name !== 'Record') {
         console.log('VP must be of type Record.  Instead it is a ',vp.constructor.name)
         console.log(vp)
@@ -90,6 +104,7 @@ const validateVP = (vp:Object):boolean => {
 }
 
 export {validateAdjectivd}
+export {validateAdverbd}
 export {validateClause}
 export {validateNound}
 export {validateNP}

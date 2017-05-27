@@ -35,10 +35,42 @@ const migrate:Function = (originalStateObject:Object, initialStates):Object => {
     const currentVersion:number = currentInitialState.get('v')
     let p = originalVersion
     while(p < currentVersion)
-        console.log(p) // presently nobody has an advanced version
+        console.log(p++, currentVersion) // presently nobody has an advanced version
 
     return originalStateObject
 }
 
+const migrateNG:Function = (currentFormat:Object, mutators:Array<Function>, factoryReset:Object):Object => {
+    console.log('currentFormat',currentFormat)
+    let currentVersion: number = currentFormat.getIn(['v'])
+    console.log('currentVersion',currentVersion)
+    // If the currentVersion is undefined then we start fresh
+    if (currentVersion === undefined) {
+        console.log('return factoryReset')
+        return factoryReset
+    }
+
+
+    // If the currentVersion is the most recent then so is currentFormat.  Return that.
+    console.log(mutators.length)
+    console.log(currentVersion === mutators.length)
+    if (currentVersion === mutators.length) {
+        console.log('return currentformat', currentFormat)
+        return currentFormat
+    }
+
+    // Else migrate from the currentFormat to the latest format.
+
+    console.log('time to migrate')
+    let newState:Object = currentFormat
+    while(currentVersion < mutators.length) {
+        newState = mutators[currentVersion](newState)
+        console.log('cv=', currentVersion++)
+        console.log(newState)
+    }
+    return currentFormat
+}
+
 export {localStorageAvailable}
 export {migrate}
+export {migrateNG}

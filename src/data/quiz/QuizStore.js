@@ -20,7 +20,7 @@ const localStorageKey:string = 'QuizStore'
 // into localStorage and there's no telling when old versions will be seen in the future.
 const initialStates:Array<Object> = [
     Map({
-        v:1,
+        v:0,
         intro: Map({ // 0
             iunderstand: false,
             passed: false
@@ -91,7 +91,86 @@ const initialStates:Array<Object> = [
             passed: false
         })
 
-    })
+    }),
+    /*Map({
+        v:1,
+        intro: Map({ // 0
+            iunderstand: false,
+            passed: false
+        }),
+        nound: Map({ // 1
+            insertNound: false,
+            updateNound: false,
+            deleteNound: false,
+            passed: false
+        }),
+        definiteness: Map({ // 2
+            definitenessChanged: false,
+            noundChanged       : false,
+            iseeArticleChanged : false,
+            passed: false
+        }),
+        phrase: Map({ // 3
+            iunderstand: false,
+            passed: false
+        }),
+        np: Map({ // 4
+            insertNP: false,
+            updateNPNound: false,
+            updateNPDefiniteness: false,
+            deleteNP: false,
+            passed: false
+        }),
+        adjectivd: Map({ // 5
+            insertAdjectivd: false,
+            updateAdjectivd: false,
+            deleteAdjectivd: false,
+            passed: false
+        }),
+        npAdjective: Map({ // 6
+            iunderstand: false,
+            addAdjectivd: false,
+            removeAdjectivd: false,
+            addTwoAdjectives: false,
+            passed: false
+        }),
+        verbd: Map({ // 7
+            insertVerbd: false,
+            updateVerbd: false,
+            deleteVerbd: false,
+            passed: false
+        }),
+        verbConjugation: Map({ // 8
+            iunderstand: false,
+            passed: false
+        }),
+        pastForm: Map({ // 9
+            iunderstand: false,
+            passed: false
+        }),
+        verbTime: Map({ // 10
+            iunderstand: false,
+            passed: false
+        }),
+        vp: Map({ // 11
+            insertVP: false,
+            changeVPVerbd: false,
+            changeVerbTime: false,
+            deleteVP: false,
+            passed: false
+        }),
+        clause: Map({ // 12
+            iunderstand: false,
+            passed: false
+        }),
+        adverbd: Map({ // 13
+            insertAdverbd: false,
+            updateAdverbd: false,
+            deleteAdverbd: false,
+            passed: false
+        })
+
+    })*/
 ]
 
 /*
@@ -108,32 +187,10 @@ class QuizStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState)
-                return this.migrate(fromJS(JSON.parse(localStorageState)))
+                return migrate(fromJS(JSON.parse(localStorageState)), initialStates)
         }
 
         return initialStates.slice(-1)[0]
-    }
-
-    // Given an originalFormat state object, as retrieved from local storage,
-    // migrate to the most current version.
-    migrate(originalFormat:Object):Object {
-        const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['v'])
-
-        // If the version is undefined then we start fresh
-        if(originalVersion === undefined)
-            return currentInitialState
-
-        // If the version is the most recent then use it
-        if (originalVersion === currentInitialState.getIn(['v']))
-            return originalFormat
-
-        // Else migrate from the originalVersion to the current version
-        const currentVersion:number = currentInitialState.getIn(['v'])
-        let p = originalVersion
-        while(p < currentVersion)
-            console.log(p++)
-        return originalFormat
     }
 
     reduce(state:Object, action:Object):Object {
@@ -389,6 +446,5 @@ class QuizStore extends ReduceStore {
         return newState
     }
 }
-
 
 export default new QuizStore()

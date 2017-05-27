@@ -1,23 +1,24 @@
 import React from 'react'
 
-import Intro           from '../views/syllabus/Intro'
+import Intro           from '../views/syllabus/Intro'             //  0
 import Nound           from '../views/syllabus/Nound'
 import Definiteness    from '../views/syllabus/Definiteness'
 import Phrase          from '../views/syllabus/Phrase'
 import NounPhrase      from '../views/syllabus/NounPhrase'
-import Adjectivd       from '../views/syllabus/Adjectivd'
+import Adjectivd       from '../views/syllabus/Adjectivd'         //  5
 import NPAdjective     from '../views/syllabus/NPAdjective'
 import Verbd           from '../views/syllabus/Verbd'
 import VerbConjugation from '../views/syllabus/VerbConjugation'
 import PastForm        from '../views/syllabus/PastForm'
-import VerbTime        from '../views/syllabus/VerbTime'
+import VerbTime        from '../views/syllabus/VerbTime'          // 10
 import VerbPhrase      from '../views/syllabus/VerbPhrase'
-
-import Aspect          from '../views/syllabus/Aspect'
 import Clause          from '../views/syllabus/Clause'
-import Sentence        from '../views/syllabus/Sentence'
-import Pluralization   from '../views/syllabus/Pluralization'
-import VPAspect        from '../views/syllabus/VPAspect'
+import Adverbd         from '../views/syllabus/Adverbd'
+
+//import Aspect          from '../views/syllabus/Aspect'
+//import Sentence        from '../views/syllabus/Sentence'
+//import Pluralization   from '../views/syllabus/Pluralization'
+//import VPAspect        from '../views/syllabus/VPAspect'
 
 /**
  * We have a series of lessons that we want to progress through, in both directions, in a specific order.
@@ -51,14 +52,12 @@ const syllabus = {
     pastForm:        {level: 9, comp:PastForm,        prev:'verbConjugation', next:'verbTime'},
     verbTime:        {level:10, comp:VerbTime,        prev:'pastForm',        next:'vp'},
     vp:              {level:11, comp:VerbPhrase,      prev:'verbTime',        next:'clause'},
-    clause:          {level:12, comp:Clause,          prev:'vp',              next:null},
+    clause:          {level:12, comp:Clause,          prev:'vp',              next:'adverbd'},
+    adverbd:         {level:13, comp:Adverbd,         prev:'clause',          next:null},
     //aspect:          {level:12, comp:Aspect,          prev:'verbPhrase',      next:'clause'},
     //sentence:        {level:14, comp:Sentence,        prev:'clause',          next:'pluralization'},
     //pluralization:   {level:15, comp:Pluralization,   prev:'sentence',        next:'vpAspect'},
     //vpAspect:        {level:16, comp:VPAspect,        prev:'pluralization',   next: null}
-
-    // Adverbs
-
     // Adverbs as part of verb phrases
 
 }

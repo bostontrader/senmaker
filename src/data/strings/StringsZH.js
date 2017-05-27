@@ -138,6 +138,17 @@ const StringsZH = {
         help10: '一个子句有一个名词短语和一个动词短语。'
     },
 
+    adverbd: { // 13
+        title: 'Adverbs',
+        help10: 'Adverbs modify, or tell us more about, other words. Usually adverbs modify verbs, telling us how, how often, when, or where something was done.',
+        help11: 'In order to study English you will use many adverbs.',
+        help12: 'This is the dictionary of adverbs that you can use.',
+        help13: 'At this time there are very few adverbs but you can add more adverbs whenever you like.',
+        quiz1: 'Can you add a new adverb?',
+        quiz2: 'Can you delete an adverb from this list?',
+        quiz3: 'Can you change the spelling of an adverb?'
+    },
+
     lessonNavigator: {
         level: '级',
         nextLevel: '下一級',

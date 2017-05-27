@@ -34,7 +34,7 @@ const localStorageKey:string = 'ClauseAEStore'
 // into localStorage and there's no telling when old versions will be seen in the future.
 const initialStates:Array<Object> = [
     Map({
-        v:1,
+        v:0,
         addClause: false,
         clause: new Clause()
     })

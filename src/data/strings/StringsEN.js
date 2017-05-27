@@ -136,7 +136,7 @@ const StringsEN = {
 
     vp: { // 11
         title: 'Verb Phrases 动词短语',
-        help10: 'The next type of phrase to learn to build is called a学习构建的下一种类型的短语被称为“动词短语”。.',
+        help10: 'The next type of phrase to learn to build is called a \'verb phrase\'.',
         help11: 'Verbs and verb phrases are very complicated so you must proceed slowly and carefully in order to understand them.',
         help12: 'A verb phrase usually has more than one word, but it might only have a single verb.',
         quiz1: 'Can you add a new verb phrase?',
@@ -148,6 +148,17 @@ const StringsEN = {
     clause: { // 12
         title: 'Clauses',
         help10: 'A clause has a noun phrase and a verb phrase.'
+    },
+
+    adverbd: { // 13
+        title: 'Adverbs',
+        help10: 'Adverbs modify, or tell us more about, other words. Usually adverbs modify verbs, telling us how, how often, when, or where something was done.',
+        help11: 'In order to study English you will use many adverbs.',
+        help12: 'This is the dictionary of adverbs that you can use.',
+        help13: 'At this time there are very few adverbs but you can add more adverbs whenever you like.',
+        quiz1: 'Can you add a new adverb?',
+        quiz2: 'Can you delete an adverb from this list?',
+        quiz3: 'Can you change the spelling of an adverb?'
     },
 
     lessonNavigator: {

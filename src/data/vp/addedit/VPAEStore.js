@@ -39,7 +39,7 @@ const initialStates:Array<Object> = [
         vp: new VP()
     }),
     Map({
-        v:1,
+        v:0,
         addVP: false,
         vp: new VP()
     })

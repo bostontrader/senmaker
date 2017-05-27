@@ -19,7 +19,7 @@ const localStorageKey = 'ClauseStore'
 // into localStorage and there's no telling when old versions will be seen in the future.
 const initialStates:Array<Object> = [
     Map({
-        v:1,
+        v:0,
         nextid:1,
         coll:Map()
     })

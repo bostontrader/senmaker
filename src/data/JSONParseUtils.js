@@ -1,5 +1,6 @@
 // @flow
-//import {validateAdjectivd} from './Validator'
+import {validateAdjectivd} from './Validator'
+import {validateAdverbd}   from './Validator'
 import {validateClause}    from './Validator'
 import {validateNound}     from './Validator'
 import {validateNP}        from './Validator'
@@ -7,15 +8,16 @@ import {validateVerbd}     from './Validator'
 import {validateVP}        from './Validator'
 import Clause              from './clause/Clause'
 import Adjectivd           from './dictionary/adjectivd/Adjectivd'
+import Adverbd             from './dictionary/adverbd/Adverbd'
 import Nound               from './dictionary/nound/Nound'
 import Verbd               from './dictionary/verbd/Verbd'
 import NP                  from './np/NP'
 import VP                  from './vp/VP'
 
 // Given an original Map of Maps which purport to be Adjectivd, return a new Map of Adjectivd Records.
-const MakeMapOfAdjectivd = (originalMap:Object) => {
+const MakeMapOfAdjectivd:Function = (originalMap:Object):Object => {
     return originalMap.map(np => {
-        let newAdjectivd = Adjectivd(np)
+        let newAdjectivd:Object = Adjectivd(np)
         //newAdjectivd = newAdjectivd.set('nound', Adjectivd(np.get('nound')))
         //validateAdjectivd(newAdjectivd)
         return newAdjectivd
@@ -23,18 +25,34 @@ const MakeMapOfAdjectivd = (originalMap:Object) => {
 }
 
 // Given an original Map which purports to be a Adjectivd, return a new Adjectivd Record.
-const MakeAdjectivd = (originalMap:Object) => {
-    let newAdjectivd = Adjectivd(originalMap)
+const MakeAdjectivd:Function = (originalMap:Object):Object => {
+    let newAdjectivd:Object = Adjectivd(originalMap)
     //validateAdjectivd(newAdjectivd)
     return newAdjectivd
 }
 
+// Given an original Map of Maps which purport to be Adjectivd, return a new Map of Adjectivd Records.
+const MakeMapOfAdverbd:Function = (originalMap:Object):Object => {
+    return originalMap.map(np => {
+        let newAdverbd:Object = Adverbd(np)
+        //newAdverbd = newAdverbd.set('nound', Adverbd(np.get('nound')))
+        //validateAdverbd(newAdverbd)
+        return newAdverbd
+    })
+}
+
+// Given an original Map which purports to be a Adverbd, return a new Adverbd Record.
+const MakeAdverbd:Function = (originalMap:Object):Object => {
+    let newAdverbd:Object = Adverbd(originalMap)
+    //validateAdverbd(newAdverbd)
+    return newAdverbd
+}
 
 // Clause
 // Given an original Map of Maps which purport to be Clause, return a new Map of Clause Records.
-const MakeMapOfClause = (originalMap:Object) => {
+const MakeMapOfClause:Function = (originalMap:Object):Object => {
     return originalMap.map(clause => {
-        let newClause = Clause(clause)
+        let newClause:Object = Clause(clause)
         newClause = newClause.set('np', NP(clause.get('np')))
         newClause = newClause.set('vp', VP(clause.get('vp')))
         validateClause(newClause)
@@ -43,9 +61,9 @@ const MakeMapOfClause = (originalMap:Object) => {
 }
 
 // Given an original Map which purports to be a Clause, return a new Clause Record.
-const MakeClause = (originalMap:Object) => {
-    let newClause = Clause(originalMap)
-    const n = newClause.get('np')
+const MakeClause:Function = (originalMap:Object):Object => {
+    let newClause:Object = Clause(originalMap)
+    const n:Object = newClause.get('np')
     newClause = newClause.set('np', NP(newClause.get('np')))
     newClause = newClause.set('vp', VP(newClause.get('vp')))
     validateClause(newClause)
@@ -55,9 +73,9 @@ const MakeClause = (originalMap:Object) => {
 
 // Nound
 // Given an original Map of Maps which purport to be Nound, return a new Map of Nound Records.
-const MakeMapOfNound = (originalMap:Object) => {
+const MakeMapOfNound:Function = (originalMap:Object):Object => {
     return originalMap.map(np => {
-        let newNound = Nound(np)
+        let newNound:Object = Nound(np)
         //newNound = newNound.set('nound', Nound(np.get('nound')))
         validateNound(newNound)
         return newNound
@@ -65,8 +83,8 @@ const MakeMapOfNound = (originalMap:Object) => {
 }
 
 // Given an original Map which purports to be a Nound, return a new Nound Record.
-const MakeNound = (originalMap:Object) => {
-    let newNound = Nound(originalMap)
+const MakeNound:Function = (originalMap:Object):Object => {
+    let newNound:Object = Nound(originalMap)
     validateNound(newNound)
     return newNound
 }
@@ -74,9 +92,9 @@ const MakeNound = (originalMap:Object) => {
 
 // NP
 // Given an original Map of Maps which purport to be NP, return a new Map of NP Records.
-const MakeMapOfNP = (originalMap:Object) => {
+const MakeMapOfNP:Function = (originalMap:Object):Object => {
     return originalMap.map(np => {
-        let newNP = NP(np)
+        let newNP:Object = NP(np)
         newNP = newNP.set('nound', Nound(np.get('nound')))
         validateNP(newNP)
         return newNP
@@ -84,8 +102,8 @@ const MakeMapOfNP = (originalMap:Object) => {
 }
 
 // Given an original Map which purports to be a NP, return a new NP Record.
-const MakeNP = (originalMap:Object) => {
-    let newNP = NP(originalMap)
+const MakeNP:Function = (originalMap:Object):Object => {
+    let newNP:Object = NP(originalMap)
     newNP = newNP.set('nound', Nound(originalMap.get('nound')))
     validateNP(newNP)
     return newNP
@@ -93,9 +111,9 @@ const MakeNP = (originalMap:Object) => {
 
 
 // Given an original Map of Maps which purport to be Verbd, return a new Map of Verbd Records.
-const MakeMapOfVerbd = (originalMap:Object) => {
+const MakeMapOfVerbd:Function = (originalMap:Object):Object => {
     return originalMap.map(np => {
-        let newVerbd = Verbd(np)
+        let newVerbd:Object = Verbd(np)
         //newVerbd = newVerbd.set('nound', Verbd(np.get('nound')))
         validateVerbd(newVerbd)
         return newVerbd
@@ -103,8 +121,8 @@ const MakeMapOfVerbd = (originalMap:Object) => {
 }
 
 // Given an original Map which purports to be a Verbd, return a new Verbd Record.
-const MakeVerbd = (originalMap:Object) => {
-    let newVerbd = Verbd(originalMap)
+const MakeVerbd:Function = (originalMap:Object):Object => {
+    let newVerbd:Object = Verbd(originalMap)
     validateVerbd(newVerbd)
     return newVerbd
 }
@@ -112,9 +130,9 @@ const MakeVerbd = (originalMap:Object) => {
 
 // VP
 // Given an original Map of Maps which purport to be VP, return a new Map of VP Records.
-const MakeMapOfVP = (originalMap:Object) => {
+const MakeMapOfVP:Function = (originalMap:Object):Object => {
     return originalMap.map(vp => {
-        let newVP = VP(vp)
+        let newVP:Object = VP(vp)
         newVP = newVP.set('verbd', Verbd(vp.get('verbd')))
         validateVP(newVP)
         return newVP
@@ -122,8 +140,8 @@ const MakeMapOfVP = (originalMap:Object) => {
 }
 
 // Given an original Map which purports to be a VP, return a new VP Record.
-const MakeVP = (originalMap:Object) => {
-    let newVP = VP(originalMap)
+const MakeVP:Function = (originalMap:Object):Object => {
+    let newVP:Object = VP(originalMap)
     newVP = newVP.set('verbd', Verbd(originalMap.get('verbd')))
     validateVP(newVP)
     return newVP
@@ -131,6 +149,9 @@ const MakeVP = (originalMap:Object) => {
 
 export {MakeMapOfAdjectivd}
 export {MakeAdjectivd}
+
+export {MakeMapOfAdverbd}
+export {MakeAdverbd}
 
 export {MakeMapOfClause}
 export {MakeClause}

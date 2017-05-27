@@ -14,7 +14,7 @@ function ClauseRow(props:Object):Object {
     return (
         <tr>
             <td>{clause.generatedText}</td>
-            <td><button id={clause.id} type="button" onClick={onClickEditClause} >{props.strings.edit}</button></td>
+            <td><button id={clause.id} type="button" onClick={onClickEditClause} >{props.strings.get('strings').misc.edit}</button></td>
         </tr>
     )
 

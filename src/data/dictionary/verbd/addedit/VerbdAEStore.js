@@ -37,7 +37,7 @@ const localStorageKey:string = 'VerbdAEStore'
 // into localStorage and there's no telling when old versions will be seen in the future.
 const initialStates:Array<Object> = [
     Map({
-        v:1,
+        v:0,
         addVerbd: false,
         verbd: new Verbd()
     })

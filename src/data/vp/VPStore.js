@@ -96,6 +96,7 @@ class VPStore extends ReduceStore {
 }
 
 VPStore.initialState = Map({
+    v:0,
     nextid:1,
     coll:Map()  // the actual collection of vp
 })

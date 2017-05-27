@@ -40,7 +40,7 @@ const initialStates:Array<Object> = [
         nound: new Nound()
     }),
     Map({
-        v:1,
+        v:0,
         addNound: false,
         nound: new Nound()
     })

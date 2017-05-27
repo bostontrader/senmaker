@@ -15,7 +15,7 @@ const localStorageKey:string = 'AppStore'
 // into localStorage and there's no telling when old versions will be seen in the future.
 const initialStates:Array<Object> = [
     Map({
-        v:1,
+        v:0,
         // If you change the lessons in data/Syllabus, be sure to review these settings
         level: Map({
             currentLevel: 0,         // these two should

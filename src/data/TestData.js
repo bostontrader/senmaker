@@ -3,6 +3,7 @@ import {List} from 'immutable'
 
 import Clause               from './clause/Clause'
 import Adjectivd            from './dictionary/adjectivd/Adjectivd'
+import Adverbd              from './dictionary/adverbd/Adverbd'
 import Nound                from './dictionary/nound/Nound'
 import {PluralizationRule}  from './dictionary/nound/NoundConstants'
 import Verbd                from './dictionary/verbd/Verbd'
@@ -21,6 +22,12 @@ const adjectivdExamples:Object = {
     a:Adjectivd({id:'1', base: 'fat'}),
     b:Adjectivd({id:'2', base: 'drunk'}),
     c:Adjectivd({id:'3', base: 'stupid'})
+}
+
+const adverbdExamples:Object = {
+    a:Adverbd({id:'1', base: 'quickly'}),
+    b:Adverbd({id:'2', base: 'stupidly'}),
+    c:Adverbd({id:'3', base: 'darkly'})
 }
 
 const noundExamples:Object = {
@@ -143,6 +150,7 @@ const clauseExamples:Object = {
 }
 
 export {adjectivdExamples}
+export {adverbdExamples}
 export {clauseExamples}
 export {noundExamples}
 export {npExamples}

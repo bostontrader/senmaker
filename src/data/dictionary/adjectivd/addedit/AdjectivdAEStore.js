@@ -32,7 +32,7 @@ const localStorageKey:string = 'AdjectivdAEStore'
 // into localStorage and there's no telling when old versions will be seen in the future.
 const initialStates:Array<Object> = [
     Map({
-        v:1,
+        v:0,
         addAdjectivd: false,
         adjectivd: new Adjectivd()
     })
