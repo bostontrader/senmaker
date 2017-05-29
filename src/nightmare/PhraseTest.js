@@ -5,12 +5,11 @@ const PhraseTest = (nightmare, delay) => {
 
     return nightmare
 
-        .then( res => {return NTU.lookFor(nightmare, '#cheat', false)})
+        .then( res => {return NTU.lookFor(nightmare, '#examples', false)})
         .then( res => {return nightmare.click('#iunderstandCheckbox').wait(delay)})
 
-        // Clicking the above checkbox passes the quiz and makes the quizbox go away
-        //.then( res => {return NTU.lookFor(nightmare, '#iunderstandCheckmark', true)})
-        .then( res => {return NTU.lookFor(nightmare, '#quiz', false)})
+        .then( res => {return NTU.lookFor(nightmare, '#iunderstandCheckmark', true)})
+        //.then( res => {return NTU.lookFor(nightmare, '#quiz', false)})
 
 }
 

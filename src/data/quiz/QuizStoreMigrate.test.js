@@ -1,9 +1,9 @@
-import {factoryReset}         from './NoundStore'
-import {mutators}             from './NoundStore'
-import {currentStateTemplate} from './NoundStore'
-import {migrateNG}            from '../../LocalStorage'
+import {factoryReset}         from './QuizStore'
+import {mutators}             from './QuizStore'
+import {currentStateTemplate} from './QuizStore'
+import {migrateNG}            from '../LocalStorage'
 
-describe('NoundStore Migrations', function() {
+describe('QuizStore Migrations', function() {
 
     // This will only demonstrate that the migration run from the beginning
     // to the end.

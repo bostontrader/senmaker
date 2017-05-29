@@ -7,25 +7,36 @@ import Nound            from './Nound'
 import NoundActionTypes from './NoundActionTypes'
 import AppDispatcher    from '../../AppDispatcher'
 import {MakeMapOfNound} from '../../JSONParseUtils'
+import {noundExamples}  from '../../TestData'
 import {validateNound}  from '../../Validator'
 import AppActionTypes   from '../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../LocalStorage'
+import {migrateNG}             from '../../LocalStorage'
 const localStorageKey:string = 'NoundStore'
 
-// We want to provide a migration capacity for the format of this store.  It's serialized
-// into localStorage and there's no telling when old versions will be seen in the future.
-const initialStates:Array<Object> = [
-    Map({
-        nextid:1,
-        coll:Map()
-    }),
-    Map({
-        v:0,
-        nextid:1,
-        coll:Map()
-    })
+// This is how it starts in the very beginning.
+const factoryReset:Object = Map({
+    v:0,
+    nextid:1,
+    coll:Map()
+})
+
+// mutators[0] will mutate priorTemplate from v0 to v1
+const mutators:Array<Function> = [
+    (priorTemplate:Object):Object => {  // v0 -> v1
+        return priorTemplate.merge({showExamplesButton:true}).set('v',1)
+    }
 ]
+
+// This is what the structure should look like when finished.
+// We only need this for testing.
+const currentStateTemplate:Object = Map({
+    v:1,
+    nextid:1,
+    coll:Map(),
+    showExamplesButton:true
+})
 
 class NoundStore extends ReduceStore {
 
@@ -37,41 +48,22 @@ class NoundStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
+                let originalParse = migrateNG(fromJS(JSON.parse(localStorageState)), mutators, factoryReset)
                 let newColl = MakeMapOfNound(originalParse.getIn(['coll']))
                 return originalParse.set('coll',newColl)
             }
         }
 
-        return initialStates.slice(-1)[0]
+        return migrateNG(factoryReset, mutators, factoryReset)
 
-    }
-
-    // Given an originalFormat state object migrate to the most current version
-    migrate(originalFormat:Object):Object {
-        const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['v'])
-
-        // If the version is undefined then we start fresh
-        if(originalVersion === undefined)
-            return currentInitialState
-
-        // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['v']))
-            return originalFormat
-
-        // Else migrate from the originalVersion to the current version
-        // But at this time there are no intermediate version to migrate through
-        // so do nothing
-        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {
 
-        function insertNewRecord(nound) {
+        function insertNewRecord(presentState:Object, nound:Object) {
             validateNound(nound)
-            const id:number = state.getIn(['nextid'])
-            let newState = state.setIn(['nextid'], id + 1)
+            const id:number = presentState.getIn(['nextid'])
+            let newState:Object = presentState.setIn(['nextid'], id + 1)
 
             return newState.setIn(['coll',id.toString()], Nound({
                 id: id.toString(),
@@ -87,7 +79,16 @@ class NoundStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
+                break
+
+            // AppActionTypes
+            case AppActionTypes.ON_CLICK_EXAMPLES:
+                newState = insertNewRecord(newState, noundExamples.a)
+                newState = insertNewRecord(newState, noundExamples.b)
+                newState = insertNewRecord(newState, noundExamples.c)
+                newState = insertNewRecord(newState, noundExamples.d)
+                newState = newState.set('showExamplesButton',false)
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
@@ -98,7 +99,7 @@ class NoundStore extends ReduceStore {
                     newState = newState.setIn(['coll', action.nound.id], Nound(action.nound))
                 } else {
                     // No id exists so insert a new record.
-                    newState = insertNewRecord(action.nound)
+                    newState = insertNewRecord(newState, action.nound)
                 }
                 break
 
@@ -108,7 +109,7 @@ class NoundStore extends ReduceStore {
 
             // Insert a new record programmatically, w/o a UI.
             case NoundActionTypes.INSERT_NOUND:
-                newState = insertNewRecord(action.nound)
+                newState = insertNewRecord(newState, action.nound)
                 break
 
             default:
@@ -123,4 +124,6 @@ class NoundStore extends ReduceStore {
 }
 
 export default new NoundStore()
-export {initialStates}
+export {currentStateTemplate}
+export {factoryReset}
+export {mutators}

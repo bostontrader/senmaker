@@ -7,171 +7,183 @@ import QuizActionTypes      from './QuizActionTypes'
 import AppDispatcher        from '../AppDispatcher'
 import AppActionTypes       from '../app/AppActionTypes'
 import AdjectivdActionTypes from '../dictionary/adjectivd/AdjectivdActionTypes'
+import AdverbdActionTypes   from '../dictionary/adverbd/AdverbdActionTypes'
 import NoundActionTypes     from '../dictionary/nound/NoundActionTypes'
 import VerbdActionTypes     from '../dictionary/verbd/VerbdActionTypes'
 import NPActionTypes        from '../np/NPActionTypes'
 import VPActionTypes        from '../vp/VPActionTypes'
 
 import {localStorageAvailable} from '../LocalStorage'
-import {migrate}               from '../LocalStorage'
+import {migrateNG}             from '../LocalStorage'
 const localStorageKey:string = 'QuizStore'
 
-// We want to provide a migration capacity for the format of this store.  It's serialized
-// into localStorage and there's no telling when old versions will be seen in the future.
-const initialStates:Array<Object> = [
-    Map({
-        v:0,
-        intro: Map({ // 0
-            iunderstand: false,
-            passed: false
-        }),
-        nound: Map({ // 1
-            insertNound: false,
-            updateNound: false,
-            deleteNound: false,
-            passed: false
-        }),
-        definiteness: Map({ // 2
-            definitenessChanged: false,
-            noundChanged       : false,
-            iseeArticleChanged : false,
-            passed: false
-        }),
-        phrase: Map({ // 3
-            iunderstand: false,
-            passed: false
-        }),
-        np: Map({ // 4
-            insertNP: false,
-            updateNPNound: false,
-            updateNPDefiniteness: false,
-            deleteNP: false,
-            passed: false
-        }),
-        adjectivd: Map({ // 5
-            insertAdjectivd: false,
-            updateAdjectivd: false,
-            deleteAdjectivd: false,
-            passed: false
-        }),
-        npAdjective: Map({ // 6
-            iunderstand: false,
-            addAdjectivd: false,
-            removeAdjectivd: false,
-            addTwoAdjectives: false,
-            passed: false
-        }),
-        verbd: Map({ // 7
-            insertVerbd: false,
-            updateVerbd: false,
-            deleteVerbd: false,
-            passed: false
-        }),
-        verbConjugation: Map({ // 8
-            iunderstand: false,
-            passed: false
-        }),
-        pastForm: Map({ // 9
-            iunderstand: false,
-            passed: false
-        }),
-        verbTime: Map({ // 10
-            iunderstand: false,
-            passed: false
-        }),
-        vp: Map({ // 11
-            insertVP: false,
-            changeVPVerbd: false,
-            changeVerbTime: false,
-            deleteVP: false,
-            passed: false
-        }),
-        clause: Map({ // 12
-            iunderstand: false,
-            passed: false
-        })
-
+// This is how it starts in the very beginning.
+const factoryReset:Object = Map({
+    v:0,
+    intro: Map({ // 0
+        iunderstand: false,
+        passed: false
     }),
-    /*Map({
-        v:1,
-        intro: Map({ // 0
-            iunderstand: false,
-            passed: false
-        }),
-        nound: Map({ // 1
-            insertNound: false,
-            updateNound: false,
-            deleteNound: false,
-            passed: false
-        }),
-        definiteness: Map({ // 2
-            definitenessChanged: false,
-            noundChanged       : false,
-            iseeArticleChanged : false,
-            passed: false
-        }),
-        phrase: Map({ // 3
-            iunderstand: false,
-            passed: false
-        }),
-        np: Map({ // 4
-            insertNP: false,
-            updateNPNound: false,
-            updateNPDefiniteness: false,
-            deleteNP: false,
-            passed: false
-        }),
-        adjectivd: Map({ // 5
-            insertAdjectivd: false,
-            updateAdjectivd: false,
-            deleteAdjectivd: false,
-            passed: false
-        }),
-        npAdjective: Map({ // 6
-            iunderstand: false,
-            addAdjectivd: false,
-            removeAdjectivd: false,
-            addTwoAdjectives: false,
-            passed: false
-        }),
-        verbd: Map({ // 7
-            insertVerbd: false,
-            updateVerbd: false,
-            deleteVerbd: false,
-            passed: false
-        }),
-        verbConjugation: Map({ // 8
-            iunderstand: false,
-            passed: false
-        }),
-        pastForm: Map({ // 9
-            iunderstand: false,
-            passed: false
-        }),
-        verbTime: Map({ // 10
-            iunderstand: false,
-            passed: false
-        }),
-        vp: Map({ // 11
-            insertVP: false,
-            changeVPVerbd: false,
-            changeVerbTime: false,
-            deleteVP: false,
-            passed: false
-        }),
-        clause: Map({ // 12
-            iunderstand: false,
-            passed: false
-        }),
-        adverbd: Map({ // 13
+    nound: Map({ // 1
+        insertNound: false,
+        updateNound: false,
+        deleteNound: false,
+        passed: false
+    }),
+    definiteness: Map({ // 2
+        definitenessChanged: false,
+        noundChanged       : false,
+        iseeArticleChanged : false,
+        passed: false
+    }),
+    phrase: Map({ // 3
+        iunderstand: false,
+        passed: false
+    }),
+    np: Map({ // 4
+        insertNP: false,
+        updateNPNound: false,
+        updateNPDefiniteness: false,
+        deleteNP: false,
+        passed: false
+    }),
+    adjectivd: Map({ // 5
+        insertAdjectivd: false,
+        updateAdjectivd: false,
+        deleteAdjectivd: false,
+        passed: false
+    }),
+    npAdjective: Map({ // 6
+        iunderstand: false,
+        addAdjectivd: false,
+        removeAdjectivd: false,
+        addTwoAdjectives: false,
+        passed: false
+    }),
+    verbd: Map({ // 7
+        insertVerbd: false,
+        updateVerbd: false,
+        deleteVerbd: false,
+        passed: false
+    }),
+    verbConjugation: Map({ // 8
+        iunderstand: false,
+        passed: false
+    }),
+    pastForm: Map({ // 9
+        iunderstand: false,
+        passed: false
+    }),
+    verbTime: Map({ // 10
+        iunderstand: false,
+        passed: false
+    }),
+    vp: Map({ // 11
+        insertVP: false,
+        changeVPVerbd: false,
+        changeVerbTime: false,
+        deleteVP: false,
+        passed: false
+    }),
+    clause: Map({ // 12
+        iunderstand: false,
+        passed: false
+    })
+
+})
+
+// mutators[0] will mutate priorTemplate from v0 to v1
+const mutators:Array<Function> = [
+    (priorTemplate:Object):Object => {  // v0 -> v1
+        return priorTemplate.merge({adverbd: Map({
             insertAdverbd: false,
             updateAdverbd: false,
             deleteAdverbd: false,
             passed: false
-        })
-
-    })*/
+        })}).set('v',1)
+    }
 ]
+
+// This is what the structure should look like when finished.
+// We only need this for testing.
+const currentStateTemplate:Object = Map({
+    v:1,
+    intro: Map({ // 0
+        iunderstand: false,
+        passed: false
+    }),
+    nound: Map({ // 1
+        insertNound: false,
+        updateNound: false,
+        deleteNound: false,
+        passed: false
+    }),
+    definiteness: Map({ // 2
+        definitenessChanged: false,
+        noundChanged       : false,
+        iseeArticleChanged : false,
+        passed: false
+    }),
+    phrase: Map({ // 3
+        iunderstand: false,
+        passed: false
+    }),
+    np: Map({ // 4
+        insertNP: false,
+        updateNPNound: false,
+        updateNPDefiniteness: false,
+        deleteNP: false,
+        passed: false
+    }),
+    adjectivd: Map({ // 5
+        insertAdjectivd: false,
+        updateAdjectivd: false,
+        deleteAdjectivd: false,
+        passed: false
+    }),
+    npAdjective: Map({ // 6
+        iunderstand: false,
+        addAdjectivd: false,
+        removeAdjectivd: false,
+        addTwoAdjectives: false,
+        passed: false
+    }),
+    verbd: Map({ // 7
+        insertVerbd: false,
+        updateVerbd: false,
+        deleteVerbd: false,
+        passed: false
+    }),
+    verbConjugation: Map({ // 8
+        iunderstand: false,
+        passed: false
+    }),
+    pastForm: Map({ // 9
+        iunderstand: false,
+        passed: false
+    }),
+    verbTime: Map({ // 10
+        iunderstand: false,
+        passed: false
+    }),
+    vp: Map({ // 11
+        insertVP: false,
+        changeVPVerbd: false,
+        changeVerbTime: false,
+        deleteVP: false,
+        passed: false
+    }),
+    clause: Map({ // 12
+        iunderstand: false,
+        passed: false
+    }),
+    adverbd: Map({ // 13
+        insertAdverbd: false,
+        updateAdverbd: false,
+        deleteAdverbd: false,
+        passed: false
+    })
+})
 
 /*
  This store manages all state required to support the quizzes at the end of each lesson.
@@ -180,17 +192,16 @@ class QuizStore extends ReduceStore {
 
     constructor() {super(AppDispatcher)}
 
-
     getInitialState():Object {
 
         if (localStorageAvailable) {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState)
-                return migrate(fromJS(JSON.parse(localStorageState)), initialStates)
+                return migrateNG(fromJS(JSON.parse(localStorageState)), mutators, factoryReset)
         }
 
-        return initialStates.slice(-1)[0]
+        return migrateNG(factoryReset, mutators, factoryReset)
     }
 
     reduce(state:Object, action:Object):Object {
@@ -252,13 +263,22 @@ class QuizStore extends ReduceStore {
                 state.getIn(['vp','deleteVP'])
             )
         }
+
+        // 13
+        const adverbdQuizPassed:Function = (state:Object):boolean => {
+            return(
+                state.getIn(['adverbd','updateAdverbd']) &&
+                state.getIn(['adverbd','insertAdverbd']) &&
+                state.getIn(['adverbd','deleteAdverbd'])
+            )
+        }
         
         let newState:Object = state
 
         switch (action.type) {
 
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
                 break
 
             // 0. intro
@@ -421,20 +441,22 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['clause','iunderstand'],true)
                 newState = newState.setIn(['clause','passed'],true)
                 break
-            
-            // 10. sentences
-            /*case QuizActionTypes.sentence.ON_I_UNDERSTAND:
-                newState = newState.setIn(['sentence','iunderstand'],true)
-                newState = newState.setIn(['sentence','passed'],true)
+
+            // 13. adverbd
+            case AdverbdActionTypes.ON_CLICK_SAVE_ADVERBD:
+                if(action.adverbd.id) { // if an id is present then this is an update
+                    newState = newState.setIn(['adverbd','updateAdverbd'],true)
+                    newState = newState.setIn(['adverbd','passed'],adverbdQuizPassed(newState))
+                } else { // otherwise it's an insert
+                    newState = newState.setIn(['adverbd','insertAdverbd'],true)
+                    newState = newState.setIn(['adverbd','passed'],adverbdQuizPassed(newState))
+                }
                 break
 
-            // 11. pluralization
-            case QuizActionTypes.pluralization.ON_I_UNDERSTAND:
-                newState = newState.setIn(['pluralization','iunderstand'],true)
-                newState = newState.setIn(['pluralization','passed'],true)
+            case AdverbdActionTypes.ON_CLICK_DELETE_ADVERBD:
+                newState = newState.setIn(['adverbd','deleteAdverbd'],true)
+                newState = newState.setIn(['adverbd','passed'],adverbdQuizPassed(newState))
                 break
-
-*/
 
             default:
                 // do nothing, newState is already set to the existing state
@@ -448,3 +470,6 @@ class QuizStore extends ReduceStore {
 }
 
 export default new QuizStore()
+export {currentStateTemplate}
+export {factoryReset}
+export {mutators}

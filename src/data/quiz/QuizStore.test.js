@@ -1,6 +1,7 @@
 import QuizActionTypes      from './QuizActionTypes'
 import QuizStore            from './QuizStore'
 import AdjectivdActionTypes from '../dictionary/adjectivd/AdjectivdActionTypes'
+import AdverbdActionTypes   from '../dictionary/adverbd/AdverbdActionTypes'
 import NoundActionTypes     from '../dictionary/nound/NoundActionTypes'
 import VerbdActionTypes     from '../dictionary/verbd/VerbdActionTypes'
 import NPActionTypes        from '../np/NPActionTypes'
@@ -290,4 +291,45 @@ describe('QuizStore', () => {
         expect(state.getIn(['verbConjugation','passed'])).toBe(true)
     })*/
 
+    // 13. adverbd
+    describe('adverbd', () => {
+
+        it('ON_CLICK_SAVE_ADVERBD, insert', () => {
+            expect(state.getIn(['adverbd','insertAdverbd'])).toBe(false)
+            expect(state.getIn(['adverbd','passed'])).toBe(false)
+
+            state = QuizStore.reduce(state, {type: AdverbdActionTypes.ON_CLICK_SAVE_ADVERBD, adverbd: {}}) // no id means insert new adverbd
+            expect(state.getIn(['adverbd','insertAdverbd'])).toBe(true)
+            expect(state.getIn(['adverbd','passed'])).toBe(false)
+        })
+
+        it('ON_CLICK_SAVE_ADVERBD, update', () => {
+            expect(state.getIn(['adverbd','updateAdverbd'])).toBe(false)
+            expect(state.getIn(['adverbd','passed'])).toBe(false)
+
+            state = QuizStore.reduce(state, {type: AdverbdActionTypes.ON_CLICK_SAVE_ADVERBD, adverbd: {id:'1'}}) // id means update
+            expect(state.getIn(['adverbd','updateAdverbd'])).toBe(true)
+            expect(state.getIn(['adverbd','passed'])).toBe(false)
+        })
+
+        it('ON_CLICK_DELETE_ADVERBD, update', () => {
+            expect(state.getIn(['adverbd','deleteAdverbd'])).toBe(false)
+            expect(state.getIn(['adverbd','passed'])).toBe(false)
+
+            state = QuizStore.reduce(state, {type: AdverbdActionTypes.ON_CLICK_DELETE_ADVERBD})
+            expect(state.getIn(['adverbd','deleteAdverbd'])).toBe(true)
+            expect(state.getIn(['adverbd','passed'])).toBe(false)
+        })
+
+        it('Pass the quiz.', () => {
+            expect(state.getIn(['adverbd','passed'])).toBe(false)
+
+            state = QuizStore.reduce(state, {type: AdverbdActionTypes.ON_CLICK_SAVE_ADVERBD, adverbd: {}}) // no id means insert new adverbd
+            state = QuizStore.reduce(state, {type: AdverbdActionTypes.ON_CLICK_SAVE_ADVERBD, adverbd: {id:'1'}}) // id means update
+            state = QuizStore.reduce(state, {type: AdverbdActionTypes.ON_CLICK_DELETE_ADVERBD})
+
+            expect(state.getIn(['adverbd','passed'])).toBe(true)
+        })
+    })
+    
 })

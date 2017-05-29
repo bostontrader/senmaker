@@ -49,8 +49,8 @@ const validateClause:Function = (clause:Object):boolean => {
 const validateNound:Function = (nound:Object):boolean => {
     if(nound.constructor.name !== 'Record') {
         // This is coming from Clause -> NP -> Nound.  Make clause is not doing the nound
-        console.log('Nound must be of type Record.  Instead it is a ',nound.constructor.name)
-        console.log(nound)
+        //console.log('Nound must be of type Record.  Instead it is a ',nound.constructor.name)
+        //console.log(nound)
         //throw('nound.constructor.name==='+nound.constructor.name)
     }
     if(typeof(nound.get('id')) !== 'string') {
@@ -77,8 +77,8 @@ const validateNP:Function = (vp:Object):boolean => {
 
 const validateVerbd:Function = (verbd:Object):boolean => {
     if(verbd.constructor.name !== 'Record') {
-        console.log('Verbd must be of type Record.  Instead it is a ',verbd.constructor.name)
-        console.log(verbd)
+        //console.log('Verbd must be of type Record.  Instead it is a ',verbd.constructor.name)
+        //console.log(verbd)
         //throw('verbd.constructor.name==='+verbd.constructor.name)
     }
     if(typeof(verbd.get('id')) !== 'string') {

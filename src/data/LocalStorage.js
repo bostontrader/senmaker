@@ -14,6 +14,7 @@ const localStorageAvailable:boolean = (() => {
     }}) ()
 
 /*
+Deprecated.  See migrateNG
 Take an originalStateObject containing state deserialized from storage, for a particular
 store and convert it to the most recent store format if necessary and possible.
 
@@ -40,35 +41,25 @@ const migrate:Function = (originalStateObject:Object, initialStates):Object => {
     return originalStateObject
 }
 
+// Given a currentFormat state object, an array of mutator functions,
+// and a factoryReset value: If the currentFormat is recognizable then return the most
+// current format/version. Else return factoryReset.
 const migrateNG:Function = (currentFormat:Object, mutators:Array<Function>, factoryReset:Object):Object => {
-    console.log('currentFormat',currentFormat)
     let currentVersion: number = currentFormat.getIn(['v'])
-    console.log('currentVersion',currentVersion)
     // If the currentVersion is undefined then we start fresh
-    if (currentVersion === undefined) {
-        console.log('return factoryReset')
-        return factoryReset
-    }
+    if (currentVersion === undefined) return factoryReset
 
 
     // If the currentVersion is the most recent then so is currentFormat.  Return that.
-    console.log(mutators.length)
-    console.log(currentVersion === mutators.length)
-    if (currentVersion === mutators.length) {
-        console.log('return currentformat', currentFormat)
-        return currentFormat
-    }
+    if (currentVersion === mutators.length) return currentFormat
 
     // Else migrate from the currentFormat to the latest format.
-
-    console.log('time to migrate')
     let newState:Object = currentFormat
-    while(currentVersion < mutators.length) {
-        newState = mutators[currentVersion](newState)
-        console.log('cv=', currentVersion++)
-        console.log(newState)
-    }
-    return currentFormat
+    while(currentVersion < mutators.length)
+        newState = mutators[currentVersion++](newState)
+
+    return newState
+
 }
 
 export {localStorageAvailable}

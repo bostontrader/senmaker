@@ -26,7 +26,22 @@ describe('NoundStore', () => {
 
         // Now reset the state
         state = NoundStore.reduce(state, {type: AppActionTypes.ON_CLICK_APP_RESET})
-        expect(initialState).toBe(state)
+        expect(initialState).toEqual(state)
+    })
+
+    it('ON_CLICK_EXAMPLES', () => {
+        expect(state.get('showExamplesButton')).toBe(true)
+
+        state = NoundStore.reduce(state, {type: AppActionTypes.ON_CLICK_EXAMPLES})
+        expect(initialState).not.toBe(state)
+        expect(nounds()).toEqual([
+            noundExamples.a.toJSON(),
+            noundExamples.b.toJSON(),
+            noundExamples.c.toJSON(),
+            noundExamples.d.toJSON()
+        ])
+
+        expect(state.get('showExamplesButton')).toBe(false)
     })
 
     it('ON_CLICK_DELETE_NOUND', () => {

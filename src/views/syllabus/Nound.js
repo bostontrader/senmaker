@@ -46,10 +46,10 @@ function Nound(props:Object):Object {
             </table>
         </div>
 
-
+    console.log(props.nound.getIn(['dict','showExamplesButton']))
     return(
         <div>
-            <LessonNavigator cheat={true} {...props} />
+            <LessonNavigator examples={props.nound.getIn(['dict','showExamplesButton'])} {...props} />
             <div id='help' style={style}>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>

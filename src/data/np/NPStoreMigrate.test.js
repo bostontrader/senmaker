@@ -1,9 +1,9 @@
-import {factoryReset}         from './NoundStore'
-import {mutators}             from './NoundStore'
-import {currentStateTemplate} from './NoundStore'
-import {migrateNG}            from '../../LocalStorage'
+import {factoryReset}         from './NPStore'
+import {mutators}             from './NPStore'
+import {currentStateTemplate} from './NPStore'
+import {migrateNG}            from '../LocalStorage'
 
-describe('NoundStore Migrations', function() {
+describe('NPStore Migrations', function() {
 
     // This will only demonstrate that the migration run from the beginning
     // to the end.

@@ -35,7 +35,7 @@ function Intro(props:Object):Object {
 
     return (
         <div>
-            <LessonNavigator cheat={false} {...props} />
+            <LessonNavigator examples={false} {...props} />
             <div id='help' style={style}>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>

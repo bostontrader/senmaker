@@ -7,15 +7,12 @@ import Adverbd            from './Adverbd'
 import AdverbdActionTypes from './AdverbdActionTypes'
 import AppDispatcher      from '../../AppDispatcher'
 import {MakeMapOfAdverbd} from '../../JSONParseUtils'
-import {migrateNG}        from '../../LocalStorage'
 import {validateAdverbd}  from '../../Validator'
 import AppActionTypes     from '../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../LocalStorage'
+import {migrateNG}             from '../../LocalStorage'
 const localStorageKey:string = 'AdverbdStore'
-
-// We want to provide a migration capacity for the format of this store.  It's serialized
-// into localStorage and there's no telling when old versions will be seen in the future.
 
 // This is how it starts in the very beginning.
 const factoryReset:Object = Map({
@@ -25,8 +22,8 @@ const factoryReset:Object = Map({
 })
 
 const mutators:Array<Function> = [
-    (priorTemplate:Object):Object => {return priorTemplate.merge({'catfood':''})}, // 0 -> 1
-    (priorTemplate:Object):Object => {return priorTemplate.merge({'dogfood':''})}  // 1 -> 2
+    //(priorTemplate:Object):Object => {return priorTemplate.merge({'catfood':''})}, // 0 -> 1
+    //(priorTemplate:Object):Object => {return priorTemplate.merge({'dogfood':''})}  // 1 -> 2
 ]
 
 // This is what the structure should look like when finished.
@@ -75,11 +72,11 @@ class AdverbdStore extends ReduceStore {
     getInitialState() {
 
         if (localStorageAvailable) {
-            console.log('a')
+            //console.log('a')
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                console.log('b')
+                //console.log('b')
                 let originalParse = migrateNG(fromJS(JSON.parse(localStorageState)), mutators, factoryReset)
                 let newColl = MakeMapOfAdverbd(originalParse.getIn(['coll']))
                 return originalParse.set('coll',newColl)
@@ -180,6 +177,6 @@ class AdverbdStore extends ReduceStore {
 }
 
 export default new AdverbdStore()
+export {currentStateTemplate}
 export {factoryReset}
 export {mutators}
-export {currentStateTemplate}

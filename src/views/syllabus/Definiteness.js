@@ -58,7 +58,7 @@ function Definiteness(props:Object):Object {
 
     return(
         <div>
-            <LessonNavigator cheat={true} {...props} />
+            <LessonNavigator examples={true} {...props} />
             <div id='help' style={style}>
                 <p>{s.help10}</p>
                 <p>{s.help11}</p>

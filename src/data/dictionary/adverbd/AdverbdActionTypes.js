@@ -1,5 +1,5 @@
 // @flow
-const AdjectivdActionTypes:Object = {
+const AdverbdActionTypes:Object = {
 
     // add/edit UI
     ON_CLICK_ADD_ADVERBD:    'ON_CLICK_ADD_ADVERBD',
@@ -9,8 +9,8 @@ const AdjectivdActionTypes:Object = {
     ON_CLICK_SAVE_ADVERBD:   'ON_CLICK_SAVE_ADVERBD',
     ON_CHANGE_BASE:          'ON_CHANGE_ADVERBD_BASE',
 
-    // Pump a new adjectivd directly into the db w/o dealing with any UI.
+    // Pump a new adverbd directly into the db w/o dealing with any UI.
     INSERT_ADVERBD: 'INSERT_ADVERBD'
 }
 
-export default AdjectivdActionTypes
+export default AdverbdActionTypes

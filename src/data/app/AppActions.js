@@ -9,9 +9,9 @@ const AppActions:Object = {
             type: AppActionTypes.ON_CLICK_APP_RESET
         })
     },
-    onCheat():void {
+    onExamples():void {
         AppDispatcher.dispatch({
-            type: AppActionTypes.ON_CLICK_CHEAT
+            type: AppActionTypes.ON_CLICK_EXAMPLES
         })
     },
     onLessonPrevious():void {

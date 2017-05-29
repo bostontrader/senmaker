@@ -51,24 +51,15 @@ const NoundTest = (nightmare, delay) => {
                 .click('#delete-nound').wait(delay)
         })
         .then( res => {return NTU.lookFor(nightmare, '#nound-addedit-form', false)})
+        .then( res => {return NTU.lookFor(nightmare, '#deleteNoundCheck', true)})
+        //.then( res => {return NTU.lookFor(nightmare, '#quiz', false)})
 
-        // The above delete action passes the quiz and makes the quizbox go away
-        // So we can't see the deleteNoundCheck and we're not really testing this.
-        //.then( res => {return NTU.lookFor(nightmare, '#deleteNoundCheck', true)})
-        .then( res => {return NTU.lookFor(nightmare, '#quiz', false)})
+        // Can I see the examples button?
+        .then( res => {return NTU.lookFor(nightmare, '#examples', true)})
 
-        // After add/edit/delete, there are no items in the dictionary.  Add one example
-        // for use by subsequent tests.
-        .then( res => {
-            return nightmare
-                .click('#add-nound').wait(delay)
-                .type('#base', 'carrot').wait(delay)
-                .click('#save-nound').wait(delay)
-        })
-
-        // Can I see the cheat button?
-        .then( res => {return NTU.lookFor(nightmare, '#cheat', true)})
-
+        // Does it go away after I click it?
+        .then( res => {return nightmare.click('#examples')})
+        .then( res => {return NTU.lookFor(nightmare, '#examples', false)})
 }
 
 module.exports = NoundTest

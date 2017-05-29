@@ -1,86 +1,94 @@
-import NP                   from './NP'
-import NPActionTypes        from './NPActionTypes'
-import {DefinitenessSelect} from './NPConstants'
-import NPStore              from './NPStore'
-import {npExamples}         from '../TestData'
-import AppActionTypes       from '../app/AppActionTypes'
-import Nound                from '../dictionary/nound/Nound'
-import {PluralizationRule}  from '../dictionary/nound/NoundConstants'
+import NPActionTypes  from './NPActionTypes'
+import NPStore        from './NPStore'
+import initialState   from '../StateGetter'
+import {npExamples}   from '../TestData'
+import AppActionTypes from '../app/AppActionTypes'
 
-describe('NPStore', function() {
+describe('NPStore', () => {
 
-    /*beforeEach(function() {
-        this.state = NPStore.getInitialState()
+    let state
 
-        this.verbPhrases = () => Array.from(this.state.getIn(['coll']).values()).map(np => ({
-            id: np.id,
-            nound: np.nound.toJSON(),
-            definiteness: np.definiteness,
-            generatedText: np.generatedText,
-            adjectivds: np.adjectivds.toJSON()
-        }))
-        
-        this.dispatch = action => {this.state = NPStore.reduce(this.state, action)}
-        
-    })*/
+    const nps = () => Array.from(state.getIn(['coll']).values()).map(np => ({
+        id: np.id,
+        nound: np.nound.toJSON(),
+        definiteness: np.definiteness,
+        generatedText: np.generatedText,
+        adjectivds: np.adjectivds.toJSON()
+    }))
 
-    it('ON_CLICK_APP_RESET', function() {
-        //const initialState = this.state
+    beforeEach(() => {state = initialState.np.getIn(['dict'])})
+
+    it('ON_CLICK_APP_RESET', () => {
+        const initialState = state
 
         // Now do anything, doesn't matter what, to change the initial state
-        //this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.a})
-        //expect(initialState).not.toBe(this.state)
+        state = NPStore.reduce(state, {type: NPActionTypes.INSERT_NP, np: npExamples.a})
+        expect(initialState).not.toBe(state)
 
-        //this.dispatch({type: AppActionTypes.ON_CLICK_APP_RESET})
-        //expect(initialState).toBe(this.state)
+        // Now reset the state
+        state = NPStore.reduce(state, {type: AppActionTypes.ON_CLICK_APP_RESET})
+        expect(initialState).toEqual(state)
     })
 
-    /*it('ON_CLICK_DELETE_NP', function() {
-        expect(this.verbPhrases()).toEqual([])
+    it('ON_CLICK_EXAMPLES', () => {
+        expect(state.get('showExamplesButton')).toBe(true)
 
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.a.set('id','')})
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.b.set('id','')})
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.c.set('id','')})
+        state = NPStore.reduce(state, {type: AppActionTypes.ON_CLICK_EXAMPLES})
+        expect(initialState).not.toBe(state)
+        expect(nps()).toEqual([
+            npExamples.a.toJSON(),
+            npExamples.b.toJSON(),
+            npExamples.c.toJSON()
+        ])
 
-        this.dispatch({type: NPActionTypes.ON_CLICK_DELETE_NP, id: '2'})
-        expect(this.verbPhrases()).toEqual([npExamples.a.toJSON(), npExamples.c.toJSON()])
-
-        this.dispatch({type: NPActionTypes.ON_CLICK_DELETE_NP, id: '3'})
-        expect(this.verbPhrases()).toEqual([npExamples.a.toJSON()])
-
-        this.dispatch({type: NPActionTypes.ON_CLICK_DELETE_NP, id: '1'})
-        expect(this.verbPhrases()).toEqual([])
-
+        expect(state.get('showExamplesButton')).toBe(false)
     })
 
-    it('ON_CLICK_SAVE_NP, new np', function() {
+    it('ON_CLICK_DELETE_NP', () => {
+        expect(nps()).toEqual([])
+
+        state = NPStore.reduce(state, {type: NPActionTypes.INSERT_NP, np: npExamples.a})
+        state = NPStore.reduce(state, {type: NPActionTypes.INSERT_NP, np: npExamples.b})
+        state = NPStore.reduce(state, {type: NPActionTypes.INSERT_NP, np: npExamples.c})
+
+        state = NPStore.reduce(state, {type: NPActionTypes.ON_CLICK_DELETE_NP, id: '2'})
+        expect(nps()).toEqual([npExamples.a.toJSON(), npExamples.c.toJSON()])
+
+        state = NPStore.reduce(state, {type: NPActionTypes.ON_CLICK_DELETE_NP, id: '3'})
+        expect(nps()).toEqual([npExamples.a.toJSON()])
+
+        state = NPStore.reduce(state, {type: NPActionTypes.ON_CLICK_DELETE_NP, id: '1'})
+        expect(nps()).toEqual([])
+    })
+
+    it('ON_CLICK_SAVE_NP, new np', () => {
         // We know that this is a new record because np has no id.
-        expect(this.verbPhrases()).toEqual([])
-        this.dispatch({type: NPActionTypes.ON_CLICK_SAVE_NP, np: npExamples.a.set('id','')})
-        expect(this.verbPhrases()).toEqual([npExamples.a.toJSON()])
+        expect(nps()).toEqual([])
+        state = NPStore.reduce(state, {type: NPActionTypes.ON_CLICK_SAVE_NP, np: npExamples.a.set('id','')})
+        expect(nps()).toEqual([npExamples.a.toJSON()])
     })
 
-    it('ON_CLICK_SAVE_NP, edit np', function() {
-        expect(this.verbPhrases()).toEqual([])
+    it('ON_CLICK_SAVE_NP, edit np', () => {
+        expect(nps()).toEqual([])
 
         // Watch this carefully, we play tricks with the id
         // Insert a new record and we know it will be assigned id = '1'
         // Then update that record.
         const update = npExamples.b.set('id','1')
 
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.a.set('id','')})
-        this.dispatch({type: NPActionTypes.ON_CLICK_SAVE_NP, np: update})
+        state = NPStore.reduce(state, {type: NPActionTypes.INSERT_NP, np: npExamples.a})
+        state = NPStore.reduce(state, {type: NPActionTypes.ON_CLICK_SAVE_NP, np: update})
 
-        expect(this.verbPhrases()).toEqual([update.toJSON()])
+        expect(nps()).toEqual([update.toJSON()])
     })
 
-    it('INSERT_NP', function() {
-        expect(this.verbPhrases()).toEqual([])
+    it('INSERT_NP', () => {
+        expect(nps()).toEqual([])
 
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.a.set('id','')})
-        expect(this.verbPhrases()).toEqual([npExamples.a.toJSON()])
+        state = NPStore.reduce(state, {type: NPActionTypes.INSERT_NP, np: npExamples.a})
+        expect(nps()).toEqual([npExamples.a.toJSON()])
 
-        this.dispatch({type: NPActionTypes.INSERT_NP, np: npExamples.b.set('id','')})
-        expect(this.verbPhrases()).toEqual([npExamples.a.toJSON(), npExamples.b.toJSON()])
-    })*/
+        state = NPStore.reduce(state, {type: NPActionTypes.INSERT_NP, np: npExamples.b})
+        expect(nps()).toEqual([npExamples.a.toJSON(), npExamples.b.toJSON()])
+    })
 })

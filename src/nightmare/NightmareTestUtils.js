@@ -10,9 +10,9 @@ const lookFor = (nightmare, css_id, expect2FindIt) => {
         },css_id)
         .then( objectFound => {
             if( objectFound && !expect2FindIt )
-                throw('The object was found, but it shouldn\'t be.')
+                throw(css_id + ' was found, but it shouldn\'t have been.')
             if( !objectFound && expect2FindIt )
-                throw('The object was not found, but it should be.')
+                throw(css_id + ' was not found, but it should have been.')
         })
 }
 

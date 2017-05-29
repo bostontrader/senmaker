@@ -13,18 +13,31 @@ import AppActionTypes from '../app/AppActionTypes'
 import Nound          from '../dictionary/nound/Nound'
 
 import {localStorageAvailable} from '../LocalStorage'
-import {migrate}               from '../LocalStorage'
+import {migrateNG}             from '../LocalStorage'
 const localStorageKey:string = 'NPStore'
 
-// We want to provide a migration capacity for the format of this store.  It's serialized
-// into localStorage and there's no telling when old versions will be seen in the future.
-const initialStates:Array<Object> = [
-    Map({
-        v:0,
-        nextid:1,
-        coll:Map()
-    })
+// This is how it starts in the very beginning.
+const factoryReset:Object = Map({
+    v:0,
+    nextid:1,
+    coll:Map()
+})
+
+// mutators[0] will mutate priorTemplate from v0 to v1
+const mutators:Array<Function> = [
+    (priorTemplate:Object):Object => {  // v0 -> v1
+        return priorTemplate.merge({showExamplesButton:true}).set('v',1)
+    }
 ]
+
+// This is what the structure should look like when finished.
+// We only need this for testing.
+const currentStateTemplate:Object = Map({
+    v:1,
+    nextid:1,
+    coll:Map(),
+    showExamplesButton:true
+})
 
 class NPStore extends ReduceStore {
 
@@ -36,21 +49,21 @@ class NPStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = migrate(fromJS(JSON.parse(localStorageState)), initialStates)
+                let originalParse = migrateNG(fromJS(JSON.parse(localStorageState)), mutators, factoryReset)
                 let newColl = MakeMapOfNP(originalParse.getIn(['coll']))
                 return originalParse.set('coll',newColl)
             }
         }
-        return initialStates.slice(-1)[0]
+        return migrateNG(factoryReset, mutators, factoryReset)
 
     }
 
     reduce(state:Object, action:Object):Object {
 
-        function insertNewRecord(np:Object):Object {
+        function insertNewRecord(presentState:Object, np:Object):Object {
             validateNP(np)
-            const id:number = state.getIn(['nextid'])
-            let newState = state.setIn(['nextid'], id + 1)
+            const id:number = presentState.getIn(['nextid'])
+            let newState:Object = presentState.setIn(['nextid'], id + 1)
 
             return newState.setIn(['coll',id.toString()], NP({
                 id: id.toString(),
@@ -66,7 +79,15 @@ class NPStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
+                break
+
+            // AppActionTypes
+            case AppActionTypes.ON_CLICK_EXAMPLES:
+                newState = insertNewRecord(newState, npExamples.a)
+                newState = insertNewRecord(newState, npExamples.b)
+                newState = insertNewRecord(newState, npExamples.c)
+                newState = newState.set('showExamplesButton',false)
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
@@ -77,7 +98,7 @@ class NPStore extends ReduceStore {
                     newState = newState.setIn(['coll', action.np.id], NP(action.np))
                 } else {
                     // No id exists so insert a new record.
-                    newState = insertNewRecord(action.np)
+                    newState = insertNewRecord(newState, action.np)
                 }
                 break
             
@@ -88,7 +109,7 @@ class NPStore extends ReduceStore {
             // Insert a new record programmatically, w/o a UI.
             case NPActionTypes.INSERT_NP:
                 validateNP(action.np)
-                newState = insertNewRecord(action.np)
+                newState = insertNewRecord(newState, action.np)
                 break
 
             default:
@@ -104,4 +125,6 @@ class NPStore extends ReduceStore {
 }
 
 export default new NPStore()
-export {initialStates}
+export {currentStateTemplate}
+export {factoryReset}
+export {mutators}
