@@ -9,9 +9,10 @@ const AppActions:Object = {
             type: AppActionTypes.ON_CLICK_APP_RESET
         })
     },
-    onExamples():void {
+    onClickExamples(store:string):void {
         AppDispatcher.dispatch({
-            type: AppActionTypes.ON_CLICK_EXAMPLES
+            type: AppActionTypes.ON_CLICK_EXAMPLES,
+            store: store
         })
     },
     onLessonPrevious():void {

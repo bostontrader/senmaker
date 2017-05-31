@@ -11,3 +11,11 @@ const Adverbd = Record({
 })
 
 export default Adverbd
+
+/*
+Adverb  of manner:     suddenly, quickly
+Adverb of frequency always, often
+Adverb of place: there, nearby
+Linking adverb: too, also
+adverb of degree: very
+*/

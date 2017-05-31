@@ -32,20 +32,17 @@ function AdjectivdAEForm(props:Object):Object {
 
     const buttonSave:Object   = <button id='save-adjectivd'   onClick={onClickSave}>{sm.save}</button>
     const buttonDelete:Object = <button id='delete-adjectivd' onClick={onDelete}>{sm.delete}</button>
-    const buttonCancel:Object = <button id='cancel'       onClick={AdjectivdActions.onClickCancel}>{sm.cancel}</button>
+    const buttonCancel:Object = <button id='cancel'           onClick={AdjectivdActions.onClickCancel}>{sm.cancel}</button>
 
     const theButtons:Object = (props.adjectivd.getIn(['addedit','adjectivd','id'])) ?
         <div>{buttonSave}{buttonDelete}{buttonCancel}</div> : <div>{buttonSave}{buttonCancel}</div>
 
-    let adjectivdAEForm:Object = <div></div>
-
-    adjectivdAEForm =
+    return(
         <div id='adjectivd-addedit-form' style={style}>
             {baseControls}
             {theButtons}
         </div>
-
-    return adjectivdAEForm
+    )
 
 }
 

@@ -27,7 +27,7 @@ const NPActions = {
     },
     onClickEditNP(np:Object):void {
         validateNP(np)
-        console.log(np)
+        console.log(np.toJSON())
         AppDispatcher.dispatch({
             type: NPActionTypes.ON_CLICK_EDIT_NP,
             np: np

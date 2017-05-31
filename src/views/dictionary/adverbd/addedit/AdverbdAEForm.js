@@ -37,15 +37,12 @@ function AdverbdAEForm(props:Object):Object {
     const theButtons:Object = (props.adverbd.getIn(['addedit','adverbd','id'])) ?
         <div>{buttonSave}{buttonDelete}{buttonCancel}</div> : <div>{buttonSave}{buttonCancel}</div>
 
-    let adverbdAEForm:Object = <div></div>
-
-    adverbdAEForm =
+    return(
         <div id='adverbd-addedit-form' style={style}>
             {baseControls}
             {theButtons}
         </div>
-
-    return adverbdAEForm
+    )
 
 }
 

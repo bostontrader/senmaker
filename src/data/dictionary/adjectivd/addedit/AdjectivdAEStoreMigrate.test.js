@@ -1,13 +1,15 @@
-import AdjectivdAEStore from './AdjectivdAEStore'
-import {initialStates}  from './AdjectivdAEStore'
-import {migrate}        from '../../../LocalStorage'
+import {factoryReset}         from './AdjectivdAEStore'
+import {mutators}             from './AdjectivdAEStore'
+import {currentStateTemplate} from './AdjectivdAEStore'
+import {migrateNG}            from '../../../LocalStorage'
 
 describe('AdjectivdAEStore Migrations', function() {
 
-    it('Prehistory -> Reset to initial state', function() {
-        const preHistory = initialStates[0]
-        const currentVersion = migrate(preHistory, initialStates)
-        expect(currentVersion).toBe(initialStates.slice(-1)[0])
+    // This will only demonstrate that the migration run from the beginning
+    // to the end.
+    it('Runs all the migrations', function() {
+        const finalState = migrateNG(factoryReset, mutators, factoryReset)
+        expect(finalState).toEqual(currentStateTemplate)
     })
 
 })

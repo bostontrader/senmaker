@@ -84,10 +84,12 @@ class NPStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_EXAMPLES:
-                newState = insertNewRecord(newState, npExamples.a)
-                newState = insertNewRecord(newState, npExamples.b)
-                newState = insertNewRecord(newState, npExamples.c)
-                newState = newState.set('showExamplesButton',false)
+                if(action.store==='np') {
+                    newState = insertNewRecord(newState, npExamples.a)
+                    newState = insertNewRecord(newState, npExamples.b)
+                    newState = insertNewRecord(newState, npExamples.c)
+                    newState = newState.set('showExamplesButton', false)
+                }
                 break
 
             // Insert a new record or update an existing one, originating from a UI.

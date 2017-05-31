@@ -4,11 +4,13 @@ import {List} from 'immutable'
 import Clause               from './clause/Clause'
 import Adjectivd            from './dictionary/adjectivd/Adjectivd'
 import Adverbd              from './dictionary/adverbd/Adverbd'
+import Conjunctiond         from './dictionary/conjunctiond/Conjunctiond'
+import Determinerd          from './dictionary/determinerd/Determinerd'
 import Nound                from './dictionary/nound/Nound'
-import {PluralizationRule}  from './dictionary/nound/NoundConstants'
+import Prepositiond         from './dictionary/prepositiond/Prepositiond'
+import Pronound             from './dictionary/pronound/Pronound'
 import Verbd                from './dictionary/verbd/Verbd'
 import {AspectOrSimple}     from './dictionary/verbd/VerbdConstants'
-import {PastFormRule}       from './dictionary/verbd/VerbdConstants'
 import NP                   from './np/NP'
 import {DefinitenessSelect} from './np/NPConstants'
 import VP                   from './vp/VP'
@@ -30,18 +32,58 @@ const adverbdExamples:Object = {
     c:Adverbd({id:'3', base: 'darkly'})
 }
 
+const conjunctiondExamples:Object = {
+    a:Conjunctiond({id:'1', v:0, base: 'and'}),
+    b:Conjunctiond({id:'2', v:0, base: 'but'}),
+    c:Conjunctiond({id:'3', v:0, base: 'so'})
+}
+
+const determinerdExamples:Object = {
+    a:Determinerd({id:'1', base: 'the'}),
+    b:Determinerd({id:'2', base: 'his'}),
+    c:Determinerd({id:'3', base: 'some'})
+}
+
+const pronoundExamples:Object = {
+    a:Pronound({id:'1', base: 'i'}),
+    b:Pronound({id:'2', base: 'you'}),
+    c:Pronound({id:'3', base: 'he'})
+}
+
 const noundExamples:Object = {
-    a:Nound({
-        id:'1', base: 'apple',  plural: 'apples', pluralization_rule: PluralizationRule.Append_s
+    a:Nound({id:'1', base: 'apple',  plural: 'apples'}),
+    b:Nound({id:'2', base: 'box',    plural: 'boxes'}),
+    c:Nound({id:'3', base: 'fish',   plural: 'fish'}),
+    d:Nound({id:'4', base: 'person', plural: 'people'})
+}
+
+const prepositiondExamples:Object = {
+    a:Prepositiond({id:'1', base: 'quickly'}),
+    b:Prepositiond({id:'2', base: 'stupidly'}),
+    c:Prepositiond({id:'3', base: 'darkly'})
+}
+
+const verbdExamples:Object = {
+    a:Verbd({
+        id:'1',
+        base: 'eat',
+        pastForm: 'ate',
+        aspectOrSimple: AspectOrSimple.Simple,
+        aspect: []
     }),
-    b:Nound({
-        id:'2', base: 'box',    plural: 'boxes',  pluralization_rule: PluralizationRule.Append_es
+    b:Verbd({
+        id:'2',
+        base: 'talk',
+        pastForm: 'talked',
+        aspectOrSimple: AspectOrSimple.Simple,
+        aspect: []
     }),
-    c:Nound({
-        id:'3', base: 'fish',   plural: 'fish',   pluralization_rule: PluralizationRule.NoChange
-    }),
-    d:Nound({
-        id:'4', base: 'person', plural: 'people', pluralization_rule: PluralizationRule.Irregular
+    c:Verbd({
+        id:'3',
+        base: 'hit',
+        pastForm: 'hit',
+        aspectOrSimple: AspectOrSimple.Simple,
+        aspect: []
     })
 }
 
@@ -70,32 +112,9 @@ const npExamples:Object = {
 
 }
 
-const verbdExamples:Object = {
-    a:Verbd({
-        id:'1',
-        base: 'eat',
-        pastForm: 'ate',
-        pastForm_rule: PastFormRule.Irregular,
-        aspectOrSimple: AspectOrSimple.Simple,
-        aspect: []
-    }),
-    b:Verbd({
-        id:'2',
-        base: 'talk',
-        pastForm: 'talked',
-        pastForm_Rule: PastFormRule.Append_ed,
-        aspectOrSimple: AspectOrSimple.Simple,
-        aspect: []
-    }),
-    c:Verbd({
-        id:'3',
-        base: 'hit',
-        pastForm: 'hit',
-        pastForm_Rule: PastFormRule.NoChange,
-        aspectOrSimple: AspectOrSimple.Simple,
-        aspect: []
-    })
-}
+
+
+
 
 const vpExamples:Object = {
     a:VP({
@@ -151,8 +170,13 @@ const clauseExamples:Object = {
 
 export {adjectivdExamples}
 export {adverbdExamples}
-export {clauseExamples}
+export {conjunctiondExamples}
+export {determinerdExamples}
 export {noundExamples}
-export {npExamples}
+export {prepositiondExamples}
+export {pronoundExamples}
 export {verbdExamples}
+
+export {clauseExamples}
+export {npExamples}
 export {vpExamples}

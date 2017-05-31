@@ -19,9 +19,9 @@ function AdverbdPanel(props:Object):Object {
     const sm:Object = props.strings.get('strings').misc
 
     // What should be displayed in the adverbd add/edit panel?
-    let nounAddEditForm:?Object = null
+    let adverbdAEForm:?Object = null
     if(props.adverbd.getIn(['addedit','adverbd','id']) || props.adverbd.getIn(['addedit','addAdverbd']))
-        nounAddEditForm = <AdverbdAEForm {...props} />
+        adverbdAEForm = <AdverbdAEForm {...props} />
 
     // The appearance of a AdverbdPanel is not affected by the level.
     return( <div style={style}>
@@ -30,7 +30,7 @@ function AdverbdPanel(props:Object):Object {
             <AdverbdTable {...props} />
         </div>
         <div>
-            {nounAddEditForm}
+            {adverbdAEForm}
         </div>
     </div>)
 

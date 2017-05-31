@@ -11,6 +11,7 @@ import {validateNound}  from '../../../Validator'
 import AppActionTypes   from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../LocalStorage'
+import {migrateNG}             from '../../../LocalStorage'
 const localStorageKey:string = 'NoundAEStore'
 
 /*
@@ -32,19 +33,24 @@ const localStorageKey:string = 'NoundAEStore'
 
  */
 
-// We want to provide a migration capacity for the format of this store.  It's serialized
-// into localStorage and there's no telling when old versions will be seen in the future.
-const initialStates:Array<Object> = [
-    Map({
-        addNound: false,
-        nound: new Nound()
-    }),
-    Map({
-        v:0,
-        addNound: false,
-        nound: new Nound()
-    })
-]
+// This is how it starts in the very beginning.
+const factoryReset:Object = Map({
+    v:0,
+    addNound: false,
+    nound: new Nound()
+})
+
+// mutators[0] will mutate priorTemplate from v0 to v1
+const mutators:Array<Function> = []
+
+// This is what the structure should look like when finished.
+// We only need this for testing.
+const currentStateTemplate:Object = Map({
+    v:0,
+    addNound: false,
+    nound: new Nound()
+})
+
 
 class NoundAEStore extends ReduceStore {
 
@@ -56,34 +62,15 @@ class NoundAEStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
+                let originalParse = migrateNG(fromJS(JSON.parse(localStorageState)), mutators, factoryReset)
                 let newNound = MakeNound(originalParse.getIn(['nound']))
                 return originalParse.set('nound',newNound)
             }
 
         }
 
-        return initialStates.slice(-1)[0]
+        return migrateNG(factoryReset, mutators, factoryReset)
 
-    }
-
-    // Given an originalFormat state object migrate to the most current version
-    migrate(originalFormat:Object):Object {
-        const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['v'])
-
-        // If the version is undefined then we start fresh
-        if(originalVersion === undefined)
-            return currentInitialState
-
-        // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['v']))
-            return originalFormat
-
-        // Else migrate from the originalVersion to the current version
-        // But at this time there are no intermediate version to migrate through
-        // so do nothing
-        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {
@@ -94,7 +81,7 @@ class NoundAEStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
                 break
 
             // Signal the UI to open the NoundAddForm
@@ -104,14 +91,14 @@ class NoundAEStore extends ReduceStore {
 
             // Signal the UI to close NoundAddForm or NoundEditForm
             case NoundActionTypes.ON_CLICK_CANCEL:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
                 break
 
             // Signal the UI to close NoundAddForm or NoundEditForm (but the delete button
             // is only present on NounEditForm.)
             // NoundStore will also catch this event and it's responsible for the actual deletion.
             case NoundActionTypes.ON_CLICK_DELETE_NOUND:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
                 break
 
             // Signal the UI to open NoundEditForm and populate with the given data.
@@ -128,7 +115,7 @@ class NoundAEStore extends ReduceStore {
             // Signal the UI to close NoundAddForm or NoundEditForm. We don't need to specify which,
             // the same state should close either one.
             case NoundActionTypes.ON_CLICK_SAVE_NOUND:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
                 break
 
             case NoundActionTypes.ON_CHANGE_BASE:
@@ -155,4 +142,6 @@ class NoundAEStore extends ReduceStore {
 }
 
 export default new NoundAEStore()
-export {initialStates}
+export {currentStateTemplate}
+export {factoryReset}
+export {mutators}

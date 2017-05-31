@@ -54,12 +54,20 @@ const NoundTest = (nightmare, delay) => {
         .then( res => {return NTU.lookFor(nightmare, '#deleteNoundCheck', true)})
         //.then( res => {return NTU.lookFor(nightmare, '#quiz', false)})
 
+        .then( res => {
+            return nightmare
+                .click('#add-nound').wait(delay)
+                .type('#base', 'carrot').wait(delay)
+                .click('#save-nound').wait(delay)
+        })
+
+
         // Can I see the examples button?
-        .then( res => {return NTU.lookFor(nightmare, '#examples', true)})
+        //.then( res => {return NTU.lookFor(nightmare, '#examples', true)})
 
         // Does it go away after I click it?
-        .then( res => {return nightmare.click('#examples')})
-        .then( res => {return NTU.lookFor(nightmare, '#examples', false)})
+        //.then( res => {return nightmare.click('#examples')})
+        //.then( res => {return NTU.lookFor(nightmare, '#examples', false)})
 }
 
 module.exports = NoundTest

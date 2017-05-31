@@ -26,7 +26,7 @@ describe('AdjectivdStore', function() {
 
         // Now reset the state
         state = AdjectivdStore.reduce(state, {type: AppActionTypes.ON_CLICK_APP_RESET})
-        expect(initialState).toBe(state)
+        expect(initialState).toEqual(state)
     })
 
     it('ON_CLICK_DELETE_ADJECTIVD', function() {

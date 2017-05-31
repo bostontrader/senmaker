@@ -30,7 +30,7 @@ describe('NPStore', () => {
         expect(initialState).toEqual(state)
     })
 
-    it('ON_CLICK_EXAMPLES', () => {
+    /*it('ON_CLICK_EXAMPLES', () => {
         expect(state.get('showExamplesButton')).toBe(true)
 
         state = NPStore.reduce(state, {type: AppActionTypes.ON_CLICK_EXAMPLES})
@@ -42,7 +42,7 @@ describe('NPStore', () => {
         ])
 
         expect(state.get('showExamplesButton')).toBe(false)
-    })
+    })*/
 
     it('ON_CLICK_DELETE_NP', () => {
         expect(nps()).toEqual([])

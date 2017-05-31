@@ -83,13 +83,15 @@ class NoundStore extends ReduceStore {
                 break
 
             // AppActionTypes
-            case AppActionTypes.ON_CLICK_EXAMPLES:
-                newState = insertNewRecord(newState, noundExamples.a)
-                newState = insertNewRecord(newState, noundExamples.b)
-                newState = insertNewRecord(newState, noundExamples.c)
-                newState = insertNewRecord(newState, noundExamples.d)
-                newState = newState.set('showExamplesButton',false)
-                break
+            /*case AppActionTypes.ON_CLICK_EXAMPLES:
+                if(action.store==='nound') {
+                    newState = insertNewRecord(newState, noundExamples.a)
+                    newState = insertNewRecord(newState, noundExamples.b)
+                    newState = insertNewRecord(newState, noundExamples.c)
+                    newState = insertNewRecord(newState, noundExamples.d)
+                    newState = newState.set('showExamplesButton',false)
+                }
+                break*/
 
             // Insert a new record or update an existing one, originating from a UI.
             case NoundActionTypes.ON_CLICK_SAVE_NOUND:

@@ -71,7 +71,7 @@ function NPAEForm(props:Object):?Object {
 
         case NPPanelLevel.L1:
             npAEForm =
-                <div style={style}>
+                <div id='np-addedit-form' style={style}>
                     <NoundSelect options={availableNounds} value={selectedNound} onChange={onChangeNound} />
                     {radioDefiniteness}
                     <p id='generatedText'>{props.np.getIn(['addedit','np','generatedText'])}</p>

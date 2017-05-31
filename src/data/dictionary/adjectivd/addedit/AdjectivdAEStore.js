@@ -11,7 +11,7 @@ import {validateAdjectivd}  from '../../../Validator'
 import AppActionTypes       from '../../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../../LocalStorage'
-import {migrate}               from '../../../LocalStorage'
+import {migrateNG}             from '../../../LocalStorage'
 const localStorageKey:string = 'AdjectivdAEStore'
 
 /*
@@ -28,15 +28,24 @@ const localStorageKey:string = 'AdjectivdAEStore'
 
  */
 
-// We want to provide a migration capacity for the format of this store.  It's serialized
-// into localStorage and there's no telling when old versions will be seen in the future.
-const initialStates:Array<Object> = [
-    Map({
-        v:0,
-        addAdjectivd: false,
-        adjectivd: new Adjectivd()
-    })
-]
+// This is how it starts in the very beginning.
+const factoryReset:Object = Map({
+    v:0,
+    addAdjectivd: false,
+    adjectivd: new Adjectivd()
+})
+
+// mutators[0] will mutate priorTemplate from v0 to v1
+const mutators:Array<Function> = []
+
+// This is what the structure should look like when finished.
+// We only need this for testing.
+const currentStateTemplate:Object = Map({
+    v:0,
+    addAdjectivd: false,
+    adjectivd: new Adjectivd()
+})
+
 
 class AdjectivdAEStore extends ReduceStore {
 
@@ -48,14 +57,14 @@ class AdjectivdAEStore extends ReduceStore {
             const localStorageState = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = migrate(fromJS(JSON.parse(localStorageState)), initialStates)
+                let originalParse = migrateNG(fromJS(JSON.parse(localStorageState)), mutators, factoryReset)
                 let newAdjectivd = MakeAdjectivd(originalParse.getIn(['adjectivd']))
                 return originalParse.set('adjectivd',newAdjectivd)
             }
 
         }
 
-        return initialStates.slice(-1)[0]
+        return migrateNG(factoryReset, mutators, factoryReset)
 
     }
 
@@ -67,7 +76,7 @@ class AdjectivdAEStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
                 break
 
             // Signal the UI to open the AdjectivdAddForm
@@ -77,14 +86,14 @@ class AdjectivdAEStore extends ReduceStore {
 
             // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm
             case AdjectivdActionTypes.ON_CLICK_CANCEL:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
                 break
 
             // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm (but the delete button
             // is only present on NounEditForm.)
             // AdjectivdStore will also catch this event and it's responsible for the actual deletion.
             case AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
                 break
 
             // Signal the UI to open AdjectivdEditForm and populate with the given data.
@@ -101,7 +110,7 @@ class AdjectivdAEStore extends ReduceStore {
             // Signal the UI to close AdjectivdAddForm or AdjectivdEditForm. We don't need to specify which,
             // the same state should close either one.
             case AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
                 break
 
             case AdjectivdActionTypes.ON_CHANGE_BASE:
@@ -120,4 +129,6 @@ class AdjectivdAEStore extends ReduceStore {
 }
 
 export default new AdjectivdAEStore()
-export {initialStates}
+export {currentStateTemplate}
+export {factoryReset}
+export {mutators}

@@ -105,9 +105,9 @@ const StringsEN = {
         help11: 'In order to study English you will use many verbs.',
         help12: 'This is the dictionary of verbs that you can use.',
         help13: 'At this time there are very few verbs but you can add more verbs whenever you like.',
-        quiz1: 'Can you add a new verbs?',
-        quiz2: 'Can you delete a verbs from this list?',
-        quiz3: 'Can you change the spelling of a verbs?'
+        quiz1: 'Can you add a new verb?',
+        quiz2: 'Can you delete a verb from this list?',
+        quiz3: 'Can you change the spelling of a verb?'
     },
 
     verbConjugation: { // 8
@@ -161,6 +161,48 @@ const StringsEN = {
         quiz3: 'Can you change the spelling of an adverb?'
     },
 
+    prepositiond: { // 14
+        title: 'Prepositions',
+        help10: 'Prepositions are random little words that typically describe time, position, or direction.',
+        help11: 'In order to study English you will use many prepositions.',
+        help12: 'This is the dictionary of prepositions that you can use.',
+        help13: 'At this time there are very few prepositions but you can add more prepositions whenever you like.',
+        quiz1: 'Can you add a new preposition?',
+        quiz2: 'Can you delete an preposition from this list?',
+        quiz3: 'Can you change the spelling of an preposition?'
+    },
+    conjunctiond: {
+        title: 'Conjunctions',
+        help10: 'Conjunctions are ...',
+        help11: 'In order to study English you will use many conjunctions.',
+        help12: 'This is the dictionary of conjunctions that you can use.',
+        help13: 'At this time there are very few conjunctions but you can add more conjunctions whenever you like.',
+        quiz1: 'Can you add a new conjunction?',
+        quiz2: 'Can you delete an conjunction from this list?',
+        quiz3: 'Can you change the spelling of an conjunction?'
+    },
+
+    determinerd: {
+        title: 'Determiners',
+        help10: 'Determiners are ...',
+        help11: 'In order to study English you will use many determiners.',
+        help12: 'This is the dictionary of determiners that you can use.',
+        help13: 'At this time there are very few determiners but you can add more determiners whenever you like.',
+        quiz1: 'Can you add a new determiner?',
+        quiz2: 'Can you delete an determiner from this list?',
+        quiz3: 'Can you change the spelling of an determiner?'
+    },
+
+    pronound: {
+        title: 'Pronouns',
+        help10: 'Pronouns are ...',
+        help11: 'In order to study English you will use many pronouns.',
+        help12: 'This is the dictionary of pronouns that you can use.',
+        help13: 'At this time there are very few pronouns but you can add more pronouns whenever you like.',
+        quiz1: 'Can you add a new pronoun?',
+        quiz2: 'Can you delete an pronoun from this list?',
+        quiz3: 'Can you change the spelling of an pronoun?'
+    },
     lessonNavigator: {
         level: 'Level',
         nextLevel: 'Next Level',

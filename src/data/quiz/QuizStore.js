@@ -3,15 +3,19 @@ import {ReduceStore} from 'flux/utils'
 import {fromJS}      from 'immutable'
 import {Map}         from 'immutable'
 
-import QuizActionTypes      from './QuizActionTypes'
-import AppDispatcher        from '../AppDispatcher'
-import AppActionTypes       from '../app/AppActionTypes'
-import AdjectivdActionTypes from '../dictionary/adjectivd/AdjectivdActionTypes'
-import AdverbdActionTypes   from '../dictionary/adverbd/AdverbdActionTypes'
-import NoundActionTypes     from '../dictionary/nound/NoundActionTypes'
-import VerbdActionTypes     from '../dictionary/verbd/VerbdActionTypes'
-import NPActionTypes        from '../np/NPActionTypes'
-import VPActionTypes        from '../vp/VPActionTypes'
+import QuizActionTypes         from './QuizActionTypes'
+import AppDispatcher           from '../AppDispatcher'
+import AppActionTypes          from '../app/AppActionTypes'
+import AdjectivdActionTypes    from '../dictionary/adjectivd/AdjectivdActionTypes'
+import AdverbdActionTypes      from '../dictionary/adverbd/AdverbdActionTypes'
+import ConjunctiondActionTypes from '../dictionary/conjunctiond/ConjunctiondActionTypes'
+import DeterminerdActionTypes  from '../dictionary/determinerd/DeterminerdActionTypes'
+import NoundActionTypes        from '../dictionary/nound/NoundActionTypes'
+import PrepositiondActionTypes from '../dictionary/prepositiond/PrepositiondActionTypes'
+import PronoundActionTypes     from '../dictionary/pronound/PronoundActionTypes'
+import VerbdActionTypes        from '../dictionary/verbd/VerbdActionTypes'
+import NPActionTypes           from '../np/NPActionTypes'
+import VPActionTypes           from '../vp/VPActionTypes'
 
 import {localStorageAvailable} from '../LocalStorage'
 import {migrateNG}             from '../LocalStorage'
@@ -20,170 +24,135 @@ const localStorageKey:string = 'QuizStore'
 // This is how it starts in the very beginning.
 const factoryReset:Object = Map({
     v:0,
-    intro: Map({ // 0
-        iunderstand: false,
+
+    // The 8 word types
+    adjectivd: Map({
+        insertAdjectivd: false,
+        updateAdjectivd: false,
+        deleteAdjectivd: false,
         passed: false
     }),
-    nound: Map({ // 1
+
+    adverbd: Map({
+        insertAdverbd: false,
+        updateAdverbd: false,
+        deleteAdverbd: false,
+        passed: false
+    }),
+
+    conjunctiond: Map({
+        insertConjunctiond: false,
+        updateConjunctiond: false,
+        deleteConjunctiond: false,
+        passed: false
+    }),
+
+    determinerd: Map({
+        insertDeterminerd: false,
+        updateDeterminerd: false,
+        deleteDeterminerd: false,
+        passed: false
+    }),
+
+    nound: Map({
         insertNound: false,
         updateNound: false,
         deleteNound: false,
         passed: false
     }),
-    definiteness: Map({ // 2
+
+    prepositiond: Map({
+        insertPrepositiond: false,
+        updatePrepositiond: false,
+        deletePrepositiond: false,
+        passed: false
+    }),
+
+    pronound: Map({
+        insertPronound: false,
+        updatePronound: false,
+        deletePronound: false,
+        passed: false
+    }),
+
+    verbd: Map({
+        insertVerbd: false,
+        updateVerbd: false,
+        deleteVerbd: false,
+        passed: false
+    }),
+
+
+    // Other
+    clause: Map({
+        iunderstand: false,
+        passed: false
+    }),
+
+    definiteness: Map({
         definitenessChanged: false,
         noundChanged       : false,
         iseeArticleChanged : false,
         passed: false
     }),
-    phrase: Map({ // 3
+
+    intro: Map({
         iunderstand: false,
         passed: false
     }),
-    np: Map({ // 4
+
+    np: Map({
         insertNP: false,
         updateNPNound: false,
         updateNPDefiniteness: false,
         deleteNP: false,
         passed: false
     }),
-    adjectivd: Map({ // 5
-        insertAdjectivd: false,
-        updateAdjectivd: false,
-        deleteAdjectivd: false,
-        passed: false
-    }),
-    npAdjective: Map({ // 6
+
+    npAdjective: Map({
         iunderstand: false,
         addAdjectivd: false,
         removeAdjectivd: false,
         addTwoAdjectives: false,
         passed: false
     }),
-    verbd: Map({ // 7
-        insertVerbd: false,
-        updateVerbd: false,
-        deleteVerbd: false,
-        passed: false
-    }),
-    verbConjugation: Map({ // 8
+
+    pastForm: Map({
         iunderstand: false,
         passed: false
     }),
-    pastForm: Map({ // 9
+
+    phrase: Map({
         iunderstand: false,
         passed: false
     }),
-    verbTime: Map({ // 10
+
+    verbConjugation: Map({
         iunderstand: false,
         passed: false
     }),
-    vp: Map({ // 11
+
+    verbTime: Map({
+        iunderstand: false,
+        passed: false
+    }),
+
+    vp: Map({
         insertVP: false,
         changeVPVerbd: false,
         changeVerbTime: false,
         deleteVP: false,
-        passed: false
-    }),
-    clause: Map({ // 12
-        iunderstand: false,
         passed: false
     })
 
 })
 
 // mutators[0] will mutate priorTemplate from v0 to v1
-const mutators:Array<Function> = [
-    (priorTemplate:Object):Object => {  // v0 -> v1
-        return priorTemplate.merge({adverbd: Map({
-            insertAdverbd: false,
-            updateAdverbd: false,
-            deleteAdverbd: false,
-            passed: false
-        })}).set('v',1)
-    }
-]
+const mutators:Array<Function> = []
 
 // This is what the structure should look like when finished.
 // We only need this for testing.
-const currentStateTemplate:Object = Map({
-    v:1,
-    intro: Map({ // 0
-        iunderstand: false,
-        passed: false
-    }),
-    nound: Map({ // 1
-        insertNound: false,
-        updateNound: false,
-        deleteNound: false,
-        passed: false
-    }),
-    definiteness: Map({ // 2
-        definitenessChanged: false,
-        noundChanged       : false,
-        iseeArticleChanged : false,
-        passed: false
-    }),
-    phrase: Map({ // 3
-        iunderstand: false,
-        passed: false
-    }),
-    np: Map({ // 4
-        insertNP: false,
-        updateNPNound: false,
-        updateNPDefiniteness: false,
-        deleteNP: false,
-        passed: false
-    }),
-    adjectivd: Map({ // 5
-        insertAdjectivd: false,
-        updateAdjectivd: false,
-        deleteAdjectivd: false,
-        passed: false
-    }),
-    npAdjective: Map({ // 6
-        iunderstand: false,
-        addAdjectivd: false,
-        removeAdjectivd: false,
-        addTwoAdjectives: false,
-        passed: false
-    }),
-    verbd: Map({ // 7
-        insertVerbd: false,
-        updateVerbd: false,
-        deleteVerbd: false,
-        passed: false
-    }),
-    verbConjugation: Map({ // 8
-        iunderstand: false,
-        passed: false
-    }),
-    pastForm: Map({ // 9
-        iunderstand: false,
-        passed: false
-    }),
-    verbTime: Map({ // 10
-        iunderstand: false,
-        passed: false
-    }),
-    vp: Map({ // 11
-        insertVP: false,
-        changeVPVerbd: false,
-        changeVerbTime: false,
-        deleteVP: false,
-        passed: false
-    }),
-    clause: Map({ // 12
-        iunderstand: false,
-        passed: false
-    }),
-    adverbd: Map({ // 13
-        insertAdverbd: false,
-        updateAdverbd: false,
-        deleteAdverbd: false,
-        passed: false
-    })
-})
+const currentStateTemplate:Object = factoryReset // this means no migrations yet
 
 /*
  This store manages all state required to support the quizzes at the end of each lesson.
@@ -206,16 +175,29 @@ class QuizStore extends ReduceStore {
 
     reduce(state:Object, action:Object):Object {
 
-        // 1
-        const noundQuizPassed:Function = (state:Object):boolean => {
+        // The 8 types of words
+        const clickSaveWord:Function = (newState:Object, wordType:string) => {
+            const ucWordType:string = wordType.charAt(0).toUpperCase() + wordType.slice(1)
+            if(action[wordType].id) { // if an id is present then this is an update
+                newState = newState.setIn([wordType,'update' + ucWordType],true)
+                newState = newState.setIn([wordType,'passed'],wordQuizPassed(newState, wordType))
+            } else { // otherwise it's an insert
+                newState = newState.setIn([wordType,'insert' + ucWordType],true)
+                newState = newState.setIn([wordType,'passed'],wordQuizPassed(newState, wordType))
+            }
+            return newState
+        }
+
+        const wordQuizPassed:Function = (state:Object, wordType:string):boolean => {
+            const ucWordType:string = wordType.charAt(0).toUpperCase() + wordType.slice(1)
             return(
-                state.getIn(['nound','updateNound']) &&
-                state.getIn(['nound','insertNound']) &&
-                state.getIn(['nound','deleteNound'])
+                state.getIn([wordType,'update' + ucWordType]) &&
+                state.getIn([wordType,'insert' + ucWordType]) &&
+                state.getIn([wordType,'delete' + ucWordType])
             )
         }
 
-        // 2
+        // Other
         const definitenessQuizPassed:Function = (state:Object):boolean => {
             return(
                 state.getIn(['definiteness','definitenessChanged']) &&
@@ -224,7 +206,6 @@ class QuizStore extends ReduceStore {
             )
         }
 
-        // 4
         const npQuizPassed:Function = (state:Object):boolean => {
             return(
                 state.getIn(['np','insertNP']) &&
@@ -234,27 +215,6 @@ class QuizStore extends ReduceStore {
             )
         }
 
-        // 5
-        const adjectivdQuizPassed:Function = (state:Object):boolean => {
-            return(
-                state.getIn(['adjectivd','updateAdjectivd']) &&
-                state.getIn(['adjectivd','insertAdjectivd']) &&
-                state.getIn(['adjectivd','deleteAdjectivd'])
-            )
-        }
-
-        // 6 npAdjectiveQuizPassed
-
-        // 7
-        const verbdQuizPassed:Function = (state:Object):boolean => {
-            return(
-                state.getIn(['verbd','updateVerbd']) &&
-                state.getIn(['verbd','insertVerbd']) &&
-                state.getIn(['verbd','deleteVerbd'])
-            )
-        }
-
-        // 11
         const vpQuizPassed:Function = (state:Object):boolean => {
             return(
                 state.getIn(['vp','insertVP']) &&
@@ -264,46 +224,93 @@ class QuizStore extends ReduceStore {
             )
         }
 
-        // 13
-        const adverbdQuizPassed:Function = (state:Object):boolean => {
-            return(
-                state.getIn(['adverbd','updateAdverbd']) &&
-                state.getIn(['adverbd','insertAdverbd']) &&
-                state.getIn(['adverbd','deleteAdverbd'])
-            )
-        }
-        
         let newState:Object = state
 
         switch (action.type) {
 
+            // The 8 word types
+            case AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD:
+                newState = clickSaveWord(newState, 'adjectivd')
+                break
+
+            case AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD:
+                newState = newState.setIn(['adjectivd','deleteAdjectivd'],true)
+                newState = newState.setIn(['adjectivd','passed'],wordQuizPassed(newState, 'adjectivd'))
+                break
+
+            case AdverbdActionTypes.ON_CLICK_SAVE_ADVERBD:
+                newState = clickSaveWord(newState, 'adverbd')
+                break
+
+            case AdverbdActionTypes.ON_CLICK_DELETE_ADVERBD:
+                newState = newState.setIn(['adverbd','deleteAdverbd'],true)
+                newState = newState.setIn(['adverbd','passed'],wordQuizPassed(newState, 'adverbd'))
+                break
+
+            case ConjunctiondActionTypes.ON_CLICK_SAVE_CONJUNCTIOND:
+                newState = clickSaveWord(newState, 'conjunctiond')
+                break
+
+            case ConjunctiondActionTypes.ON_CLICK_DELETE_CONJUNCTIOND:
+                newState = newState.setIn(['conjunctiond','deleteConjunctiond'],true)
+                newState = newState.setIn(['conjunctiond','passed'],wordQuizPassed(newState, 'conjunctiond'))
+                break
+
+            case DeterminerdActionTypes.ON_CLICK_SAVE_DETERMINERD:
+                newState = clickSaveWord(newState, 'determinerd')
+                break
+
+            case DeterminerdActionTypes.ON_CLICK_DELETE_DETERMINERD:
+                newState = newState.setIn(['determinerd','deleteDeterminerd'],true)
+                newState = newState.setIn(['determinerd','passed'],wordQuizPassed(newState, 'determinerd'))
+                break
+            
+            case NoundActionTypes.ON_CLICK_SAVE_NOUND:
+                newState = clickSaveWord(newState, 'nound')
+                break
+
+            case NoundActionTypes.ON_CLICK_DELETE_NOUND:
+                newState = newState.setIn(['nound','deleteNound'],true)
+                newState = newState.setIn(['nound','passed'],wordQuizPassed(newState, 'nound'))
+                break
+
+            case PrepositiondActionTypes.ON_CLICK_SAVE_PREPOSITIOND:
+                newState = clickSaveWord(newState, 'prepositiond')
+                break
+
+            case PrepositiondActionTypes.ON_CLICK_DELETE_PREPOSITIOND:
+                newState = newState.setIn(['prepositiond','deletePrepositiond'],true)
+                newState = newState.setIn(['prepositiond','passed'],wordQuizPassed(newState, 'prepositiond'))
+                break
+
+            case PronoundActionTypes.ON_CLICK_SAVE_PRONOUND:
+                newState = clickSaveWord(newState, 'pronound')
+                break
+
+            case PronoundActionTypes.ON_CLICK_DELETE_PRONOUND:
+                newState = newState.setIn(['pronound','deletePronound'],true)
+                newState = newState.setIn(['pronound','passed'],wordQuizPassed(newState, 'pronound'))
+                break
+            
+            case VerbdActionTypes.ON_CLICK_SAVE_VERBD:
+                newState = clickSaveWord(newState, 'verbd')
+                break
+
+            case VerbdActionTypes.ON_CLICK_DELETE_VERBD:
+                newState = newState.setIn(['verbd','deleteVerbd'],true)
+                newState = newState.setIn(['verbd','passed'],wordQuizPassed(newState, 'verbd'))
+                break
+
+            // Other
             case AppActionTypes.ON_CLICK_APP_RESET:
                 newState = migrateNG(factoryReset, mutators, factoryReset)
                 break
 
-            // 0. intro
             case QuizActionTypes.intro.ON_I_UNDERSTAND:
                 newState = newState.setIn(['intro','iunderstand'],true)
                 newState = newState.setIn(['intro','passed'],true)
                 break
 
-            // 1. nound
-            case NoundActionTypes.ON_CLICK_SAVE_NOUND:
-                if(action.nound.id) { // if an id is present then this is an update
-                    newState = newState.setIn(['nound','updateNound'],true)
-                    newState = newState.setIn(['nound','passed'],noundQuizPassed(newState))
-                } else { // otherwise it's an insert
-                    newState = newState.setIn(['nound','insertNound'],true)
-                    newState = newState.setIn(['nound','passed'],noundQuizPassed(newState))
-                }
-                break
-
-            case NoundActionTypes.ON_CLICK_DELETE_NOUND:
-                newState = newState.setIn(['nound','deleteNound'],true)
-                newState = newState.setIn(['nound','passed'],noundQuizPassed(newState))
-                break
-
-            // 2. definiteness
             case NPActionTypes.ON_CHANGE_SELECTED_NOUND_L1:
                 newState = newState.setIn(['definiteness','noundChanged'],true)
                 newState = newState.setIn(['definiteness','passed'],definitenessQuizPassed(newState))
@@ -320,13 +327,11 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['definiteness','passed'],definitenessQuizPassed(newState))
                 break
 
-            // 3. phrase
             case QuizActionTypes.phrase.ON_I_UNDERSTAND:
                 newState = newState.setIn(['phrase','iunderstand'],true)
                 newState = newState.setIn(['phrase','passed'],true)
                 break
 
-            // 4. np
             case NPActionTypes.ON_CLICK_SAVE_NP:
                 //if(action.np.id) { // if an id is present then this is an update
                     //newState = newState.setIn(['np','updateNP'],true)
@@ -353,63 +358,26 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['np','passed'],npQuizPassed(newState))
                 break
 
-            // 5. adjectivd
-            case AdjectivdActionTypes.ON_CLICK_SAVE_ADJECTIVD:
-                if(action.adjectivd.id) { // if an id is present then this is an update
-                    newState = newState.setIn(['adjectivd','updateAdjectivd'],true)
-                    newState = newState.setIn(['adjectivd','passed'],adjectivdQuizPassed(newState))
-                } else { // otherwise it's an insert
-                    newState = newState.setIn(['adjectivd','insertAdjectivd'],true)
-                    newState = newState.setIn(['adjectivd','passed'],adjectivdQuizPassed(newState))
-                }
-                break
-
-            case AdjectivdActionTypes.ON_CLICK_DELETE_ADJECTIVD:
-                newState = newState.setIn(['adjectivd','deleteAdjectivd'],true)
-                newState = newState.setIn(['adjectivd','passed'],adjectivdQuizPassed(newState))
-                break
-
-            // 6. npAdjective
             case QuizActionTypes.npAdjective.ON_I_UNDERSTAND:
                 newState = newState.setIn(['npAdjective','iunderstand'],true)
                 newState = newState.setIn(['npAdjective','passed'],true)
                 break
 
-            // 7. verbd
-            case VerbdActionTypes.ON_CLICK_SAVE_VERBD:
-                if(action.verbd.id) { // if an id is present then this is an update
-                    newState = newState.setIn(['verbd','updateVerbd'],true)
-                    newState = newState.setIn(['verbd','passed'],verbdQuizPassed(newState))
-                } else { // otherwise it's an insert
-                    newState = newState.setIn(['verbd','insertVerbd'],true)
-                    newState = newState.setIn(['verbd','passed'],verbdQuizPassed(newState))
-                }
-                break
-
-            case VerbdActionTypes.ON_CLICK_DELETE_VERBD:
-                newState = newState.setIn(['verbd','deleteVerbd'],true)
-                newState = newState.setIn(['verbd','passed'],verbdQuizPassed(newState))
-                break
-
-            // 8. verbConjugation
             case QuizActionTypes.verbConjugation.ON_I_UNDERSTAND:
                 newState = newState.setIn(['verbConjugation','iunderstand'],true)
                 newState = newState.setIn(['verbConjugation','passed'],true)
                 break
 
-            // 9. pastForm
             case QuizActionTypes.pastForm.ON_I_UNDERSTAND:
                 newState = newState.setIn(['pastForm','iunderstand'],true)
                 newState = newState.setIn(['pastForm','passed'],true)
                 break
 
-            // 10. verbTime
             case QuizActionTypes.verbTime.ON_I_UNDERSTAND:
                 newState = newState.setIn(['verbTime','iunderstand'],true)
                 newState = newState.setIn(['verbTime','passed'],true)
                 break
 
-            // 11. vp
             case VPActionTypes.ON_CLICK_SAVE_VP:
                 //if(action.vp.id) { // if an id is present then this is an update
                 //newState = newState.setIn(['vp','updateVP'],true)
@@ -436,26 +404,9 @@ class QuizStore extends ReduceStore {
                 newState = newState.setIn(['vp','passed'],vpQuizPassed(newState))
                 break
 
-            // 12. clause
             case QuizActionTypes.clause.ON_I_UNDERSTAND:
                 newState = newState.setIn(['clause','iunderstand'],true)
                 newState = newState.setIn(['clause','passed'],true)
-                break
-
-            // 13. adverbd
-            case AdverbdActionTypes.ON_CLICK_SAVE_ADVERBD:
-                if(action.adverbd.id) { // if an id is present then this is an update
-                    newState = newState.setIn(['adverbd','updateAdverbd'],true)
-                    newState = newState.setIn(['adverbd','passed'],adverbdQuizPassed(newState))
-                } else { // otherwise it's an insert
-                    newState = newState.setIn(['adverbd','insertAdverbd'],true)
-                    newState = newState.setIn(['adverbd','passed'],adverbdQuizPassed(newState))
-                }
-                break
-
-            case AdverbdActionTypes.ON_CLICK_DELETE_ADVERBD:
-                newState = newState.setIn(['adverbd','deleteAdverbd'],true)
-                newState = newState.setIn(['adverbd','passed'],adverbdQuizPassed(newState))
                 break
 
             default:

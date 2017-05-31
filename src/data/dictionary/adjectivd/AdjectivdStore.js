@@ -11,21 +11,31 @@ import {validateAdjectivd}  from '../../Validator'
 import AppActionTypes       from '../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../LocalStorage'
+import {migrateNG}             from '../../LocalStorage'
 const localStorageKey:string = 'AdjectivdStore'
 
-// We want to provide a migration capacity for the format of this store.  It's serialized
-// into localStorage and there's no telling when old versions will be seen in the future.
-const initialStates:Array<Object> = [
-    Map({
-        nextid:1,
-        coll:Map()
-    }),
-    Map({
-        v:0,
-        nextid:1,
-        coll:Map()
-    })
+// This is how it starts in the very beginning.
+const factoryReset:Object = Map({
+    v:0,
+    nextid:1,
+    coll:Map()
+})
+
+// mutators[0] will mutate priorTemplate from v0 to v1
+const mutators:Array<Function> = [
+    (priorTemplate:Object):Object => {  // v0 -> v1
+        return priorTemplate.merge({showExamplesButton:true}).set('v',1)
+    }
 ]
+
+// This is what the structure should look like when finished.
+// We only need this for testing.
+const currentStateTemplate:Object = Map({
+    v:1,
+    nextid:1,
+    coll:Map(),
+    showExamplesButton:true
+})
 
 class AdjectivdStore extends ReduceStore {
 
@@ -37,33 +47,14 @@ class AdjectivdStore extends ReduceStore {
             const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
 
             if(localStorageState) {
-                let originalParse = this.migrate(fromJS(JSON.parse(localStorageState)))
+                let originalParse = migrateNG(fromJS(JSON.parse(localStorageState)), mutators, factoryReset)
                 let newColl = MakeMapOfAdjectivd(originalParse.getIn(['coll']))
                 return originalParse.set('coll',newColl)
             }
         }
 
-        return initialStates.slice(-1)[0]
+        return migrateNG(factoryReset, mutators, factoryReset)
 
-    }
-
-    // Given an originalFormat state object migrate to the most current version
-    migrate(originalFormat:Object):Object {
-        const currentInitialState:Object = initialStates.slice(-1)[0]
-        const originalVersion:number = originalFormat.getIn(['v'])
-
-        // If the version is undefined then we start fresh
-        if(originalVersion === undefined)
-            return currentInitialState
-
-        // If the version is the most recent
-        if (originalVersion === currentInitialState.getIn(['v']))
-            return originalFormat
-
-        // Else migrate from the originalVersion to the current version
-        // But at this time there are no intermediate version to migrate through
-        // so do nothing
-        return currentInitialState
     }
 
     reduce(state:Object, action:Object):Object {
@@ -85,7 +76,7 @@ class AdjectivdStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = initialStates.slice(-1)[0]
+                newState = migrateNG(factoryReset, mutators, factoryReset)
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
@@ -121,4 +112,6 @@ class AdjectivdStore extends ReduceStore {
 }
 
 export default new AdjectivdStore()
-export {initialStates}
+export {currentStateTemplate}
+export {factoryReset}
+export {mutators}

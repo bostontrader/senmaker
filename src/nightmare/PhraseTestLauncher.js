@@ -23,7 +23,7 @@ describe('Phrase', () => {
 
             // And the rest of the test runs in English
 
-            // Advance to DefinitenessTest
+            // Advance to PhraseTest
             .then( res => {return IntroTest(nightmare, delayB)})
             .then( res => {return nightmare.click('#lesson-next').wait(delayB)})
             .then( res => {return NoundTest(nightmare, delayB)})

@@ -7,7 +7,7 @@ const DefinitenessTest = (nightmare, delay) => {
 
         // Change the selected noun and look for the changeNoundCheckmark
         // Note: make sure this noun has been entered as an example already.
-        .type('.Select-control input','box\u000d').wait(delay)
+        .type('.Select-control input','carrot\u000d').wait(delay)
         .then( res => {return NTU.lookFor(nightmare, '#changeNoundCheck', true)})
 
         // Change the definiteness and look for the changeDefinitenessCheckmark
@@ -21,7 +21,7 @@ const DefinitenessTest = (nightmare, delay) => {
         //.then( res => {return NTU.lookFor(nightmare, '#quiz', false)})
 
         // Can I see the examples button?
-        .then( res => {return NTU.lookFor(nightmare, '#examples', true)})
+        //.then( res => {return NTU.lookFor(nightmare, '#examples', true)})
 
 }
 

@@ -1,6 +1,8 @@
 // @flow
 // Various functions intended to validate the structure and content of the several objects.
 
+// 1. The word types
+
 const validateAdjectivd:Function = (adjectivd:Object):boolean => {
     if(adjectivd.constructor.name !== 'Record') {
         // This is coming from Clause -> NP -> Adjectivd.  Make clause is not doing the adjectivd
@@ -29,20 +31,31 @@ const validateAdverbd:Function = (adverbd:Object):boolean => {
     return true
 }
 
-const validateClause:Function = (clause:Object):boolean => {
-    if(clause.constructor.name !== 'Record') {
-        console.log('Clause must be of type Record.  Instead it is a ',clause.constructor.name)
-        console.log(clause)
-        //throw('clause.constructor.name==='+clause.constructor.name)
-    }
-    if(typeof(clause.get('id')) !== 'string') {
-        console.log('Clause id must be a string.  Instead it is a ',typeof(clause.get('id')))
-        //throw('up')
-    }
+const validateConjunctiond:Function = (conjunctiond:Object):boolean => {
+    //if(conjunctiond.constructor.name !== 'Record') {
+    // This is coming from Clause -> NP -> Conjunctiond.  Make clause is not doing the conjunctiond
+    //console.log('Conjunctiond must be of type Record.  Instead it is a ',conjunctiond.constructor.name)
+    //console.log(conjunctiond)
+    //throw('conjunctiond.constructor.name==='+conjunctiond.constructor.name)
+    //}
+    //if(typeof(conjunctiond.get('id')) !== 'string') {
+    //console.log('Conjunctiond id must be a string.  Instead it is a ',typeof(conjunctiond.get('id')))
+    //throw('up')
+    //}
+    return true
+}
 
-    if(!validateNP( clause.getIn(['np']))) throw('up')
-    if(!validateVP( clause.getIn(['vp']))) throw('up')
-
+const validateDeterminerd:Function = (determinerd:Object):boolean => {
+    //if(determinerd.constructor.name !== 'Record') {
+    // This is coming from Clause -> NP -> Determinerd.  Make clause is not doing the determinerd
+    //console.log('Determinerd must be of type Record.  Instead it is a ',determinerd.constructor.name)
+    //console.log(determinerd)
+    //throw('determinerd.constructor.name==='+determinerd.constructor.name)
+    //}
+    //if(typeof(determinerd.get('id')) !== 'string') {
+    //console.log('Determinerd id must be a string.  Instead it is a ',typeof(determinerd.get('id')))
+    //throw('up')
+    //}
     return true
 }
 
@@ -60,18 +73,32 @@ const validateNound:Function = (nound:Object):boolean => {
     return true
 }
 
-const validateNP:Function = (vp:Object):boolean => {
-    if(vp.constructor.name !== 'Record') {
-        console.log('NP must be of type Record.  Instead it is a ',vp.constructor.name)
-        console.log(vp)
-        //throw('vp.constructor.name==='+vp.constructor.name)
+
+const validatePrepositiond:Function = (prepositiond:Object):boolean => {
+    if(prepositiond.constructor.name !== 'Record') {
+        // This is coming from Clause -> NP -> Prepositiond.  Make clause is not doing the prepositiond
+        console.log('Prepositiond must be of type Record.  Instead it is a ',prepositiond.constructor.name)
+        console.log(prepositiond)
+        //throw('prepositiond.constructor.name==='+prepositiond.constructor.name)
     }
-    if(typeof(vp.get('id')) !== 'string') {
-        console.log('NP id must be a string.  Instead it is a ',typeof(vp.get('id')))
+    if(typeof(prepositiond.get('id')) !== 'string') {
+        console.log('Prepositiond id must be a string.  Instead it is a ',typeof(prepositiond.get('id')))
         //throw('up')
     }
+    return true
+}
 
-    if(!validateNound( vp.getIn(['nound']))) throw('up')
+const validatePronound:Function = (pronound:Object):boolean => {
+    //if(pronound.constructor.name !== 'Record') {
+    // This is coming from Clause -> NP -> Pronound.  Make clause is not doing the pronound
+    //console.log('Pronound must be of type Record.  Instead it is a ',pronound.constructor.name)
+    //console.log(pronound)
+    //throw('pronound.constructor.name==='+pronound.constructor.name)
+    //}
+    //if(typeof(pronound.get('id')) !== 'string') {
+    //console.log('Pronound id must be a string.  Instead it is a ',typeof(pronound.get('id')))
+    //throw('up')
+    //}
     return true
 }
 
@@ -87,6 +114,44 @@ const validateVerbd:Function = (verbd:Object):boolean => {
     }
     return true
 }
+
+// 2. Other
+
+const validateClause:Function = (clause:Object):boolean => {
+    if(clause.constructor.name !== 'Record') {
+        console.log('Clause must be of type Record.  Instead it is a ',clause.constructor.name)
+        console.log(clause)
+        //throw('clause.constructor.name==='+clause.constructor.name)
+    }
+    if(typeof(clause.get('id')) !== 'string') {
+        console.log('Clause id must be a string.  Instead it is a ',typeof(clause.get('id')))
+        //throw('up')
+    }
+
+    if(!validateNP( clause.getIn(['np']))) throw('up')
+    if(!validateVP( clause.getIn(['vp']))) throw('up')
+
+    return true
+}
+
+
+
+const validateNP:Function = (vp:Object):boolean => {
+    if(vp.constructor.name !== 'Record') {
+        console.log('NP must be of type Record.  Instead it is a ',vp.constructor.name)
+        console.log(vp)
+        //throw('vp.constructor.name==='+vp.constructor.name)
+    }
+    if(typeof(vp.get('id')) !== 'string') {
+        console.log('NP id must be a string.  Instead it is a ',typeof(vp.get('id')))
+        //throw('up')
+    }
+
+    if(!validateNound( vp.getIn(['nound']))) throw('up')
+    return true
+}
+
+
 
 const validateVP:Function = (vp:Object):boolean => {
     if(vp.constructor.name !== 'Record') {
@@ -105,8 +170,14 @@ const validateVP:Function = (vp:Object):boolean => {
 
 export {validateAdjectivd}
 export {validateAdverbd}
-export {validateClause}
+export {validateConjunctiond}
+export {validateDeterminerd}
 export {validateNound}
-export {validateNP}
+export {validatePrepositiond}
+export {validatePronound}
 export {validateVerbd}
+
+
+export {validateClause}
+export {validateNP}
 export {validateVP}

@@ -14,6 +14,10 @@ import VerbTime        from '../views/syllabus/VerbTime'          // 10
 import VerbPhrase      from '../views/syllabus/VerbPhrase'
 import Clause          from '../views/syllabus/Clause'
 import Adverbd         from '../views/syllabus/Adverbd'
+import Prepositiond    from '../views/syllabus/Prepositiond'
+import Determinerd     from '../views/syllabus/Determinerd'
+import Conjunctiond    from '../views/syllabus/Conjunctiond'
+import Pronound        from '../views/syllabus/Pronound'
 
 //import Aspect          from '../views/syllabus/Aspect'
 //import Sentence        from '../views/syllabus/Sentence'
@@ -39,7 +43,7 @@ import Adverbd         from '../views/syllabus/Adverbd'
  */
 
 // If you change these lessons be sure to review the initialState in AppStore
-const syllabus = {
+/*const syllabus = {
     intro:           {level: 0, comp:Intro,           prev:null,              next:'nound'},
     nound:           {level: 1, comp:Nound,           prev:'intro',           next:'definiteness'},
     definiteness:    {level: 2, comp:Definiteness,    prev:'nound',           next:'phrase'},
@@ -53,13 +57,28 @@ const syllabus = {
     verbTime:        {level:10, comp:VerbTime,        prev:'pastForm',        next:'vp'},
     vp:              {level:11, comp:VerbPhrase,      prev:'verbTime',        next:'clause'},
     clause:          {level:12, comp:Clause,          prev:'vp',              next:'adverbd'},
-    adverbd:         {level:13, comp:Adverbd,         prev:'clause',          next:null},
+    adverbd:         {level:13, comp:Adverbd,         prev:'clause',          next:'prepositiond'},
+    prepositiond:    {level:14, comp:Prepositiond,    prev:'adverbd',         next:null},
+
     //aspect:          {level:12, comp:Aspect,          prev:'verbPhrase',      next:'clause'},
     //sentence:        {level:14, comp:Sentence,        prev:'clause',          next:'pluralization'},
     //pluralization:   {level:15, comp:Pluralization,   prev:'sentence',        next:'vpAspect'},
     //vpAspect:        {level:16, comp:VPAspect,        prev:'pluralization',   next: null}
     // Adverbs as part of verb phrases
 
+}*/
+
+const syllabus = {
+    intro:        {level: 0, comp: Intro,        prev: null,           next: 'adjectivd'},
+    adjectivd:    {level: 1, comp: Adjectivd,    prev: 'intro',        next: 'adverbd'},
+    adverbd:      {level: 2, comp: Adverbd,      prev: 'adjectivd',    next: 'conjunctiond'},
+    conjunctiond: {level: 3, comp: Conjunctiond, prev: 'adverbd',      next: 'determinerd'},
+    determinerd:  {level: 4, comp: Determinerd,  prev: 'conjunctiond', next: 'nound'},
+    nound:        {level: 5, comp: Nound,        prev: 'determinerd',  next: 'prepositiond'},
+    prepositiond: {level: 6, comp: Prepositiond, prev: 'nound',        next: 'pronound'},
+    pronound:     {level: 7, comp: Pronound,     prev: 'prepositiond', next: 'verbd'},
+    verbd:        {level: 8, comp: Verbd,        prev: 'pronound',     next: null}
 }
+
 
 export default syllabus

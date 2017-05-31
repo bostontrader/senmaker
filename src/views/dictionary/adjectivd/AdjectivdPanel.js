@@ -19,9 +19,9 @@ function AdjectivdPanel(props:Object):Object {
     const sm:Object = props.strings.get('strings').misc
 
     // What should be displayed in the adjectivd add/edit panel?
-    let nounAddEditForm:?Object = null
+    let adjectivdAEForm:?Object = null
     if(props.adjectivd.getIn(['addedit','adjectivd','id']) || props.adjectivd.getIn(['addedit','addAdjectivd']))
-        nounAddEditForm = <AdjectivdAEForm {...props} />
+        adjectivdAEForm = <AdjectivdAEForm {...props} />
 
     // The appearance of a AdjectivdPanel is not affected by the level.
     return( <div style={style}>
@@ -30,7 +30,7 @@ function AdjectivdPanel(props:Object):Object {
             <AdjectivdTable {...props} />
         </div>
         <div>
-            {nounAddEditForm}
+            {adjectivdAEForm}
         </div>
     </div>)
 
