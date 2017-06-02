@@ -1,16 +1,12 @@
-// @flow
+//@flow
 import {Record} from 'immutable'
+import {MD}     from '../../SchemaConstants'
 
-/**
- * A Adverbd provides the minimal information we need to instantiate an adjective.
- * This is the information that we would find in a dictionary about a particular adjective.
- */
-const Adverbd = Record({
-    id: '',
-    base: ''
-})
+const Defs:Array<Function> = [Record({id: '', v:0, t: MD.Adv.t, base: ''})]
+const Adverbd:Function = Defs[MD.Adv.cv]
 
 export default Adverbd
+export {Defs}
 
 /*
 Adverb  of manner:     suddenly, quickly

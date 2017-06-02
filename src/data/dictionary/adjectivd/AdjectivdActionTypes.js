@@ -10,7 +10,7 @@ const AdjectivdActionTypes:Object = {
     ON_CHANGE_BASE:            'ON_CHANGE_ADJECTIVD_BASE',
 
     // Pump a new adjectivd directly into the db w/o dealing with any UI.
-    INSERT_ADJECTIVD:             'INSERT_ADJECTIVD'
+    INSERT_ADJECTIVD: 'INSERT_ADJECTIVD'
 }
 
 export default AdjectivdActionTypes

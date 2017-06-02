@@ -1,69 +1,37 @@
 // @flow
 import {ReduceStore} from 'flux/utils'
-import {fromJS}      from 'immutable'
-import {Map}         from 'immutable'
 
+import AdverbdStoreState  from './AdverbdStoreState'
 import Adverbd            from './Adverbd'
 import AdverbdActionTypes from './AdverbdActionTypes'
-import AppDispatcher      from '../../AppDispatcher'
-import {MakeMapOfAdverbd} from '../../JSONParseUtils'
-import {validateAdverbd}  from '../../Validator'
-import AppActionTypes     from '../../app/AppActionTypes'
+import AppDispatcher        from '../../AppDispatcher'
+import {deserialize}        from '../../Serializer'
+import AppActionTypes       from '../../app/AppActionTypes'
 
 import {localStorageAvailable} from '../../LocalStorage'
-import {migrateNG}             from '../../LocalStorage'
 const localStorageKey:string = 'AdverbdStore'
-
-// This is how it starts in the very beginning.
-const factoryReset:Object = Map({
-    v:0,
-    nextid:1,
-    coll:Map()
-})
-
-// mutators[0] will mutate priorTemplate from v0 to v1
-const mutators:Array<Function> = []
-
-// This is what the structure should look like when finished.
-// We only need this for testing.
-const currentStateTemplate:Object =
-    Map({
-        v:0,
-        nextid:1,
-        coll:Map()
-    })
-
 
 class AdverbdStore extends ReduceStore {
 
     constructor() {super(AppDispatcher)}
 
-    getInitialState() {
+    getInitialState():Object {
 
-        if (localStorageAvailable) {
-            const localStorageState:string | null | void = localStorage.getItem(localStorageKey)
+        if (localStorageAvailable)
+            if(localStorage.getItem(localStorageKey)) return deserialize(localStorage.getItem(localStorageKey))
 
-            if(localStorageState) {
-                let originalParse = migrateNG(fromJS(JSON.parse(localStorageState)), mutators, factoryReset)
-                let newColl = MakeMapOfAdverbd(originalParse.getIn(['coll']))
-                return originalParse.set('coll',newColl)
-            }
-        }
-
-        return migrateNG(factoryReset, mutators, factoryReset)
-
+        return AdverbdStoreState()
     }
 
     reduce(state:Object, action:Object):Object {
 
         function insertNewRecord(adverbd) {
-            validateAdverbd(adverbd)
             const id:number = state.getIn(['nextid'])
             let newState = state.setIn(['nextid'], id + 1)
-
             return newState.setIn(['coll',id.toString()], Adverbd({
                 id: id.toString(),
                 base: adverbd.get('base')
+                // don't set t or v here
             }))
         }
 
@@ -73,12 +41,11 @@ class AdverbdStore extends ReduceStore {
 
             // AppActionTypes
             case AppActionTypes.ON_CLICK_APP_RESET:
-                newState = migrateNG(factoryReset, mutators, factoryReset)
+                newState = AdverbdStoreState()
                 break
 
             // Insert a new record or update an existing one, originating from a UI.
             case AdverbdActionTypes.ON_CLICK_SAVE_ADVERBD:
-                validateAdverbd(action.adverbd)
                 if(action.adverbd.id) {
                     // An id exists so update the existing record.
                     newState = newState.setIn(['coll', action.adverbd.id], Adverbd(action.adverbd))
@@ -86,7 +53,7 @@ class AdverbdStore extends ReduceStore {
                     // No id exists so insert a new record.
                     newState = insertNewRecord(action.adverbd)
                 }
-                break
+                break   
 
             case AdverbdActionTypes.ON_CLICK_DELETE_ADVERBD:
                 newState = newState.deleteIn(['coll',action.id])
@@ -109,6 +76,3 @@ class AdverbdStore extends ReduceStore {
 }
 
 export default new AdverbdStore()
-export {currentStateTemplate}
-export {factoryReset}
-export {mutators}

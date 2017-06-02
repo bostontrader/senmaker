@@ -1,12 +1,15 @@
-import VerbdStore      from './VerbdStore'
-import {initialStates} from './VerbdStore'
+import Verbd           from './Verbd'
+import {MD}            from '../../SchemaConstants'
+import {deserialize}   from '../../Serializer'
+import {verbdExamples} from '../../../data/TestData'
+import {verbdStoreStateExample} from '../../../data/TestData'
 
 describe('VerbdStore Migrations', function() {
 
-    it('Prehistory -> Reset to initial state', function() {
-        const preHistory = initialStates[0]
-        const currentVersion = VerbdStore.migrate(preHistory)
-        expect(currentVersion).toBe(initialStates.slice(-1)[0])
+    // Just be happy that this works.
+    it('Runs all the migrations', function() {
+        const stringVersion = JSON.stringify(verbdStoreStateExample.toJSON())
+        const n2 = deserialize(stringVersion)
     })
 
 })

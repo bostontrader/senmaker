@@ -1,15 +1,15 @@
-import {factoryReset}         from './PrepositiondStore'
-import {mutators}             from './PrepositiondStore'
-import {currentStateTemplate} from './PrepositiondStore'
-import {migrateNG}            from '../../LocalStorage'
+import Prepositiond           from './Prepositiond'
+import {MD}                   from '../../SchemaConstants'
+import {deserialize}          from '../../Serializer'
+import {prepositiondExamples} from '../../../data/TestData'
+import {prepositiondStoreStateExample} from '../../../data/TestData'
 
 describe('PrepositiondStore Migrations', function() {
 
-    // This will only demonstrate that the migration run from the beginning
-    // to the end.
+    // Just be happy that this works.
     it('Runs all the migrations', function() {
-        const finalState = migrateNG(factoryReset, mutators, factoryReset)
-        expect(finalState).toEqual(currentStateTemplate)
+        const stringVersion = JSON.stringify(prepositiondStoreStateExample.toJSON())
+        const n2 = deserialize(stringVersion)
     })
 
 })

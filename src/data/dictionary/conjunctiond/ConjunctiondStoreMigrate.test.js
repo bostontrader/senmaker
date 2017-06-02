@@ -1,15 +1,15 @@
-import {factoryReset}         from './ConjunctiondStore'
-import {mutators}             from './ConjunctiondStore'
-import {currentStateTemplate} from './ConjunctiondStore'
-import {migrateNG}            from '../../LocalStorage'
+import Conjunctiond           from './Conjunctiond'
+import {MD}                   from '../../SchemaConstants'
+import {deserialize}          from '../../Serializer'
+import {conjunctiondExamples} from '../../../data/TestData'
+import {conjunctiondStoreStateExample} from '../../../data/TestData'
 
 describe('ConjunctiondStore Migrations', function() {
 
-    // This will only demonstrate that the migration run from the beginning
-    // to the end.
+    // Just be happy that this works.
     it('Runs all the migrations', function() {
-        const finalState = migrateNG(factoryReset, mutators, factoryReset)
-        expect(finalState).toEqual(currentStateTemplate)
+        const stringVersion = JSON.stringify(conjunctiondStoreStateExample.toJSON())
+        const n2 = deserialize(stringVersion)
     })
 
 })

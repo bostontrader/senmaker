@@ -10,12 +10,7 @@ const testFunction = (Store, ActionTypes, wordType, examples) => {
 
     let state
 
-    const words = () => Array.from(state.getIn(['coll']).values()).map(word => ({
-        id: word.id,
-        base: word.base,
-        v: word.v,
-        t: word.t
-    }))
+    const words = () => Array.from(state.getIn(['coll']).values()).map(word => word.toJSON() )
 
     beforeEach(() => {state = initialState[wordType].get('dict')})
 

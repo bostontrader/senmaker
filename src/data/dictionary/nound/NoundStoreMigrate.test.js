@@ -1,15 +1,15 @@
-import {factoryReset}         from './NoundStore'
-import {mutators}             from './NoundStore'
-import {currentStateTemplate} from './NoundStore'
-import {migrateNG}            from '../../LocalStorage'
+import Nound           from './Nound'
+import {MD}                from '../../SchemaConstants'
+import {deserialize}       from '../../Serializer'
+import {noundExamples} from '../../../data/TestData'
+import {noundStoreStateExample} from '../../../data/TestData'
 
 describe('NoundStore Migrations', function() {
 
-    // This will only demonstrate that the migration run from the beginning
-    // to the end.
+    // Just be happy that this works.
     it('Runs all the migrations', function() {
-        const finalState = migrateNG(factoryReset, mutators, factoryReset)
-        expect(finalState).toEqual(currentStateTemplate)
+        const stringVersion = JSON.stringify(noundStoreStateExample.toJSON())
+        const n2 = deserialize(stringVersion)
     })
 
 })

@@ -1,15 +1,15 @@
-import {factoryReset}         from './PronoundStore'
-import {mutators}             from './PronoundStore'
-import {currentStateTemplate} from './PronoundStore'
-import {migrateNG}            from '../../LocalStorage'
+import Pronound           from './Pronound'
+import {MD}               from '../../SchemaConstants'
+import {deserialize}      from '../../Serializer'
+import {pronoundExamples} from '../../../data/TestData'
+import {pronoundStoreStateExample} from '../../../data/TestData'
 
 describe('PronoundStore Migrations', function() {
 
-    // This will only demonstrate that the migration run from the beginning
-    // to the end.
+    // Just be happy that this works.
     it('Runs all the migrations', function() {
-        const finalState = migrateNG(factoryReset, mutators, factoryReset)
-        expect(finalState).toEqual(currentStateTemplate)
+        const stringVersion = JSON.stringify(pronoundStoreStateExample.toJSON())
+        const n2 = deserialize(stringVersion)
     })
 
 })

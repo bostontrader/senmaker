@@ -1,4 +1,12 @@
-import ConjunctiondActionTypes from './ConjunctiondActionTypes'
+import ActionTypes            from './ConjunctiondActionTypes'
+import Store                  from './ConjunctiondStore'
+import {conjunctiondExamples} from '../../../data/TestData'
+
+import {testFunction} from '../word/Store'
+
+describe("ConjunctiondStore", () => {testFunction(Store, ActionTypes, 'conjunctiond', conjunctiondExamples)})
+
+/*import ConjunctiondActionTypes from './ConjunctiondActionTypes'
 import ConjunctiondStore       from './ConjunctiondStore'
 import initialState            from '../../StateGetter'
 import {conjunctiondExamples}  from '../../TestData'
@@ -76,3 +84,4 @@ describe('ConjunctiondStore', () => {
         expect(conjunctionds()).toEqual([conjunctiondExamples.a.toJSON(), conjunctiondExamples.b.toJSON()])
     })
 })
+*/

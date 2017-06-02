@@ -16,8 +16,22 @@ const MD:Object = {
     'Clause': {t:14, cv: 0},
     'Sen':    {t:15, cv: 0},
 
-    'AdjStore'  : {t:16, cv: 0},
-    'AdjAEStore': {t:17, cv: 0}
+    'AdjStore':    {t:16, cv: 0},
+    'AdjAEStore':  {t:17, cv: 0},
+    'AdvStore':    {t:18, cv: 0},
+    'AdvAEStore':  {t:19, cv: 0},
+    'ConjStore':   {t:20, cv: 0},
+    'ConjAEStore': {t:21, cv: 0},
+    'DetStore':    {t:22, cv: 0},
+    'DetAEStore':  {t:23, cv: 0},
+    'NStore':      {t:24, cv: 0},
+    'NAEStore':    {t:25, cv: 0},
+    'PreStore':    {t:26, cv: 0},
+    'PreAEStore':  {t:27, cv: 0},
+    'ProStore':    {t:28, cv: 0},
+    'ProAEStore':  {t:29, cv: 0},
+    'VStore':      {t:30, cv: 0},
+    'VAEStore':    {t:31, cv: 0}
 }
 
 export {MD}

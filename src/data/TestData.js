@@ -2,17 +2,25 @@
 import {List} from 'immutable'
 import {Map}  from 'immutable'
 
-import {MD}                 from './SchemaConstants'
-import Clause               from './clause/Clause'
-import Adjectivd            from './dictionary/adjectivd/Adjectivd'
-import AdjectivdStoreState  from './dictionary/adjectivd/AdjectivdStoreState'
-import Adverbd              from './dictionary/adverbd/Adverbd'
-import Conjunctiond         from './dictionary/conjunctiond/Conjunctiond'
-import Determinerd          from './dictionary/determinerd/Determinerd'
-import Nound                from './dictionary/nound/Nound'
-import Prepositiond         from './dictionary/prepositiond/Prepositiond'
-import Pronound             from './dictionary/pronound/Pronound'
-import Verbd                from './dictionary/verbd/Verbd'
+import {MD}                   from './SchemaConstants'
+import Clause                 from './clause/Clause'
+import Adjectivd              from './dictionary/adjectivd/Adjectivd'
+import AdjectivdStoreState    from './dictionary/adjectivd/AdjectivdStoreState'
+import Adverbd                from './dictionary/adverbd/Adverbd'
+import AdverbdStoreState      from './dictionary/adverbd/AdverbdStoreState'
+import Conjunctiond           from './dictionary/conjunctiond/Conjunctiond'
+import ConjunctiondStoreState from './dictionary/conjunctiond/ConjunctiondStoreState'
+import Determinerd            from './dictionary/determinerd/Determinerd'
+import DeterminerdStoreState  from './dictionary/determinerd/DeterminerdStoreState'
+import Nound                  from './dictionary/nound/Nound'
+import NoundStoreState        from './dictionary/nound/NoundStoreState'
+import Prepositiond           from './dictionary/prepositiond/Prepositiond'
+import PrepositiondStoreState from './dictionary/prepositiond/PrepositiondStoreState'
+import Pronound               from './dictionary/pronound/Pronound'
+import PronoundStoreState     from './dictionary/pronound/PronoundStoreState'
+import Verbd                  from './dictionary/verbd/Verbd'
+import VerbdStoreState        from './dictionary/verbd/VerbdStoreState'
+
 import {AspectOrSimple}     from './dictionary/verbd/VerbdConstants'
 import NP                   from './np/NP'
 import {DefinitenessSelect} from './np/NPConstants'
@@ -32,66 +40,95 @@ const adjectivdExamples:Object = {
 const adjectivdStoreStateExample:Object =
     AdjectivdStoreState({id:'1', v:0, t:MD.AdjStore.t, coll: Map(adjectivdExamples)})
 
+
 const adverbdExamples:Object = {
-    a:Adverbd({id:'1', v:0, t:MD.Adv, base: 'quickly'}),
-    b:Adverbd({id:'2', v:0, t:MD.Adv, base: 'stupidly'}),
-    c:Adverbd({id:'3', v:0, t:MD.Adv, base: 'darkly'})
+    '1':Adverbd({id:'1', v:0, t:MD.Adv.t, base: 'quickly'}),
+    '2':Adverbd({id:'2', v:0, t:MD.Adv.t, base: 'stupidly'}),
+    '3':Adverbd({id:'3', v:0, t:MD.Adv.t, base: 'darkly'})
 }
+
+const adverbdStoreStateExample:Object =
+    AdverbdStoreState({id:'1', v:0, t:MD.AdvStore.t, coll: Map(adverbdExamples)})
+
 
 const conjunctiondExamples:Object = {
-    a:Conjunctiond({id:'1', v:0, t:MD.Conj, base: 'and'}),
-    b:Conjunctiond({id:'2', v:0, t:MD.Conj, base: 'but'}),
-    c:Conjunctiond({id:'3', v:0, t:MD.Conj, base: 'so'})
+    '1':Conjunctiond({id:'1', v:0, t:MD.Conj.t, base: 'and'}),
+    '2':Conjunctiond({id:'2', v:0, t:MD.Conj.t, base: 'but'}),
+    '3':Conjunctiond({id:'3', v:0, t:MD.Conj.t, base: 'so'})
 }
+
+const conjunctiondStoreStateExample:Object =
+    ConjunctiondStoreState({id:'1', v:0, t:MD.ConjStore.t, coll: Map(conjunctiondExamples)})
+
 
 const determinerdExamples:Object = {
-    a:Determinerd({id:'1', v:0, t:MD.Det, base: 'the'}),
-    b:Determinerd({id:'2', v:0, t:MD.Det, base: 'his'}),
-    c:Determinerd({id:'3', v:0, t:MD.Det, base: 'some'})
+    '1':Determinerd({id:'1', v:0, t:MD.Det.t, base: 'the'}),
+    '2':Determinerd({id:'2', v:0, t:MD.Det.t, base: 'his'}),
+    '3':Determinerd({id:'3', v:0, t:MD.Det.t, base: 'some'})
 }
+
+const determinerdStoreStateExample:Object =
+    DeterminerdStoreState({id:'1', v:0, t:MD.DetStore.t, coll: Map(determinerdExamples)})
+
 
 const noundExamples:Object = {
-    a:Nound({id:'1', base: 'apple',  plural: 'apples'}),
-    b:Nound({id:'2', base: 'box',    plural: 'boxes'}),
-    c:Nound({id:'3', base: 'fish',   plural: 'fish'}),
-    d:Nound({id:'4', base: 'person', plural: 'people'})
+    '1':Nound({id:'1', v:1, t:MD.N.t, base: 'apple',  plural: 'apples'}),
+    '2':Nound({id:'2', v:1, t:MD.N.t, base: 'box',    plural: 'boxes'}),
+    '3':Nound({id:'3', v:1, t:MD.N.t, base: 'fish',   plural: 'fish'}),
+    '4':Nound({id:'4', v:1, t:MD.N.t, base: 'person', plural: 'people'})
 }
 
-const pronoundExamples:Object = {
-    a:Pronound({id:'1', v:0, t:MD.Pro, base: 'i'}),
-    b:Pronound({id:'2', v:0, t:MD.Pro, base: 'you'}),
-    c:Pronound({id:'3', v:0, t:MD.Pro, base: 'he'})
-}
+const noundStoreStateExample:Object =
+    NoundStoreState({id:'1', v:0, t:MD.NStore.t, coll: Map(noundExamples)})
+
 
 const prepositiondExamples:Object = {
-    a:Prepositiond({id:'1', v:0, t:MD.Pre, base: 'quickly'}),
-    b:Prepositiond({id:'2', v:0, t:MD.Pre, base: 'stupidly'}),
-    c:Prepositiond({id:'3', v:0, t:MD.Pre, base: 'darkly'})
+    '1':Prepositiond({id:'1', v:0, t:MD.Pre.t, base: 'quickly'}),
+    '2':Prepositiond({id:'2', v:0, t:MD.Pre.t, base: 'stupidly'}),
+    '3':Prepositiond({id:'3', v:0, t:MD.Pre.t, base: 'darkly'})
 }
 
+const prepositiondStoreStateExample:Object =
+    PrepositiondStoreState({id:'1', v:0, t:MD.PreStore.t, coll: Map(prepositiondExamples)})
+
+
+const pronoundExamples:Object = {
+    '1':Pronound({id:'1', v:0, t:MD.Pro.t, base: 'i'}),
+    '2':Pronound({id:'2', v:0, t:MD.Pro.t, base: 'you'}),
+    '3':Pronound({id:'3', v:0, t:MD.Pro.t, base: 'he'})
+}
+
+const pronoundStoreStateExample:Object =
+    PronoundStoreState({id:'1', v:0, t:MD.ProStore.t, coll: Map(pronoundExamples)})
+
+
 const verbdExamples:Object = {
-    a:Verbd({
-        id:'1', v:0, t:MD.V,
+    '1':Verbd({
+        id:'1', v:0, t:MD.V.t,
         base: 'eat',
         pastForm: 'ate',
         aspectOrSimple: AspectOrSimple.Simple,
         aspect: []
     }),
-    b:Verbd({
-        id:'2', v:0, t:MD.V,
+    '2':Verbd({
+        id:'2', v:0, t:MD.V.t,
         base: 'talk',
         pastForm: 'talked',
         aspectOrSimple: AspectOrSimple.Simple,
         aspect: []
     }),
-    c:Verbd({
-        id:'3', v:0, t:MD.V,
+    '3':Verbd({
+        id:'3', v:0, t:MD.V.t,
         base: 'hit',
         pastForm: 'hit',
         aspectOrSimple: AspectOrSimple.Simple,
         aspect: []
     })
 }
+
+const verbdStoreStateExample:Object =
+    VerbdStoreState({id:'1', v:0, t:MD.VStore.t, coll: Map(verbdExamples)})
+
 
 const npExamples:Object = {
     a:NP({
@@ -180,6 +217,13 @@ export {pronoundExamples}
 export {verbdExamples}
 
 export {adjectivdStoreStateExample}
+export {adverbdStoreStateExample}
+export {conjunctiondStoreStateExample}
+export {determinerdStoreStateExample}
+export {noundStoreStateExample}
+export {prepositiondStoreStateExample}
+export {pronoundStoreStateExample}
+export {verbdStoreStateExample}
 
 export {clauseExamples}
 export {npExamples}
