@@ -11,13 +11,12 @@ function AdverbdRow(props:Object):Object {
     const onClickEditAdverbd:Function = () => AdverbdActions.onClickEditAdverbd(adverbd)
     const editButton:Object = <button id={'id'+adverbd.id} type="button" onClick={onClickEditAdverbd} >{props.strings.get('strings').misc.edit}</button>
 
-    let adverbdRow:Object =
+    return(
         <tr>
             <td>{adverbd.base}</td>
             <td>{editButton}</td>
         </tr>
-
-    return adverbdRow
+    )
 
 }
 

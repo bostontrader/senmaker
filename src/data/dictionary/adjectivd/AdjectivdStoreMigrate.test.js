@@ -1,15 +1,15 @@
-import {factoryReset}         from './AdjectivdStore'
-import {mutators}             from './AdjectivdStore'
-import {currentStateTemplate} from './AdjectivdStore'
-import {migrateNG}            from '../../LocalStorage'
+import Adjectivd           from './Adjectivd'
+import {MD}                from '../../SchemaConstants'
+import {deserialize}       from '../../Serializer'
+import {adjectivdExamples} from '../../../data/TestData'
+import {adjectivdStoreStateExample} from '../../../data/TestData'
 
 describe('AdjectivdStore Migrations', function() {
 
-    // This will only demonstrate that the migrations run from the beginning
-    // to the end.
+    // Just be happy that this works.
     it('Runs all the migrations', function() {
-        const finalState = migrateNG(factoryReset, mutators, factoryReset)
-        expect(finalState).toEqual(currentStateTemplate)
+        const stringVersion = JSON.stringify(adjectivdStoreStateExample.toJSON())
+        const n2 = deserialize(stringVersion)
     })
 
 })

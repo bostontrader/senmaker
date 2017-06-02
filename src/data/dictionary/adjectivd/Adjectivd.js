@@ -1,13 +1,9 @@
-// @flow
+//@flow
 import {Record} from 'immutable'
+import {MD}     from '../../SchemaConstants'
 
-/**
- * A Adjectivd provides the minimal information we need to instantiate an adjective.
- * This is the information that we would find in a dictionary about a particular adjective.
- */
-const Adjectivd = Record({
-    id: '',
-    base: ''
-})
+const Defs:Array<Function> = [Record({id: '', v:0, t: MD.Adj.t, base: ''})]
+const Adjectivd:Function = Defs[MD.Adj.cv]
 
 export default Adjectivd
+export {Defs}

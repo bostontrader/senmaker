@@ -18,7 +18,7 @@ const Verbd = Record({
     //auxilliary: false
 
     // only ordinary verbs can be transitive
-    // the verb can be transitive or not, depending upon the context 
+    // the verb can be transitive or not, depending upon the context
     //transitive: true/false
 })
 

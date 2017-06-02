@@ -1,7 +1,7 @@
-import PronoundAEForm from './addedit/PronoundAEForm'
-import PronoundPanel  from './PronoundPanel'
-import PronoundTable  from './PronoundTable'
+import AEForm from './addedit/PronoundAEForm'
+import Panel  from './PronoundPanel'
+import Table  from './PronoundTable'
 
 import {testFunction} from '../word/Panel'
 
-describe("PronoundPanel", () => {testFunction(PronoundPanel, PronoundTable, PronoundAEForm, 'pronound')})
+describe("PronoundPanel", () => {testFunction(Panel, Table, AEForm, 'pronound')})

@@ -11,13 +11,12 @@ function PrepositiondRow(props:Object):Object {
     const onClickEditPrepositiond:Function = () => PrepositiondActions.onClickEditPrepositiond(prepositiond)
     const editButton:Object = <button id={'id'+prepositiond.id} type="button" onClick={onClickEditPrepositiond} >{props.strings.get('strings').misc.edit}</button>
 
-    let prepositiondRow:Object =
+    return(
         <tr>
             <td>{prepositiond.base}</td>
             <td>{editButton}</td>
         </tr>
-
-    return prepositiondRow
+    )
 
 }
 

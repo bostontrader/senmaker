@@ -1,7 +1,7 @@
-import PrepositiondAEForm from './addedit/PrepositiondAEForm'
-import PrepositiondPanel  from './PrepositiondPanel'
-import PrepositiondTable  from './PrepositiondTable'
+import AEForm from './addedit/PrepositiondAEForm'
+import Panel  from './PrepositiondPanel'
+import Table  from './PrepositiondTable'
 
 import {testFunction} from '../word/Panel'
 
-describe("PrepositiondPanel", () => {testFunction(PrepositiondPanel, PrepositiondTable, PrepositiondAEForm, 'prepositiond')})
+describe("PrepositiondPanel", () => {testFunction(Panel, Table, AEForm, 'prepositiond')})

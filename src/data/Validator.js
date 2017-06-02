@@ -5,21 +5,17 @@
 
 const validateAdjectivd:Function = (adjectivd:Object):boolean => {
     if(adjectivd.constructor.name !== 'Record') {
-        // This is coming from Clause -> NP -> Adjectivd.  Make clause is not doing the adjectivd
         console.log('Adjectivd must be of type Record.  Instead it is a ',adjectivd.constructor.name)
         console.log(adjectivd)
-        //throw('adjectivd.constructor.name==='+adjectivd.constructor.name)
     }
     if(typeof(adjectivd.get('id')) !== 'string') {
         console.log('Adjectivd id must be a string.  Instead it is a ',typeof(adjectivd.get('id')))
-        //throw('up')
     }
     return true
 }
 
 const validateAdverbd:Function = (adverbd:Object):boolean => {
     //if(adverbd.constructor.name !== 'Record') {
-        // This is coming from Clause -> NP -> Adverbd.  Make clause is not doing the adverbd
         //console.log('Adverbd must be of type Record.  Instead it is a ',adverbd.constructor.name)
         //console.log(adverbd)
         //throw('adverbd.constructor.name==='+adverbd.constructor.name)
@@ -33,7 +29,6 @@ const validateAdverbd:Function = (adverbd:Object):boolean => {
 
 const validateConjunctiond:Function = (conjunctiond:Object):boolean => {
     //if(conjunctiond.constructor.name !== 'Record') {
-    // This is coming from Clause -> NP -> Conjunctiond.  Make clause is not doing the conjunctiond
     //console.log('Conjunctiond must be of type Record.  Instead it is a ',conjunctiond.constructor.name)
     //console.log(conjunctiond)
     //throw('conjunctiond.constructor.name==='+conjunctiond.constructor.name)
@@ -47,7 +42,6 @@ const validateConjunctiond:Function = (conjunctiond:Object):boolean => {
 
 const validateDeterminerd:Function = (determinerd:Object):boolean => {
     //if(determinerd.constructor.name !== 'Record') {
-    // This is coming from Clause -> NP -> Determinerd.  Make clause is not doing the determinerd
     //console.log('Determinerd must be of type Record.  Instead it is a ',determinerd.constructor.name)
     //console.log(determinerd)
     //throw('determinerd.constructor.name==='+determinerd.constructor.name)
@@ -76,14 +70,11 @@ const validateNound:Function = (nound:Object):boolean => {
 
 const validatePrepositiond:Function = (prepositiond:Object):boolean => {
     if(prepositiond.constructor.name !== 'Record') {
-        // This is coming from Clause -> NP -> Prepositiond.  Make clause is not doing the prepositiond
         console.log('Prepositiond must be of type Record.  Instead it is a ',prepositiond.constructor.name)
         console.log(prepositiond)
-        //throw('prepositiond.constructor.name==='+prepositiond.constructor.name)
     }
     if(typeof(prepositiond.get('id')) !== 'string') {
         console.log('Prepositiond id must be a string.  Instead it is a ',typeof(prepositiond.get('id')))
-        //throw('up')
     }
     return true
 }

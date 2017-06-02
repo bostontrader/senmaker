@@ -1,7 +1,7 @@
-import ConjunctiondAEForm from './addedit/ConjunctiondAEForm'
-import ConjunctiondPanel  from './ConjunctiondPanel'
-import ConjunctiondTable  from './ConjunctiondTable'
+import AEForm from './addedit/ConjunctiondAEForm'
+import Panel  from './ConjunctiondPanel'
+import Table  from './ConjunctiondTable'
 
 import {testFunction} from '../word/Panel'
 
-describe("ConjunctiondPanel", () => {testFunction(ConjunctiondPanel, ConjunctiondTable, ConjunctiondAEForm, 'conjunctiond')})
+describe("ConjunctiondPanel", () => {testFunction(Panel, Table, AEForm, 'conjunctiond')})

@@ -11,29 +11,12 @@ function DeterminerdRow(props:Object):Object {
     const onClickEditDeterminerd:Function = () => DeterminerdActions.onClickEditDeterminerd(determinerd)
     const editButton:Object = <button id={'id'+determinerd.id} type="button" onClick={onClickEditDeterminerd} >{props.strings.get('strings').misc.edit}</button>
 
-    let determinerdRow:Object = <div></div>
-
-    //switch(props.determinerdPanelLevel) {
-        //case DeterminerdPanelLevel.BASE:
-            determinerdRow =
-                <tr>
-                    <td>{determinerd.base}</td>
-                    <td>{editButton}</td>
-                </tr>
-            //break
-        //case DeterminerdPanelLevel.PLURALIZATION:
-            //determinerdRow =
-                /*<tr>
-                    <td>{determinerd.base}</td>
-                    <td>{determinerd.plural}</td>
-                    <td>{editButton}</td>
-                </tr>*/
-            //break
-        //default:
-            // determinerdRow already has a suitable default. Do nothing.
-    //}
-
-    return determinerdRow
+    return(
+        <tr>
+            <td>{determinerd.base}</td>
+            <td>{editButton}</td>
+        </tr>
+    )
 
 }
 

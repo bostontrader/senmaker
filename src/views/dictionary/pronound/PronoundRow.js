@@ -11,29 +11,12 @@ function PronoundRow(props:Object):Object {
     const onClickEditPronound:Function = () => PronoundActions.onClickEditPronound(pronound)
     const editButton:Object = <button id={'id'+pronound.id} type="button" onClick={onClickEditPronound} >{props.strings.get('strings').misc.edit}</button>
 
-    let pronoundRow:Object = <div></div>
-
-    //switch(props.pronoundPanelLevel) {
-        //case PronoundPanelLevel.BASE:
-            pronoundRow =
-                <tr>
-                    <td>{pronound.base}</td>
-                    <td>{editButton}</td>
-                </tr>
-            //break
-        //case PronoundPanelLevel.PLURALIZATION:
-            /*pronoundRow =
-                <tr>
-                    <td>{pronound.base}</td>
-                    <td>{pronound.plural}</td>
-                    <td>{editButton}</td>
-                </tr>
-            break
-        default:
-            // pronoundRow already has a suitable default. Do nothing.
-    }*/
-
-    return pronoundRow
+    return(
+        <tr>
+            <td>{pronound.base}</td>
+            <td>{editButton}</td>
+        </tr>
+    )
 
 }
 
